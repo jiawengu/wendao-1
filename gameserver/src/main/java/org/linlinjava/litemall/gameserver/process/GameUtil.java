@@ -3,8 +3,10 @@
 /*      */ import java.util.ArrayList;
 /*      */ import java.util.List;
 /*      */ import java.util.Random;
-/*      */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-/*      */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
+/*      */ import org.linlinjava.litemall.db.domain.Characters;
+import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
+/*      */ import org.linlinjava.litemall.db.util.JSONUtils;
+import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*      */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65525_0;
 /*      */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
@@ -329,7 +331,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
     /*      */   public static int duiwudengjicmp(Chara chara, GameObjectChar session, int nMinLv, int MaxLv) {
         /*  329 */     for (int i = 0; i < session.gameTeam.duiwu.size(); i++) {
             int lv = ((Chara)session.gameTeam.duiwu.get(i)).level;
-            /*  330 */       if (lv < nMinLv || lv > MaxLv) {
+            /*  330 */       if (lv < nMinLv) {
                 return 1;
                 /*      */       }
             else if (lv > MaxLv) {
@@ -4318,9 +4320,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 4308 */     return "";
         /*      */   }
     /*      */
-    public static void a45060(Chara chara) {
-       org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0 vo_45060_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0();
-           vo_45060_0.hasBonus = 0;
+    /*      */   public static void a45060(Chara chara) {
+        /* 4312 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0 vo_45060_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0();
+        /* 4313 */     vo_45060_0.hasBonus = 0;
         /* 4314 */     vo_45060_0.xy_higest = 649;
         /* 4315 */     vo_45060_0.fm_higest = 496;
         /* 4316 */     vo_45060_0.fx_higest = 0;
@@ -4339,24 +4341,19 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 4329 */     vo_45060_0.max_chongfengsan_time = 3;
         /* 4330 */     vo_45060_0.ziqihongmeng_time = 0;
         /* 4331 */     vo_45060_0.max_ziqihongmeng_time = 1;
-        vo_45060_0.max_chongfengsan = 440;
-        vo_45060_0.chongfengsan_status = chara.chongfengsan;
-         vo_45060_0.max_ziqihongmeng = 440;
-          vo_45060_0.ziqihongmeng_status = chara.ziqihongmeng;
-       vo_45060_0.hasDaofaBonus = 0;
-          vo_45060_0.count = 3;
-         vo_45060_0.taskName = "降妖";
-       vo_45060_0.taskTime = 9;
-           vo_45060_0.taskName1 = "伏魔";
-        vo_45060_0.taskTime1 = 3;
-         vo_45060_0.taskName2 = "飞仙渡邪";
-   vo_45060_0.taskTime2 = 1;
-   GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45060_0(), vo_45060_0);
-  }
- }
+        /* 4332 */     vo_45060_0.max_chongfengsan = 440;
+        /* 4333 */     vo_45060_0.chongfengsan_status = chara.chongfengsan;
+        /* 4334 */     vo_45060_0.max_ziqihongmeng = 440;
+        /* 4335 */     vo_45060_0.ziqihongmeng_status = chara.ziqihongmeng;
+        /* 4336 */     vo_45060_0.hasDaofaBonus = 0;
+        /* 4337 */     vo_45060_0.count = 3;
+        /* 4338 */     vo_45060_0.taskName = "降妖";
+        /* 4339 */     vo_45060_0.taskTime = 9;
+        /* 4340 */     vo_45060_0.taskName1 = "伏魔";
+        /* 4341 */     vo_45060_0.taskTime1 = 3;
+        /* 4342 */     vo_45060_0.taskName2 = "飞仙渡邪";
+        /* 4343 */     vo_45060_0.taskTime2 = 1;
+        /* 4344 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45060_0(), vo_45060_0);
+        /*      */   }
+    /*      */ }
 
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\process\GameUtil.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */

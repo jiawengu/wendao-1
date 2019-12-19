@@ -955,7 +955,7 @@ import java.util.ArrayList;
             /*      */
             /*      */
             /*  512 */
-            List<RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(3));
+            List<RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(4));
             /*  513 */
             Random random = new Random();
             /*  514 */
@@ -999,7 +999,7 @@ import java.util.ArrayList;
             /*  533 */
             vo_65529_0.level = chara1.level;
             /*  534 */
-            vo_65529_0.leixing = 3;
+            vo_65529_0.leixing = 4;
             /*  535 */
             chara1.npcshuadao.add(vo_65529_0);
             /*      */

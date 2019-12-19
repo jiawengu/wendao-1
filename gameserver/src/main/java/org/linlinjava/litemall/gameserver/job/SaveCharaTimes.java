@@ -53,6 +53,12 @@ public class SaveCharaTimes {
 
         while(var2.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var2.next();
+            String data = gameSession.characters.getData();
+            Chara chara111 = JSONUtils.parseObject(data, Chara.class);
+            if (chara111.level < gameSession.chara.level)
+            {
+                throw new RuntimeException("角色等级回档！！！");
+            }
             gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
             GameData.that.baseCharactersService.updateById(gameSession.characters);
         }
