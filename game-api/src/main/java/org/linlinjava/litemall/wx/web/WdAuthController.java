@@ -44,10 +44,10 @@ public class WdAuthController {
     public Object d() {
         Map<String, Object> data = new HashMap();
         List list = new ArrayList();
-        list.add("117.24.6.15");
-        list.add("117.24.6.15");
-        list.add("117.24.6.15");
-        data.put("host", "117.24.6.15");
+        list.add(ip);
+        list.add(ip);
+        list.add(ip);
+        data.put("host", ip);
         data.put("ips", list);
         data.put("ttl", 17);
         data.put("origin_ttl", 100);
