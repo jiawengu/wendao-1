@@ -57,6 +57,13 @@ public class SaveCharaTimes {
             Chara chara111 = JSONUtils.parseObject(data, Chara.class);
             if (chara111.level < gameSession.chara.level)
             {
+                log.error("人物{}",chara111.name);
+                log.error("等级{}",chara111.level);
+                log.error("gameSession:等级{}",gameSession.chara.level);
+                log.error("gameSession:人物{}",gameSession.chara.name);
+                log.error("data:{}",data);
+                log.error("添加{}",JSONUtils.toJSONString(gameSession.chara));
+                log.error("修改{}",JSONUtils.toJSONString(gameSession.characters));
                 throw new RuntimeException("角色等级回档！！！");
             }
             gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
