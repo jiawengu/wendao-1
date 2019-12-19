@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/game-all/game-all.iml" filepath="$PROJECT_DIR$/game-all/game-all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-api/game-api.iml" filepath="$PROJECT_DIR$/game-api/game-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-db/game-db.iml" filepath="$PROJECT_DIR$/game-db/game-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-utils/game-utils.iml" filepath="$PROJECT_DIR$/game-utils/game-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gameserver/gameserver.iml" filepath="$PROJECT_DIR$/gameserver/gameserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/wendaoshouyou.iml" filepath="$PROJECT_DIR$/.idea/wendaoshouyou.iml" />
+    </modules>
+  </component>
+</project>

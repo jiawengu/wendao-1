@@ -1,0 +1,5 @@
+org\linlinjava\litemall\wx\web\WdAuthController.class
+org\linlinjava\litemall\wx\web\WdDailiController.class
+org\linlinjava\litemall\wx\Application.class
+org\linlinjava\litemall\wx\util\IpUtil.class
+org\linlinjava\litemall\wx\util\VerifyUtils.class
