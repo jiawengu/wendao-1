@@ -22,10 +22,15 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C12490_0 implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
+                private static final Logger log = LoggerFactory.getLogger(C12490_0.class);
     /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
     /*     */   {
         /*  31 */     String id = GameReadTool.readString(buff);
@@ -158,6 +163,8 @@
             Chara chara111 = JSONUtils.parseObject(data, Chara.class);
             if (chara111.level < chara1.level)
             {
+                log.error("人物等级{old}",chara111.name,chara111.level);
+                log.error("人物等级{new}",chara.name,chara.level);
                 throw new RuntimeException("角色等级回档！！！");
             }
             /* 157 */       characters.setData(JSONUtils.toJSONString(chara1));

@@ -217,8 +217,11 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
             /* 216 */       this.chara.online_time += this.chara.updatetime - this.chara.uptime;
             String data = this.characters.getData();
             Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-            if (chara111.level < this.chara.level)
+            if (chara111.level > this.chara.level)
             {
+                log.error("人物等级{old}",chara111.name,chara111.level);
+                log.error("人物等级{new}",this.chara.name,this.chara.level);
+                log.error("人物队伍信息", this.gameTeam.toString());
                 throw new RuntimeException("角色等级回档！！！");
             }
             /* 217 */       this.characters.setData(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(this.chara));

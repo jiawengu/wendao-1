@@ -6,9 +6,14 @@
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+import org.linlinjava.litemall.gameserver.process.C12490_0;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*    */
 /*    */ public class GameObjectCharMng
         /*    */ {
+                private static final Logger log = LoggerFactory.getLogger(GameObjectCharMng.class);
     /* 11 */   private static final List<GameObjectChar> gameObjectCharList = new java.util.concurrent.CopyOnWriteArrayList();
     /*    */
     /*    */   public static void add(GameObjectChar gameObjectChar) {
@@ -78,8 +83,11 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
     /*    */   public static void save(GameObjectChar gameObjectChar) {
         String data = gameObjectChar.characters.getData();
         Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-        if (chara111.level < gameObjectChar.chara.level)
+        if (chara111.level > gameObjectChar.chara.level)
         {
+            log.error("人物等级{old}",chara111.name,chara111.level);
+            log.error("人物等级{new}",gameObjectChar.chara.name,gameObjectChar.chara.level);
+            log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
             throw new RuntimeException("角色等级回档！！！");
         }
         /* 78 */     gameObjectChar.characters.setData(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara));
