@@ -135,7 +135,7 @@ public class SaveCharaTimes {
         String msg = "";
         int i;
         GameMap gameMap;
-        if (xingqi.equals("周日") && GameUtilRenWu.belongCalendarshidao()) {
+        if (xingqi.equals("周日") && GameUtilRenWu.belongCalendarshidao() && GameShiDao.statzhuangtai == 0) {
             msg = "试道即将开启，请找试道申请员；";
             GameShiDao.sendyaoyan1(msg);
             GameShiDao.statTime = System.currentTimeMillis();
