@@ -452,7 +452,8 @@ import java.util.ArrayList;
             org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(shidaoname);
             if (map == null) {
                 Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                vo_20481_0.msg = "不符合条件";
+                if(shidaoname == "不在活动时间内") vo_20481_0.msg = shidaoname;
+                else vo_20481_0.msg = "不符合条件";
                 vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                 GameObjectChar.send(new M20481_0(), vo_20481_0);
                 return;

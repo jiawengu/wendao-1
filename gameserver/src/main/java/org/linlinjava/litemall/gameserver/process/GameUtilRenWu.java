@@ -41,7 +41,7 @@
 /*     */   
 /*     */   public static String shidaolevel(Chara chara) {
 /*  43 */     if (!belongCalendarshidao()) {
-/*  44 */       return "";
+/*  44 */       return "不在活动时间内";
 /*     */     }
 /*  46 */     GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);
 /*  47 */     String[] shidaolevel = { "试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)" };
@@ -267,7 +267,7 @@
 /*     */     {
 /* 268 */       nowTime = df.parse(df.format(new Date()));
 /* 269 */       beginTime = df.parse("20:49");
-/* 270 */       endTime = df.parse("20:59");
+/* 270 */       endTime = df.parse("23:30");
 /*     */     } catch (ParseException e) {
 /* 272 */       e.printStackTrace();
 /*     */     }
