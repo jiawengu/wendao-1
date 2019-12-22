@@ -69,14 +69,6 @@ import org.slf4j.LoggerFactory;
         /*  64 */     characters.setName(char_name);
         /*  65 */     characters.setMenpai(Integer.valueOf(chara.menpai));
         /*  66 */     characters.setGid(uuid);
-        String data = characters.getData();
-        Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-        if (chara111.level > chara.level)
-        {
-            log.error("人物等级{old}",chara111.name,chara111.level);
-            log.error("人物等级{new}",chara.name,chara.level);
-            throw new RuntimeException("角色等级回档！！！");
-        }
         /*  67 */     characters.setData(JSONUtils.toJSONString(chara));
         /*  68 */     characters.setAccountId(Integer.valueOf(session.accountid));
         /*     */
@@ -113,12 +105,6 @@ import org.slf4j.LoggerFactory;
         /*     */
         /*     */
         /*     */
-        data = characters.getData();
-        chara111 = JSONUtils.parseObject(data, Chara.class);
-        if (chara111.level > chara.level)
-        {
-            throw new RuntimeException("角色等级回档！！！");
-        }
         /* 104 */     characters.setData(JSONUtils.toJSONString(chara));
         /* 105 */     GameData.that.characterService.updateById(characters);
         /* 106 */     session.init(characters);
