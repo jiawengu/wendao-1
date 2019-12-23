@@ -510,8 +510,10 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
 
         if (id == 829 && menu_item.equals("挑战掌门")) {
+            String strArr[] = new String[]{"金系掌门", "木系掌门", "水系掌门", "火系掌门", "土系掌门"};
             List<String> list = new ArrayList();
-            list.add("金系掌门");
+            list.add(strArr[(chara1.menpai + 4) % 5]);
+            // todo
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
         }
