@@ -264,6 +264,11 @@ import io.netty.buffer.ByteBuf;
             content = "[【师门】入世/sm-002_s1]" + content;
             /*     */
         }
+        if (npc.getName().equals(chara.xiuxingNpcname)) {
+            /* 152 */
+            content = "[【十绝阵】讨教/十绝阵_s1]" + content;
+            /*     */
+        }
         /*     */
         /* 155 */
         Renwu renwu = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);

@@ -412,10 +412,56 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /*  405 */     vo_45063_0.check_point = 147761859;
         /*  406 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
         /*      */   }
+/*      */   public static void nextzhengzhu(Chara chara1, Chara duiyuan)
+/*      */   {
+    /*  366 */     duiyuan.xiuxingcishu += 1;
+    /*  367 */     int chubao = chara1.xiuxingcishu - 1;
+    /*  368 */     if (duiyuan.xiuxingcishu <= 40) {
+        /*  369 */       int use_money_type = (int)(duiyuan.level / 10 * 6815 * (1.0D + 0.2D * chubao));
+        /*  370 */       duiyuan.use_money_type += use_money_type;
+        /*  371 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+        /*  372 */       vo_20481_0.msg = ("获得代金券#R" + use_money_type);
+        /*  373 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
+        /*  374 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+        /*  375 */       int jingyan = (int)(1281 * duiyuan.level * (1.0D + 0.05D * chubao));
+        /*      */
+        /*  377 */       jingyan = shuangbei(chara1, jingyan);
+        /*  378 */       huodejingyan(duiyuan, jingyan);
+        /*  379 */       ListVo_65527_0 listVo_65527_0 = a65527(duiyuan);
+        /*  380 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M65527_0(), listVo_65527_0);
+        /*  381 */       if ((duiyuan.xiuxingcishu == 20) || (duiyuan.xiuxingcishu == 40)) {
+            /*  382 */         weijianding(duiyuan);
+            /*      */       }
+        /*      */ }
+
+                   int i = (duiyuan.xiuxingcishu + 9) % 10;
+    /*  387 */     String[] npces = {"金光阵主", "风吼阵主", "落魄阵主", "化血阵主", "红水阵主", "寒冰阵主", "烈焰阵主", "地烈阵主", "天阙阵主", "红砂阵主"};
+    /*  390 */
+                   chara1.xiuxingNpcname = npces[i];
+    /*  391 */     String task_prompt = "";
+    /*  392 */     String show_name = "";
+    /*  393 */     task_prompt = "讨教#P" + npces[i] + "| M=【十绝阵】请仙人赐教#P";
+    /*  394 */     show_name = "【十绝阵】讨教(" + (i + 1) + "/10)";
     /*      */
+    /*  396 */     if (i == 0 || chara1.xiuxingcishu > 40) {
+        /*  397 */       task_prompt = "";
+        /*  398 */       show_name = "";
+                         chara1.xiuxingNpcname = "";
+
+    /*  458 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+    /*  459 */           vo_20481_0.msg = ("请重新找玉泉老人接取十绝阵任务！");
+    /*  460 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
+    /*  461 */           GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+        /*      */     }
     /*      */
+    /*  401 */     GameUtilRenWu.renwukuangkuang("十绝阵", task_prompt, show_name, chara1);
     /*      */
-    /*      */
+    /*  403 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+    /*  404 */     vo_45063_0.task_name = task_prompt;
+    /*  405 */     vo_45063_0.check_point = 147761859;
+    /*  406 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+    /*      */   }
+
     /*      */   public static void nextshuadao(Chara chara1, Chara duiyuan)
     /*      */   {
         /*  414 */     Random random = new Random();

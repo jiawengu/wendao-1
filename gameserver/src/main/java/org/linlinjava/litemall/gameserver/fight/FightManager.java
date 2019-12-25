@@ -1294,11 +1294,23 @@ public class FightManager {
                 }
 
                 if (guaiwu != null && chara1.xiuxingNpcname.equals(((FightObject)guaiwu.get(0)).str)) {
+                    boolean isZhenZhu = false;
+                    if(chara1.xiuxingNpcname.contains("阵主")) isZhenZhu = true;
                     if (GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu != null) {
                         for(i = 0; i < GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu.size(); ++i) {
+                            if(isZhenZhu)
+                            {
+                                GameUtil.nextzhengzhu(chara1, (Chara)GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu.get(i));
+                                continue;
+                            }
                             GameUtil.nextxiuxing(chara1, (Chara)GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu.get(i));
                         }
                     } else {
+                        if(isZhenZhu)
+                        {
+                            GameUtil.nextzhengzhu(chara1, chara1);
+                            continue;
+                        }
                         GameUtil.nextxiuxing(chara1, chara1);
                     }
 
