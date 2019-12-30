@@ -7,7 +7,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameCore;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_REQUEST_SERVER_STATUS     -- 请求线列表跟状态
+ */
 /*    */ @Service
 /*    */ public class C222 implements GameHandler
 /*    */ {

@@ -12,7 +12,9 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*    */ import org.slf4j.Logger;
+/*    */ import org.linlinjava.litemall.gameserver.process.C4274_0;
+import org.linlinjava.litemall.gameserver.process.C61634_0;
+import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,6 +70,9 @@
 /* 67 */           if (session.lock()) {
 /*    */             try {
 /* 69 */               waitLine.process(ctx, buff);
+                        if(! (waitLine instanceof C4274_0 || waitLine instanceof C61634_0)){//todo 打印消息
+                              log.info("recive msg!=>"+waitLine);
+                        }
 /*    */             }
 /*    */             finally {
 /* 72 */               session.unlock();

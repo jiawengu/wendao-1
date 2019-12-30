@@ -85,6 +85,9 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.springframework.stereotype.Service;
 
+/**
+ * CMD_GENERAL_NOTIFY    一般通知
+ */
 @Service
 public class C63752_0 implements GameHandler {
     public C63752_0() {
@@ -1155,6 +1158,10 @@ public class C63752_0 implements GameHandler {
 
         if (type == 40008) {
             GameUtil.a49159(chara);
+        }
+
+        if(type == 40007){//通天塔离开
+            GameUtilRenWu.huicheng(chara);
         }
 
     }

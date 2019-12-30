@@ -6,7 +6,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * MSG_EXITS
+ */
 /*    */ @Service
 /*    */ public class M65531_0
 /*    */   extends BaseWrite

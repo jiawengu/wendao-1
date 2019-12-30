@@ -36,11 +36,18 @@ import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
 
 public class FightObject {
+    public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
     public int id;
     public int cid;
     public int fid;
     public String str;
     public int leader;
+    /**
+     * 1:玩家
+     * 2:宠物
+     * 3:守护
+     * 4：宠物-怪物
+     */
     public int type;
     public int pos;
     public int weapon_icon;
@@ -288,6 +295,10 @@ public class FightObject {
         if (name.contains("仙界叛逆")) {
             strname = chara.npcXuanShangName;
             this.friend = (int)(0.29D * (double)chara.level * (double)chara.level * (double)chara.level * 0.29D * (double)chara.level * (double)chara.level * (double)chara.level);
+        }
+        if(name.contains("星君")){//通天塔
+            int randomIndex = new Random().nextInt(TONG_TIAN_TA_PET.length);
+            strname = TONG_TIAN_TA_PET[randomIndex];
         }
 
         String names = "土匪#强盗#狐狸妖#鱼妖#蓝精#黄怪#疯魑#狂魍#蟒怪#鸟精#琵琶妖蟒妖#怪王狂狮#鬼王黑熊#鬼王悍猪#混天巨象#兑灵#艮灵#坎灵#离灵#狂灵#疯灵#山神#炎神#雷神#花神#龙神#刀斧手#火扇儒生#红衣剑客#试道元魔";

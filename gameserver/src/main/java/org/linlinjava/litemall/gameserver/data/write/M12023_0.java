@@ -6,7 +6,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * MSG_REFRESH_PET_GODBOOK_SKILLS
+ */
 /*    */ @Service
 /*    */ public class M12023_0 extends BaseWrite
 /*    */ {

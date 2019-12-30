@@ -21,7 +21,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ 
+/*     */
+
+/**
+ * CMD_SUMMON_MOUNT_REQUEST -- 请求召唤精怪
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C41044_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {

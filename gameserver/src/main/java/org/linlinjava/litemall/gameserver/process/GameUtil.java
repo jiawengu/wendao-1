@@ -6,10 +6,11 @@
 /*      */ import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*      */ import org.linlinjava.litemall.db.util.JSONUtils;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-/*      */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65525_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
+/*      */
 /*      */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+import org.linlinjava.litemall.gameserver.data.write.M45704_0;
+import org.linlinjava.litemall.gameserver.data.write.M49155_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*      */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*      */ import org.linlinjava.litemall.gameserver.domain.GoodsFenSe;
@@ -29,6 +30,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*      */ @org.springframework.stereotype.Service
 /*      */ public class GameUtil
         /*      */ {
+            private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天旋星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君", "北斗神将"};
     /*      */   public static void addshouhu(Chara chara)
     /*      */   {
         /*   30 */     for (int i = 0; i < chara.listshouhu.size(); i++)
@@ -741,6 +743,11 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /*  684 */     huodezhuangbei(chara, zhuangbeiInfo, 1, 1);
         /*      */   }
     /*      */
+
+    /**
+     * 任务奖励
+     * @param chara
+     */
     /*      */   public static void renwujiangli(Chara chara) {
         /*  688 */     org.linlinjava.litemall.db.domain.Renwu renwu = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
         /*  689 */     String reward = renwu.getReward();
@@ -751,6 +758,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             /*      */     }
         /*      */   }
     /*      */
+
+    /**
+     * 下一个任务
+     * @param str
+     * @return
+     */
     /*      */   public static String nextrenw(String str) {
         /*  698 */     String substring = str.substring(9, str.length());
         /*  699 */     int next = Integer.valueOf(substring).intValue() + 1;
@@ -1359,7 +1372,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /*      */
         /* 1302 */     return vo_61545_0List;
         /*      */   }
-    /*      */
+    /*      */  //MSG_FRIEND_UPDATE_PARTIAL
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 a24505(Chara chara) {
         /* 1306 */     org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0();
         /* 1307 */     vo_24505_0.update_type = 2;
@@ -2536,6 +2549,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2478 */     return ret;
         /*      */   }
     /*      */
+    /**
+     * MSG_TASK_PROMPT  任务提示
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 a61553(org.linlinjava.litemall.db.domain.Renwu tasks, Chara chara)
     /*      */   {
         /* 2483 */     if (tasks == null) {
@@ -2581,6 +2597,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2523 */     return vo_61553_0;
         /*      */   }
     /*      */
+    /**
+     * MSG_MENU_LIST
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 a8247(org.linlinjava.litemall.db.domain.Npc npc, String content)
     /*      */   {
         /* 2528 */     org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 vo_8247_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0();
@@ -2593,7 +2612,22 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2535 */     vo_8247_0.attrib = 0;
         /* 2536 */     return vo_8247_0;
         /*      */   }
+
+    /**
+     * 随机通天塔星君名字
+     * @return
+     */
+    public static String randomTTTXingJunName(){
+        Random random = new Random();
+        return TTT_XINGJUN[random.nextInt(TTT_XINGJUN.length)];
+    }
     /*      */
+
+    /**
+     * MSG_APPEAR
+     * @param chara
+     * @return
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 a65529(Chara chara) {
         /* 2540 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 vo_65529_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0();
         /* 2541 */     vo_65529_0.id = chara.id;
@@ -2650,6 +2684,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2592 */     return vo_65529_0;
         /*      */   }
     /*      */
+
+    /**
+     * MSG_UPDATE_IMPROVEMENT
+     * @param chara
+     * @return
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 a65511(Chara chara) {
         /* 2596 */     zhuangbeiValue(chara);
         /* 2597 */     chara.zbAttribute.id = chara.id;
@@ -2661,19 +2701,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2603 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
         /*      */
         /* 2605 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 vo_65511_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0();
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
-        /*      */
         /* 2616 */     return vo_65511_0;
         /*      */   }
-    /*      */
+    /*      */  //MSG_UPDATE
     /*      */   public static ListVo_65527_0 a65527(Chara chara)
     /*      */   {
         /* 2621 */     ListVo_65527_0 vo_65527_0 = new ListVo_65527_0();
@@ -2856,6 +2886,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2798 */     return vo_65527_0;
         /*      */   }
     /*      */
+
+    /**
+     * MSG_ENTER_ROOM
+     * @param chara
+     * @return
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0 a65505(Chara chara) {
         /* 2802 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0 vo_65505_1 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0();
         /* 2803 */     vo_65505_1.map_id = chara.mapid;
@@ -3065,6 +3101,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 3007 */     return vo_12285_0;
         /*      */   }
     /*      */
+    /**
+     * MSG_UPDATE_APPEARANCE    更新外观
+     */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 a61661(Chara chara) {
         /* 3011 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0();
         /* 3012 */     vo_61661_0.id = chara.id;
@@ -4366,6 +4405,11 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 4308 */     return "";
         /*      */   }
     /*      */
+
+    /**
+     * MSG_SHUADAO_REFRESH
+     * @param chara
+     */
     /*      */   public static void a45060(Chara chara) {
         /* 4312 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0 vo_45060_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45060_0();
         /* 4313 */     vo_45060_0.hasBonus = 0;
@@ -4401,5 +4445,30 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 4343 */     vo_45060_0.taskTime2 = 1;
         /* 4344 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45060_0(), vo_45060_0);
         /*      */   }
+
+        public static void a45704(Chara chara){
+            Vo_45704_0 vo_45704_0 = new Vo_45704_0();
+            vo_45704_0.result = 0;//TODO
+            vo_45704_0.xing_name = chara.ttt_xj_name;
+            GameObjectChar.send(new M45704_0(), vo_45704_0);
+        }
+        public static void a49155(Chara chara){
+            Vo_49155_0 vo_49155_0 = new Vo_49155_0();
+            vo_49155_0.curLayer = (short) chara.ttt_layer;
+            vo_49155_0.breakLayer = (short) (chara.level);
+            byte curType = 0;
+            if(chara.ttt_challenge_num>0){
+                curType = (byte) (chara.ttt_xj_success?2:3);
+            }else{
+                curType = 1;
+            }
+            vo_49155_0.curType = curType;
+            vo_49155_0.topLayer = chara.level+45;
+            vo_49155_0.npc = chara.ttt_xj_name;
+            vo_49155_0.challengeCount = 1;//TODO
+            vo_49155_0.bonusType = "exp";
+            vo_49155_0.hasNotCompletedSmfj = 1;
+            GameObjectChar.send(new M49155_0(), vo_49155_0);
+        }
     /*      */ }
 

@@ -13,7 +13,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */ //MSG_FRIEND_UPDATE_PARTIAL
 /*    */ @Service
 /*    */ public class M24505_0
 /*    */   extends BaseWrite

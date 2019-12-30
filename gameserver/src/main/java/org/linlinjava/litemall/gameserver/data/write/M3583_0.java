@@ -10,7 +10,7 @@ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_3583_0;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
-
+//MSG_C_START_COMBAT    开始战斗
 @Service
 public class M3583_0 extends BaseWrite {
     public M3583_0() {

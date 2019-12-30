@@ -16,7 +16,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
-/*     */ 
+/*     */
+
+/**
+ * CMD_TELEPORT 传送
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C32768 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {

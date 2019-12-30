@@ -24,7 +24,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */
+
+/**
+ * CMD_LOAD_EXISTED_CHAR
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C4192_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
@@ -61,7 +65,7 @@
 /*     */ 
 /*  62 */     chara.uptime = System.currentTimeMillis();
 /*  63 */     java.util.Date date = new java.util.Date(chara.updatetime);
-/*  64 */     boolean isnow = GameUtil.isNow(date);
+/*  64 */     boolean isnow = GameUtil.isNow(date);//是否是今天
 /*  65 */     if (!isnow) {
 /*  66 */       chara.isGet = 0;
 /*  67 */       chara.isCanSgin = 1;

@@ -14,7 +14,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*    */ 
+/*    */
+
+/**
+ * CMD_MULTI_MOVE_TO
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class C61634_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
@@ -37,7 +41,8 @@
 /* 37 */       y = GameReadTool.readShort(buff);
 /*    */     }
 /*    */     
-/*    */ 
+/*    */
+//    System.out.println("x:"+x+",y:"+y);
 /*    */ 
 /* 42 */     int dir = GameReadTool.readShort(buff);
 /*    */     

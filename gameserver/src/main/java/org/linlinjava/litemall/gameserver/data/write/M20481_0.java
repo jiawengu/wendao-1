@@ -4,7 +4,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*    */ 
+/*    */
+
+/**
+ * MSG_NOTIFY_MISC_EX
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class M20481_0 extends BaseWrite
 /*    */ {

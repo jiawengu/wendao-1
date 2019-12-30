@@ -11,7 +11,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightObject;
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightRequest;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*    */ 
+/*    */
+
+/**
+ * CMD_AUTO_FIGHT_SET_DATA   -- 设置自动战斗数据
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class C32984_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {

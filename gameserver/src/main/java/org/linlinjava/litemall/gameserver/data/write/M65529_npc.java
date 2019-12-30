@@ -5,7 +5,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * MSG_APPEAR
+ */
 /*    */ @Service
 /*    */ public class M65529_npc
 /*    */   extends BaseWrite

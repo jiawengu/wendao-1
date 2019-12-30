@@ -1350,6 +1350,11 @@ public class FightManager {
 
                     return;
                 }
+                if (chara1.mapid == 37000 && guaiwu != null && (guaiwu.get(0)).str.contains("星君")) {//通天塔挑战成功
+                    assert chara1.ttt_xj_name.equals(guaiwu.get(0).str);
+                    chara1.onTttChallengeSuccess();
+                    return;
+                }
 
                 if (chara1.mapid == 38004) {
                     GameShiDao var10000 = GameObjectCharMng.getGameObjectChar(chara1.id).gameMap.gameShiDao;
@@ -1487,6 +1492,12 @@ public class FightManager {
                     } else {
                         GameUtil.shuayeguai(chara1, chara1, ((FightObject)guaiwu.get(0)).guaiwulevel);
                     }
+                }
+            }else{
+                if (chara1.mapid == 37000 ) {//通天塔挑战失败
+                    assert chara1.ttt_xj_name.equals(guaiwu.get(0).str);
+                    chara1.onTttChallengeFail();
+                    return;
                 }
             }
 

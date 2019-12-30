@@ -9,7 +9,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * CMD_REQUEST_RECHARGE_SCORE_GOODS -- 客户端请求积分商品列表
+ */
 /*    */ @Service
 /*    */ public class C53448_0
 /*    */   implements GameHandler

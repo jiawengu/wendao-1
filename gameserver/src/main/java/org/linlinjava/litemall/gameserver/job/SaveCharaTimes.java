@@ -64,7 +64,7 @@ public class SaveCharaTimes {
                 }
             }
             gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
-            GameData.that.baseCharactersService.updateById(gameSession.characters);
+//todo            GameData.that.baseCharactersService.updateById(gameSession.characters);
         }
 
     }

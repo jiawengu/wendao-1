@@ -6,7 +6,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * MSG_TITLE
+ */
 /*    */ @Service
 /*    */ public class M61671_0
 /*    */   extends BaseWrite

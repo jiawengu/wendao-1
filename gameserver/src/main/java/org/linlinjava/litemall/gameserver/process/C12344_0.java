@@ -1,35 +1,40 @@
 package org.linlinjava.litemall.gameserver.process;
 
+import com.google.common.base.Preconditions;
 import org.linlinjava.litemall.db.domain.Accounts;
 import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+import org.linlinjava.litemall.gameserver.data.write.M49155_0;
 import org.linlinjava.litemall.gameserver.data.write.M61553_0;
 import org.linlinjava.litemall.gameserver.data.write.M65527_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
+import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * CMD_SELECT_MENU_ITEM
+ *
+ * @param <main>
+ */
 @org.springframework.stereotype.Service
 public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHandler {
     public int[] coins = {18000, 90000, 360000, 750000, 1284000, 1800000, 2844000, 3900000, 9000000, 14400000, 25500000};
     public int[] jiage = {6, 30, 100, 200, 328, 500, 648, 1000, 2000, 3000, 5000};
 
 
-    public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff)
-        {
+    public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff) {
 
         int id = org.linlinjava.litemall.gameserver.data.GameReadTool.readInt(buff);
 
@@ -272,7 +277,6 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
         }
 
 
-
         if ((id == 1151) &&
                 (menu_item.equals("赠送元宝"))) {
 
@@ -374,7 +378,7 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
 
         if ((id == 1170) &&
-            (menu_item.equals("离开战场"))) {
+                (menu_item.equals("离开战场"))) {
 
             GameUtilRenWu.shidaohuicheng(chara1);
 
@@ -412,7 +416,14 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
          * 进入通天塔
          */
         if (id == 960 && (menu_item.equals("通天塔"))) {
-            System.out.println(menu_item);
+            if(chara1.level<50){
+                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "角色等级不足50级！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                return;
+            }
             org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(menu_item);
             chara1.y = map.getY().intValue();
             chara1.x = map.getX().intValue();
@@ -431,6 +442,33 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
             return;
         }
 
+        if (menu_item.equals("挑战星君")) {
+            FightManager.goFight(chara1, Arrays.asList(chara1.ttt_xj_name));
+            return;
+        }
+
+        if(id == 1207){//北斗神将
+            if("离开".equals(menu_item)){
+                GameUtilRenWu.huicheng(chara1);
+            }else if("挑战下层".equals(menu_item)){
+                Preconditions.checkArgument(chara1.ttt_xj_success);
+                String xingjunName = GameUtil.randomTTTXingJunName();
+                chara1.onEnterTttLayer(chara1.ttt_layer+1, xingjunName);
+
+                GameUtil.a49155(chara1);
+            }else if("飞升".equals(menu_item)){
+
+            }else if("重新挑战".equals(menu_item)){
+                FightManager.goFight(chara1, Arrays.asList(chara1.ttt_xj_name));
+            }else if("更换奖励类型".equals(menu_item)){
+                Preconditions.checkArgument(chara1.ttt_challenge_num==0);
+                String xingjunName = GameUtil.randomTTTXingJunName();
+                chara1.onEnterTttLayer(chara1.ttt_layer, xingjunName);
+                GameUtil.a49155(chara1);
+            }else if("传送出塔".equals(menu_item)){
+                GameUtilRenWu.huicheng(chara1);
+            }
+        }
 
         if ((id == 962) && (menu_item.equals("世道进入"))) {
             String shidaoname = GameUtilRenWu.shidaolevel(chara1);
@@ -731,158 +769,162 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
             /*      */
         }
         /*      */
-            if ((id == 1184) &&
-                    /*  404 */       (menu_item.equals("十绝阵_s0"))) {
-                /*  405 */
-                if (GameObjectChar.getGameObjectChar().gameTeam == null) {
-                    /*  406 */
-                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                    /*  407 */
-                    vo_20481_0.msg = "人数不足3人！";
-                    /*  408 */
-                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                    /*  409 */
-                    GameObjectChar.getGameObjectChar();
-                    GameObjectChar.send(new M20481_0(), vo_20481_0);
-                    /*  410 */
-                    return;
-                    /*      */
-                }
-                /*  412 */
-                List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-                /*  413 */
-                if (duiwu.size() < 3) {
-                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                    vo_20481_0.msg = "人数不足3人！";
-                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                    GameObjectChar.getGameObjectChar();
-                    GameObjectChar.send(new M20481_0(), vo_20481_0);
-                    return;
-
-                }
-                /*  420 */
-                for (int i = 0; i < duiwu.size(); i++) {
-                    /*  421 */
-                    if (((Chara) duiwu.get(i)).xiuxingcishu > 40) {
-                        /*  422 */
-                        Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                        /*  423 */
-                        vo_20481_0.msg = (((Chara) duiwu.get(i)).name + "已完成任务");
-                        /*  424 */
-                        vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                        /*  425 */
-                        GameObjectChar.getGameObjectChar();
-                        GameObjectChar.send(new M20481_0(), vo_20481_0);
-                        /*  426 */
-                        return;
-                        /*      */
-                    }
-                    /*      */
-                }
-                /*  429 */
-                String[] npces = {"金光阵主", "风吼阵主", "落魄阵主", "化血阵主", "红水阵主", "寒冰阵主", "烈焰阵主", "地烈阵主", "天阙阵主", "红砂阵主"};
-                /*  431 */
-                int i = (chara1.xiuxingcishu + 9) % 10;
-                /*  432 */
-                chara1.xiuxingNpcname = npces[i];
-                /*  433 */
-                Vo_61553_0 vo_61553_10 = new Vo_61553_0();
-                /*  434 */
-                vo_61553_10.count = 1;
-                /*  435 */
-                vo_61553_10.task_type = "十绝阵";
-                /*  436 */
-                vo_61553_10.task_desc = "天法道、道法自然，此乃道义根本。十位上古仙神演自然玄机，终成十绝之阵。";
-                /*  437 */
-                vo_61553_10.task_prompt = ("拜访#P" + npces[i] + "|M=【十绝阵】请仙人赐教#P");
-                /*  438 */
-                vo_61553_10.refresh = 0;
-                /*  439 */
-                vo_61553_10.task_end_time = 1567932239;
-                /*  440 */
-                vo_61553_10.attrib = 0;
-                /*  441 */
-                vo_61553_10.reward = "#I经验|人物经验宠物经验#I#I金钱|金钱#I";
-                /*  442 */
-                vo_61553_10.show_name = ("【十绝阵】修行(" + ((chara1.xiuxingcishu + 9) % 10 + 1)+ "/10)");
-                /*  443 */
-                vo_61553_10.tasktask_extra_para = "";
-                /*  444 */
-                vo_61553_10.tasktask_state = "1";
-                /*  445 */
-                GameObjectChar.sendduiwu(new M61553_0(), vo_61553_10, chara1.id);
-
-/*  403 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
-/*  404 */     vo_45063_0.task_name = vo_61553_10.task_prompt;
-/*  405 */     vo_45063_0.check_point = 147761859;
-/*  406 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+        if ((id == 1184) &&
+                /*  404 */       (menu_item.equals("十绝阵_s0"))) {
+            /*  405 */
+            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+                /*  406 */
+                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                /*  407 */
+                vo_20481_0.msg = "人数不足3人！";
+                /*  408 */
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                /*  409 */
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                /*  410 */
+                return;
                 /*      */
             }
-            if (menu_item.equals("十绝阵_s1")) {
-                /*  451 */
-                org.linlinjava.litemall.db.domain.Npc npc = GameData.that.baseNpcService.findOneByName(chara1.xiuxingNpcname);
-                /*  452 */
-                if (npc == null) {
-                    /*  453 */
+            /*  412 */
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            /*  413 */
+            if (duiwu.size() < 3) {
+                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "人数不足3人！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                return;
+
+            }
+            /*  420 */
+            for (int i = 0; i < duiwu.size(); i++) {
+                /*  421 */
+                if (((Chara) duiwu.get(i)).xiuxingcishu > 40) {
+                    /*  422 */
+                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                    /*  423 */
+                    vo_20481_0.msg = (((Chara) duiwu.get(i)).name + "已完成任务");
+                    /*  424 */
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                    /*  425 */
+                    GameObjectChar.getGameObjectChar();
+                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+                    /*  426 */
                     return;
-                    /*      */
-                }
-                /*  455 */
-                if (npc.getId().intValue() == id) {
-                    /*  456 */
-                    Random random = new Random();
-                    /*  457 */
-                    List<String> list = new ArrayList();
-                    /*  458 */
-                    list.add(chara1.xiuxingNpcname);
-                    /*  459 */
-                    for (int j = 0; j < 9; j++) {
-                        /*  460 */
-                        int i1 = random.nextInt(6);
-                        /*  461 */
-                        if (i1 == 0) {
-                            /*  462 */
-                            list.add("兑灵");
-                            /*      */
-                        }
-                        /*  464 */
-                        if (i1 == 1) {
-                            /*  465 */
-                            list.add("艮灵");
-                            /*      */
-                        }
-                        /*  467 */
-                        if (i1 == 2) {
-                            /*  468 */
-                            list.add("坎灵");
-                            /*      */
-                        }
-                        /*  470 */
-                        if (i1 == 3) {
-                            /*  471 */
-                            list.add("离灵");
-                            /*      */
-                        }
-                        /*  473 */
-                        if (i1 == 4) {
-                            /*  474 */
-                            list.add("狂灵");
-                            /*      */
-                        }
-                        /*  476 */
-                        if (i1 == 5) {
-                            /*  477 */
-                            list.add("疯灵");
-                            /*      */
-                        }
-                        /*      */
-                    }
-                    /*  480 */
-                    org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
                     /*      */
                 }
                 /*      */
             }
+            /*  429 */
+            String[] npces = {"金光阵主", "风吼阵主", "落魄阵主", "化血阵主", "红水阵主", "寒冰阵主", "烈焰阵主", "地烈阵主", "天阙阵主", "红砂阵主"};
+            /*  431 */
+            int i = (chara1.xiuxingcishu + 9) % 10;
+            /*  432 */
+            chara1.xiuxingNpcname = npces[i];
+            /*  433 */
+            Vo_61553_0 vo_61553_10 = new Vo_61553_0();
+            /*  434 */
+            vo_61553_10.count = 1;
+            /*  435 */
+            vo_61553_10.task_type = "十绝阵";
+            /*  436 */
+            vo_61553_10.task_desc = "天法道、道法自然，此乃道义根本。十位上古仙神演自然玄机，终成十绝之阵。";
+            /*  437 */
+            vo_61553_10.task_prompt = ("拜访#P" + npces[i] + "|M=【十绝阵】请仙人赐教#P");
+            /*  438 */
+            vo_61553_10.refresh = 0;
+            /*  439 */
+            vo_61553_10.task_end_time = 1567932239;
+            /*  440 */
+            vo_61553_10.attrib = 0;
+            /*  441 */
+            vo_61553_10.reward = "#I经验|人物经验宠物经验#I#I金钱|金钱#I";
+            /*  442 */
+            vo_61553_10.show_name = ("【十绝阵】修行(" + ((chara1.xiuxingcishu + 9) % 10 + 1) + "/10)");
+            /*  443 */
+            vo_61553_10.tasktask_extra_para = "";
+            /*  444 */
+            vo_61553_10.tasktask_state = "1";
+            /*  445 */
+            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_10, chara1.id);
+
+            /*  403 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+            /*  404 */
+            vo_45063_0.task_name = vo_61553_10.task_prompt;
+            /*  405 */
+            vo_45063_0.check_point = 147761859;
+            /*  406 */
+            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+            /*      */
+        }
+        if (menu_item.equals("十绝阵_s1")) {
+            /*  451 */
+            org.linlinjava.litemall.db.domain.Npc npc = GameData.that.baseNpcService.findOneByName(chara1.xiuxingNpcname);
+            /*  452 */
+            if (npc == null) {
+                /*  453 */
+                return;
+                /*      */
+            }
+            /*  455 */
+            if (npc.getId().intValue() == id) {
+                /*  456 */
+                Random random = new Random();
+                /*  457 */
+                List<String> list = new ArrayList();
+                /*  458 */
+                list.add(chara1.xiuxingNpcname);
+                /*  459 */
+                for (int j = 0; j < 9; j++) {
+                    /*  460 */
+                    int i1 = random.nextInt(6);
+                    /*  461 */
+                    if (i1 == 0) {
+                        /*  462 */
+                        list.add("兑灵");
+                        /*      */
+                    }
+                    /*  464 */
+                    if (i1 == 1) {
+                        /*  465 */
+                        list.add("艮灵");
+                        /*      */
+                    }
+                    /*  467 */
+                    if (i1 == 2) {
+                        /*  468 */
+                        list.add("坎灵");
+                        /*      */
+                    }
+                    /*  470 */
+                    if (i1 == 3) {
+                        /*  471 */
+                        list.add("离灵");
+                        /*      */
+                    }
+                    /*  473 */
+                    if (i1 == 4) {
+                        /*  474 */
+                        list.add("狂灵");
+                        /*      */
+                    }
+                    /*  476 */
+                    if (i1 == 5) {
+                        /*  477 */
+                        list.add("疯灵");
+                        /*      */
+                    }
+                    /*      */
+                }
+                /*  480 */
+                org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
+                /*      */
+            }
+            /*      */
+        }
         /*  403 */
         if ((id == 1174) &&
                 /*  404 */       (menu_item.equals("修行_s0"))) {

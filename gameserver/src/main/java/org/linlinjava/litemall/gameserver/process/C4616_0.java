@@ -14,7 +14,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightRequest;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_C_CATCH_PET
+ */
 /*    */ @Service
 /*    */ public class C4616_0 implements GameHandler
 /*    */ {

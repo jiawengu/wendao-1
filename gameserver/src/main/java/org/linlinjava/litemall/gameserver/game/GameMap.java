@@ -12,18 +12,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcPoint;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45157_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_1;
-import org.linlinjava.litemall.gameserver.data.write.M45157_0;
-import org.linlinjava.litemall.gameserver.data.write.M61671_0;
-import org.linlinjava.litemall.gameserver.data.write.M65505_0;
-import org.linlinjava.litemall.gameserver.data.write.M65529_0;
-import org.linlinjava.litemall.gameserver.data.write.M65529_npc;
-import org.linlinjava.litemall.gameserver.data.write.M65531_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -109,6 +99,16 @@ public class GameMap {
         vo_61671_0.id = chara.mapid;
         vo_61671_0.count = 0;
         gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+
+        if(id==37000){//通天塔
+            String randomXjName = GameUtil.randomTTTXingJunName();
+            short layer = (short) (chara.level-14);
+            chara.onEnterTttLayer(layer, randomXjName);
+
+            GameUtil.a49155(chara);
+
+            GameUtil.a45704(chara);
+        }
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
@@ -116,7 +116,7 @@ public class GameMap {
         this.sessionList.remove(gameObjectChar);
         this.sessionList.add(gameObjectChar);
         Chara chara = gameObjectChar.chara;
-        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
+
         gameObjectChar.gameMap = this;
         chara.x = charaduizhang.x;
         chara.y = charaduizhang.y;
@@ -128,8 +128,9 @@ public class GameMap {
         gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
         gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
-        Iterator var7 = npcList.iterator();
 
+        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
+        Iterator var7 = npcList.iterator();
         while(var7.hasNext()) {
             Npc npc = (Npc)var7.next();
             gameObjectChar.sendOne(new M65529_npc(), npc);
@@ -137,10 +138,11 @@ public class GameMap {
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
         gameObjectChar.sendOne(new M65531_0(), list);
+
         Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
         this.send(new M65529_0(), vo_65529_0);
-        Iterator var9 = this.sessionList.iterator();
 
+        Iterator var9 = this.sessionList.iterator();
         while(var9.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var9.next();
             if (gameSession.ctx != null && gameSession.chara != null) {

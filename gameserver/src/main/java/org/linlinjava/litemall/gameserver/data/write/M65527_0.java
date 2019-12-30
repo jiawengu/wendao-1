@@ -14,7 +14,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.BuildFields;
 /*     */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*     */ import org.springframework.stereotype.Service;
-/*     */ 
+/*     */
+
+/**
+ * MSG_UPDATE
+ */
 /*     */ @Service
 /*     */ public class M65527_0
 /*     */   extends BaseWrite

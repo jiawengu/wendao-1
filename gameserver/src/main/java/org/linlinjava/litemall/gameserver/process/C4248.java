@@ -16,7 +16,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*    */ 
+/*    */
+
+/**
+ * CMD_SHIFT
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class C4248 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {

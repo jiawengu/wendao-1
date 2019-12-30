@@ -12,7 +12,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.BuildFields;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*    */ 
+/*    */
+
+/**
+ * MSG_MESSAGE_EX
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class M16383_0 extends BaseWrite
 /*    */ {

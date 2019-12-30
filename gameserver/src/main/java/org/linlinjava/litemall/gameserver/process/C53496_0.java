@@ -9,7 +9,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * CMD_GET_ACTIVE_BONUS_INFO    -- 获取活动会员信息
+ */
 /*    */ @Service
 /*    */ public class C53496_0
 /*    */   implements GameHandler

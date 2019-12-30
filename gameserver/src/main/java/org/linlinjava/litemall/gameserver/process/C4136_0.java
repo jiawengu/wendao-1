@@ -21,7 +21,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.springframework.stereotype.Service;
-/*     */ 
+/*     */
+
+/**
+ * CMD_EQUIP
+ */
 /*     */ @Service
 /*     */ public class C4136_0 implements GameHandler
 /*     */ {

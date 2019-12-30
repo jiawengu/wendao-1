@@ -100,7 +100,7 @@
 /* 100 */       vo_65529_0.level = level;
 /* 101 */       vo_65529_0.type = 2;
 /* 102 */       vo_65529_0.leixing = (random.nextInt(5) + 1);
-/* 103 */       List<RenwuMonster> renwuMonsters = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(7));
+/* 103 */       List<RenwuMonster> renwuMonsters = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(7));//杀星
 /* 104 */       RenwuMonster renwuMonster = (RenwuMonster)renwuMonsters.get(random.nextInt(renwuMonsters.size()));
 /* 105 */       org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
 /* 106 */       vo_65529_0.mapid = map.getMapId().intValue();

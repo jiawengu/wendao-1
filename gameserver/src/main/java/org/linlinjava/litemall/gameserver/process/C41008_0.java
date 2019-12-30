@@ -6,7 +6,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41009_0;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */ //CMD_ASK_SERVER_TIME  -- 请求更新服务器时间
 /*    */ @Service
 /*    */ public class C41008_0 implements GameHandler
 /*    */ {

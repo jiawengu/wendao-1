@@ -2,165 +2,82 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4993621a-738c-4447-b64f-bb07b6918c2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_11_0_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_linux_11_0_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_11_0_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11_0_0_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_10.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_10.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_oss_aliyun_sdk_oss_2_5_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_aliyun_oss_aliyun_sdk_oss_2_5_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_qrcode_utils_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_qrcode_utils_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_common_3_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_common_3_3_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_miniapp_3_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_miniapp_3_3_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_pay_3_3_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_binarywang_weixin_java_pay_3_3_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_5_1_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_autoconfigure_1_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_spring_boot_starter_1_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_qcloudsms_qcloudsms_1_0_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_qcloudsms_qcloudsms_1_0_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_qcloud_cos_api_5_4_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_qcloud_cos_api_5_4_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_qiniu_qiniu_java_sdk_7_2_28.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_qiniu_qiniu_java_sdk_7_2_28.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_14_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_14_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_javax_mail_1_6_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_javax_mail_1_6_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_10.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_2_7_9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_HikariCP_2_7_9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_5.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_5_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_lettuce_lettuce_core_5_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_32_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_32_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_buffer_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_codec_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_common_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_handler_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_resolver_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_27_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_transport_4_1_27_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_1_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_projectreactor_reactor_core_3_1_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jaxen_jaxen_1_1_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jaxen_jaxen_1_1_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_9_9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_9_9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_46.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_46.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_7_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_7_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_7_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_json_lib_json_lib_jdk15_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_json_lib_json_lib_jdk15_2_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_7.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_10.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_10.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_10_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_10_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_10_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_10_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_32.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_8_5_32.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_5_32.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_8_5_32.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_5_32.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_8_5_32.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_9_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_9_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_59.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_59.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_59.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_59.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_0_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_dom4j_dom4j_2_0_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_11_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_11_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom_1_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom_1_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_core_3_7_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_core_3_7_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_http_3_7_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_http_3_7_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_upload_3_7_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jodd_jodd_upload_3_7_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20170516.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20170516.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_15_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_2_15_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_autoconfigure_1_3_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_spring_boot_mybatis_spring_boot_starter_1_3_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_25.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_mail_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_mail_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_0_4_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_0_4_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_9_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_0_9_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_0_9_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_0_9_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_0_9_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_0_9_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_10_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_10_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_0_8_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_0_8_RELEASE.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_5_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_5_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_19.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_19.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xmlpull_xmlpull_1_1_3_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xmlpull_xmlpull_1_1_3_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__xpp3_xpp3_min_1_1_4c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xpp3_xpp3_min_1_1_4c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/wendaoshouyou.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wendaoshouyou.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-all/game-all.iml" beforeDir="false" afterPath="$PROJECT_DIR$/game-all/game-all.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-all/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/game-all/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-api/game-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/game-api/game-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/atm/g-bits/patch.zip" beforeDir="false" afterPath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/atm/g-bits/patch.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/mobile/sdk/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/mobile/sdk/js/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/wd/110001_config_20190415.json" beforeDir="false" afterPath="$PROJECT_DIR$/game-api/src/main/resources/static/vip4/wd/110001_config_20190415.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-api/target/classes/org/linlinjava/litemall/wx/web/WdAuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/game-api/target/classes/org/linlinjava/litemall/wx/web/WdAuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-utils/game-utils.iml" beforeDir="false" afterPath="$PROJECT_DIR$/game-utils/game-utils.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/gameserver.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/gameserver.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/fight/FightManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/fight/FightManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/game/GameObjectChar.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/game/GameObjectChar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/game/GameObjectCharMng.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/game/GameObjectCharMng.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C12344_0.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C12344_0.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C12490_0.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C12490_0.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C4150_0.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C4150_0.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C8284_0.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/C8284_0.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/GameUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/GameUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/GameUtilRenWu.class" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/target/classes/org/linlinjava/litemall/gameserver/process/GameUtilRenWu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Npc.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Npc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12023_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12023_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12285_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12285_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12285_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M12285_1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16383_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16383_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16429_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16429_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16431_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16431_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M19959_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M19959_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M20480_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M20480_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M20481_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M20481_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M24505_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M24505_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M32985_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M32985_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M3583_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M3583_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4099_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4099_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M41009_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M41009_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M41023_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M41023_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4119_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4119_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4121_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4121_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45060_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45060_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45063_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45063_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45141_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45141_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45157_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45157_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45277_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45277_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45388_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M45388_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M49177_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M49177_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61553_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61553_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61593_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61593_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61661_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61661_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61671_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61671_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M64971_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M64971_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65017_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65017_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65019_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65019_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65505_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65505_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65507_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65507_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65511_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65511_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65527_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65527_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65529_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65529_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65529_npc.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65529_npc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65531_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65531_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M7655_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M7655_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M7659_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M7659_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M8247_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M8247_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/Chara.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/Chara.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/GoodsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/GoodsInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShuaGuai.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShuaGuai.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/netty/ServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/netty/ServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C12344_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C12344_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C12802_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C12802_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C16558_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C16558_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C222.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C222.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C28_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C28_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C32768.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C32768.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C32984_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C32984_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41008_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41008_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41044_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41044_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41111_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C41111_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4136_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4136_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4144.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4144.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4150_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4150_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4156_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4156_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4192_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4192_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4248.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4248.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4274_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4274_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4616_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4616_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C518_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C518_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C53448_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C53448_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C53496_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C53496_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C61634_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C61634_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C63752_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C63752_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C8708_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C8708_0.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/spring.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -195,6 +112,9 @@
       </list>
     </option>
   </component>
+  <component name="FindBugs-IDEA-Workspace">
+    <toolWindowEditorPreview>false</toolWindowEditorPreview>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -219,6 +139,9 @@
     <option name="vmOptions" value="-DarchetypeCatalog=internal" />
   </component>
   <component name="ProjectId" id="1VXtwMPydEU42YxXBdH8G6ME2t3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -246,13 +169,9 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\process" />
-      <recent name="E:\wendaoshouyou" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\wendaoshouyou\game-api\src\main\resources\static\vip4\atm\g-bits" />
       <recent name="E:\wendaoshouyou\game-api\src\main\resources\static\vip4\wd" />
@@ -260,11 +179,20 @@
       <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\data" />
       <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\data\game" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.linlinjava.litemall.gameserver.data.write" />
+      <recent name="org.linlinjava.litemall.gameserver.data.vo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\process" />
+      <recent name="E:\wendaoshouyou" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.linlinjava.litemall.Application" />
       <module name="game-all" />
+      <option name="PROGRAM_PARAMETERS" value="debug" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.linlinjava.litemall.*" />
@@ -334,78 +262,90 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577414676015">
+    <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577670539111">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577414676015" />
-    <state width="449" height="438" key="DebuggerActiveHint" timestamp="1577414949418">
+    <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577670539111" />
+    <state x="677" y="138" width="590" height="584" key="#xdebugger.evaluate" timestamp="1577702118929">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="449" height="438" key="DebuggerActiveHint/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577414949418" />
+    <state x="677" y="138" width="590" height="584" key="#xdebugger.evaluate/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577702118929" />
+    <state width="451" height="438" key="DebuggerActiveHint" timestamp="1577708025317">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="451" height="438" key="DebuggerActiveHint/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577708025317" />
     <state x="580" y="187" key="FileChooserDialogImpl" timestamp="1577412880865">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="187" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577412880865" />
-    <state width="1557" height="262" key="GridCell.Tab.0.bottom" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.0.bottom" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.0.center" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.0.center" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.0.left" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.0.left" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.0.right" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.0.right" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.1.bottom" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.1.bottom" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.1.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.1.center" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.1.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.1.center" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.1.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.1.left" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.1.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.1.left" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.1.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state width="1557" height="262" key="GridCell.Tab.1.right" timestamp="1577428603286">
+    <state width="1557" height="262" key="GridCell.Tab.1.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state width="1557" height="262" key="GridCell.Tab.1.right" timestamp="1577711123197">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="262" key="GridCell.Tab.1.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577428603286" />
-    <state x="280" y="7" key="SettingsEditor" timestamp="1577412644918">
+    <state width="1557" height="262" key="GridCell.Tab.1.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711123197" />
+    <state x="280" y="7" key="SettingsEditor" timestamp="1577583887473">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="280" y="7" key="SettingsEditor/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577412644918" />
-    <state x="487" y="190" width="626" height="480" key="find.popup" timestamp="1577417998542">
+    <state x="280" y="7" key="SettingsEditor/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577583887473" />
+    <state x="521" y="171" width="549" height="524" key="StructurePopup" timestamp="1577710061853">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="487" y="190" width="626" height="480" key="find.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577417998542" />
-    <state width="972" height="500" key="javadoc.popup.new" timestamp="1577416423527">
+    <state x="521" y="171" width="549" height="524" key="StructurePopup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577710061853" />
+    <state x="487" y="190" width="806" height="480" key="find.popup" timestamp="1577710998141">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="972" height="500" key="javadoc.popup.new/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577416423527" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1577418013061">
+    <state x="487" y="190" width="806" height="480" key="find.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577710998141" />
+    <state width="972" height="500" key="javadoc.popup.new" timestamp="1577711383786">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577418013061" />
+    <state width="972" height="500" key="javadoc.popup.new/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577711383786" />
+    <state x="503" y="62" key="refactoring.ChangeSignatureDialog" timestamp="1577707624595">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="503" y="62" key="refactoring.ChangeSignatureDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577707624595" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1577709875116">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577709875116" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C63752_0.java</url>
-          <line>945</line>
+          <line>948</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4136_0.java</url>
-          <line>75</line>
+          <line>79</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -427,21 +367,6 @@
           <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C32776_0.java</url>
           <line>25</line>
           <option name="timeStamp" value="170" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4150_0.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="210" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="211" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

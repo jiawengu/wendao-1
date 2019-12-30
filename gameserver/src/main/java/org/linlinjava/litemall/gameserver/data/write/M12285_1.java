@@ -3,7 +3,10 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*    */ 
+/*    */
+/**
+ * MSG_DISAPPEAR    角色不再视野内
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class M12285_1 extends BaseWrite
 /*    */ {

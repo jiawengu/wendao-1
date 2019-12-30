@@ -6,7 +6,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41106_0;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * CMD_REQUEST_CONSUME_SCORE_GOODS  -- 请求消费积分商品信息
+ */
 /*    */ @Service
 /*    */ public class C41111_0
 /*    */   implements GameHandler

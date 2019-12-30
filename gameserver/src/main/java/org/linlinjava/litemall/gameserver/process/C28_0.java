@@ -19,7 +19,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
 /*     */ import org.springframework.stereotype.Service;
-/*     */ 
+/*     */
+
+/**
+ * CMD_RETURN_TEAM
+ */
 /*     */ @Service
 /*     */ public class C28_0
 /*     */   implements GameHandler

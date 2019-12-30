@@ -5,7 +5,8 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */ import java.util.Arrays;
+import java.util.List;
 /*     */ import org.linlinjava.litemall.db.domain.Npc;
 /*     */ import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
 /*     */ import org.linlinjava.litemall.db.domain.Renwu;
@@ -15,7 +16,8 @@ import io.netty.buffer.ByteBuf;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameData;
+/*     */ import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -24,6 +26,10 @@ import io.netty.buffer.ByteBuf;
 
 /*     */
 /*     */
+
+/**
+ * CMD_OPEN_MENU
+ */
 @org.springframework.stereotype.Service
 /*     */ public class C4150_0 implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
@@ -243,6 +249,7 @@ import io.netty.buffer.ByteBuf;
             return;
             /*     */
         }
+
         /* 146 */
         List<NpcDialogueFrame> npcDialogueFrameList = GameData.that.baseNpcDialogueFrameService.findByName(npc.getName());
         /* 147 */
@@ -268,6 +275,22 @@ import io.netty.buffer.ByteBuf;
             /* 152 */
             content = "[【十绝阵】讨教/十绝阵_s1]" + content;
             /*     */
+        }
+        if(npc.getMapId()==37000){//通天塔
+            if (!chara.ttt_xj_success && npc.getName().equals(chara.ttt_xj_name)) {
+                content = "[挑战星君]"+ content;
+            }
+            if(npc.getName().equals("北斗神将")){
+                if(chara.ttt_challenge_num>0){//挑战了
+                    if(chara.ttt_xj_success){//挑战成功
+                        content = "道友已参透此处玄机，佩服，佩服[挑战下层][飞升][离开]";
+                    }else{//挑战失败
+                        content = "来日方长，待道友重整旗鼓，再来见识通天塔之玄妙[重新挑战][离开]";
+                    }
+                }else{//还没用挑战
+                    content = "吾奉天命，在此负责通天塔之传送事宜。[更换奖励类型][传送出塔][离开]";
+                }
+            }
         }
         /*     */
         /* 155 */

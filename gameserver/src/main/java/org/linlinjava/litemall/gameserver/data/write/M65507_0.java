@@ -14,7 +14,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*     */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*     */ 
+/*     */
+
+/**
+ * MSG_UPDATE_PETS
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class M65507_0 extends BaseWrite
 /*     */ {

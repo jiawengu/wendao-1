@@ -19,7 +19,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */ //CMD_REQUEST_JOIN
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C4156_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
