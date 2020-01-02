@@ -420,6 +420,9 @@
 /* 420 */   public int shidaodaguaijifen = 0;
 /*     */   
 /* 422 */   public int shidaocishu = 0;
+
+            public int partyId = 0;
+            public String partyName = "";
 /*     */ }
 
 

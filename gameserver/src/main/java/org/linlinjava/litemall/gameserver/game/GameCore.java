@@ -29,7 +29,7 @@
 /* 29 */   private static final Map<Integer, BaseWrite> basewriteMap = new HashMap();
 /*    */   public NettyServer server;
 /* 31 */   public long currentTime = 0L;
-/*    */   
+           public PartyMgr partyMgr;
 /*    */   public void init(NettyServer server) {
 /* 34 */     log.error("game init begin!");
 /*    */     
@@ -46,6 +46,8 @@
 /* 46 */     BuildFields.add();
 /* 47 */     BattleUtils.init();
 /* 48 */     FightTianshuMap.init();
+             this.partyMgr = new PartyMgr();
+             this.partyMgr.init();
 /* 49 */     log.error("game init over!");
 /*    */   }
 /*    */   
