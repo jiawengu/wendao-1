@@ -21,7 +21,7 @@ public class M49155_0 extends BaseWrite {
 
         GameWriteTool.writeByte(writeBuf, Integer.valueOf(object1.curType));
 
-        GameWriteTool.writeLong(writeBuf, Long.valueOf(object1.topLayer));
+        GameWriteTool.writeInt(writeBuf, Integer.valueOf(object1.topLayer));
 
         GameWriteTool.writeString(writeBuf, object1.npc);
 

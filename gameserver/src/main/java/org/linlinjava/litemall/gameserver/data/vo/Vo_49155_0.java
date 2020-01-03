@@ -14,7 +14,7 @@ public class Vo_49155_0
      * 当前状态（1：开始挑战，2：挑战下层，3：继续挑战）
      */
     public byte curType;
-    public long topLayer;
+    public int topLayer;
     public String npc;
     /**
      * 剩余挑战次数

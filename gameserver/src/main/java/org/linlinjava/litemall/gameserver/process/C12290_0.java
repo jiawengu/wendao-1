@@ -19,7 +19,11 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_LOGIN
+ */
 /*    */ @Service
 /*    */ public class C12290_0 implements GameHandler
 /*    */ {

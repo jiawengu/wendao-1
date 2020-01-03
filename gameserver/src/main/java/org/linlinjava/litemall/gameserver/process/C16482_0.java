@@ -28,6 +28,9 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
 /*     */ import org.springframework.stereotype.Service;
 
+/**
+ * CMD_CHAT_EX
+ */
 /*     */
 /*     */
 @Service

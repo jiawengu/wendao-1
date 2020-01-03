@@ -424,16 +424,20 @@ public class Chara implements Serializable {
      * 通天塔-是否挑战星君成功
      */
     public boolean ttt_xj_success;
-    public void onEnterTttLayer(int ttt_layer, String ttt_xj_name){
+
+    public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;
         this.ttt_xj_name = ttt_xj_name;
         this.ttt_xj_success = false;
+        this.ttt_challenge_num = 0;
     }
-    public void onTttChallengeSuccess(){
+
+    public void onTttChallengeSuccess() {
         this.ttt_xj_success = true;
         this.ttt_challenge_num++;
     }
-    public void onTttChallengeFail(){
+
+    public void onTttChallengeFail() {
         this.ttt_xj_success = false;
         this.ttt_challenge_num++;
     }

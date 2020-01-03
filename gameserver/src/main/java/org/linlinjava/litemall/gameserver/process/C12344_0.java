@@ -5,10 +5,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.vo.*;
-import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-import org.linlinjava.litemall.gameserver.data.write.M49155_0;
-import org.linlinjava.litemall.gameserver.data.write.M61553_0;
-import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -451,19 +448,16 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
             if("离开".equals(menu_item)){
                 GameUtilRenWu.huicheng(chara1);
             }else if("挑战下层".equals(menu_item)){
-                Preconditions.checkArgument(chara1.ttt_xj_success);
-                String xingjunName = GameUtil.randomTTTXingJunName();
-                chara1.onEnterTttLayer(chara1.ttt_layer+1, xingjunName);
-
-                GameUtil.a49155(chara1);
+                GameUtil.tttChallengeNextLayer(chara1);
             }else if("飞升".equals(menu_item)){
-
+                GameObjectChar.send(new M45093_0(), null);
             }else if("重新挑战".equals(menu_item)){
                 FightManager.goFight(chara1, Arrays.asList(chara1.ttt_xj_name));
             }else if("更换奖励类型".equals(menu_item)){
                 Preconditions.checkArgument(chara1.ttt_challenge_num==0);
                 String xingjunName = GameUtil.randomTTTXingJunName();
                 chara1.onEnterTttLayer(chara1.ttt_layer, xingjunName);
+
                 GameUtil.a49155(chara1);
             }else if("传送出塔".equals(menu_item)){
                 GameUtilRenWu.huicheng(chara1);

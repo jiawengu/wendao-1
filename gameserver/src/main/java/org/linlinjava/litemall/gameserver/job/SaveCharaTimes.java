@@ -64,17 +64,17 @@ public class SaveCharaTimes {
                 }
             }
             gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
-//todo            GameData.that.baseCharactersService.updateById(gameSession.characters);
+            GameData.that.baseCharactersService.updateById(gameSession.characters);
         }
 
     }
 
-    @Scheduled(
-            fixedDelay = 10000L
-    )
-    public void onlines() {
-        log.error("online  : " + GameObjectCharMng.getAll().size());
-    }
+//    @Scheduled(
+//            fixedDelay = 10000L
+//    )
+//    public void onlines() {
+//        log.error("online  : " + GameObjectCharMng.getAll().size());
+//    }
 
     @Scheduled(
             fixedDelay = 2000L

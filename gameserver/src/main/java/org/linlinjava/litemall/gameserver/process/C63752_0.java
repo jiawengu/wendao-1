@@ -85,6 +85,8 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.springframework.stereotype.Service;
 
+import static org.linlinjava.litemall.gameserver.process.GameUtil.addYuanBao;
+
 /**
  * CMD_GENERAL_NOTIFY    一般通知
  */
@@ -1160,6 +1162,60 @@ public class C63752_0 implements GameHandler {
             GameUtil.a49159(chara);
         }
 
+        if(type==30025){
+            System.out.println("NOTIFY_TTT_JUMP_ASSURE=  30025, \n" +
+                    "  -- 通天塔飞升确认");
+        }
+        if(type==30026){
+            System.out.println("NOTIFY_TTT_JUMP_CANCEL=  30026,  \n" +
+                    " -- 通天塔飞升取消");
+        }
+        if(type==40000){
+            System.out.println("NOTIFY_TTT_GET_BONUS=  40000, \n" +
+                    "  -- 通天塔领取奖励");
+        }
+        if(type==40001){
+            System.out.println(" NOTIFY_TTT_DO_REVIVE=  40001, \n" +
+                    "  -- 通天塔请求复活");
+        }
+        if(type==40002){//通天塔急速飞升  元宝
+            int flyLayer = Integer.valueOf(para1);
+            //扣元宝
+            int cost = 0;
+            if (flyLayer <= 5){
+                cost = 90;
+            }else{
+                cost = 180;
+            }
+            addYuanBao(chara, -cost);
+            chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
+            GameUtil.a45090(chara, (byte) 1, cost, flyLayer);
+            GameUtil.a49155(chara);
+        }
+        if(type==40003){//通天塔快速飞升 金钱
+            int flyLayer = Integer.valueOf(para1);
+            //扣金钱
+            int cost = 0;
+            if (flyLayer <= 5){
+                cost = (flyLayer - 1) * 800000;
+            }else{
+                cost = (5 - 1) * 800000;
+            }
+            GameUtil.addCoin(chara, -cost);
+
+            chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
+
+            GameUtil.a45090(chara, (byte) 2, cost, flyLayer);
+
+            GameUtil.a49155(chara);
+        }
+        if(type==40004){
+            System.out.println("NOTIFY_TTT_RESET_TASK =  40004,\n" +
+                    "   -- 通天塔重置任务");
+        }
+        if(type==40006){//通天塔-挑战下层
+            GameUtil.tttChallengeNextLayer(chara);
+        }
         if(type == 40007){//通天塔离开
             GameUtilRenWu.huicheng(chara);
         }

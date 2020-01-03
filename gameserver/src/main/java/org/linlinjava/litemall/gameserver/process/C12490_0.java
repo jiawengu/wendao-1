@@ -26,6 +26,9 @@ import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * CMD_BUY_FROM_STALL
+ */
 /*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C12490_0 implements org.linlinjava.litemall.gameserver.GameHandler

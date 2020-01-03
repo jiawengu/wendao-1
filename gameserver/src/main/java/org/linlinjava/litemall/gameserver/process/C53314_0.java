@@ -145,8 +145,8 @@ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
                     /*  97 */
                     int quality = ((PetShuXing) petbeibao.petShuXing.get(0)).penetrate;
                     /*  98 */
-                    String[] split = pos.split("\\|");
                     /*  99 */
+                    String[] split = pos.split("\\|");
                     int pill = 0;
                     /* 100 */
                     int unidentifiedMoney = 0;

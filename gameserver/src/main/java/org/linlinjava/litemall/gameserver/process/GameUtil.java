@@ -3,14 +3,13 @@
 /*      */ import java.util.ArrayList;
 /*      */ import java.util.List;
 /*      */ import java.util.Random;
-/*      */ import org.linlinjava.litemall.db.domain.Characters;
+/*      */ import com.google.common.base.Preconditions;
+import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*      */ import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 /*      */
-/*      */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-import org.linlinjava.litemall.gameserver.data.write.M45704_0;
-import org.linlinjava.litemall.gameserver.data.write.M49155_0;
+/*      */ import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*      */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*      */ import org.linlinjava.litemall.gameserver.domain.GoodsFenSe;
@@ -4452,7 +4451,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             vo_45704_0.xing_name = chara.ttt_xj_name;
             GameObjectChar.send(new M45704_0(), vo_45704_0);
         }
-        public static void a49155(Chara chara){
+
+    /**
+     * 通天塔-任务面板信息
+     * @param chara
+     */
+    public static void a49155(Chara chara){
             Vo_49155_0 vo_49155_0 = new Vo_49155_0();
             vo_49155_0.curLayer = (short) chara.ttt_layer;
             vo_49155_0.breakLayer = (short) (chara.level);
@@ -4465,10 +4469,84 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             vo_49155_0.curType = curType;
             vo_49155_0.topLayer = chara.level+45;
             vo_49155_0.npc = chara.ttt_xj_name;
-            vo_49155_0.challengeCount = 1;//TODO
+            vo_49155_0.challengeCount = 3-chara.ttt_challenge_num;
             vo_49155_0.bonusType = "exp";
             vo_49155_0.hasNotCompletedSmfj = 1;
             GameObjectChar.send(new M49155_0(), vo_49155_0);
         }
+
+    /**
+     * MSG_TONGTIANTA_BONUS_DLG 通天塔突破修练奖励界面
+     */
+    public static void a49157_exp(Chara chara, long bonusValue){
+        Vo_49157_0 vo_49157_0 = new Vo_49157_0();
+        vo_49157_0.bonusType = "exp";
+        vo_49157_0.dlgType = 1;
+        vo_49157_0.bonusValue = bonusValue;
+        vo_49157_0.bonusTaoPoint = 0;
+        GameObjectChar.send(new M49157_0(), vo_49157_0);
+    }
+
+    /**
+     * MSG_TONGTIANTA_BONUS_DLG 通天塔突破修练奖励界面
+     */
+    public static void a49157_tao(Chara chara, long bonusTaoPoint){
+        Vo_49157_0 vo_49157_0 = new Vo_49157_0();
+        vo_49157_0.bonusType = "exp";
+        vo_49157_0.dlgType = 1;
+        vo_49157_0.bonusValue = 0;
+        vo_49157_0.bonusTaoPoint = bonusTaoPoint;
+        GameObjectChar.send(new M49157_0(), vo_49157_0);
+    }
+
+    /**
+     * 增加或减少元宝
+     * @param chara
+     * @param addYuanbao
+     */
+    public static void addYuanBao(Chara chara, int addYuanbao){
+        chara.extra_life += addYuanbao;
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new M65527_0(), listVo_65527_0);
+    }
+
+    /**
+     * 增加或减少金币
+     * @param chara
+     * @param addCoin
+     */
+
+    public static void addCoin(Chara chara, int addCoin){
+        chara.gold_coin += addCoin;
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new M65527_0(), listVo_65527_0);
+    }
+
+    /**
+     * 通知玩家通天塔飞升成功
+     * @param chara
+     * @param costType  消耗类型  1元宝2金钱
+     * @param costCount
+     * @param jumpCount
+     */
+    public static void a45090(Chara chara, byte costType, long costCount, int jumpCount){
+        Vo_45090_0 vo_45090_0 = new Vo_45090_0();
+        vo_45090_0.costType=costType;
+        vo_45090_0.costCount = costCount;
+        vo_45090_0.jumpCount = jumpCount;
+        GameObjectChar.send(new M45090_0(), vo_45090_0);
+    }
+
+    /**
+     * 通天塔-挑战下层
+     * @param chara
+     */
+    public static void tttChallengeNextLayer(Chara chara){
+        Preconditions.checkArgument(chara.ttt_xj_success);
+        String xingjunName = GameUtil.randomTTTXingJunName();
+        chara.onEnterTttLayer(chara.ttt_layer+1, xingjunName);
+
+        GameUtil.a49155(chara);
+    }
     /*      */ }
 

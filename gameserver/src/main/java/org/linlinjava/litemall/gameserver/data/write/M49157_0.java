@@ -9,7 +9,7 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 
 
 /**
- * MSG_TONGTIANTA_BONUS_DLG
+ * MSG_TONGTIANTA_BONUS_DLG 通天塔突破修练奖励界面
  */
 @org.springframework.stereotype.Service
 public class M49157_0 extends BaseWrite {

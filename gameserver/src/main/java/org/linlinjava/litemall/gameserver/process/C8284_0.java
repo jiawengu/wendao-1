@@ -25,6 +25,9 @@ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * CMD_CREATE_NEW_CHAR
+ */
 /*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C8284_0 implements org.linlinjava.litemall.gameserver.GameHandler
