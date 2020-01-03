@@ -17,8 +17,6 @@ public class CharacterTitleVO implements Cloneable, Serializable {
 
     private Integer type;
 
-    private String title;
-
     private Integer ownerUid;
 
     private LocalDateTime addTime;

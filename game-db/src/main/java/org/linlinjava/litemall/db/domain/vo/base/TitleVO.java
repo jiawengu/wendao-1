@@ -14,7 +14,7 @@ public class TitleVO {
 
     private String title;
 
-    private Integer color;
+    private String color;
 
     private Integer gender; // 0表示男性专属，1表示女性专属，2表示通用
 }
