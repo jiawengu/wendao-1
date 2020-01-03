@@ -1,3 +1,10 @@
 .idea/
-/logs/
-/logs/spring.log
+target/
+.settings/
+logs/
+.project
+*.iml
+*.classpath
+bin/
+.vs/
+.ini
