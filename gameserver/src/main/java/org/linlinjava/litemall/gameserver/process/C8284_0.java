@@ -5,23 +5,23 @@
 /*     */ import java.util.List;
 /*     */ import org.linlinjava.litemall.db.domain.Characters;
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-/*     */ import org.linlinjava.litemall.db.service.CharacterService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseZhuangbeiInfoService;
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_61537_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8285_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsBasics;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-/*     */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,7 +102,7 @@ import org.slf4j.LoggerFactory;
         /*  94 */     shuXing.upgrade_magic = 0;
         /*  95 */     shuXing.upgrade_total = 0;
         /*  96 */     petbeibao.petShuXing.add(shuXing);
-        /*  97 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65507_0(), list);
+        /*  97 */     GameObjectChar.send(new MSG_UPDATE_PETS(), list);
         /*     */
         /*     */
         /*     */

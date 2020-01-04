@@ -2,19 +2,19 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.List;
+/*    */
 /*    */ import org.linlinjava.litemall.db.domain.Characters;
-/*    */ import org.linlinjava.litemall.db.service.CharacterService;
+/*    */
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */
 
@@ -60,13 +60,13 @@
 /* 56 */     vo_61671_0.count = 2;
 /* 57 */     vo_61671_0.list.add(Integer.valueOf(2));
 /* 58 */     vo_61671_0.list.add(Integer.valueOf(5));
-/* 59 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+/* 59 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /* 60 */     vo_61671_0 = new Vo_61671_0();
 /* 61 */     vo_61671_0.id = chara.id;
 /* 62 */     vo_61671_0.count = 2;
 /* 63 */     vo_61671_0.list.add(Integer.valueOf(2));
 /* 64 */     vo_61671_0.list.add(Integer.valueOf(3));
-/* 65 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+/* 65 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*    */   }
 /*    */   
 /*    */   public Vo_65505_0 a65505(Chara chara)

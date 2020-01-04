@@ -8,7 +8,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -51,7 +51,7 @@
 /* 51 */     GameUtil.a65511(chara);
 /*    */     
 /* 53 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 54 */     GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 54 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

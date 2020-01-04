@@ -11,9 +11,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41482_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M32747_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_SKILLS;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
@@ -67,10 +68,10 @@
 /*     */           
 /*     */ 
 /*  69 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  70 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65527_0(), listVo_65527_0);
+/*  70 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */           
 /*  72 */           List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
-/*  73 */           GameObjectChar.send(new M32747_0(), vo_32747_0List);
+/*  73 */           GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*     */           
 /*  75 */           GameUtil.a65511(chara);
 /*     */           
@@ -140,10 +141,10 @@
 /*     */       
 /*     */ 
 /* 142 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 143 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65527_0(), listVo_65527_0);
+/* 143 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /* 145 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
-/* 146 */       GameObjectChar.send(new M32747_0(), vo_32747_0List);
+/* 146 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*     */       
 /* 148 */       GameUtil.a65511(chara);
 /*     */       

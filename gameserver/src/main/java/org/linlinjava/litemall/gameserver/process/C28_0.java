@@ -2,7 +2,7 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
@@ -11,10 +11,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
@@ -68,14 +68,14 @@
 /*  64 */     vo_61671_0.count = 2;
 /*  65 */     vo_61671_0.list.add(Integer.valueOf(2));
 /*  66 */     vo_61671_0.list.add(Integer.valueOf(3));
-/*  67 */     session1.gameMap.send(new M61671_0(), vo_61671_0);
+/*  67 */     session1.gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     
 /*  69 */     vo_61671_0 = new Vo_61671_0();
 /*  70 */     vo_61671_0.id = chara.id;
 /*  71 */     vo_61671_0.count = 2;
 /*  72 */     vo_61671_0.list.add(Integer.valueOf(2));
 /*  73 */     vo_61671_0.list.add(Integer.valueOf(5));
-/*  74 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+/*  74 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*  75 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  76 */     vo_20480_0.msg = (chara.name + "回到了队伍。");
 /*  77 */     vo_20480_0.time = 1562593376;
@@ -94,7 +94,7 @@
 /*  90 */     vo_61671_0.count = 2;
 /*  91 */     vo_61671_0.list.add(Integer.valueOf(2));
 /*  92 */     vo_61671_0.list.add(Integer.valueOf(5));
-/*  93 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+/*  93 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     
 /*     */ 
 /*  96 */     vo_61671_0 = new Vo_61671_0();
@@ -102,7 +102,7 @@
 /*  98 */     vo_61671_0.count = 2;
 /*  99 */     vo_61671_0.list.add(Integer.valueOf(2));
 /* 100 */     vo_61671_0.list.add(Integer.valueOf(3));
-/* 101 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+/* 101 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */   }
 /*     */   
 /*     */ 

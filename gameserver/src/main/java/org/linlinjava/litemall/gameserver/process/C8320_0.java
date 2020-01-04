@@ -6,8 +6,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
@@ -29,11 +29,11 @@
 /* 29 */       chara.balance += money;
 /*    */     }
 /* 31 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 32 */     GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 32 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 33 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 34 */     vo_20481_0.msg = ("#成功取出#cBA55DC" + money + "#n文钱#n。");
 /* 35 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 36 */     GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 36 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */   }
 /*    */   
 /*    */ 

@@ -10,7 +10,7 @@ import java.util.List;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.write.M19945_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public class NormalAttackSkill implements FightSkill {
@@ -25,7 +25,7 @@ public class NormalAttackSkill implements FightSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         int id = fightRequest.id;
         FightObject fightObject = FightManager.getFightObject(fightContainer, id);
         FightObject victimFightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);

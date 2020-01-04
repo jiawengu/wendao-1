@@ -4,22 +4,23 @@
 /*     */ import java.text.SimpleDateFormat;
 /*     */ import java.util.Calendar;
 /*     */ import java.util.Date;
-/*     */ import java.util.List;
+/*     */
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.Map;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */
+
+/*     */
 /*     */ public class GameUtilRenWu
 /*     */ {
 /*     */   public static void renwukuangkuang(String task_type, String task_prompt, String show_name, Chara chara1)
@@ -127,13 +128,13 @@
 /* 127 */           vo_61671_0.count = 2;
 /* 128 */           vo_61671_0.list.add(Integer.valueOf(2));
 /* 129 */           vo_61671_0.list.add(Integer.valueOf(5));
-/* 130 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 130 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /* 131 */           vo_61671_0 = new Vo_61671_0();
 /* 132 */           vo_61671_0.id = chara.id;
 /* 133 */           vo_61671_0.count = 2;
 /* 134 */           vo_61671_0.list.add(Integer.valueOf(2));
 /* 135 */           vo_61671_0.list.add(Integer.valueOf(3));
-/* 136 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 136 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */         }
 /*     */       }
 /*     */     }
@@ -170,7 +171,7 @@
 /* 170 */       vo_61671_0.count = 2;
 /* 171 */       vo_61671_0.list.add(Integer.valueOf(2));
 /* 172 */       vo_61671_0.list.add(Integer.valueOf(3));
-/* 173 */       GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 173 */       GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     }
 /*     */     
 /*     */ 

@@ -7,7 +7,13 @@ package org.linlinjava.litemall.gameserver.fight;
 
 public class FightRequest {
   public int id;
+  /**
+   * 受害者id
+   */
   public int vid;
+  /**
+   * 3:使用技能
+   */
   public int action;
   public int para;
   public String para1;

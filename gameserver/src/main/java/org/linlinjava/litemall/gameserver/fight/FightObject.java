@@ -21,10 +21,10 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7667_0;
-import org.linlinjava.litemall.gameserver.data.write.M11757_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M7667_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
@@ -34,9 +34,9 @@ import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 public class FightObject {
-    public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
     public int id;
     public int cid;
     public int fid;
@@ -297,13 +297,19 @@ public class FightObject {
             this.friend = (int)(0.29D * (double)chara.level * (double)chara.level * (double)chara.level * 0.29D * (double)chara.level * (double)chara.level * (double)chara.level);
         }
         if(name.contains("星君")){//通天塔
-            int randomIndex = new Random().nextInt(TONG_TIAN_TA_PET.length);
-            strname = TONG_TIAN_TA_PET[randomIndex];
+            strname = name;
+        }
+
+        boolean isTTTPet = false;
+        for(String petName:GameUtil.TONG_TIAN_TA_PET){
+            petName.equals(name);
+            strname = name;
+            isTTTPet = true;
         }
 
         String names = "土匪#强盗#狐狸妖#鱼妖#蓝精#黄怪#疯魑#狂魍#蟒怪#鸟精#琵琶妖蟒妖#怪王狂狮#鬼王黑熊#鬼王悍猪#混天巨象#兑灵#艮灵#坎灵#离灵#狂灵#疯灵#山神#炎神#雷神#花神#龙神#刀斧手#火扇儒生#红衣剑客#试道元魔";
         Petbeibao petbeibao;
-        if (!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
+        if (!isTTTPet&&!name.contains("星君")&&!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
             petbeibao = this.petCreate(strname);
         } else {
             petbeibao = this.petCreate(strname, chara.level);
@@ -572,6 +578,16 @@ public class FightObject {
         return petbeibao;
     }
 
+    /**
+     *
+     * @param leixing 宠物：1，守护：2
+     * @param pos   金木水火土
+     * @param level
+     * @param isMagic
+     * @param id
+     * @param skills
+     * @return
+     */
     public static List<JiNeng> dujineng(int leixing, int pos, int level, boolean isMagic, int id, String skills) {
         List<JiNeng> jiNengList = new ArrayList();
         List<JSONObject> nomelSkills = PetAndHelpSkillUtils.getNomelSkills(leixing, pos, level, true, skills);
@@ -601,7 +617,7 @@ public class FightObject {
         vo_11757_0.id = this.fid;
         vo_11757_0.list.add(state);
         vo_11757_0.list.add(type);
-        FightManager.send(fightContainer, new M11757_0(), vo_11757_0);
+        FightManager.send(fightContainer, new MSG_C_UPDATE_STATUS(), vo_11757_0);
     }
 
     public void updateState(FightContainer fightContainer) {
@@ -617,7 +633,7 @@ public class FightObject {
             vo_19959_0.action = 43;
             vo_19959_0.vid = this.fid;
             vo_19959_0.para = 0;
-            FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             int value = 0;
 
             Integer integer;
@@ -629,10 +645,10 @@ public class FightObject {
             vo_11757_0.list.add(32);
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = this.fid;
-            FightManager.send(fightContainer, new M7655_0(), vo_7655_0);
+            FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         }
 
-        FightManager.send(fightContainer, new M11757_0(), vo_11757_0);
+        FightManager.send(fightContainer, new MSG_C_UPDATE_STATUS(), vo_11757_0);
     }
 
     public void update(FightContainer fightContainer) {

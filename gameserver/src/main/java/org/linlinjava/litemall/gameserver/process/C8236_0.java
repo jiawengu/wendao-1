@@ -7,18 +7,18 @@
 /*     */ import org.linlinjava.litemall.db.domain.Map;
 /*     */ import org.linlinjava.litemall.db.domain.RenwuMonster;
 /*     */ import org.linlinjava.litemall.db.domain.StoreInfo;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
@@ -52,7 +52,7 @@
 /*  52 */             chara.extra_mana = 90000000;
 /*     */           }
 /*  54 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  55 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  55 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  56 */           GameUtil.removemunber(chara, "血池", 1);
 /*     */         }
 /*  58 */         if (goods.goodsInfo.str.equals("中级血池")) {
@@ -61,7 +61,7 @@
 /*  61 */             chara.extra_mana = 90000000;
 /*     */           }
 /*  63 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  64 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  64 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  65 */           GameUtil.removemunber(chara, "中级血池", 1);
 /*     */         }
 /*     */         
@@ -71,7 +71,7 @@
 /*  71 */             chara.extra_mana = 90000000;
 /*     */           }
 /*  73 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  74 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  74 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  75 */           GameUtil.removemunber(chara, "高级血池", 1);
 /*     */         }
 /*  77 */         if (goods.goodsInfo.str.equals("灵池")) {
@@ -80,7 +80,7 @@
 /*  80 */             chara.have_coin_pwd = 90000000;
 /*     */           }
 /*  82 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  83 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  83 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  84 */           GameUtil.removemunber(chara, "灵池", 1);
 /*     */         }
 /*  86 */         if (goods.goodsInfo.str.equals("中级灵池")) {
@@ -89,7 +89,7 @@
 /*  89 */             chara.have_coin_pwd = 90000000;
 /*     */           }
 /*  91 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  92 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  92 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  93 */           GameUtil.removemunber(chara, "中级灵池", 1);
 /*     */         }
 /*  95 */         if (goods.goodsInfo.str.equals("高级灵池")) {
@@ -98,7 +98,7 @@
 /*  98 */             chara.have_coin_pwd = 90000000;
 /*     */           }
 /* 100 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 101 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 101 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 102 */           GameUtil.removemunber(chara, "高级灵池", 1);
 /*     */         }
 /* 104 */         if (goods.goodsInfo.str.equals("驯兽诀")) {
@@ -107,7 +107,7 @@
 /* 107 */             chara.use_skill_d = 90000000;
 /*     */           }
 /* 109 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 110 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 110 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 111 */           GameUtil.removemunber(chara, "驯兽诀", 1);
 /*     */         }
 /*     */         
@@ -118,13 +118,13 @@
 /* 118 */             chara.enable_double_points = 12000;
 /*     */           }
 /* 120 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 121 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 121 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 122 */           GameUtil.removemunber(chara, "超级仙风散", 1);
 /*     */           
 /* 124 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 125 */           vo_20481_0.msg = ("你使用了道具#R超级仙风散#n，当前余额#R" + chara.enable_double_points + "点。");
 /* 126 */           vo_20481_0.time = 1562987118;
-/* 127 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 127 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 130 */         if (goods.goodsInfo.str.equals("神木鼎")) {
@@ -133,13 +133,13 @@
 /* 133 */             chara.enable_shenmu_points = 8000;
 /*     */           }
 /* 135 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 136 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 136 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 137 */           GameUtil.removemunber(chara, "神木鼎", 1);
 /*     */           
 /* 139 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 140 */           vo_20481_0.msg = ("你使用了道具#R神木鼎#n，当前余额#R" + chara.enable_shenmu_points + "点。");
 /* 141 */           vo_20481_0.time = 1562987118;
-/* 142 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 142 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 145 */         if (goods.goodsInfo.str.equals("紫气鸿蒙")) {
@@ -148,12 +148,12 @@
 /* 148 */             chara.extra_skill = 12000;
 /*     */           }
 /* 150 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 151 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 151 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 152 */           GameUtil.removemunber(chara, "紫气鸿蒙", 1);
 /* 153 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 154 */           vo_20481_0.msg = ("你使用了道具#R紫气鸿蒙#n，当前余额#R" + chara.extra_skill + "点。");
 /* 155 */           vo_20481_0.time = 1562987118;
-/* 156 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 156 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 159 */         if (goods.goodsInfo.str.equals("如意刷到令")) {
@@ -162,12 +162,12 @@
 /* 162 */             chara.chushi_ex = 4000;
 /*     */           }
 /* 164 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 165 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 165 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 166 */           GameUtil.removemunber(chara, "如意刷到令", 1);
 /* 167 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 168 */           vo_20481_0.msg = ("你使用了道具#R如意刷到令#n，当前余额#R" + chara.chushi_ex + "点。");
 /* 169 */           vo_20481_0.time = 1562987118;
-/* 170 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 170 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 173 */         if (goods.goodsInfo.str.equals("急急如律令")) {
@@ -176,12 +176,12 @@
 /* 176 */             chara.fetch_nice = 4000;
 /*     */           }
 /* 178 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 179 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 179 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 180 */           GameUtil.removemunber(chara, "急急如律令", 1);
 /* 181 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 182 */           vo_20481_0.msg = ("你使用了道具#R急急如律令#n，当前余额#R" + chara.fetch_nice + "点。");
 /* 183 */           vo_20481_0.time = 1562987118;
-/* 184 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 184 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 187 */         if (goods.goodsInfo.str.equals("宠风散")) {
@@ -190,12 +190,12 @@
 /* 190 */             chara.shuadaochongfeng_san = 12000;
 /*     */           }
 /* 192 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 193 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 193 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 194 */           GameUtil.removemunber(chara, "宠风散", 1);
 /* 195 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 196 */           vo_20481_0.msg = ("你使用了道具#R宠风散#n，当前余额#R" + chara.shuadaochongfeng_san + "点。");
 /* 197 */           vo_20481_0.time = 1562987118;
-/* 198 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 198 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /*     */ 
@@ -205,7 +205,7 @@
 /* 205 */             chara.use_skill_d = 3000000;
 /*     */           }
 /* 207 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 208 */           GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 208 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 209 */           GameUtil.removemunber(chara, "高级驯兽诀", 1);
 /*     */         }
 /* 211 */         if (goods.goodsInfo.str.equals("灵物囊")) {
@@ -222,7 +222,7 @@
 /* 222 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 223 */           vo_20481_0.msg = ("你打开了灵物囊，获得了#R1#n个#R" + name + "#n。");
 /* 224 */           vo_20481_0.time = 1562987118;
-/* 225 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 225 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /*     */         
 /* 228 */         if (goods.goodsInfo.str.equals("天书")) {
@@ -248,14 +248,14 @@
 /* 248 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 249 */           vo_20481_0.msg = "你使用了天书";
 /* 250 */           vo_20481_0.time = 1562987118;
-/* 251 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 251 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
 /* 253 */         if (goods.goodsInfo.str.equals("超级藏宝图")) {
 /* 254 */           if (chara.changbaotu.mapid != 0) {
 /* 255 */             Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 256 */             vo_20481_0.msg = "当前有藏宝图任务";
 /* 257 */             vo_20481_0.time = 1562987118;
-/* 258 */             GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 258 */             GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 259 */             return;
 /*     */           }
 /* 261 */           Random random = new Random();

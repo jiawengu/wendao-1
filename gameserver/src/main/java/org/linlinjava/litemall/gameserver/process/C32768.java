@@ -1,21 +1,22 @@
 /*     */ package org.linlinjava.litemall.gameserver.process;
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.db.domain.Renwu;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseRenwuService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+/*     */
 /*     */
 
 /**
@@ -102,7 +103,7 @@
 /*  98 */       vo_61671_0.count = 2;
 /*  99 */       vo_61671_0.list.add(Integer.valueOf(2));
 /* 100 */       vo_61671_0.list.add(Integer.valueOf(3));
-/* 101 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 101 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     }
 /*     */     
 /*     */ 

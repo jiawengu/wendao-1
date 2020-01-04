@@ -12,9 +12,9 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_53717_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.write.M11719_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M53717_0;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public class UseItemSkill implements FightSkill {
@@ -28,7 +28,7 @@ public class UseItemSkill implements FightSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         if (fightRequest.item_type != 9050) {
             return null;
         } else {
@@ -56,12 +56,12 @@ public class UseItemSkill implements FightSkill {
                 vo_19959_0.action = 0;
                 vo_19959_0.vid = fightObject.fid;
                 vo_19959_0.para = 0;
-                FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+                FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
                 fightObject.state = 1;
                 fightObject.revive(fightContainer);
                 Vo_7655_0 vo_7655_0 = new Vo_7655_0();
                 vo_7655_0.id = fightObject.fid;
-                FightManager.send(fightContainer, new M7655_0(), vo_7655_0);
+                FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             } else {
                 fightResult.id = fightRequest.vid;
                 fightResult.vid = fightRequest.vid;

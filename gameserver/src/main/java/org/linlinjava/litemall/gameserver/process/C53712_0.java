@@ -13,10 +13,12 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M41505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
@@ -139,12 +141,12 @@
 /* 139 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 140 */     vo_20481_0.msg = "购买成功。";
 /* 141 */     vo_20481_0.time = 1562987118;
-/* 142 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+/* 142 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     
 /* 144 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 145 */     vo_61671_0.id = chara.id;
 /* 146 */     vo_61671_0.count = 0;
-/* 147 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 147 */     GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /* 148 */     Vo_41505_0 vo_41505_0 = new Vo_41505_0();
 /* 149 */     vo_41505_0.type = "view_follow_pet";
 /* 150 */     GameObjectChar.send(new M41505_0(), vo_41505_0);

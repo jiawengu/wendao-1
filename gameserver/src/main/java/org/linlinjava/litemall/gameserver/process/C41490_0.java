@@ -13,10 +13,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_01;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
@@ -203,7 +204,7 @@
 /* 203 */     vo_61671_0.id = chara.id;
 /* 204 */     vo_61671_0.count = 0;
 /*     */     
-/* 206 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 206 */     GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /* 207 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 208 */     vo_8165_0.msg = "穿戴成功";
 /* 209 */     vo_8165_0.active = 0;

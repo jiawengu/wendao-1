@@ -10,9 +10,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_32747_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M32747_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_SKILLS;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -54,7 +54,7 @@
 /*  54 */         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  55 */         vo_20481_0.msg = "潜能不足，无法学习该技能";
 /*  56 */         vo_20481_0.time = 1562987118;
-/*  57 */         GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  57 */         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*  58 */         return;
 /*     */       }
 /*  60 */       sjjiNeng.skill_no = skill_no;
@@ -85,19 +85,19 @@
 /*  85 */           chara.use_money_type -= cash;
 /*     */         }
 /*  87 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  88 */         GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  88 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       } else {
 /*  90 */         chara.cash -= cash;
 /*     */       }
 /*     */       
 /*  93 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
-/*  94 */       GameObjectChar.send(new M65527_0(), vo_65527_0);
+/*  94 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*  95 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
-/*  96 */       GameObjectChar.send(new M32747_0(), vo_32747_0List);
+/*  96 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*  97 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  98 */       vo_20481_0.msg = ("你技能等级提升到了#R" + sjjiNeng.skill_level + "#n级！");
 /*  99 */       vo_20481_0.time = 1562987118;
-/* 100 */       GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 100 */       GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     }
 /*     */     else {
 /* 103 */       sjjiNeng.skill_attrib = PetAndHelpSkillUtils.getMaxSkill(chara.level);
@@ -115,7 +115,7 @@
 /* 115 */         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 116 */         vo_20481_0.msg = "金币，无法学习该技能";
 /* 117 */         vo_20481_0.time = 1562987118;
-/* 118 */         GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 118 */         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 119 */         return;
 /*     */       }
 /* 121 */       if (((skill_no == 301) || (skill_no == 302)) && 
@@ -143,24 +143,24 @@
 /* 143 */           chara.use_money_type -= cash;
 /*     */         }
 /* 145 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 146 */         GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 146 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       } else {
 /* 148 */         chara.cash -= cash;
 /*     */       }
 /* 150 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
-/* 151 */       GameObjectChar.send(new M65527_0(), vo_65527_0);
+/* 151 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /* 152 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
-/* 153 */       GameObjectChar.send(new M32747_0(), vo_32747_0List);
+/* 153 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /* 154 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 155 */       vo_20481_0.msg = ("你技能等级提升到了#R" + sjjiNeng.skill_level + "#n级！");
 /* 156 */       vo_20481_0.time = 1562987118;
-/* 157 */       GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 157 */       GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     }
 /*     */     
 /*     */ 
 /*     */ 
 /* 162 */     ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
-/* 163 */     GameObjectChar.send(new M65527_0(), vo_65527_0);
+/* 163 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*     */   }
 /*     */   
 /*     */ 

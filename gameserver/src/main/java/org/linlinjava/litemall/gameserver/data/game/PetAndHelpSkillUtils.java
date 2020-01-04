@@ -38,6 +38,16 @@ public class PetAndHelpSkillUtils {
         return getNomelSkills(pet, pMetal, attrib, isMagic, "");
     }
 
+    /**
+     *
+     * @param pet 类型 宠物：1，守护：2
+     * @param pMetal    金木水火土
+     * @param attrib    等级
+     * @param isMagic   是否是魔法
+     * @param skill_value
+     * @return
+     * @throws JSONException
+     */
     public static List<JSONObject> getNomelSkills(int pet, int pMetal, int attrib, boolean isMagic, String skill_value) throws JSONException {
         if (skillJson == null) {
             BufferedReader br = getResFile();
@@ -97,7 +107,7 @@ public class PetAndHelpSkillUtils {
         String skillType;
         int skillIndex;
         int[] skillNum_round;
-        if (pet == 2 && (null == skill_value || skill_value.isEmpty())) {
+        if (pet == 2 && (null == skill_value || skill_value.isEmpty())) {//守护
             for(i = 0; i < jsonArray.length(); ++i) {
                 jsonObject = jsonArray.optJSONObject(i);
                 metal = jsonObject.optInt("metal");
@@ -132,7 +142,7 @@ public class PetAndHelpSkillUtils {
 
             sh_gj_list.addAll(sh_fz_list);
             return sh_gj_list;
-        } else if (pet == 1 && isMagic && (null == skill_value || skill_value.isEmpty())) {
+        } else if (pet == 1 && isMagic && (null == skill_value || skill_value.isEmpty())) {//宠物
             for(i = 0; i < jsonArray.length(); ++i) {
                 jsonObject = jsonArray.optJSONObject(i);
                 metal = jsonObject.optInt("metal");

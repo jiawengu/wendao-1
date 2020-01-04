@@ -9,10 +9,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41045_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -42,7 +43,7 @@
 /*  42 */         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  43 */         vo_20481_0.msg = "召唤令数量不足，无法兑换";
 /*  44 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  45 */         GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  45 */         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*  46 */         return;
 /*     */       }
 /*  48 */       GameUtil.removemunber(chara, "召唤令·十二生肖", 100);
@@ -57,7 +58,7 @@
 /*  57 */         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  58 */         vo_20481_0.msg = "召唤令数量不足，无法兑换";
 /*  59 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  60 */         GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  60 */         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*  61 */         return;
 /*     */       }
 /*  63 */       type = 4;
@@ -69,7 +70,7 @@
 /*  69 */     List<Petbeibao> list = new java.util.ArrayList();
 /*  70 */     chara.pets.add(petbeibao);
 /*  71 */     list.add(petbeibao);
-/*  72 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65507_0(), list);
+/*  72 */     GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */     
 /*  74 */     Vo_12269_0 vo_12269_0 = new Vo_12269_0();
 /*     */     
@@ -89,7 +90,7 @@
 /*  89 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  90 */     vo_20481_0.msg = ("恭喜你召唤了一只" + name);
 /*  91 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  92 */     GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  92 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*  93 */     Vo_41045_0 vo_41045_0 = new Vo_41045_0();
 /*  94 */     vo_41045_0.flag = 3;
 /*  95 */     vo_41045_0.id = petbeibao.id;

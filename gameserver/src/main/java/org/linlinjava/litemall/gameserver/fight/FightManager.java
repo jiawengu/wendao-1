@@ -29,23 +29,23 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_7653_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7659_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7669_0;
-import org.linlinjava.litemall.gameserver.data.write.M12025_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_GODBOOK_EFFECT_NORMAL;
 import org.linlinjava.litemall.gameserver.data.write.M12285_1;
 import org.linlinjava.litemall.gameserver.data.write.M15857_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
-import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-import org.linlinjava.litemall.gameserver.data.write.M32985_0;
-import org.linlinjava.litemall.gameserver.data.write.M3581_0;
-import org.linlinjava.litemall.gameserver.data.write.M3583_0;
-import org.linlinjava.litemall.gameserver.data.write.M45141_0;
-import org.linlinjava.litemall.gameserver.data.write.M61671_0;
-import org.linlinjava.litemall.gameserver.data.write.M64971_0;
-import org.linlinjava.litemall.gameserver.data.write.M65017_0;
-import org.linlinjava.litemall.gameserver.data.write.M65019_0;
-import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+import org.linlinjava.litemall.gameserver.data.write.MSG_AUTO_FIGHT_SKIL;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_COMBAT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_START_COMBAT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_CUR_ROUND;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_REFRESH_PET_LIST;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_OPPONENTS;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_FRIENDS;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.data.write.M7653_0;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
-import org.linlinjava.litemall.gameserver.data.write.M7659_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_WAIT_COMMAND;
 import org.linlinjava.litemall.gameserver.data.write.M7669_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
@@ -245,7 +245,7 @@ public class FightManager {
             vo_32985_0.pet_next_action = 0;
             vo_32985_0.pet_para = 0;
             vo_32985_0.pet_next_para = 0;
-            GameObjectChar.send(new M32985_0(), vo_32985_0);
+            GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
         }
 
         GameUtil.a24505(chara);
@@ -253,12 +253,12 @@ public class FightManager {
         Vo_3583_0 vo_3583_0 = new Vo_3583_0();
         vo_3583_0.a = 1;
         vo_3583_0.b = 3;
-        send(fc, new M3583_0(), vo_3583_0);
+        send(fc, new MSG_C_START_COMBAT(), vo_3583_0);
         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.id;
         vo_61671_0.count = 1;
         vo_61671_0.list.add(1);
-        GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+        GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
         FightTeam friendsFightTeam = getFightTeam(fc, chara.id);
         List<FightObject> fightObjectList1 = friendsFightTeam.fightObjectList;
         Iterator var31 = fightObjectList1.iterator();
@@ -270,7 +270,7 @@ public class FightManager {
                 vo_64971_0.count = 1;
                 vo_64971_0.id = fightObject.id;
                 vo_64971_0.haveCalled = 1;
-                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new M64971_0(), vo_64971_0);
+                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
             }
         }
 
@@ -304,7 +304,7 @@ public class FightManager {
             list65019.add(vo_65019_0);
         }
 
-        send(fc, new M65019_0(), list65019);
+        send(fc, new MSG_C_FRIENDS(), list65019);
         List<Vo_65017_0> list65017 = new ArrayList();
         fightObjectList = getFightTeamDM(fc, chara.id).fightObjectList;
         Iterator var39 = fightObjectList.iterator();
@@ -335,7 +335,7 @@ public class FightManager {
             list65017.add(vo_65017_0);
         }
 
-        send(fc, new M65017_0(), list65017);
+        send(fc, new MSG_C_OPPONENTS(), list65017);
         fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fc.round;
@@ -343,7 +343,7 @@ public class FightManager {
         vo_19959_0.action = 0;
         vo_19959_0.vid = 0;
         vo_19959_0.para = 0;
-        send(fc, new M19959_0(), vo_19959_0);
+        send(fc, new MSG_C_ACTION(), vo_19959_0);
         Iterator var42 = fightObjectList.iterator();
 
         while(var42.hasNext()) {
@@ -352,13 +352,13 @@ public class FightManager {
                 Vo_12025_0 vo_12025_0 = new Vo_12025_0();
                 vo_12025_0.id = fightObject.fid;
                 vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new M12025_0(), vo_12025_0);
+                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
             }
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
-        send(fc, new M7655_0(), vo_7655_0);
+        send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
     }
 
@@ -612,7 +612,7 @@ public class FightManager {
 
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
-            send(fightContainer, new M7655_0(), vo_7655_0);
+            send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         } while(!isOver(fightContainer));
 
         doOver(fightContainer);
@@ -752,20 +752,20 @@ public class FightManager {
         vo_19959_0.action = 0;
         vo_19959_0.vid = 0;
         vo_19959_0.para = 0;
-        send(fightContainer, new M19959_0(), vo_19959_0);
+        send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
         vo_19959_0.aid = 0;
         vo_19959_0.action = 0;
         vo_19959_0.vid = 0;
         vo_19959_0.para = 0;
-        send(fightContainer, new M19959_0(), vo_19959_0);
+        send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
-        send(fightContainer, new M7655_0(), vo_7655_0);
+        send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
-        send(fightContainer, new M7655_0(), vo_7655_0);
+        send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         Iterator var4 = allFightObject.iterator();
 
         while(var4.hasNext()) {
@@ -776,20 +776,20 @@ public class FightManager {
             vo_19959_0.action = 0;
             vo_19959_0.vid = fightObject.fid;
             vo_19959_0.para = 0;
-            send(fightContainer, new M19959_0(), vo_19959_0);
+            send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fightContainer.round;
             vo_19959_0.aid = fightObject.fid;
             vo_19959_0.action = 0;
             vo_19959_0.vid = fightObject.fid;
             vo_19959_0.para = 0;
-            send(fightContainer, new M19959_0(), vo_19959_0);
+            send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
-            send(fightContainer, new M7655_0(), vo_7655_0);
+            send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
-            send(fightContainer, new M7655_0(), vo_7655_0);
+            send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         }
 
     }
@@ -836,19 +836,19 @@ public class FightManager {
                 vo_19959_0.action = 43;
                 vo_19959_0.vid = fightObject.fid;
                 vo_19959_0.para = 0;
-                send(fightContainer, new M19959_0(), vo_19959_0);
+                send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
                 Vo_7655_0 vo_7655_0 = new Vo_7655_0();
                 vo_7655_0.id = fightObject.fid;
-                send(fightContainer, new M7655_0(), vo_7655_0);
+                send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
                 fightObject.updateState(fightContainer, 0, 0);
                 Vo_3581_0 vo_3581_0 = new Vo_3581_0();
                 vo_3581_0.a = 1;
-                GameObjectChar.send(new M3581_0(), vo_3581_0, fightObject.id);
+                GameObjectChar.send(new MSG_C_END_COMBAT(), vo_3581_0, fightObject.id);
                 Vo_61671_0 vo_61671_0 = new Vo_61671_0();
                 vo_61671_0.id = fightObject.fid;
                 vo_61671_0.count = 0;
                 GameObjectChar session = GameObjectCharMng.getGameObjectChar(fightObject.id);
-                session.gameMap.send(new M61671_0(), vo_61671_0);
+                session.gameMap.send(new MSG_TITLE(), vo_61671_0);
                 fightObject.max_shengming = fightObject.shengming;
                 fightObject.update(fightContainer);
             } else if (fightObject.type == 2) {
@@ -907,10 +907,10 @@ public class FightManager {
         vo_19959_0.action = 0;
         vo_19959_0.vid = 0;
         vo_19959_0.para = 0;
-        send(fightContainer, new M19959_0(), vo_19959_0);
+        send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
-        send(fightContainer, new M7655_0(), vo_7655_0);
+        send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         Iterator var4 = allFightObject.iterator();
 
         while(var4.hasNext()) {
@@ -919,7 +919,7 @@ public class FightManager {
                 Vo_45141_0 vo_45141_0 = new Vo_45141_0();
                 vo_45141_0.round = fightContainer.round;
                 vo_45141_0.animate_done = 1;
-                GameObjectChar.send(new M45141_0(), vo_45141_0, fightObject.id);
+                GameObjectChar.send(new MSG_C_CUR_ROUND(), vo_45141_0, fightObject.id);
                 Vo_7659_0 vo_7659_0 = new Vo_7659_0();
                 vo_7659_0.a = 0;
                 vo_7659_0.id = 0;
@@ -927,7 +927,7 @@ public class FightManager {
                 vo_7659_0.question = 265576908;
                 vo_7659_0.round = fightContainer.round;
                 vo_7659_0.curTime = (int)(System.currentTimeMillis() / 1000L);
-                GameObjectChar.send(new M7659_0(), vo_7659_0, fightObject.id);
+                GameObjectChar.send(new MSG_C_WAIT_COMMAND(), vo_7659_0, fightObject.id);
             }
         }
 
@@ -1417,7 +1417,7 @@ public class FightManager {
                                     vo_20481_0 = new Vo_20481_0();
                                     vo_20481_0.msg = "你当前队伍积分" + GameObjectCharMng.getGameObjectChar(fightObject.id).chara.shidaodaguaijifen;
                                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                    GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                    GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                 }
                             } else {
                                 var23 = ((FightTeam)teamList.get(i)).fightObjectList.iterator();
@@ -1452,14 +1452,14 @@ public class FightManager {
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了#R试道勇者#n的称谓。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 50000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了50000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                         listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M65527_0(), listVo_65527_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 
                                     if (mingci == 2) {
@@ -1468,20 +1468,20 @@ public class FightManager {
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了#R试道勇者#n的称谓。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 100000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了100000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                         listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M65527_0(), listVo_65527_0);
+                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 
                                     vo_20481_0 = new Vo_20481_0();
                                     vo_20481_0.msg = "你当前队伍积分" + GameObjectCharMng.getGameObjectChar(fightObject.id).chara.shidaodaguaijifen;
                                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                    GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                    GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                                     if (GameObjectCharMng.getGameObjectChar(fightObject.id).chara.shidaocishu <= 0) {
                                         GameUtilRenWu.shidaohuicheng(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
                                     }
@@ -1758,21 +1758,21 @@ public class FightManager {
                             vo_32985_0.pet_next_action = 0;
                             vo_32985_0.pet_para = 0;
                             vo_32985_0.pet_next_para = 0;
-                            GameObjectChar.send(new M32985_0(), vo_32985_0);
+                            GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
                         }
 
                         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
                         vo_61671_0.id = object.id;
                         vo_61671_0.count = 1;
                         vo_61671_0.list.add(1);
-                        objectChar.gameMap.send(new M61671_0(), vo_61671_0);
+                        objectChar.gameMap.send(new MSG_TITLE(), vo_61671_0);
                     }
                 }
 
                 Vo_3583_0 vo_3583_0 = new Vo_3583_0();
                 vo_3583_0.a = 1;
                 vo_3583_0.b = 3;
-                send(fc, new M3583_0(), vo_3583_0);
+                send(fc, new MSG_C_START_COMBAT(), vo_3583_0);
                 Iterator var25 = fightObjectListAll.iterator();
 
                 while(var25.hasNext()) {
@@ -1783,7 +1783,7 @@ public class FightManager {
                         vo_64971_0.id = object.id;
                         vo_64971_0.haveCalled = 1;
                         GameObjectCharMng.getGameObjectChar(object.cid);
-                        GameObjectChar.send(new M64971_0(), vo_64971_0);
+                        GameObjectChar.send(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
                     }
                 }
 
@@ -1850,10 +1850,10 @@ public class FightManager {
                     list65017.add(vo_65017_0);
                 }
 
-                sendTeam(fc, fightObjectList, new M65019_0(), list65019);
-                sendTeam(fc, fightObjectList, new M65017_0(), list65017);
-                sendTeam(fc, fightObjectListOther, new M65019_0(), list65017);
-                sendTeam(fc, fightObjectListOther, new M65017_0(), list65019);
+                sendTeam(fc, fightObjectList, new MSG_C_FRIENDS(), list65019);
+                sendTeam(fc, fightObjectList, new MSG_C_OPPONENTS(), list65017);
+                sendTeam(fc, fightObjectListOther, new MSG_C_FRIENDS(), list65017);
+                sendTeam(fc, fightObjectListOther, new MSG_C_OPPONENTS(), list65019);
                 fightObjectList = getAllFightObject(fc);
                 var43 = fightObjectList.iterator();
 
@@ -1863,7 +1863,7 @@ public class FightManager {
                         Vo_12025_0 vo_12025_0 = new Vo_12025_0();
                         vo_12025_0.id = object1.fid;
                         vo_12025_0.effect_no = object1.godbook;
-                        send(fc, new M12025_0(), vo_12025_0);
+                        send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
                     }
                 }
 
@@ -1969,7 +1969,7 @@ public class FightManager {
             vo_32985_0.pet_next_action = 0;
             vo_32985_0.pet_para = 0;
             vo_32985_0.pet_next_para = 0;
-            GameObjectChar.send(new M32985_0(), vo_32985_0);
+            GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
         }
 
         GameUtil.a24505(chara);
@@ -1977,12 +1977,12 @@ public class FightManager {
         Vo_3583_0 vo_3583_0 = new Vo_3583_0();
         vo_3583_0.a = 1;
         vo_3583_0.b = 3;
-        send(fc, new M3583_0(), vo_3583_0);
+        send(fc, new MSG_C_START_COMBAT(), vo_3583_0);
         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.id;
         vo_61671_0.count = 1;
         vo_61671_0.list.add(1);
-        GameObjectChar.getGameObjectChar().gameMap.send(new M61671_0(), vo_61671_0);
+        GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
         FightTeam friendsFightTeam = getFightTeam(fc, chara.id);
         List<FightObject> fightObjectList1 = friendsFightTeam.fightObjectList;
         Iterator var11 = fightObjectList1.iterator();
@@ -1994,7 +1994,7 @@ public class FightManager {
                 vo_64971_0.count = 1;
                 vo_64971_0.id = fightObject.id;
                 vo_64971_0.haveCalled = 1;
-                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new M64971_0(), vo_64971_0);
+                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
             }
         }
 
@@ -2029,7 +2029,7 @@ public class FightManager {
             list65019.add(vo_65019_0);
         }
 
-        send(fc, new M65019_0(), list65019);
+        send(fc, new MSG_C_FRIENDS(), list65019);
         List<Vo_65017_0> list65017 = new ArrayList();
         fightObjectList = getFightTeamDM(fc, chara.id).fightObjectList;
         Iterator var33 = fightObjectList.iterator();
@@ -2062,7 +2062,7 @@ public class FightManager {
             list65017.add(vo_65017_0);
         }
 
-        send(fc, new M65017_0(), list65017);
+        send(fc, new MSG_C_OPPONENTS(), list65017);
         fightObjectList = getAllFightObject(fc);
         var33 = fightObjectList.iterator();
 
@@ -2072,7 +2072,7 @@ public class FightManager {
                 Vo_12025_0 vo_12025_0 = new Vo_12025_0();
                 vo_12025_0.id = fightObject.fid;
                 vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new M12025_0(), vo_12025_0);
+                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
             }
         }
 
@@ -2135,7 +2135,7 @@ public class FightManager {
             Vo_3583_0 vo_3583_0 = new Vo_3583_0();
             vo_3583_0.a = 1;
             vo_3583_0.b = 3;
-            GameObjectChar.send(new M3583_0(), vo_3583_0);
+            GameObjectChar.send(new MSG_C_START_COMBAT(), vo_3583_0);
             List<FightObject> fightObjectList = getFightTeam(fc, id).fightObjectList;
             List<Vo_65017_0> list65019 = new ArrayList();
             Iterator var7 = fightObjectList.iterator();
@@ -2166,7 +2166,7 @@ public class FightManager {
                 list65019.add(vo_65019_0);
             }
 
-            GameObjectChar.send(new M65019_0(), list65019);
+            GameObjectChar.send(new MSG_C_FRIENDS(), list65019);
             new ArrayList();
             List<Vo_65017_0> list65017 = new ArrayList();
             fightObjectList = getFightTeamDM(fc, id).fightObjectList;
@@ -2198,7 +2198,7 @@ public class FightManager {
                 list65017.add(vo_65017_0);
             }
 
-            GameObjectChar.send(new M65017_0(), list65017);
+            GameObjectChar.send(new MSG_C_OPPONENTS(), list65017);
             fightObjectList = getFightTeam(fc, id).fightObjectList;
             Vo_19959_0 vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fc.round;
@@ -2206,7 +2206,7 @@ public class FightManager {
             vo_19959_0.action = 0;
             vo_19959_0.vid = 0;
             vo_19959_0.para = 0;
-            GameObjectChar.send(new M19959_0(), vo_19959_0);
+            GameObjectChar.send(new MSG_C_ACTION(), vo_19959_0);
             Iterator var16 = fightObjectList.iterator();
 
             while(var16.hasNext()) {
@@ -2215,13 +2215,13 @@ public class FightManager {
                     Vo_12025_0 vo_12025_0 = new Vo_12025_0();
                     vo_12025_0.id = fightObject.fid;
                     vo_12025_0.effect_no = fightObject.godbook;
-                    GameObjectChar.send(new M12025_0(), vo_12025_0);
+                    GameObjectChar.send(new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
                 }
             }
 
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = 0;
-            GameObjectChar.send(new M7655_0(), vo_7655_0);
+            GameObjectChar.send(new MSG_C_END_ACTION(), vo_7655_0);
         }
     }
 }

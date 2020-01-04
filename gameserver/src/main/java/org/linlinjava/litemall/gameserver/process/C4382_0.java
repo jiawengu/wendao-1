@@ -2,18 +2,18 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45177_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8425_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M45177_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
@@ -46,12 +46,12 @@
 /*  46 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  47 */       vo_20481_0.msg = "坐骑包裹已开启。";
 /*  48 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  49 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  49 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     } else {
 /*  51 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  52 */       vo_20481_0.msg = "坐骑包裹已关闭。";
 /*  53 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  54 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  54 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     }
 /*     */     
 /*     */ 

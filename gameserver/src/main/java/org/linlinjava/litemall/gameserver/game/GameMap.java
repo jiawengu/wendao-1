@@ -73,7 +73,7 @@ public class GameMap {
             vo_61671_0.count = 2;
             vo_61671_0.list.add(2);
             vo_61671_0.list.add(3);
-            gameObjectChar.gameMap.send(new M61671_0(), vo_61671_0);
+            gameObjectChar.gameMap.send(new MSG_TITLE(), vo_61671_0);
         }
 
         Iterator var13 = this.sessionList.iterator();
@@ -90,7 +90,7 @@ public class GameMap {
                     vo_61671_0.count = 2;
                     vo_61671_0.list.add(2);
                     vo_61671_0.list.add(3);
-                    gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+                    gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
                 }
             }
         }
@@ -98,7 +98,7 @@ public class GameMap {
         vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.mapid;
         vo_61671_0.count = 0;
-        gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+        gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
 
         if(id==37000){//通天塔
             String randomXjName = GameUtil.randomTTTXingJunName();
@@ -155,7 +155,7 @@ public class GameMap {
                     vo_61671_0.count = 2;
                     vo_61671_0.list.add(2);
                     vo_61671_0.list.add(3);
-                    gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+                    gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
                 }
             }
         }
@@ -163,7 +163,7 @@ public class GameMap {
         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.id;
         vo_61671_0.count = 0;
-        gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+        gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
     }
 
     public void leave(GameObjectChar gameObjectChar) {

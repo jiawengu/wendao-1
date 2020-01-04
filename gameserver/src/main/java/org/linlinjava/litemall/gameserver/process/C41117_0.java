@@ -7,7 +7,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_3;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -40,7 +40,7 @@
 /* 40 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 41 */           vo_20481_0.msg = "无法使用";
 /* 42 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 43 */           GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 43 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 44 */           return;
 /*    */         }
 /* 46 */         id = ((Petbeibao)chara.pets.get(i)).id;
@@ -54,7 +54,7 @@
 /* 54 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 55 */     vo_20481_0.msg = ("你使用了#R" + num1 + "#n颗宠物经验丹。");
 /* 56 */     vo_20481_0.time = 1562987118;
-/* 57 */     GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 57 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */     
 /*    */ 
 /* 60 */     List list = new LinkedList();

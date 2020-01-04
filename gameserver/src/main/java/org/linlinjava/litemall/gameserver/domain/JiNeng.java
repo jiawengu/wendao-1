@@ -19,9 +19,3 @@ public class JiNeng
   public int isTempSkill;
   public int skillRound;
 }
-
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\domain\JiNeng.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */

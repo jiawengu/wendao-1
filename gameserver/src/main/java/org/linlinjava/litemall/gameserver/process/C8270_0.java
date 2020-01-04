@@ -5,16 +5,17 @@
 /*     */ import java.util.Random;
 /*     */ import org.json.JSONObject;
 /*     */ import org.linlinjava.litemall.db.domain.Pet;
-/*     */ import org.linlinjava.litemall.db.service.base.BasePetService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40991_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65507_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -70,7 +71,7 @@
 /*  70 */               ((Petbeibao)chara.pets.get(j)).petShuXing.add(petShuXing);
 /*  71 */               List list = new ArrayList();
 /*  72 */               list.add(chara.pets.get(j));
-/*  73 */               GameObjectChar.send(new M65507_0(), list);
+/*  73 */               GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */               
 /*  75 */               Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  76 */               vo_8165_0.msg = "打入妖石成功";
@@ -121,7 +122,7 @@
 /* 121 */             if (((Petbeibao)chara.pets.get(j)).no == no) {
 /* 122 */               List list = new ArrayList();
 /* 123 */               list.add(chara.pets.get(j));
-/* 124 */               GameObjectChar.send(new M65507_0(), list);
+/* 124 */               GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 125 */               boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).rank > ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).pet_mag_shape;
 /* 126 */               GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).metal, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).skill, isfagong, ((Petbeibao)chara.pets.get(j)).id, chara);
 /* 127 */               org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0 vo_12023_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0();
@@ -132,13 +133,13 @@
 /* 132 */               vo_12023_0.god_book_skill_power = 6000;
 /* 133 */               vo_12023_0.god_book_skill_disabled = 0;
 /* 134 */               ((Petbeibao)chara.pets.get(j)).tianshu.add(vo_12023_0);
-/* 135 */               GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12023_0(), ((Petbeibao)chara.pets.get(j)).tianshu);
+/* 135 */               GameObjectChar.send(new MSG_REFRESH_PET_GODBOOK_SKILLS_0(), ((Petbeibao)chara.pets.get(j)).tianshu);
 /*     */               
 /*     */ 
 /* 138 */               org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
 /* 139 */               vo_20481_0.msg = ("恭喜，你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).str + "#n领悟了新的天书技能");
 /* 140 */               vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 141 */               GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+/* 141 */               GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 142 */               GameUtil.removemunber(chara, goods.goodsInfo.str, 1);
 /*     */             }
 /*     */           }
@@ -177,7 +178,7 @@
 /* 177 */           list.add(petbeibao);
 /*     */           
 /*     */ 
-/* 180 */           GameObjectChar.send(new M65507_0(), list);
+/* 180 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */         }
 /*     */       }
 /*     */     }
@@ -211,7 +212,7 @@
 /* 211 */           BasicAttributesUtils.petshuxing((PetShuXing)petbeibao.petShuXing.get(0));
 /* 212 */           list.add(petbeibao);
 /*     */           
-/* 214 */           GameObjectChar.send(new M65507_0(), list);
+/* 214 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 215 */           GameUtil.removemunber(chara, "宠物强化丹", 1);
 /*     */         }
 /*     */       }
@@ -273,10 +274,10 @@
 /* 273 */             jiNengList.add(jiNeng);
 /*     */           }
 /* 275 */           List<org.linlinjava.litemall.gameserver.data.vo.Vo_32747_0> vo_32747_0List = GameUtil.a32747(jiNengList);
-/* 276 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M32747_0(), vo_32747_0List);
+/* 276 */           GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*     */           
 /*     */ 
-/* 279 */           GameObjectChar.send(new M65507_0(), list);
+/* 279 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 280 */           Vo_40991_0 vo_40991_0 = new Vo_40991_0();
 /* 281 */           vo_40991_0.result = 0;
 /* 282 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40991_0(), vo_40991_0);
@@ -340,7 +341,7 @@
 /*     */           
 /* 341 */           list.add(petbeibao);
 /*     */           
-/* 343 */           GameObjectChar.send(new M65507_0(), list);
+/* 343 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 344 */           Vo_40991_0 vo_40991_0 = new Vo_40991_0();
 /* 345 */           vo_40991_0.result = 0;
 /* 346 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40991_0(), vo_40991_0);

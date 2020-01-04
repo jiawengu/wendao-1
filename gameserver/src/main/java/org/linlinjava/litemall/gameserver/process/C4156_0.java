@@ -14,7 +14,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20467_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -134,7 +135,7 @@
 /* 134 */       vo_61671_0.count = 2;
 /* 135 */       vo_61671_0.list.add(Integer.valueOf(2));
 /* 136 */       vo_61671_0.list.add(Integer.valueOf(3));
-/* 137 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 137 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */       
 /*     */ 
 /* 140 */       GameTeam gameTeam = new GameTeam();
@@ -168,7 +169,7 @@
 /* 168 */         vo_61671_0.count = 2;
 /* 169 */         vo_61671_0.list.add(Integer.valueOf(2));
 /* 170 */         vo_61671_0.list.add(Integer.valueOf(3));
-/* 171 */         GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 171 */         GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */         
 /*     */ 
 /* 174 */         GameTeam gameTeam = new GameTeam();

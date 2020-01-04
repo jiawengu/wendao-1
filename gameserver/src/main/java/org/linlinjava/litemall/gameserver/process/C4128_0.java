@@ -9,11 +9,13 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*    */ 
+/*    */
+
+/*    */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class C4128_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
@@ -24,7 +26,7 @@
 /* 24 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 25 */     vo_61671_0.id = chara.id;
 /* 26 */     vo_61671_0.count = 0;
-/* 27 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 27 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*    */     
 /*    */ 
 /* 30 */     List<Chara> list = new java.util.LinkedList();

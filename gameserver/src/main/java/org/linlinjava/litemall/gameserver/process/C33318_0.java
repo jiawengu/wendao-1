@@ -2,22 +2,22 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.db.domain.PackModification;
-/*     */ import org.linlinjava.litemall.db.service.base.BasePackModificationService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M41505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_01;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.springframework.stereotype.Service;
@@ -74,7 +74,7 @@
 /*  74 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  75 */     vo_20481_0.msg = ("你花费了" + packModification.getGoodsPrice() + "#n个金元宝购买了#Y" + item_names + "#n。");
 /*  76 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  77 */     GameObjectChar.send(new M20481_0(), vo_20481_0);
+/*  77 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     
 /*     */ 
 /*  80 */     Vo_41505_0 vo_41505_0 = new Vo_41505_0();

@@ -5,8 +5,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_11713_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53715_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M11713_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M53715_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_C_SANDGLASS;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_SELECT_COMMAND;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightContainer;
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightManager;
@@ -42,12 +42,12 @@
 /* 38 */       vo_53715_0.victim_id = 0;
 /* 39 */       vo_53715_0.action = 7;
 /* 40 */       vo_53715_0.no = 0;
-/* 41 */       GameObjectChar.send(new M53715_0(), vo_53715_0);
+/* 41 */       GameObjectChar.send(new MSG_SELECT_COMMAND(), vo_53715_0);
 /*    */       
 /* 43 */       Vo_11713_0 vo_11713_0 = new Vo_11713_0();
 /* 44 */       vo_11713_0.id = chara.id;
 /* 45 */       vo_11713_0.show = 0;
-/* 46 */       GameObjectChar.send(new M11713_0(), vo_11713_0);
+/* 46 */       GameObjectChar.send(new MSG_C_SANDGLASS(), vo_11713_0);
 /*    */     }
 /*    */   }
 /*    */   

@@ -13,9 +13,9 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.write.M19945_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64989_0;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public class ZhangaiMu71Skill extends FightRoundSkill {
@@ -33,7 +33,7 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         boolean fabao = true;
         FightFabaoSkill fabaoSkill = attFightObject.getFabaoSkill();
         if (fabaoSkill != null && fabaoSkill.getStateType() == 8398 && fabaoSkill.isActive()) {
@@ -71,10 +71,10 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
             vo_19959_0.action = 43;
             vo_19959_0.vid = fightObject.fid;
             vo_19959_0.para = 0;
-            FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
-            FightManager.send(fightContainer, new M7655_0(), vo_7655_0);
+            FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
             ZhangaiMu71Skill that = new ZhangaiMu71Skill();
             fightObject.addSkill(that);
@@ -113,14 +113,14 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         vo_19959_0.action = 0;
         vo_19959_0.vid = this.buffObject.fid;
         vo_19959_0.para = 0;
-        FightManager.send(this.fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(this.fightContainer, new MSG_C_ACTION(), vo_19959_0);
         vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = this.fightContainer.round;
         vo_19959_0.aid = this.buffObject.fid;
         vo_19959_0.action = 0;
         vo_19959_0.vid = this.buffObject.fid;
         vo_19959_0.para = 0;
-        FightManager.send(this.fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(this.fightContainer, new MSG_C_ACTION(), vo_19959_0);
         this.xueliang = this.buffObject.reduceShengming(this.xueliang, false);
         if (this.buffObject.type == 1 || this.buffObject.type == 2) {
             this.buffObject.update(this.fightContainer);
@@ -132,10 +132,10 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         vo_19959_0.action = 0;
         vo_19959_0.vid = 0;
         vo_19959_0.para = 0;
-        FightManager.send(this.fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(this.fightContainer, new MSG_C_ACTION(), vo_19959_0);
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
-        FightManager.send(this.fightContainer, new M7655_0(), vo_7655_0);
+        FightManager.send(this.fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         FightResult fightResult = new FightResult();
         fightResult.id = this.buffObject.fid;
         fightResult.vid = this.buffObject.fid;
@@ -145,10 +145,10 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         FightManager.send_LIFE_DELTA(this.fightContainer, fightResult);
         vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = this.buffObject.fid;
-        FightManager.send(this.fightContainer, new M7655_0(), vo_7655_0);
+        FightManager.send(this.fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = this.buffObject.fid;
-        FightManager.send(this.fightContainer, new M7655_0(), vo_7655_0);
+        FightManager.send(this.fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
     }
 
     protected void doDisappear() {
