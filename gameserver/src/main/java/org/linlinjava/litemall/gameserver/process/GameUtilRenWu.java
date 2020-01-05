@@ -10,8 +10,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
+/*     */
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -37,7 +38,7 @@
 /*  36 */     vo_61553_0.show_name = show_name;
 /*  37 */     vo_61553_0.tasktask_extra_para = "";
 /*  38 */     vo_61553_0.tasktask_state = "1";
-/*  39 */     GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+/*  39 */     GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
 /*     */   }
 /*     */   
 /*     */   public static String shidaolevel(Chara chara) {

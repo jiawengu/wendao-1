@@ -63,7 +63,7 @@ import org.linlinjava.litemall.gameserver.data.write.M49153_0;
 import org.linlinjava.litemall.gameserver.data.write.M49169_0;
 import org.linlinjava.litemall.gameserver.data.write.M49179_0;
 import org.linlinjava.litemall.gameserver.data.write.M49183_0;
-import org.linlinjava.litemall.gameserver.data.write.M61553_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 import org.linlinjava.litemall.gameserver.data.write.M61677_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -119,7 +119,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_61553_0.tasktask_extra_para = "";
             vo_61553_0.tasktask_state = "1";
             GameObjectChar.getGameObjectChar();
-            GameObjectChar.send(new M61553_0(), vo_61553_0);
+            GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
             String[] strings = GameUtilRenWu.luckFindDraw();
             GameUtil.huodechoujiang(strings, chara);
             Vo_8165_0 vo_8165_0 = new Vo_8165_0();

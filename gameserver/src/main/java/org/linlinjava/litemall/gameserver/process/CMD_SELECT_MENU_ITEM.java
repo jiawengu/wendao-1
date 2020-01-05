@@ -436,6 +436,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             vo_49177_0.stage2_duration_time = 6600;
             vo_49177_0.rank = 0;
             GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49177_0(), vo_49177_0);
+
             return;
         }
 
@@ -450,7 +451,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }else if("挑战下层".equals(menu_item)){
                 GameUtil.tttChallengeNextLayer(chara1);
             }else if("飞升".equals(menu_item)){
-                GameObjectChar.send(new M45093_0(), null);
+                GameObjectChar.send(new MSG_OPEN_FEISHENG_DLG(), null);
             }else if("重新挑战".equals(menu_item)){
                 FightManager.goFight(chara1, Arrays.asList(chara1.ttt_xj_name));
             }else if("更换奖励类型".equals(menu_item)){
@@ -842,7 +843,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  444 */
             vo_61553_10.tasktask_state = "1";
             /*  445 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_10, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_10, chara1.id);
 
             /*  403 */
             org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
@@ -1006,7 +1007,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  444 */
             vo_61553_10.tasktask_state = "1";
             /*  445 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_10, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_10, chara1.id);
             /*      */
         }
         /*      */
@@ -1212,7 +1213,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  553 */
             vo_61553_0.tasktask_state = "1";
             /*  554 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
             /*      */
             /*  556 */
             org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
@@ -1396,7 +1397,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  553 */
             vo_61553_0.tasktask_state = "1";
             /*  554 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
             /*      */
             /*  556 */
             org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
@@ -1590,7 +1591,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  643 */
             vo_61553_0.tasktask_state = "1";
             /*  644 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
             /*      */
             /*      */
             /*      */
@@ -1688,7 +1689,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /*  697 */
                 vo_61553_10.tasktask_state = "1";
                 /*  698 */
-                GameObjectChar.send(new M61553_0(), vo_61553_10);
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
                 /*  699 */
                 chara1.fabaorenwu += 1;
                 /*      */
@@ -1748,7 +1749,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /*  728 */
                 vo_61553_10.tasktask_state = "0";
                 /*  729 */
-                GameObjectChar.send(new M61553_0(), vo_61553_10);
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
                 /*  730 */
                 chara1.fabaorenwu += 1;
                 /*  731 */
@@ -1801,7 +1802,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /*  757 */
                 vo_61553_10.tasktask_state = "1";
                 /*  758 */
-                GameObjectChar.send(new M61553_0(), vo_61553_10);
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
                 /*  759 */
                 return;
                 /*      */
@@ -1833,7 +1834,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  773 */
             vo_61553_10.tasktask_state = "1";
             /*  774 */
-            GameObjectChar.send(new M61553_0(), vo_61553_10);
+            GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
             /*  775 */
             GameUtil.huodejingyan(chara1, (int) (1420 * chara1.level * (1.0D + 0.1D * chara1.shimencishu)));
             /*  776 */
@@ -1930,7 +1931,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /*  821 */
                 vo_61553_10.tasktask_state = "1";
                 /*  822 */
-                GameObjectChar.send(new M61553_0(), vo_61553_10);
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
                 /*      */
             }
             /*      */
@@ -2401,7 +2402,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /* 1071 */
             vo_61553_0.tasktask_state = "1";
             /* 1072 */
-            GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
             /*      */
             /* 1074 */
             org.linlinjava.litemall.gameserver.data.vo.Vo_45092_0 vo_45092_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45092_0();
@@ -2766,7 +2767,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     /* 1271 */
                     vo_61553_0.tasktask_state = "1";
                     /* 1272 */
-                    GameObjectChar.send(new M61553_0(), vo_61553_0);
+                    GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
                     /*      */
                 }
                 /* 1274 */
@@ -2776,7 +2777,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /* 1276 */
                 Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
                 /* 1277 */
-                GameObjectChar.send(new M61553_0(), vo_61553_0);
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
                 /*      */
             }
             /*      */

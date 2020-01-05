@@ -4457,7 +4457,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             Vo_45704_0 vo_45704_0 = new Vo_45704_0();
             vo_45704_0.result = 0;//TODO
             vo_45704_0.xing_name = chara.ttt_xj_name;
-            GameObjectChar.send(new M45704_0(), vo_45704_0);
+            GameObjectChar.send(new MSG_TTT_NEW_XING(), vo_45704_0);
         }
 
     /**
@@ -4555,6 +4555,13 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         chara.onEnterTttLayer(chara.ttt_layer+1, xingjunName);
 
         GameUtil.a49155(chara);
+    }
+
+    public static void openDlg(String dlgName){
+        final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
+        vo_9129_2.notify = 97;
+        vo_9129_2.para = dlgName;
+        GameObjectChar.send(new M9129_0(), vo_9129_2);
     }
     /*      */ }
 

@@ -10,7 +10,7 @@
  * MSG_TASK_PROMPT  任务提示
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M61553_0 extends BaseWrite
+/*    */ public class MSG_TASK_PROMPT extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
@@ -47,7 +47,7 @@
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M61553_0.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\MSG_TASK_PROMPT.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */

@@ -275,7 +275,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /* 271 */     org.linlinjava.litemall.db.domain.Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
 /* 272 */     Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/* 273 */     GameObjectChar.send(new M61553_0(), vo_61553_0);
+/* 273 */     GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     
 /*     */ 
 /* 276 */     org.linlinjava.litemall.gameserver.data.vo.Vo_53925_0 vo_53925_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_53925_0();
@@ -323,7 +323,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 318 */       vo_61553_10.show_name = ("师门—入世(" + chara.shimencishu + "/10)");
 /* 319 */       vo_61553_10.tasktask_extra_para = "";
 /* 320 */       vo_61553_10.tasktask_state = "1";
-/* 321 */       GameObjectChar.send(new M61553_0(), vo_61553_10);
+/* 321 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
 /*     */     }
 /*     */     
 /*     */ 
@@ -348,7 +348,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 343 */       vo_61553_10.show_name = "法宝任务";
 /* 344 */       vo_61553_10.tasktask_extra_para = "";
 /* 345 */       vo_61553_10.tasktask_state = "1";
-/* 346 */       GameObjectChar.send(new M61553_0(), vo_61553_10);
+/* 346 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
 /*     */     }
 /*     */     
 /*     */ 
@@ -390,7 +390,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 385 */       vo_61553_0.show_name = "超级宝藏";
 /* 386 */       vo_61553_0.tasktask_extra_para = "";
 /* 387 */       vo_61553_0.tasktask_state = "1";
-/* 388 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new M61553_0(), vo_61553_0);
+/* 388 */       GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*     */     
 /*     */ 

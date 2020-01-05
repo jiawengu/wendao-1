@@ -9,7 +9,7 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
  * MSG_OPEN_FEISHENG_DLG    打开通天塔飞升界面
  */
 @org.springframework.stereotype.Service
-public class M45093_0 extends BaseWrite {
+public class MSG_OPEN_FEISHENG_DLG extends BaseWrite {
 
     protected void writeO(ByteBuf writeBuf, Object object) {
     }

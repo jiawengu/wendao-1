@@ -11,9 +11,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+/*     */
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -50,7 +51,7 @@
 /*     */ 
 /*  47 */       Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
 /*  48 */       Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  49 */       GameObjectChar.send(new M61553_0(), vo_61553_0);
+/*  49 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*  51 */     boolean has = false;
 /*  52 */     Goods goodshas = new Goods();
