@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.linlinjava.litemall.db.domain.Pet;
+import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12025_0;
@@ -1434,7 +1435,7 @@ public class FightManager {
 
                                     ListVo_65527_0 listVo_65527_0;
                                     if (mingci == 3) {
-                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, "试道勇者", "试道勇者");
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 50000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了50000元宝。";
@@ -1445,7 +1446,7 @@ public class FightManager {
                                     }
 
                                     if (mingci == 2) {
-                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, "试道勇者", "试道勇者");
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 100000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了100000元宝。";

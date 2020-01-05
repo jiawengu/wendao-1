@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TitleService {
 
-    public static void grantTitle(Chara chara, String source, String title) {
-        chara.chenghao.put(source, title);
+    public static void grantTitle(Chara chara, String event, String title) {
+        chara.chenghao.put(event, title);
         GameUtil.chenghaoxiaoxi(chara);
         Vo_20481_0 vo_20481_9 = new Vo_20481_0();
         vo_20481_9.msg = String.format("你获得了#R%s#n的称谓。", title);
@@ -20,8 +20,8 @@ public class TitleService {
         GameObjectChar.send(new M20481_0(), vo_20481_9);
     }
 
-    public static void grantTitle(int uid, String source, String title) {
+    public static void grantTitle(int uid, String event, String title) {
         GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(uid);
-        grantTitle(gameObjectChar.chara, source, title);
+        grantTitle(gameObjectChar.chara, event, title);
     }
 }

@@ -3,6 +3,7 @@ package org.linlinjava.litemall.gameserver.process;
 import org.linlinjava.litemall.db.domain.Accounts;
 import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
+import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
@@ -2683,7 +2684,7 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
                     String[] chenghao = {"五龙山云霄洞第一代弟子", "终南山玉柱洞第一代弟子", "凤凰山斗阙宫第一代弟子", "乾元山金光洞第一代弟子", "骷髅山白骨洞第一代弟子"};
                     /* 1247 */
                     String chenhao = chenghao[(chara.menpai - 1)];
-                    TitleService.grantTitle(chara, "拜师任务", chenhao);
+                    TitleService.grantTitle(chara, TitleConst.TITLE_EVENT_BAISHI, chenhao);
                     /* 1255 */
                     List<RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(1));
                     /* 1256 */
