@@ -83,8 +83,10 @@ public class GameMap {
             if (gameSession.ctx != null && gameSession.chara != null) {
                 vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
-                if(isTTTMap() && gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
-                    gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                if(isTTTMap()){
+                    if(gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
+                        gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                    }
                 }else{
                     gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 }
@@ -195,6 +197,9 @@ public class GameMap {
 
         while(var7.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var7.next();
+            if(isTTTMap()&&gameSession.chara.ttt_layer!=session.chara.ttt_layer){
+                continue;
+            }
             if (gameSession.ctx != null) {
                 ++sendNum;
                 ByteBuf copy = buff.copy();
