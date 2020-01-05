@@ -31,6 +31,7 @@ import org.linlinjava.litemall.gameserver.game.GameShiDao;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -261,12 +262,7 @@ public class SaveCharaTimes {
                         ListVo_65527_0 listVo_65527_0;
                         if (size == 1) {
                             for(k = 0; k < ((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.size(); ++k) {
-                                ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).chenghao.put("试道王者", "试道王者");
-                                GameUtil.chenghaoxiaoxi((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k));
-                                vo_20481_9 = new Vo_20481_0();
-                                vo_20481_9.msg = "你获得了#R试道王者#n的称谓。";
-                                vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
-                                GameObjectCharMng.getGameObjectChar(((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).id).sendOne(new M20481_0(), vo_20481_9);
+                                TitleService.grantTitle((((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)), "试道王者", "试道王者");
                                 ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).extra_life += 200000;
                                 vo_20481_9 = new Vo_20481_0();
                                 vo_20481_9.msg = "你获得了200000元宝的称谓。";
@@ -279,12 +275,7 @@ public class SaveCharaTimes {
 
                         if (size == 2) {
                             for(k = 0; k < ((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.size(); ++k) {
-                                ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).chenghao.put("试道勇者", "试道勇者");
-                                GameUtil.chenghaoxiaoxi((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k));
-                                vo_20481_9 = new Vo_20481_0();
-                                vo_20481_9.msg = "你获得了#R试道勇者#n的称谓。";
-                                vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
-                                GameObjectCharMng.getGameObjectChar(((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).id).sendOne(new M20481_0(), vo_20481_9);
+                                TitleService.grantTitle((((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)), "试道勇者", "试道勇者");
                                 ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).extra_life += 100000;
                                 vo_20481_9 = new Vo_20481_0();
                                 vo_20481_9.msg = "你获得了100000元宝的称谓。";
@@ -297,12 +288,7 @@ public class SaveCharaTimes {
 
                         if (size == 3) {
                             for(k = 0; k < ((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.size(); ++k) {
-                                ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).chenghao.put("试道勇者", "试道勇者");
-                                GameUtil.chenghaoxiaoxi((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k));
-                                vo_20481_9 = new Vo_20481_0();
-                                vo_20481_9.msg = "你获得了#R试道勇者#n的称谓。";
-                                vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
-                                GameObjectCharMng.getGameObjectChar(((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).id).sendOne(new M20481_0(), vo_20481_9);
+                                TitleService.grantTitle((((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)), "试道勇者", "试道勇者");
                                 ((Chara)((GameObjectChar)gameSessions.get(k)).gameTeam.duiwu.get(k)).extra_life += 50000;
                                 vo_20481_9 = new Vo_20481_0();
                                 vo_20481_9.msg = "你获得了50000元宝的称谓。";
@@ -391,14 +377,9 @@ public class SaveCharaTimes {
                     int j = 0;
                     if (j < gameSessions.size()) {
                         for( int k = 0; k < ((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.size(); ++k) {
-                            ((Chara)((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k)).chenghao.put("试道王者", "试道王者");
-                            GameUtil.chenghaoxiaoxi((Chara)((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k));
-                            Vo_20481_0 vo_20481_9 = new Vo_20481_0();
-                            vo_20481_9.msg = "你获得了#R试道王者#n的称谓。";
-                            vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
-                            GameObjectCharMng.getGameObjectChar(((Chara)((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k)).id).sendOne(new M20481_0(), vo_20481_9);
+                            TitleService.grantTitle((((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k)), "试道王者", "试道王者");
                             ((Chara)((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k)).extra_life += 200000;
-                            vo_20481_9 = new Vo_20481_0();
+                            Vo_20481_0 vo_20481_9 = new Vo_20481_0();
                             vo_20481_9.msg = "你获得了200000元宝的称谓。";
                             vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
                             GameObjectCharMng.getGameObjectChar(((Chara)((GameObjectChar)gameSessions.get(j)).gameTeam.duiwu.get(k)).id).sendOne(new M20481_0(), vo_20481_9);

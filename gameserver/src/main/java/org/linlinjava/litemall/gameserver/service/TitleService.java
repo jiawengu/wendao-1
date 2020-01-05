@@ -1,88 +1,27 @@
 package org.linlinjava.litemall.gameserver.service;
 
-import com.google.common.collect.Lists;
-import org.linlinjava.litemall.db.domain.vo.base.CharacterTitleVO;
-import org.linlinjava.litemall.db.domain.vo.base.TitleVO;
-import org.linlinjava.litemall.db.repository.TitleRepository;
-import org.linlinjava.litemall.gameserver.domain.CharacterTitleDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
+import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TitleService {
-    @Autowired
-    private TitleRepository titleRepository;
 
-    private CharacterTitleDTO convert(TitleVO titleVO, CharacterTitleVO characterTitleVO) {
-        return CharacterTitleDTO.builder()
-                .color(titleVO.getColor())
-                .title(titleVO.getTitle())
-                .type(titleVO.getType())
-                .gender(titleVO.getGender())
-                .isOwned(characterTitleVO != null)
-                .addTime(characterTitleVO != null ? characterTitleVO.getAddTime() : null)
-                .build();
+    public static void grantTitle(Chara chara, String source, String title) {
+        chara.chenghao.put(source, title);
+        GameUtil.chenghaoxiaoxi(chara);
+        Vo_20481_0 vo_20481_9 = new Vo_20481_0();
+        vo_20481_9.msg = String.format("你获得了#R%s#n的称谓。", title);
+        vo_20481_9.time = (int)(System.currentTimeMillis() / 1000);
+        GameObjectChar.send(new M20481_0(), vo_20481_9);
     }
 
-
-    public List<CharacterTitleDTO> getTitleListByUid(int uid) {
-        List<CharacterTitleVO> characterTitleVOList = titleRepository.getTitleListByUid(uid);
-        List<TitleVO> titleVOList = titleRepository.getAllTitleTypeList();
-
-        List<CharacterTitleDTO> characterTitleDTOList = Lists.newArrayList();
-        for (TitleVO titleVO : titleVOList) {
-            boolean flag = false;
-            for (CharacterTitleVO characterTitleVO : characterTitleVOList) {
-                if (characterTitleVO.getType().equals(titleVO.getType())) {
-                    characterTitleDTOList.add(convert(titleVO, characterTitleVO));
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
-                characterTitleDTOList.add(convert(titleVO, null));
-            }
-        }
-        return characterTitleDTOList;
-    }
-
-    public boolean isUserContainTitle(int uid, int titleType) {
-        return titleRepository.isUserContainTitle(uid, titleType);
-    }
-
-    public List<Integer> getUidListByTitleType(int titleType) {
-        return titleRepository.getUidListByTitleType(titleType);
-    }
-
-    public boolean grantUserTitle(int uid, int titleType) {
-        return titleRepository.grantUserTitle(uid, titleType);
-    }
-
-    public boolean reclaimUserTitle(int uid, int titleType) {
-        return titleRepository.reclaimUserTitle(uid, titleType);
-    }
-
-    public CharacterTitleDTO getTitleInfoByType(int uid, int titleType) {
-        TitleVO titleVO = titleRepository.getTitleInfoByType(titleType);
-        if (titleVO == null) {
-            return null;
-        }
-        CharacterTitleVO characterTitleVO = titleRepository.getCharacterTitleVO(uid, titleType);
-        return convert(titleVO, characterTitleVO);
-    }
-
-    public List<CharacterTitleDTO> getTitleByColor(int uid, String color) {
-        return getTitleListByUid(uid).stream()
-                .filter(characterTitleDTO -> characterTitleDTO.getColor().equals(color))
-                .collect(Collectors.toList());
-    }
-
-    public List<CharacterTitleDTO> getTitleByGender(int uid, int gender) {
-        return getTitleListByUid(uid).stream()
-                .filter(characterTitleDTO -> characterTitleDTO.getGender().equals(gender))
-                .collect(Collectors.toList());
+    public static void grantTitle(int uid, String source, String title) {
+        GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(uid);
+        grantTitle(gameObjectChar.chara, source, title);
     }
 }
