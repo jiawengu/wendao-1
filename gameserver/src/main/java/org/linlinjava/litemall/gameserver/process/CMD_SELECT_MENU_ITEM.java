@@ -425,23 +425,23 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             chara1.y = map.getY().intValue();
             chara1.x = map.getX().intValue();
             org.linlinjava.litemall.gameserver.game.GameLine.getGameMapname(chara1.line, map.getName()).join(GameObjectChar.getGameObjectChar());
-            org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0 vo_49177_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0();
-            vo_49177_0.isPK = 3;
-            vo_49177_0.stageId = 3;
-            vo_49177_0.monsterPoint = 10;
-            vo_49177_0.pkValue = 2;
-            vo_49177_0.totalScore = 45;
-            vo_49177_0.startTime = 1567343400;
-            vo_49177_0.stage1_duration_time = 1800;
-            vo_49177_0.stage2_duration_time = 6600;
-            vo_49177_0.rank = 0;
-            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49177_0(), vo_49177_0);
+//            org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0 vo_49177_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0();
+//            vo_49177_0.isPK = 3;
+//            vo_49177_0.stageId = 3;
+//            vo_49177_0.monsterPoint = 10;
+//            vo_49177_0.pkValue = 2;
+//            vo_49177_0.totalScore = 45;
+//            vo_49177_0.startTime = 1567343400;
+//            vo_49177_0.stage1_duration_time = 1800;
+//            vo_49177_0.stage2_duration_time = 6600;
+//            vo_49177_0.rank = 0;
+//            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49177_0(), vo_49177_0);
 
             return;
         }
 
         if (menu_item.equals("挑战星君")) {
-            FightManager.goFight(chara1, Arrays.asList(chara1.ttt_xj_name, GameUtil.randomTTTPetName()));
+            FightManager.goFightTTT(chara1);
             return;
         }
 
