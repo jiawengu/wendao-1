@@ -413,6 +413,11 @@ public class Chara implements Serializable {
      */
     public int ttt_layer;
     /**
+     * 通天塔奖励类型
+     * exp，tao
+     */
+    public String ttt_award_type = "exp";
+    /**
      * 通天塔-星君名字
      */
     public String ttt_xj_name = "";

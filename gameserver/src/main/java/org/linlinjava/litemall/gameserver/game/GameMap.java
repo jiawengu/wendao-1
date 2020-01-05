@@ -52,9 +52,9 @@ public class GameMap {
         Vo_45157_0 vo_45157_0 = new Vo_45157_0();
         vo_45157_0.id = chara.id;
         vo_45157_0.mapId = chara.mapid;
-        gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-        gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
         Iterator var6 = npcList.iterator();
 
         while(var6.hasNext()) {
@@ -63,9 +63,9 @@ public class GameMap {
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
-        gameObjectChar.sendOne(new M65531_0(), list);
-        Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
-        this.send(new M65529_0(), vo_65529_0);
+        gameObjectChar.sendOne(new MSG_EXITS(), list);
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        this.send(new MSG_APPEAR(), vo_65529_0);
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
             vo_61671_0 = new Vo_61671_0();
@@ -81,9 +81,13 @@ public class GameMap {
         while(var13.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var13.next();
             if (gameSession.ctx != null && gameSession.chara != null) {
-                vo_65529_0 = GameUtil.a65529(gameSession.chara);
+                vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
-                gameObjectChar.sendOne(new M65529_0(), vo_65529_0);
+                if(isTTTMap() && gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
+                    gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                }else{
+                    gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                }
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu != null && gameSession.gameTeam.duiwu.size() > 0) {
                      vo_61671_0 = new Vo_61671_0();
                     vo_61671_0.id = ((Chara)gameSession.gameTeam.duiwu.get(0)).id;
@@ -100,15 +104,25 @@ public class GameMap {
         vo_61671_0.count = 0;
         gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
 
-        if(id==37000){//通天塔
-            String randomXjName = GameUtil.randomTTTXingJunName();
-            short layer = (short) (chara.level-14);
-            chara.onEnterTttLayer(layer, randomXjName);
+        if(isTTTMap()){//通天塔
+            //初始化
+            if(chara.ttt_layer == 0){
+                String randomXjName = GameUtil.randomTTTXingJunName();
+                short layer = (short) (chara.level-14);
+                chara.onEnterTttLayer(layer, randomXjName);
+            }
 
-            GameUtil.a49155(chara);
+            GameUtil.notifyTTTPanelInfo(chara);
 
             GameUtil.a45704(chara);
         }
+    }
+
+    /**
+     * 是否是通天塔地图
+     */
+    public boolean isTTTMap(){
+        return id==37000;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
@@ -125,9 +139,9 @@ public class GameMap {
         Vo_45157_0 vo_45157_0 = new Vo_45157_0();
         vo_45157_0.id = chara.id;
         vo_45157_0.mapId = charaduizhang.mapid;
-        gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-        gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
 
         List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
         Iterator var7 = npcList.iterator();
@@ -137,17 +151,17 @@ public class GameMap {
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
-        gameObjectChar.sendOne(new M65531_0(), list);
+        gameObjectChar.sendOne(new MSG_EXITS(), list);
 
-        Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
-        this.send(new M65529_0(), vo_65529_0);
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        this.send(new MSG_APPEAR(), vo_65529_0);
 
         Iterator var9 = this.sessionList.iterator();
         while(var9.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var9.next();
             if (gameSession.ctx != null && gameSession.chara != null) {
-                vo_65529_0 = GameUtil.a65529(gameSession.chara);
-                gameObjectChar.sendOne(new M65529_0(), vo_65529_0);
+                vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
+                gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 GameUtil.genchongfei(gameSession.chara);
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu.size() > 0) {
                     Vo_61671_0 vo_61671_0 = new Vo_61671_0();

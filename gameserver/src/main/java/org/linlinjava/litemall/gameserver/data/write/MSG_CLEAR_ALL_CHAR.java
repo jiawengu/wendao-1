@@ -9,7 +9,7 @@
  * "MSG_CLEAR_ALL_CHAR", -- 清除所有的玩家
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M45157_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_CLEAR_ALL_CHAR extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
@@ -23,7 +23,7 @@
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M45157_0.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\MSG_CLEAR_ALL_CHAR.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */

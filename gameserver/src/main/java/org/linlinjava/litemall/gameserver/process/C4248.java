@@ -10,8 +10,9 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */
@@ -43,13 +44,13 @@
 /*    */     
 /* 40 */     for (int i = 0; i < chara.npcchubao.size(); i++) {
 /* 41 */       if (chara1.mapid == ((Vo_65529_0)chara.npcchubao.get(i)).mapid) {
-/* 42 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcchubao.get(i), chara.id);
+/* 42 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcchubao.get(i), chara.id);
 /*    */       }
 /*    */     }
 /*    */     
 /* 46 */     for (int i = 0; i < chara.npcshuadao.size(); i++) {
 /* 47 */       if (chara1.mapid == ((Vo_65529_0)chara.npcshuadao.get(i)).mapid) {
-/* 48 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcshuadao.get(i), chara.id);
+/* 48 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcshuadao.get(i), chara.id);
 /*    */       }
 /*    */     }
 /*    */     

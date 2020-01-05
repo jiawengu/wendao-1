@@ -12,7 +12,7 @@
  * MSG_EXITS
  */
 /*    */ @Service
-/*    */ public class M65531_0
+/*    */ public class MSG_EXITS
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
@@ -38,7 +38,7 @@
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M65531_0.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\MSG_EXITS.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */

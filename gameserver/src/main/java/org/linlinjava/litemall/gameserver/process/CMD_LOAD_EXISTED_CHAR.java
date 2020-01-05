@@ -129,7 +129,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     
 /*     */ 
 /* 126 */     GameUtil.a65511(chara);
-/*     */     
+/*     */
+              GameUtilRenWu.notifyTTTTask(chara);
 /*     */ 
 /* 129 */     Vo_41023_0 vo_41023_0 = new Vo_41023_0();
 /* 130 */     vo_41023_0.taskName = "拜师任务";

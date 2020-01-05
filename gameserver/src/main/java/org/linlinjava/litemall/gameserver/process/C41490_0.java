@@ -10,10 +10,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_01;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
+/*     */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -192,7 +192,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 191 */       vo_65529_0.name = packModification.getStr();
 /* 192 */       vo_65529_0.org_icon = chara.genchong_icon;
 /* 193 */       vo_65529_0.portrait = chara.genchong_icon;
-/* 194 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), vo_65529_0);
+/* 194 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_APPEAR(), vo_65529_0);
 /*     */     }
 /*     */     
 /*     */ 

@@ -4,6 +4,7 @@
 /*      */ import java.util.List;
 /*      */ import java.util.Random;
 /*      */ import com.google.common.base.Preconditions;
+import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*      */
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -22,7 +23,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*      */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*      */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
 /*      */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*      */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+/*      */ import org.linlinjava.litemall.gameserver.game.GameLine;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*      */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*      */
 /*      */ @org.springframework.stereotype.Service
@@ -635,7 +637,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             /*      */     }
         /*      */
         /*  579 */     if (chara1.mapid == ((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcchubao.get(0)).mapid) {
-            /*  580 */       GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), chara1.npcchubao.get(0), chara1.id);
+            /*  580 */       GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcchubao.get(0), chara1.id);
             /*      */     }
         /*      */
         /*  583 */     String task_prompt = "捉拿#P" + name + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")|M=就是来抓你的|$0#P";
@@ -823,7 +825,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                 /*  754 */         vo_65529_0.name = ((Goods)chara.backpack.get(i)).goodsInfo.str;
                 /*  755 */         vo_65529_0.org_icon = chara.genchong_icon;
                 /*  756 */         vo_65529_0.portrait = chara.genchong_icon;
-                /*  757 */         GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), vo_65529_0);
+                /*  757 */         GameObjectChar.getGameObjectChar().gameMap.send(new MSG_APPEAR(), vo_65529_0);
                 /*      */       }
             /*      */     }
         /*      */   }
@@ -2635,7 +2637,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
      * @param chara
      * @return
      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 a65529(Chara chara) {
+    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 MSG_APPEAR(Chara chara) {
         /* 2540 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 vo_65529_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0();
         /* 2541 */     vo_65529_0.id = chara.id;
         /* 2542 */     vo_65529_0.x = chara.x;
@@ -4464,23 +4466,33 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
      * 通天塔-任务面板信息
      * @param chara
      */
-    public static void a49155(Chara chara){
+    public static void notifyTTTPanelInfo(Chara chara){
             Vo_49155_0 vo_49155_0 = new Vo_49155_0();
             vo_49155_0.curLayer = (short) chara.ttt_layer;
             vo_49155_0.breakLayer = (short) (chara.level);
             byte curType = 0;
-            if(chara.ttt_challenge_num>0){
-                curType = (byte) (chara.ttt_xj_success?2:3);
-            }else{
+            if(chara.ttt_layer<=chara.level){
                 curType = 1;
+            }else{
+
             }
+        if(chara.ttt_challenge_num>0){
+                if(chara.ttt_xj_success){
+                    curType = 2;
+                }else{
+                    curType = (byte) (chara.ttt_layer<=chara.level?1:3);
+                }
+        }else{
+            curType = 1;
+        }
+
             vo_49155_0.curType = curType;
             vo_49155_0.topLayer = chara.level+45;
             vo_49155_0.npc = chara.ttt_xj_name;
             vo_49155_0.challengeCount = 3-chara.ttt_challenge_num;
-            vo_49155_0.bonusType = "exp";
+            vo_49155_0.bonusType = chara.ttt_award_type;
             vo_49155_0.hasNotCompletedSmfj = 1;
-            GameObjectChar.send(new M49155_0(), vo_49155_0);
+            GameObjectChar.send(new MSG_TONGTIANTA_INFO(), vo_49155_0);
         }
 
     /**
@@ -4488,7 +4500,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
      */
     public static void a49157_exp(Chara chara, long bonusValue){
         Vo_49157_0 vo_49157_0 = new Vo_49157_0();
-        vo_49157_0.bonusType = "exp";
+        vo_49157_0.bonusType = chara.ttt_award_type;
         vo_49157_0.dlgType = 1;
         vo_49157_0.bonusValue = bonusValue;
         vo_49157_0.bonusTaoPoint = 0;
@@ -4500,7 +4512,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
      */
     public static void a49157_tao(Chara chara, long bonusTaoPoint){
         Vo_49157_0 vo_49157_0 = new Vo_49157_0();
-        vo_49157_0.bonusType = "exp";
+        vo_49157_0.bonusType = chara.ttt_award_type;
         vo_49157_0.dlgType = 1;
         vo_49157_0.bonusValue = 0;
         vo_49157_0.bonusTaoPoint = bonusTaoPoint;
@@ -4550,11 +4562,24 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
      * @param chara
      */
     public static void tttChallengeNextLayer(Chara chara){
+        int nextLayer = chara.ttt_layer+1;
+        if(nextLayer>=186){//塔顶
+            Map map = GameData.that.baseMapService.findOneByName("通天塔");
+            chara.y = map.getY().intValue();
+            chara.x = map.getX().intValue();
+            GameLine.getGameMapname(chara.line,map.getName()).join(GameObjectChar.getGameObjectChar());
+        }else{
+            Map map = GameData.that.baseMapService.findOneByName("通天塔顶");
+            chara.y = map.getY().intValue();
+            chara.x = map.getX().intValue();
+            GameLine.getGameMapname(chara.line,map.getName()).join(GameObjectChar.getGameObjectChar());
+        }
         Preconditions.checkArgument(chara.ttt_xj_success);
         String xingjunName = GameUtil.randomTTTXingJunName();
-        chara.onEnterTttLayer(chara.ttt_layer+1, xingjunName);
+        chara.onEnterTttLayer(nextLayer, xingjunName);
 
-        GameUtil.a49155(chara);
+        GameUtil.notifyTTTPanelInfo(chara);
+
     }
 
     public static void openDlg(String dlgName){

@@ -11,10 +11,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M41505_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -86,7 +85,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  84 */     vo_65529_0.name = packModification.getStr();
 /*  85 */     vo_65529_0.org_icon = Integer.valueOf(packModification.getFasionType()).intValue();
 /*  86 */     vo_65529_0.portrait = Integer.valueOf(packModification.getFasionType()).intValue();
-/*  87 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), vo_65529_0);
+/*  87 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_APPEAR(), vo_65529_0);
 /*     */     
 /*     */ 
 /*     */ 

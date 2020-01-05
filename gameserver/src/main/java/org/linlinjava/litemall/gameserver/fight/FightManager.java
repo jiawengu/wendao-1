@@ -1624,7 +1624,7 @@ public class FightManager {
                     }
 
                     chara1.onTttChallengeSuccess();
-                    GameUtil.a49155(chara1);
+                    GameUtil.notifyTTTPanelInfo(chara1);
                     return;
                 }
 
@@ -1769,7 +1769,7 @@ public class FightManager {
                 if (chara1.mapid == 37000 ) {//通天塔挑战失败
                     assert chara1.ttt_xj_name.equals(guaiwu.get(0).str);
                     chara1.onTttChallengeFail();
-                    GameUtil.a49155(chara1);
+                    GameUtil.notifyTTTPanelInfo(chara1);
                     return;
                 }
             }

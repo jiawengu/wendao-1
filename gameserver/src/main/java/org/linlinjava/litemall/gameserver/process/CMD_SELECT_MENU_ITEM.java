@@ -2,6 +2,7 @@ package org.linlinjava.litemall.gameserver.process;
 
 import com.google.common.base.Preconditions;
 import org.linlinjava.litemall.db.domain.Accounts;
+import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -12,6 +13,7 @@ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.GameData;
+import org.linlinjava.litemall.gameserver.game.GameLine;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 
@@ -421,11 +423,12 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 return;
             }
-            org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(menu_item);
+            Map map = GameData.that.baseMapService.findOneByName("通天塔");
             chara1.y = map.getY().intValue();
             chara1.x = map.getX().intValue();
-            org.linlinjava.litemall.gameserver.game.GameLine.getGameMapname(chara1.line, map.getName()).join(GameObjectChar.getGameObjectChar());
-//            org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0 vo_49177_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49177_0();
+            GameLine.getGameMapname(chara1.line, map.getName()).join(GameObjectChar.getGameObjectChar());
+
+//            Vo_49177_0 vo_49177_0 = new Vo_49177_0();
 //            vo_49177_0.isPK = 3;
 //            vo_49177_0.stageId = 3;
 //            vo_49177_0.monsterPoint = 10;
@@ -435,8 +438,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 //            vo_49177_0.stage1_duration_time = 1800;
 //            vo_49177_0.stage2_duration_time = 6600;
 //            vo_49177_0.rank = 0;
-//            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49177_0(), vo_49177_0);
+//            GameObjectChar.send(new M49177_0(), vo_49177_0);
 
+            GameUtilRenWu.notifyTTTTask(chara1);
             return;
         }
 
@@ -459,7 +463,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 String xingjunName = GameUtil.randomTTTXingJunName();
                 chara1.onEnterTttLayer(chara1.ttt_layer, xingjunName);
 
-                GameUtil.a49155(chara1);
+                GameUtil.notifyTTTPanelInfo(chara1);
             }else if("传送出塔".equals(menu_item)){
                 GameUtilRenWu.huicheng(chara1);
             }
@@ -1246,7 +1250,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  572 */
             if (chara1.mapid == ((Vo_65529_0) chara1.npcshuadao.get(0)).mapid) {
                 /*  573 */
-                GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), chara1.npcshuadao.get(0), chara1.id);
+                GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcshuadao.get(0), chara1.id);
                 /*      */
             }
             /*      */
@@ -1430,7 +1434,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  572 */
             if (chara1.mapid == ((Vo_65529_0) chara1.npcshuadao.get(0)).mapid) {
                 /*  573 */
-                GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), chara1.npcshuadao.get(0), chara1.id);
+                GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcshuadao.get(0), chara1.id);
                 /*      */
             }
             /*      */
@@ -1626,7 +1630,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  664 */
             if (chara1.mapid == ((Vo_65529_0) chara1.npcshuadao.get(0)).mapid) {
                 /*  665 */
-                GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), chara1.npcshuadao.get(0), chara1.id);
+                GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcshuadao.get(0), chara1.id);
                 /*      */
             }
             /*      */

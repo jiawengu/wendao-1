@@ -1,9 +1,8 @@
 /*    */ package org.linlinjava.litemall.gameserver.netty;
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
-/*    */ import io.netty.channel.Channel;
+/*    */
 /*    */ import io.netty.channel.ChannelHandler;
-      import io.netty.channel.ChannelHandler.Sharable;
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import io.netty.channel.ChannelInboundHandlerAdapter;
 /*    */ import io.netty.util.Attribute;
@@ -13,7 +12,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*    */ import org.linlinjava.litemall.gameserver.process.C4274_0;
-import org.linlinjava.litemall.gameserver.process.C61634_0;
+import org.linlinjava.litemall.gameserver.process.CMD_MULTI_MOVE_TO;
 import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,7 @@ import org.slf4j.Logger;
 /* 67 */           if (session.lock()) {
 /*    */             try {
 /* 69 */               waitLine.process(ctx, buff);
-                        if(! (waitLine instanceof C4274_0 || waitLine instanceof C61634_0)){//todo 打印消息
+                        if(! (waitLine instanceof C4274_0 || waitLine instanceof CMD_MULTI_MOVE_TO)){//todo 打印消息
                               log.info("recive msg!=>"+waitLine);
                         }
 /*    */             }

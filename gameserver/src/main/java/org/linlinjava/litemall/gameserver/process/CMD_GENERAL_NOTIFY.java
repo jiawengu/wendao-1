@@ -1190,7 +1190,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             addYuanBao(chara, -cost);
             chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
             GameUtil.a45090(chara, (byte) 1, cost, flyLayer);
-            GameUtil.a49155(chara);
+            GameUtil.notifyTTTPanelInfo(chara);
         }
         if(type==40003){//通天塔快速飞升 金钱
             int flyLayer = Integer.valueOf(para1);
@@ -1207,7 +1207,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
             GameUtil.a45090(chara, (byte) 2, cost, flyLayer);
 
-            GameUtil.a49155(chara);
+            GameUtil.notifyTTTPanelInfo(chara);
         }
         if(type==40004){
             System.out.println("NOTIFY_TTT_RESET_TASK =  40004,\n" +
@@ -1216,7 +1216,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         if(type==40006){//通天塔-挑战下层
             GameUtil.tttChallengeNextLayer(chara);
         }
-        if(type == 40007){//通天塔离开
+        if(type == 40007 || type == 50022){//通天塔离开
             GameUtilRenWu.huicheng(chara);
         }
 

@@ -7,7 +7,8 @@
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ public class GameShuaGuai
 /*     */ {
@@ -20,7 +21,7 @@
 /*     */   public static void sendshuaguai(GameShuaGuai gameShuaGuai)
 /*     */   {
 /*  22 */     for (int i = 0; i < dengdaishuaXing.size(); i++) {
-/*  23 */       GameObjectCharMng.sendAllmap(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
+/*  23 */       GameObjectCharMng.sendAllmap(new MSG_APPEAR(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
 /*  24 */       List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
 /*  25 */       for (int j = 0; j < sessionList.size(); j++) {
 /*  26 */         if (((GameObjectChar)sessionList.get(j)).gameMap.id == ((Vo_65529_0)dengdaishuaXing.get(i)).mapid) {

@@ -8,8 +8,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -50,26 +51,26 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*  46 */     for (int i = 0; i < GameLine.gameShuaGuai.shuaXing.size(); i++) {
 /*  47 */       if (((Vo_65529_0)GameLine.gameShuaGuai.shuaXing.get(i)).mapid == mapid) {
-/*  48 */         GameObjectChar.sendduiwu(new M65529_0(), GameLine.gameShuaGuai.shuaXing.get(i), chara.id);
+/*  48 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), GameLine.gameShuaGuai.shuaXing.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*     */ 
 /*  53 */     for (int i = 0; i < chara.npcchubao.size(); i++) {
 /*  54 */       if (mapid == ((Vo_65529_0)chara.npcchubao.get(i)).mapid) {
-/*  55 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcchubao.get(i), chara.id);
+/*  55 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcchubao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*  59 */     for (int i = 0; i < chara.npcshuadao.size(); i++) {
 /*  60 */       if (mapid == ((Vo_65529_0)chara.npcshuadao.get(i)).mapid) {
-/*  61 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcshuadao.get(i), chara.id);
+/*  61 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcshuadao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*  65 */     for (int i = 0; i < chara.npcxuanshang.size(); i++) {
 /*  66 */       if (mapid == ((Vo_65529_0)chara.npcxuanshang.get(i)).mapid) {
-/*  67 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcxuanshang.get(i), chara.id);
+/*  67 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcxuanshang.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     

@@ -11,7 +11,7 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
  * MSG_TONGTIANTA_INFO
  */
 @org.springframework.stereotype.Service
-public class M49155_0 extends BaseWrite {
+public class MSG_TONGTIANTA_INFO extends BaseWrite {
 
     protected void writeO(ByteBuf writeBuf, Object object) {
         Vo_49155_0 object1 = (Vo_49155_0) object;

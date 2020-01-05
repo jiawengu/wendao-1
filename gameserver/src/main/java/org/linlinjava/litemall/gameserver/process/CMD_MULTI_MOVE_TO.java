@@ -20,7 +20,7 @@
  * CMD_MULTI_MOVE_TO
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class C61634_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*    */ public class CMD_MULTI_MOVE_TO implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
@@ -94,7 +94,7 @@
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\process\C61634_0.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\process\CMD_MULTI_MOVE_TO.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */
