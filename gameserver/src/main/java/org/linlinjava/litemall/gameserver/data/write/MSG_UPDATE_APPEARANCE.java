@@ -10,7 +10,7 @@
  * MSG_UPDATE_APPEARANCE    更新外观
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M61661_0 extends BaseWrite
+/*    */ public class MSG_UPDATE_APPEARANCE extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

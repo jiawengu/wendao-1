@@ -9,7 +9,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8425_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M45177_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -55,8 +55,8 @@
 /*     */     }
 /*     */     
 /*     */ 
-/*  58 */     Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/*  59 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61661_0(), vo_61661_0);
+/*  58 */     Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/*  59 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
 /*  61 */     Vo_8425_0 vo_8425_0 = new Vo_8425_0();
 /*  62 */     vo_8425_0.id = pet_id;

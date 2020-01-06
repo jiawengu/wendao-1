@@ -25,7 +25,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.M7667_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_REVIVE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -34,13 +34,29 @@ import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
-import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 public class FightObject {
+    /**
+     * 玩家id
+     * 宠物id
+     */
     public int id;
+    /**
+     * 玩家id
+     */
     public int cid;
+    /**
+     * 玩家id,
+     * 宠物id
+     */
     public int fid;
+    /**
+     * 玩家名字
+     */
     public String str;
+    /**
+     * 1:队长
+     */
     public int leader;
     /**
      * 1:玩家
@@ -49,6 +65,9 @@ public class FightObject {
      * 4：宠物-怪物
      */
     public int type;
+    /**
+     * 站位
+     */
     public int pos;
     public int weapon_icon;
     public int guaiwulevel;
@@ -69,16 +88,32 @@ public class FightObject {
     public int suit_icon;
     public int suit_light_effect;
     public int special_icon;
+    /**
+     * 1:
+     * 2：死亡 不可受到伤害
+     * 3：死亡 不可受到伤害
+     * 6:
+     * 7:
+     */
     public int state = 1;
     private List<Integer> buffState = new ArrayList();
+    /**
+     * 技能列表
+     */
     public List<JiNeng> skillsList;
     public FightRequest fightRequest;
+    /**
+     * 战斗技能列表
+     */
     private List<FightSkill> fightSkillList = new ArrayList();
     public int autofight_select = 0;
     public int autofight_skillaction;
     public int autofight_skillno;
     public int friend;
     public int rank;
+    /**
+     * 天书技能
+     */
     public int godbook;
     public boolean run;
 
@@ -337,6 +372,10 @@ public class FightObject {
         this.type = 4;
     }
 
+    /**
+     * 是否可以攻击
+     * @return
+     */
     public boolean canAtta() {
         boolean canbe = true;
         if (this.state == 2 || this.state == 3) {
@@ -350,6 +389,10 @@ public class FightObject {
         return canbe;
     }
 
+    /**
+     * 是否可以受到伤害
+     * @return
+     */
     public boolean canbeVictim() {
         boolean canbe = true;
         if (this.state == 2 || this.state == 3) {
@@ -647,6 +690,10 @@ public class FightObject {
         FightManager.send(fightContainer, new MSG_C_UPDATE_STATUS(), vo_11757_0);
     }
 
+    /**
+     * 通知fightContainer所有的玩家，当前战斗对象的血量
+     * @param fightContainer
+     */
     public void update(FightContainer fightContainer) {
         ArrayList<Integer> objects = new ArrayList();
         objects.add(this.fid);
@@ -798,10 +845,14 @@ public class FightObject {
 
     }
 
+    /**
+     * 复活
+     * @param fightContainer
+     */
     public void revive(FightContainer fightContainer) {
         Vo_7667_0 vo_7667_0 = new Vo_7667_0();
         vo_7667_0.id = this.fid;
-        FightManager.send(fightContainer, new M7667_0(), vo_7667_0);
+        FightManager.send(fightContainer, new MSG_C_CHAR_REVIVE(), vo_7667_0);
         this.update(fightContainer);
         FightResult fightResult = new FightResult();
         fightResult.id = this.fid;

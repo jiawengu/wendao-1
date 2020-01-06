@@ -14,7 +14,7 @@ public class MSG_C_WAIT_COMMAND extends org.linlinjava.litemall.gameserver.netty
         GameWriteTool.writeShort(writeBuf, Integer.valueOf(object1.a));
 
         GameWriteTool.writeInt(writeBuf, Integer.valueOf(object1.id));
-
+        //等待时间
         GameWriteTool.writeShort(writeBuf, Integer.valueOf(object1.time));
 
         GameWriteTool.writeInt(writeBuf, Integer.valueOf(object1.question));

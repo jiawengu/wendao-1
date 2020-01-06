@@ -3,9 +3,13 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_7669_0;
-/*    */ 
+/*    */
+
+/**
+ * 通知玩家死亡
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M7669_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_C_CHAR_DIED extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

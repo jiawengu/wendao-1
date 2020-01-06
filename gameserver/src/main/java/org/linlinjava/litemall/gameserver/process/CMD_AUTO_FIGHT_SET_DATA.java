@@ -17,7 +17,7 @@
  * CMD_AUTO_FIGHT_SET_DATA   -- 设置自动战斗数据
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class C32984_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*    */ public class CMD_AUTO_FIGHT_SET_DATA implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {

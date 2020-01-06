@@ -6,7 +6,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ 
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M19945_0 extends BaseWrite
+/*    */ public class MSG_C_ACCEPT_HIT extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

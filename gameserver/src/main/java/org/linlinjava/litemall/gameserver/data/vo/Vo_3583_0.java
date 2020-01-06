@@ -6,7 +6,13 @@
 package org.linlinjava.litemall.gameserver.data.vo;
 
 public class Vo_3583_0 {
+  /**
+   * flag
+   */
   public int a;
+  /**
+   *  mode
+   */
   public int b;
 
   public Vo_3583_0() {

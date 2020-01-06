@@ -2706,8 +2706,8 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
         /*      */
         /* 2600 */     ListVo_65527_0 vo_65527_0 = a65527(chara);
         /* 2601 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
-        /* 2602 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = a61661(chara);
-        /* 2603 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+        /* 2602 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = MSG_UPDATE_APPEARANCE(chara);
+        /* 2603 */     GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
         /*      */
         /* 2605 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 vo_65511_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0();
         /* 2616 */     return vo_65511_0;
@@ -3113,7 +3113,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
     /**
      * MSG_UPDATE_APPEARANCE    更新外观
      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 a61661(Chara chara) {
+    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 MSG_UPDATE_APPEARANCE(Chara chara) {
         /* 3011 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0();
         /* 3012 */     vo_61661_0.id = chara.id;
         /* 3013 */     vo_61661_0.x = chara.x;

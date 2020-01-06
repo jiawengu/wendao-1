@@ -196,8 +196,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     }
 /*     */     
 /*     */ 
-/* 198 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 199 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/* 198 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 199 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
 /*     */ 
 /* 202 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();

@@ -6,7 +6,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
 /*    */ 
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M64989_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_C_ACCEPT_MAGIC_HIT extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

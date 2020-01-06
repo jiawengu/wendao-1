@@ -18,13 +18,16 @@ public class FightContainer {
     public int round = 1;
     /**
      * 1:等待选择技能
-     * 3:
-     * 4:
-     * 5:
+     * 3:doAction
+     * 4:战斗结束
+     * 5:移除战斗队列
      */
     public AtomicInteger state = new AtomicInteger(1);
     public List<FightTeam> teamList = new ArrayList();
     public List<FightObject> doActionList;
+    /**
+     * 本回合开始时间
+     */
     public long roundTime = System.currentTimeMillis();
 
     public FightContainer() {

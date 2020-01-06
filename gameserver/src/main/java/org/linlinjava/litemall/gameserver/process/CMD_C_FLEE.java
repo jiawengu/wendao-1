@@ -17,10 +17,11 @@
 /*    */
 
 /**
+ * 逃跑
  * CMD_C_FLEE
  */
 /*    */ @Service
-/*    */ public class C518_0 implements GameHandler
+/*    */ public class CMD_C_FLEE implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {

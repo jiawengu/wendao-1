@@ -20,7 +20,7 @@
  * CMD_C_CATCH_PET
  */
 /*    */ @Service
-/*    */ public class C4616_0 implements GameHandler
+/*    */ public class CMD_C_CATCH_PET implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {

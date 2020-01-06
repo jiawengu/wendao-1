@@ -23,7 +23,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C8270_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_FEED_PET implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff)
 /*     */   {

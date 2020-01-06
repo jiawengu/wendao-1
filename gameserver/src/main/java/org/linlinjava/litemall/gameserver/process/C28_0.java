@@ -10,7 +10,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -55,8 +55,8 @@
 /*     */       }
 /*     */     }
 /*  53 */     for (int i = 0; i < GameObjectChar.getGameObjectChar().gameTeam.duiwu.size(); i++) {
-/*  54 */       Vo_61661_0 vo_61661_0 = GameUtil.a61661((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i));
-/*  55 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new M61661_0(), vo_61661_0);
+/*  54 */       Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i));
+/*  55 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*  56 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  57 */       vo_8165_0.msg = (chara.name + "回到队伍中");
 /*  58 */       vo_8165_0.active = 0;

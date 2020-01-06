@@ -18,8 +18,8 @@ public class MSG_C_START_COMBAT extends BaseWrite {
 
     protected void writeO(ByteBuf writeBuf, Object object) {
         Vo_3583_0 object1 = (Vo_3583_0)object;
-        GameWriteTool.writeShort(writeBuf, object1.a);
-        GameWriteTool.writeByte(writeBuf, ((Vo_3583_0)object).b);
+        GameWriteTool.writeShort(writeBuf, object1.a);//flag
+        GameWriteTool.writeByte(writeBuf, ((Vo_3583_0)object).b);//mode
     }
 
     public int cmd() {

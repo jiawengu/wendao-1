@@ -31,7 +31,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_7659_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7669_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_GODBOOK_EFFECT_NORMAL;
 import org.linlinjava.litemall.gameserver.data.write.M12285_1;
-import org.linlinjava.litemall.gameserver.data.write.M15857_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_LIFE_DELTA;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_AUTO_FIGHT_SKIL;
@@ -43,10 +43,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_REFRESH_PET_LIST;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_OPPONENTS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_FRIENDS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-import org.linlinjava.litemall.gameserver.data.write.M7653_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_QUIT_COMBAT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_WAIT_COMMAND;
-import org.linlinjava.litemall.gameserver.data.write.M7669_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_DIED;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -726,6 +726,13 @@ public class FightManager {
         return fightRequest;
     }
 
+    /**
+     * 随机敌方阵营的受伤害者
+     * @param fightContainer
+     * @param fightObject
+     * @param fightRequest
+     * @return
+     */
     public static FightRequest generateActionDM(FightContainer fightContainer, FightObject fightObject, FightRequest fightRequest) {
         ArrayList<FightObject> fightObjects = new ArrayList();
         FightTeam opponentsFightTeam = getFightTeamDM(fightContainer, fightObject.fid);
@@ -754,7 +761,13 @@ public class FightManager {
             return fightRequest;
         }
     }
-
+    /**
+     * 随机已方阵营的受伤害者
+     * @param fightContainer
+     * @param fightObject
+     * @param fightRequest
+     * @return
+     */
     public static FightRequest generateActionVt(FightContainer fightContainer, FightObject fightObject, FightRequest fightRequest) {
         ArrayList<FightObject> fightObjects = new ArrayList();
         FightTeam friendsFightTeam = getFightTeam(fightContainer, fightObject.fid);
@@ -888,7 +901,7 @@ public class FightManager {
         vo_15857_0.point = fightResult.point;
         vo_15857_0.effect_no = fightResult.effect_no;
         vo_15857_0.damage_type = fightResult.damage_type;
-        send(fightContainer, new M15857_0(), vo_15857_0);
+        send(fightContainer, new MSG_C_LIFE_DELTA(), vo_15857_0);
         FightTeam friendsFightTeam = getFightTeam(fightContainer, fightResult.vid);
         FightObject victimObject;
         if (friendsFightTeam.type == 1) {
@@ -901,11 +914,11 @@ public class FightManager {
             Vo_7669_0 vo_7669_0 = new Vo_7669_0();
             vo_7669_0.id = victimObject.fid;
             vo_7669_0.damage_type = 4098;
-            send(fightContainer, new M7669_0(), vo_7669_0);
+            send(fightContainer, new MSG_C_CHAR_DIED(), vo_7669_0);
             if (victimObject.state == 3) {
                 Vo_7653_0 vo_7653_0 = new Vo_7653_0();
                 vo_7653_0.id = victimObject.fid;
-                send(fightContainer, new M7653_0(), vo_7653_0);
+                send(fightContainer, new MSG_C_QUIT_COMBAT(), vo_7653_0);
             }
         }
 
@@ -1123,6 +1136,11 @@ public class FightManager {
         afterFight(fightContainer);
     }
 
+    /**
+     * 是否战斗结束
+     * @param fightContainer
+     * @return
+     */
     private static boolean isOver(FightContainer fightContainer) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator var2 = teamList.iterator();
@@ -1283,6 +1301,12 @@ public class FightManager {
         return null;
     }
 
+    /**
+     * 获取已方的team
+     * @param fightContainer
+     * @param id
+     * @return
+     */
     public static FightTeam getFightTeam(FightContainer fightContainer, int id) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator var3 = teamList.iterator();
@@ -1303,6 +1327,12 @@ public class FightManager {
         return null;
     }
 
+    /**
+     * 获取对手team
+     * @param fightContainer
+     * @param id
+     * @return
+     */
     public static FightTeam getFightTeamDM(FightContainer fightContainer, int id) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator var3 = teamList.iterator();
@@ -1414,6 +1444,14 @@ public class FightManager {
         return rlist;
     }
 
+    /**
+     * 找技能范围目标
+     * @param fightContainer
+     * @param fightRequest
+     * @param type  1：敌方内寻找 ，2：友方内寻找，必定包括fightRequest.vid，3：友方内寻找，纯随机，不一定包括fightRequest.vid
+     * @param num   技能目标数量
+     * @return
+     */
     public static List<FightObject> findTarget(FightContainer fightContainer, FightRequest fightRequest, int type, int num) {
         List<FightObject> fightObjects = new ArrayList();
         FightObject newTarget;
@@ -1505,21 +1543,21 @@ public class FightManager {
             }
 
             List<FightObject> guaiwu = guaiwu(fightContainer);
-            boolean isDead = false;
+            boolean monsterNotAllDead = false;
             if (guaiwu != null) {
                 Iterator var16 = guaiwu.iterator();
 
                 while(var16.hasNext()) {
                     FightObject fightObject = (FightObject)var16.next();
                     if (!fightObject.isDead()) {
-                        isDead = true;
+                        monsterNotAllDead = true;
                     }
                 }
             }
 
             Chara chara1 = chara(fightContainer);
             GameUtilRenWu.feiditu(chara1.mapid, chara1);
-            if (!isDead) {
+            if (!monsterNotAllDead) {
                 if (chara1.npcchubao.size() > 0 && guaiwu != null && ((Vo_65529_0)chara1.npcchubao.get(0)).name.equals(((FightObject)guaiwu.get(0)).str)) {
                     if (GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu != null) {
                         for(i = 0; i < GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu.size(); ++i) {
@@ -1778,6 +1816,11 @@ public class FightManager {
         }
     }
 
+    /**
+     * 怪物阵营的战斗对象列表
+     * @param fightContainer
+     * @return
+     */
     private static List<FightObject> guaiwu(FightContainer fightContainer) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator var2 = teamList.iterator();
@@ -1795,6 +1838,11 @@ public class FightManager {
         return fightObjectList;
     }
 
+    /**
+     * 找到第一个玩家
+     * @param fightContainer
+     * @return
+     */
     private static Chara chara(FightContainer fightContainer) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator var2 = teamList.iterator();
@@ -2358,6 +2406,12 @@ public class FightManager {
         return fightObject;
     }
 
+
+    /**
+     * 移除战斗单元
+     * @param fightContainer
+     * @param fightObject
+     */
     public static void remove(FightContainer fightContainer, FightObject fightObject) {
         List<FightTeam> teamList = fightContainer.teamList;
         Iterator iterator = teamList.iterator();

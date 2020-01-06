@@ -18,6 +18,9 @@ public class Chara implements Serializable {
     public List<Goods> texiao = new LinkedList();
     public List<Goods> genchong = new LinkedList();
 
+    /**
+     * 背包
+     */
     public List<Goods> backpack = new LinkedList();
 
 

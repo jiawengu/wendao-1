@@ -10,7 +10,7 @@ public class GoodsInfo {
     public int rebuild_level;
     public int parry;
     /**
-     * 力量
+     * 名字
      */
     public String str = "";
     public String auto_fight = "";

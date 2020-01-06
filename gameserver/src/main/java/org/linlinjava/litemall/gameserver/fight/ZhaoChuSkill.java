@@ -13,17 +13,20 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_64971_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65017_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7653_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.M64945_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_SET_FIGHT_PET;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_REFRESH_PET_LIST;
 import org.linlinjava.litemall.gameserver.data.write.M64993_0;
 import org.linlinjava.litemall.gameserver.data.write.M64995_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
-import org.linlinjava.litemall.gameserver.data.write.M7653_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_QUIT_COMBAT;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 
+/**
+ * 招出宠物
+ */
 public class ZhaoChuSkill implements FightSkill {
     public ZhaoChuSkill() {
     }
@@ -41,7 +44,7 @@ public class ZhaoChuSkill implements FightSkill {
         if (fightObjectPet != null) {
             Vo_7653_0 vo_7653_0 = new Vo_7653_0();
             vo_7653_0.id = fightObjectPet.fid;
-            FightManager.send(fightContainer, new M7653_0(), vo_7653_0);
+            FightManager.send(fightContainer, new MSG_C_QUIT_COMBAT(), vo_7653_0);
             FightManager.remove(fightContainer, fightObjectPet);
             Vo_64971_0 vo_64971_0 = new Vo_64971_0();
             vo_64971_0.count = 1;
@@ -51,7 +54,7 @@ public class ZhaoChuSkill implements FightSkill {
             vo_64971_0 = new Vo_64971_0();
             vo_64971_0.id = fightObjectPet.id;
             vo_64971_0.haveCalled = 0;
-            FightManager.send(fightContainer, new M64945_0(), vo_64971_0);
+            FightManager.send(fightContainer, new MSG_C_SET_FIGHT_PET(), vo_64971_0);
         }
 
         Chara chara = GameObjectCharMng.getGameObjectChar(fightRequest.id).chara;
@@ -120,7 +123,7 @@ public class ZhaoChuSkill implements FightSkill {
             vo_64971_0 = new Vo_64971_0();
             vo_64971_0.id = fightObject.id;
             vo_64971_0.haveCalled = 1;
-            GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new M64945_0(), vo_64971_0);
+            GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_SET_FIGHT_PET(), vo_64971_0);
             return null;
         }
     }

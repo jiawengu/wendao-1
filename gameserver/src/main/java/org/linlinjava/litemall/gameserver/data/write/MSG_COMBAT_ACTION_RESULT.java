@@ -3,9 +3,13 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53717_0;
-/*    */ 
+/*    */
+
+/**
+ * 通知客户端战斗操作结果
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M53717_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_COMBAT_ACTION_RESULT extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

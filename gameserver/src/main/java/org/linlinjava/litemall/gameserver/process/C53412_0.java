@@ -8,11 +8,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53411_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M53411_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.springframework.stereotype.Service;
 /*     */ 
@@ -51,8 +51,8 @@
 /*  51 */     GameObjectChar.send(new M53411_0(), vo_53411_0);
 /*     */     
 /*     */ 
-/*  54 */     Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/*  55 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61661_0(), vo_61661_0);
+/*  54 */     Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/*  55 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */   }
 /*     */   
 /*     */ 

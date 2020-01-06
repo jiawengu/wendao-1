@@ -134,11 +134,11 @@
 /* 134 */       vo_20568_0.gid = "";
 /* 135 */       GameObjectChar.send(new M20568_0(), vo_20568_0);
 /*     */       
-/* 137 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 138 */       GameObjectChar.send(new M61661_0(), vo_61661_0);
+/* 137 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 138 */       GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */       
-/* 140 */       vo_61661_0 = GameUtil.a61661(chara1);
-/* 141 */       GameObjectChar.send(new M61661_0(), vo_61661_0);
+/* 140 */       vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara1);
+/* 141 */       GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */       
 /* 143 */       org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
 /* 144 */       vo_8165_0.msg = (peer_name + "加入队伍");
@@ -149,10 +149,10 @@
 /* 149 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M20568_0(), vo_20568_0);
 /*     */       
 /*     */ 
-/* 152 */       vo_61661_0 = GameUtil.a61661(chara1);
-/* 153 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M61661_0(), vo_61661_0);
-/* 154 */       vo_61661_0 = GameUtil.a61661(chara);
-/* 155 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M61661_0(), vo_61661_0);
+/* 152 */       vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara1);
+/* 153 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
+/* 154 */       vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 155 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */       
 /*     */ 
 /* 158 */       vo_61593_0 = new Vo_61593_0();
@@ -238,8 +238,8 @@
 /* 238 */       GameObjectChar.send(new M20568_0(), vo_20568_0);
 /*     */       
 /*     */ 
-/* 241 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara1);
-/* 242 */       GameObjectChar.send(new M61661_0(), vo_61661_0);
+/* 241 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara1);
+/* 242 */       GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     }
 /*     */   }
 /*     */   

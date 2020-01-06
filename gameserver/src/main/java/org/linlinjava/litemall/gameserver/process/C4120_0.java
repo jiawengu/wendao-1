@@ -11,6 +11,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -48,8 +49,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 47 */     GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */     
 /* 49 */     for (int i = 0; i < GameObjectChar.getGameObjectChar().gameTeam.duiwu.size(); i++) {
-/* 50 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i));
-/* 51 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/* 50 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i));
+/* 51 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /* 52 */       vo_20481_0 = new Vo_20481_0();
 /* 53 */       vo_20481_0.msg = (peer_name + "离开了队伍。。");
 /* 54 */       vo_20481_0.time = 1562987118;
