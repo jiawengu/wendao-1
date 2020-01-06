@@ -4564,12 +4564,12 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
     public static void tttChallengeNextLayer(Chara chara){
         int nextLayer = chara.ttt_layer+1;
         if(nextLayer>=186){//塔顶
-            Map map = GameData.that.baseMapService.findOneByName("通天塔");
+            Map map = GameData.that.baseMapService.findOneByName("通天塔顶");
             chara.y = map.getY().intValue();
             chara.x = map.getX().intValue();
             GameLine.getGameMapname(chara.line,map.getName()).join(GameObjectChar.getGameObjectChar());
         }else{
-            Map map = GameData.that.baseMapService.findOneByName("通天塔顶");
+            Map map = GameData.that.baseMapService.findOneByName("通天塔");
             chara.y = map.getY().intValue();
             chara.x = map.getX().intValue();
             GameLine.getGameMapname(chara.line,map.getName()).join(GameObjectChar.getGameObjectChar());

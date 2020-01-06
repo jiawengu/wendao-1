@@ -456,16 +456,6 @@ public class FightManager {
             ++num;
         }
 
-        for(i = 0; i < chara.listshouhu.size() && num < 5; ++i) {
-            if (((ShouHuShuXing)((ShouHu)chara.listshouhu.get(i)).listShouHuShuXing.get(0)).nil != 0) {
-                fightObject = new FightObject((ShouHu)chara.listshouhu.get(i));
-                fightObject.pos = (Integer)PERSON_POS.get(num);
-                fightObject.fid = fc.id++;
-                ft.add(fightObject);
-                ++num;
-            }
-        }
-
         FightTeam monsterTeam = new FightTeam();
         monsterTeam.type = 2;
         num = 0;
@@ -481,9 +471,10 @@ public class FightManager {
         num++;
 
         //宠物
-        fightObject = new FightObject(chara);
-        Petbeibao petbeibao = fightObject.petCreate(GameUtil.randomTTTPetName(), chara.ttt_layer);
-        fightObject = new FightObject(petbeibao);
+//        fightObject = new FightObject(chara);
+//        Petbeibao petbeibao = fightObject.petCreate(GameUtil.randomTTTPetName(), chara.ttt_layer);
+//        fightObject = new FightObject(petbeibao);
+        fightObject = new FightObject(chara, GameUtil.randomTTTPetName());
         fightObject.pos = (Integer)MONSTER_POS.get(5);
         fightObject.fid = fc.id++;
         monsterTeam.add(fightObject);

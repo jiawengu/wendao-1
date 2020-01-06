@@ -34,6 +34,7 @@ import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 public class FightObject {
     /**
@@ -335,10 +336,19 @@ public class FightObject {
             strname = name;
         }
 
+        boolean isTTTPet = false;
+        for(String petName:GameUtil.TONG_TIAN_TA_PET){
+            if(petName.equals(name)){
+                strname = name;
+                isTTTPet = true;
+                break;
+            }
+        }
+
 
         String names = "土匪#强盗#狐狸妖#鱼妖#蓝精#黄怪#疯魑#狂魍#蟒怪#鸟精#琵琶妖蟒妖#怪王狂狮#鬼王黑熊#鬼王悍猪#混天巨象#兑灵#艮灵#坎灵#离灵#狂灵#疯灵#山神#炎神#雷神#花神#龙神#刀斧手#火扇儒生#红衣剑客#试道元魔";
         Petbeibao petbeibao;
-        if(name.contains("星君")){
+        if(isTTTPet || name.contains("星君")){
             petbeibao = this.petCreate(strname, chara.ttt_layer);
         } else if (!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
             petbeibao = this.petCreate(strname);

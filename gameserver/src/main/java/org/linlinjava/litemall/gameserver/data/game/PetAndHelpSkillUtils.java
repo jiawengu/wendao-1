@@ -69,7 +69,6 @@ public class PetAndHelpSkillUtils {
             }
         }
 
-        List<JSONObject> sh_gj_list = new ArrayList();
         int[] sh_fz = new int[]{1, 1, 1, 50, 100};
         int sh_fz_count = 0;
 
@@ -80,8 +79,7 @@ public class PetAndHelpSkillUtils {
             }
         }
 
-        List<JSONObject> sh_fz_list = new ArrayList();
-        List<JSONObject> pet_gj_list = new ArrayList();
+
         int[] pet_gj = new int[]{20, 40, 60};
         List<Integer> pet_gj_counts = new ArrayList();
 
@@ -101,6 +99,10 @@ public class PetAndHelpSkillUtils {
                 break;
             }
         }
+
+        List<JSONObject> sh_gj_list = new ArrayList();
+        List<JSONObject> sh_fz_list = new ArrayList();
+        List<JSONObject> pet_gj_list = new ArrayList();
 
         JSONObject jsonObject;
         int metal;
@@ -244,6 +246,12 @@ public class PetAndHelpSkillUtils {
         }
     }
 
+    /**
+     * 根据等级获取skillNum和skillRound
+     * @param skillObject
+     * @param skill
+     * @return
+     */
     public static int[] skillNum(JSONObject skillObject, int skill) {
         JSONArray jsonArray = skillObject.optJSONArray("skillUse");
         JSONArray jsonArrayRound = skillObject.optJSONArray("skillRound");
