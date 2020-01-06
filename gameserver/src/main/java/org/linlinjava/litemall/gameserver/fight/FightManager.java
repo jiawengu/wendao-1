@@ -1435,7 +1435,7 @@ public class FightManager {
 
                                     ListVo_65527_0 listVo_65527_0;
                                     if (mingci == 3) {
-                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id), TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 50000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了50000元宝。";
@@ -1446,7 +1446,7 @@ public class FightManager {
                                     }
 
                                     if (mingci == 2) {
-                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id).chara, TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id), TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 100000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了100000元宝。";

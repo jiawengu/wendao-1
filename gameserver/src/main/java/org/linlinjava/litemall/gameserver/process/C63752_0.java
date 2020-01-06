@@ -516,13 +516,13 @@ public class C63752_0 implements GameHandler {
 
             switch (chara.vipType) {
                 case 1:
-                    TitleService.grantTitle(chara, TitleConst.TITLE_EVENT_YUEKA, "位列仙班·灵识初开");
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·灵识初开");
                     break;
                 case 2:
-                    TitleService.grantTitle(chara, TitleConst.TITLE_EVENT_YUEKA, "位列仙班·道法自然");
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·道法自然");
                     break;
                 case 3:
-                    TitleService.grantTitle(chara, TitleConst.TITLE_EVENT_YUEKA, "位列仙班·大道无穷");
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·大道无穷");
                     break;
                 default:
                     break;
