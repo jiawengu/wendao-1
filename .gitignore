@@ -8,4 +8,4 @@ logs/
 bin/
 .vs/
 .ini
-resources/
+resources/*
