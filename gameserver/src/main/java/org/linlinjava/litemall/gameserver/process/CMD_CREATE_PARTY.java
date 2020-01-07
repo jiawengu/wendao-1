@@ -5,7 +5,9 @@ import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.db.domain.Party;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
+import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
+import org.linlinjava.litemall.gameserver.data.write.M65527_0;
 import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 import org.linlinjava.litemall.gameserver.data.write.M_MSG_CREATE_PARTY_SUCC;
 import org.linlinjava.litemall.gameserver.data.write.M_MSG_PARTY_INFO;
@@ -28,31 +30,21 @@ public class CMD_CREATE_PARTY implements GameHandler {
 
     @Override
     public void process(ChannelHandlerContext paramChannelHandlerContext, ByteBuf paramByteBuf) {
-
-        System.out.println("点击创建帮派");
-        System.out.println("创建帮派");
-
         String name = GameReadTool.readString(paramByteBuf);
         String announce = GameReadTool.readString((paramByteBuf));
-
-
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         if(chara.balance < 1000){
             this.sendErr("金币不足！");
             return;
         }
         PartyMgr partyMgr = GameCore.that.partyMgr;
-        if(partyMgr.checkExist(name)){
+        if(partyMgr.checkExist(name) != null){
             this.sendErr("帮派名字已被占用!");
             return;
         }
         Party newParty = new Party();
-        newParty.setId(0);
-        newParty.setName(name);
-        newParty.setAnnounce(announce);
-        newParty.setConstruction(0);
-        newParty.setLevel(1);
-        GameParty party = partyMgr.newParty(newParty, chara);
+
+        GameParty party = partyMgr.newParty(name, chara);
 
 
         chara.balance -= 1000;
@@ -60,6 +52,8 @@ public class CMD_CREATE_PARTY implements GameHandler {
         chara.partyName = name;
         GameObjectChar.send(new M_MSG_CREATE_PARTY_SUCC(), name);
         GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
+        ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new M65527_0(), vo_65527_0);
     }
 
     @Override

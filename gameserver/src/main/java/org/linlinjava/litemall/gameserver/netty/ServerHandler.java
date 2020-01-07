@@ -62,9 +62,11 @@
 /* 61 */     GameReadTool.readInt(buff);
 /* 62 */     GameReadTool.readShort(buff);
 /* 63 */     int cmd = GameReadTool.readShort(buff);
+             if(cmd != 4274){ System.out.println("cmd == " + cmd); }
 /* 64 */     for (GameHandler waitLine : this.gameHandlers) {
 /* 65 */       if (cmd == waitLine.cmd()) {
 /* 66 */         if (session != null) {
+                   if(cmd != 4274){ System.out.println("start == " + cmd + ":" + waitLine.toString()); }
 /* 67 */           if (session.lock()) {
 /*    */             try {
 /* 69 */               waitLine.process(ctx, buff);
@@ -73,6 +75,7 @@
 /* 72 */               session.unlock();
 /*    */             }
 /*    */           }
+                if(cmd != 4274){ System.out.println("end   == " + cmd + ":" + waitLine.toString()); }
 /*    */         } else {
 /* 76 */           waitLine.process(ctx, buff);
 /* 77 */           break;

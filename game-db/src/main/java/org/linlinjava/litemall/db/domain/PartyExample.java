@@ -304,76 +304,6 @@ public class PartyExample {
             return (Criteria) this;
         }
 
-        public Criteria andMemberIsNull() {
-            addCriterion("member is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberIsNotNull() {
-            addCriterion("member is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberEqualTo(String value) {
-            addCriterion("member =", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberNotEqualTo(String value) {
-            addCriterion("member <>", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberGreaterThan(String value) {
-            addCriterion("member >", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberGreaterThanOrEqualTo(String value) {
-            addCriterion("member >=", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberLessThan(String value) {
-            addCriterion("member <", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberLessThanOrEqualTo(String value) {
-            addCriterion("member <=", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberLike(String value) {
-            addCriterion("member like", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberNotLike(String value) {
-            addCriterion("member not like", value, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberIn(List<String> values) {
-            addCriterion("member in", values, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberNotIn(List<String> values) {
-            addCriterion("member not in", values, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberBetween(String value1, String value2) {
-            addCriterion("member between", value1, value2, "member");
-            return (Criteria) this;
-        }
-
-        public Criteria andMemberNotBetween(String value1, String value2) {
-            addCriterion("member not between", value1, value2, "member");
-            return (Criteria) this;
-        }
-
         public Criteria andLevelIsNull() {
             addCriterion("level is null");
             return (Criteria) this;
@@ -561,6 +491,146 @@ public class PartyExample {
 
         public Criteria andCreatorNotBetween(String value1, String value2) {
             addCriterion("creator not between", value1, value2, "creator");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberIsNull() {
+            addCriterion("member is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberIsNotNull() {
+            addCriterion("member is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberEqualTo(String value) {
+            addCriterion("member =", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberNotEqualTo(String value) {
+            addCriterion("member <>", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberGreaterThan(String value) {
+            addCriterion("member >", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberGreaterThanOrEqualTo(String value) {
+            addCriterion("member >=", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLessThan(String value) {
+            addCriterion("member <", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLessThanOrEqualTo(String value) {
+            addCriterion("member <=", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberLike(String value) {
+            addCriterion("member like", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberNotLike(String value) {
+            addCriterion("member not like", value, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberIn(List<String> values) {
+            addCriterion("member in", values, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberNotIn(List<String> values) {
+            addCriterion("member not in", values, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberBetween(String value1, String value2) {
+            addCriterion("member between", value1, value2, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andMemberNotBetween(String value1, String value2) {
+            addCriterion("member not between", value1, value2, "member");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinIsNull() {
+            addCriterion("request_join is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinIsNotNull() {
+            addCriterion("request_join is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinEqualTo(String value) {
+            addCriterion("request_join =", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinNotEqualTo(String value) {
+            addCriterion("request_join <>", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinGreaterThan(String value) {
+            addCriterion("request_join >", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinGreaterThanOrEqualTo(String value) {
+            addCriterion("request_join >=", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinLessThan(String value) {
+            addCriterion("request_join <", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinLessThanOrEqualTo(String value) {
+            addCriterion("request_join <=", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinLike(String value) {
+            addCriterion("request_join like", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinNotLike(String value) {
+            addCriterion("request_join not like", value, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinIn(List<String> values) {
+            addCriterion("request_join in", values, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinNotIn(List<String> values) {
+            addCriterion("request_join not in", values, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinBetween(String value1, String value2) {
+            addCriterion("request_join between", value1, value2, "requestJoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestJoinNotBetween(String value1, String value2) {
+            addCriterion("request_join not between", value1, value2, "requestJoin");
             return (Criteria) this;
         }
     }

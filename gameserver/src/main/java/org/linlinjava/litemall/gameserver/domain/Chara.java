@@ -24,7 +24,7 @@
 /*  24 */   public List<Goods> genchong = new LinkedList();
 /*     */   
 /*  26 */   public List<Goods> backpack = new LinkedList();
-/*     */   
+/*     */
 /*     */ 
 /*  29 */   public ZbAttribute zbAttribute = new ZbAttribute();
 /*  30 */   public List<Petbeibao> pets = new LinkedList();

@@ -7,22 +7,25 @@ public class Party {
 
     private String announce;
 
-    private String member;
-
     private Integer level;
 
     private Integer construction;
 
     private String creator;
 
-    public Party(Integer id, String name, String announce, String member, Integer level, Integer construction, String creator) {
+    private String member;
+
+    private String requestJoin;
+
+    public Party(Integer id, String name, String announce, Integer level, Integer construction, String creator, String member, String requestJoin) {
         this.id = id;
         this.name = name;
         this.announce = announce;
-        this.member = member;
         this.level = level;
         this.construction = construction;
         this.creator = creator;
+        this.member = member;
+        this.requestJoin = requestJoin;
     }
 
     public Party() {
@@ -53,14 +56,6 @@ public class Party {
         this.announce = announce == null ? null : announce.trim();
     }
 
-    public String getMember() {
-        return member;
-    }
-
-    public void setMember(String member) {
-        this.member = member == null ? null : member.trim();
-    }
-
     public Integer getLevel() {
         return level;
     }
@@ -83,5 +78,21 @@ public class Party {
 
     public void setCreator(String creator) {
         this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getMember() {
+        return member;
+    }
+
+    public void setMember(String member) {
+        this.member = member == null ? null : member.trim();
+    }
+
+    public String getRequestJoin() {
+        return requestJoin;
+    }
+
+    public void setRequestJoin(String requestJoin) {
+        this.requestJoin = requestJoin == null ? null : requestJoin.trim();
     }
 }

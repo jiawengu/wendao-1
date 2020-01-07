@@ -2,7 +2,8 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.buffer.Unpooled;
-/*    */ import org.linlinjava.litemall.gameserver.GameHandler;
+/*    */ import org.linlinjava.litemall.core.util.JSONUtils;
+import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
@@ -31,7 +32,12 @@ import java.util.List;
 /* 27 */     writeBuf.resetWriterIndex();
 /*    */   }
 /*    */   
-/* 30 */   public ByteBuf write(Object object) { int writerIndex = 0;
+/* 30 */   public ByteBuf write(Object object) {
+                int writerIndex = 0;
+                String jsonStr = JSONUtils.toJSONString(object);
+                jsonStr = jsonStr == null ? "null" : jsonStr;
+                String objstr = object == null ? "null" : object.toString();
+                System.out.println("send:" + this.cmd() + "----" + jsonStr);
 /* 31 */     ByteBuf writeBuf = Unpooled.buffer();
 /* 32 */     writerIndex = beforeWrite(writeBuf);
 /* 33 */     writeO(writeBuf, object);

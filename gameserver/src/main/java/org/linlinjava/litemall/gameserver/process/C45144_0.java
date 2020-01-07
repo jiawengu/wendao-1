@@ -33,15 +33,19 @@ import org.linlinjava.litemall.db.domain.Accounts;
     /*    */ {
         /* 25 */
         logger.error("C45144_0:"+buff.toString());
-        String account = GameReadTool.readString(buff);
-   /*     JSONObject jo = new JSONObject(account);
-        String o = (String) jo.get("account");*/
-        String substring = account.substring(6);
-        /* 26 */
-        Accounts useraccount = GameData.that.baseAccountsService.findOneByToken(substring);
+        String token = GameReadTool.readString(buff);
+        String account = null;
+        try {
+            JSONObject jo = new JSONObject(token);
+            account = (String) jo.get("account");
+            account = account.substring(6);
+        }catch (Exception e){
+            account = token.substring(6);
+        }
+        Accounts useraccount = GameData.that.baseAccountsService.findOneByToken(account);
 
+        logger.info("验证不通过的查询参数:" + token);
         logger.info("验证不通过的查询参数:" + account);
-        logger.info("验证不通过的查询参数:" + substring);
         if (useraccount == null) {
             logger.info("验证不通过");
             return;

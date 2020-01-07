@@ -2611,7 +2611,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 2553 */     vo_65529_0.level = chara.level;
         /* 2554 */     vo_65529_0.title = "";
         /* 2555 */     vo_65529_0.family = "";
-        /* 2556 */     vo_65529_0.party = "";
+        /* 2556 */     vo_65529_0.party = chara.partyName;
         /* 2557 */     vo_65529_0.status = 0;
         /*      */
         /* 2559 */     vo_65529_0.special_icon = chara.special_icon;
@@ -3082,7 +3082,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /*      */
         /* 3025 */     vo_61661_0.title = chara.chenhao;
         /* 3026 */     vo_61661_0.family = chara.chenhao;
-        /* 3027 */     vo_61661_0.partyname = chara.chenhao;
+        /* 3027 */     vo_61661_0.partyname = chara.partyName;
         /* 3028 */     vo_61661_0.status = 0;
         /* 3029 */     vo_61661_0.special_icon = chara.special_icon;
         /* 3030 */     vo_61661_0.org_icon = chara.waiguan;

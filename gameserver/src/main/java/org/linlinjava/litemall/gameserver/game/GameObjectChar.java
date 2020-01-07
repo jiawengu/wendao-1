@@ -14,7 +14,8 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M4121_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*     */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+/*     */ import org.linlinjava.litemall.gameserver.domain.GameParty;
+import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*     */ import org.slf4j.Logger;
 /*     */
 /*     */ public class GameObjectChar
@@ -71,6 +72,16 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
         /*     */
         /*     */
         /*     */
+                        System.out.println("login init PartyId:" + chara.partyId);
+                        if(chara.partyId > 0){
+                           GameParty party = GameCore.that.partyMgr.get(chara.partyId);
+                           if(party == null){
+                              chara.partyId = 0;
+                              chara.partyName = "";
+                           }else{
+                               chara.partyName = party.data.getName();
+                           }
+                      }
         /*     */
         /*  74 */     this.gameMap = gameMap;
         /*     */   }
@@ -118,6 +129,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
     /*     */
     /*     */   public void offline()
     /*     */   {
+                    System.out.println("offline:" + this.chara.id);
         /*     */     try
             /*     */     {
             /* 122 */       if ((this.gameTeam != null) && (this.gameTeam.duiwu != null) && (this.gameTeam.duiwu.size() > 0))

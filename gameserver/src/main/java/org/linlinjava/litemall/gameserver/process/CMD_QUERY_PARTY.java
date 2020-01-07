@@ -4,29 +4,32 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_MSG_PARTY_LIST_EX;
-import org.linlinjava.litemall.gameserver.data.write.M_MSG_PARTY_LIST_EX;
+import org.linlinjava.litemall.gameserver.data.write.M_MSG_PARTY_INFO;
+import org.linlinjava.litemall.gameserver.domain.GameParty;
 import org.linlinjava.litemall.gameserver.game.GameCore;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.PartyMgr;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CMD_QUERY_PARTYS implements GameHandler {
+public class CMD_QUERY_PARTY implements GameHandler {
     @Override
     public void process(ChannelHandlerContext ctx, ByteBuf buf) {
+        String name = GameReadTool.readString(buf);
+        String id = GameReadTool.readString(buf);
         String type = GameReadTool.readString(buf);
-        String para = GameReadTool.readString(buf);
-        System.out.println(type + ":" + para);
-        PartyMgr partyMgr = GameCore.that.partyMgr;
-        Vo_MSG_PARTY_LIST_EX vo = new Vo_MSG_PARTY_LIST_EX();
-        vo.parts = partyMgr.getAll();
-        vo.type = type;
-        GameObjectChar.send(new M_MSG_PARTY_LIST_EX(), vo);
+        int partyId = PartyMgr.parseStrId(id);
+        System.out.print("CMD_QUERY_PARTY:" + name + ":" + partyId + ":" + type);
+
+        GameParty party = GameCore.that.partyMgr.get(partyId);
+        if(party == null){
+            return;
+        }
+        GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
     }
 
     @Override
     public int cmd() {
-        return 0x800E;
+        return 0xA012;
     }
 }

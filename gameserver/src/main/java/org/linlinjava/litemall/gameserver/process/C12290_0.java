@@ -19,7 +19,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
 /*    */ @Service
 /*    */ public class C12290_0 implements GameHandler
 /*    */ {
@@ -30,6 +30,8 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ 
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
+
+
 /* 32 */     String account = GameReadTool.readString(buff);
            /* JSONObject jo = new JSONObject(account);
             String o = (String) jo.get("account");*/
@@ -51,14 +53,15 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /* 48 */     int adult = GameReadTool.readByte(buff);
 /*    */     
 /* 50 */     String signature = GameReadTool.readString(buff);
-/*    */     
+/*    */
 /* 52 */     String clientname = GameReadTool.readString(buff);
-/*    */     
+/*    */
 /* 54 */     int redfinger = GameReadTool.readByte(buff);
 /*    */     
 /* 57 */     Accounts accounts = GameData.that.baseAccountsService.findOneByToken(user);
 /* 58 */     java.util.List<Characters> charactersList = GameData.that.characterService.findByAccountId(accounts.getId());
 /* 59 */     ListVo_61537_0 listvo_61537_0 = C8284_0.listjiaose(charactersList);
+
 /*    */     
 /*    */ 
 /* 62 */     ByteBuf write = new M61537_0().write(listvo_61537_0);
