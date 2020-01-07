@@ -464,6 +464,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 chara1.onEnterTttLayer(chara1.ttt_layer, xingjunName);
 
                 GameUtil.notifyTTTPanelInfo(chara1);
+                GameUtilRenWu.notifyTTTTask(chara1);
             }else if("传送出塔".equals(menu_item)){
                 GameUtilRenWu.huicheng(chara1);
             }

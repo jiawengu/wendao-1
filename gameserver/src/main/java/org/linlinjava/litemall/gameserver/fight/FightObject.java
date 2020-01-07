@@ -90,11 +90,11 @@ public class FightObject {
     public int suit_light_effect;
     public int special_icon;
     /**
-     * 1:
-     * 2：死亡 不可受到伤害
-     * 3：死亡 不可受到伤害
-     * 6:
-     * 7:
+     * 1:正常
+     * 2：死亡 可复活
+     * 3：死亡不可复活、逃离战斗
+     * 6:人或守护死亡时、其他类型可复活时
+     * 7：不是人或守护且不可复活时
      */
     public int state = 1;
     private List<Integer> buffState = new ArrayList();

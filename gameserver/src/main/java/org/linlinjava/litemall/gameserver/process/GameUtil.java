@@ -30,7 +30,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*      */ @org.springframework.stereotype.Service
 /*      */ public class GameUtil
         /*      */ {
-            private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天旋星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
+            private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天璇星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
     public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
     /*      */   public static void addshouhu(Chara chara)
     /*      */   {
@@ -2630,6 +2630,20 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
         Random random = new Random();
         return TONG_TIAN_TA_PET[random.nextInt(TONG_TIAN_TA_PET.length)];
     }
+
+    /**
+     * 是否是通天塔星君宠物
+     * @param petName
+     * @return
+     */
+    public static boolean isTTTPet(String petName){
+        for(String name:TONG_TIAN_TA_PET){
+            if(name.equals(petName)){
+                return true;
+            }
+        }
+        return false;
+    }
     /*      */
 
     /**
@@ -4579,6 +4593,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
         chara.onEnterTttLayer(nextLayer, xingjunName);
 
         GameUtil.notifyTTTPanelInfo(chara);
+        GameUtilRenWu.notifyTTTTask(chara);
 
     }
 

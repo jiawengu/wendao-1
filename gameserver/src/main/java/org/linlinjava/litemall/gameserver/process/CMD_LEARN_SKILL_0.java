@@ -20,7 +20,7 @@
 /*     */ 
 /*     */ 
 /*     */ @Service
-/*     */ public class C8308_0
+/*     */ public class CMD_LEARN_SKILL_0
 /*     */   implements GameHandler
 /*     */ {
 /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)

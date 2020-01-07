@@ -18,9 +18,13 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ 
+/*     */
+
+/**
+ *  -- 变异宠物商店
+ */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C53252_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_BUY_FROM_ELITE_PET_SHOP implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {

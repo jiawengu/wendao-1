@@ -13,6 +13,9 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_FLEE;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 逃离
+ */
 public class FleeSkill implements FightSkill {
     public FleeSkill() {
     }

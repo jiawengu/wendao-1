@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -115,6 +116,7 @@ public class GameMap {
             }
 
             GameUtil.notifyTTTPanelInfo(chara);
+            GameUtilRenWu.notifyTTTTask(chara);
 
             GameUtil.a45704(chara);
         }

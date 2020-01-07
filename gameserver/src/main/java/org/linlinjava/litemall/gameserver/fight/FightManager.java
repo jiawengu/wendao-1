@@ -698,7 +698,13 @@ public class FightManager {
         FightRequest fightRequest = new FightRequest();
         List<JiNeng> skillsList = fightObject.skillsList;
         if (skillsList != null && skillsList.size() != 0) {
-            JiNeng jiNeng = (JiNeng)skillsList.get(RANDOM.nextInt(skillsList.size()));
+            JiNeng jiNeng = null;
+            if(fightContainer.round==1 && GameUtil.isTTTPet(fightObject.str)){
+                jiNeng = skillsList.get(0);
+            }else{
+                jiNeng = (JiNeng)skillsList.get(RANDOM.nextInt(skillsList.size()));
+            }
+
             fightRequest.para = jiNeng.skill_no;
             fightRequest.action = 3;
             fightRequest.id = fightObject.fid;
@@ -1654,6 +1660,7 @@ public class FightManager {
 
                     chara1.onTttChallengeSuccess();
                     GameUtil.notifyTTTPanelInfo(chara1);
+                    GameUtilRenWu.notifyTTTTask(chara1);
                     return;
                 }
 

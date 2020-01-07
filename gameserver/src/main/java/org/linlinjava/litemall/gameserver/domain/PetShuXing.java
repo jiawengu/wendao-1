@@ -107,6 +107,9 @@ public class PetShuXing {
     public int attack_effect;
     public int phy_effect;
     public int mag_effect;
+    /**
+     * 物理抗性
+     */
     public int phy_absorb;
     public int extra_mana_effect;
     public int extra_mag_effect;

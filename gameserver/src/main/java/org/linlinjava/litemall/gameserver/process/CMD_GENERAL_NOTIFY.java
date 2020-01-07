@@ -1191,6 +1191,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
             GameUtil.a45090(chara, (byte) 1, cost, flyLayer);
             GameUtil.notifyTTTPanelInfo(chara);
+            GameUtilRenWu.notifyTTTTask(chara);
         }
         if(type==40003){//通天塔快速飞升 金钱
             int flyLayer = Integer.valueOf(para1);
