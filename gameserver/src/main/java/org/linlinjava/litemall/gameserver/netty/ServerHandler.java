@@ -76,7 +76,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             if (session != null) {
                 if (session.lock()) {
                     try {
-                        log.info("======= cmd: " + cmd + ", " + buff + " =======");
+                        log.debug("======= cmd: " + cmd + ", " + buff + " =======");
                         gameHandler.process(ctx, buff);
                     } catch (Exception e) {
                         log.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
@@ -88,7 +88,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 gameHandler.process(ctx, buff);
             }
         } else {
-            log.error(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
+            log.debug(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
         }
     }
 

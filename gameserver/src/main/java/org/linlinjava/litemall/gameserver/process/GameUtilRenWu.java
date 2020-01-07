@@ -4,22 +4,24 @@
 /*     */ import java.text.SimpleDateFormat;
 /*     */ import java.util.Calendar;
 /*     */ import java.util.Date;
-/*     */ import java.util.List;
+/*     */
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.Map;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */
+
+/*     */
 /*     */ public class GameUtilRenWu
 /*     */ {
 /*     */   public static void renwukuangkuang(String task_type, String task_prompt, String show_name, Chara chara1)
@@ -36,7 +38,7 @@
 /*  36 */     vo_61553_0.show_name = show_name;
 /*  37 */     vo_61553_0.tasktask_extra_para = "";
 /*  38 */     vo_61553_0.tasktask_state = "1";
-/*  39 */     GameObjectChar.sendduiwu(new M61553_0(), vo_61553_0, chara1.id);
+/*  39 */     GameObjectChar.sendduiwu(new M_MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
 /*     */   }
 /*     */   
 /*     */   public static String shidaolevel(Chara chara) {

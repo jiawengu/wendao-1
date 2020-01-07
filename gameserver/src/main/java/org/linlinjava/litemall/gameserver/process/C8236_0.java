@@ -7,7 +7,7 @@
 /*     */ import org.linlinjava.litemall.db.domain.Map;
 /*     */ import org.linlinjava.litemall.db.domain.RenwuMonster;
 /*     */ import org.linlinjava.litemall.db.domain.StoreInfo;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
@@ -16,9 +16,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
-/*     */ import org.linlinjava.litemall.gameserver.domain.GoodsInfo;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
@@ -273,7 +274,7 @@
 /* 273 */           vo_61553_0.show_name = "超级宝藏";
 /* 274 */           vo_61553_0.tasktask_extra_para = "";
 /* 275 */           vo_61553_0.tasktask_state = "1";
-/* 276 */           GameObjectChar.getGameObjectChar();GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61553_0(), vo_61553_0);
+/* 276 */           GameObjectChar.getGameObjectChar();GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
 /* 277 */           Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
 /* 278 */           chara.changbaotu.mapid = map.getMapId().intValue();
 /* 279 */           chara.changbaotu.name = renwuMonster.getMapName();

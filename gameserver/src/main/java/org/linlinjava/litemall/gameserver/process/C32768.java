@@ -1,22 +1,24 @@
 /*     */ package org.linlinjava.litemall.gameserver.process;
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.db.domain.Renwu;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseRenwuService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
-/*     */ 
+/*     */
+
+/*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C32768 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
@@ -76,7 +78,7 @@
 /*     */       
 /*     */ 
 /*  78 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  79 */       GameObjectChar.send(new M61553_0(), vo_61553_0);
+/*  79 */       GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*  81 */     if ((chara.current_task.equals("主线—浮生若梦_s21")) && ((mapid == 10000) || (mapid == 14000) || (mapid == 15000) || (mapid == 13000) || (mapid == 16000))) {
 /*  82 */       GameUtil.renwujiangli(chara);
@@ -85,7 +87,7 @@
 /*     */       
 /*     */ 
 /*  87 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  88 */       GameObjectChar.send(new M61553_0(), vo_61553_0);
+/*  88 */       GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*     */     
 /*     */ 
