@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.gameserver.netty;
 
+import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
+
 @Qualifier("serverHandler")
 @ChannelHandler.Sharable
 @Component
@@ -26,6 +30,16 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Autowired
     private java.util.List<GameHandler> gameHandlers;
+
+    private HashMap<Integer, GameHandler> gameHandlerHashMap;
+
+    @PostConstruct
+    private void init() {
+        gameHandlerHashMap = Maps.newHashMap();
+        for (GameHandler gameHandler : gameHandlers) {
+            gameHandlerHashMap.put(gameHandler.cmd(), gameHandler);
+        }
+    }
 
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
@@ -56,22 +70,24 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         GameReadTool.readInt(buff);
         GameReadTool.readShort(buff);
         int cmd = GameReadTool.readShort(buff);
-        for (GameHandler waitLine : this.gameHandlers) {
-            if (cmd == waitLine.cmd()) {
-                if (session != null) {
-                    if (session.lock()) {
-                        try {
-                            log.error("======= cmd: " + cmd + ", " + buff + " =======");
-                            waitLine.process(ctx, buff);
-                        } finally {
-                            session.unlock();
-                        }
+        GameHandler gameHandler = gameHandlerHashMap.getOrDefault(cmd, null);
+        if (gameHandler != null) {
+            if (session != null) {
+                if (session.lock()) {
+                    try {
+                        log.info("======= cmd: " + cmd + ", " + buff + " =======");
+                        gameHandler.process(ctx, buff);
+                    } catch (Exception e) {
+                        log.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
+                    } finally {
+                        session.unlock();
                     }
-                } else {
-                    waitLine.process(ctx, buff);
-                    break;
                 }
+            } else {
+                gameHandler.process(ctx, buff);
             }
+        } else {
+            log.error(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
         }
     }
 
