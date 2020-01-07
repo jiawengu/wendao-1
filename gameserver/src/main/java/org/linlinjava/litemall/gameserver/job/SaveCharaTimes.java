@@ -23,13 +23,7 @@ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameLine;
-import org.linlinjava.litemall.gameserver.game.GameMap;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.game.GameShiDao;
-import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.TitleService;
@@ -465,5 +459,14 @@ public class SaveCharaTimes {
             }
         }
 
+    }
+
+    @Scheduled(
+            fixedRate =  10000L
+    )
+    public void autoCheckPartyMgrSave(){
+        if(GameCore.that != null && GameCore.that.partyMgr != null){
+            GameCore.that.partyMgr.checkDirty();
+        }
     }
 }

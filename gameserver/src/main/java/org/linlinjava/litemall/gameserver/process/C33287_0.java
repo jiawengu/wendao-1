@@ -44,7 +44,7 @@
 /* 44 */     vo_36871_0.level = chara.level;
 /* 45 */     vo_36871_0.gid = char_gid;
 /* 46 */     vo_36871_0.name = chara.name;
-/* 47 */     vo_36871_0.party = "";
+/* 47 */     vo_36871_0.party = chara.partyName;
 /* 48 */     vo_36871_0.friend_score = 0;
 /* 49 */     vo_36871_0.setting_flag = 363017012;
 /* 50 */     if (GameObjectCharMng.getGameObjectChar(chara.id) == null) {

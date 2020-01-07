@@ -24,7 +24,7 @@
 /*  24 */   public List<Goods> genchong = new LinkedList();
 /*     */   
 /*  26 */   public List<Goods> backpack = new LinkedList();
-/*     */   
+/*     */
 /*     */ 
 /*  29 */   public ZbAttribute zbAttribute = new ZbAttribute();
 /*  30 */   public List<Petbeibao> pets = new LinkedList();
@@ -420,6 +420,9 @@
 /* 420 */   public int shidaodaguaijifen = 0;
 /*     */   
 /* 422 */   public int shidaocishu = 0;
+
+            public int partyId = 0;
+            public String partyName = "";
 /*     */ }
 
 
