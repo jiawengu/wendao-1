@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.linlinjava.litemall.db.dao.TTTPetMapper">
+  <resultMap id="BaseResultMap" type="org.linlinjava.litemall.db.domain.TTTPet">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="level_req" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="life" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="mana" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="speed" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="phy_attack" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="mag_attack" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="polar" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="icon" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="add_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="deleted" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, level_req, life, mana, speed, phy_attack, mag_attack, polar, icon, add_time, 
+    update_time, deleted, name
+  </sql>
+  <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.TTTPetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ttt_pet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ttt_pet
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ttt_pet
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.linlinjava.litemall.db.domain.TTTPetExample">
+    delete from ttt_pet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.linlinjava.litemall.db.domain.TTTPet">
+    insert into ttt_pet (id, level_req, life, 
+      mana, speed, phy_attack, 
+      mag_attack, polar, icon, 
+      add_time, update_time, deleted, 
+      name)
+    values (#{id,jdbcType=INTEGER}, #{levelReq,jdbcType=INTEGER}, #{life,jdbcType=INTEGER}, 
+      #{mana,jdbcType=INTEGER}, #{speed,jdbcType=INTEGER}, #{phyAttack,jdbcType=INTEGER}, 
+      #{magAttack,jdbcType=INTEGER}, #{polar,jdbcType=VARCHAR}, #{icon,jdbcType=INTEGER}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, 
+      #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.linlinjava.litemall.db.domain.TTTPet">
+    insert into ttt_pet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="levelReq != null">
+        level_req,
+      </if>
+      <if test="life != null">
+        life,
+      </if>
+      <if test="mana != null">
+        mana,
+      </if>
+      <if test="speed != null">
+        speed,
+      </if>
+      <if test="phyAttack != null">
+        phy_attack,
+      </if>
+      <if test="magAttack != null">
+        mag_attack,
+      </if>
+      <if test="polar != null">
+        polar,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="levelReq != null">
+        #{levelReq,jdbcType=INTEGER},
+      </if>
+      <if test="life != null">
+        #{life,jdbcType=INTEGER},
+      </if>
+      <if test="mana != null">
+        #{mana,jdbcType=INTEGER},
+      </if>
+      <if test="speed != null">
+        #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="phyAttack != null">
+        #{phyAttack,jdbcType=INTEGER},
+      </if>
+      <if test="magAttack != null">
+        #{magAttack,jdbcType=INTEGER},
+      </if>
+      <if test="polar != null">
+        #{polar,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.linlinjava.litemall.db.domain.TTTPetExample" resultType="java.lang.Long">
+    select count(*) from ttt_pet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ttt_pet
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.levelReq != null">
+        level_req = #{record.levelReq,jdbcType=INTEGER},
+      </if>
+      <if test="record.life != null">
+        life = #{record.life,jdbcType=INTEGER},
+      </if>
+      <if test="record.mana != null">
+        mana = #{record.mana,jdbcType=INTEGER},
+      </if>
+      <if test="record.speed != null">
+        speed = #{record.speed,jdbcType=INTEGER},
+      </if>
+      <if test="record.phyAttack != null">
+        phy_attack = #{record.phyAttack,jdbcType=INTEGER},
+      </if>
+      <if test="record.magAttack != null">
+        mag_attack = #{record.magAttack,jdbcType=INTEGER},
+      </if>
+      <if test="record.polar != null">
+        polar = #{record.polar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=INTEGER},
+      </if>
+      <if test="record.addTime != null">
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=BIT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ttt_pet
+    set id = #{record.id,jdbcType=INTEGER},
+      level_req = #{record.levelReq,jdbcType=INTEGER},
+      life = #{record.life,jdbcType=INTEGER},
+      mana = #{record.mana,jdbcType=INTEGER},
+      speed = #{record.speed,jdbcType=INTEGER},
+      phy_attack = #{record.phyAttack,jdbcType=INTEGER},
+      mag_attack = #{record.magAttack,jdbcType=INTEGER},
+      polar = #{record.polar,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=INTEGER},
+      add_time = #{record.addTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      deleted = #{record.deleted,jdbcType=BIT},
+      name = #{record.name,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.linlinjava.litemall.db.domain.TTTPet">
+    update ttt_pet
+    <set>
+      <if test="levelReq != null">
+        level_req = #{levelReq,jdbcType=INTEGER},
+      </if>
+      <if test="life != null">
+        life = #{life,jdbcType=INTEGER},
+      </if>
+      <if test="mana != null">
+        mana = #{mana,jdbcType=INTEGER},
+      </if>
+      <if test="speed != null">
+        speed = #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="phyAttack != null">
+        phy_attack = #{phyAttack,jdbcType=INTEGER},
+      </if>
+      <if test="magAttack != null">
+        mag_attack = #{magAttack,jdbcType=INTEGER},
+      </if>
+      <if test="polar != null">
+        polar = #{polar,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.linlinjava.litemall.db.domain.TTTPet">
+    update ttt_pet
+    set level_req = #{levelReq,jdbcType=INTEGER},
+      life = #{life,jdbcType=INTEGER},
+      mana = #{mana,jdbcType=INTEGER},
+      speed = #{speed,jdbcType=INTEGER},
+      phy_attack = #{phyAttack,jdbcType=INTEGER},
+      mag_attack = #{magAttack,jdbcType=INTEGER},
+      polar = #{polar,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

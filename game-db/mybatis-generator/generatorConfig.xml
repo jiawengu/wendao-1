@@ -67,7 +67,8 @@
         </javaClientGenerator>
 
         <!-- 数据表名及实体类名称  -->
-        <table tableName="party" domainObjectName="Party"> </table>
+<!--        <table tableName="party" domainObjectName="Party"> </table>-->
+        <table tableName="ttt_pet" domainObjectName="TTTPet"> </table>
 
     </context>
 </generatorConfiguration>

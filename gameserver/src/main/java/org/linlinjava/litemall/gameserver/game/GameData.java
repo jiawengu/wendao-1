@@ -8,35 +8,7 @@ package org.linlinjava.litemall.gameserver.game;
 import javax.annotation.PostConstruct;
 import org.linlinjava.litemall.db.service.CharacterService;
 import org.linlinjava.litemall.db.service.SaleGoodService;
-import org.linlinjava.litemall.db.service.base.BaseAccountsService;
-import org.linlinjava.litemall.db.service.base.BaseCharactersService;
-import org.linlinjava.litemall.db.service.base.BaseChargeService;
-import org.linlinjava.litemall.db.service.base.BaseChoujiangService;
-import org.linlinjava.litemall.db.service.base.BaseCreepsStoreService;
-import org.linlinjava.litemall.db.service.base.BaseDaySignPrizeService;
-import org.linlinjava.litemall.db.service.base.BaseExperienceService;
-import org.linlinjava.litemall.db.service.base.BaseExperienceTreasureService;
-import org.linlinjava.litemall.db.service.base.BaseGroceriesShopService;
-import org.linlinjava.litemall.db.service.base.BaseMapService;
-import org.linlinjava.litemall.db.service.base.BaseMedicineShopService;
-import org.linlinjava.litemall.db.service.base.BaseNoticeService;
-import org.linlinjava.litemall.db.service.base.BaseNpcDialogueFrameService;
-import org.linlinjava.litemall.db.service.base.BaseNpcDialogueService;
-import org.linlinjava.litemall.db.service.base.BaseNpcPointService;
-import org.linlinjava.litemall.db.service.base.BaseNpcService;
-import org.linlinjava.litemall.db.service.base.BasePackModificationService;
-import org.linlinjava.litemall.db.service.base.BasePetHelpTypeService;
-import org.linlinjava.litemall.db.service.base.BasePetService;
-import org.linlinjava.litemall.db.service.base.BaseRenwuMonsterService;
-import org.linlinjava.litemall.db.service.base.BaseRenwuService;
-import org.linlinjava.litemall.db.service.base.BaseSaleClassifyGoodService;
-import org.linlinjava.litemall.db.service.base.BaseSaleGoodService;
-import org.linlinjava.litemall.db.service.base.BaseShowTasksService;
-import org.linlinjava.litemall.db.service.base.BaseShuxingduiyingService;
-import org.linlinjava.litemall.db.service.base.BaseSkillMonsterService;
-import org.linlinjava.litemall.db.service.base.BaseStoreGoodsService;
-import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
-import org.linlinjava.litemall.db.service.base.BaseZhuangbeiInfoService;
+import org.linlinjava.litemall.db.service.base.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -52,6 +24,8 @@ public class GameData {
     public CharacterService characterService;
     @Autowired
     public BasePetService basePetService;
+    @Autowired
+    public BaseTTTPetService baseTTTPetService;
     @Autowired
     public BaseExperienceService baseExperienceService;
     @Autowired

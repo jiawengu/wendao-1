@@ -70,11 +70,11 @@
 						<artifactId>mybatis-generator-plugin</artifactId>
 						<version>1.2.20</version>
 					</dependency>
-					<dependency>
-						<groupId>com.st</groupId>
-						<artifactId>mybatis-generator-st</artifactId>
-						<version>1.0</version>
-					</dependency>
+<!--					<dependency>-->
+<!--						<groupId>com.st</groupId>-->
+<!--						<artifactId>mybatis-generator-st</artifactId>-->
+<!--						<version>1.0</version>-->
+<!--					</dependency>-->
 				</dependencies>
 			</plugin>
 

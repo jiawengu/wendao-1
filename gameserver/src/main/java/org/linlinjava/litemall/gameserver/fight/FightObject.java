@@ -12,6 +12,7 @@ import java.util.Random;
 import org.json.JSONObject;
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.db.domain.SkillMonster;
+import org.linlinjava.litemall.db.domain.TTTPet;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
@@ -117,6 +118,10 @@ public class FightObject {
      */
     public int godbook;
     public boolean run;
+    /**
+     * 通天塔星君
+     */
+    public FightObject tttXingjun;
 
     public FightObject(Chara chara) {
         this.id = chara.id;
@@ -348,7 +353,9 @@ public class FightObject {
 
         String names = "土匪#强盗#狐狸妖#鱼妖#蓝精#黄怪#疯魑#狂魍#蟒怪#鸟精#琵琶妖蟒妖#怪王狂狮#鬼王黑熊#鬼王悍猪#混天巨象#兑灵#艮灵#坎灵#离灵#狂灵#疯灵#山神#炎神#雷神#花神#龙神#刀斧手#火扇儒生#红衣剑客#试道元魔";
         Petbeibao petbeibao;
-        if(isTTTPet || name.contains("星君")){
+        if(isTTTPet ){
+            petbeibao = tttPetCreate(strname, chara.ttt_layer);
+        }else if(name.contains("星君")){
             petbeibao = this.petCreate(strname, chara.ttt_layer);
         } else if (!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
             petbeibao = this.petCreate(strname);
@@ -563,6 +570,71 @@ public class FightObject {
 
     public Petbeibao petCreate(String name, int level) {
         Pet pet = GameData.that.basePetService.findOneByName(name);
+        Petbeibao petbeibao = new Petbeibao();
+        PetShuXing shuXing = new PetShuXing();
+        shuXing.type = pet.getIcon();
+        shuXing.passive_mode = pet.getIcon();
+        shuXing.attrib = pet.getLevelReq();
+        shuXing.str = pet.getName();
+        shuXing.skill = level;
+        shuXing.pot = 0;
+        shuXing.resist_poison = 258;
+        shuXing.martial = 10000;
+        shuXing.suit_polar = pet.getName();
+        shuXing.auto_fight = shuXing.auto_fight + this.id;
+        if (pet.getPolar().equals("金")) {
+            shuXing.metal = 1;
+        }
+
+        if (pet.getPolar().equals("木")) {
+            shuXing.metal = 2;
+        }
+
+        if (pet.getPolar().equals("水")) {
+            shuXing.metal = 3;
+        }
+
+        if (pet.getPolar().equals("火")) {
+            shuXing.metal = 4;
+        }
+
+        if (pet.getPolar().equals("土")) {
+            shuXing.metal = 5;
+        }
+
+        shuXing.mana_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.attack_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mag_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_absorb = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.pet_mana_shape = shuXing.mana_effect + 40;
+        shuXing.pet_speed_shape = shuXing.attack_effect + 40;
+        shuXing.pet_phy_shape = shuXing.phy_effect + 40;
+        shuXing.pet_mag_shape = shuXing.mag_effect + 40;
+        shuXing.rank = shuXing.phy_absorb + 40;
+        shuXing.resist_point = shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank;
+        int polar_point = shuXing.skill * 4;
+        int addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.life = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.mag_power = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.phy_power = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        int var10000 = polar_point - addpoint;
+        shuXing.speed = shuXing.skill + addpoint;
+        petbeibao.petShuXing.add(shuXing);
+        BasicAttributesUtils.petshuxing(shuXing);
+        shuXing.max_life = shuXing.def;
+        shuXing.max_mana = shuXing.dex;
+        petbeibao.petShuXing.add(shuXing);
+        return petbeibao;
+    }
+    public Petbeibao tttPetCreate(String name, int level) {
+        TTTPet pet = GameData.that.baseTTTPetService.findOneByName(name);
         Petbeibao petbeibao = new Petbeibao();
         PetShuXing shuXing = new PetShuXing();
         shuXing.type = pet.getIcon();
@@ -1031,5 +1103,13 @@ public class FightObject {
         boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
         this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
         this.type = 4;
+    }
+
+    /**
+     * 是否是通天塔宠物
+     * @return
+     */
+    public boolean isTTTPet(){
+        return null!=tttXingjun;
     }
 }

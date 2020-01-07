@@ -467,6 +467,7 @@ public class FightManager {
         fightObject.pos = (Integer)MONSTER_POS.get(0);
         fightObject.fid = fc.id++;
         fightObject.leader = 1;
+        fightObject.type = 3;
         monsterTeam.add(fightObject);
         num++;
 
@@ -474,10 +475,11 @@ public class FightManager {
 //        fightObject = new FightObject(chara);
 //        Petbeibao petbeibao = fightObject.petCreate(GameUtil.randomTTTPetName(), chara.ttt_layer);
 //        fightObject = new FightObject(petbeibao);
-        fightObject = new FightObject(chara, GameUtil.randomTTTPetName());
-        fightObject.pos = (Integer)MONSTER_POS.get(5);
-        fightObject.fid = fc.id++;
-        monsterTeam.add(fightObject);
+        FightObject tttPet = new FightObject(chara, GameUtil.randomTTTPetName());
+        tttPet.pos = (Integer)MONSTER_POS.get(5);
+        tttPet.fid = fc.id++;
+        tttPet.tttXingjun = fightObject;
+        monsterTeam.add(tttPet);
         num++;
 
 
@@ -984,6 +986,28 @@ public class FightManager {
             if (fabaoSkill != null) {
                 fabaoSkill.resetTimes();
             }
+        }
+
+        for(FightObject fightObject:getAllFightObject(fightContainer)){
+            if(fightObject.isTTTPet() && fightObject.tttXingjun.isDead()){//拉起通天塔星君
+                Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+                vo_19959_0.round = fightContainer.round;
+                vo_19959_0.aid = fightObject.fid;
+                vo_19959_0.action = 26;
+                vo_19959_0.vid = fightObject.tttXingjun.fid;
+                vo_19959_0.para = 0;
+                FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
+                fightObject.tttXingjun.state = 1;
+                int blood = fightObject.tttXingjun.max_shengming / 2;
+                fightObject.tttXingjun.shengming = blood;
+                fightObject.tttXingjun.revive(fightContainer);
+                Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+                vo_7655_0.id = fightObject.fid;
+                FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
+                log.info("通天塔=>:"+fightObject.str+"救活了："+fightObject.tttXingjun.str);
+                break;
+            }
+
         }
 
     }
