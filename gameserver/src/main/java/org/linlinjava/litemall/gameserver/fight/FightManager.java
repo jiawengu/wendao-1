@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.linlinjava.litemall.db.domain.Pet;
+import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12025_0;
@@ -61,6 +62,7 @@ import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1433,12 +1435,7 @@ public class FightManager {
 
                                     ListVo_65527_0 listVo_65527_0;
                                     if (mingci == 3) {
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).chara.chenghao.put("试道勇者", "试道勇者");
-                                        GameUtil.chenghaoxiaoxi(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
-                                        vo_20481_0 = new Vo_20481_0();
-                                        vo_20481_0.msg = "你获得了#R试道勇者#n的称谓。";
-                                        vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id), TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 50000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了50000元宝。";
@@ -1449,12 +1446,7 @@ public class FightManager {
                                     }
 
                                     if (mingci == 2) {
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).chara.chenghao.put("试道勇者", "试道勇者");
-                                        GameUtil.chenghaoxiaoxi(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
-                                        vo_20481_0 = new Vo_20481_0();
-                                        vo_20481_0.msg = "你获得了#R试道勇者#n的称谓。";
-                                        vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                                        GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new M20481_0(), vo_20481_0);
+                                        TitleService.grantTitle(GameObjectCharMng.getGameObjectChar(fightObject.id), TitleConst.TITLE_EVENT_YONGZHE, TitleConst.TITLE_YONGZHE);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).chara.extra_life += 100000;
                                         vo_20481_0 = new Vo_20481_0();
                                         vo_20481_0.msg = "你获得了100000元宝。";

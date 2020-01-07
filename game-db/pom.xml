@@ -43,6 +43,28 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.29</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>28.2-jre</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -70,11 +92,11 @@
 						<artifactId>mybatis-generator-plugin</artifactId>
 						<version>1.2.20</version>
 					</dependency>
-					<dependency>
-						<groupId>com.st</groupId>
-						<artifactId>mybatis-generator-st</artifactId>
-						<version>1.0</version>
-					</dependency>
+<!--					<dependency>-->
+<!--						<groupId>com.st</groupId>-->
+<!--						<artifactId>mybatis-generator-st</artifactId>-->
+<!--						<version>1.0</version>-->
+<!--					</dependency>-->
 				</dependencies>
 			</plugin>
 

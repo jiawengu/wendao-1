@@ -24,6 +24,7 @@ import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
+import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.NoviceGiftBagUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils;
@@ -83,10 +84,12 @@ import org.linlinjava.litemall.gameserver.fight.FightRequest;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class C63752_0 implements GameHandler {
+
     public C63752_0() {
     }
 
@@ -511,37 +514,18 @@ public class C63752_0 implements GameHandler {
                 }
             }
 
-            Vo_20481_0 vo_20481_9;
-            if (chara.vipType == 1) {
-                chara.chenghao.put("月卡", "位列仙班·灵识初开");
-                GameUtil.chenghaoxiaoxi(chara);
-                vo_20481_9 = new Vo_20481_0();
-                vo_20481_9.msg = "你获得了#R位列仙班·灵识初开#n的称谓。";
-                vo_20481_9.time = 1567221761;
-                GameObjectChar.send(new M20481_0(), vo_20481_9);
-            }
-
-            if (chara.vipType == 2) {
-                chara.chenghao.put("月卡", "位列仙班·道法自然");
-                GameUtil.chenghaoxiaoxi(chara);
-                vo_20481_9 = new Vo_20481_0();
-                vo_20481_9.msg = "你获得了#R位列仙班·道法自然#n的称谓。";
-                vo_20481_9.time = 1567221761;
-                GameObjectChar.send(new M20481_0(), vo_20481_9);
-            }
-
-            if (chara.vipType == 3) {
-                chara.chenghao.put("月卡", "位列仙班·大道无穷");
-                GameUtil.chenghaoxiaoxi(chara);
-                vo_20481_9 = new Vo_20481_0();
-                vo_20481_9.msg = "你获得了#R位列仙班·大道无穷#n的称谓。";
-                vo_20481_9.time = 1567221761;
-               /* chara.shadow_self += 10000;
-                ListVo_65527_0 listVo65 = GameUtil.a65527(chara);*/
-
-//                GameObjectChar.send(new M65527_0(), listVo65);
-                GameObjectChar.send(new M20481_0(), vo_20481_9);
-
+            switch (chara.vipType) {
+                case 1:
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·灵识初开");
+                    break;
+                case 2:
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·道法自然");
+                    break;
+                case 3:
+                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YUEKA, "位列仙班·大道无穷");
+                    break;
+                default:
+                    break;
             }
 
             GameUtil.addVip(chara);
