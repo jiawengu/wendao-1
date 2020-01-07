@@ -28,7 +28,7 @@ public class CMD_REFRESH_PARTY_SHOP implements GameHandler {
         item.name = "超级女娲石";
         item.num = 100;
         vo.list.add(item);
-        GameObjectChar.send(new M_MSG_REFRESH_PARTY_SHOP(), vo);S
+        GameObjectChar.send(new M_MSG_REFRESH_PARTY_SHOP(), vo);
     }
 
     @Override
