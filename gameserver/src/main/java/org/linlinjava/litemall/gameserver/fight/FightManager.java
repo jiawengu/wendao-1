@@ -989,7 +989,7 @@ public class FightManager {
         }
 
         for(FightObject fightObject:getAllFightObject(fightContainer)){
-            if(fightObject.isTTTPet() && fightObject.tttXingjun.isDead()){//拉起通天塔星君
+            if(fightObject.isTTTPet() && !fightObject.isDead() && fightObject.tttXingjun.isDead()){//拉起通天塔星君
                 Vo_19959_0 vo_19959_0 = new Vo_19959_0();
                 vo_19959_0.round = fightContainer.round;
                 vo_19959_0.aid = fightObject.fid;
