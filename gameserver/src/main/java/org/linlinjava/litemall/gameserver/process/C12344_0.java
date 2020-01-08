@@ -1,11 +1,6 @@
 package org.linlinjava.litemall.gameserver.process;
 
-import org.linlinjava.litemall.db.domain.Accounts;
-import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
-import org.linlinjava.litemall.db.domain.RenwuMonster;
-import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-import org.linlinjava.litemall.db.service.base.BaseNpcDialogueFrameService;
-import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
+import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
@@ -20,25 +15,25 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.service.TitleService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 @org.springframework.stereotype.Service
 public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHandler {
-    private static final Logger log = LoggerFactory.getLogger(C12344_0.class);
-
     public int[] coins = {18000, 90000, 360000, 750000, 1284000, 1800000, 2844000, 3900000, 9000000, 14400000, 25500000};
     public int[] jiage = {6, 30, 100, 200, 328, 500, 648, 1000, 2000, 3000, 5000};
+
 
     public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff)
         {
 
         int id = org.linlinjava.litemall.gameserver.data.GameReadTool.readInt(buff);
+
 
         String menu_item = org.linlinjava.litemall.gameserver.data.GameReadTool.readString(buff);
 
@@ -523,7 +518,71 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
         }
+        ShangGuYaoWangInfo info =
+                GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(id,
+                        true);
+        if (menu_item.equals("挑战") && null != info){
+            if (GameObjectChar.getGameObjectChar().gameTeam == null){
+                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "人数不足3人！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                return;
+            }
 
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+
+            if (duiwu.size() < 3) {
+                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "人数不足3人！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                return;
+
+            }
+            for (int i = 0; i < duiwu.size(); i++) {
+                Chara tempChara = duiwu.get(i);
+                org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(tempChara.id);
+
+            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+
+                long count =
+                        GameData.that.BaseShangGuYaoWangRewardInfoService.count(characters.getAccountId(), sdf.format(date));
+                if (count > 5) {
+
+                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+
+                    vo_20481_0.msg = tempChara.name + "已经获取5次奖励了";
+
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+
+                    GameObjectChar.getGameObjectChar();
+                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+                    return;
+                }
+            }
+
+            org.linlinjava.litemall.db.domain.Npc npc =
+                    GameData.that.baseNpcService.findById(id);
+
+            List<String> list = new ArrayList();
+            list.add(npc.getName());
+
+            Random RANDOM = new Random();
+//            ShangGuYaoWangInfo  info =
+//                    GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
+            String []  xiaoGuai = info.getXiaoGuai().split(",");
+
+
+            for(int i = 0; i < 9; ++i) {
+                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]);
+            }
+
+            org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
+        }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(id))) && (menu_item.equals("我是来向你挑战的"))) {
             /*  292 */
@@ -2653,10 +2712,6 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
         /*      */
         /* 1227 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
-
-        if (chara.current_task.contains("押镖")) {
-            TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_YABIAO, TitleConst.TITLE_ZHENGZHAI);
-        }
         /* 1228 */
         org.linlinjava.litemall.db.domain.Npc npc = GameData.that.baseNpcService.findById(id);
         /* 1229 */
@@ -2692,7 +2747,19 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
                     String[] chenghao = {"五龙山云霄洞第一代弟子", "终南山玉柱洞第一代弟子", "凤凰山斗阙宫第一代弟子", "乾元山金光洞第一代弟子", "骷髅山白骨洞第一代弟子"};
                     /* 1247 */
                     String chenhao = chenghao[(chara.menpai - 1)];
-                    TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_BAISHI, chenhao);
+                    /* 1248 */
+                    chara.chenghao.put("拜师任务", chenhao);
+                    /* 1249 */
+                    GameUtil.chenghaoxiaoxi(chara);
+                    /*      */
+                    /* 1251 */
+                    Vo_20481_0 vo_20481_9 = new Vo_20481_0();
+                    /* 1252 */
+                    vo_20481_9.msg = ("你获得了#R" + chenhao + "#n的称谓。");
+                    /* 1253 */
+                    vo_20481_9.time = 1567221761;
+                    /* 1254 */
+                    GameObjectChar.send(new M20481_0(), vo_20481_9);
                     /* 1255 */
                     List<RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(1));
                     /* 1256 */

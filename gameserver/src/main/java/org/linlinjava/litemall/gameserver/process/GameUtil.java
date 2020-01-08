@@ -4,6 +4,7 @@
 /*      */ import java.util.List;
 /*      */ import java.util.Random;
 /*      */ import org.linlinjava.litemall.db.domain.Characters;
+import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*      */ import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
@@ -25,6 +26,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*      */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*      */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*      */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
+
 /*      */
 /*      */ @org.springframework.stereotype.Service
 /*      */ public class GameUtil
@@ -4187,6 +4190,15 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 4129 */     if (strings[1].equals("经验")) {
             /* 4130 */       huodejingyan(chara, Integer.valueOf(strings[0]).intValue());
             /*      */     }
+                        if(strings[1].equals("上古妖王")){
+                            Npc npc =
+                                    (Npc) GameData.that.baseNpcService.findOneByName(strings[0]);
+                            org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(chara.id);
+//                            GameShangGuYaoWang.setYaoWangAllFlat(npc,
+//                                    Integer.valueOf(strings[2]));
+                            GameShangGuYaoWang.setYaoWangState(npc.getId(),
+                                    GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN, characters.getAccountId());
+                        }
         /* 4132 */     if (strings[1].equals("精怪")) {
             /* 4133 */       int jieshu = stageMounts(strings[0]);
             /* 4134 */       org.linlinjava.litemall.db.domain.Pet pet = GameData.that.basePetService.findOneByName(strings[0]);

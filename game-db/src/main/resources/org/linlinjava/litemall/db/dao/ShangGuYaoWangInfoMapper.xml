@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.linlinjava.litemall.db.dao.ShangGuYaoWangInfoMapper">
+  <resultMap id="BaseResultMap" type="org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="npcID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="level" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="state" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="reward" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="wa_chu_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="wa_chu_reward" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="xiao_guai" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, npcID, level, state, reward, wa_chu_account_id, wa_chu_reward, xiao_guai
+  </sql>
+  <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.example.ShangGuYaoWangInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shang_gu_yao_wang_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shang_gu_yao_wang_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shang_gu_yao_wang_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.linlinjava.litemall.db.domain.example.ShangGuYaoWangInfoExample">
+    delete from shang_gu_yao_wang_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo">
+    insert into shang_gu_yao_wang_info (id, npcID, level, 
+      state, reward, wa_chu_account_id, 
+      wa_chu_reward, xiao_guai)
+    values (#{id,jdbcType=INTEGER}, #{npcid,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{state,jdbcType=BIT}, #{reward,jdbcType=VARCHAR}, #{waChuAccountId,jdbcType=INTEGER}, 
+      #{waChuReward,jdbcType=VARCHAR}, #{xiaoGuai,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo">
+    insert into shang_gu_yao_wang_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="npcid != null">
+        npcID,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="reward != null">
+        reward,
+      </if>
+      <if test="waChuAccountId != null">
+        wa_chu_account_id,
+      </if>
+      <if test="waChuReward != null">
+        wa_chu_reward,
+      </if>
+      <if test="xiaoGuai != null">
+        xiao_guai,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="npcid != null">
+        #{npcid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="reward != null">
+        #{reward,jdbcType=VARCHAR},
+      </if>
+      <if test="waChuAccountId != null">
+        #{waChuAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="waChuReward != null">
+        #{waChuReward,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoGuai != null">
+        #{xiaoGuai,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.linlinjava.litemall.db.domain.example.ShangGuYaoWangInfoExample" resultType="java.lang.Long">
+    select count(*) from shang_gu_yao_wang_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shang_gu_yao_wang_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.npcid != null">
+        npcID = #{record.npcid,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=BIT},
+      </if>
+      <if test="record.reward != null">
+        reward = #{record.reward,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waChuAccountId != null">
+        wa_chu_account_id = #{record.waChuAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.waChuReward != null">
+        wa_chu_reward = #{record.waChuReward,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiaoGuai != null">
+        xiao_guai = #{record.xiaoGuai,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shang_gu_yao_wang_info
+    set id = #{record.id,jdbcType=INTEGER},
+      npcID = #{record.npcid,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=BIT},
+      reward = #{record.reward,jdbcType=VARCHAR},
+      wa_chu_account_id = #{record.waChuAccountId,jdbcType=INTEGER},
+      wa_chu_reward = #{record.waChuReward,jdbcType=VARCHAR},
+      xiao_guai = #{record.xiaoGuai,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo">
+    update shang_gu_yao_wang_info
+    <set>
+      <if test="npcid != null">
+        npcID = #{npcid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="reward != null">
+        reward = #{reward,jdbcType=VARCHAR},
+      </if>
+      <if test="waChuAccountId != null">
+        wa_chu_account_id = #{waChuAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="waChuReward != null">
+        wa_chu_reward = #{waChuReward,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoGuai != null">
+        xiao_guai = #{xiaoGuai,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo">
+    update shang_gu_yao_wang_info
+    set npcID = #{npcid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      state = #{state,jdbcType=BIT},
+      reward = #{reward,jdbcType=VARCHAR},
+      wa_chu_account_id = #{waChuAccountId,jdbcType=INTEGER},
+      wa_chu_reward = #{waChuReward,jdbcType=VARCHAR},
+      xiao_guai = #{xiaoGuai,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectOneByExample" parameterType="org.linlinjava.litemall.db.domain.example.ShangGuYaoWangInfoExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from shang_gu_yao_wang_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    limit 1
+  </select>
+</mapper>

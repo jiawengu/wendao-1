@@ -7,7 +7,10 @@
 /*     */ import java.util.List;
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.Map;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
+/*     */ import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.db.domain.Pet;
+import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61553_0;
@@ -187,6 +190,13 @@
 /*     */   {
 /* 188 */     String nameType = "";
 /* 189 */     String[] yiDing = { "帅帅猴#变异", "蛋蛋鸡#变异", "乖乖狗#变异", "招财猪#变异", "岳麓剑#精怪", "筋斗云#精怪" };
+//              String[] shangGuYaoWang = { "上古妖王1#上古妖王#50", "上古妖王2#上古妖王#52",
+//                      "上古妖王3#上古妖王#54", "上古妖王4#上古妖王#56", "上古妖王5#上古妖王#58",
+//                      "上古妖王6#上古妖王#60", "上古妖王7#上古妖王#62","上古妖王8#上古妖王#64",
+//                      "上古妖王9#上古妖王#66", "上古妖王10#上古妖王#68", "上古妖王11#上古妖王#70",
+//                      "上古妖王12#上古妖王#72", "上古妖王13#上古妖王#74", "上古妖王14#上古妖王#76", "上古妖王15#上古妖王#78",
+//                      "上古妖王16#上古妖王#80", "上古妖王17#上古妖王#82", "上古妖王18#上古妖王#84", "上古妖王92#上古妖王#86",
+//                      "上古妖王20#上古妖王#88"};
 /* 190 */     String[] erDing = { "召唤令·十二生肖#物品" };
 /* 191 */     String[] siDing = { "60级首饰#首饰" };
 /* 192 */     Random random = new Random();
@@ -197,7 +207,17 @@
 /* 197 */       nameType = erDing[random.nextInt(erDing.length)];
 /*     */     }
 /* 199 */     else if (r < 50) {
-/* 200 */       nameType = siDing[random.nextInt(siDing.length)];
+        /* 200 */
+                nameType = siDing[random.nextInt(siDing.length)];
+    }         else if (r < 100){
+                List<ShangGuYaoWangInfo> infos =
+                        GameData.that.BaseShangGuYaoWangInfoService.findAllCloseState();
+                ShangGuYaoWangInfo info =
+                        infos.get(random.nextInt(infos.size()));
+                Npc npc = GameData.that.baseNpcService.findById(info.getNpcid());
+                //nameType =
+                //shangGuYaoWang[random.nextInt(shangGuYaoWang.length)];
+                    nameType = npc.getName();// shangGuYaoWang[0];
 /*     */     } else {
 /* 202 */       int money = 1000000 + random.nextInt(300000);
 /* 203 */       nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
@@ -252,7 +272,22 @@
 /*     */   
 /*     */ 
 /*     */ 
-/*     */ 
+/*     */   public static boolean isShangGuYaoWang(Chara chara){
+                if(0 == chara.changbaotu.icon) return  false;
+                List<Pet> monsterList = GameData.that.basePetService.findByZoon(GameObjectChar.getGameObjectChar().chara.mapName);
+                if(0 == monsterList.size()) return  false;
+                Pet pet = null;
+                for (int i = 0; i < monsterList.size(); i++) {
+                    Pet tempPet = monsterList.get(i);
+                    if (tempPet.getName().contains("上古妖王")){
+                        pet = tempPet;
+                        break;
+                    }
+                }
+                if (null == pet) return  false;
+
+                return  true;
+            }
 /*     */ 
 /*     */ 
 /*     */ 

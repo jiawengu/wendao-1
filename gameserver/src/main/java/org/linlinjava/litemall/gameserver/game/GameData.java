@@ -47,6 +47,10 @@ public class GameData {
     @Autowired
     public BaseNpcService baseNpcService;
     @Autowired
+    public BaseShangGuYaoWangInfoService BaseShangGuYaoWangInfoService;
+    @Autowired
+    public BaseShangGuYaoWangRewardInfoService BaseShangGuYaoWangRewardInfoService;
+    @Autowired
     public BaseMapService baseMapService;
     @Autowired
     public BaseAccountsService baseAccountsService;

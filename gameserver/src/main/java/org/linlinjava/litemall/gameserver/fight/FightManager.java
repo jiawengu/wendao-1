@@ -53,11 +53,7 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameLine;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.game.GameShiDao;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -1350,6 +1346,13 @@ public class FightManager {
                         GameUtil.shidaojingyan(chara1, chara1, ((FightObject)guaiwu.get(0)).id);
                     }
 
+                    return;
+                }
+
+                //妖王
+                if (null != guaiwu && ((FightObject)guaiwu.get(0)).str.contains("妖王")){
+                    System.out.println("妖王");
+                    GameShangGuYaoWang.onReward(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
                 }
 
