@@ -92,7 +92,7 @@
 /*     */       
 /*  93 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
 /*  94 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
-/*  95 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
+/*  95 */       List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);
 /*  96 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*  97 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  98 */       vo_20481_0.msg = ("你技能等级提升到了#R" + sjjiNeng.skill_level + "#n级！");
@@ -149,7 +149,7 @@
 /*     */       }
 /* 150 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
 /* 151 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
-/* 152 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
+/* 152 */       List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);
 /* 153 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /* 154 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 155 */       vo_20481_0.msg = ("你技能等级提升到了#R" + sjjiNeng.skill_level + "#n级！");

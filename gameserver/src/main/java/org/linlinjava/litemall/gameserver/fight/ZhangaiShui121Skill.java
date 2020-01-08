@@ -18,6 +18,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 障碍水
+ * 使用成功后可使敌方对象处于冰冻状态
+ */
 public class ZhangaiShui121Skill extends FightRoundSkill {
     public ZhangaiShui121Skill() {
     }

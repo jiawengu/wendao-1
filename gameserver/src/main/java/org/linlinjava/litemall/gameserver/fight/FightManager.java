@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.linlinjava.litemall.db.domain.Pet;
+import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_12025_0;
@@ -52,11 +53,7 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameLine;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.game.GameShiDao;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -462,25 +459,27 @@ public class FightManager {
 
 
         //星君
-        String monsterName = chara.ttt_xj_name;
-        fightObject = new FightObject(chara, monsterName);
-        fightObject.pos = (Integer)MONSTER_POS.get(0);
-        fightObject.fid = fc.id++;
-        fightObject.leader = 1;
-        fightObject.type = 3;
-        monsterTeam.add(fightObject);
-        num++;
+        {
+            T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(chara.ttt_xj_name);
+            fightObject = new FightObject(t_fightObject, chara.ttt_layer);
+            fightObject.pos = (Integer)MONSTER_POS.get(0);
+            fightObject.fid = fc.id++;
+            fightObject.leader = 1;
+            fightObject.type = 3;
+            monsterTeam.add(fightObject);
+            num++;
+        }
 
         //宠物
-//        fightObject = new FightObject(chara);
-//        Petbeibao petbeibao = fightObject.petCreate(GameUtil.randomTTTPetName(), chara.ttt_layer);
-//        fightObject = new FightObject(petbeibao);
-        FightObject tttPet = new FightObject(chara, GameUtil.randomTTTPetName());
-        tttPet.pos = (Integer)MONSTER_POS.get(5);
-        tttPet.fid = fc.id++;
-        tttPet.tttXingjun = fightObject;
-        monsterTeam.add(tttPet);
-        num++;
+        {
+            T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(GameUtil.randomTTTPetName());
+            FightObject tttPet = new FightObject(t_fightObject, chara.ttt_layer);
+            tttPet.pos = (Integer)MONSTER_POS.get(5);
+            tttPet.fid = fc.id++;
+            tttPet.tttXingjun = fightObject;
+            monsterTeam.add(tttPet);
+            num++;
+        }
 
 
 

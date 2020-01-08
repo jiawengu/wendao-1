@@ -2615,7 +2615,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                         /* 1184 */
                         listbeibao1.add(goods2);
                         /* 1185 */
-                        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65525_0(), listbeibao1);
+                        GameObjectChar.send(new MSG_INVENTORY(), listbeibao1);
                         /*      */
                     }
                     /*      */

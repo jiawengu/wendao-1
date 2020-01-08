@@ -6,9 +6,9 @@
 package org.linlinjava.litemall.db.service.base;
 
 import com.github.pagehelper.PageHelper;
-import org.linlinjava.litemall.db.dao.TTTPetMapper;
-import org.linlinjava.litemall.db.domain.TTTPet;
-import org.linlinjava.litemall.db.domain.TTTPetExample;
+import org.linlinjava.litemall.db.dao.T_FightObjectMapper;
+import org.linlinjava.litemall.db.domain.T_FightObject;
+import org.linlinjava.litemall.db.domain.T_FightObjectExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -16,32 +16,32 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 @Service
-public class BaseTTTPetService {
+public class BaseFightObjectService {
     @Autowired
-    protected TTTPetMapper mapper;
+    protected T_FightObjectMapper mapper;
 
-    public BaseTTTPetService() {
+    public BaseFightObjectService() {
     }
 
 
-    public List<TTTPet> findByName(String name) {
-        TTTPetExample example = new TTTPetExample();
-        TTTPetExample.Criteria criteria = example.createCriteria();
+    public List<T_FightObject> findByName(String name) {
+        T_FightObjectExample example = new T_FightObjectExample();
+        T_FightObjectExample.Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false).andNameEqualTo(name);
         return this.mapper.selectByExample(example);
     }
 
-    public TTTPet findOneByName(String name) {
-        List<TTTPet> list = findByName(name);
+    public T_FightObject findOneByName(String name) {
+        List<T_FightObject> list = findByName(name);
         if(list.isEmpty()){
             return null;
         }
         return list.get(0);
     }
 
-    public List<TTTPet> findAll(int page, int size, String sort, String order) {
-        TTTPetExample example = new TTTPetExample();
-        TTTPetExample.Criteria criteria = example.createCriteria();
+    public List<T_FightObject> findAll(int page, int size, String sort, String order) {
+        T_FightObjectExample example = new T_FightObjectExample();
+        T_FightObjectExample.Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false);
         if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
             example.setOrderByClause(sort + " " + order);
@@ -51,9 +51,9 @@ public class BaseTTTPetService {
         return this.mapper.selectByExample(example);
     }
 
-    public List<TTTPet> findAll() {
-        TTTPetExample example = new TTTPetExample();
-        TTTPetExample.Criteria criteria = example.createCriteria();
+    public List<T_FightObject> findAll() {
+        T_FightObjectExample example = new T_FightObjectExample();
+        T_FightObjectExample.Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false);
         return this.mapper.selectByExample(example);
     }

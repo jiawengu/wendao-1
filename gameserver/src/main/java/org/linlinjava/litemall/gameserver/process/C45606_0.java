@@ -108,7 +108,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 107 */     chara.backpack.add(goods);
 /* 108 */     List<Goods> list = new ArrayList();
 /* 109 */     list.add(goods);
-/* 110 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65525_0(), list);
+/* 110 */     GameObjectChar.send(new MSG_INVENTORY(), list);
 /*     */     
 /*     */ 
 /* 113 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);

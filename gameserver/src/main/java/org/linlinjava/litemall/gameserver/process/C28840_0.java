@@ -5,7 +5,7 @@
 /*     */ import java.util.ArrayList;
 /*     */ import java.util.List;
 /*     */ import org.linlinjava.litemall.db.domain.StoreInfo;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.game.PackUtils;
@@ -14,7 +14,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -54,7 +54,7 @@
 /*  54 */       goods1.goodsLanSe.def = PackUtils.demonStoneValue(index);
 /*  55 */       GameUtil.addwupin(goods1, chara);
 /*  56 */       list.add(goods1);
-/*  57 */       GameObjectChar.send(new M65525_0(), list);
+/*  57 */       GameObjectChar.send(new MSG_INVENTORY(), list);
 /*     */     }
 /*     */     
 /*  60 */     if (index / 10 == 12) {
@@ -75,7 +75,7 @@
 /*  75 */       goods1.goodsInfo.silver_coin = 6000;
 /*  76 */       goods1.goodsLanSe.parry = PackUtils.demonStoneValue(index);
 /*  77 */       GameUtil.addwupin(goods1, chara);
-/*  78 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/*  78 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
 /*     */     
 /*     */ 
@@ -97,7 +97,7 @@
 /*  97 */       goods1.goodsInfo.silver_coin = 6000;
 /*  98 */       goods1.goodsLanSe.wiz = PackUtils.demonStoneValue(index);
 /*  99 */       GameUtil.addwupin(goods1, chara);
-/* 100 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 100 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
 /*     */     
 /*     */ 
@@ -120,7 +120,7 @@
 /* 120 */       goods1.goodsInfo.silver_coin = 6000;
 /* 121 */       goods1.goodsLanSe.accurate = PackUtils.demonStoneValue(index);
 /* 122 */       GameUtil.addwupin(goods1, chara);
-/* 123 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 123 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
 /*     */     
 /* 126 */     if (index / 10 == 20) {
@@ -141,7 +141,7 @@
 /* 141 */       goods1.goodsInfo.silver_coin = 6000;
 /* 142 */       goods1.goodsLanSe.dex = PackUtils.demonStoneValue(index);
 /* 143 */       GameUtil.addwupin(goods1, chara);
-/* 144 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 144 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
 /*     */     
 /* 147 */     if (index / 10 == 18) {
@@ -162,7 +162,7 @@
 /* 162 */       goods1.goodsInfo.silver_coin = 6000;
 /* 163 */       goods1.goodsLanSe.mana = PackUtils.demonStoneValue(index);
 /* 164 */       GameUtil.addwupin(goods1, chara);
-/* 165 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 165 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
 /*     */   }
 /*     */   
@@ -210,7 +210,7 @@
 /* 210 */         goods1.goodsLanSe = null;
 /* 211 */         goods1.pos = goods.pos;
 /* 212 */         listbeibao.add(goods1);
-/* 213 */         GameObjectChar.send(new M65525_0(), listbeibao);
+/* 213 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /* 214 */         if (count == 0) {
 /*     */           break;
 /*     */         }
@@ -218,9 +218,9 @@
 /*     */     }
 /* 219 */     for (int j = 0; j < list.size(); j++) {
 /* 220 */       chara.backpack.remove(list.get(j));
-/* 221 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 221 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
-/* 223 */     GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 223 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     
 /* 225 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 226 */     vo_8165_0.msg = "炼制成功";

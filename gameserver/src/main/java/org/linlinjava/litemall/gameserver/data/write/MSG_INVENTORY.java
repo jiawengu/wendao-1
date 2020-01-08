@@ -17,7 +17,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class M65525_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*     */ public class MSG_INVENTORY extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*     */ {
 /*     */   protected void writeO(io.netty.buffer.ByteBuf writeBuf, Object object)
 /*     */   {

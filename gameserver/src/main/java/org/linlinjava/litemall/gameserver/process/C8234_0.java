@@ -7,7 +7,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -41,8 +41,8 @@
 /* 41 */         goods1.goodsInfo = null;
 /* 42 */         goods1.pos = from_pos;
 /* 43 */         listbeibao.add(goods1);
-/* 44 */         GameObjectChar.send(new M65525_0(), listbeibao);
-/* 45 */         GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 44 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
+/* 45 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*    */       }
 /*    */     }
 /*    */     

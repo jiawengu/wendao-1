@@ -30,9 +30,9 @@ import org.slf4j.LoggerFactory;
  */
 /*     */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C8284_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
-                private static final Logger log = LoggerFactory.getLogger(C8284_0.class);
+                private static final Logger log = LoggerFactory.getLogger(CMD_CREATE_NEW_CHAR.class);
     /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
     /*     */   {
         /*  30 */     String char_name = GameReadTool.readString(buff);

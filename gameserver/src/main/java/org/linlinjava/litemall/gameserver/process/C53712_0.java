@@ -133,7 +133,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 132 */     chara.backpack.add(goods);
 /* 133 */     List<Goods> list = new ArrayList();
 /* 134 */     list.add(goods);
-/* 135 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65525_0(), list);
+/* 135 */     GameObjectChar.send(new MSG_INVENTORY(), list);
 /*     */     
 /*     */ 
 /*     */ 

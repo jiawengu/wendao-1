@@ -12,7 +12,7 @@ import java.util.Random;
 import org.json.JSONObject;
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.db.domain.SkillMonster;
-import org.linlinjava.litemall.db.domain.TTTPet;
+import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
@@ -64,7 +64,7 @@ public class FightObject {
      * 1:玩家
      * 2:宠物
      * 3:守护
-     * 4：宠物-怪物
+     * 4:怪物
      */
     public int type;
     /**
@@ -424,6 +424,32 @@ public class FightObject {
         this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
         this.type = 4;
     }
+    public FightObject(T_FightObject t_fightObject, int ttt_level){
+        int metal = GameUtil.getMetal(t_fightObject.getPolar());
+
+        this.str = t_fightObject.getName();
+        this.guaiwulevel = ttt_level;
+        this.shengming = (int) (t_fightObject.getLife()*(1+ttt_level*0.1));
+        this.max_shengming = (int) (t_fightObject.getLife()*(1+ttt_level*0.1));
+        this.mofa = (int) (t_fightObject.getMana()*(1+ttt_level*0.1));
+        this.max_mofa = (int) (t_fightObject.getMana()*(1+ttt_level*0.1));
+        this.fashang = (int) (t_fightObject.getMagAttack()*(1+ttt_level*0.1));
+        this.parry = (int)(t_fightObject.getSpeed()*(1+ttt_level*0.1));
+        this.accurate = (int)(t_fightObject.getPhyAttack()*(1+ttt_level*0.1));
+        this.fangyu = (int)(t_fightObject.getDef()*(1+ttt_level*0.1));
+        this.org_icon = t_fightObject.getIcon();
+
+        this.skillsList = getJiNengListByName( metal, ttt_level, 123456, t_fightObject.getSkill());
+        this.type = 4;
+    }
+
+    public int subtraction(int i) {
+        Random r = new Random();
+        if (i == 0) {
+            return 0;
+        }
+        return r.nextInt(i);
+    }
 
     /**
      * 是否可以攻击
@@ -670,12 +696,12 @@ public class FightObject {
         return petbeibao;
     }
     public Petbeibao tttPetCreate(String name, int level) {
-        TTTPet pet = GameData.that.baseTTTPetService.findOneByName(name);
+        T_FightObject pet = GameData.that.baseFightObjectService.findOneByName(name);
         Petbeibao petbeibao = new Petbeibao();
         PetShuXing shuXing = new PetShuXing();
         shuXing.type = pet.getIcon();
         shuXing.passive_mode = pet.getIcon();
-        shuXing.attrib = pet.getLevelReq();
+        shuXing.attrib = level;
         shuXing.str = pet.getName();
         shuXing.skill = level;
         shuXing.pot = 0;
@@ -752,6 +778,36 @@ public class FightObject {
         for(int i = 0; i < nomelSkills.size(); ++i) {
             JiNeng jiNeng = new JiNeng();
             JSONObject jsonObject = (JSONObject)nomelSkills.get(i);
+            jiNeng.id = id;
+            jiNeng.skill_no = Integer.parseInt((String)jsonObject.get("skillNo"));
+            jiNeng.skill_attrib = (Integer)jsonObject.get("skillLevel");
+            jiNeng.skill_level = (Integer)jsonObject.get("skillLevel");
+            jiNeng.skillRound = jsonObject.optInt("skillRound");
+            jiNeng.level_improved = 0;
+            jiNeng.skill_mana_cost = (Integer)jsonObject.get("skillBlue");
+            jiNeng.skill_nimbus = 42949672;
+            jiNeng.skill_disabled = 0;
+            jiNeng.range = (Integer)jsonObject.get("skillNum");
+            jiNeng.max_range = (Integer)jsonObject.get("skillNum");
+            jiNengList.add(jiNeng);
+        }
+
+        return jiNengList;
+    }
+
+    /**
+     * 技能名字是逗号分隔
+     * @param metal 门派
+     * @param skillNames
+     * @return
+     */
+    public static List<JiNeng> getJiNengListByName(int metal, int level, int id, String skillNames){
+        List<JiNeng> jiNengList = new ArrayList();
+        List<JSONObject> nomelSkills = PetAndHelpSkillUtils.getSkills(metal, level, skillNames);
+
+        for(int i = 0; i < nomelSkills.size(); ++i) {
+            JiNeng jiNeng = new JiNeng();
+            JSONObject jsonObject = nomelSkills.get(i);
             jiNeng.id = id;
             jiNeng.skill_no = Integer.parseInt((String)jsonObject.get("skillNo"));
             jiNeng.skill_attrib = (Integer)jsonObject.get("skillLevel");

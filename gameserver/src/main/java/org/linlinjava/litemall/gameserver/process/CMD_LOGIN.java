@@ -62,7 +62,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */     
 /* 57 */     Accounts accounts = GameData.that.baseAccountsService.findOneByToken(user);
 /* 58 */     java.util.List<Characters> charactersList = GameData.that.characterService.findByAccountId(accounts.getId());
-/* 59 */     ListVo_61537_0 listvo_61537_0 = C8284_0.listjiaose(charactersList);
+/* 59 */     ListVo_61537_0 listvo_61537_0 = CMD_CREATE_NEW_CHAR.listjiaose(charactersList);
 /*    */     
 /*    */ 
 /* 62 */     ByteBuf write = new M61537_0().write(listvo_61537_0);
