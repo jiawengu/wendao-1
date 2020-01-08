@@ -50,6 +50,10 @@ public class PetAndHelpSkillUtils {
 
         JSONArray jsonArray = new JSONArray(skillJson);
         List<JSONObject> result = new ArrayList<>();
+        if(null == skill_value || skill_value.isEmpty()){
+            return result;
+
+        }
         for(int i = 0; i < jsonArray.length(); ++i) {
             JSONObject jsonObject = jsonArray.optJSONObject(i);
             int metal = jsonObject.optInt("metal");
