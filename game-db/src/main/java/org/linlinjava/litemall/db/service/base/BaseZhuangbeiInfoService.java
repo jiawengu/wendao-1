@@ -74,6 +74,13 @@ public class BaseZhuangbeiInfoService {
         return this.mapper.selectByExample(example);
     }
 
+    public List<ZhuangbeiInfo> findByAttribAndQuality(Integer attrib,String quality) {
+        ZhuangbeiInfoExample example = new ZhuangbeiInfoExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false).andAttribEqualTo(attrib).andQualityEqualTo(quality);
+        return this.mapper.selectByExample(example);
+    }
+
     public List<ZhuangbeiInfo> findByAmount(Integer amount) {
         ZhuangbeiInfoExample example = new ZhuangbeiInfoExample();
         Criteria criteria = example.createCriteria();
