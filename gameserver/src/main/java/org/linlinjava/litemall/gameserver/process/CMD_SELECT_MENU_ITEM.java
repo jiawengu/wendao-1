@@ -563,7 +563,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 vo_20481_0.msg = "人数不足3人！";
                 vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                 GameObjectChar.getGameObjectChar();
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 return;
             }
 
@@ -574,7 +574,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 vo_20481_0.msg = "人数不足3人！";
                 vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                 GameObjectChar.getGameObjectChar();
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 return;
 
             }
@@ -596,7 +596,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
 
                     GameObjectChar.getGameObjectChar();
-                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     return;
                 }
             }
