@@ -425,6 +425,7 @@ public class FightObject {
         this.type = 4;
     }
     public FightObject(T_FightObject t_fightObject, int ttt_level){
+        ttt_level = ttt_level-36;
         int metal = GameUtil.getMetal(t_fightObject.getPolar());
 
         this.str = t_fightObject.getName();
