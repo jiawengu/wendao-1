@@ -37,4 +37,10 @@ public class FightRequest {
 
   public FightRequest() {
   }
+
+  public void normalSkill(int id){
+      this.id = id;
+      this.action = 2;
+      this.para = 2;
+  }
 }

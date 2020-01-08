@@ -715,9 +715,7 @@ public class FightManager {
                 generateActionVt(fightContainer, fightObject, fightRequest);
             }
         } else {
-            fightRequest.para = 2;
-            fightRequest.action = 2;
-            fightRequest.id = fightObject.fid;
+            fightRequest.normalSkill(fightObject.fid);
             generateActionDM(fightContainer, fightObject, fightRequest);
         }
 

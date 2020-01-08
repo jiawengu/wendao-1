@@ -1042,8 +1042,12 @@ public class FightObject {
         return this.hasBuffState(528128);
     }
 
+    /**
+     * 是否可以使用技能
+     * @return
+     */
     public boolean canbeSkill() {
-        return !this.hasBuffState(3848) && !this.hasBuffState(3872);
+        return !isYiwang() && !isHunluan();
     }
 
     public boolean canbeHurt() {
