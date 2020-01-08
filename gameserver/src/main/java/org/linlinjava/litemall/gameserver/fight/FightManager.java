@@ -248,8 +248,8 @@ public class FightManager {
             GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
         }
 
-        GameUtil.a24505(chara);
-        GameUtil.a65511(chara);
+        GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
+        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
         Vo_3583_0 vo_3583_0 = new Vo_3583_0();
         vo_3583_0.a = 1;
         vo_3583_0.b = 3;
@@ -504,8 +504,8 @@ public class FightManager {
             GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
         }
 
-        GameUtil.a24505(chara);
-        GameUtil.a65511(chara);
+        GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
+        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
         Vo_3583_0 vo_3583_0 = new Vo_3583_0();
         vo_3583_0.a = 1;
         vo_3583_0.b = 3;
@@ -2305,8 +2305,8 @@ public class FightManager {
             GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
         }
 
-        GameUtil.a24505(chara);
-        GameUtil.a65511(chara);
+        GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
+        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
         Vo_3583_0 vo_3583_0 = new Vo_3583_0();
         vo_3583_0.a = 1;
         vo_3583_0.b = 3;

@@ -223,7 +223,9 @@ public class Chara implements Serializable {
     public int def;
 
     public int dex;
-
+    /**
+     * 灵力
+     */
     public int wiz;
 
     public int mana;
@@ -388,10 +390,14 @@ public class Chara implements Serializable {
     public int autofight_skillaction = 2;
     public int autofight_skillno = 2;
 
-
+    /**
+     * 道行-n个3年
+     */
     public int friend;
 
-
+    /**
+     * 道行-天
+     */
     public int owner_name;
 
     public Map<String, String> chenghao = new HashMap();

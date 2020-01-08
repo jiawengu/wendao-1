@@ -18,6 +18,9 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 障碍木-法系伤害
+ */
 public class ZhangaiMu71Skill extends FightRoundSkill {
     private int xueliang;
 

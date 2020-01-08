@@ -11,6 +11,9 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 防御技能
+ */
 public class DefenseSkill extends FightRoundSkill {
     public DefenseSkill() {
     }

@@ -45,7 +45,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  44 */     if ("request_team_leader".equals(ask_type)) {
 /*  45 */       List<Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
 /*  46 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61545_0(), vo_61545_0List);
-/*  47 */       org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = GameUtil.a24505(chara1);
+/*  47 */       org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
 /*  48 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M24505_0(), vo_24505_0);
 /*  49 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  50 */       vo_8165_0.msg = "你的申请已发送";

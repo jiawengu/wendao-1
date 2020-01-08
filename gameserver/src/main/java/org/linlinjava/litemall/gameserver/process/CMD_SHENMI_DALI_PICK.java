@@ -19,7 +19,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C41481_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_SHENMI_DALI_PICK implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {
@@ -73,7 +73,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  72 */           List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
 /*  73 */           GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*     */           
-/*  75 */           GameUtil.a65511(chara);
+/*  75 */           GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*     */           
 /*  77 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  78 */           vo_8165_0.msg = ("恭喜，你意外获得了#R" + name + "#n奖励");
@@ -146,7 +146,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 145 */       List<Vo_32747_0> vo_32747_0List = GameUtil.a32747(chara);
 /* 146 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
 /*     */       
-/* 148 */       GameUtil.a65511(chara);
+/* 148 */       GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*     */       
 /* 150 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 151 */       vo_8165_0.msg = ("恭喜，你意外获得了#R" + name + "#n奖励");

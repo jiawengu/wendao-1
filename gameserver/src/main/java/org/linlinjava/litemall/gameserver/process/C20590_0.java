@@ -4,7 +4,7 @@
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import java.util.List;
 /*    */ import org.linlinjava.litemall.db.domain.Characters;
-/*    */ import org.linlinjava.litemall.db.service.CharacterService;
+/*    */
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
@@ -52,7 +52,7 @@
 /* 52 */     Characters characters = GameData.that.characterService.findOneByName(name);
 /* 53 */     String data = characters.getData();
 /* 54 */     Chara chara1 = (Chara)JSONUtils.parseObject(data, Chara.class);
-/* 55 */     Vo_24505_0 vo_24505_0 = GameUtil.a24505(chara1);
+/* 55 */     Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
 /* 56 */     GameObjectChar.send(new M24505_0(), vo_24505_0);
 /* 57 */     List<Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
 /* 58 */     GameObjectChar.send(new M61545_0(), vo_61545_0List);

@@ -8,6 +8,9 @@ public class PetShuXing {
 
     public String str = "";
     public int max_life;
+    /**
+     * 防御
+     */
     public int def;
     /**
      * 法力
@@ -29,6 +32,9 @@ public class PetShuXing {
      * 相性点
      */
     public int polar_point;
+    /**
+     * 相性
+     */
     public int metal;
     public int stamina;
     public int type;
@@ -37,13 +43,28 @@ public class PetShuXing {
     public int mag_power;
     public int life;
     public int speed;
+    /**
+     * 准确
+     */
     public int accurate;
+    /**
+     * 魔法
+     */
     public int mana;
+    /**
+     * 灵敏/速度
+     */
     public int parry;
+    /**
+     * 灵力
+     */
     public int wiz;
     public int shape;
     public int pot;
     public int loyalty;
+    /**
+     * 抗木
+     */
     public int resist_wood;
     public int resist_water;
     public int resist_fire;
@@ -54,9 +75,18 @@ public class PetShuXing {
     public int resist_forgotten;
     public int resist_confusion;
     public int longevity;
+    /**
+     * 武学
+     */
     public int martial;
     public int resist_point;
+    /**
+     * 亲密
+     */
     public int intimacy;
+    /**
+     * 上月武学
+     */
     public int last_mon_martial;
     public int mon_tao_rank;
     public int double_hit;

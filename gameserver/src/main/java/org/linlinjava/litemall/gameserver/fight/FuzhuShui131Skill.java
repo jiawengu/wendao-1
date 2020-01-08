@@ -17,6 +17,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 辅助水
+ * 	对己方使用，能够提升己方单人略微防御力与提升抗障碍能力
+ */
 public class FuzhuShui131Skill extends FightRoundSkill {
     public FuzhuShui131Skill() {
     }

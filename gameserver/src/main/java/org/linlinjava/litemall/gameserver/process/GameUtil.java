@@ -1374,7 +1374,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
         /* 1302 */     return vo_61545_0List;
         /*      */   }
     /*      */  //MSG_FRIEND_UPDATE_PARTIAL
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 a24505(Chara chara) {
+    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 MSG_FRIEND_UPDATE_PARTIAL(Chara chara) {
         /* 1306 */     org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0();
         /* 1307 */     vo_24505_0.update_type = 2;
         /* 1308 */     vo_24505_0.groupBuf = "6";
@@ -2713,7 +2713,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
      * @param chara
      * @return
      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 a65511(Chara chara) {
+    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 MSG_UPDATE_IMPROVEMENT(Chara chara) {
         /* 2596 */     zhuangbeiValue(chara);
         /* 2597 */     chara.zbAttribute.id = chara.id;
         /* 2598 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65511_0(), chara.zbAttribute);

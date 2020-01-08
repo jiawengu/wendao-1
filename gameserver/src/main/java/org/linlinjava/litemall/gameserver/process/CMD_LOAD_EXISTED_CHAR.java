@@ -128,7 +128,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 123 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45388_0(), null);
 /*     */     
 /*     */ 
-/* 126 */     GameUtil.a65511(chara);
+/* 126 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*     */
               GameUtilRenWu.notifyTTTTask(chara);
 /*     */ 
@@ -222,7 +222,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 216 */     session.gameMap.join(session);
 /*     */     
 /*     */ 
-/* 219 */     GameUtil.a65511(chara);
+/* 219 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*     */     
 /*     */ 
 /*     */ 

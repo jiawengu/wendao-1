@@ -63,7 +63,7 @@
 /*  63 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M8425_0(), vo_8425_0);
 /*     */     
 /*     */ 
-/*  66 */     GameUtil.a65511(chara);
+/*  66 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*     */     
 /*     */ 
 /*  69 */     Vo_45177_0 vo_45177_0 = new Vo_45177_0();

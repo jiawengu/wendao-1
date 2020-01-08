@@ -18,6 +18,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 障碍火
+ * 	对敌方使用，成功后可令对手单人处于锁灵状态，该状态下所有战斗指令无效，但可以使用道具；死亡后锁灵状态马上解除但当前回合无法被复活。
+ */
 public class ZhangaiHuo171Skill extends FightRoundSkill {
     public ZhangaiHuo171Skill() {
     }

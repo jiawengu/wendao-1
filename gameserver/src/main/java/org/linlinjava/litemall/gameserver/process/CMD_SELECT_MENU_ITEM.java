@@ -2793,7 +2793,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /* 1283 */
             GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
             /* 1284 */
-            GameUtil.a65511(chara);
+            GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
             /*      */
         }
         /* 1286 */

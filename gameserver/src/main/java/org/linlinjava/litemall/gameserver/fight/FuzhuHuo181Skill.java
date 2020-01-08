@@ -18,6 +18,9 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 辅助火-提高速度
+ */
 public class FuzhuHuo181Skill extends FightRoundSkill {
     public FuzhuHuo181Skill() {
     }

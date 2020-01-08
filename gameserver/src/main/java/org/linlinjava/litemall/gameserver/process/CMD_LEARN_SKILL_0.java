@@ -77,7 +77,7 @@
 /*  77 */       sjjiNeng.isTempSkill = 0;
 /*  78 */       chara.jiNengList.add(sjjiNeng);
 /*  79 */       if ((skill_no == 301) || (skill_no == 302)) {
-/*  80 */         GameUtil.a65511(chara);
+/*  80 */         GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*  81 */         sjjiNeng.s1 = "voucher_or_cash";
 /*  82 */         if (chara.use_money_type < cash) {
 /*  83 */           chara.balance -= cash;
@@ -135,7 +135,7 @@
 /* 135 */       sjjiNeng.s2 = blueAndPointsLan[1];
 /*     */       
 /* 137 */       if ((skill_no == 301) || (skill_no == 302)) {
-/* 138 */         GameUtil.a65511(chara);
+/* 138 */         GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /* 139 */         sjjiNeng.s1 = "voucher_or_cash";
 /* 140 */         if (chara.use_money_type < cash) {
 /* 141 */           chara.balance -= cash;

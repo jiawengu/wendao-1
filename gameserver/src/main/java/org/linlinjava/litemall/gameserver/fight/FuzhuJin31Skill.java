@@ -19,6 +19,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
 
+/**
+ * 辅助金
+ * 可使己方单个对象的物理攻击上升
+ */
 public class FuzhuJin31Skill extends FightRoundSkill {
     public FuzhuJin31Skill() {
     }

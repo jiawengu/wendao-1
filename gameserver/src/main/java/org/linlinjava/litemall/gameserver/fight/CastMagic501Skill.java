@@ -16,6 +16,9 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 物理攻击-力破千钧：对敌方使用，令对手及其身边的数个目标受到与任务物理攻击相关的物理伤害。
+ */
 public class CastMagic501Skill implements FightSkill {
     public CastMagic501Skill() {
     }

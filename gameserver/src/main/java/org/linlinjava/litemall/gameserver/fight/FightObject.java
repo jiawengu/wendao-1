@@ -73,18 +73,45 @@ public class FightObject {
     public int pos;
     public int weapon_icon;
     public int guaiwulevel;
+    /**
+     * 法力值
+     */
     public int mofa;
+    /**
+     * 生命
+     */
     public int shengming;
+    /**
+     * 最大法力
+     */
     public int max_mofa;
+    /**
+     * 最大生命
+     */
     public int max_shengming;
+    /**
+     * 防御
+     */
     public int fangyu;
+    /**
+     * 准确
+     */
     public int accurate;
+    /**
+     * 法伤
+     */
     public int fashang;
+    /**
+     * 敏捷或速度
+     */
     public int parry;
     public int fangyu_ext;
     public int accurate_ext;
     public int fashang_ext;
     public int parry_ext;
+    /**
+     * 耐久
+     */
     public int durability;
     public int org_icon;
     public int suit_icon;
@@ -111,12 +138,21 @@ public class FightObject {
     public int autofight_select = 0;
     public int autofight_skillaction;
     public int autofight_skillno;
+    /**
+     * 道行
+     */
     public int friend;
+    /**
+     * 守护、宠物:2
+     */
     public int rank;
     /**
      * 天书技能
      */
     public int godbook;
+    /**
+     * 是否逃跑
+     */
     public boolean run;
     /**
      * 通天塔星君

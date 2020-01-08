@@ -272,7 +272,7 @@ public class C32776_0 implements GameHandler
                     final int coin4 = ConsumeMoneyUtils.appendEqMoney(goods4.goodsInfo.attrib);
                     if(chara.balance<coin4) {return;}
                     chara.balance -= coin4;
-                    GameUtil.a65511(chara);
+                    GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                     final List<Goods> list = new ArrayList<Goods>();
                     list.add(goods4);
                     final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
@@ -341,7 +341,7 @@ public class C32776_0 implements GameHandler
                         vo_20481_0.msg = "恭喜你，改造成功！装备的改造等级提升到1级";
                         vo_20481_0.time = 1562987118;
                         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final Vo_41191_0 vo_41191_4 = new Vo_41191_0();
                         vo_41191_4.flag = 1;
                         vo_41191_4.opType = "";
@@ -444,7 +444,7 @@ public class C32776_0 implements GameHandler
                             maps5.put("groupType", 2);
                             final GoodsHuangSe goodsLanSeObj = (GoodsHuangSe)JSONUtils.parseObject(JSONUtils.toJSONString((Object)maps5), (Class)GoodsHuangSe.class);
                             goods4.goodsHuangSe = goodsLanSeObj;
-                            GameUtil.a65511(chara);
+                            GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                             final List list2 = new ArrayList();
                             list2.add(goods4);
                             GameObjectChar.send(new M65525_0(), list2);
@@ -529,7 +529,7 @@ public class C32776_0 implements GameHandler
                         maps2.put("groupType", 2);
                         final GoodsFenSe goodsLanSeObj2 = (GoodsFenSe)JSONUtils.parseObject(JSONUtils.toJSONString((Object)maps2), (Class)GoodsFenSe.class);
                         goods.goodsFenSe = goodsLanSeObj2;
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         GameObjectChar.send(new M65525_0(), chara.backpack);
                         final int coin7 = ConsumeMoneyUtils.pinkMoney(goods.goodsInfo.attrib);
                         if(chara.balance<coin7) {return;}
@@ -1127,7 +1127,7 @@ public class C32776_0 implements GameHandler
                         goods7.goodsInfo.degree_32 = 0;
                         goods7.goodsInfo.owner_id = 1;
                         goods7.goodsLanSe = goodsLanSeObj5;
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final List list4 = new ArrayList();
                         list4.add(goods7);
                         GameUtil.removemunber(chara, goods, 1);
@@ -1171,7 +1171,7 @@ public class C32776_0 implements GameHandler
                         goods12.goodsLanSe = goodsLanSeObj6;
                         goods12.goodsHuangSe = goodshuangseObj;
                         goods12.goodsFenSe = goodsfenseObj;
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final List list5 = new ArrayList();
                         list5.add(goods12);
                         GameUtil.removemunber(chara, goods, 1);
