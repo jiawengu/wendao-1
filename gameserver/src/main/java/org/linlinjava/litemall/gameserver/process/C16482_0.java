@@ -6,28 +6,31 @@ package org.linlinjava.litemall.gameserver.process;
 import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
 /*     */ import java.util.HashMap;
-/*     */ import java.util.List;
+/*     */
 /*     */ import java.util.Map;
 /*     */ import org.linlinjava.litemall.core.util.CharUtil;
 import org.linlinjava.litemall.db.domain.Characters;
-/*     */ import org.linlinjava.litemall.db.service.CharacterService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseAccountsService;
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
+/*     */
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M16383_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*     */
 import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
+/*     */
 /*     */ import org.springframework.stereotype.Service;
 
+/**
+ * CMD_CHAT_EX
+ */
 /*     */
 /*     */
 @Service
@@ -132,7 +135,7 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
                 /*  80 */
                 vo_20481_0.time = 1562987118;
                 /*  81 */
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /*  82 */
                 GameUtil.removemunber(chara, para, 1);
                 /*  83 */
@@ -150,7 +153,7 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
             /*  89 */
             vo_20481_0.time = 1562987118;
             /*  90 */
-            GameObjectChar.send(new M20481_0(), vo_20481_0);
+            GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
             /*     */
         }
         /*     */
@@ -178,7 +181,7 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
                 /* 105 */
                 vo_20481_0.time = 1562987118;
                 /* 106 */
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /* 107 */
                 return;
                 /*     */
@@ -236,7 +239,7 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
                 /* 121 */
                 vo_20481_0.time = 1562987118;
                 /* 122 */
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /* 123 */
                 return;
                 /*     */
@@ -297,7 +300,7 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
                 /* 151 */
                 vo_20481_0.time = 1562987118;
                 /* 152 */
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /* 153 */
                 return;
                 /*     */

@@ -2,15 +2,15 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.Map;
+/*    */
 /*    */ import java.util.Map.Entry;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ 
 /*    */ @org.springframework.stereotype.Service
@@ -32,10 +32,10 @@
 /* 32 */       chara.chenhao = "";
 /*    */     }
 /* 34 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 35 */     GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 35 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */     
-/* 37 */     Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 38 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61661_0(), vo_61661_0);
+/* 37 */     Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 38 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

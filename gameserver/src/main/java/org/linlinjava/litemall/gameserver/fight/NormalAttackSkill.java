@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
-import org.linlinjava.litemall.gameserver.data.write.M19945_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public class NormalAttackSkill implements FightSkill {
@@ -25,7 +25,7 @@ public class NormalAttackSkill implements FightSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         int id = fightRequest.id;
         FightObject fightObject = FightManager.getFightObject(fightContainer, id);
         FightObject victimFightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);
@@ -50,7 +50,7 @@ public class NormalAttackSkill implements FightSkill {
         vo_19945_0.missed = 1;
         vo_19945_0.para = 0;
         vo_19945_0.damage_type = 1;
-        FightManager.send(fightContainer, new M19945_0(), vo_19945_0);
+        FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
         int hurt = BattleUtils.battle(fightObject.accurate + fightObject.accurate_ext, 0, victimFightObject.fangyu + victimFightObject.fangyu_ext);
         hurt = (int)((float)hurt * jiabei);
         hurt = victimFightObject.reduceShengming(hurt, fabao);

@@ -2,7 +2,7 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.io.PrintStream;
+/*     */
 /*     */ import java.util.ArrayList;
 /*     */ import java.util.Hashtable;
 /*     */ import java.util.List;
@@ -11,9 +11,9 @@
 /*     */ import org.linlinjava.litemall.db.domain.Pet;
 /*     */ import org.linlinjava.litemall.db.domain.StoreInfo;
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-/*     */ import org.linlinjava.litemall.db.service.base.BasePetService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseZhuangbeiInfoService;
+/*     */
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*     */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*     */ import org.linlinjava.litemall.gameserver.data.game.LuckDrawUtils;
@@ -21,8 +21,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45382_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M41240_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M45382_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65507_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -44,7 +44,7 @@
 /*  44 */     if (1 == type) {
 /*  45 */       chara.shadow_self -= 1;
 /*  46 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  47 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  47 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*     */ 
 /*  50 */       String[] strings = LuckDrawUtils.luckDraw(false);
@@ -56,7 +56,7 @@
 /*  56 */       for (int i = 0; i < 10; i++) {
 /*  57 */         chara.shadow_self -= 1;
 /*  58 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  59 */         GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  59 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */         
 /*     */ 
 /*  62 */         String[] strings = LuckDrawUtils.luckDraw(false);
@@ -68,7 +68,7 @@
 /*     */     {
 /*  69 */       chara.shadow_self -= 10;
 /*  70 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  71 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  71 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*     */ 
 /*  74 */       String[] strings = LuckDrawUtils.luckDraw(true);
@@ -79,7 +79,7 @@
 /*  79 */       for (int i = 0; i < 10; i++) {
 /*  80 */         chara.shadow_self -= 10;
 /*  81 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  82 */         GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  82 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */         
 /*     */ 
 /*  85 */         String[] strings = LuckDrawUtils.luckDraw(true);
@@ -105,7 +105,7 @@
 /* 105 */       List<Petbeibao> list = new ArrayList();
 /* 106 */       chara.pets.add(petbeibao);
 /* 107 */       list.add(petbeibao);
-/* 108 */       GameObjectChar.send(new M65507_0(), list);
+/* 108 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */     }
 /* 110 */     if (strings[1].equals("神兽")) {
 /* 111 */       Pet pet = GameData.that.basePetService.findOneByName(strings[0]);
@@ -114,7 +114,7 @@
 /* 114 */       List<Petbeibao> list = new ArrayList();
 /* 115 */       chara.pets.add(petbeibao);
 /* 116 */       list.add(petbeibao);
-/* 117 */       GameObjectChar.send(new M65507_0(), list);
+/* 117 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */     }
 /* 119 */     if (strings[1].equals("精怪")) {
 /* 120 */       int jieshu = stageMounts(strings[0]);
@@ -138,7 +138,7 @@
 /* 138 */       shuXing.upgrade_magic = 0;
 /* 139 */       shuXing.upgrade_total = 0;
 /* 140 */       petbeibao.petShuXing.add(shuXing);
-/* 141 */       GameObjectChar.send(new M65507_0(), list);
+/* 141 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*     */     }
 /* 143 */     if (strings[1].equals("物品")) {
 /* 144 */       StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(strings[0]);

@@ -19,6 +19,9 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.stereotype.Service;
 
+/**
+ * CMD_L_REQUEST_LINE_INFO  -- 请求排队信息
+ */
 /*    */
 /*    */
 @Service

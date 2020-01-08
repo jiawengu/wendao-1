@@ -13,6 +13,11 @@ public abstract class FightRoundSkill implements FightSkill {
     public FightRoundSkill() {
     }
 
+    /**
+     * 消失
+     * @param fightContainer
+     * @return
+     */
     public boolean disappear(FightContainer fightContainer) {
         if (this.removeRound <= fightContainer.round) {
             this.doDisappear();

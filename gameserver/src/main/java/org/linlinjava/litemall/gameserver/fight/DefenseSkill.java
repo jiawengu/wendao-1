@@ -8,9 +8,12 @@ package org.linlinjava.litemall.gameserver.fight;
 import java.util.ArrayList;
 import java.util.List;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 防御技能
+ */
 public class DefenseSkill extends FightRoundSkill {
     public DefenseSkill() {
     }
@@ -23,7 +26,7 @@ public class DefenseSkill extends FightRoundSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         FightObject fightObject = FightManager.getFightObject(fightContainer, fightRequest.id);
         fightObject.addBuffState(fightContainer, this.getStateType());
         fightObject.addSkill(this);

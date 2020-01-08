@@ -5,12 +5,12 @@
 /*    */ import java.util.ArrayList;
 /*    */ import java.util.List;
 /*    */ import org.linlinjava.litemall.db.domain.Pet;
-/*    */ import org.linlinjava.litemall.db.service.base.BasePetService;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65507_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -67,7 +67,7 @@
 /* 67 */           shuXing.max_life = shuXing.def;
 /* 68 */           shuXing.max_mana = shuXing.dex;
 /* 69 */           list.add(petbeibao);
-/* 70 */           GameObjectChar.send(new M65507_0(), list);
+/* 70 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 71 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 72 */           vo_8165_0.msg = ("你的#Y" + pet.getName() + "#n经过洗炼，基础成长已重新生成。");
 /* 73 */           vo_8165_0.active = 0;

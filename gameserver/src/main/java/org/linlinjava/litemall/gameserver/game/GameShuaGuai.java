@@ -7,7 +7,8 @@
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ public class GameShuaGuai
 /*     */ {
@@ -20,7 +21,7 @@
 /*     */   public static void sendshuaguai(GameShuaGuai gameShuaGuai)
 /*     */   {
 /*  22 */     for (int i = 0; i < dengdaishuaXing.size(); i++) {
-/*  23 */       GameObjectCharMng.sendAllmap(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
+/*  23 */       GameObjectCharMng.sendAllmap(new MSG_APPEAR(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
 /*  24 */       List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
 /*  25 */       for (int j = 0; j < sessionList.size(); j++) {
 /*  26 */         if (((GameObjectChar)sessionList.get(j)).gameMap.id == ((Vo_65529_0)dengdaishuaXing.get(i)).mapid) {
@@ -100,7 +101,7 @@
 /* 100 */       vo_65529_0.level = level;
 /* 101 */       vo_65529_0.type = 2;
 /* 102 */       vo_65529_0.leixing = (random.nextInt(5) + 1);
-/* 103 */       List<RenwuMonster> renwuMonsters = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(7));
+/* 103 */       List<RenwuMonster> renwuMonsters = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(7));//杀星
 /* 104 */       RenwuMonster renwuMonster = (RenwuMonster)renwuMonsters.get(random.nextInt(renwuMonsters.size()));
 /* 105 */       org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
 /* 106 */       vo_65529_0.mapid = map.getMapId().intValue();

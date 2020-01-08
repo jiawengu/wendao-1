@@ -5,7 +5,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * MSG_DISAPPEAR    角色不再视野内
+ */
 /*    */ @Service
 /*    */ public class M12285_0
 /*    */   extends BaseWrite

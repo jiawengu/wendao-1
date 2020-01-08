@@ -5,7 +5,9 @@
 /*    */ import java.util.Random;
 /*    */ import org.linlinjava.litemall.db.domain.RenwuMonster;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*    */ 
+import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+
+/*    */
 /*    */ public class GameShiDao
 /*    */ {
 /* 11 */   public int shuaXingzhuangtai = 0;
@@ -73,7 +75,7 @@
 /*    */   public static void sendshuaguai(GameShiDao gameShiDao, GameMap gameMap)
 /*    */   {
 /* 75 */     for (int i = 0; i < gameShiDao.dengdaishuaXing.size(); i++) {
-/* 76 */       GameObjectCharMng.sendAllmapname(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), gameShiDao.dengdaishuaXing.get(i), gameMap.name);
+/* 76 */       GameObjectCharMng.sendAllmapname(new MSG_APPEAR(), gameShiDao.dengdaishuaXing.get(i), gameMap.name);
 /*    */     }
 /* 78 */     gameShiDao.shidaoyuanmo.addAll(gameShiDao.dengdaishuaXing);
 /* 79 */     gameShiDao.dengdaishuaXing = new LinkedList();

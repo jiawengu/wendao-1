@@ -9,10 +9,10 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M41488_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M41505_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
@@ -24,13 +24,13 @@
 /* 24 */     int fasion_label = GameReadTool.readByte(buff);
 /* 25 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*    */     
-/* 27 */     Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 28 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61661_0(), vo_61661_0);
+/* 27 */     Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 28 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*    */     
 /* 30 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 31 */     vo_61671_0.id = chara.id;
 /* 32 */     vo_61671_0.count = 0;
-/* 33 */     GameObjectChar.send(new M61671_0(), vo_61671_0);
+/* 33 */     GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /*    */     
 /*    */ 
 /*    */ 

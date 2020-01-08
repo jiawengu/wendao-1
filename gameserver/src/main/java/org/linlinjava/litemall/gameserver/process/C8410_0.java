@@ -5,9 +5,9 @@
 /*     */ import org.linlinjava.litemall.db.domain.StoreGoods;
 /*     */ import org.linlinjava.litemall.db.domain.StoreInfo;
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreGoodsService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseStoreInfoService;
-/*     */ import org.linlinjava.litemall.db.service.base.BaseZhuangbeiInfoService;
+/*     */
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
@@ -15,7 +15,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -40,7 +40,7 @@
 /*  40 */       chara.balance += 3000000;
 /*  41 */       chara.extra_life -= 300;
 /*  42 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  43 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  43 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  44 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  45 */       vo_40964_0.type = 3;
 /*  46 */       vo_40964_0.name = "金钱";
@@ -61,7 +61,7 @@
 /*  61 */       chara.balance += 6000000;
 /*  62 */       chara.extra_life -= 600;
 /*  63 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  64 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  64 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  65 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  66 */       vo_40964_0.type = 3;
 /*  67 */       vo_40964_0.name = "金钱";
@@ -82,7 +82,7 @@
 /*  82 */       chara.balance += 10000000;
 /*  83 */       chara.extra_life -= 1100;
 /*  84 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/*  85 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/*  85 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  86 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  87 */       vo_40964_0.type = 3;
 /*  88 */       vo_40964_0.name = "金钱";
@@ -103,7 +103,7 @@
 /* 103 */       chara.balance += 30000000;
 /* 104 */       chara.extra_life -= 3300;
 /* 105 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 106 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 106 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 107 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 108 */       vo_40964_0.type = 3;
 /* 109 */       vo_40964_0.name = "金钱";
@@ -124,7 +124,7 @@
 /* 124 */       chara.balance += 60000000;
 /* 125 */       chara.extra_life -= 7200;
 /* 126 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 127 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 127 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 128 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 129 */       vo_40964_0.type = 3;
 /* 130 */       vo_40964_0.name = "金钱";
@@ -145,7 +145,7 @@
 /* 145 */       chara.balance += 100000000;
 /* 146 */       chara.extra_life -= 7200;
 /* 147 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 148 */       GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 148 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 149 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 150 */       vo_40964_0.type = 3;
 /* 151 */       vo_40964_0.name = "金钱";
@@ -207,7 +207,7 @@
 /*     */     
 /*     */ 
 /* 209 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 210 */     GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 210 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */   }
 /*     */   
 /*     */ 

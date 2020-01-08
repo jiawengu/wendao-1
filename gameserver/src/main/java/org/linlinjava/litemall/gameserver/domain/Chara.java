@@ -423,6 +423,44 @@
 
             public int partyId = 0;
             public String partyName = "";
+    /**
+     * 通天塔-层数
+     */
+    public int ttt_layer;
+    /**
+     * 通天塔奖励类型
+     * exp，tao
+     */
+    public String ttt_award_type = "exp";
+    /**
+     * 通天塔-星君名字
+     */
+    public String ttt_xj_name = "";
+    /**
+     * 通天塔-当前层挑战次数
+     */
+    public int ttt_challenge_num;
+    /**
+     * 通天塔-是否挑战星君成功
+     */
+    public boolean ttt_xj_success;
+
+    public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
+        this.ttt_layer = ttt_layer;
+        this.ttt_xj_name = ttt_xj_name;
+        this.ttt_xj_success = false;
+        this.ttt_challenge_num = 0;
+    }
+
+    public void onTttChallengeSuccess() {
+        this.ttt_xj_success = true;
+        this.ttt_challenge_num++;
+    }
+
+    public void onTttChallengeFail() {
+        this.ttt_xj_success = false;
+        this.ttt_challenge_num++;
+    }
 /*     */ }
 
 

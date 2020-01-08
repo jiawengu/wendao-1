@@ -71,6 +71,7 @@
             <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />
         </table>
+        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>
 
     </context>
 </generatorConfiguration>

@@ -38,6 +38,53 @@ public class PetAndHelpSkillUtils {
         return getNomelSkills(pet, pMetal, attrib, isMagic, "");
     }
 
+    public static List<JSONObject> getSkills(int pMetal, int level, String skill_value) throws JSONException {
+        if (skillJson == null) {
+            BufferedReader br = getResFile();
+            StringBuilder strb = new StringBuilder();
+            br.lines().forEach((f) -> {
+                strb.append(f);
+            });
+            skillJson = strb.toString();
+        }
+
+        JSONArray jsonArray = new JSONArray(skillJson);
+        List<JSONObject> result = new ArrayList<>();
+        if(null == skill_value || skill_value.isEmpty()){
+            return result;
+
+        }
+        for(int i = 0; i < jsonArray.length(); ++i) {
+            JSONObject jsonObject = jsonArray.optJSONObject(i);
+            int metal = jsonObject.optInt("metal");
+            String skillType = jsonObject.optString("skillType");
+            String skillName = jsonObject.optString("skillName");
+            int skillIndex = jsonObject.optInt("skillIndex");
+            if (skill_value.contains(skillName) && pMetal == metal) {
+                int[] skillNum_round = skillNum(jsonObject, getMaxSkill(level));
+                jsonObject.put("skillNum", skillNum_round[0]);
+                jsonObject.put("skillRound", skillNum_round[1]);
+                jsonObject.put("skillLevel", getMaxSkill(level));
+                jsonObject.remove("skillUse");
+                jsonObject = appendBP(jsonObject, skillType, skillIndex, level);
+
+                result.add(jsonObject);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param pet 类型 宠物：1，守护：2
+     * @param pMetal    金木水火土
+     * @param attrib    等级
+     * @param isMagic   是否是魔法
+     * @param skill_value
+     * @return
+     * @throws JSONException
+     */
     public static List<JSONObject> getNomelSkills(int pet, int pMetal, int attrib, boolean isMagic, String skill_value) throws JSONException {
         if (skillJson == null) {
             BufferedReader br = getResFile();
@@ -59,7 +106,6 @@ public class PetAndHelpSkillUtils {
             }
         }
 
-        List<JSONObject> sh_gj_list = new ArrayList();
         int[] sh_fz = new int[]{1, 1, 1, 50, 100};
         int sh_fz_count = 0;
 
@@ -70,8 +116,7 @@ public class PetAndHelpSkillUtils {
             }
         }
 
-        List<JSONObject> sh_fz_list = new ArrayList();
-        List<JSONObject> pet_gj_list = new ArrayList();
+
         int[] pet_gj = new int[]{20, 40, 60};
         List<Integer> pet_gj_counts = new ArrayList();
 
@@ -92,12 +137,16 @@ public class PetAndHelpSkillUtils {
             }
         }
 
+        List<JSONObject> sh_gj_list = new ArrayList();
+        List<JSONObject> sh_fz_list = new ArrayList();
+        List<JSONObject> pet_gj_list = new ArrayList();
+
         JSONObject jsonObject;
         int metal;
         String skillType;
         int skillIndex;
         int[] skillNum_round;
-        if (pet == 2 && (null == skill_value || skill_value.isEmpty())) {
+        if (pet == 2 && (null == skill_value || skill_value.isEmpty())) {//守护
             for(i = 0; i < jsonArray.length(); ++i) {
                 jsonObject = jsonArray.optJSONObject(i);
                 metal = jsonObject.optInt("metal");
@@ -132,7 +181,7 @@ public class PetAndHelpSkillUtils {
 
             sh_gj_list.addAll(sh_fz_list);
             return sh_gj_list;
-        } else if (pet == 1 && isMagic && (null == skill_value || skill_value.isEmpty())) {
+        } else if (pet == 1 && isMagic && (null == skill_value || skill_value.isEmpty())) {//宠物
             for(i = 0; i < jsonArray.length(); ++i) {
                 jsonObject = jsonArray.optJSONObject(i);
                 metal = jsonObject.optInt("metal");
@@ -234,6 +283,12 @@ public class PetAndHelpSkillUtils {
         }
     }
 
+    /**
+     * 根据等级获取skillNum和skillRound
+     * @param skillObject
+     * @param skill
+     * @return
+     */
     public static int[] skillNum(JSONObject skillObject, int skill) {
         JSONArray jsonArray = skillObject.optJSONArray("skillUse");
         JSONArray jsonArrayRound = skillObject.optJSONArray("skillRound");

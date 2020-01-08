@@ -14,7 +14,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.domain.LieBiao;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * MSG_REQUEST_LIST -- 通知客户端请求数据
+ */
 /*    */ @Service
 /*    */ public class M53741_0
 /*    */   extends BaseWrite

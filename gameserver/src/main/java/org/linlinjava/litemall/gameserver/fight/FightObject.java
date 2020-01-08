@@ -12,6 +12,7 @@ import java.util.Random;
 import org.json.JSONObject;
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.db.domain.SkillMonster;
+import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
@@ -21,11 +22,11 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7667_0;
-import org.linlinjava.litemall.gameserver.data.write.M11757_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
-import org.linlinjava.litemall.gameserver.data.write.M7667_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_REVIVE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -34,46 +35,129 @@ import org.linlinjava.litemall.gameserver.domain.ShouHu;
 import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 public class FightObject {
+    /**
+     * 玩家id
+     * 宠物id
+     */
     public int id;
+    /**
+     * 玩家id
+     */
     public int cid;
+    /**
+     * 玩家id,
+     * 宠物id
+     */
     public int fid;
+    /**
+     * 玩家名字
+     */
     public String str;
+    /**
+     * 1:队长
+     */
     public int leader;
+    /**
+     * 1:玩家
+     * 2:宠物
+     * 3:守护
+     * 4:怪物
+     */
     public int type;
+    /**
+     * 站位
+     */
     public int pos;
     public int weapon_icon;
     public int guaiwulevel;
+    /**
+     * 法力值
+     */
     public int mofa;
+    /**
+     * 生命
+     */
     public int shengming;
+    /**
+     * 最大法力
+     */
     public int max_mofa;
+    /**
+     * 最大生命
+     */
     public int max_shengming;
+    /**
+     * 防御
+     */
     public int fangyu;
+    /**
+     * 准确
+     */
     public int accurate;
+    /**
+     * 法伤
+     */
     public int fashang;
+    /**
+     * 敏捷或速度
+     */
     public int parry;
     public int fangyu_ext;
     public int accurate_ext;
     public int fashang_ext;
     public int parry_ext;
+    /**
+     * 耐久
+     */
     public int durability;
     public int org_icon;
     public int suit_icon;
     public int suit_light_effect;
     public int special_icon;
+    /**
+     * 1:正常
+     * 2：死亡 可复活
+     * 3：死亡不可复活、逃离战斗
+     * 6:人或守护死亡时、其他类型可复活时
+     * 7：不是人或守护且不可复活时
+     */
     public int state = 1;
     private List<Integer> buffState = new ArrayList();
+    /**
+     * 技能列表
+     */
     public List<JiNeng> skillsList;
     public FightRequest fightRequest;
+    /**
+     * 战斗技能列表
+     */
     private List<FightSkill> fightSkillList = new ArrayList();
     public int autofight_select = 0;
     public int autofight_skillaction;
     public int autofight_skillno;
+    /**
+     * 道行
+     */
     public int friend;
+    /**
+     * 守护、宠物:2
+     */
     public int rank;
+    /**
+     * 天书技能
+     */
     public int godbook;
+    /**
+     * 是否逃跑
+     */
     public boolean run;
+    /**
+     * 通天塔星君
+     */
+    public FightObject tttXingjun;
 
     public FightObject(Chara chara) {
         this.id = chara.id;
@@ -292,12 +376,29 @@ public class FightObject {
             strname = chara.npcXuanShangName;
             this.friend = (int)(0.29D * (double)chara.level * (double)chara.level * (double)chara.level * 0.29D * (double)chara.level * (double)chara.level * (double)chara.level);
         }
+        if(name.contains("星君")){//通天塔
+            strname = name;
+        }
+
+        boolean isTTTPet = false;
+        for(String petName:GameUtil.TONG_TIAN_TA_PET){
+            if(petName.equals(name)){
+                strname = name;
+                isTTTPet = true;
+                break;
+            }
+        }
+
 
         String names = "土匪#强盗#狐狸妖#鱼妖#蓝精#黄怪#疯魑#狂魍#蟒怪#鸟精#琵琶妖蟒妖#怪王狂狮#鬼王黑熊#鬼王悍猪#混天巨象#兑灵#艮灵#坎灵#离灵#狂灵#疯灵#山神#炎神#雷神#花神#龙神#刀斧手#火扇儒生#红衣剑客#试道元魔#上古妖王";
         Petbeibao petbeibao;
-        if (!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
+        if(isTTTPet ){
+            petbeibao = tttPetCreate(strname, chara.ttt_layer);
+        }else if(name.contains("星君")){
+            petbeibao = this.petCreate(strname, chara.ttt_layer);
+        } else if (!name.equals("帮凶") && !name.equals("喽啰") && !strname.equals("土匪") && !strname.equals("强盗") && !names.contains(strname)) {
             petbeibao = this.petCreate(strname);
-        } else {
+        }else {
             petbeibao = this.petCreate(strname, chara.level);
         }
 
@@ -326,7 +427,38 @@ public class FightObject {
         this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
         this.type = 4;
     }
+    public FightObject(T_FightObject t_fightObject, int ttt_level){
+        ttt_level = ttt_level-36;
+        int metal = GameUtil.getMetal(t_fightObject.getPolar());
 
+        this.str = t_fightObject.getName();
+        this.guaiwulevel = ttt_level;
+        this.shengming = (int) (t_fightObject.getLife()*(1+ttt_level*0.1));
+        this.max_shengming = (int) (t_fightObject.getLife()*(1+ttt_level*0.1));
+        this.mofa = (int) (t_fightObject.getMana()*(1+ttt_level*0.1));
+        this.max_mofa = (int) (t_fightObject.getMana()*(1+ttt_level*0.1));
+        this.fashang = (int) (t_fightObject.getMagAttack()*(1+ttt_level*0.1));
+        this.parry = (int)(t_fightObject.getSpeed()*(1+ttt_level*0.1));
+        this.accurate = (int)(t_fightObject.getPhyAttack()*(1+ttt_level*0.1));
+        this.fangyu = (int)(t_fightObject.getDef()*(1+ttt_level*0.1));
+        this.org_icon = t_fightObject.getIcon();
+
+        this.skillsList = getJiNengListByName( metal, ttt_level, 123456, t_fightObject.getSkill());
+        this.type = 4;
+    }
+
+    public int subtraction(int i) {
+        Random r = new Random();
+        if (i == 0) {
+            return 0;
+        }
+        return r.nextInt(i);
+    }
+
+    /**
+     * 是否可以攻击
+     * @return
+     */
     public boolean canAtta() {
         boolean canbe = true;
         if (this.state == 2 || this.state == 3) {
@@ -340,6 +472,10 @@ public class FightObject {
         return canbe;
     }
 
+    /**
+     * 是否可以受到伤害
+     * @return
+     */
     public boolean canbeVictim() {
         boolean canbe = true;
         if (this.state == 2 || this.state == 3) {
@@ -563,7 +699,82 @@ public class FightObject {
         petbeibao.petShuXing.add(shuXing);
         return petbeibao;
     }
+    public Petbeibao tttPetCreate(String name, int level) {
+        T_FightObject pet = GameData.that.baseFightObjectService.findOneByName(name);
+        Petbeibao petbeibao = new Petbeibao();
+        PetShuXing shuXing = new PetShuXing();
+        shuXing.type = pet.getIcon();
+        shuXing.passive_mode = pet.getIcon();
+        shuXing.attrib = level;
+        shuXing.str = pet.getName();
+        shuXing.skill = level;
+        shuXing.pot = 0;
+        shuXing.resist_poison = 258;
+        shuXing.martial = 10000;
+        shuXing.suit_polar = pet.getName();
+        shuXing.auto_fight = shuXing.auto_fight + this.id;
+        if (pet.getPolar().equals("金")) {
+            shuXing.metal = 1;
+        }
 
+        if (pet.getPolar().equals("木")) {
+            shuXing.metal = 2;
+        }
+
+        if (pet.getPolar().equals("水")) {
+            shuXing.metal = 3;
+        }
+
+        if (pet.getPolar().equals("火")) {
+            shuXing.metal = 4;
+        }
+
+        if (pet.getPolar().equals("土")) {
+            shuXing.metal = 5;
+        }
+
+        shuXing.mana_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.attack_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mag_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_absorb = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.pet_mana_shape = shuXing.mana_effect + 40;
+        shuXing.pet_speed_shape = shuXing.attack_effect + 40;
+        shuXing.pet_phy_shape = shuXing.phy_effect + 40;
+        shuXing.pet_mag_shape = shuXing.mag_effect + 40;
+        shuXing.rank = shuXing.phy_absorb + 40;
+        shuXing.resist_point = shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank;
+        int polar_point = shuXing.skill * 4;
+        int addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.life = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.mag_power = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        polar_point -= addpoint;
+        shuXing.phy_power = shuXing.skill + addpoint;
+        addpoint = FightManager.RANDOM.nextInt(polar_point);
+        int var10000 = polar_point - addpoint;
+        shuXing.speed = shuXing.skill + addpoint;
+        petbeibao.petShuXing.add(shuXing);
+        BasicAttributesUtils.petshuxing(shuXing);
+        shuXing.max_life = shuXing.def;
+        shuXing.max_mana = shuXing.dex;
+        petbeibao.petShuXing.add(shuXing);
+        return petbeibao;
+    }
+
+    /**
+     *
+     * @param leixing 宠物：1，守护：2
+     * @param pos   金木水火土
+     * @param level
+     * @param isMagic
+     * @param id
+     * @param skills
+     * @return
+     */
     public static List<JiNeng> dujineng(int leixing, int pos, int level, boolean isMagic, int id, String skills) {
         List<JiNeng> jiNengList = new ArrayList();
         List<JSONObject> nomelSkills = PetAndHelpSkillUtils.getNomelSkills(leixing, pos, level, true, skills);
@@ -588,12 +799,42 @@ public class FightObject {
         return jiNengList;
     }
 
+    /**
+     * 技能名字是逗号分隔
+     * @param metal 门派
+     * @param skillNames
+     * @return
+     */
+    public static List<JiNeng> getJiNengListByName(int metal, int level, int id, String skillNames){
+        List<JiNeng> jiNengList = new ArrayList();
+        List<JSONObject> nomelSkills = PetAndHelpSkillUtils.getSkills(metal, level, skillNames);
+
+        for(int i = 0; i < nomelSkills.size(); ++i) {
+            JiNeng jiNeng = new JiNeng();
+            JSONObject jsonObject = nomelSkills.get(i);
+            jiNeng.id = id;
+            jiNeng.skill_no = Integer.parseInt((String)jsonObject.get("skillNo"));
+            jiNeng.skill_attrib = (Integer)jsonObject.get("skillLevel");
+            jiNeng.skill_level = (Integer)jsonObject.get("skillLevel");
+            jiNeng.skillRound = jsonObject.optInt("skillRound");
+            jiNeng.level_improved = 0;
+            jiNeng.skill_mana_cost = (Integer)jsonObject.get("skillBlue");
+            jiNeng.skill_nimbus = 42949672;
+            jiNeng.skill_disabled = 0;
+            jiNeng.range = (Integer)jsonObject.get("skillNum");
+            jiNeng.max_range = (Integer)jsonObject.get("skillNum");
+            jiNengList.add(jiNeng);
+        }
+
+        return jiNengList;
+    }
+
     public void updateState(FightContainer fightContainer, int state, int type) {
         Vo_11757_0 vo_11757_0 = new Vo_11757_0();
         vo_11757_0.id = this.fid;
         vo_11757_0.list.add(state);
         vo_11757_0.list.add(type);
-        FightManager.send(fightContainer, new M11757_0(), vo_11757_0);
+        FightManager.send(fightContainer, new MSG_C_UPDATE_STATUS(), vo_11757_0);
     }
 
     public void updateState(FightContainer fightContainer) {
@@ -609,7 +850,7 @@ public class FightObject {
             vo_19959_0.action = 43;
             vo_19959_0.vid = this.fid;
             vo_19959_0.para = 0;
-            FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             int value = 0;
 
             Integer integer;
@@ -621,12 +862,16 @@ public class FightObject {
             vo_11757_0.list.add(32);
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = this.fid;
-            FightManager.send(fightContainer, new M7655_0(), vo_7655_0);
+            FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
         }
 
-        FightManager.send(fightContainer, new M11757_0(), vo_11757_0);
+        FightManager.send(fightContainer, new MSG_C_UPDATE_STATUS(), vo_11757_0);
     }
 
+    /**
+     * 通知fightContainer所有的玩家，当前战斗对象的血量
+     * @param fightContainer
+     */
     public void update(FightContainer fightContainer) {
         ArrayList<Integer> objects = new ArrayList();
         objects.add(this.fid);
@@ -778,10 +1023,14 @@ public class FightObject {
 
     }
 
+    /**
+     * 复活
+     * @param fightContainer
+     */
     public void revive(FightContainer fightContainer) {
         Vo_7667_0 vo_7667_0 = new Vo_7667_0();
         vo_7667_0.id = this.fid;
-        FightManager.send(fightContainer, new M7667_0(), vo_7667_0);
+        FightManager.send(fightContainer, new MSG_C_CHAR_REVIVE(), vo_7667_0);
         this.update(fightContainer);
         FightResult fightResult = new FightResult();
         fightResult.id = this.fid;
@@ -797,8 +1046,12 @@ public class FightObject {
         return this.hasBuffState(528128);
     }
 
+    /**
+     * 是否可以使用技能
+     * @return
+     */
     public boolean canbeSkill() {
-        return !this.hasBuffState(3848) && !this.hasBuffState(3872);
+        return !isYiwang() && !isHunluan();
     }
 
     public boolean canbeHurt() {
@@ -950,5 +1203,13 @@ public class FightObject {
         boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
         this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
         this.type = 4;
+    }
+
+    /**
+     * 是否是通天塔宠物
+     * @return
+     */
+    public boolean isTTTPet(){
+        return null!=tttXingjun;
     }
 }

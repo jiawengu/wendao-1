@@ -192,6 +192,13 @@ public class BattleUtils {
         }
     }
 
+    /**
+     * 计算伤害
+     * @param baseAttack
+     * @param skillAttack
+     * @param monsterDefense
+     * @return
+     */
     public static int battle(int baseAttack, int skillAttack, int monsterDefense) {
         double y = 1.483748645720477D;
         double x = 1.880943782352233D;
@@ -206,13 +213,21 @@ public class BattleUtils {
         return hurt;
     }
 
-    public static int skillAttack(int baseAttack, int skillLeave, String skillType, int skillPara) {
+    /**
+     * 计算技能攻击
+     * @param baseAttack
+     * @param skillLevel
+     * @param skillType
+     * @param skillPara
+     * @return
+     */
+    public static int skillAttack(int baseAttack, int skillLevel, String skillType, int skillPara) {
         if (skillType.contentEquals("WS")) {
-            return (int)(0.001138120610055D * (double)skillLeave * (double)baseAttack);
+            return (int)(0.001138120610055D * (double)skillLevel * (double)baseAttack);
         } else {
             int skillIndex = getSkillIndex(skillPara);
             double[] fs = new double[]{0.0D, 7.98084596967E-4D, 0.002394253790902D, 0.010375099760575D, 0.004788507581804D};
-            return skillType.contentEquals("FS") ? (int)(fs[skillIndex] * (double)skillLeave * (double)baseAttack * 0.8D) : 0;
+            return skillType.contentEquals("FS") ? (int)(fs[skillIndex] * (double)skillLevel * (double)baseAttack * 0.8D) : 0;
         }
     }
 

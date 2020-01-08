@@ -12,12 +12,15 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
-import org.linlinjava.litemall.gameserver.data.write.M19945_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
-import org.linlinjava.litemall.gameserver.data.write.M64989_0;
-import org.linlinjava.litemall.gameserver.data.write.M7655_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
+/**
+ * 法攻技能
+ */
 public class CastMagic11Skill implements FightSkill {
     public CastMagic11Skill() {
     }
@@ -33,7 +36,7 @@ public class CastMagic11Skill implements FightSkill {
         vo_19959_0.action = 3;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         int attTimes = 1;
         boolean fabao = true;
         FightFabaoSkill fabaoSkill = attFightObject.getFabaoSkill();
@@ -71,7 +74,7 @@ public class CastMagic11Skill implements FightSkill {
         vo_19945_0.missed = 1;
         vo_19945_0.para = 0;
         vo_19945_0.damage_type = 2;
-        FightManager.send(fightContainer, new M19945_0(), vo_19945_0);
+        FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 1;
@@ -84,7 +87,7 @@ public class CastMagic11Skill implements FightSkill {
             vo_64989_0.missList.add(1);
         }
 
-        FightManager.send(fightContainer, new M64989_0(), vo_64989_0);
+        FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
         var16 = targetList.iterator();
 
         int remove;
@@ -139,7 +142,7 @@ public class CastMagic11Skill implements FightSkill {
 
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = attFightObject.fid;
-            FightManager.send(fightContainer, new M7655_0(), vo_7655_0);
+            FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             Iterator<FightObject> iterator = targetList.iterator();
             remove = 0;
 
@@ -177,7 +180,7 @@ public class CastMagic11Skill implements FightSkill {
             vo_19959_0.action = 3;
             vo_19959_0.vid = fightRequest.vid;
             vo_19959_0.para = fightRequest.para;
-            FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
             vo_19945_0 = new Vo_19945_0();
             vo_19945_0.id = fightRequest.vid;
             vo_19945_0.hid = fightRequest.id;
@@ -185,7 +188,7 @@ public class CastMagic11Skill implements FightSkill {
             vo_19945_0.missed = 1;
             vo_19945_0.para = 0;
             vo_19945_0.damage_type = 2;
-            FightManager.send(fightContainer, new M19945_0(), vo_19945_0);
+            FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
             vo_64989_0 = new Vo_64989_0();
             vo_64989_0.hid = fightRequest.id;
             vo_64989_0.a = 1;
@@ -197,7 +200,7 @@ public class CastMagic11Skill implements FightSkill {
                 vo_64989_0.missList.add(1);
             }
 
-            FightManager.send(fightContainer, new M64989_0(), vo_64989_0);
+            FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
             resultList = new ArrayList();
             hurt = 0;
             var31 = targetList.iterator();

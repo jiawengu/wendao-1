@@ -11,6 +11,9 @@ public class JiNeng
   public int skill_mana_cost;
   public int skill_nimbus;
   public int skill_disabled;
+  /**
+   * 技能目标数量
+   */
   public int range;
   public int max_range;
   public int count1;
@@ -19,9 +22,3 @@ public class JiNeng
   public int isTempSkill;
   public int skillRound;
 }
-
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\domain\JiNeng.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */

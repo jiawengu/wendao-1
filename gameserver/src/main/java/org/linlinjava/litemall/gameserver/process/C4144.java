@@ -15,7 +15,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * CMD_ENTER_ROOM
+ */
 /*    */ @Service
 /*    */ public class C4144
 /*    */   implements GameHandler

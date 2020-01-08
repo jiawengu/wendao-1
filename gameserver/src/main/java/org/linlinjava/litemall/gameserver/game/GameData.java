@@ -25,6 +25,8 @@ public class GameData {
     @Autowired
     public BasePetService basePetService;
     @Autowired
+    public BaseFightObjectService baseFightObjectService;
+    @Autowired
     public BaseExperienceService baseExperienceService;
     @Autowired
     public BaseStoreInfoService baseStoreInfoService;
