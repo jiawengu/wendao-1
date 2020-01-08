@@ -43,6 +43,8 @@ public class GameMap {
     public List<GameObjectChar> sessionList = new CopyOnWriteArrayList();
     public GameShiDao gameShiDao = new GameShiDao();
 
+
+
     public GameMap() {
     }
 
@@ -65,6 +67,13 @@ public class GameMap {
         gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
         gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
+
+        GameData.that.superBossMng.randomBossPos();
+        //超级BOSS的地图判断
+        if(GameData.that.superBossMng.mapid == this.id){
+            npcList.add(GameData.that.superBossMng.npc);
+        }
+
         Iterator var6 = npcList.iterator();
 
         while(var6.hasNext()) {

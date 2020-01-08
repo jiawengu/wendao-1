@@ -2576,6 +2576,13 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
         org.linlinjava.litemall.db.domain.Npc npc = GameData.that.baseNpcService.findById(id);
 
+        if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
+            if ("我要挑战超级大BOSS".equals(menu_item)) {
+                GameData.that.superBossMng.sendBossFight(chara);
+            }
+            return ;
+        }
+
         if (npc == null) {
 
             return;
@@ -2593,24 +2600,7 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
             if ("超级大BOSS".equals(menu_item)) {
                 org.linlinjava.litemall.db.domain.NpcDialogueFrame npcDialogueFrame = GameData.that.baseNpcDialogueFrameService
                         .findOneByContent(npc.getName() + "超级大BOSS");
-
-                Vo_8247_0 vo_8247_0 = new Vo_8247_0();
-
-                vo_8247_0.id = npc.getId();
-
-                vo_8247_0.portrait = npc.getIcon();
-
-                vo_8247_0.pic_no = 1;
-
-                vo_8247_0.content = npcDialogueFrame.getUncontent();
-
-                vo_8247_0.secret_key = "";
-
-                vo_8247_0.name = npc.getName();
-
-                vo_8247_0.attrib = 0;
-
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameUtil.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
                 return;
             }
             if ("查看BOSS图鉴".equals(menu_item)) {
@@ -2623,30 +2613,16 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
                 return;
             }
             if ("查询BOSS位置".equals(menu_item)) {
-                //根据文档推断，超级BOSS 是个活动
-                //有时间区间和随机位置，以及 50 个分身
-                //初步确定逻辑
-                //1、在 Pet 配置四个超级BOSS的信息，其中 BOSS 所在的 zoon 为空
-                //2、在定时任务随机设置 BOSS 所在的地图，在所有地图随机产生，如果 BOSS 不在战斗状态则继续随机改变所在地图
-                //3、设置全局变量表示当前 BOSS 是否正在战斗/在玩家数据中设置击败每种 BOSS 的数量，
-                //   在战斗结束中记录，如果达到了 50 次击败则获得额外奖励
-                //
+                GameData.that.superBossMng.randomBossPos();
+                GameUtil.sendNpcDlg(npc, String.format("#R%s#n在#R%s#n作乱[离开/离开]", GameData.that.superBossMng.npc.getName(), GameData.that.superBossMng.mapName));
                 return;
             }
 
             if ("七杀试炼".equals(menu_item)) {
                 org.linlinjava.litemall.db.domain.NpcDialogueFrame npcDialogueFrame = GameData.that.baseNpcDialogueFrameService
                         .findOneByContent(npc.getName() + "七杀试炼");
-                Vo_8247_0 vo_8247_0 = new Vo_8247_0();
-                vo_8247_0.id = npc.getId();
-                vo_8247_0.portrait = npc.getIcon();
-                vo_8247_0.pic_no = 1;
-                vo_8247_0.content = npcDialogueFrame.getUncontent();
-                vo_8247_0.secret_key = "";
-                vo_8247_0.name = npc.getName();
-                vo_8247_0.attrib = 0;
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
 
+                GameUtil.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
                 chara.nextJuBen = 0;
                 chara.currentJuBens = npcDialogueFrame.getNext().split(",");
 

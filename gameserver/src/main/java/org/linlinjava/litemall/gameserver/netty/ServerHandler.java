@@ -17,7 +17,7 @@
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.beans.factory.annotation.Qualifier;
 /*    */ import org.springframework.stereotype.Component;
-/*    */ 
+/*    */
 /*    */ @Qualifier("serverHandler")
 /*    */ @ChannelHandler.Sharable
 /*    */ @Component
@@ -62,6 +62,8 @@
 /* 61 */     GameReadTool.readInt(buff);
 /* 62 */     GameReadTool.readShort(buff);
 /* 63 */     int cmd = GameReadTool.readShort(buff);
+
+            System.out.println(String.format("收到的指令[%s]", cmd));
 /* 64 */     for (GameHandler waitLine : this.gameHandlers) {
 /* 65 */       if (cmd == waitLine.cmd()) {
 /* 66 */         if (session != null) {
@@ -79,6 +81,7 @@
 /*    */         }
 /*    */       }
 /*    */     }
+
 /*    */   }
 /*    */   
 /*    */   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception

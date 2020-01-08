@@ -94,6 +94,7 @@ public class C63752_0 implements GameHandler {
         int type = GameReadTool.readShort(buff);
         String para1 = GameReadTool.readString(buff);
         String para2 = GameReadTool.readString(buff);
+        System.out.println(String.format("63752： type %s; para1 %s; para2 %s", type, para1, para2));
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         if (type == 20023) {
             Vo_9129_0 vo_9129_52 = new Vo_9129_0();
@@ -279,6 +280,7 @@ public class C63752_0 implements GameHandler {
         }
 
         if (32 == type) {
+
         }
 
         int weizhi;
@@ -1155,6 +1157,17 @@ public class C63752_0 implements GameHandler {
 
         if (type == 40008) {
             GameUtil.a49159(chara);
+        }
+
+        if(30000 == type){
+            System.out.println("创建副本逻辑");
+            //1、获取对应的副本信息
+                //1、副本信息在哪里
+
+            //2、判断是否符合等级标准
+            //3、传送任务到副本目标地图
+            //4、发送副本对应的剧情线
+            //5、跟随剧情进行战斗或者奖励
         }
 
     }

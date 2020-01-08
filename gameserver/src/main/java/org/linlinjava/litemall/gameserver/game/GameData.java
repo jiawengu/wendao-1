@@ -111,7 +111,10 @@ public class GameData {
     @Autowired
     public BaseChargeService baseChargeService;
 
+    public SuperBossMng superBossMng;
+
     public GameData() {
+        this.superBossMng = new SuperBossMng();
     }
 
     @PostConstruct

@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.linlinjava.litemall.db.domain.Characters;
+import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcDialogue;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 
-import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-import org.linlinjava.litemall.gameserver.data.write.M45056_0;
-import org.linlinjava.litemall.gameserver.data.write.M9129_0;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.GoodsFenSe;
@@ -235,8 +233,7 @@ public class GameUtil {
 
         huodejingyan(duiyuan, jingyan);
         ListVo_65527_0 listVo_65527_0 = a65527(duiyuan);
-        GameObjectCharMng.getGameObjectChar(duiyuan.id)
-                .sendOne(new org.linlinjava.litemall.gameserver.data.write.M65527_0(), listVo_65527_0);
+        GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M65527_0(), listVo_65527_0);
         i = random.nextInt(1000);
         if ((i < 5) && (level >= 60)) {
             weijianding(duiyuan);
@@ -4490,6 +4487,23 @@ public class GameUtil {
             }
         }
 
+    }
+
+    /**
+     * 弹出 NPC 操作对话框
+     * @param npc
+     * @param content
+     */
+    public static void sendNpcDlg(Npc npc,String content){
+        Vo_8247_0 vo_8247_0 = new Vo_8247_0();
+        vo_8247_0.id = npc.getId();
+        vo_8247_0.portrait = npc.getIcon();
+        vo_8247_0.pic_no = 1;
+        vo_8247_0.content = content;
+        vo_8247_0.secret_key = "";
+        vo_8247_0.name = npc.getName();
+        vo_8247_0.attrib = 0;
+        GameObjectChar.send(new M8247_0(), vo_8247_0);
     }
 
 }

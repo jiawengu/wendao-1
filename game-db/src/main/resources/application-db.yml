@@ -8,6 +8,10 @@ spring:
   datasource:
     druid:
       #jdbc:mysql://localhost:3306/xc_course?characterEncoding=utf-8
+#      url:  jdbc:mysql://127.0.0.1:3306/gserver?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
+#      driver-class-name:  com.mysql.jdbc.Driver
+#      username: root
+#      password: 123456
       url:  jdbc:mysql://117.24.6.15:3306/gserver?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
       driver-class-name:  com.mysql.jdbc.Driver
       username: root
