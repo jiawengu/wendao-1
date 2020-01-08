@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "超级女娲石",
+    "cost": 30000,
+    "daily_limit": 20
+  },
+  {
+    "id": 2,
+    "name": "神龙罩秘笈",
+    "cost": 100000,
+    "daily_limit": 3
+  },
+  {
+    "id": 3,
+    "name": "乾坤罩秘笈",
+    "cost": 100000,
+    "daily_limit": 3
+  },
+  {
+    "id": 4,
+    "name": "如意圈秘笈",
+    "cost": 100000,
+    "daily_limit": 3
+  },
+  {
+    "id": 5,
+    "name": "十二生肖召唤令",
+    "cost": 200000,
+    "daily_limit": 3
+  },
+  {
+    "id": 6,
+    "name": "上古神兽召唤令",
+    "cost": 500000,
+    "daily_limit": 2
+  },
+  {
+    "id": 7,
+    "name": "宠物经验丹",
+    "cost": 10000,
+    "daily_limit": 100
+  },
+  {
+    "id": 8,
+    "name": "超级粉水晶",
+    "cost": 20000,
+    "daily_limit": 50
+  },
+  {
+    "id": 9,
+    "name": "羽化丹",
+    "cost": 10000,
+    "daily_limit": 60
+  },
+  {
+    "id": 10,
+    "name": "法文手轮",
+    "cost": 5000,
+    "daily_limit": 50
+  },
+  {
+    "id": 11,
+    "name": "精怪诱饵",
+    "cost": 10000,
+    "daily_limit": 50
+  },
+  {
+    "id": 12,
+    "name": "点化丹",
+    "cost": 3000,
+    "daily_limit": 80
+  },
+  {
+    "id": 13,
+    "name": "天书",
+    "cost": 2000,
+    "daily_limit": 50
+  }
+]

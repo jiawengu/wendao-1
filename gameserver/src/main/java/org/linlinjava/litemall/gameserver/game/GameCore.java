@@ -32,7 +32,8 @@
            public PartyMgr partyMgr;
 /*    */   public void init(NettyServer server) {
 /* 34 */     log.error("game init begin!");
-/*    */     
+                XLSConfigMgr.init();
+/*    */
 /* 36 */     this.server = server;
 /* 37 */     for (int i = 0; i < 14; i++) {
 /* 38 */       GameLine gameLine = (GameLine)this.applicationContext.getBean("glllbawsdfawelllll", GameLine.class);
