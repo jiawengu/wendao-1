@@ -35,7 +35,7 @@ public class CMD_HEART_BEAT implements GameHandler {
         ctx.writeAndFlush(write);
 
         BAXIAN_LEFT_TIME_VO baxian_left_time_vo = new BAXIAN_LEFT_TIME_VO();
-        baxian_left_time_vo.left_time = 10;
+        baxian_left_time_vo.left_time = 7;
         GameObjectChar.send(m_msg_baxian_left_times, baxian_left_time_vo);
     }
 
