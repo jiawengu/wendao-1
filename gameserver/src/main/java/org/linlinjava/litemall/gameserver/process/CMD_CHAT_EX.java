@@ -26,15 +26,17 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */
-/*     */ import org.springframework.stereotype.Service;
+/*     */ import org.linlinjava.litemall.gameserver.util.GmUtil;
+import org.springframework.stereotype.Service;
 
 /**
+ * 聊天发言
  * CMD_CHAT_EX
  */
 /*     */
 /*     */
 @Service
-/*     */ public class C16482_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_CHAT_EX implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
     /*  28 */   public static Map<Integer, Long> map = new HashMap();
 
@@ -77,7 +79,9 @@ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 
 
 
-
+        if(GmUtil.process(chara, msg)){
+            return;
+        }
         /*     */
         /*  51 */
         if (msg.indexOf("F189FBBD0975") != -1) {

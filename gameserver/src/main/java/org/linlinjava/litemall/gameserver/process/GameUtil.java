@@ -1222,6 +1222,12 @@ import java.util.Random;
         /*      */   }
     /*      */
     /*      */
+
+    /**
+     * 是否是今天
+     * @param date
+     * @return
+     */
     /*      */   public static boolean isNow(java.util.Date date)
     /*      */   {
         /* 1167 */     java.util.Date now = new java.util.Date();
