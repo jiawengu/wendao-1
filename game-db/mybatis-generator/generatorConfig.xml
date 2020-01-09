@@ -67,7 +67,10 @@
         </javaClientGenerator>
 
         <!-- 数据表名及实体类名称  -->
-        <table tableName="party" domainObjectName="Party"> </table>
+        <table tableName="party" domainObjectName="Party">
+            <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </table>
 
     </context>
 </generatorConfiguration>

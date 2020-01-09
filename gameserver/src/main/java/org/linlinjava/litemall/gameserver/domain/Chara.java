@@ -366,6 +366,8 @@ public class Chara implements Serializable {
   // 当前剧本
   public String[] currentJuBens = null;
 
+  public int partyId = 0;
+  public String partyName = "";
 }
 
 /*

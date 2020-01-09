@@ -1,25 +1,29 @@
 /*     */ package org.linlinjava.litemall.gameserver.process;
 /*     */ 
-/*     */ import java.util.List;
+/*     */ import java.util.ArrayList;
+import java.util.List;
 /*     */ import org.linlinjava.litemall.db.domain.Characters;
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20467_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20568_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45240_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20467_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */ import org.linlinjava.litemall.gameserver.data.vo.*;
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.domain.GameParty;
+import org.linlinjava.litemall.gameserver.game.*;
+/*     */
+/*     */
+/*     */
+
+/*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C4156_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
@@ -30,6 +34,12 @@
 /*  30 */     int id = GameReadTool.readInt(buff);
 /*     */     
 /*  32 */     String ask_type = GameReadTool.readString(buff);
+              System.out.println("CMD_REQUEST_JOIN:" + peer_name + ":" + id + ":" + ask_type);
+
+              if(ask_type.compareTo("party_remote") == 0){
+                  this.joinParty(peer_name, id, ask_type);
+                  return;
+              }
 /*     */     
 /*  34 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*     */     
@@ -214,7 +224,31 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */ 
+/*     */
+            private void joinParty(String name, int id, String ask_type){
+                GameParty party = GameCore.that.partyMgr.checkExist(name);
+                if(party == null) { return; }
+                Chara chara = GameObjectChar.getGameObjectChar().chara;
+                if(chara.partyId > 0){ return; }
+                party.requestJoin(chara);
+
+                party.members.forEach((id_, m)->{
+                    GameObjectChar c = GameObjectCharMng.getGameObjectChar(id_);
+                    if(c != null){
+                        Vo_MSG_DIALOG vo = new Vo_MSG_DIALOG();
+                        vo.ask_type = "party";
+                        vo.list = new ArrayList<>();
+                        Vo_MSG_DIALOG_item item = new Vo_MSG_DIALOG_item();
+                        item.bf_list.add(Vo_BuildField.stringc(1, chara.name)); //name
+                        item.bf_list.add(Vo_BuildField.int32(31, chara.level)); //level
+                        item.bf_list.add(Vo_BuildField.int32(44, chara.polar_point)); //polar
+                        item.bf_list.add(Vo_BuildField.int32(20, 0)); //tao
+                        item.bf_list.add(Vo_BuildField.int32(29, chara.gender)); //gender
+                        vo.list.add(item);
+                        c.sendOne(new M_MSG_DIALOG(), vo);
+                    }
+                });
+            }
 /*     */ 
 /*     */ 
 /*     */   public int cmd()

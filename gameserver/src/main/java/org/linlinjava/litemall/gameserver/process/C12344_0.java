@@ -7,6 +7,14 @@ import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.db.domain.*;
+import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
+import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+import org.linlinjava.litemall.gameserver.data.write.M61553_0;
+import org.linlinjava.litemall.gameserver.data.write.M65527_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -14,8 +22,10 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -507,34 +517,98 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
         }
-
-        if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(id)))
-                && (menu_item.equals("我是来向你挑战的"))) {
-
-            for (int i = 0; i < org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing.size(); i++) {
-
-                if (id == ((Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing
-                        .get(i)).id) {
-
-                    List<String> list = new ArrayList();
-
-                    list.add(((Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing
-                            .get(i)).name);
-
-                    for (int j = 0; j < 9; j++) {
-
-                        list.add("星");
-
-                    }
-
-                    org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list,
-                            (Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing.get(i));
-
-                }
-
-            }
-
-        }
+//        ShangGuYaoWangInfo info =
+//                GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(id,
+//                        true);
+//        if (menu_item.equals("挑战") && null != info){
+//            if (GameObjectChar.getGameObjectChar().gameTeam == null){
+//                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//                vo_20481_0.msg = "人数不足3人！";
+//                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//                GameObjectChar.getGameObjectChar();
+//                GameObjectChar.send(new M20481_0(), vo_20481_0);
+//                return;
+//            }
+//
+//            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+//
+//            if (duiwu.size() < 3) {
+//                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//                vo_20481_0.msg = "人数不足3人！";
+//                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//                GameObjectChar.getGameObjectChar();
+//                GameObjectChar.send(new M20481_0(), vo_20481_0);
+//                return;
+//
+//            }
+//            for (int i = 0; i < duiwu.size(); i++) {
+//                Chara tempChara = duiwu.get(i);
+//                org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(tempChara.id);
+//
+//            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+//            Date date = new Date();
+//
+//        if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(id)))
+//                && (menu_item.equals("我是来向你挑战的"))) {
+//                long count =
+//                        GameData.that.BaseShangGuYaoWangRewardInfoService.count(characters.getAccountId(), sdf.format(date));
+//                if (count > 5) {
+//
+//                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//
+//                    vo_20481_0.msg = tempChara.name + "已经获取5次奖励了";
+//
+//                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//
+//                    GameObjectChar.getGameObjectChar();
+//                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+//                    return;
+//                }
+//            }
+//
+//            org.linlinjava.litemall.db.domain.Npc npc =
+//                    GameData.that.baseNpcService.findById(id);
+//
+//            List<String> list = new ArrayList();
+//            list.add(npc.getName());
+//
+//            Random RANDOM = new Random();
+////            ShangGuYaoWangInfo  info =
+////                    GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
+//            String []  xiaoGuai = info.getXiaoGuai().split(",");
+//
+//
+//            for(int a = 0; a < 9; ++a) {
+//                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]);
+//            }
+//
+//            org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
+//        }
+//
+//            for (int i = 0; i < org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing.size(); i++) {
+//
+//                if (id == ((Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing
+//                        .get(i)).id) {
+//
+//                    List<String> list = new ArrayList();
+//
+//                    list.add(((Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing
+//                            .get(i)).name);
+//
+//                    for (int j = 0; j < 9; j++) {
+//
+//                        list.add("星");
+//
+//                    }
+//
+//                    org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list,
+//                            (Vo_65529_0) org.linlinjava.litemall.gameserver.game.GameLine.gameShuaGuai.shuaXing.get(i));
+//
+//                }
+//
+//            }
+//
+//        }
 
         for (int i = 0; i < chara1.npcxuanshang.size(); i++) {
 
@@ -2578,7 +2652,7 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
 
         if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
             if ("我要挑战超级大BOSS".equals(menu_item)) {
-                GameData.that.superBossMng.sendBossFight(chara);
+                GameData.that.superBossMng.sendBossFight(chara, id);
             }
             return ;
         }
@@ -2613,8 +2687,7 @@ public class C12344_0<main> implements org.linlinjava.litemall.gameserver.GameHa
                 return;
             }
             if ("查询BOSS位置".equals(menu_item)) {
-                GameData.that.superBossMng.randomBossPos();
-                GameUtil.sendNpcDlg(npc, String.format("#R%s#n在#R%s#n作乱[离开/离开]", GameData.that.superBossMng.npc.getName(), GameData.that.superBossMng.mapName));
+                GameData.that.superBossMng.sendBossPosDlg(npc);
                 return;
             }
 

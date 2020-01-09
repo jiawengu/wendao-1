@@ -68,11 +68,8 @@ public class GameMap {
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
         gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
 
-        GameData.that.superBossMng.randomBossPos();
         //超级BOSS的地图判断
-        if(GameData.that.superBossMng.mapid == this.id){
-            npcList.add(GameData.that.superBossMng.npc);
-        }
+        npcList.addAll(GameData.that.superBossMng.getBossListByMapid(this.id));
 
         Iterator var6 = npcList.iterator();
 

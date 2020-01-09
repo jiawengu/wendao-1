@@ -7,19 +7,15 @@ import java.util.List;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
 import org.linlinjava.litemall.db.domain.Renwu;
+import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.M8247_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameLine;
-import org.linlinjava.litemall.gameserver.game.GameMap;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameShiDao;
-import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
-
+import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 @org.springframework.stereotype.Service
 public class C4150_0 implements org.linlinjava.litemall.gameserver.GameHandler {
 
@@ -215,10 +211,9 @@ public class C4150_0 implements org.linlinjava.litemall.gameserver.GameHandler {
 
         if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
             //是超级BOSS;
-            GameData.that.superBossMng.sendBossDlg();
+            GameData.that.superBossMng.sendBossDlg(id);
             return ;
         }
-
         Npc npc = GameData.that.baseNpcService.findById(id);
 
         if (npc == null) {
@@ -236,6 +231,14 @@ public class C4150_0 implements org.linlinjava.litemall.gameserver.GameHandler {
 
             content = ((NpcDialogueFrame) npcDialogueFrameList.get(0)).getUncontent();
 
+        }
+        ShangGuYaoWangInfo info =
+                GameShangGuYaoWang.getYaoWangNpc(npc.getId(),
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
+        if (null != info){
+            int level = info.getLevel();
+            content =
+                    ("大胆狂徒，敢在本大王面前撒野，真是活得不耐烦了！(妖王等级"+level+"级，适合"+level+"-"+(level+29)+"级玩家挑战）\n[挑战]\n" + "[离开]".replace("\\",""));
         }
 
         if (id == 829) {

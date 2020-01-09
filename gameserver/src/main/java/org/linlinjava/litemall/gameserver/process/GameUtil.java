@@ -6,6 +6,7 @@ import java.util.Random;
 import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcDialogue;
+import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -26,6 +27,7 @@ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
 
 @org.springframework.stereotype.Service
 public class GameUtil {

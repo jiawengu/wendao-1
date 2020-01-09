@@ -1,100 +1,101 @@
-/*    */ package org.linlinjava.litemall.gameserver.netty;
-/*    */ 
-/*    */ import io.netty.buffer.ByteBuf;
-/*    */ import io.netty.channel.Channel;
-/*    */ import io.netty.channel.ChannelHandler;
-      import io.netty.channel.ChannelHandler.Sharable;
-/*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import io.netty.channel.ChannelInboundHandlerAdapter;
-/*    */ import io.netty.util.Attribute;
-/*    */ import io.netty.util.AttributeKey;
-/*    */ import org.linlinjava.litemall.gameserver.GameHandler;
-/*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*    */ import org.slf4j.Logger;
-/*    */ import org.slf4j.LoggerFactory;
-/*    */ import org.springframework.beans.factory.annotation.Autowired;
-/*    */ import org.springframework.beans.factory.annotation.Qualifier;
-/*    */ import org.springframework.stereotype.Component;
-/*    */
-/*    */ @Qualifier("serverHandler")
-/*    */ @ChannelHandler.Sharable
-/*    */ @Component
-/*    */ public class ServerHandler extends ChannelInboundHandlerAdapter
-/*    */ {
-/* 25 */   private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
-/* 26 */   public static final AttributeKey<GameObjectChar> akey = AttributeKey.newInstance("session");
-/*    */   @Autowired
-/*    */   private java.util.List<GameHandler> gameHandlers;
-/*    */   
-/* 30 */   public void channelActive(ChannelHandlerContext ctx) throws Exception { super.channelActive(ctx); }
-/*    */   
-/*    */ 
-/*    */   public void channelInactive(ChannelHandlerContext ctx)
-/*    */     throws Exception
-/*    */   {
-/* 36 */     super.channelInactive(ctx);
-/* 37 */     Attribute<GameObjectChar> attr = ctx.channel().attr(akey);
-/* 38 */     if (attr == null) {
-/* 39 */       return;
-/*    */     }
-/* 41 */     GameObjectChar session = (GameObjectChar)attr.get();
-/* 42 */     if ((session == null) || (session.chara == null)) {
-/* 43 */       return;
-/*    */     }
-/* 45 */     GameObjectCharMng.remove(session);
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public void channelRead(ChannelHandlerContext ctx, Object msg)
-/*    */     throws Exception
-/*    */   {
-/* 54 */     Attribute<GameObjectChar> attr = ctx.channel().attr(akey);
-/* 55 */     GameObjectChar session = null;
-/* 56 */     if ((attr != null) && (attr.get() != null)) {
-/* 57 */       session = (GameObjectChar)attr.get();
-/* 58 */       GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(session);
-/*    */     }
-/* 60 */     ByteBuf buff = (ByteBuf)msg;
-/* 61 */     GameReadTool.readInt(buff);
-/* 62 */     GameReadTool.readShort(buff);
-/* 63 */     int cmd = GameReadTool.readShort(buff);
 
-            System.out.println(String.format("收到的指令[%s]", cmd));
-/* 64 */     for (GameHandler waitLine : this.gameHandlers) {
-/* 65 */       if (cmd == waitLine.cmd()) {
-/* 66 */         if (session != null) {
-/* 67 */           if (session.lock()) {
-/*    */             try {
-/* 69 */               waitLine.process(ctx, buff);
-/*    */             }
-/*    */             finally {
-/* 72 */               session.unlock();
-/*    */             }
-/*    */           }
-/*    */         } else {
-/* 76 */           waitLine.process(ctx, buff);
-/* 77 */           break;
-/*    */         }
-/*    */       }
-/*    */     }
+package org.linlinjava.litemall.gameserver.netty;
 
-/*    */   }
-/*    */   
-/*    */   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception
-/*    */   {
-/* 85 */     if (!cause.toString().contains("java.io.IOException")) {
-/* 86 */       log.error("exceptionCaught", cause);
-/*    */     }
-/* 88 */     ctx.close();
-/*    */   }
-/*    */ }
+import com.google.common.collect.Maps;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.Attribute;
+import io.netty.util.AttributeKey;
+import org.linlinjava.litemall.gameserver.GameHandler;
+import org.linlinjava.litemall.gameserver.data.GameReadTool;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\netty\ServerHandler.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+@Qualifier("serverHandler")
+@ChannelHandler.Sharable
+@Component
+public class ServerHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger log = LoggerFactory.getLogger(ServerHandler.class);
+
+    public static final AttributeKey<GameObjectChar> akey = AttributeKey.newInstance("session");
+
+    @Autowired
+    private java.util.List<GameHandler> gameHandlers;
+
+    private HashMap<Integer, GameHandler> gameHandlerHashMap;
+
+    @PostConstruct
+    private void init() {
+        gameHandlerHashMap = Maps.newHashMap();
+        for (GameHandler gameHandler : gameHandlers) {
+            gameHandlerHashMap.put(gameHandler.cmd(), gameHandler);
+        }
+    }
+
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+    }
+
+    public void channelInactive(ChannelHandlerContext ctx)
+            throws Exception {
+        super.channelInactive(ctx);
+        Attribute<GameObjectChar> attr = ctx.channel().attr(akey);
+        if (attr == null) {
+            return;
+        }
+        GameObjectChar session = (GameObjectChar) attr.get();
+        if ((session == null) || (session.chara == null)) {
+            return;
+        }
+        GameObjectCharMng.remove(session);
+    }
+
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        Attribute<GameObjectChar> attr = ctx.channel().attr(akey);
+        GameObjectChar session = null;
+        if ((attr != null) && (attr.get() != null)) {
+            session = attr.get();
+            GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(session);
+        }
+        ByteBuf buff = (ByteBuf) msg;
+        GameReadTool.readInt(buff);
+        GameReadTool.readShort(buff);
+        int cmd = GameReadTool.readShort(buff);
+        GameHandler gameHandler = gameHandlerHashMap.getOrDefault(cmd, null);
+        if (gameHandler != null) {
+            if (session != null) {
+                if (session.lock()) {
+                    try {
+                        log.info("======= cmd: " + cmd + ", " + buff + " =======");
+                        gameHandler.process(ctx, buff);
+                    } catch (Exception e) {
+                        log.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
+                    } finally {
+                        session.unlock();
+                    }
+                }
+            } else {
+                gameHandler.process(ctx, buff);
+            }
+        } else {
+            log.error(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
+        }
+    }
+
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        if (!cause.toString().contains("java.io.IOException")) {
+            log.error("exceptionCaught", cause);
+        }
+        ctx.close();
+    }
+}
