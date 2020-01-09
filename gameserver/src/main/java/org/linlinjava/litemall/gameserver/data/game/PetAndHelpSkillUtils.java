@@ -9,9 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
+import java.util.*;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,13 +53,17 @@ public class PetAndHelpSkillUtils {
             return result;
 
         }
+        List<String> skillNameList = new ArrayList<>();
+        for(String name:skill_value.split(",")){
+            skillNameList.add(name);
+        }
         for(int i = 0; i < jsonArray.length(); ++i) {
             JSONObject jsonObject = jsonArray.optJSONObject(i);
             int metal = jsonObject.optInt("metal");
             String skillType = jsonObject.optString("skillType");
             String skillName = jsonObject.optString("skillName");
             int skillIndex = jsonObject.optInt("skillIndex");
-            if (skill_value.contains(skillName) && pMetal == metal) {
+            if (pMetal == metal && skill_value.contains(skillName)) {
                 int[] skillNum_round = skillNum(jsonObject, getMaxSkill(level));
                 jsonObject.put("skillNum", skillNum_round[0]);
                 jsonObject.put("skillRound", skillNum_round[1]);
@@ -69,7 +72,12 @@ public class PetAndHelpSkillUtils {
                 jsonObject = appendBP(jsonObject, skillType, skillIndex, level);
 
                 result.add(jsonObject);
+                skillNameList.remove(skillName);
             }
+        }
+
+        if(!skillNameList.isEmpty()){
+            //TODO
         }
 
         return result;

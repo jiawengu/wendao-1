@@ -110,7 +110,7 @@ public class CastMagic11Skill implements FightSkill {
                 exclude.add(attFightObject);
                 exclude.add(fightObject);
                 next = FightManager.getRandomObject(fightContainer, exclude);
-                int showhurt = next.reduceShengming(hurt, false);
+                int showhurt = next.reduceShengming(hurt, false, true);
                 FightResult fightResult = new FightResult();
                 fightResult.id = fightRequest.id;
                 fightResult.vid = next.fid;
@@ -119,7 +119,7 @@ public class CastMagic11Skill implements FightSkill {
                 fightResult.damage_type = 2;
                 resultList.add(fightResult);
             } else {
-                remove = fightObject.reduceShengming(hurt, fabao);
+                remove = fightObject.reduceShengming(hurt, fabao, true);
                 FightResult fightResult = new FightResult();
                 fightResult.id = fightRequest.id;
                 fightResult.vid = fightObject.fid;
@@ -216,7 +216,7 @@ public class CastMagic11Skill implements FightSkill {
                     hurt = (int)((double)hurt * 0.9D);
                 }
 
-                showhurt = object.reduceShengming(hurt, fabao);
+                showhurt = object.reduceShengming(hurt, fabao, true);
                 FightResult fightResult = new FightResult();
                 fightResult.id = fightRequest.id;
                 fightResult.vid = object.fid;

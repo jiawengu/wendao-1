@@ -20,12 +20,16 @@ public abstract class FightRoundSkill implements FightSkill {
      */
     public boolean disappear(FightContainer fightContainer) {
         if (this.removeRound <= fightContainer.round) {
-            this.doDisappear();
-            this.buffObject.removeBuffState(fightContainer, this.getStateType());
+            remove();
             return true;
         } else {
             return false;
         }
+    }
+
+    public void remove(){
+        this.doDisappear();
+        this.buffObject.removeBuffState(fightContainer, this.getStateType());
     }
 
     protected abstract void doRoundSkill();

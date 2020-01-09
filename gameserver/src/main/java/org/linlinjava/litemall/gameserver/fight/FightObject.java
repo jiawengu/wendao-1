@@ -240,6 +240,14 @@ public class FightObject {
 
         return (FightFabaoSkill)fightSkill;
     }
+    public <T extends FightSkill> T getSkill(Class<T> clazz) {
+        for(FightSkill fightSkill:fightSkillList){
+            if(fightSkill.getClass() == clazz){
+                return (T) fightSkill;
+            }
+        }
+        return null;
+    }
 
     public boolean isActiveTianshu(FightContainer fc, int state) {
         Iterator var3 = this.fightSkillList.iterator();
@@ -879,7 +887,7 @@ public class FightObject {
         FightManager.send(fightContainer, new M64981_Fight_Blood(), objects);
     }
 
-    public int reduceShengming(int reduce, boolean fabao) {
+    public int reduceShengming(int reduce, boolean fabao, boolean isFaShang) {
         if (!this.canbeHurt()) {
             return 0;
         } else {
@@ -892,6 +900,18 @@ public class FightObject {
                 if (fabaoSkill != null && fabaoSkill.getStateType() == 8015 && fabaoSkill.isActive()) {
                     fabaoSkill.sendEffect(FightManager.getFightContainer(this.fid));
                     reduce = 0;
+                }
+            }
+
+            if(isFaShang){//法伤
+                RuYiQuanSkill ruYiQuanSkill = getSkill(RuYiQuanSkill.class);
+                if(null!=ruYiQuanSkill){
+                    reduce = ruYiQuanSkill.reduceHp(reduce);
+                }
+            }else {//物理伤害
+                ShenLongZhaoSkill shenLongZhaoSkill = getSkill(ShenLongZhaoSkill.class);
+                if(null!=shenLongZhaoSkill){
+                    reduce = shenLongZhaoSkill.reduceHp(reduce);
                 }
             }
 

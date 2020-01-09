@@ -10,6 +10,8 @@ import io.netty.util.ReferenceCountUtil;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Predicate;
+
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcPoint;
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -66,7 +68,9 @@ public class GameMap {
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
         gameObjectChar.sendOne(new MSG_EXITS(), list);
         Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
-        this.send(new MSG_APPEAR(), vo_65529_0);
+        this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
+            return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+        });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
             vo_61671_0 = new Vo_61671_0();
@@ -199,9 +203,6 @@ public class GameMap {
 
         while(var7.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var7.next();
-            if(isTTTMap()&&gameSession.chara.ttt_layer!=session.chara.ttt_layer){
-                continue;
-            }
             if (gameSession.ctx != null) {
                 ++sendNum;
                 ByteBuf copy = buff.copy();
@@ -217,6 +218,34 @@ public class GameMap {
         }
 
         ReferenceCountUtil.release(buff);
+    }
+    public void send(BaseWrite baseWrite, Object obj, Predicate<GameObjectChar> predicate) {
+        GameObjectChar session = GameObjectChar.getGameObjectChar();
+        ByteBuf buff = baseWrite.write(obj);
+        boolean hasSend = false;
+        int sendNum = 0;
+        Iterator var7 = this.sessionList.iterator();
+
+        while(var7.hasNext()) {
+            GameObjectChar gameSession = (GameObjectChar)var7.next();
+            if (gameSession.ctx != null && predicate.test(gameSession)) {
+                ++sendNum;
+                ByteBuf copy = buff.copy();
+                gameSession.send0(copy);
+                if (gameSession == session) {
+                    hasSend = true;
+                }
+            }
+        }
+
+        if (!hasSend && session != null) {
+            session.send0(buff.copy());
+        }
+
+        ReferenceCountUtil.release(buff);
+    }
+    private interface Filter{
+        boolean filter();
     }
 
     public void sendNoMe(BaseWrite baseWrite, Object obj, GameObjectChar gameObjectChar) {

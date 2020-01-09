@@ -85,7 +85,7 @@ public class CastMagic501Skill implements FightSkill {
                 hurt = (int)((double)hurt * 0.9D);
             }
 
-            showhurt = fightObject.reduceShengming(hurt, fabao);
+            showhurt = fightObject.reduceShengming(hurt, fabao, false);
             FightResult fightResult = new FightResult();
             fightResult.id = fightRequest.id;
             fightResult.vid = fightObject.fid;

@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * gm指令格式:#gm 指令 参数1 参数2 参数3
+ */
 public class GmUtil {
     /**
      * 是否打开GM指令 //TODO

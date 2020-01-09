@@ -53,7 +53,7 @@ public class NormalAttackSkill implements FightSkill {
         FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
         int hurt = BattleUtils.battle(fightObject.accurate + fightObject.accurate_ext, 0, victimFightObject.fangyu + victimFightObject.fangyu_ext);
         hurt = (int)((float)hurt * jiabei);
-        hurt = victimFightObject.reduceShengming(hurt, fabao);
+        hurt = victimFightObject.reduceShengming(hurt, fabao, false);
         FightResult fightResult = new FightResult();
         fightResult.id = fightRequest.id;
         fightResult.vid = fightRequest.vid;

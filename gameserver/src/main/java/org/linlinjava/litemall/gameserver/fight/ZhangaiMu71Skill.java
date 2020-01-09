@@ -94,7 +94,7 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
                 hurt = (int)((double)hurt * 0.9D);
             }
 
-            showhurt = fightObject.reduceShengming(hurt, fabao);
+            showhurt = fightObject.reduceShengming(hurt, fabao, true);
             that.xueliang = hurt;
             FightResult fightResult = new FightResult();
             fightResult.id = fightRequest.id;
@@ -124,7 +124,7 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         vo_19959_0.vid = this.buffObject.fid;
         vo_19959_0.para = 0;
         FightManager.send(this.fightContainer, new MSG_C_ACTION(), vo_19959_0);
-        this.xueliang = this.buffObject.reduceShengming(this.xueliang, false);
+        this.xueliang = this.buffObject.reduceShengming(this.xueliang, false, true);
         if (this.buffObject.type == 1 || this.buffObject.type == 2) {
             this.buffObject.update(this.fightContainer);
         }
