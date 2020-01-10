@@ -18,7 +18,7 @@
  * MSG_MESSAGE_EX
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M16383_0 extends BaseWrite
+/*    */ public class MSG_MESSAGE_EX extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

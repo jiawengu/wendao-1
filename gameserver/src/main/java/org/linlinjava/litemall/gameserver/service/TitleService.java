@@ -97,4 +97,18 @@ public class TitleService {
         chara.chenghao.remove(event);
         GameObjectCharMng.save(gameObjectChar);
     }
+    /**
+     * 撤销用户称谓
+     * @param uid uid
+     * @param event 称谓来源
+     */
+    public static void removeUserTitle(Integer uid, String event) {
+        if (uid == null) {
+            return;
+        }
+        GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(uid);
+        Chara chara = gameObjectChar.chara;
+        chara.chenghao.remove(event);
+        GameObjectCharMng.save(gameObjectChar);
+    }
 }

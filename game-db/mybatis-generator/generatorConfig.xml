@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
@@ -75,6 +75,8 @@
         <table tableName="user_party" domainObjectName="UserParty"></table>
         <table tableName="user_party_daily_task" domainObjectName="UserPartyDailyTask"></table>
         <table tableName="user_party_shop" domainObjectName="UserPartyShop"></table>
+        <table tableName="chara_statue" domainObjectName="Chara_Statue"> </table>
+
 
     </context>
 </generatorConfiguration>

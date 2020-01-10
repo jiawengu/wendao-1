@@ -17,7 +17,7 @@ import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M16383_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */
 import org.linlinjava.litemall.gameserver.data.write.M8165_0;
@@ -145,7 +145,7 @@ import org.springframework.stereotype.Service;
                 /*  83 */
                 Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, msg, channel);
                 /*  84 */
-                GameObjectCharMng.sendAll(new M16383_0(), vo_16383_0);
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_0);
                 /*  85 */
                 return;
                 /*     */
@@ -175,7 +175,7 @@ import org.springframework.stereotype.Service;
                 /* 100 */
                 Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, msg, channel);
                 /* 101 */
-                GameObjectChar.getGameObjectChar().gameMap.send(new M16383_0(), vo_16383_0);
+                GameObjectChar.getGameObjectChar().gameMap.send(new MSG_MESSAGE_EX(), vo_16383_0);
                 /*     */
             } else {
                 /* 103 */
@@ -232,7 +232,7 @@ import org.springframework.stereotype.Service;
                 Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, msg, channel);
 
                 /* 117 */
-                GameObjectCharMng.sendAll(new M16383_0(), vo_16383_0);
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_0);
 
                 /*     */
             } else {
@@ -288,7 +288,7 @@ import org.springframework.stereotype.Service;
                     /* 143 */
                     for (int i = 0; i < GameObjectChar.getGameObjectChar().gameTeam.duiwu.size(); i++) {
                         /* 144 */
-                        GameObjectCharMng.getGameObjectChar(((Chara) GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new M16383_0(), vo_16383_0);
+                        GameObjectCharMng.getGameObjectChar(((Chara) GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new MSG_MESSAGE_EX(), vo_16383_0);
                         /*     */
                     }
                     /*     */

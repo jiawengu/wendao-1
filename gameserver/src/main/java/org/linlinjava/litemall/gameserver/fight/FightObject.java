@@ -27,12 +27,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_REVIVE;
-import org.linlinjava.litemall.gameserver.domain.Chara;
-import org.linlinjava.litemall.gameserver.domain.JiNeng;
-import org.linlinjava.litemall.gameserver.domain.PetShuXing;
-import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-import org.linlinjava.litemall.gameserver.domain.ShouHu;
-import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
+import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -180,6 +175,27 @@ public class FightObject {
         this.autofight_skillno = chara.autofight_skillno;
         this.autofight_select = chara.autofight_select;
         this.autofight_skillaction = chara.autofight_skillaction;
+    }
+    public FightObject(CharaStatue charaStatue) {
+        this.str = charaStatue.name;
+        this.weapon_icon = charaStatue.weapon_icon;
+        this.shengming = charaStatue.shengming;
+        this.mofa = charaStatue.mofa;
+        this.max_shengming = charaStatue.max_shengming;
+        this.max_mofa = charaStatue.max_mofa;
+        this.fashang = charaStatue.fashang;
+        this.parry = charaStatue.parry;
+        this.accurate = charaStatue.accurate;
+        this.fangyu = charaStatue.fangyu;
+        this.suit_icon = charaStatue.suit_icon;
+        this.suit_light_effect = charaStatue.suit_light_effect;
+        this.org_icon = charaStatue.waiguan;
+        this.friend = charaStatue.friend;
+        this.skillsList = charaStatue.jiNengList;
+        this.type = 4;
+        this.autofight_skillno = charaStatue.autofight_skillno;
+        this.autofight_select = charaStatue.autofight_select;
+        this.autofight_skillaction = charaStatue.autofight_skillaction;
     }
 
     public boolean isDead() {
@@ -453,6 +469,24 @@ public class FightObject {
         this.org_icon = t_fightObject.getIcon();
 
         this.skillsList = getJiNengListByName( metal, ttt_level, 123456, t_fightObject.getSkill());
+        this.type = 4;
+    }
+    public FightObject(T_FightObject t_fightObject){
+        int metal = GameUtil.getMetal(t_fightObject.getPolar());
+
+        this.str = t_fightObject.getName();
+        this.guaiwulevel = 1;
+        this.shengming = t_fightObject.getLife();
+        this.max_shengming = t_fightObject.getLife();
+        this.mofa = t_fightObject.getMana();
+        this.max_mofa = t_fightObject.getMana();
+        this.fashang = t_fightObject.getMagAttack();
+        this.parry = t_fightObject.getSpeed();
+        this.accurate = t_fightObject.getPhyAttack();
+        this.fangyu = t_fightObject.getDef();
+        this.org_icon = t_fightObject.getIcon();
+
+        this.skillsList = getJiNengListByName( metal, 1, 123456, t_fightObject.getSkill());
         this.type = 4;
     }
 

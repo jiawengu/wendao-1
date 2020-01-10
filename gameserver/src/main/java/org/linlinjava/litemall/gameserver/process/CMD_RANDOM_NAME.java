@@ -14,7 +14,7 @@
 /*    */ 
 /*    */ 
 /*    */ @Service
-/*    */ public class C45073_0
+/*    */ public class CMD_RANDOM_NAME
 /*    */   implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
