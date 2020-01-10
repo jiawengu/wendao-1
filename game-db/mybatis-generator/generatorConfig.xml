@@ -67,11 +67,12 @@
         </javaClientGenerator>
 
         <!-- 数据表名及实体类名称  -->
-        <table tableName="party" domainObjectName="Party">
-            <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>
+<!--        <table tableName="party" domainObjectName="Party">-->
+<!--            <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--        </table>-->
+<!--        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>-->
+        <table tableName="chara_statue" domainObjectName="Chara_Statue"> </table>
 
     </context>
 </generatorConfiguration>

@@ -21,7 +21,7 @@ public class MSG_MASTER_INFO extends BaseWrite {
 
 
         m_buildField.writeO(writeBuf, Vo_BuildField.stringc(1, vo_61613_0.name));//name
-        m_buildField.writeO(writeBuf, Vo_BuildField.stringc(36, vo_61613_0.name));//title
+        m_buildField.writeO(writeBuf, Vo_BuildField.stringc(36, vo_61613_0.title));//title
         m_buildField.writeO(writeBuf, Vo_BuildField.stringc(31, vo_61613_0.level));//level
         m_buildField.writeO(writeBuf, Vo_BuildField.stringc(196, vo_61613_0.party_name));//party_name
         m_buildField.writeO(writeBuf, Vo_BuildField.int32(291, vo_61613_0.suit_icon));//suit_icon

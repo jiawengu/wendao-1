@@ -1,6 +1,10 @@
 package org.linlinjava.litemall.gameserver.util;
 
+import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
 import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.game.GameData;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -54,6 +58,7 @@ public class GmUtil {
     }
 
     public void ljy_handler(Chara chara, String[] cmds){
-
+        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
+        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
     }
 }

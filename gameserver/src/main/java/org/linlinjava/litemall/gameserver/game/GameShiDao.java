@@ -6,6 +6,7 @@
 /*    */ import org.linlinjava.litemall.db.domain.RenwuMonster;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 
 /*    */
 /*    */ public class GameShiDao
@@ -40,7 +41,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
 /* 38 */     vo_16383_5.voiceTime = 0;
 /* 39 */     vo_16383_5.token = "";
 /* 40 */     vo_16383_5.checksum = 0;
-/* 41 */     GameObjectCharMng.sendAll(new org.linlinjava.litemall.gameserver.data.write.M16383_0(), vo_16383_5);
+/* 41 */     GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
 /*    */   }
 /*    */   
 /*    */ 

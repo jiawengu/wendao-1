@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class CharaStatue {
     public int id;
-    public int icon;
     public String name;
     public int level;
+    public int sex;
     public String partyName;
     public int special_icon;
     public int weapon_icon;
@@ -32,6 +32,7 @@ public class CharaStatue {
     public int autofight_skillno;
     public int autofight_select;
     public int autofight_skillaction;
+    public int menpai;
 
     /**
      * 宠物
@@ -44,7 +45,9 @@ public class CharaStatue {
 
     public void copyFrom(Chara chara) {
         this.id = chara.id;
+        this.sex = sex;
         this.name = chara.name;
+        this.menpai = chara.menpai;
         this.level = chara.level;
         this.partyName = chara.partyName;
         this.special_icon = chara.special_icon;

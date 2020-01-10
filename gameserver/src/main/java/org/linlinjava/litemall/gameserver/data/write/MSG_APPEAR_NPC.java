@@ -5,6 +5,7 @@ import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.domain.CharaStatue;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+import org.linlinjava.litemall.gameserver.service.CharaStatueService;
 import org.springframework.stereotype.Service;
 
 
@@ -18,7 +19,7 @@ public class MSG_APPEAR_NPC
         Npc npc = (Npc) object;
 
         //人物雕像
-        CharaStatue charaStatue = null;
+        CharaStatue charaStatue = CharaStatueService.getCharStaure(npc.getName());
 
         GameWriteTool.writeInt(writeBuf, npc.getId());
 
@@ -44,7 +45,7 @@ public class MSG_APPEAR_NPC
 
         GameWriteTool.writeShort(writeBuf, charaStatue==null?Integer.valueOf(0):charaStatue.level);
 
-        GameWriteTool.writeString(writeBuf, "");
+        GameWriteTool.writeString(writeBuf, charaStatue==null?"":npc.getName());
 
         GameWriteTool.writeString(writeBuf, "");
 

@@ -8,6 +8,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ public class GameShuaGuai
@@ -139,7 +140,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 138 */       vo_16383_5.voiceTime = 0;
 /* 139 */       vo_16383_5.token = "";
 /* 140 */       vo_16383_5.checksum = 0;
-/* 141 */       GameObjectCharMng.sendAll(new org.linlinjava.litemall.gameserver.data.write.M16383_0(), vo_16383_5);
+/* 141 */       GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
 /*     */     }
 /*     */   }
 /*     */   

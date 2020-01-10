@@ -19,6 +19,9 @@ public class GameData {
     @Qualifier("baseCharactersService")
     @Autowired
     public BaseCharactersService baseCharactersService;
+    @Qualifier("baseCharaStatueService")
+    @Autowired
+    public BaseCharaStatueService baseCharaStatueService;
     @Qualifier("characterService")
     @Autowired
     public CharacterService characterService;

@@ -15,7 +15,7 @@
 /*    */ 
 /*    */ //MSG_FRIEND_UPDATE_PARTIAL
 /*    */ @Service
-/*    */ public class M24505_0
+/*    */ public class MSG_FRIEND_UPDATE_PARTIAL
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
