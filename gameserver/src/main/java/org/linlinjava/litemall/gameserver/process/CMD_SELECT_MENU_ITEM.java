@@ -3,10 +3,7 @@ package org.linlinjava.litemall.gameserver.process;
 import com.google.common.base.Preconditions;
 import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.*;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -2759,6 +2756,11 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
         if(GameUtil.isZhangeMenNpc(npc.getName())){//掌门
             if(menu_item.equals(MsgUtil.TIAO_ZHAN_ZHANG_MEN)){//挑战掌门
+                if(chara.leaderTodayFailNum>0){
+                    Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, "修道不可急功近利，明天再来找我比试吧！[离开]");
+                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+                    return;
+                }
                 ChallengeLeaderService.challengeLeader(chara);
             }else if(menu_item.equals(MsgUtil.CHA_KAN_ZHANG_MEN) || menu_item.equals(MsgUtil.KAN_KAN_YE_WU_FANG)){//查看掌门
                 ChallengeLeaderService.notifyLeaderInfo(GameUtil.getMenPai(npc.getName()));

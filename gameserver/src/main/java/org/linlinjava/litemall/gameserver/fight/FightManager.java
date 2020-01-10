@@ -1990,8 +1990,11 @@ public class FightManager {
                     if(null!=charaStatue){
                         if(charaStatue.id!=chara1.id){
                             //撤销旧的称号
-//                            TitleService.
+                            TitleService.removeUserTitle(charaStatue.id, TitleConst.TITLE_EVENT_CHALLENGE_LEADER);
+                            TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_CHALLENGE_LEADER, zhangMenName);
                         }
+                    }else{
+                        TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_CHALLENGE_LEADER, zhangMenName);
                     }
 
 

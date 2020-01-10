@@ -1,10 +1,12 @@
 package org.linlinjava.litemall.gameserver.util;
 
 import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.db.domain.StoreInfo;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -58,7 +60,17 @@ public class GmUtil {
     }
 
     public void ljy_handler(Chara chara, String[] cmds){
-        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
-        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
+//        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
+//        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
+
+        String goodsName = cmds[1];
+        int num = cmds.length>=3?Integer.parseInt(cmds[2]):1;
+        StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(goodsName);
+        if(null==info){
+            System.out.println("没有找到物品："+goodsName);
+        }
+        for(int i=0;i<num;++i){
+            GameUtil.huodedaoju(chara, info, 1);
+        }
     }
 }

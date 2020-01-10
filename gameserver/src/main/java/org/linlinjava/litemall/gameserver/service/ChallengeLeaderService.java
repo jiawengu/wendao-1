@@ -2,7 +2,9 @@ package org.linlinjava.litemall.gameserver.service;
 
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61613_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MASTER_INFO;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.CharaStatue;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
@@ -103,6 +105,7 @@ public class ChallengeLeaderService {
         }else{
             FightManager.goFightChallengeLeader(chara, charaStatue);
         }
+        chara.leaderTodayFailNum++;
     }
 
     /**

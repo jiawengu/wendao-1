@@ -69,7 +69,11 @@ public class GameMap {
         gameObjectChar.sendOne(new MSG_EXITS(), list);
         Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
         this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
-            return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+            if(isTTTMap()){
+                return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+            }else{
+                return true;
+            }
         });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
