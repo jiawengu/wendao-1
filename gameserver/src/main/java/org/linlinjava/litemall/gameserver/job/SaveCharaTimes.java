@@ -471,7 +471,7 @@ public class SaveCharaTimes {
     }
 
     @Scheduled(
-            fixedRate =  10000L
+            fixedRate =  1000L
     )
     public void autoProductionBoss(){
         GameData.that.superBossMng.productionBoss();
