@@ -3,7 +3,7 @@ package org.linlinjava.litemall.gameserver.service;
 import org.linlinjava.litemall.db.service.CharacterService;
 import org.linlinjava.litemall.db.util.RedisUtils;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -39,7 +39,7 @@ public class TitleService {
         Vo_20481_0 vo_20481_9 = new Vo_20481_0();
         vo_20481_9.msg = String.format("你获得了#R%s#n的称谓。", title);
         vo_20481_9.time = (int)(System.currentTimeMillis() / 1000);
-        GameObjectChar.send(new M20481_0(), vo_20481_9);
+        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_9);
     }
 
     private String generateRedisKey(String event, String title) {
@@ -89,6 +89,20 @@ public class TitleService {
      * @param event 称谓来源
      */
     private void reclaimUserTitle(Integer uid, String event) {
+        if (uid == null) {
+            return;
+        }
+        GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(uid);
+        Chara chara = gameObjectChar.chara;
+        chara.chenghao.remove(event);
+        GameObjectCharMng.save(gameObjectChar);
+    }
+    /**
+     * 撤销用户称谓
+     * @param uid uid
+     * @param event 称谓来源
+     */
+    public static void removeUserTitle(Integer uid, String event) {
         if (uid == null) {
             return;
         }

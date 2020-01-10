@@ -12,6 +12,21 @@ public class PetAttributesUtils {
     public PetAttributesUtils() {
     }
 
+    /**
+     * new int[]{def_all, dex_all, accurate_all, mana_all, parry_all, wiz_all}
+     * @param isMagic
+     * @param attrib
+     * @param constitution
+     * @param mag_power
+     * @param phy_power
+     * @param speed
+     * @param qx_append
+     * @param fl_append
+     * @param sd_append
+     * @param wg_append
+     * @param fg_append
+     * @return
+     */
     public static int[] petAttributes(boolean isMagic, int attrib, int constitution, int mag_power, int phy_power, int speed, int qx_append, int fl_append, int sd_append, int wg_append, int fg_append) {
         int parry_all = (int)(0.06D * (double)sd_append * (double)speed + 50.0D);
         int accurate_all = (int)((double)wg_append * 0.3D * (double)phy_power + (double)(16 * attrib) + 50.0D);

@@ -2,14 +2,18 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.Random;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4275_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M4275_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_REPLY_ECHO;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_ECHO
+ */
 /*    */ @Service
 /*    */ public class C4274_0 implements GameHandler
 /*    */ {
@@ -29,7 +33,7 @@
 /*    */     }
 /* 30 */     session.heartEcho = System.currentTimeMillis();
 /*    */     
-/* 32 */     ByteBuf write = new M4275_0().write(vo_4275_0);
+/* 32 */     ByteBuf write = new MSG_REPLY_ECHO().write(vo_4275_0);
 /* 33 */     ctx.writeAndFlush(write);
 /*    */   }
 /*    */   

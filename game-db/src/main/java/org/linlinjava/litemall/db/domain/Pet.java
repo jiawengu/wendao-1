@@ -19,16 +19,49 @@ public class Pet implements Cloneable, Serializable {
     public static final Boolean IS_DELETED;
     public static final Boolean NOT_DELETED;
     private Integer id;
+    /**
+     * 对应图鉴的位置
+     */
     private Integer index;
+    /**
+     * 携带等级
+     */
     private Integer levelReq;
+    /**
+     * 血气成长
+     */
     private Integer life;
+    /**
+     * 法力成长
+     */
     private Integer mana;
+    /**
+     * 速度成长
+     */
     private Integer speed;
+    /**
+     * 物攻成长
+     */
     private Integer phyAttack;
+    /**
+     * 法攻成长
+     */
     private Integer magAttack;
+    /**
+     * 金木水火土
+     */
     private String polar;
+    /**
+     * 拥有天生技能
+     */
     private String skiils;
+    /**
+     * 所在地图
+     */
     private String zoon;
+    /**
+     * 外观
+     */
     private Integer icon;
     @JsonDeserialize(
             using = LocalDateTimeDeserializer.class
@@ -51,6 +84,9 @@ public class Pet implements Cloneable, Serializable {
     )
     private LocalDateTime updateTime;
     private Boolean deleted;
+    /**
+     * 名字
+     */
     private String name;
     private static final long serialVersionUID = 1L;
 

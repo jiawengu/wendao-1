@@ -11,6 +11,10 @@ import java.util.List;
 public class FightTeam {
     public List<FightObject> fightObjectList = new ArrayList();
     public int leader;
+    /**
+     * 1：玩家
+     * 2：怪物
+     */
     public int type;
 
     public FightTeam() {

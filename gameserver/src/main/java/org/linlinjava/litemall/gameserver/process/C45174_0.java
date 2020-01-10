@@ -3,13 +3,13 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import org.linlinjava.litemall.db.domain.Characters;
-/*    */ import org.linlinjava.litemall.db.service.CharacterService;
+/*    */
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M45185_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -42,7 +42,7 @@
 /* 42 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 43 */       vo_20481_0.msg = (chara.name + "在队伍中向你发送了一次震动提醒");
 /* 44 */       vo_20481_0.time = 1562987118;
-/* 45 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M20481_0(), vo_20481_0);
+/* 45 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */       
 /* 47 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M45185_0(), "");
 /*    */     }

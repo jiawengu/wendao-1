@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.domain.BuildFields;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
 
+//MSG_UPDATE_TEAM_LIST_EX
 @Service
 public class M4121_0 extends BaseWrite {
     public M4121_0() {

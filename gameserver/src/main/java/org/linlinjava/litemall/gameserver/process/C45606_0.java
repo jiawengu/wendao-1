@@ -11,10 +11,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45608_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M41505_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61661_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -107,25 +108,25 @@
 /* 107 */     chara.backpack.add(goods);
 /* 108 */     List<Goods> list = new ArrayList();
 /* 109 */     list.add(goods);
-/* 110 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65525_0(), list);
+/* 110 */     GameObjectChar.send(new MSG_INVENTORY(), list);
 /*     */     
 /*     */ 
-/* 113 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 114 */     GameObjectChar.getGameObjectChar().gameMap.send(new M61661_0(), vo_61661_0);
+/* 113 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 114 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
-/* 116 */     vo_61661_0 = GameUtil.a61661(chara);
-/* 117 */     GameObjectChar.send(new M61661_0(), vo_61661_0);
+/* 116 */     vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 117 */     GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
 /* 119 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 120 */     vo_61671_0.id = chara.id;
 /* 121 */     vo_61671_0.count = 0;
-/* 122 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 122 */     GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /*     */     
 /*     */ 
 /* 125 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 126 */     vo_20481_0.msg = ("你花费了 " + packModification.getGoodsPrice() + "个金元宝购买了#Y" + item_name + "#n。");
 /* 127 */     vo_20481_0.time = 1562987118;
-/* 128 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+/* 128 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */     
 /*     */ 
 /* 131 */     Vo_45608_0 vo_45608_0 = new Vo_45608_0();

@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Npc implements Cloneable, Serializable {
     public static final Boolean IS_DELETED;
     public static final Boolean NOT_DELETED;
-    private Integer id;  //逐渐
+    private Integer id;  //主键
     private Integer icon;  // 图片
     private Integer x;  // 坐标
     private Integer y;  // 坐标

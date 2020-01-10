@@ -9,5 +9,10 @@ logs/
 bin/
 .vs/
 .ini
+<<<<<<< HEAD
 resources/*
 .factorypath
+=======
+.factorypath
+classes/
+>>>>>>> 98a2cc2571efa4c0dc503b8dbe904fcd5211d0ce

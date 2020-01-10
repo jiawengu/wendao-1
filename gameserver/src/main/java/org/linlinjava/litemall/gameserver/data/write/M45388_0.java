@@ -7,7 +7,11 @@
 /*    */ 
 /*    */ 
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * MSG_NEW_LOTTERY_OPEN  -- 开启新充值好礼
+ */
 /*    */ @Service
 /*    */ public class M45388_0
 /*    */   extends BaseWrite

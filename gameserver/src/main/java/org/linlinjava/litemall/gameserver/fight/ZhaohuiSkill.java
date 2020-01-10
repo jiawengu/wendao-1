@@ -10,13 +10,16 @@ import java.util.List;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64971_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7653_0;
-import org.linlinjava.litemall.gameserver.data.write.M19959_0;
-import org.linlinjava.litemall.gameserver.data.write.M64945_0;
-import org.linlinjava.litemall.gameserver.data.write.M64971_0;
-import org.linlinjava.litemall.gameserver.data.write.M7653_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_SET_FIGHT_PET;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_REFRESH_PET_LIST;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_QUIT_COMBAT;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 
+/**
+ * 召回宠物
+ */
 public class ZhaohuiSkill implements FightSkill {
     public ZhaohuiSkill() {
     }
@@ -28,24 +31,24 @@ public class ZhaohuiSkill implements FightSkill {
         vo_19959_0.action = fightRequest.action;
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
-        FightManager.send(fightContainer, new M19959_0(), vo_19959_0);
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
         FightObject fightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);
         if (fightObject.type != 2) {
             return null;
         } else {
             Vo_7653_0 vo_7653_0 = new Vo_7653_0();
             vo_7653_0.id = fightObject.fid;
-            FightManager.send(fightContainer, new M7653_0(), vo_7653_0);
+            FightManager.send(fightContainer, new MSG_C_QUIT_COMBAT(), vo_7653_0);
             Vo_64971_0 vo_64971_0 = new Vo_64971_0();
             vo_64971_0.id = fightObject.id;
             vo_64971_0.haveCalled = 0;
-            FightManager.send(fightContainer, new M64945_0(), vo_64971_0);
+            FightManager.send(fightContainer, new MSG_C_SET_FIGHT_PET(), vo_64971_0);
             FightManager.remove(fightContainer, fightObject);
             vo_64971_0 = new Vo_64971_0();
             vo_64971_0.count = 1;
             vo_64971_0.id = fightObject.id;
             vo_64971_0.haveCalled = 0;
-            GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new M64971_0(), vo_64971_0);
+            GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
             List<FightResult> resultList = new ArrayList();
             return resultList;
         }

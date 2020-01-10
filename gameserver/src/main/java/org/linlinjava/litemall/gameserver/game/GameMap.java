@@ -10,23 +10,16 @@ import io.netty.util.ReferenceCountUtil;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Predicate;
+
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcPoint;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45157_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_1;
-import org.linlinjava.litemall.gameserver.data.write.M45157_0;
-import org.linlinjava.litemall.gameserver.data.write.M61671_0;
-import org.linlinjava.litemall.gameserver.data.write.M65505_0;
-import org.linlinjava.litemall.gameserver.data.write.M65529_0;
-import org.linlinjava.litemall.gameserver.data.write.M65529_npc;
-import org.linlinjava.litemall.gameserver.data.write.M65531_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -64,24 +57,30 @@ public class GameMap {
         Vo_45157_0 vo_45157_0 = new Vo_45157_0();
         vo_45157_0.id = chara.id;
         vo_45157_0.mapId = chara.mapid;
-        gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-        gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
 
         //超级BOSS的地图判断
         npcList.addAll(GameData.that.superBossMng.getBossListByMapid(this.id));
 
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
         Iterator var6 = npcList.iterator();
 
         while(var6.hasNext()) {
             Npc npc = (Npc)var6.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
-        gameObjectChar.sendOne(new M65531_0(), list);
-        Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
-        this.send(new M65529_0(), vo_65529_0);
+        gameObjectChar.sendOne(new MSG_EXITS(), list);
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
+            if(isTTTMap()){
+                return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+            }else{
+                return true;
+            }
+        });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
             vo_61671_0 = new Vo_61671_0();
@@ -89,7 +88,7 @@ public class GameMap {
             vo_61671_0.count = 2;
             vo_61671_0.list.add(2);
             vo_61671_0.list.add(3);
-            gameObjectChar.gameMap.send(new M61671_0(), vo_61671_0);
+            gameObjectChar.gameMap.send(new MSG_TITLE(), vo_61671_0);
         }
 
         Iterator var13 = this.sessionList.iterator();
@@ -97,16 +96,22 @@ public class GameMap {
         while(var13.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var13.next();
             if (gameSession.ctx != null && gameSession.chara != null) {
-                vo_65529_0 = GameUtil.a65529(gameSession.chara);
+                vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
-                gameObjectChar.sendOne(new M65529_0(), vo_65529_0);
+                if(isTTTMap()){
+                    if(gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
+                        gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                    }
+                }else{
+                    gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+                }
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu != null && gameSession.gameTeam.duiwu.size() > 0) {
                      vo_61671_0 = new Vo_61671_0();
                     vo_61671_0.id = ((Chara)gameSession.gameTeam.duiwu.get(0)).id;
                     vo_61671_0.count = 2;
                     vo_61671_0.list.add(2);
                     vo_61671_0.list.add(3);
-                    gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+                    gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
                 }
             }
         }
@@ -114,7 +119,28 @@ public class GameMap {
         vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.mapid;
         vo_61671_0.count = 0;
-        gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+        gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
+
+        if(isTTTMap()){//通天塔
+            //初始化
+            if(chara.ttt_layer == 0){
+                String randomXjName = GameUtil.randomTTTXingJunName();
+                short layer = (short) (chara.level-14);
+                chara.onEnterTttLayer(layer, randomXjName);
+            }
+
+            GameUtil.notifyTTTPanelInfo(chara);
+            GameUtilRenWu.notifyTTTTask(chara);
+
+            GameUtil.a45704(chara);
+        }
+    }
+
+    /**
+     * 是否是通天塔地图
+     */
+    public boolean isTTTMap(){
+        return id==37000;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
@@ -122,7 +148,7 @@ public class GameMap {
         this.sessionList.remove(gameObjectChar);
         this.sessionList.add(gameObjectChar);
         Chara chara = gameObjectChar.chara;
-        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
+
         gameObjectChar.gameMap = this;
         chara.x = charaduizhang.x;
         chara.y = charaduizhang.y;
@@ -131,27 +157,29 @@ public class GameMap {
         Vo_45157_0 vo_45157_0 = new Vo_45157_0();
         vo_45157_0.id = chara.id;
         vo_45157_0.mapId = charaduizhang.mapid;
-        gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-        gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
-        Iterator var7 = npcList.iterator();
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
 
+        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
+        Iterator var7 = npcList.iterator();
         while(var7.hasNext()) {
             Npc npc = (Npc)var7.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
-        gameObjectChar.sendOne(new M65531_0(), list);
-        Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
-        this.send(new M65529_0(), vo_65529_0);
-        Iterator var9 = this.sessionList.iterator();
+        gameObjectChar.sendOne(new MSG_EXITS(), list);
 
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        this.send(new MSG_APPEAR(), vo_65529_0);
+
+        Iterator var9 = this.sessionList.iterator();
         while(var9.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var9.next();
             if (gameSession.ctx != null && gameSession.chara != null) {
-                vo_65529_0 = GameUtil.a65529(gameSession.chara);
-                gameObjectChar.sendOne(new M65529_0(), vo_65529_0);
+                vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
+                gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 GameUtil.genchongfei(gameSession.chara);
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu.size() > 0) {
                     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -159,7 +187,7 @@ public class GameMap {
                     vo_61671_0.count = 2;
                     vo_61671_0.list.add(2);
                     vo_61671_0.list.add(3);
-                    gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+                    gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
                 }
             }
         }
@@ -167,7 +195,7 @@ public class GameMap {
         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
         vo_61671_0.id = chara.id;
         vo_61671_0.count = 0;
-        gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+        gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
     }
 
     public void leave(GameObjectChar gameObjectChar) {
@@ -200,6 +228,34 @@ public class GameMap {
         }
 
         ReferenceCountUtil.release(buff);
+    }
+    public void send(BaseWrite baseWrite, Object obj, Predicate<GameObjectChar> predicate) {
+        GameObjectChar session = GameObjectChar.getGameObjectChar();
+        ByteBuf buff = baseWrite.write(obj);
+        boolean hasSend = false;
+        int sendNum = 0;
+        Iterator var7 = this.sessionList.iterator();
+
+        while(var7.hasNext()) {
+            GameObjectChar gameSession = (GameObjectChar)var7.next();
+            if (gameSession.ctx != null && predicate.test(gameSession)) {
+                ++sendNum;
+                ByteBuf copy = buff.copy();
+                gameSession.send0(copy);
+                if (gameSession == session) {
+                    hasSend = true;
+                }
+            }
+        }
+
+        if (!hasSend && session != null) {
+            session.send0(buff.copy());
+        }
+
+        ReferenceCountUtil.release(buff);
+    }
+    private interface Filter{
+        boolean filter();
     }
 
     public void sendNoMe(BaseWrite baseWrite, Object obj, GameObjectChar gameObjectChar) {
