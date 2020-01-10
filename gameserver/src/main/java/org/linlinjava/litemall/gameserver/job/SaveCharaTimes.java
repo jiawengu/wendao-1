@@ -462,11 +462,25 @@ public class SaveCharaTimes {
     }
 
     @Scheduled(
-            fixedRate =  10000L
+            fixedRate =  50000L
     )
     public void autoCheckPartyMgrSave(){
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
         }
     }
+
+    @Scheduled(
+            fixedRate =  5000L
+    )
+    public void autoCheckUserLogicSave(){
+        GameObjectCharMng.getAll().forEach(item->{
+            try {
+                item.logic.cacheSave();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 }

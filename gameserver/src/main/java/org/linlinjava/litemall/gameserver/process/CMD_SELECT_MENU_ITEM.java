@@ -8,6 +8,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -17,6 +18,8 @@ import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameLine;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -39,8 +42,8 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
         String menu_item = org.linlinjava.litemall.gameserver.data.GameReadTool.readString(buff);
 
-
         String para = org.linlinjava.litemall.gameserver.data.GameReadTool.readString(buff);
+        System.out.println("CMD_SELECT_MENU_ITEM:" + id + ":" + menu_item + ":" + para);
 
 
         Chara chara1 = GameObjectChar.getGameObjectChar().chara;
@@ -2851,6 +2854,43 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
             /*      */
             /*      */
+
+            UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+            UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+            boolean hasPartyDailyTask = dailyTaskLogic.hasTask();
+            PartyDailyTaskItem newDailyTaskItem = dailyTaskLogic.selectMenuItem(id, menu_item);
+            if(newDailyTaskItem != null){
+                Vo_61553_0 vo_61553_0 = new Vo_61553_0();
+                vo_61553_0.count = 1;
+                vo_61553_0.task_type = "帮派日常任务";
+                vo_61553_0.task_desc = newDailyTaskItem.task_desc;
+                vo_61553_0.task_prompt = newDailyTaskItem.task_prompt;
+                vo_61553_0.refresh = 1;
+                vo_61553_0.task_end_time = 1567909190;
+                vo_61553_0.attrib = 1;
+                vo_61553_0.reward = newDailyTaskItem.reward > 0 ? "帮贡x" + newDailyTaskItem.reward : "";
+                vo_61553_0.show_name = newDailyTaskItem.show_name;
+                vo_61553_0.tasktask_extra_para = "";
+                vo_61553_0.tasktask_state = "1";
+                GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
+            }else{
+                if(hasPartyDailyTask){ //任务完成
+                    Vo_61553_0 vo_61553_0 = new Vo_61553_0();
+                    vo_61553_0.count = 1;
+                    vo_61553_0.task_type = "帮派日常任务";
+                    vo_61553_0.task_desc = "";
+                    vo_61553_0.task_prompt = "";
+                    vo_61553_0.refresh = 1;
+                    vo_61553_0.task_end_time = 0;
+                    vo_61553_0.attrib = 1;
+                    vo_61553_0.reward = "";
+                    vo_61553_0.show_name = "";
+                    vo_61553_0.tasktask_extra_para = "";
+                    vo_61553_0.tasktask_state = "1";
+                    GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
+                }
+            }
+
             /* 1282 */
             ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
             /* 1283 */

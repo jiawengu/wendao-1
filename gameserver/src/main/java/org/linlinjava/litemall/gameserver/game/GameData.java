@@ -6,9 +6,13 @@
 package org.linlinjava.litemall.gameserver.game;
 
 import javax.annotation.PostConstruct;
+
+import org.linlinjava.litemall.db.service.PartyService;
+import org.linlinjava.litemall.db.service.UserPartyDailyTaskService;
 import org.linlinjava.litemall.db.service.CharacterService;
 import org.linlinjava.litemall.db.service.SaleGoodService;
 import org.linlinjava.litemall.db.service.base.*;
+import org.linlinjava.litemall.gameserver.service.BaseUserPartyShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -89,7 +93,17 @@ public class GameData {
     @Autowired
     public BaseChargeService baseChargeService;
     @Autowired
-    public BasePartyService basePartyService;
+    public PartyService basePartyService;
+    @Autowired
+    public BaseUserPartyService baseUserPartyService;
+
+
+    @Autowired
+    public UserPartyDailyTaskService userPartyDailyTaskService;
+    @Autowired
+    public BaseUserPartyShopService baseUserPartyShopService;
+
+
 
     public GameData() {
     }
