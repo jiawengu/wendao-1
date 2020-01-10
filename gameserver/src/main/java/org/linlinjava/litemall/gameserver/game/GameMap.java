@@ -62,7 +62,7 @@ public class GameMap {
 
         while(var6.hasNext()) {
             Npc npc = (Npc)var6.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
@@ -155,7 +155,7 @@ public class GameMap {
         Iterator var7 = npcList.iterator();
         while(var7.hasNext()) {
             Npc npc = (Npc)var7.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);

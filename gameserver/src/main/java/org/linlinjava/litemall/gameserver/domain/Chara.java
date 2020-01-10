@@ -193,8 +193,11 @@
 /*     */ 
 /*     */   public String chenhao;
 /*     */   
-/*     */ 
-/*     */   public int menpai;
+/*     */
+    /**
+     * 1-5 金木水火土
+     */
+    /*     */   public int menpai;
 /*     */   
 /*     */ 
 /* 200 */   public int tizhi = 1;
