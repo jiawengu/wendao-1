@@ -29,6 +29,7 @@ public class GmUtil {
         //注册处理器
         {
             result.put("ljy", this::ljy_handler);
+            result.put("goods", this::goods_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -63,11 +64,19 @@ public class GmUtil {
 //        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
 //        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
 
+    }
+
+    /**
+     * 添加物品
+     * @param chara
+     * @param cmds
+     */
+    public void goods_handler(Chara chara, String[] cmds){
         String goodsName = cmds[1];
         int num = cmds.length>=3?Integer.parseInt(cmds[2]):1;
         StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(goodsName);
         if(null==info){
-            System.out.println("没有找到物品："+goodsName);
+            System.out.println("在StoreInfo里没有找到物品："+goodsName);
         }
         for(int i=0;i<num;++i){
             GameUtil.huodedaoju(chara, info, 1);
