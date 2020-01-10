@@ -62,14 +62,18 @@ public class GameMap {
 
         while(var6.hasNext()) {
             Npc npc = (Npc)var6.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);
         gameObjectChar.sendOne(new MSG_EXITS(), list);
         Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
         this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
-            return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+            if(isTTTMap()){
+                return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
+            }else{
+                return true;
+            }
         });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
@@ -155,7 +159,7 @@ public class GameMap {
         Iterator var7 = npcList.iterator();
         while(var7.hasNext()) {
             Npc npc = (Npc)var7.next();
-            gameObjectChar.sendOne(new M65529_npc(), npc);
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
         List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(this.name);

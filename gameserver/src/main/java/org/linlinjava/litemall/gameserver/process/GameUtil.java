@@ -20,6 +20,7 @@ import java.util.Random;
         /*      */ {
             private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天璇星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
     public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
+    public static final String[] ZHANG_MEN = new String[]{"金系掌门", "土系掌门", "水系掌门", "木系掌门", "火系掌门"};
     /*      */   public static void addshouhu(Chara chara)
     /*      */   {
         /*   30 */     for (int i = 0; i < chara.listshouhu.size(); i++)
@@ -2595,7 +2596,7 @@ import java.util.Random;
     /**
      * MSG_MENU_LIST
      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 a8247(org.linlinjava.litemall.db.domain.Npc npc, String content)
+    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 MSG_MENU_LIST(org.linlinjava.litemall.db.domain.Npc npc, String content)
     /*      */   {
         /* 2528 */     org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 vo_8247_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0();
         /* 2529 */     vo_8247_0.id = npc.getId().intValue();
@@ -4634,5 +4635,25 @@ import java.util.Random;
         }
         return 0;
     }
+    public static boolean isZhangeMenNpc(String npcName){
+        for(String name:ZHANG_MEN){
+            if(name.equals(npcName)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static int getMenPai(String zhangMenName){
+        for(int i=0;i<ZHANG_MEN.length;++i){
+            if(ZHANG_MEN[i].equals(zhangMenName)){
+                return i+1;
+            }
+        }
+        throw new UnsupportedOperationException();
+    }
+    public static String getZhangMenName(int menpai){
+        return ZHANG_MEN[menpai-1];
+    }
+
     /*      */ }
 

@@ -15,7 +15,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M61545_0 extends BaseWrite
+/*    */ public class MSG_FRIEND_ADD_CHAR extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

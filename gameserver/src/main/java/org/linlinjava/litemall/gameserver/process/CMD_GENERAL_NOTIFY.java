@@ -52,7 +52,7 @@ import org.linlinjava.litemall.gameserver.data.write.M12016_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_1;
 import org.linlinjava.litemall.gameserver.data.write.M12269_0;
-import org.linlinjava.litemall.gameserver.data.write.M16383_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.M40964_0;
@@ -149,7 +149,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.voiceTime = 0;
                 vo_16383_5.token = "";
                 vo_16383_5.checksum = 0;
-                GameObjectCharMng.sendAll(new M16383_0(), vo_16383_5);
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
             }
         }
 
