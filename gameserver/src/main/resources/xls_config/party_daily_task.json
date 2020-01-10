@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "group": 1,
+    "show_name": "帮派-日常任务",
+    "task_desc": "",
+    "task_prompt": "",
+    "reward": 0,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 1006
+  },
+  {
+    "id": 2,
+    "group": 1,
+    "show_name": "帮派-日常任务",
+    "task_desc": "向#P杜卜思|E=【帮派】购买20颗灵药|$0#P购买灵药",
+    "task_prompt": "向#P杜卜思|E=【帮派】购买20颗灵药|$0#P购买灵药",
+    "reward": 0,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 965
+  },
+  {
+    "id": 3,
+    "group": 1,
+    "show_name": "帮派-日常任务",
+    "task_desc": "向#P帮派总管|E=【帮派】将灵药交给总管|$0#P上交灵药",
+    "task_prompt": "向#P帮派总管|E=【帮派】将灵药交给总管|$0#P上交灵药",
+    "reward": 1000,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 1006
+  },
+  {
+    "id": 4,
+    "group": 2,
+    "show_name": "帮派-日常任务",
+    "task_desc": "",
+    "task_prompt": "",
+    "reward": 0,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 1006
+  },
+  {
+    "id": 5,
+    "group": 2,
+    "show_name": "帮派-日常任务",
+    "task_desc": "向#P董老头|E=【帮派】购买2只野生灵兽|$0#p购买野生灵兽",
+    "task_prompt": "向#P董老头|E=【帮派】购买2只野生灵兽|$0#p购买野生灵兽",
+    "reward": 0,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 974
+  },
+  {
+    "id": 6,
+    "group": 2,
+    "show_name": "帮派-日常任务",
+    "task_desc": "向#P帮派总管|E=【帮派】将野生灵兽交给总管|$0#P上交灵兽",
+    "task_prompt": "向#P帮派总管|E=【帮派】将野生灵兽交给总管|$0#P上交灵兽",
+    "reward": 1000,
+    "map_id": 1,
+    "map_x": 1,
+    "map_y": 1,
+    "npc_id": 1006
+  }
+]

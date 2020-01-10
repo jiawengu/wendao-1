@@ -16,6 +16,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.*;
 /*     */
 /*     */
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -24,6 +25,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameCore;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*     */
 /*     */
 
@@ -327,14 +330,14 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 321 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_10);
 /*     */     }
 /*     */     
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
 /*     */ 
 /* 333 */     if (chara.fabaorenwu == 1) {
 /* 334 */       Vo_61553_0 vo_61553_10 = new Vo_61553_0();
@@ -404,6 +407,31 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 398 */     vo_4321_0.time = ((int)(System.currentTimeMillis() / 1000L));
 /* 399 */     vo_4321_0.c = 8;
 /* 400 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4321_0(), vo_4321_0);
+
+
+                UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+                UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+                boolean hasPartyDailyTask = dailyTaskLogic.hasTask();
+                PartyDailyTaskItem newDailyTaskItem = null;
+                if(hasPartyDailyTask){
+                    newDailyTaskItem = dailyTaskLogic.getCfgItem(dailyTaskLogic.data.getCurTaskId());
+                }
+                if(newDailyTaskItem != null){
+                    vo_61553_0 = new Vo_61553_0();
+                    vo_61553_0.count = 1;
+                    vo_61553_0.task_type = "帮派日常任务";
+                    vo_61553_0.task_desc = newDailyTaskItem.task_desc;
+                    vo_61553_0.task_prompt = newDailyTaskItem.task_prompt;
+                    vo_61553_0.refresh = 1;
+                    vo_61553_0.task_end_time = 1567909190;
+                    vo_61553_0.attrib = 1;
+                    vo_61553_0.reward = "帮贡x" + newDailyTaskItem.reward;
+                    vo_61553_0.show_name = newDailyTaskItem.show_name;
+                    vo_61553_0.tasktask_extra_para = "";
+                    vo_61553_0.tasktask_state = "1";
+                    GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
+                }
+
 /*     */     
 /* 402 */     org.linlinjava.litemall.gameserver.fight.FightManager.reconnect(chara);
 /*     */   }

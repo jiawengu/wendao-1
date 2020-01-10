@@ -12,10 +12,13 @@ import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.M8247_0;
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 
 import java.util.List;
 
@@ -34,6 +37,7 @@ import java.util.List;
         /*     */
         /*  29 */
         int type = org.linlinjava.litemall.gameserver.data.GameReadTool.readByte(buff);
+        System.out.println("CMD_OPEN_MENU:" + id + ":" + type);
         /*     */
         /*  31 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
@@ -338,6 +342,13 @@ import java.util.List;
             /* 174 */
             content = "[【领取法宝】提交#R蟠螭结、雪魂丝链#n]" + content;
             /*     */
+        }
+
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.getCurTask(id);
+        if(dailyTaskItem != null){
+            content = "[" + dailyTaskItem.show_name + "]";
         }
         /*     */
         /*     */

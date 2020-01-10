@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package org.linlinjava.litemall.db.service.base;
+package org.linlinjava.litemall.db.service;
 
 import com.github.pagehelper.PageHelper;
 import java.time.LocalDateTime;
@@ -20,11 +20,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BasePartyService {
+public class PartyService {
     @Autowired
     protected PartyMapper mapper;
 
-    public BasePartyService() {
+    public PartyService() {
     }
 
     @Cacheable(
