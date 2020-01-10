@@ -67,7 +67,7 @@ public class GmUtil {
     }
 
     /**
-     * 添加物品
+     * 添加物品:#gm goods 物品名字 物品数量
      * @param chara
      * @param cmds
      */
