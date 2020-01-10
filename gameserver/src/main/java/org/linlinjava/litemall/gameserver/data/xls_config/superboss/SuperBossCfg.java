@@ -56,13 +56,13 @@ public class SuperBossCfg implements ApplicationRunner {
         load();
     }
 
-    public void load()  throws Exception {
+    public void load() {
         this.maps = getResObjList("SuperBossMap", SuperBossMap.class);
         this.bosss = getResObjList("SuperBossItem", SuperBossItem.class);
         this.cfg = getResObjList("SuperBossCfg", Cfg.class).get(0);
     }
 
-    public static <T> List<T> getResObjList(String name, Class<T> t)  throws Exception {
+    public static <T> List<T> getResObjList(String name, Class<T> t)  {
         List<T> list = new ArrayList<T>();
         try {
             JSONArray objs = JSONObject.parseObject(resourceLoader.getResource("classpath:xls_config/" + name + ".json").getInputStream(), JSONArray.class);
