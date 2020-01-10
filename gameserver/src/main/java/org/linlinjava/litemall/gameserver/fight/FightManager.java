@@ -60,6 +60,8 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.TitleService;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1832,6 +1834,9 @@ public class FightManager {
                     } else {
                         GameUtil.shuayeguai(chara1, chara1, ((FightObject)guaiwu.get(0)).guaiwulevel);
                     }
+                    UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+                    UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+                    dailyTaskLogic.fightAfterWin(chara1.mapid, guaiwu);
                 }
             }else{
                 if (chara1.mapid == 37000 ) {//通天塔挑战失败

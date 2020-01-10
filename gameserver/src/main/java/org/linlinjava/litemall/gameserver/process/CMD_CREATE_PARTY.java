@@ -43,8 +43,6 @@ public class CMD_CREATE_PARTY implements GameHandler {
             this.sendErr("帮派名字已被占用!");
             return;
         }
-        Party newParty = new Party();
-
         GameParty party = partyMgr.newParty(name, chara);
         UserPartyLogic logic = (UserPartyLogic)GameObjectChar.getGameObjectChar().logic.getMod("party");
         logic.joinParty(party.id, party.data.getName());

@@ -346,9 +346,9 @@ import java.util.List;
 
         UserLogic logic = GameObjectChar.getGameObjectChar().logic;
         UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.getCurTask(id);
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
         if(dailyTaskItem != null){
-            content = "[" + dailyTaskItem.show_name + "]";
+            content = "[" + dailyTaskItem.show_name + "]" + content;
         }
         /*     */
         /*     */

@@ -34,6 +34,7 @@ public class PartyDailyTaskCfg extends ArrayList<PartyDailyTaskItem> {
     }
 
     public ArrayList<PartyDailyTaskItem> randomGroup(){
+        //if(true){ return groupMap.get(4); }
         int group = (int)Math.floor(Math.random() * group_count) + 1;
         if(group > group_count){
             group = group_count;

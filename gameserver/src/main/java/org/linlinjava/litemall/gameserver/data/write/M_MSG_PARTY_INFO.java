@@ -3,6 +3,7 @@ package org.linlinjava.litemall.gameserver.data.write;
 import io.netty.buffer.ByteBuf;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
+import org.linlinjava.litemall.gameserver.domain.PartyOfficers;
 import org.linlinjava.litemall.gameserver.game.PartyMgr;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 
@@ -33,7 +34,12 @@ public class M_MSG_PARTY_INFO extends BaseWrite {
 
         GameWriteTool.writeString(buf, ""); // icon_md5
         GameWriteTool.writeString(buf, ""); //review_icon_md5
-        GameWriteTool.writeShort(buf, 0); //leaderCount
+
+        GameWriteTool.writeShort(buf, p.officers.size()); //leaderCount
+        p.officers.forEach((job, office)->{
+            GameWriteTool.writeString(buf, job);
+            GameWriteTool.writeString(buf,  office.name);
+        });
     }
 
     public int cmd()
