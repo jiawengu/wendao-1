@@ -11,13 +11,18 @@ import org.linlinjava.litemall.db.domain.Renwu;
 import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
-import org.linlinjava.litemall.gameserver.data.write.M8247_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 
 import java.util.List;
+
+import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 
 
 /**
@@ -34,6 +39,7 @@ import java.util.List;
         /*     */
         /*  29 */
         int type = org.linlinjava.litemall.gameserver.data.GameReadTool.readByte(buff);
+        System.out.println("CMD_OPEN_MENU:" + id + ":" + type);
         /*     */
         /*  31 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
@@ -65,7 +71,7 @@ import java.util.List;
                     /*  45 */
                     vo_8247_0.attrib = 0;
                     /*  46 */
-                    GameObjectChar.send(new M8247_0(), vo_8247_0);
+                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                     /*     */
                 }
                 /*     */
@@ -102,7 +108,7 @@ import java.util.List;
                         /*  66 */
                         vo_8247_0.attrib = 0;
                         /*  67 */
-                        GameObjectChar.send(new M8247_0(), vo_8247_0);
+                        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                         /*  68 */
                         return;
                         /*     */
@@ -126,7 +132,7 @@ import java.util.List;
                     /*  79 */
                     vo_8247_0.attrib = 0;
                     /*  80 */
-                    GameObjectChar.send(new M8247_0(), vo_8247_0);
+                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                     /*  81 */
                     return;
                     /*     */
@@ -163,7 +169,7 @@ import java.util.List;
                 /* 101 */
                 vo_8247_0.attrib = 0;
                 /* 102 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 103 */
                 return;
                 /*     */
@@ -194,7 +200,7 @@ import java.util.List;
                 /* 118 */
                 vo_8247_0.attrib = 0;
                 /* 119 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 120 */
                 return;
                 /*     */
@@ -226,7 +232,7 @@ import java.util.List;
                 /* 135 */
                 vo_8247_0.attrib = 0;
                 /* 136 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 137 */
                 return;
                 /*     */
@@ -271,9 +277,16 @@ import java.util.List;
                     ("大胆狂徒，敢在本大王面前撒野，真是活得不耐烦了！(妖王等级"+level+"级，适合"+level+"-"+(level+29)+"级玩家挑战）\n[挑战]\n" + "[离开]".replace("\\",""));
         }
 
-            if (id == 829) {
-                content = "[挑战掌门]" + content;
-          }
+        if (GameUtil.isZhangeMenNpc(npc.getName())) {//掌门npc
+            if(GameUtil.getMenPai(npc.getName()) == chara.menpai){//自己的掌门
+                content = getTalk(TIAO_ZHAN_ZHANG_MEN)+
+                        getTalk(CHA_KAN_ZHANG_MEN)+
+                        getTalk(JIN_RU_ZHENG_DAO_DIAN);
+            }else{//其他门派掌门
+                content = getTalk(KAN_KAN_YE_WU_FANG)+
+                        getTalk(BU_KAN_LE);
+            }
+        }
 
         /* 151 */
         if (npc.getName().equals(chara.npcName)) {
@@ -345,13 +358,20 @@ import java.util.List;
             content = "[【领取法宝】提交#R蟠螭结、雪魂丝链#n]" + content;
             /*     */
         }
+
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.getCurTask(id);
+        if(dailyTaskItem != null){
+            content = "[" + dailyTaskItem.show_name + "]";
+        }
         /*     */
         /*     */
         /*     */
         /* 179 */
-        Vo_8247_0 vo_8247_0 = GameUtil.a8247(npc, content);
+        Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, content);
         /* 180 */
-        GameObjectChar.send(new M8247_0(), vo_8247_0);
+        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
         /*     */
     }
 

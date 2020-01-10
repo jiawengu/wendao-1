@@ -3,21 +3,21 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import org.linlinjava.litemall.db.domain.Characters;
-/*    */ import org.linlinjava.litemall.db.service.CharacterService;
+/*    */
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_36871_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M36871_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_CHAR_INFO;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
+/*    */
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class C33287_0 implements GameHandler
+/*    */ public class CMD_GET_CHAR_INFO implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
@@ -66,7 +66,7 @@
 /* 66 */     vo_36871_0.isInThereFrend = 0;
 /* 67 */     vo_36871_0.ringScore = 0;
 /* 68 */     vo_36871_0.comeback_flag = 0;
-/* 69 */     GameObjectChar.send(new M36871_0(), vo_36871_0);
+/* 69 */     GameObjectChar.send(new MSG_CHAR_INFO(), vo_36871_0);
 /*    */   }
 /*    */   
 /*    */ 

@@ -16,6 +16,7 @@ import org.linlinjava.litemall.gameserver.domain.GameParty;
 import org.linlinjava.litemall.gameserver.game.GameCore;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.PartyMgr;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -45,7 +46,8 @@ public class CMD_CREATE_PARTY implements GameHandler {
         Party newParty = new Party();
 
         GameParty party = partyMgr.newParty(name, chara);
-
+        UserPartyLogic logic = (UserPartyLogic)GameObjectChar.getGameObjectChar().logic.getMod("party");
+        logic.joinParty(party.id, party.data.getName());
 
         chara.balance -= 1000;
         chara.partyId = party.id;

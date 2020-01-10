@@ -13,6 +13,7 @@ import org.linlinjava.litemall.gameserver.data.write.M4121_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.slf4j.Logger;
 
@@ -28,6 +29,7 @@ public class GameObjectChar {
 
     public Chara chara;
     public Characters characters;
+    public UserLogic logic;
     public GameMap gameMap;
     public GameTeam gameTeam;
     public int upduizhangid;
@@ -75,6 +77,8 @@ public class GameObjectChar {
         chara.id = characters.getId().intValue();
         this.chara = chara;
         this.characters = characters;
+        this.logic = new UserLogic();
+        this.logic.init(chara.id, this.logic);
         GameObjectCharMng.add(this);
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);

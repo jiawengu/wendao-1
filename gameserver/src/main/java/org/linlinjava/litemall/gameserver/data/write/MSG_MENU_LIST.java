@@ -10,7 +10,7 @@
  * MSG_MENU_LIST
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M8247_0 extends BaseWrite
+/*    */ public class MSG_MENU_LIST extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

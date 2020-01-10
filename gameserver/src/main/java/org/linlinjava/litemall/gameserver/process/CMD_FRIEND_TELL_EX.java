@@ -12,10 +12,10 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53569_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M16383_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M24505_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_FRIEND_UPDATE_PARTIAL;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M53569_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61545_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_FRIEND_ADD_CHAR;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -24,7 +24,7 @@
 /*    */ 
 /*    */ 
 /*    */ @Service
-/*    */ public class C20590_0
+/*    */ public class CMD_FRIEND_TELL_EX
 /*    */   implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
@@ -53,14 +53,14 @@
 /* 53 */     String data = characters.getData();
 /* 54 */     Chara chara1 = (Chara)JSONUtils.parseObject(data, Chara.class);
 /* 55 */     Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
-/* 56 */     GameObjectChar.send(new M24505_0(), vo_24505_0);
+/* 56 */     GameObjectChar.send(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
 /* 57 */     List<Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
-/* 58 */     GameObjectChar.send(new M61545_0(), vo_61545_0List);
+/* 58 */     GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /* 59 */     Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, msg, 9, chara1);
-/* 60 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new M16383_0(), vo_16383_0);
+/* 60 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_MESSAGE_EX(), vo_16383_0);
 /* 61 */     if (GameObjectCharMng.getGameObjectChar(chara1.id) != null) {
 /* 62 */       vo_16383_0 = GameUtil.a16383(chara, msg, 9);
-/* 63 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M16383_0(), vo_16383_0);
+/* 63 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_MESSAGE_EX(), vo_16383_0);
 /* 64 */       Vo_53569_0 vo_53569_0 = new Vo_53569_0();
 /* 65 */       vo_53569_0.gid = receive_gid;
 /* 66 */       vo_53569_0.online = 1;

@@ -19,7 +19,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C4132_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_ACCEPT implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff)
 /*     */   {
@@ -46,10 +46,10 @@
 /*     */       
 /*     */ 
 /*  48 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
-/*  49 */       GameObjectChar.send(new M61545_0(), vo_61545_0List);
+/*  49 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*  51 */       org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
-/*  52 */       GameObjectChar.send(new M24505_0(), vo_24505_0);
+/*  52 */       GameObjectChar.send(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
 /*     */       
 /*     */ 
 /*  55 */       Vo_61591_0 vo_61591_0 = new Vo_61591_0();
@@ -70,10 +70,10 @@
 /*  70 */       GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /*     */       
 /*  72 */       vo_61545_0List = GameUtil.a61545(chara1);
-/*  73 */       GameObjectChar.send(new M61545_0(), vo_61545_0List);
+/*  73 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*  75 */       vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
-/*  76 */       GameObjectChar.send(new M24505_0(), vo_24505_0);
+/*  76 */       GameObjectChar.send(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
 /*     */       
 /*  78 */       org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara1);
 /*  79 */       GameObjectChar.send(new MSG_APPEAR(), vo_65529_0);
@@ -104,11 +104,11 @@
 /*     */       
 /*     */ 
 /* 106 */       vo_61545_0List = GameUtil.a61545(chara);
-/* 107 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M61545_0(), vo_61545_0List);
+/* 107 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*     */ 
 /* 110 */       vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
-/* 111 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M24505_0(), vo_24505_0);
+/* 111 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
 /*     */       
 /* 113 */       vo_65529_0 = GameUtil.MSG_APPEAR(chara);
 /* 114 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_APPEAR(), vo_65529_0);
@@ -189,7 +189,7 @@
 /* 189 */         return;
 /*     */       }
 /* 191 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara);
-/* 192 */       GameObjectChar.send(new M61545_0(), vo_61545_0List);
+/* 192 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /* 194 */       GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
 /*     */       

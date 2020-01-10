@@ -193,8 +193,11 @@
 /*     */ 
 /*     */   public String chenhao;
 /*     */   
-/*     */ 
-/*     */   public int menpai;
+/*     */
+    /**
+     * 1-5 金木水火土
+     */
+    /*     */   public int menpai;
 /*     */   
 /*     */ 
 /* 200 */   public int tizhi = 1;
@@ -444,6 +447,15 @@
      * 通天塔-是否挑战星君成功
      */
     public boolean ttt_xj_success;
+
+    /**
+     * 挑战掌门-掌门留言
+     */
+    public String leaderNotice;
+    /**
+     * 挑战掌门-今日失败次数
+     */
+    public int leaderTodayFailNum;
 
     public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;

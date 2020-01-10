@@ -11,8 +11,8 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
 
 @Service
-public class M4155_0 extends BaseWrite {
-    public M4155_0() {
+public class MSG_MENU_CLOSED extends BaseWrite {
+    public MSG_MENU_CLOSED() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {

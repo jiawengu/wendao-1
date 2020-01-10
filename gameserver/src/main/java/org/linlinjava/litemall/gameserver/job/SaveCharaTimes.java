@@ -17,7 +17,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.write.M12285_1;
-import org.linlinjava.litemall.gameserver.data.write.M16383_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -352,7 +352,7 @@ public class SaveCharaTimes {
                 vo_16383_0.has_break_lv_limit = 0;
                 vo_16383_0.skill = 1;
                 vo_16383_0.type = 1;
-                gameMap.send(new M16383_0(), vo_16383_0);
+                gameMap.send(new MSG_MESSAGE_EX(), vo_16383_0);
             }
 
             for(i = 0; i < shidaolevel.length; ++i) {
@@ -418,7 +418,7 @@ public class SaveCharaTimes {
                 vo_16383_0.has_break_lv_limit = 0;
                 vo_16383_0.skill = 1;
                 vo_16383_0.type = 1;
-                GameObjectCharMng.sendAll(new M16383_0(), vo_16383_0);
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_0);
                 this.gonggaotim = System.currentTimeMillis();
             }
         }
@@ -462,11 +462,25 @@ public class SaveCharaTimes {
     }
 
     @Scheduled(
-            fixedRate =  10000L
+            fixedRate =  50000L
     )
     public void autoCheckPartyMgrSave(){
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
         }
     }
+
+    @Scheduled(
+            fixedRate =  5000L
+    )
+    public void autoCheckUserLogicSave(){
+        GameObjectCharMng.getAll().forEach(item->{
+            try {
+                item.logic.cacheSave();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 }
