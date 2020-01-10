@@ -3,6 +3,7 @@ package org.linlinjava.litemall.gameserver.game;
 import net.sf.json.JSON;
 import org.linlinjava.litemall.core.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
+import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyShopCfg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
-public class XLSConfigMgr {
+    public class XLSConfigMgr {
     private static HashMap<String, Object> caches = new HashMap<>();
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
     private static final Logger log = LoggerFactory.getLogger(XLSConfigMgr.class);
@@ -55,6 +56,7 @@ public class XLSConfigMgr {
 
     public static void init(){
         loadXls("party_shop", PartyShopCfg.class);
+        loadXls("dugeno", DugenoCfg.class);
     }
 
     public static Object getCfg(String name){

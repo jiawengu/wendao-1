@@ -1694,6 +1694,15 @@ public class FightManager {
                     return;
                 }
 
+                if (guaiwu != null) {
+                    GameMap gameMap = GameObjectCharMng.getGameObjectChar(chara1.id).gameMap;
+                    if (gameMap.isDugeno()){
+                        GameDugeon gameDugeon = ((GameZone)gameMap).gameDugeon;
+                        gameDugeon.fightWin(chara1);
+                        return;
+                    }
+                }
+
                 if (chara1.mapid == 38004) {
                     GameShiDao var10000 = GameObjectCharMng.getGameObjectChar(chara1.id).gameMap.gameShiDao;
                     if (GameShiDao.statzhuangtai == 3) {

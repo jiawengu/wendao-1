@@ -8,6 +8,8 @@ import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
+import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.*;
 
@@ -4634,5 +4636,19 @@ import java.util.Random;
         }
         return 0;
     }
+
+    // 进入副本
+    public static void enterDugeno(Chara chara, String map_name) {
+        DugenoCfg cfgMgr = (DugenoCfg)XLSConfigMgr.getCfg("dugeno");
+        DugenoItem cfg = cfgMgr.getByName(map_name);
+        org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(cfg.map_name);
+        chara.y = map.getY().intValue();
+        chara.x = map.getX().intValue();
+        GameZone gameZone = GameLine.createGameZone(chara.line, map.getMapId());
+        gameZone.initGameDugeon(cfg.name);
+        gameZone.join(GameObjectCharMng.getGameObjectChar(chara.id));
+        gameZone.gameDugeon.enter(chara);
+    }
+
     /*      */ }
 

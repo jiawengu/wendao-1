@@ -233,6 +233,12 @@ import java.util.List;
             }
             /*     */
         }
+
+        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
+        if (gameMap.isDugeno() && ((GameZone)gameMap).gameDugeon.meetNpc(chara, id))
+        {
+            return;
+        }
         /*     */
 
         /*     */

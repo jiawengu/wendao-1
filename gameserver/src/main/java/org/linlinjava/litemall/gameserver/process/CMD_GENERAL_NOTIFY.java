@@ -71,6 +71,8 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.data.write.M65527_1;
 import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 import org.linlinjava.litemall.gameserver.data.write.M9129_0;
+import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
+import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -81,13 +83,9 @@ import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.fight.FightRequest;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.springframework.stereotype.Service;
-
-import static org.linlinjava.litemall.gameserver.process.GameUtil.addYuanBao;
 
 /**
  * CMD_GENERAL_NOTIFY    一般通知
@@ -1170,7 +1168,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             }else{
                 cost = 180;
             }
-            addYuanBao(chara, -cost);
+            GameUtil.addYuanBao(chara, -cost);
             chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
             GameUtil.a45090(chara, (byte) 1, cost, flyLayer);
             GameUtil.notifyTTTPanelInfo(chara);
@@ -1202,6 +1200,35 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         }
         if(type == 40007 || type == 50022){//通天塔离开
             GameUtilRenWu.huicheng(chara);
+        }
+
+        if (type == 30000)
+        {
+            int nCnt = 0;
+            if (GameObjectChar.getGameObjectChar().gameTeam != null && GameObjectChar.getGameObjectChar().gameTeam.duiwu != null)
+            {
+                nCnt = GameObjectChar.getGameObjectChar().gameTeam.duiwu.size();
+            }
+            if (nCnt < 3) {
+                vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "人数不足3人！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                return;
+            }
+
+            if (para1.matches("黑风洞"))
+            {
+                para1 = "黑风洞一层";
+            }
+
+            vo_9129_0 = new Vo_9129_0();
+            vo_9129_0.notify = 98;
+            vo_9129_0.para = "DugeonCreateDlg";
+            GameObjectChar.send(new M9129_0(), vo_9129_0);
+
+            GameUtil.enterDugeno(chara, para1);
         }
 
     }

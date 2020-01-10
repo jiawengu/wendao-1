@@ -33,10 +33,12 @@ public class GameMap {
     public String name;
     public int x;
     public int y;
+    public int map_type;
     public List<GameObjectChar> sessionList = new CopyOnWriteArrayList();
     public GameShiDao gameShiDao = new GameShiDao();
 
     public GameMap() {
+        map_type = 0;
     }
 
     public List<GameObjectChar> getSessionList() {
@@ -312,5 +314,15 @@ public class GameMap {
         }
 
         ReferenceCountUtil.release(buff);
+    }
+
+    //  是否是动态地图
+    public boolean isZone(){
+        return this.map_type > 0;
+    }
+
+    // 是否是副本
+    public boolean isDugeno(){
+        return this.map_type > 1;
     }
 }
