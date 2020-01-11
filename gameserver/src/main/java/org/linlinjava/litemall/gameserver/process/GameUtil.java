@@ -4671,5 +4671,46 @@ import java.util.Random;
         gameZone.gameDugeon.enter(chara);
     }
 
+
+    /**
+     *
+     * @param menpai
+     * @param sex 1:男，2：女
+     * @return
+     */
+    public static int getCharWaiGuan(int menpai, int sex) {
+        if ((menpai == 1) && (sex == 1)) {
+         return 6001;
+          }
+        if ((menpai == 2) && (sex == 1)) {
+             return  7002;
+         }
+        if ((menpai == 3) && (sex == 1)) {
+            return  7003;
+         }
+        if ((menpai == 4) && (sex == 1)) {
+              return 6004;
+            }
+        if ((menpai == 5) && (sex == 1)) {
+              return  6005;
+             }
+         if ((menpai == 1) && (sex == 2)) {
+             return  7001;
+           }
+        if ((menpai == 2) && (sex == 2)) {
+                return 6002;
+              }
+         if ((menpai == 3) && (sex == 2)) {
+             return 6003;
+         }
+        if ((menpai == 4) && (sex == 2)) {
+            return 7004;
+        }
+       if ((menpai == 5) && (sex == 2)) {
+           return 7005;
+        }
+        throw new UnsupportedOperationException();
+     }
+
     /*      */ }
 

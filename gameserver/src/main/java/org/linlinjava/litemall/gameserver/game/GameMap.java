@@ -20,6 +20,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -130,6 +131,10 @@ public class GameMap {
 
             GameUtil.a45704(chara);
         }
+
+        if(isZhengDaoDianMap()){
+            ZhengDaoDianService.onEngerMap(gameObjectChar);
+        }
     }
 
     /**
@@ -137,6 +142,12 @@ public class GameMap {
      */
     public boolean isTTTMap(){
         return id==37000;
+    }
+    /**
+     * 是否是正道殿地图
+     */
+    public boolean isZhengDaoDianMap(){
+        return id==ZhengDaoDianService.MAP_ID;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
