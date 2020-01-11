@@ -2,7 +2,7 @@ package org.linlinjava.litemall.wx.web;
 
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.service.TaskChainService;
+import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.wx.request.GrantTitleRequest;
 import org.linlinjava.litemall.wx.request.SetTaskRequest;
@@ -22,7 +22,7 @@ public class DebugController {
     private final Logger logger = LoggerFactory.getLogger(DebugController.class);
 
     @Autowired
-    private TaskChainService taskChainService;
+    private BaxianService baxianService;
 
     @PostMapping("/grant-title")
     public Object grantTitle(@RequestBody GrantTitleRequest request) {
@@ -38,7 +38,7 @@ public class DebugController {
         logger.error("setTask: " + request.toString());
 
         GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(request.getUid());
-        taskChainService.setPlayerTask(gameObjectChar, request.getChainId(), request.getTaskId());
+        baxianService.gotoNextTask(gameObjectChar, request.getChainId(), request.getTaskId());
         return true;
     }
 }

@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskVO {
+    private Integer chainId;
+
     private Integer taskId;
-
-    private String taskName;
-
-    private String taskPrompt;
 
     private Integer npcId;
 
@@ -25,4 +25,6 @@ public class TaskVO {
     private Integer npcX;
 
     private Integer npcY;
+
+    private List<String> monsterList;
 }

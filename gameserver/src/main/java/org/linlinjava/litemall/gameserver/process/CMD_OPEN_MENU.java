@@ -25,7 +25,7 @@ import io.netty.buffer.ByteBuf;
 /*     */
 /*     */
 @org.springframework.stereotype.Service
-/*     */ public class C4150_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_OPEN_MENU implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
     /*     */
     public void process(ChannelHandlerContext ctx, ByteBuf buff)
@@ -332,9 +332,3 @@ import io.netty.buffer.ByteBuf;
     }
     /*     */
 }
-
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\process\C4150_0.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */

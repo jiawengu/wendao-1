@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Consumer;
+
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
@@ -113,12 +115,17 @@ public class FightManager {
     }
 
     public static void goFight(Chara chara, List<String> monsterList) {
+        goFightWithCallback(chara, monsterList, null);
+    }
+
+    public static void goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
         }
 
         fc = new FightContainer();
+        fc.fightCallback = fightCallback;
         FightTeam ft = new FightTeam();
         ft.type = 1;
         GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);
@@ -247,7 +254,7 @@ public class FightManager {
             vo_32985_0.pet_next_action = 0;
             vo_32985_0.pet_para = 0;
             vo_32985_0.pet_next_para = 0;
-            GameObjectChar.send(new M32985_0(), vo_32985_0);
+            GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new M32985_0(), vo_32985_0);
         }
 
         GameUtil.a24505(chara);
@@ -857,6 +864,10 @@ public class FightManager {
                 fightObject.max_shengming = fightObject.shengming;
                 fightObject.update(fightContainer);
             }
+        }
+
+        if (fightContainer.fightCallback != null) {
+            fightContainer.fightCallback.accept(fightContainer.isPlayerWin());
         }
 
         afterFight(fightContainer);

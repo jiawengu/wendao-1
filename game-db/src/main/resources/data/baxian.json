@@ -1,44 +1,32 @@
 [
   {
     "chainId": 1,
-    "name": "吕洞宾的烦恼",
+    "name": "八仙梦境—吕洞宾",
     "taskList": [
       {
-        "taskId": 1,
-        "taskName": "吕洞宾的烦恼1",
-        "taskPrompt": "吕洞宾的烦恼11",
+        "taskId": 23,
         "npcId": 948,
         "npcName": "吕洞宾"
       }, {
         "taskId": 2,
-        "taskName": "吕洞宾的烦恼2",
-        "taskPrompt": "吕洞宾的烦恼12",
         "npcId": 949,
         "npcName": "太白金星"
       }, {
         "taskId": 3,
-        "taskName": "吕洞宾的烦恼3",
-        "taskPrompt": "吕洞宾的烦恼13",
         "npcId": 1022,
         "npcName": "牡丹仙子"
       }, {
         "taskId": 4,
-        "taskName": "吕洞宾的烦恼4",
-        "taskPrompt": "吕洞宾的烦恼14",
         "npcId": 1024,
         "npcName": "守值天兵",
-        "battle_info": []
+        "monsterList": ["牡丹仙子", "牡丹仙子", "牡丹仙子"]
       }, {
         "taskId": 5,
-        "taskName": "吕洞宾的烦恼5",
-        "taskPrompt": "吕洞宾的烦恼15",
         "npcId": 950,
         "npcName": "穿山甲",
-        "battle_info": []
+        "monsterList": ["穿山甲"]
       }, {
         "taskId": 6,
-        "taskName": "吕洞宾的烦恼6",
-        "taskPrompt": "吕洞宾的烦恼16",
         "npcId": 1023,
         "npcName": "西王母"
       }

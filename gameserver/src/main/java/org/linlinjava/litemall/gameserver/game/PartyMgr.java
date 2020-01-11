@@ -23,13 +23,13 @@ public class PartyMgr {
     }
 
     public void init(){
-        this.map = new HashMap<>();
-        Party a7913 = GameData.that.basePartyService.findById(7913);
-        List<Party> list = GameData.that.basePartyService.getAll();
-        list.forEach(item->{
-            this.map.put(item.getId(), new GameParty().init(item, null));
-        });
-        this.inited = true;
+//        this.map = new HashMap<>();
+//        Party a7913 = GameData.that.basePartyService.findById(7913);
+//        List<Party> list = GameData.that.basePartyService.getAll();
+//        list.forEach(item->{
+//            this.map.put(item.getId(), new GameParty().init(item, null));
+//        });
+//        this.inited = true;
     }
 
     public List<GameParty> getAll(){

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
+import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 
 public class Chara implements Serializable {
     public int allId;
@@ -408,4 +409,12 @@ public class Chara implements Serializable {
 
     public int partyId = 0;
     public String partyName = "";
+
+    public Baxian baxian = Baxian.builder()
+            .currentLevel(1)
+            .currentMaxLevel(1)
+            .resetTimeLeft(7)
+            .timesLeft(700)
+            .status(0)
+            .build();
 }

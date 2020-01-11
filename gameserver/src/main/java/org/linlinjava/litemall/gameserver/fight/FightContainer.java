@@ -8,6 +8,7 @@ package org.linlinjava.litemall.gameserver.fight;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 public class FightContainer {
     public int id = 1000;
@@ -17,7 +18,20 @@ public class FightContainer {
     public List<FightTeam> teamList = new ArrayList();
     public List<FightObject> doActionList;
     public long roundTime = System.currentTimeMillis();
+    public Consumer<Boolean> fightCallback;
 
     public FightContainer() {
+    }
+
+    public boolean isPlayerWin() {
+        FightTeam playerTeam = teamList.get(0);
+
+        for (FightObject fightObject : playerTeam.fightObjectList) {
+            if (fightObject.shengming > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

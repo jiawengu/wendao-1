@@ -1,4 +1,6 @@
 package org.linlinjava.litemall.gameserver.process;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.linlinjava.litemall.db.domain.Accounts;
 import org.linlinjava.litemall.db.domain.RenwuMonster;
 import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
@@ -17,18 +19,40 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 @org.springframework.stereotype.Service
-public class CMD_DIALOG_CHOOSE_RESULT<main> implements org.linlinjava.litemall.gameserver.GameHandler {
+public class CMD_DIALOG_CHOOSE_RESULT implements org.linlinjava.litemall.gameserver.GameHandler {
     private static final Logger log = LoggerFactory.getLogger(CMD_DIALOG_CHOOSE_RESULT.class);
     public int[] coins = {18000, 90000, 360000, 750000, 1284000, 1800000, 2844000, 3900000, 9000000, 14400000, 25500000};
     public int[] jiage = {6, 30, 100, 200, 328, 500, 648, 1000, 2000, 3000, 5000};
+
+    private static final Integer PENGLAI_XIANREN = 906; // 蓬莱仙人
+    private static final List<Integer> BAXIAN_NPC_LIST = Lists.newArrayList(948);
+
+    @Autowired
+    private BaxianService baxianService;
+
+    private java.util.Map<Integer, Consumer<CMD_DIALOG_CHOOSE_RESULT_VO>> npcHandlerMap = Maps.newHashMap();
+
+    @PostConstruct
+    private void init() {
+        npcHandlerMap.put(PENGLAI_XIANREN, this::logic_penglaixianren);
+        for (Integer npcId : BAXIAN_NPC_LIST) {
+            npcHandlerMap.put(npcId, this::logic_baxian);
+        }
+    }
+
     public void process(io.netty.channel.ChannelHandlerContext ctx, io.netty.buffer.ByteBuf buff) {
         int npc_id = org.linlinjava.litemall.gameserver.data.GameReadTool.readInt(buff);
         String menu_item = org.linlinjava.litemall.gameserver.data.GameReadTool.readString(buff);
@@ -37,6 +61,17 @@ public class CMD_DIALOG_CHOOSE_RESULT<main> implements org.linlinjava.litemall.g
         log.debug("npc id: " + npc_id + " menu_item: " + menu_item + " para: " + para);
 
         Chara chara1 = GameObjectChar.getGameObjectChar().chara;
+        Consumer<CMD_DIALOG_CHOOSE_RESULT_VO> npcHandler = npcHandlerMap.getOrDefault(npc_id, null);
+        if (npcHandler != null) {
+            CMD_DIALOG_CHOOSE_RESULT_VO cmd_dialog_choose_result_vo = CMD_DIALOG_CHOOSE_RESULT_VO.builder()
+                    .npcId(npc_id)
+                    .menuItem(menu_item)
+                    .para(para)
+                    .gameObjectChar(GameObjectChar.getGameObjectChar())
+                    .build();
+            npcHandler.accept(cmd_dialog_choose_result_vo);
+            return;
+        }
 
         String name;
         if (npc_id == 992) {
@@ -1508,19 +1543,27 @@ public class CMD_DIALOG_CHOOSE_RESULT<main> implements org.linlinjava.litemall.g
         }
     }
 
-    private void processBaxian() {
-        Vo_61553_0 vo_61553_10 = new Vo_61553_0();
-        vo_61553_10.count = 1;
-        vo_61553_10.task_type = "法宝任务";
-        vo_61553_10.task_desc = "";
-        vo_61553_10.task_prompt = "";
-        vo_61553_10.refresh = 0;
-        vo_61553_10.task_end_time = (int)(System.currentTimeMillis() / 1000L) + 2 * 60 * 60;
-        vo_61553_10.attrib = 0;
-        vo_61553_10.reward = "";
-        vo_61553_10.show_name = "法宝任务";
-        vo_61553_10.tasktask_extra_para = "";
-        vo_61553_10.tasktask_state = "1";
-        GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_10);
+    /**
+     * 蓬莱仙人的处理逻辑
+     * @param cmd_dialog_choose_result_vo CMD_DIALOG_CHOOSE_RESULT_VO
+     */
+    private void logic_penglaixianren(CMD_DIALOG_CHOOSE_RESULT_VO cmd_dialog_choose_result_vo) {
+        switch (cmd_dialog_choose_result_vo.getMenuItem()) {
+            case "open_dlg":
+                // 打开八仙梦境的选择界面
+                baxianService.showBaxianSelectDlg(cmd_dialog_choose_result_vo.getGameObjectChar());
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void logic_baxian(CMD_DIALOG_CHOOSE_RESULT_VO dialog_choose_result_vo) {
+        int npcId = dialog_choose_result_vo.getNpcId();
+        log.debug(String.format("logic_baxian npcId: %d, dialog_choose_result: %s", npcId, dialog_choose_result_vo.toString()));
+
+        if (dialog_choose_result_vo.getMenuItem().equals("task")) {
+            baxianService.afterTalkToNpc(dialog_choose_result_vo.getGameObjectChar(),npcId);
+        }
     }
 }

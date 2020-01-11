@@ -18,6 +18,16 @@ public class TaskChain {
         return taskList.get(taskList.size() - 1).getTaskId() == taskId;
     }
 
+    public TaskVO getTask(Integer taskId) {
+        for (TaskVO taskVO : taskList) {
+            if (taskVO.getTaskId().equals(taskId)) {
+                return taskVO;
+            }
+        }
+
+        return null;
+    }
+
     public TaskVO getFirstTask() {
         return taskList.get(0);
     }
