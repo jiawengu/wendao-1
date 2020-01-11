@@ -596,17 +596,17 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     GameData.that.baseNpcService.findById(id);
 
             List<String> list = new ArrayList();
-            list.add(npc.getName());
+            list.add("上古妖王"+(info.getLevel()/10)*10);
 
             Random RANDOM = new Random();
             String []  xiaoGuai = info.getXiaoGuai().split(",");
 
 
             for(int i = 0; i < 9; ++i) {
-                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]);
+                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]+(info.getLevel()/10)*10);
             }
 
-            org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
+            org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
         }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(id))) && (menu_item.equals("我是来向你挑战的"))) {
