@@ -1551,7 +1551,9 @@ public class CMD_DIALOG_CHOOSE_RESULT implements org.linlinjava.litemall.gameser
         switch (cmd_dialog_choose_result_vo.getMenuItem()) {
             case "open_dlg":
                 // 打开八仙梦境的选择界面
-                baxianService.showBaxianSelectDlg(cmd_dialog_choose_result_vo.getGameObjectChar());
+                if (cmd_dialog_choose_result_vo.getGameObjectChar().chara.level >= 60) {
+                    baxianService.showBaxianSelectDlg(cmd_dialog_choose_result_vo.getGameObjectChar());
+                }
                 break;
             default:
                 break;
