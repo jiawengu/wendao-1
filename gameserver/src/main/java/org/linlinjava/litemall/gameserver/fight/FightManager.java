@@ -2114,6 +2114,13 @@ public class FightManager {
                     GameShangGuYaoWang.onReward(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
                 }
+                //超级 BOSS
+                if(guaiwu != null && GameData.that.superBossMng.getBossByname(guaiwu.get(0).str) != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
+                    for(Chara c : GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu){
+                        GameData.that.superBossMng.sendRewards(c, guaiwu.get(0).str);
+                    }
+                    return ;
+                }
 
                 if (chara1.mapid == 38004) {
                     GameShiDao var10000 = GameObjectCharMng.getGameObjectChar(chara1.id).gameMap.gameShiDao;

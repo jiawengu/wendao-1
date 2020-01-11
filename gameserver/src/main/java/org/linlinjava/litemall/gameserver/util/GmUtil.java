@@ -2,7 +2,9 @@ package org.linlinjava.litemall.gameserver.util;
 
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.StoreInfo;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -30,6 +32,7 @@ public class GmUtil {
         {
             result.put("ljy", this::ljy_handler);
             result.put("goods", this::goods_handler);
+            result.put("pos", this::npc_pos);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -81,5 +84,10 @@ public class GmUtil {
         for(int i=0;i<num;++i){
             GameUtil.huodedaoju(chara, info, 1);
         }
+    }
+
+    public void npc_pos(Chara chara, String[] cmds){
+        Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, String.format("%s, %s", chara.x, chara.y), 1);
+        GameObjectChar.send(new MSG_MESSAGE_EX(), vo_16383_0);
     }
 }

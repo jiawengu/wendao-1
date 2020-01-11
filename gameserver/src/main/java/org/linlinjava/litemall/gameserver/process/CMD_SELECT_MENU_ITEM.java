@@ -2747,10 +2747,21 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         /* 1227 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         
-        if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
-            if ("我要挑战超级大BOSS".equals(menu_item)) {
-                GameData.that.superBossMng.sendBossFight(chara, id);
+        if(GameData.that.superBossMng.isBoss(Integer.valueOf(id)) && "我要挑战超级大BOSS".equals(menu_item)){
+            if(chara.level < 100){
+                GameUtil.sendTips("等级至少100级才能挑战哦");
+                return ;
             }
+            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+                GameUtil.sendTips("请先创建队伍");
+                return ;
+            }
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            if (duiwu.size() < 3) {
+                GameUtil.sendTips("人数不足3人");
+                return;
+            }
+            GameData.that.superBossMng.sendBossFight(chara, id);
             return ;
         }
         /* 1228 */
