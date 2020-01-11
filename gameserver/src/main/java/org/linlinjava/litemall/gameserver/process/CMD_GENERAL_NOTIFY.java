@@ -7,19 +7,12 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.linlinjava.litemall.db.domain.Characters;
-import org.linlinjava.litemall.db.domain.DaySignPrize;
-import org.linlinjava.litemall.db.domain.PetHelpType;
-import org.linlinjava.litemall.db.domain.SaleGood;
-import org.linlinjava.litemall.db.domain.StoreInfo;
+
+import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
@@ -129,8 +122,17 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             }else if(strings[1].equals("潜能")){
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
             }else if(strings[1].equals("上古妖王")){
+                Random random = new Random();
+                Npc npc = (Npc) GameData.that.baseNpcService.findOneByName(strings[0]);
+                npc.setDeleted(false);
+                npc.setX(random.nextInt(40)+1);
+                npc.setY(random.nextInt(40)+1);
+                GameData.that.baseNpcService.updateById(npc);
+                org.linlinjava.litemall.db.domain.Map map =
+                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
-                        "#n ";
+                        "#n, "+ "在地图#Z" + map.getName() + "|" + map.getName() +
+                        "(" + npc.getX() + "," + npc.getY() + ")#Z上,赶快去挑战吧!";
             }else if(strings[1].equals("道行")){
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
             }else {
@@ -146,6 +148,8 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
             GameObjectChar.send(new M20480_0(), vo_20480_0);
+
+
             if (!strings[1].equals("金币")) {
                 Vo_16383_0 vo_16383_5 = new Vo_16383_0();
                 vo_16383_5.channel = 6;
@@ -163,6 +167,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.token = "";
                 vo_16383_5.checksum = 0;
                 GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
+
             }
         }
 

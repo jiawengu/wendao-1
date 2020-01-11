@@ -2530,6 +2530,13 @@ public class FightManager {
                     GameUtil.notifyTTTPanelInfo(chara1);
                     return;
                 }
+
+                //妖王ti挑战失败
+                if (null != guaiwu && ((FightObject)guaiwu.get(0)).str.contains("妖王")){
+                    System.out.println("妖王");
+                    GameShangGuYaoWang.onChallengeFail(chara1,((FightObject)guaiwu.get(0)).str);
+                    return;
+                }
             }
 
             return;
