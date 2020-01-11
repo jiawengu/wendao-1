@@ -4255,6 +4255,15 @@ import java.util.Random;
                             GameShangGuYaoWang.setYaoWangState(npc.getId(),
                                     GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN, characters.getAccountId());
                         }
+                        if (strings[1].equals("潜能")){
+                            chara.cash += Integer.valueOf(strings[0]).intValue();
+                            Vo_20480_0 vo_20480_0 = new Vo_20480_0();
+                            vo_20480_0.msg = ("你获得了#R" + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能");
+                            vo_20480_0.time = 1562593376;
+                            GameObjectChar.send(new M20480_0(), vo_20480_0, chara.id);
+                            ListVo_65527_0 listVo_65527_0 = a65527(chara);
+                            GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+                        }
         /* 4132 */     if (strings[1].equals("精怪")) {
             /* 4133 */       int jieshu = stageMounts(strings[0]);
             /* 4134 */       org.linlinjava.litemall.db.domain.Pet pet = GameData.that.basePetService.findOneByName(strings[0]);

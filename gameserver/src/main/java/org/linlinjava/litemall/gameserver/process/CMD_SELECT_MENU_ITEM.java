@@ -546,51 +546,51 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         }
 
         ShangGuYaoWangInfo info =
-                GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(id,
-                        true);
+                GameShangGuYaoWang.getYaoWangNpc(id,
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
         if (menu_item.equals("挑战") && null != info){
-            if (GameObjectChar.getGameObjectChar().gameTeam == null){
-                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                vo_20481_0.msg = "人数不足3人！";
-                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                GameObjectChar.getGameObjectChar();
-                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                return;
-            }
-
-            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-
-            if (duiwu.size() < 3) {
-                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                vo_20481_0.msg = "人数不足3人！";
-                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                GameObjectChar.getGameObjectChar();
-                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                return;
-
-            }
-            for (int i = 0; i < duiwu.size(); i++) {
-                Chara tempChara = duiwu.get(i);
-                org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(tempChara.id);
-
-            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-            Date date = new Date();
-
-                long count =
-                        GameData.that.BaseShangGuYaoWangRewardInfoService.count(characters.getAccountId(), sdf.format(date));
-                if (count > 5) {
-
-                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-
-                    vo_20481_0.msg = tempChara.name + "已经获取5次奖励了";
-
-                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-
-                    GameObjectChar.getGameObjectChar();
-                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                    return;
-                }
-            }
+//            if (GameObjectChar.getGameObjectChar().gameTeam == null){
+//                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//                vo_20481_0.msg = "人数不足3人！";
+//                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//                GameObjectChar.getGameObjectChar();
+//                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+//                return;
+//            }
+//
+//            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+//
+//            if (duiwu.size() < 3) {
+//                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//                vo_20481_0.msg = "人数不足3人！";
+//                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//                GameObjectChar.getGameObjectChar();
+//                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+//                return;
+//
+//            }
+//            for (int i = 0; i < duiwu.size(); i++) {
+//                Chara tempChara = duiwu.get(i);
+//                org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(tempChara.id);
+//
+//            SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+//            Date date = new Date();
+//
+//                long count =
+//                        GameData.that.BaseShangGuYaoWangRewardInfoService.count(characters.getAccountId(), sdf.format(date));
+//                if (count > 5) {
+//
+//                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//
+//                    vo_20481_0.msg = tempChara.name + "已经获取5次奖励了";
+//
+//                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//
+//                    GameObjectChar.getGameObjectChar();
+//                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+//                    return;
+//                }
+//            }
 
             org.linlinjava.litemall.db.domain.Npc npc =
                     GameData.that.baseNpcService.findById(id);
@@ -599,8 +599,6 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             list.add(npc.getName());
 
             Random RANDOM = new Random();
-//            ShangGuYaoWangInfo  info =
-//                    GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
             String []  xiaoGuai = info.getXiaoGuai().split(",");
 
 

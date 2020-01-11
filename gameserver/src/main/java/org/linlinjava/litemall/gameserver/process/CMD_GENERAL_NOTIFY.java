@@ -122,13 +122,28 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
             String[] strings = GameUtilRenWu.luckFindDraw();
             GameUtil.huodechoujiang(strings, chara);
+            String msg;
+            if (strings[1].equals("金币")){
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" +strings[0]+ strings[1] + "#n ";
+            }else if(strings[1].equals("潜能")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
+            }else if(strings[1].equals("上古妖王")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
+                        "#n ";
+            }else if(strings[1].equals("道行")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
+            }else {
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[0] + "#n ";
+            }
             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
-            vo_8165_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_8165_0.msg = msg;
             vo_8165_0.active = 0;
             GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
             GameObjectChar.send(new M8165_0(), vo_8165_0);
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
-            vo_20480_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
             GameObjectChar.send(new M20480_0(), vo_20480_0);
             if (!strings[1].equals("金币")) {
@@ -136,7 +151,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.channel = 6;
                 vo_16383_5.id = 0;
                 vo_16383_5.name = "";
-                vo_16383_5.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+                vo_16383_5.msg =msg;
                 vo_16383_5.time = (int)(System.currentTimeMillis() / 1000L);
                 vo_16383_5.privilege = 0;
                 vo_16383_5.server_name = "3周年14线";

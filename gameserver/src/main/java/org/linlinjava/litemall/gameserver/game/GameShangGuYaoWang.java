@@ -18,6 +18,8 @@ public class GameShangGuYaoWang {
         YAOWANG_STATE_OPEN,//开放
     }
 
+    public static final  int propliaty  =   2000;//挖宝挖出的概率 万分比
+
 
     public  static  void setYaoWangState(int npcID, YAOWANG_STATE state,
                                          int wa_chu_account_id){
@@ -79,10 +81,10 @@ public class GameShangGuYaoWang {
             }
         }
 
-        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
-        List<Chara> charas = team.duiwu;
-        for (int i = 0;i < charas.size(); i++){
-            Chara tempChara =charas.get(i);
+//        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
+//        List<Chara> charas = team.duiwu;
+//        for (int i = 0;i < charas.size(); i++){
+            Chara tempChara =chara;//charas.get(i);
             ShangGuYaoWangRewardInfo rewardInfo = new ShangGuYaoWangRewardInfo();
             org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(tempChara.id);
             rewardInfo.setAccountId(characters.getAccountId());
@@ -97,16 +99,16 @@ public class GameShangGuYaoWang {
             rewardInfo.setYaoWangId(npc.getId());
 
             GameData.that.BaseShangGuYaoWangRewardInfoService.add(rewardInfo);
-        }
+//        }
         return  true;
     }
 
     public  static  boolean addReward(Chara chara, String name,
                                       String jutiName, int count ){
-        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
-        List<Chara> charas = team.duiwu;
-        for (int i = 0;i < charas.size(); i++){
-            Chara tempChara = charas.get(i);
+//        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
+//        List<Chara> charas = team.duiwu;
+//        for (int i = 0;i < charas.size(); i++){
+            Chara tempChara = chara;//charas.get(i);
             if (name.contains("经验")){
                 GameUtil.huodejingyan(tempChara, count);
             }else if (name.contains("道行")){
@@ -119,7 +121,7 @@ public class GameShangGuYaoWang {
                 org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(jutiName);
                 GameUtil.huodedaoju(chara, info, 1);
             }
-        }
+//        }
         return  true;
     }
 
