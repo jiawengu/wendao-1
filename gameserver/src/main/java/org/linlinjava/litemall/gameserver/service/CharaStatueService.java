@@ -60,4 +60,9 @@ public class CharaStatueService {
         return cacheMap.get(npcName);
     }
 
+    public static void putCache(String npcName, CharaStatue charaStatue){
+        assert !cacheMap.containsKey(npcName);
+        cacheMap.put(npcName, charaStatue);
+    }
+
 }

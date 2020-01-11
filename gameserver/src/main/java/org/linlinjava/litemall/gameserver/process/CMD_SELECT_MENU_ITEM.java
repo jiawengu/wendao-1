@@ -2788,7 +2788,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }else if(menu_item.equals(MsgUtil.CHA_KAN_ZHANG_MEN) || menu_item.equals(MsgUtil.KAN_KAN_YE_WU_FANG)){//查看掌门
                 ChallengeLeaderService.notifyLeaderInfo(GameUtil.getMenPai(npc.getName()));
             }else if(menu_item.equals(MsgUtil.JIN_RU_ZHENG_DAO_DIAN)){//进入证道殿
-                //TODO
+                GameLine.getGameMapname(chara.line, "证道殿").join(GameObjectCharMng.getGameObjectChar(chara.id));
             }
         }
         /*      */

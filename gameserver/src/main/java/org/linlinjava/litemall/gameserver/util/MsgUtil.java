@@ -1,8 +1,6 @@
 package org.linlinjava.litemall.gameserver.util;
 
 /**
- * @Author: Liujinyong
- * @Date: 2020/1/9 20:47
  */
 public interface MsgUtil {
     String TIAO_ZHAN_ZHANG_MEN = "【挑战掌门】与掌门一战";
