@@ -1,6 +1,7 @@
 package org.linlinjava.litemall.db.task;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.linlinjava.litemall.db.domain.Npc;
@@ -90,5 +91,17 @@ public class BaxianRepository {
             return taskChain.getTask(taskId);
         }
         return null;
+    }
+
+    public List<Integer> getNpcList() {
+        List<Integer> npcList = Lists.newArrayList();
+
+        for (TaskChain taskChain : taskChainMap.values()) {
+            for (TaskVO taskVO : taskChain.getTaskList()) {
+                npcList.add(taskVO.getNpcId());
+            }
+        }
+
+        return npcList;
     }
 }
