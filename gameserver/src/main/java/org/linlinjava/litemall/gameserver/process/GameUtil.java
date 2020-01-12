@@ -2612,6 +2612,15 @@ import java.util.Random;
         /*      */   }
 
     /**
+     * 通知打开面板
+     * @param npc
+     * @param content
+     */
+        public static void notifyOpenMenu(Npc npc, String content){
+            GameObjectChar.send(new MSG_MENU_LIST(), GameUtil.MSG_MENU_LIST(npc, content));
+        }
+
+    /**
      * 随机通天塔星君名字
      * @return
      */
@@ -4711,6 +4720,20 @@ import java.util.Random;
         }
         throw new UnsupportedOperationException();
      }
+
+    /**
+     * 通知提示消息
+     */
+    public static void notifyPrompt(int charaId, String msg){
+        Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+
+        vo_20481_0.msg = msg;
+
+        vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+
+        GameObjectCharMng.getGameObjectChar(charaId).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+     }
+
 
     /*      */ }
 

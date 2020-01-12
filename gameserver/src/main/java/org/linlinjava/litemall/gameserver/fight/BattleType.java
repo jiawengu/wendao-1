@@ -7,5 +7,10 @@ public enum BattleType {
     /**
      * 挑战掌门
      */
-    CHALLENGE_LEADER;
+    CHALLENGE_LEADER,
+    /**
+     * 证道殿
+     */
+    ZHEGN_DAO_DIAN,
+    ;
 }

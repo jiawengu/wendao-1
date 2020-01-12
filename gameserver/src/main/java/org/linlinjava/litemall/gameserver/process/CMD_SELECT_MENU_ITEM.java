@@ -14,9 +14,11 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.ChallengeLeaderService;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
+import org.linlinjava.litemall.gameserver.util.NpcIds;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -48,6 +50,28 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
         String name;
 
+        if(NpcIds.isZhengDaoDianNpc(id)){//证道殿
+            if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_70)){//挑战70
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_80)){//挑战80
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_90)){//挑战90
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_100)){//挑战100
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_110)){//挑战110
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_TIAO_ZHAN_120)){//挑战120
+                ZhengDaoDianService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_YI_DU_HU_FA)){//查看面板
+                ZhengDaoDianService.notifyPanel(chara1, id);
+                GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));
+            }else {//离开
+                GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));
+            }
+
+            return;
+        }
         if (id == 992) {
 
             org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(chara1.id);
@@ -2788,6 +2812,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }else if(menu_item.equals(MsgUtil.CHA_KAN_ZHANG_MEN) || menu_item.equals(MsgUtil.KAN_KAN_YE_WU_FANG)){//查看掌门
                 ChallengeLeaderService.notifyLeaderInfo(GameUtil.getMenPai(npc.getName()));
             }else if(menu_item.equals(MsgUtil.JIN_RU_ZHENG_DAO_DIAN)){//进入证道殿
+                Map map = GameData.that.baseMapService.findOneByName("证道殿");
+                chara.y = map.getY().intValue();
+                chara.x = map.getX().intValue();
                 GameLine.getGameMapname(chara.line, "证道殿").join(GameObjectCharMng.getGameObjectChar(chara.id));
             }
         }
