@@ -63,7 +63,7 @@ public class GameShangGuYaoWang {
         Random random = new Random();
         npc.setX(random.nextInt(40)+1);
         npc.setY(random.nextInt(40)+1);
-        npc.setDeleted(false);
+        npc.setDeleted(true);
         GameData.that.baseNpcService.updateById(npc);
 
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
@@ -109,7 +109,7 @@ public class GameShangGuYaoWang {
         Random random = new Random();
         npc.setX(random.nextInt(40)+1);
         npc.setY(random.nextInt(40)+1);
-        npc.setDeleted(false);
+        npc.setDeleted(true);
         GameData.that.baseNpcService.updateById(npc);
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
         ShangGuYaoWangInfo  info =
@@ -119,6 +119,7 @@ public class GameShangGuYaoWang {
         GameData.that.BaseShangGuYaoWangInfoService.updateById(info);
         String[] rewardStr = info.getReward().split(",");
         String tempRewardStr = "";
+
         for (int i =0 ; i < rewardStr.length ; i++){
             String[] tempWuPin = rewardStr[i].split("#");
             if (tempWuPin[0].contains("经验")){
@@ -131,17 +132,41 @@ public class GameShangGuYaoWang {
                 tempRewardStr += tempWuPin[0]+"#"+Integer.valueOf(tempWuPin[1]);
             }else if(tempWuPin[0].contains("装备")){
                 String [] zhuangBeiInfos = tempWuPin[1].split(":");
-                String zhuangbeiName = zhuangbname(chara, zhuangBeiInfos[0]);
-                addReward(chara, tempWuPin[0], zhuangbeiName,    1);
-                tempRewardStr += zhuangbeiName;
+                if (random.nextInt(1000) < Integer.valueOf(zhuangBeiInfos[1])){
+                    String zhuangbeiName = zhuangbname(chara, zhuangBeiInfos[0]);
+                    addReward(chara, tempWuPin[0], zhuangbeiName,    1);
+                    tempRewardStr += zhuangbeiName;
+                }
+
             }else if(tempWuPin[0].contains("物品")){
                 String [] wuPins = tempWuPin[1].split(":");
-                String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
-                        wuPins[0].indexOf("]"));
-                String[] goods = good.split("'");
-                String tempGood = goods[random.nextInt(goods.length)];
-                addReward(chara, tempWuPin[0], tempGood,    1);
-                tempRewardStr += tempGood;
+                if (random.nextInt(1000) < Integer.valueOf(wuPins[1])) {
+                    String good = wuPins[0].substring(wuPins[0].indexOf("[") + 1,
+                            wuPins[0].indexOf("]"));
+                    String[] goods = good.split("'");
+                    String tempGood = goods[random.nextInt(goods.length)];
+                    addReward(chara, tempWuPin[0], tempGood, 1);
+                    tempRewardStr += tempGood;
+                }
+            }
+            else if(tempWuPin[0].contains("首饰")) {
+                String[] wuPins = tempWuPin[1].split(":");
+                if (random.nextInt(1000) < Integer.valueOf(wuPins[1])) {
+                    String good = wuPins[0].substring(wuPins[0].indexOf("[") + 1,
+                            wuPins[0].indexOf("]"));
+                    String[] goods = good.split("'");
+                    List<ZhuangbeiInfo> zhuangbeis = new ArrayList<>();
+                    for (int j = 0; j < goods.length; j++) {
+                        zhuangbeis.addAll(GameData.that.baseZhuangbeiInfoService.findByAmountAndAttrib(Integer.valueOf(goods[j]), 20));
+                        zhuangbeis.addAll(GameData.that.baseZhuangbeiInfoService.findByAmountAndAttrib(Integer.valueOf(goods[j]), 40));
+                    }
+
+
+                    ZhuangbeiInfo tempzhuangbei =
+                            zhuangbeis.get(random.nextInt(zhuangbeis.size()));
+                    addReward(chara, tempWuPin[0], tempzhuangbei.getStr(), 1);
+                    tempRewardStr += tempzhuangbei.getStr();
+                }
             }
         }
 
@@ -185,7 +210,20 @@ public class GameShangGuYaoWang {
 
                 ZhuangbeiInfo zhuangbeiInfo =
                         GameData.that.baseZhuangbeiInfoService.findOneByStr(zhuangbeiName);
-                GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
+                Random random = new Random();
+                int[] eqType = { 1, 2, 10, 3 };
+                int leixing = eqType[random.nextInt(4)];
+                List<Hashtable<String, Integer>> hashtables = GameUtil.equipmentLuckDraw(chara.level, leixing);
+                if (hashtables.size() > 0)
+                {
+                    for (Hashtable<String, Integer> maps : hashtables) {
+                        if (((Integer)maps.get("groupNo")).intValue() == 2) {
+                            maps.put("groupType", Integer.valueOf(2));
+                            GoodsLanSe gooodsLanSe = (GoodsLanSe) org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(maps), GoodsLanSe.class);
+                            GameUtil.huodezhuangbeiEx(chara, zhuangbeiInfo, 0, 1, gooodsLanSe);
+                        }
+                    }
+                }
             }else if(tempWuPin[0].contains("物品")){
                 String [] wuPins = tempWuPin[1].split(":");
                 String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
@@ -196,6 +234,34 @@ public class GameShangGuYaoWang {
 
                 org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(tempGood);
                 GameUtil.huodedaoju(chara, info, 1);
+            }else if(tempWuPin[0].contains("首饰")){
+                String [] wuPins = tempWuPin[1].split(":");
+                String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
+                        wuPins[0].indexOf("]"));
+                String[] goods = good.split("'");
+                Random random = new Random();
+                List<ZhuangbeiInfo>  zhuangbeis =  new ArrayList<>();
+                for (int j = 0; j < goods.length;j++){
+                    zhuangbeis.addAll(GameData.that.baseZhuangbeiInfoService.findByAmountAndAttrib(Integer.valueOf(goods[j]), 20));
+                    zhuangbeis.addAll(GameData.that.baseZhuangbeiInfoService.findByAmountAndAttrib(Integer.valueOf(goods[j]), 40));
+                }
+
+                ZhuangbeiInfo tempzhuangbei =
+                        zhuangbeis.get(random.nextInt(zhuangbeis.size()));
+
+                int[] eqType = { 1, 2, 10, 3 };
+                int leixing = eqType[random.nextInt(4)];
+                List<Hashtable<String, Integer>> hashtables = GameUtil.equipmentLuckDraw(chara.level, leixing);
+                if (hashtables.size() > 0)
+                {
+                    for (Hashtable<String, Integer> maps : hashtables) {
+                        if (((Integer)maps.get("groupNo")).intValue() == 2) {
+                            maps.put("groupType", Integer.valueOf(2));
+                            GoodsLanSe gooodsLanSe = (GoodsLanSe) org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(maps), GoodsLanSe.class);
+                            GameUtil.huodezhuangbeiEx(chara, tempzhuangbei, 0, 1, gooodsLanSe);
+                        }
+                    }
+                }
             }
         }
     }
@@ -211,12 +277,51 @@ public class GameShangGuYaoWang {
             }else if (name.contains("道行")){
                 GameUtil.adddaohang(tempChara, count);
             }else if(name.contains("装备")){
-                ZhuangbeiInfo zhuangbeiInfo =
-                        GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
-                GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
+                Random random = new Random();
+                int[] eqType = { 1, 2, 10, 3 };
+                int leixing = eqType[random.nextInt(4)];
+                List<Hashtable<String, Integer>> hashtables = GameUtil.equipmentLuckDraw(chara.level, leixing);
+               if (hashtables.size() > 0)
+               {
+                   ZhuangbeiInfo zhuangbeiInfo =
+                           GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
+                 for (Hashtable<String, Integer> maps : hashtables) {
+                   if (((Integer)maps.get("groupNo")).intValue() == 2) {
+                     maps.put("groupType", Integer.valueOf(2));
+                     GoodsLanSe gooodsLanSe = (GoodsLanSe) org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(maps), GoodsLanSe.class);
+                     GameUtil.huodezhuangbeiEx(chara, zhuangbeiInfo, 0, 1, gooodsLanSe);
+                   }
+                 }
+               }
+
+//                ZhuangbeiInfo zhuangbeiInfo =
+//                        GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
+//                GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
             }else if (name.contains("物品")){
                 org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(jutiName);
                 GameUtil.huodedaoju(chara, info, 1);
+            }else if (name.contains("首饰")){
+//                ZhuangbeiInfo zhuangbeiInfo =
+//                        GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
+//                GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
+
+                Random random = new Random();
+                int[] eqType = { 1, 2, 10, 3 };
+                int leixing = eqType[random.nextInt(4)];
+                List<Hashtable<String, Integer>> hashtables = GameUtil.equipmentLuckDraw(chara.level, leixing);
+                if (hashtables.size() > 0)
+                {
+                    ZhuangbeiInfo zhuangbeiInfo =
+                            GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
+                    for (Hashtable<String, Integer> maps : hashtables) {
+                        if (((Integer)maps.get("groupNo")).intValue() == 2) {
+                            maps.put("groupType", Integer.valueOf(2));
+                            GoodsLanSe gooodsLanSe = (GoodsLanSe) org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(maps), GoodsLanSe.class);
+                            GameUtil.huodezhuangbeiEx(chara, zhuangbeiInfo, 0, 1, gooodsLanSe);
+                        }
+                    }
+                }
+
             }
 //        }
         return  true;
@@ -245,7 +350,7 @@ public class GameShangGuYaoWang {
     }
 
     public static String zhuangbname(Chara chara, String  quality) {
-        int eq_attrib = chara.level / 10 * 10;
+        int eq_attrib = (chara.level / 10) * 10;
         Random random = new Random();
         List<ZhuangbeiInfo> byAttrib =
                 GameData.that.baseZhuangbeiInfoService.findByAttribAndQuality(Integer.valueOf(eq_attrib), quality);

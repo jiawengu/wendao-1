@@ -214,7 +214,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             if(infos.size() > 0){
                 ShangGuYaoWangInfo info =
                         infos.get(random.nextInt(infos.size()));
-                Npc npc = GameData.that.baseNpcService.findById(info.getNpcid());
+                Npc npc =
+                        GameData.that.baseNpcService.findOneById(info.getNpcid().intValue());
                 nameType = npc.getName()+"#上古妖王";
             }else{
                 int money = 0;
