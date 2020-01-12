@@ -95,15 +95,11 @@ public class GameObjectChar {
     }
 
     public static final GameObjectChar getGameObjectChar() {
-        if (GameObjectCharMng.getGameObjectCharList().size() != 0) {
-            return GameObjectCharMng.getGameObjectCharList().get(0);
-        }
         return GAMEOBJECTCHAR_THREAD_LOCAL.get();
     }
 
     public static void send(BaseWrite baseWrite, Object obj) {
-//        GameObjectChar gameObjectChar = (GameObjectChar) GAMEOBJECTCHAR_THREAD_LOCAL.get();
-        GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectCharList().get(0);
+        GameObjectChar gameObjectChar = (GameObjectChar) GAMEOBJECTCHAR_THREAD_LOCAL.get();
         ByteBuf write = baseWrite.write(obj);
         gameObjectChar.ctx.writeAndFlush(write);
     }
