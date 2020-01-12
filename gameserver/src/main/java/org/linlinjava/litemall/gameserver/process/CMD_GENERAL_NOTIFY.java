@@ -1260,10 +1260,8 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
         Baxian baxian = gameObjectChar.chara.baxian;
         if (baxian.getTimesLeft() > 0) {
-            baxian.setCurrentMaxLevel(7);
-            baxian.setStatus(0);
+            baxian.setStatus(1);
             baxian.setCurrentTaskId(null);
-            baxian.setTimesLeft(baxian.getTimesLeft() - 1);
             GameObjectCharMng.save(gameObjectChar);
             baxianService.gotoNextTask(gameObjectChar, baxian.getCurrentLevel(), null);
 

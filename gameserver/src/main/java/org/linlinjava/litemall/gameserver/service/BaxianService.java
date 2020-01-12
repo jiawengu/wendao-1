@@ -1,7 +1,10 @@
 package org.linlinjava.litemall.gameserver.service;
 
+import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.Renwu;
+import org.linlinjava.litemall.db.service.base.BaseMapService;
+import org.linlinjava.litemall.db.service.base.BaseNpcService;
 import org.linlinjava.litemall.db.service.base.BaseRenwuMonsterService;
 import org.linlinjava.litemall.db.service.base.BaseRenwuService;
 import org.linlinjava.litemall.db.task.BaxianRepository;
@@ -25,6 +28,9 @@ import reactor.util.function.Tuple2;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.linlinjava.litemall.gameserver.data.constant.MapConst.PENGLAI_MAP_ID;
+import static org.linlinjava.litemall.gameserver.data.constant.NpcConst.PENGLAI_XIANREN;
+
 @Service
 public class BaxianService {
     private static final Logger logger = LoggerFactory.getLogger(BaxianService.class);
@@ -44,6 +50,12 @@ public class BaxianService {
     @Autowired
     private BaseRenwuMonsterService renwuMonsterService;
 
+    @Autowired
+    private BaseNpcService npcService;
+
+    @Autowired
+    private BaseMapService mapService;
+
     public void afterTalkToNpc(GameObjectChar gameObjectChar, int npcId) {
         TaskVO taskVO = baxianRepository.getChainAndTaskIdByNpcId(npcId);
         if (taskVO == null) {
@@ -57,41 +69,42 @@ public class BaxianService {
         }
     }
 
-    public void gotoNextTask(GameObjectChar gameObjectChar, Integer chainId, Integer taskId) {
+    private void transport(GameObjectChar gameObjectChar, int mapId, String mapName, int x, int y) {
         Chara chara = gameObjectChar.chara;
-        TaskVO taskVO = baxianRepository.getNextTask(chainId, taskId);
-        if (taskVO == null) {
-            mainTaskFinish(gameObjectChar, chainId);
-            return;
+        chara.mapid = mapId;
+        chara.mapName = mapName;
+        chara.x = x;
+        chara.y = y;
+
+        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(mapId);
+        Vo_45157_0 vo_45157_0 = new Vo_45157_0();
+        vo_45157_0.id = chara.id;
+        vo_45157_0.mapId = chara.mapid;
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
+        Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
+        Iterator var6 = npcList.iterator();
+
+        while(var6.hasNext()) {
+            Npc npc = (Npc)var6.next();
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
+
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        GameUtil.genchongfei(chara);
+        gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
+        Vo_61671_0 vo_61671_0 = new Vo_61671_0();
+        vo_61671_0.id = chara.mapid;
+        vo_61671_0.count = 0;
+        gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
+    }
+
+    private void gotoTask(GameObjectChar gameObjectChar, TaskVO taskVO) {
+        Chara chara = gameObjectChar.chara;
+
         chara.baxian.setCurrentTaskId(taskVO.getTaskId());
         if (chara.mapid != taskVO.getMapId()) {
-            chara.mapid = taskVO.getMapId();
-            chara.mapName = taskVO.getMapName();
-            chara.x = taskVO.getNpcX();
-            chara.y = taskVO.getNpcY();
-
-            List<Npc> npcList = GameData.that.baseNpcService.findByMapId(taskVO.getMapId());
-            Vo_45157_0 vo_45157_0 = new Vo_45157_0();
-            vo_45157_0.id = chara.id;
-            vo_45157_0.mapId = chara.mapid;
-            gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
-            Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-            gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
-            Iterator var6 = npcList.iterator();
-
-            while(var6.hasNext()) {
-                Npc npc = (Npc)var6.next();
-                gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
-            }
-
-            Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
-            GameUtil.genchongfei(chara);
-            gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
-            Vo_61671_0 vo_61671_0 = new Vo_61671_0();
-            vo_61671_0.id = chara.mapid;
-            vo_61671_0.count = 0;
-            gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
+            transport(gameObjectChar, taskVO.getMapId(), taskVO.getMapName(), taskVO.getNpcX(), taskVO.getNpcY());
         }
         Renwu renwu = renwuService.findById(taskVO.getTaskId());
         if (renwu != null) {
@@ -111,6 +124,15 @@ public class BaxianService {
         }
     }
 
+    public void gotoNextTask(GameObjectChar gameObjectChar, Integer chainId, Integer taskId) {
+        TaskVO taskVO = baxianRepository.getNextTask(chainId, taskId);
+        if (taskVO == null) {
+            mainTaskFinish(gameObjectChar, chainId);
+            return;
+        }
+        gotoTask(gameObjectChar, taskVO);
+    }
+
     private void pullIntoFight(GameObjectChar gameObjectChar, Integer chainId, TaskVO taskVO) {
         FightManager.goFightWithCallback(gameObjectChar.chara, taskVO.getMonsterList(), (isWin) -> fightCallback(gameObjectChar, chainId, taskVO.getTaskId(), isWin));
     }
@@ -121,7 +143,7 @@ public class BaxianService {
             if (taskVO == null) {
                 mainTaskFinish(gameObjectChar, chainId);
             } else {
-                gotoNextTask(gameObjectChar, chainId, taskVO.getTaskId());
+                gotoTask(gameObjectChar, taskVO);
             }
         } else {
             // 失败惩罚逻辑暂时没有实现
@@ -131,10 +153,16 @@ public class BaxianService {
     private void mainTaskFinish(GameObjectChar gameObjectChar, int chainId) {
         // 主任务执行完毕
         Baxian baxian = gameObjectChar.chara.baxian;
-        baxian.setCurrentMaxLevel(chainId + 1);
+        baxian.setCurrentMaxLevel(Math.max(baxian.getCurrentMaxLevel() + 1, baxian.getCurrentLevel() + 1));
         baxian.setCurrentTaskId(null);
+        baxian.setTimesLeft(baxian.getTimesLeft() - 1);
+        baxian.setCurrentLevel(baxian.getCurrentLevel() + 1);
         baxian.setStatus(0);
         GameObjectCharMng.save(gameObjectChar);
+
+        Npc npc = npcService.findById(PENGLAI_XIANREN);
+        Map map = mapService.findOneByMapId(PENGLAI_MAP_ID);
+        transport(gameObjectChar, map.getMapId(), map.getName(), npc.getX(), npc.getY());
     }
 
     public void showBaxianSelectDlg(GameObjectChar gameObjectChar) {
@@ -147,5 +175,9 @@ public class BaxianService {
                 .isOpenDlg(1)
                 .build();
         gameObjectChar.sendOne(m_msg_baxian_mengjing_info, baxian_mengjing_info_vo);
+    }
+
+    public List<Integer> getNpcList() {
+        return baxianRepository.getNpcList();
     }
 }
