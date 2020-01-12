@@ -23,6 +23,7 @@ import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static org.linlinjava.litemall.gameserver.data.constant.TitleConst.*;
 import static org.linlinjava.litemall.gameserver.util.MsgUtil.KONG_PA_SHI_LI_BU_GOU;
 import static org.linlinjava.litemall.gameserver.util.MsgUtil.WO_YAO_YI_DU_HU_FA;
 
@@ -32,7 +33,7 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.WO_YAO_YI_DU_HU_FA
 @Service
 public class ZhengDaoDianService {
     public static final int MAP_ID = 29002;
-    public static final String[] titles = new String[]{"新入道途", "初领妙道", "进入佳境", "道心稳固", "妙领天机", "脱胎换骨"};
+    public static final String[] titles = new String[]{TITLE_ZHENGDAODIAN_70, TITLE_ZHENGDAODIAN_80, TITLE_ZHENGDAODIAN_90, TITLE_ZHENGDAODIAN_100, TITLE_ZHENGDAODIAN_110, TITLE_ZHENGDAODIAN_120};
     public static final String[] contents = new String[]{MsgUtil.WO_YAO_TIAO_ZHAN_70, MsgUtil.WO_YAO_TIAO_ZHAN_80, MsgUtil.WO_YAO_TIAO_ZHAN_90, MsgUtil.WO_YAO_TIAO_ZHAN_100,
             MsgUtil.WO_YAO_TIAO_ZHAN_110, MsgUtil.WO_YAO_TIAO_ZHAN_120};
     public static final Integer[][] manPos = {{61,29}, {55,26}, {49,23}, {43,20}, {37,17}, {31,14}};
