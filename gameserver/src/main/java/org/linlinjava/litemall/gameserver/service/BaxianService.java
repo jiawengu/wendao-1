@@ -75,23 +75,23 @@ public class BaxianService {
             Vo_45157_0 vo_45157_0 = new Vo_45157_0();
             vo_45157_0.id = chara.id;
             vo_45157_0.mapId = chara.mapid;
-            gameObjectChar.sendOne(new M45157_0(), vo_45157_0);
+            gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
             Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
-            gameObjectChar.sendOne(new M65505_0(), vo_65505_1);
+            gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
             Iterator var6 = npcList.iterator();
 
             while(var6.hasNext()) {
                 Npc npc = (Npc)var6.next();
-                gameObjectChar.sendOne(new M65529_npc(), npc);
+                gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
             }
 
-            Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
+            Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
             GameUtil.genchongfei(chara);
-            gameObjectChar.sendOne(new M65529_0(), vo_65529_0);
+            gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
             Vo_61671_0 vo_61671_0 = new Vo_61671_0();
             vo_61671_0.id = chara.mapid;
             vo_61671_0.count = 0;
-            gameObjectChar.sendOne(new M61671_0(), vo_61671_0);
+            gameObjectChar.sendOne(new MSG_TITLE(), vo_61671_0);
         }
         Renwu renwu = renwuService.findById(taskVO.getTaskId());
         if (renwu != null) {

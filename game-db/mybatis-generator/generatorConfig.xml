@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
@@ -11,11 +11,11 @@
 <!--    <classPathEntry location="${jdbc.driverLocation}"/>-->
 
     <context id="default" targetRuntime="MyBatis3">
-
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
         <!-- 注释 -->
         <commentGenerator>
-            <property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
-            <!-- <property name="suppressDate" value="true" />  是否生成注释代时间戳 -->
+            <property name="suppressAllComments" value="false" /><!-- 是否取消注释 -->
+             <property name="suppressDate" value="false" />  <!-- 是否生成注释代时间戳 -->
         </commentGenerator>
 
         <!--jdbc的数据库连接 -->
@@ -71,6 +71,12 @@
             <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />
             <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />
         </table>
+        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>
+        <table tableName="user_party" domainObjectName="UserParty"></table>
+        <table tableName="user_party_daily_task" domainObjectName="UserPartyDailyTask"></table>
+        <table tableName="user_party_shop" domainObjectName="UserPartyShop"></table>
+        <table tableName="chara_statue" domainObjectName="Chara_Statue"> </table>
+
 
     </context>
 </generatorConfiguration>

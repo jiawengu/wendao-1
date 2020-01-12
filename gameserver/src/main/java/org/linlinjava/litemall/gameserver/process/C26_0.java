@@ -11,7 +11,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M4121_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
@@ -38,7 +40,7 @@
 /*  38 */         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /*  39 */         vo_61671_0.id = ((Vo_4121_0)gameTeam.zhanliduiyuan.get(i)).id;
 /*  40 */         vo_61671_0.count = 0;
-/*  41 */         GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/*  41 */         GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */       }
 /*     */       
 /*  44 */       for (int i = 0; i < GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan.size() - 1; i++) {
@@ -61,7 +63,7 @@
 /*  61 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /*  62 */       vo_61671_0.id = chara.id;
 /*  63 */       vo_61671_0.count = 0;
-/*  64 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/*  64 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*  65 */       List<Vo_4119_0> object1 = new ArrayList();
 /*  66 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
 /*  67 */       List<Vo_4121_0> vo_4121_0List = new ArrayList();
@@ -71,8 +73,8 @@
 /*  71 */       vo_20480_0.time = 1562593376;
 /*  72 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
 /*  73 */       for (int i = 0; i < gameTeam.duiwu.size(); i++) {
-/*  74 */         org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661((Chara)gameTeam.duiwu.get(i));
-/*  75 */         GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/*  74 */         org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE((Chara)gameTeam.duiwu.get(i));
+/*  75 */         GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */       }
 /*     */       
 /*  78 */       Vo_49189_0 vo_49189_0 = new Vo_49189_0();

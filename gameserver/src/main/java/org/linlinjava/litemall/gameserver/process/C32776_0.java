@@ -7,7 +7,6 @@ import io.netty.buffer.*;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.data.*;
 import org.linlinjava.litemall.db.util.*;
-import org.linlinjava.litemall.gameserver.netty.*;
 import org.linlinjava.litemall.gameserver.data.game.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.apache.commons.collections.*;
@@ -79,19 +78,19 @@ public class C32776_0 implements GameHandler
                         final Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "你成功合成了1个#R" + zhuangbeiInfo.getStr() + "#n。";
                         vo_20481_0.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_0);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     }
                     else {
                         final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                         vo_20481_2.msg = "合成失败!";
                         vo_20481_2.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_2);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                     }
                     final int coin = ConsumeMoneyUtils.appraisalMoney(attrib);
                     if(chara.balance<coin) {return;}
                     chara.balance -= coin;
                     final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     if (goods.goodsInfo.attrib >= 100) {
                         infoList = (List<ZhuangbeiInfo>)GameData.that.baseZhuangbeiInfoService.findByAttrib(Integer.valueOf(70));
                         for (int k = 0; k < infoList.size(); ++k) {
@@ -143,13 +142,13 @@ public class C32776_0 implements GameHandler
                 vo_20481_0.msg = "你成功合成了1个#R" + pos2 + "#n。";
                 vo_20481_0.time = 1562987118;
                 for (int i2 = 0; i2 < owner_id; ++i2) {
-                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 }
                 final int coin2 = ConsumeMoneyUtils.appraisalMoney(zhuangbeiInfo2.getAttrib());
                 if(chara.balance<coin2 * owner_id) {return;}
                 chara.balance -= coin2 * owner_id;
                 final ListVo_65527_0 listVo_65527_2 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_2);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_2);
             }
             else {
                 if (zhuangbeiInfo2.getAttrib() <= 70) {
@@ -173,12 +172,12 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_3 = new Vo_20481_0();
                 vo_20481_3.msg = "你成功合成了1个#R" + pos2 + "#n。";
                 vo_20481_3.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_3);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_3);
                 final int coin3 = ConsumeMoneyUtils.appraisalMoney(zhuangbeiInfo2.getAttrib());
                 if(chara.balance<coin3) {return;}
                 chara.balance -= coin3;
                 final ListVo_65527_0 listVo_65527_3 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_3);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_3);
             }
             final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
             vo_9129_2.notify = 10000;
@@ -216,7 +215,7 @@ public class C32776_0 implements GameHandler
                         }
                         final List<Goods> list = new ArrayList<Goods>();
                         list.add(goods3);
-                        GameObjectChar.send(new M65525_0(), list);
+                        GameObjectChar.send(new MSG_INVENTORY(), list);
                         final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                         vo_41191_0.flag = 1;
                         vo_41191_0.opType = "";
@@ -224,7 +223,7 @@ public class C32776_0 implements GameHandler
                         final Vo_20481_0 vo_20481_4 = new Vo_20481_0();
                         vo_20481_4.msg = "恭喜你，炼化成功!";
                         vo_20481_4.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_4);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_4);
                     }
                     else {
                         final Vo_41191_0 vo_41191_2 = new Vo_41191_0();
@@ -234,13 +233,13 @@ public class C32776_0 implements GameHandler
                         final Vo_20481_0 vo_20481_3 = new Vo_20481_0();
                         vo_20481_3.msg = "炼化失败，请继续努力";
                         vo_20481_3.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_3);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_3);
                     }
                     final int coin = ConsumeMoneyUtils.remakeMoney(goods3.goodsInfo.attrib);
                     if(chara.balance<coin) {return;}
                     chara.balance -= coin;
                     final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     GameUtil.removemunber(chara, "装备共鸣石", pos5);
                 }
             }
@@ -273,12 +272,12 @@ public class C32776_0 implements GameHandler
                     final int coin4 = ConsumeMoneyUtils.appendEqMoney(goods4.goodsInfo.attrib);
                     if(chara.balance<coin4) {return;}
                     chara.balance -= coin4;
-                    GameUtil.a65511(chara);
+                    GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                     final List<Goods> list = new ArrayList<Goods>();
                     list.add(goods4);
                     final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65525_0(), list);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                    GameObjectChar.send(new MSG_INVENTORY(), list);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     final Vo_41191_0 vo_41191_3 = new Vo_41191_0();
                     vo_41191_3.flag = 1;
                     vo_41191_3.opType = "";
@@ -286,7 +285,7 @@ public class C32776_0 implements GameHandler
                     final Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "恭喜你，炼化成功，属性已生成";
                     vo_20481_0.time = 1562987118;
-                    GameObjectChar.send(new M20481_0(), vo_20481_0);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     GameUtil.removemunber(chara, "超级绿水晶", 1);
                 }
             }
@@ -337,12 +336,12 @@ public class C32776_0 implements GameHandler
                         GameObjectChar.send(new M32775_0(), goods4);
                         final List<Goods> listgood = new ArrayList<Goods>();
                         listgood.add(goods4);
-                        GameObjectChar.send(new M65525_0(), listgood);
+                        GameObjectChar.send(new MSG_INVENTORY(), listgood);
                         final Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "恭喜你，改造成功！装备的改造等级提升到1级";
                         vo_20481_0.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_0);
-                        GameUtil.a65511(chara);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final Vo_41191_0 vo_41191_4 = new Vo_41191_0();
                         vo_41191_4.flag = 1;
                         vo_41191_4.opType = "";
@@ -352,11 +351,11 @@ public class C32776_0 implements GameHandler
                         goods4.goodsInfo.store_exp = ints[1];
                         final List<Goods> listgood2 = new ArrayList<Goods>();
                         listgood2.add(goods4);
-                        GameObjectChar.send(new M65525_0(), listgood2);
+                        GameObjectChar.send(new MSG_INVENTORY(), listgood2);
                         final Vo_20481_0 vo_20481_4 = new Vo_20481_0();
                         vo_20481_4.msg = "改造失败，再接再厉";
                         vo_20481_4.time = 1562987118;
-                        GameObjectChar.send(new M20481_0(), vo_20481_4);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_4);
                         final Vo_41191_0 vo_41191_5 = new Vo_41191_0();
                         vo_41191_5.flag = 0;
                         vo_41191_5.opType = "";
@@ -366,14 +365,14 @@ public class C32776_0 implements GameHandler
                     if(chara.balance<coin5) {return;}
                     chara.balance -= coin5;
                     final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_4);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
                     if (iswuqi == 1) {
                         GameUtil.removemunber(chara, "超级灵石", pos7);
                     }
                     else {
                         GameUtil.removemunber(chara, "超级晶石", pos7);
                     }
-                    GameObjectChar.send(new M65525_0(), chara.backpack);
+                    GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                     return;
                 }
             }
@@ -445,10 +444,10 @@ public class C32776_0 implements GameHandler
                             maps5.put("groupType", 2);
                             final GoodsHuangSe goodsLanSeObj = (GoodsHuangSe)JSONUtils.parseObject(JSONUtils.toJSONString((Object)maps5), (Class)GoodsHuangSe.class);
                             goods4.goodsHuangSe = goodsLanSeObj;
-                            GameUtil.a65511(chara);
+                            GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                             final List list2 = new ArrayList();
                             list2.add(goods4);
-                            GameObjectChar.send(new M65525_0(), list2);
+                            GameObjectChar.send(new MSG_INVENTORY(), list2);
                             final Vo_9129_0 vo_9129_3 = new Vo_9129_0();
                             vo_9129_3.notify = 50;
                             vo_9129_3.para = "39563320";
@@ -463,13 +462,13 @@ public class C32776_0 implements GameHandler
                         final Vo_20481_0 vo_20481_5 = new Vo_20481_0();
                         vo_20481_5.msg = "炼化失败，请继续努力！";
                         vo_20481_5.time = 1564556611;
-                        GameObjectChar.send(new M20481_0(), vo_20481_5);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_5);
                     }
                     final int coin6 = ConsumeMoneyUtils.yellowMoney(goods4.goodsInfo.attrib);
                     if(chara.balance<coin6) {return;}
                     chara.balance -= coin6;
                     final ListVo_65527_0 listVo_65527_5 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_5);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_5);
                     GameUtil.removemunber(chara, "黄水晶", pos3);
                 }
             }
@@ -530,13 +529,13 @@ public class C32776_0 implements GameHandler
                         maps2.put("groupType", 2);
                         final GoodsFenSe goodsLanSeObj2 = (GoodsFenSe)JSONUtils.parseObject(JSONUtils.toJSONString((Object)maps2), (Class)GoodsFenSe.class);
                         goods.goodsFenSe = goodsLanSeObj2;
-                        GameUtil.a65511(chara);
-                        GameObjectChar.send(new M65525_0(), chara.backpack);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
+                        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                         final int coin7 = ConsumeMoneyUtils.pinkMoney(goods.goodsInfo.attrib);
                         if(chara.balance<coin7) {return;}
                         chara.balance -= coin7;
                         final ListVo_65527_0 listVo_65527_6 = GameUtil.a65527(chara);
-                        GameObjectChar.send(new M65527_0(), listVo_65527_6);
+                        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_6);
                         final Vo_41191_0 vo_41191_7 = new Vo_41191_0();
                         vo_41191_7.flag = 1;
                         vo_41191_7.opType = "gold_refine";
@@ -565,7 +564,7 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_6 = new Vo_20481_0();
                 vo_20481_6.msg = "请放入超级黑水晶！";
                 vo_20481_6.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_6);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_6);
                 return;
             }
             int leve = 0;
@@ -590,7 +589,7 @@ public class C32776_0 implements GameHandler
                             goods5.goodsFenSe = goodsHuangSeObj1;
                             final List list2 = new ArrayList();
                             list2.add(goods5);
-                            GameObjectChar.send(new M65525_0(), list2);
+                            GameObjectChar.send(new MSG_INVENTORY(), list2);
                         }
                     }
                     GameUtil.removemunber(chara, "超级圣水晶", 1);
@@ -610,16 +609,16 @@ public class C32776_0 implements GameHandler
                         goods6.goodsFenSe = null;
                         goods6.pos = pos7;
                         listbeibao.add(goods6);
-                        GameObjectChar.send(new M65525_0(), listbeibao);
+                        GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
                         chara.backpack.remove(chara.backpack.get(i5));
-                        GameObjectChar.send(new M65525_0(), chara.backpack);
+                        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                         break;
                     }
                 }
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化成功，请再接再厉！";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 1;
                 vo_41191_0.opType = "";
@@ -629,13 +628,13 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化失败!";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 0;
                 vo_41191_0.opType = "";
                 GameObjectChar.send(new M41191_0(), vo_41191_0);
             }
-            GameObjectChar.send(new M65525_0(), chara.backpack);
+            GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
             final Vo_9129_0 vo_9129_5 = new Vo_9129_0();
             vo_9129_5.notify = 51;
             vo_9129_5.para = "33927504";
@@ -644,7 +643,7 @@ public class C32776_0 implements GameHandler
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
             final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo_65527_4);
+            GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
         }
         if (11 == type) {
             final String[] split = para.split("\\|");
@@ -661,7 +660,7 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_6 = new Vo_20481_0();
                 vo_20481_6.msg = "请放入超级黑水晶！";
                 vo_20481_6.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_6);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_6);
                 return;
             }
             int leve = 0;
@@ -686,7 +685,7 @@ public class C32776_0 implements GameHandler
                             goods5.goodsHuangSe = goodsHuangSeObj2;
                             final List list2 = new ArrayList();
                             list2.add(goods5);
-                            GameObjectChar.send(new M65525_0(), list2);
+                            GameObjectChar.send(new MSG_INVENTORY(), list2);
                         }
                     }
                     GameUtil.removemunber(chara, "超级圣水晶", 1);
@@ -706,16 +705,16 @@ public class C32776_0 implements GameHandler
                         goods6.goodsFenSe = null;
                         goods6.pos = pos7;
                         listbeibao.add(goods6);
-                        GameObjectChar.send(new M65525_0(), listbeibao);
+                        GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
                         chara.backpack.remove(chara.backpack.get(i5));
-                        GameObjectChar.send(new M65525_0(), chara.backpack);
+                        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                         break;
                     }
                 }
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化成功，请再接再厉！";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 1;
                 vo_41191_0.opType = "";
@@ -725,7 +724,7 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化失败！";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 0;
                 vo_41191_0.opType = "";
@@ -739,7 +738,7 @@ public class C32776_0 implements GameHandler
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
             final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo_65527_4);
+            GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
         }
         if (9 == type) {
             final String[] split = para.split("\\|");
@@ -756,7 +755,7 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_6 = new Vo_20481_0();
                 vo_20481_6.msg = "请放入超级黑水晶！";
                 vo_20481_6.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_6);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_6);
                 return;
             }
             int leve = 0;
@@ -781,7 +780,7 @@ public class C32776_0 implements GameHandler
                             goods5.goodsLanSe = goodsHuangSeObj3;
                             final List list2 = new ArrayList();
                             list2.add(goods5);
-                            GameObjectChar.send(new M65525_0(), list2);
+                            GameObjectChar.send(new MSG_INVENTORY(), list2);
                         }
                     }
                     GameUtil.removemunber(chara, "超级圣水晶", 1);
@@ -801,16 +800,16 @@ public class C32776_0 implements GameHandler
                         goods6.goodsFenSe = null;
                         goods6.pos = pos7;
                         listbeibao.add(goods6);
-                        GameObjectChar.send(new M65525_0(), listbeibao);
+                        GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
                         chara.backpack.remove(chara.backpack.get(i5));
-                        GameObjectChar.send(new M65525_0(), chara.backpack);
+                        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                         break;
                     }
                 }
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化成功，请再接再厉！";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 1;
                 vo_41191_0.opType = "";
@@ -824,7 +823,7 @@ public class C32776_0 implements GameHandler
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
                 vo_20481_2.msg = "强化失败!";
                 vo_20481_2.time = 1562987118;
-                GameObjectChar.send(new M20481_0(), vo_20481_2);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_2);
                 final Vo_41191_0 vo_41191_0 = new Vo_41191_0();
                 vo_41191_0.flag = 0;
                 vo_41191_0.opType = "";
@@ -834,7 +833,7 @@ public class C32776_0 implements GameHandler
             if(chara.balance<coin) {return;}
             chara.balance -= coin;
             final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo_65527_0);
+            GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
         }
         if (4 == type) {
             final ZhuangbeiInfo zhuangbeiInfo3 = GameData.that.baseZhuangbeiInfoService.findOneByType(Integer.valueOf(pos));
@@ -842,7 +841,7 @@ public class C32776_0 implements GameHandler
             if(chara.balance<coin8) {return;}
             chara.balance -= coin8;
             final ListVo_65527_0 listVo_65527_7 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo_65527_7);
+            GameObjectChar.send(new MSG_UPDATE(), listVo_65527_7);
             final String[] split3 = para.split("\\|");
             final int pos9 = Integer.parseInt(split3[0]);
             final int pos10 = Integer.parseInt(split3[1]);
@@ -875,7 +874,7 @@ public class C32776_0 implements GameHandler
                     goods9.pos = pos9;
                     listbeibao2.add(goods9);
                     backpack2 = chara.backpack.get(i2);
-                    GameObjectChar.send(new M65525_0(), listbeibao2);
+                    GameObjectChar.send(new MSG_INVENTORY(), listbeibao2);
                 }
                 if (chara.backpack.get(i2).pos == pos10) {
                     final Map<Object, Object> goodsLanSe6 = UtilObjMapshuxing.GoodsLanSe(goods8.goodsLanSe);
@@ -898,7 +897,7 @@ public class C32776_0 implements GameHandler
                     goods9.pos = pos10;
                     listbeibao2.add(goods9);
                     backpack3 = chara.backpack.get(i2);
-                    GameObjectChar.send(new M65525_0(), listbeibao2);
+                    GameObjectChar.send(new MSG_INVENTORY(), listbeibao2);
                 }
                 if (chara.backpack.get(i2).pos == pos11) {
                     final Map<Object, Object> goodsLanSe6 = UtilObjMapshuxing.GoodsLanSe(goods8.goodsLanSe);
@@ -921,7 +920,7 @@ public class C32776_0 implements GameHandler
                     goods9.pos = pos11;
                     listbeibao2.add(goods9);
                     backpack4 = chara.backpack.get(i2);
-                    GameObjectChar.send(new M65525_0(), listbeibao2);
+                    GameObjectChar.send(new MSG_INVENTORY(), listbeibao2);
                 }
             }
             final Vo_40964_0 vo_40964_2 = new Vo_40964_0();
@@ -938,7 +937,7 @@ public class C32776_0 implements GameHandler
             goods7.goodsLanSe = goodsHuangSeObj4;
             final List<Goods> listbeibao3 = new ArrayList<Goods>();
             listbeibao3.add(goods7);
-            GameObjectChar.send(new M65525_0(), listbeibao3);
+            GameObjectChar.send(new MSG_INVENTORY(), listbeibao3);
             final Vo_9129_0 vo_9129_6 = new Vo_9129_0();
             vo_9129_6.notify = 49;
             vo_9129_6.para = "32271173";
@@ -952,7 +951,7 @@ public class C32776_0 implements GameHandler
                     if(chara.balance<coin9) {return;}
                     chara.balance -= coin9;
                     final ListVo_65527_0 listVo_65527_8 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_8);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_8);
                     final Random random = new Random();
                     final Goods goods4 = chara.backpack.get(i);
                     final Map<Object, Object> goodsLanSe = UtilObjMapshuxing.GoodsLanSe(goods4.goodsLanSe);
@@ -988,7 +987,7 @@ public class C32776_0 implements GameHandler
                             goods4.goodsLanSe = goodsLanSeObj4;
                             final List list3 = new ArrayList();
                             list3.add(goods4);
-                            GameObjectChar.send(new M65525_0(), list3);
+                            GameObjectChar.send(new MSG_INVENTORY(), list3);
                             jilv = 0;
                             break;
                         }
@@ -1017,7 +1016,7 @@ public class C32776_0 implements GameHandler
                             goods4.goodsHuangSe = goodsHuangSeObj6;
                             final List list3 = new ArrayList();
                             list3.add(goods4);
-                            GameObjectChar.send(new M65525_0(), list3);
+                            GameObjectChar.send(new MSG_INVENTORY(), list3);
                             jilv = 0;
                             break;
                         }
@@ -1044,7 +1043,7 @@ public class C32776_0 implements GameHandler
                                 goods4.goodsFenSe = goodsFenSeObj2;
                                 final List list3 = new ArrayList();
                                 list3.add(goods4);
-                                GameObjectChar.send(new M65525_0(), list3);
+                                GameObjectChar.send(new MSG_INVENTORY(), list3);
                                 jilv = 0;
                                 break;
                             }
@@ -1085,7 +1084,7 @@ public class C32776_0 implements GameHandler
                         goods10.pos = pos;
                         listbeibao4.add(goods10);
                         chara.backpack.remove(chara.backpack.get(i));
-                        GameObjectChar.send(new M65525_0(), listbeibao4);
+                        GameObjectChar.send(new MSG_INVENTORY(), listbeibao4);
                     }
                     final Vo_20481_0 vo_20481_7 = new Vo_20481_0();
                     if (name2.equals("")) {
@@ -1095,7 +1094,7 @@ public class C32776_0 implements GameHandler
                         vo_20481_7.msg = "你成功拆分出了属性#R" + name2 + "#n";
                     }
                     vo_20481_7.time = 1562987118;
-                    GameObjectChar.send(new M20481_0(), vo_20481_7);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_7);
                     GameUtil.removemunber(chara, "超级黑水晶", 1);
                     if (para.equals("3")) {
                         GameUtil.removemunber(chara, "混沌玉", 1);
@@ -1128,12 +1127,12 @@ public class C32776_0 implements GameHandler
                         goods7.goodsInfo.degree_32 = 0;
                         goods7.goodsInfo.owner_id = 1;
                         goods7.goodsLanSe = goodsLanSeObj5;
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final List list4 = new ArrayList();
                         list4.add(goods7);
                         GameUtil.removemunber(chara, goods, 1);
                         chara.backpack.add(goods7);
-                        GameObjectChar.send(new M65525_0(), list4);
+                        GameObjectChar.send(new MSG_INVENTORY(), list4);
                     }
                     if (type == 12) {
                         final List<Hashtable<String, Integer>> hashtables5 = ForgingEquipmentUtils.appraisalEquipment(goods.goodsInfo.amount, goods.goodsInfo.attrib, 2);
@@ -1172,23 +1171,23 @@ public class C32776_0 implements GameHandler
                         goods12.goodsLanSe = goodsLanSeObj6;
                         goods12.goodsHuangSe = goodshuangseObj;
                         goods12.goodsFenSe = goodsfenseObj;
-                        GameUtil.a65511(chara);
+                        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                         final List list5 = new ArrayList();
                         list5.add(goods12);
                         GameUtil.removemunber(chara, goods, 1);
                         chara.backpack.add(goods12);
-                        GameObjectChar.send(new M65525_0(), chara.backpack);
+                        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
                     }
                     final int coin10 = ConsumeMoneyUtils.appraisalMoney(goods.goodsInfo.attrib);
                     chara.balance -= coin10;
                     final ListVo_65527_0 listVo_65527_9 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo_65527_9);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo_65527_9);
                 }
             }
             final Vo_20481_0 vo_20481_8 = new Vo_20481_0();
             vo_20481_8.msg = "鉴定成功！";
             vo_20481_8.time = 1562987118;
-            GameObjectChar.send(new M20481_0(), vo_20481_8);
+            GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_8);
             final Vo_9129_0 vo_9129_7 = new Vo_9129_0();
             vo_9129_7.notify = 20022;
             vo_9129_7.para = "11516529|1";

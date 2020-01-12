@@ -10,7 +10,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M40995_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@
 /* 36 */     GameObjectChar.send(new M40964_0(), vo_40964_0);
 /* 37 */     chara.balance += chara.wuxingBalance;
 /* 38 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-/* 39 */     GameObjectChar.send(new M65527_0(), listVo_65527_0);
+/* 39 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 40 */     chara.wuxingBalance = 0;
 /*    */     
 /* 42 */     Vo_40995_0 vo_40995_1 = new Vo_40995_0();

@@ -2,14 +2,15 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.db.domain.PackModification;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41488_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M41488_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_SHIZHUANG;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -59,8 +60,8 @@
 /*     */     
 /*     */ 
 /*     */ 
-/*  62 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/*  63 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/*  62 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/*  63 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
 /*     */ 
 /*  66 */     Vo_41488_0 vo_41488_0 = new Vo_41488_0();

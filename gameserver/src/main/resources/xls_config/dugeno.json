@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "黑风洞一层",
+    "map_name": "黑风洞一层",
+    "monster_liststr": "11321;11320",
+    "pet_liststr": "252:1|250:9;251:1|250:9",
+    "task_type": "黑风洞",
+    "taskinfo_liststr": "找#P杨校尉#P;#找二当家#;#找大当家#;找#P杨校尉#P",
+    "max_step": 3,
+    "next_dugeno": "黑风洞二层",
+    "back_map": 1000,
+    "back_x": 100,
+    "back_y": 100
+  },
+  {
+    "id": 2,
+    "name": "黑风洞二层",
+    "map_name": "黑风洞二层",
+    "monster_liststr": "11322;11323",
+    "pet_liststr": "277:5;278:5",
+    "task_type": "黑风洞",
+    "taskinfo_liststr": "#找蒙面人#;#找土宸#;#找木岚#;#找蒙面人#",
+    "max_step": 3,
+    "next_dugeno": "黑风洞三层",
+    "back_map": 1000,
+    "back_x": 100,
+    "back_y": 100
+  },
+  {
+    "id": 3,
+    "name": "黑风洞三层",
+    "map_name": "黑风洞三层",
+    "monster_liststr": "1311",
+    "pet_liststr": "279:2",
+    "task_type": "黑风洞",
+    "taskinfo_liststr": "#找妖狼王#",
+    "max_step": 2,
+    "next_dugeno": "",
+    "back_map": 1000,
+    "back_x": 100,
+    "back_y": 100
+  }
+]

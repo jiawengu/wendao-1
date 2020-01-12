@@ -22,6 +22,9 @@ public class ZbAttribute
   public int stunt;
   public int def;
   public int dex;
+  /**
+   * 灵力
+   */
   public int wiz;
   public int family;
   public int life_recover;

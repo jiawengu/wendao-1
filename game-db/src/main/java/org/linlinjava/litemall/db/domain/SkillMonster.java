@@ -21,6 +21,10 @@ public class SkillMonster implements Cloneable, Serializable {
     private Integer id;
     private String name;
     private String skills;
+    /**
+     * monster:1
+     * 守护：2
+     */
     private Integer type;
     @JsonDeserialize(
             using = LocalDateTimeDeserializer.class

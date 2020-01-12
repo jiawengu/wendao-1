@@ -7,7 +7,12 @@
 /*    */ 
 /*    */ public class Goods
 /*    */ {
-/* 10 */   public int pos = 45;
+    /**
+     * 佩戴位置
+     * 9：法宝
+     * 37：跟宠
+     */
+    /* 10 */   public int pos = 45;
 /* 11 */   public GoodsInfo goodsInfo = new GoodsInfo();
 /* 12 */   public GoodsBasics goodsBasics = new GoodsBasics();
 /* 13 */   public GoodsLanSe goodsLanSe = new GoodsLanSe();

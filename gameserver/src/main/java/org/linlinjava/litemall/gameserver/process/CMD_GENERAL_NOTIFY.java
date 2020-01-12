@@ -45,9 +45,7 @@ import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.fight.FightRequest;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +53,13 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * CMD_GENERAL_NOTIFY    一般通知
+ */
 @Service
 public class CMD_GENERAL_NOTIFY implements GameHandler {
+    public CMD_GENERAL_NOTIFY() {
+    }
     @Autowired
     private BaxianService baxianService;
 
@@ -106,16 +109,31 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_61553_0.tasktask_extra_para = "";
             vo_61553_0.tasktask_state = "1";
             GameObjectChar.getGameObjectChar();
-            GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
+            GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
             String[] strings = GameUtilRenWu.luckFindDraw();
             GameUtil.huodechoujiang(strings, chara);
+            String msg;
+            if (strings[1].equals("金币")){
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" +strings[0]+ strings[1] + "#n ";
+            }else if(strings[1].equals("潜能")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
+            }else if(strings[1].equals("上古妖王")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
+                        "#n ";
+            }else if(strings[1].equals("道行")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
+            }else {
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[0] + "#n ";
+            }
             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
-            vo_8165_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_8165_0.msg = msg;
             vo_8165_0.active = 0;
             GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
             GameObjectChar.send(new M8165_0(), vo_8165_0);
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
-            vo_20480_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
             GameObjectChar.send(new M20480_0(), vo_20480_0);
             if (!strings[1].equals("金币")) {
@@ -123,7 +141,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.channel = 6;
                 vo_16383_5.id = 0;
                 vo_16383_5.name = "";
-                vo_16383_5.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+                vo_16383_5.msg =msg;
                 vo_16383_5.time = (int)(System.currentTimeMillis() / 1000L);
                 vo_16383_5.privilege = 0;
                 vo_16383_5.server_name = "3周年14线";
@@ -134,7 +152,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.voiceTime = 0;
                 vo_16383_5.token = "";
                 vo_16383_5.checksum = 0;
-                GameObjectCharMng.sendAll(new M16383_0(), vo_16383_5);
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
             }
         }
 
@@ -233,7 +251,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameUtil.removemunber(chara, "改头换面卡", 1);
             chara.name = para1;
             listVo_65527_0 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo_65527_0);
+            GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             vo81650 = new Vo_8165_0();
             vo81650.msg = "修改成功";
             vo81650.active = 0;
@@ -317,7 +335,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
                     List list = new ArrayList();
                     list.add(chara.pets.get(i));
-                    GameObjectChar.send(new M65507_0(), list);
+                    GameObjectChar.send(new MSG_UPDATE_PETS(), list);
                     Vo_8165_0 vo816501 = new Vo_8165_0();
                     vo816501.msg = "移除妖石成功！";
                     vo816501.active = 0;
@@ -355,7 +373,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
         int coin;
         List saleGoodList;
-        if (37 == type) {
+        if (37 == type) {//自动战斗
             chara.autofight_select = Integer.valueOf(para1);
             saleGoodList = chara.pets;
 
@@ -440,19 +458,19 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             if (i == 1) {
                 chara.extra_life += 100;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
             if (i == 2) {
                 chara.extra_life += 120;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
             if (i == 3) {
                 chara.extra_life += 150;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
             chara.isGet = 1;
@@ -474,21 +492,21 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             if (i == 1) {
                 chara.extra_life -= 3000;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 2592000;
             }
 
             if (i == 2) {
                 chara.extra_life -= 9000;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 7776000;
             }
 
             if (i == 3) {
                 chara.extra_life -= 36000;
                 listVo_65527_0 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 31536000;
             }
 
@@ -529,16 +547,16 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                             ((Petbeibao)chara.pets.get(i)).tianshu.remove(((Petbeibao)chara.pets.get(i)).tianshu.get(coin));
                             List list = new ArrayList();
                             list.add(chara.pets.get(i));
-                            GameObjectChar.send(new M65507_0(), list);
+                            GameObjectChar.send(new MSG_UPDATE_PETS(), list);
                             boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).rank > ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).pet_mag_shape;
                             GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).metal, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).skill, isfagong, ((Petbeibao)chara.pets.get(i)).id, chara);
                             if (((Petbeibao)chara.pets.get(i)).tianshu.size() == 0) {
                                 Vo_12023_0 vo_12023_0 = new Vo_12023_0();
                                 vo_12023_0.owner_id = chara.id;
                                 vo_12023_0.id = ((Petbeibao)chara.pets.get(i)).id;
-                                GameObjectChar.send(new M12023_1(), vo_12023_0);
+                                GameObjectChar.send(new MSG_REFRESH_PET_GODBOOK_SKILLS_1(), vo_12023_0);
                             } else {
-                                GameObjectChar.send(new M12023_0(), ((Petbeibao)chara.pets.get(i)).tianshu);
+                                GameObjectChar.send(new MSG_REFRESH_PET_GODBOOK_SKILLS_0(), ((Petbeibao)chara.pets.get(i)).tianshu);
                             }
 
                             StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(para2);
@@ -546,7 +564,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                             vo_20481_0 = new Vo_20481_0();
                             vo_20481_0.msg = "你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n成功取出了天书散卷#R" + para2 + "#n。";
                             vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                            GameObjectChar.send(new M20481_0(), vo_20481_0);
+                            GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                             break;
                         }
                     }
@@ -633,11 +651,11 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     GameUtil.removemunber(chara, goods, Integer.valueOf(para2));
                     chara.use_money_type += goods.goodsInfo.rebuild_level / 5 * Integer.valueOf(para2);
                     listVo6552701 = GameUtil.a65527(chara);
-                    GameObjectChar.send(new M65527_0(), listVo6552701);
+                    GameObjectChar.send(new MSG_UPDATE(), listVo6552701);
                     Vo_20481_0 vo204810 = new Vo_20481_0();
                     vo204810.msg = "你成功出售" + goods.goodsInfo.str + "#n获得代金券#n。";
                     vo204810.time = 1562987118;
-                    GameObjectChar.send(new M20481_0(), vo204810);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo204810);
                     break;
                 }
             }
@@ -656,7 +674,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             chara.balance += chara.jishou_coin;
             chara.jishou_coin = 0;
             ListVo_65527_0 vo655270 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), vo655270);
+            GameObjectChar.send(new MSG_UPDATE(), vo655270);
             list1 = GameData.that.baseSaleGoodService.findByOwnerUuid(chara.uuid);
             vo_49179_0 = GameUtil.a49179(list1, chara);
             GameObjectChar.send(new M49179_0(), vo_49179_0);
@@ -695,7 +713,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_20481_0 = new Vo_20481_0();
                 vo_20481_0.msg = "你成功将#R" + saleGood.getName() + "#n撤摊了";
                 vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
             } else {
                 name = saleGood.getGoods();
                 Petbeibao petbeibao = (Petbeibao)JSONUtils.parseObject(name, Petbeibao.class);
@@ -712,10 +730,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_20481_0 = new Vo_20481_0();
                 vo_20481_0.msg = "你成功将#R" + saleGood.getName() + "#n撤摊了";
                 vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 List arrayList = new ArrayList();
                 arrayList.add(petbeibao);
-                GameObjectChar.send(new M65507_0(), arrayList);
+                GameObjectChar.send(new MSG_UPDATE_PETS(), arrayList);
                 boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
                 GameUtil.dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, petbeibao.id, chara);
                 chara.pets.add(petbeibao);
@@ -818,7 +836,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 GameObjectChar.send(new M40964_0(), vo_40964_0);
                 chara.gold_coin += 100;
                 ListVo_65527_0 listVo655270 = GameUtil.a65527(chara);
-                GameObjectChar.send(new M65527_0(), listVo655270);
+                GameObjectChar.send(new MSG_UPDATE(), listVo655270);
             } else {
                 StoreInfo storeInfo = GameData.that.baseStoreInfoService.findOneByName(name);
                 GameUtil.huodedaoju(chara, storeInfo, 1);
@@ -999,7 +1017,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     vo204810 = new Vo_20481_0();
                     vo204810.msg = "代金卷不足";
                     vo204810.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectChar.send(new M20481_0(), vo204810);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo204810);
                     return;
                 }
 
@@ -1009,7 +1027,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     vo204810 = new Vo_20481_0();
                     vo204810.msg = "金币不足";
                     vo204810.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectChar.send(new M20481_0(), vo204810);
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo204810);
                     return;
                 }
 
@@ -1017,7 +1035,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             }
 
             listVo6552701 = GameUtil.a65527(chara);
-            GameObjectChar.send(new M65527_0(), listVo6552701);
+            GameObjectChar.send(new MSG_UPDATE(), listVo6552701);
             ShouHu shouHu = new ShouHu();
             shouHu.id = GameUtil.getCard(chara);
             ShouHuShuXing shouHuShuXing = new ShouHuShuXing();
@@ -1060,7 +1078,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_20481_0 vo2048101 = new Vo_20481_0();
             vo2048101.msg = "#n召唤守护#Y" + para1 + "#n";
             vo2048101.time = 1562987118;
-            GameObjectChar.send(new M20481_0(), vo2048101);
+            GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo2048101);
             GameUtil.dujineng(2, pos1, shouHuShuXing.skill, true, shouHu.id, chara);
         }
 
@@ -1128,6 +1146,94 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
         if (type == 40008) {
             GameUtil.a49159(chara);
+        }
+
+        if(type==30025){
+            System.out.println("NOTIFY_TTT_JUMP_ASSURE=  30025, \n" +
+                    "  -- 通天塔飞升确认");
+        }
+        if(type==30026){
+            System.out.println("NOTIFY_TTT_JUMP_CANCEL=  30026,  \n" +
+                    " -- 通天塔飞升取消");
+        }
+        if(type==40000){
+            System.out.println("NOTIFY_TTT_GET_BONUS=  40000, \n" +
+                    "  -- 通天塔领取奖励");
+        }
+        if(type==40001){
+            System.out.println(" NOTIFY_TTT_DO_REVIVE=  40001, \n" +
+                    "  -- 通天塔请求复活");
+        }
+        if(type==40002){//通天塔急速飞升  元宝
+            int flyLayer = Integer.valueOf(para1);
+            //扣元宝
+            int cost = 0;
+            if (flyLayer <= 5){
+                cost = 90;
+            }else{
+                cost = 180;
+            }
+            GameUtil.addYuanBao(chara, -cost);
+            chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
+            GameUtil.a45090(chara, (byte) 1, cost, flyLayer);
+            GameUtil.notifyTTTPanelInfo(chara);
+            GameUtilRenWu.notifyTTTTask(chara);
+        }
+        if(type==40003){//通天塔快速飞升 金钱
+            int flyLayer = Integer.valueOf(para1);
+            //扣金钱
+            int cost = 0;
+            if (flyLayer <= 5){
+                cost = (flyLayer - 1) * 800000;
+            }else{
+                cost = (5 - 1) * 800000;
+            }
+            GameUtil.addCoin(chara, -cost);
+
+            chara.onEnterTttLayer(chara.ttt_layer+flyLayer ,GameUtil.randomTTTXingJunName());
+
+            GameUtil.a45090(chara, (byte) 2, cost, flyLayer);
+
+            GameUtil.notifyTTTPanelInfo(chara);
+        }
+        if(type==40004){
+            System.out.println("NOTIFY_TTT_RESET_TASK =  40004,\n" +
+                    "   -- 通天塔重置任务");
+        }
+        if(type==40006){//通天塔-挑战下层
+            GameUtil.tttChallengeNextLayer(chara);
+        }
+        if(type == 40007 || type == 50022){//通天塔离开
+            GameUtilRenWu.huicheng(chara);
+        }
+
+        if (type == 30000)
+        {
+            int nCnt = 0;
+            if (GameObjectChar.getGameObjectChar().gameTeam != null && GameObjectChar.getGameObjectChar().gameTeam.duiwu != null)
+            {
+                nCnt = GameObjectChar.getGameObjectChar().gameTeam.duiwu.size();
+            }
+            if (nCnt < 3) {
+                vo_20481_0 = new Vo_20481_0();
+                vo_20481_0.msg = "人数不足3人！";
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                GameObjectChar.getGameObjectChar();
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                return;
+            }
+
+            if (para1.matches("黑风洞"))
+            {
+                para1 = "黑风洞一层";
+            }
+
+            vo_9129_0 = new Vo_9129_0();
+            vo_9129_0.notify = 98;
+            vo_9129_0.para = "DugeonCreateDlg";
+            GameObjectChar.send(new M9129_0(), vo_9129_0);
+
+            GameUtil.enterDugeno(chara, para1);
         }
 
     }

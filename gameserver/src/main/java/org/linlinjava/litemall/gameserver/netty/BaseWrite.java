@@ -5,7 +5,8 @@
 /*    */ import org.linlinjava.litemall.core.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
-/*    */ import org.slf4j.Logger;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_REPLY_ECHO;
+import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 
 import java.util.List;
@@ -37,7 +38,9 @@ import java.util.List;
                 String jsonStr = JSONUtils.toJSONString(object);
                 jsonStr = jsonStr == null ? "null" : jsonStr;
                 String objstr = object == null ? "null" : object.toString();
-                System.out.println("send:" + this.cmd() + "----" + jsonStr);
+                if(this.getClass()!= MSG_REPLY_ECHO.class){
+                    System.out.println("send:" + this.getClass().getSimpleName() + "----" + jsonStr);
+                }
 /* 31 */     ByteBuf writeBuf = Unpooled.buffer();
 /* 32 */     writerIndex = beforeWrite(writeBuf);
 /* 33 */     writeO(writeBuf, object);

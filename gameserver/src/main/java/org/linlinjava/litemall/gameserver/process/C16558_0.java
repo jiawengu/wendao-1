@@ -10,7 +10,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_OTHER_MOVE_TO
+ */
 /*    */ @Service
 /*    */ public class C16558_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {

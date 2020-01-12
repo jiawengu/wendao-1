@@ -8,14 +8,23 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 /*     */
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
 /*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+/*     */
+/*     */
+
+/**
+ * CMD_TELEPORT 传送
+ */
 /*     */
 
 /*     */
@@ -47,26 +56,26 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*  46 */     for (int i = 0; i < GameLine.gameShuaGuai.shuaXing.size(); i++) {
 /*  47 */       if (((Vo_65529_0)GameLine.gameShuaGuai.shuaXing.get(i)).mapid == mapid) {
-/*  48 */         GameObjectChar.sendduiwu(new M65529_0(), GameLine.gameShuaGuai.shuaXing.get(i), chara.id);
+/*  48 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), GameLine.gameShuaGuai.shuaXing.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*     */ 
 /*  53 */     for (int i = 0; i < chara.npcchubao.size(); i++) {
 /*  54 */       if (mapid == ((Vo_65529_0)chara.npcchubao.get(i)).mapid) {
-/*  55 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcchubao.get(i), chara.id);
+/*  55 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcchubao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*  59 */     for (int i = 0; i < chara.npcshuadao.size(); i++) {
 /*  60 */       if (mapid == ((Vo_65529_0)chara.npcshuadao.get(i)).mapid) {
-/*  61 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcshuadao.get(i), chara.id);
+/*  61 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcshuadao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*  65 */     for (int i = 0; i < chara.npcxuanshang.size(); i++) {
 /*  66 */       if (mapid == ((Vo_65529_0)chara.npcxuanshang.get(i)).mapid) {
-/*  67 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcxuanshang.get(i), chara.id);
+/*  67 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcxuanshang.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
@@ -78,7 +87,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */       
 /*     */ 
 /*  78 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  79 */       GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
+/*  79 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*  81 */     if ((chara.current_task.equals("主线—浮生若梦_s21")) && ((mapid == 10000) || (mapid == 14000) || (mapid == 15000) || (mapid == 13000) || (mapid == 16000))) {
 /*  82 */       GameUtil.renwujiangli(chara);
@@ -87,12 +96,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */       
 /*     */ 
 /*  87 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  88 */       GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
+/*  88 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*     */     
 /*     */ 
-/*  92 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/*  93 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/*  92 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/*  93 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*  94 */     if ((GameObjectChar.getGameObjectChar().gameTeam != null) && (GameObjectChar.getGameObjectChar().gameTeam.duiwu.size() > 0) && 
 /*  95 */       (((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(0)).id == chara.id)) {
 /*  96 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -100,7 +109,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  98 */       vo_61671_0.count = 2;
 /*  99 */       vo_61671_0.list.add(Integer.valueOf(2));
 /* 100 */       vo_61671_0.list.add(Integer.valueOf(3));
-/* 101 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 101 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     }
 /*     */     
 /*     */ 

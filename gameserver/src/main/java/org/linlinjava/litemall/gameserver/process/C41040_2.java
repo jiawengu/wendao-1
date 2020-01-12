@@ -9,7 +9,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65507_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -60,7 +60,7 @@
 /*    */         
 /* 61 */         List list = new ArrayList();
 /* 62 */         list.add(chara.pets.get(i));
-/* 63 */         GameObjectChar.send(new M65507_0(), list);
+/* 63 */         GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 64 */         Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 65 */         vo_8165_0.msg = ("恭喜你将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
 /* 66 */         vo_8165_0.active = 0;

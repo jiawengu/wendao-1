@@ -11,18 +11,22 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */
-import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.springframework.stereotype.Service;
-/*     */ 
+/*     */
+
+/**
+ * CMD_EQUIP
+ */
 /*     */ @Service
 /*     */ public class C4136_0 implements GameHandler
 /*     */ {
@@ -47,7 +51,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*  47 */       Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
 /*  48 */       Vo_61553_0 vo_61553_0 = GameUtil.a61553(tasks, chara);
-/*  49 */       GameObjectChar.send(new M_MSG_TASK_PROMPT(), vo_61553_0);
+/*  49 */       GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
 /*     */     }
 /*  51 */     boolean has = false;
 /*  52 */     Goods goodshas = new Goods();
@@ -81,17 +85,17 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  80 */       goods1.goodsLanSe = null;
 /*  81 */       goods1.pos = pos;
 /*  82 */       listbeibao.add(goods1);
-/*  83 */       GameObjectChar.send(new M65525_0(), listbeibao);
+/*  83 */       GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /*     */     }
 /*     */     
-/*  86 */     GameObjectChar.send(new M65525_0(), chara.backpack);
+/*  86 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     
-/*  88 */     GameUtil.a65511(chara);
+/*  88 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*  89 */     ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
-/*  90 */     GameObjectChar.send(new M65527_0(), vo_65527_0);
+/*  90 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*     */     
-/*  92 */     Vo_65529_0 vo_65529_0 = GameUtil.a65529(chara);
-/*  93 */     GameObjectChar.send(new M65529_0(), vo_65529_0);
+/*  92 */     Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+/*  93 */     GameObjectChar.send(new MSG_APPEAR(), vo_65529_0);
 /*     */   }
 /*     */   
 /*     */ 

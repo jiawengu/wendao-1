@@ -4,26 +4,30 @@ package org.linlinjava.litemall.gameserver.process;
 /*     */
 
 import io.netty.buffer.ByteBuf;
-/*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
-/*     */ import org.linlinjava.litemall.db.domain.Npc;
-/*     */ import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
-/*     */ import org.linlinjava.litemall.db.domain.Renwu;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8247_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameShiDao;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
+import io.netty.channel.ChannelHandlerContext;
+import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
+import org.linlinjava.litemall.db.domain.Renwu;
+import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
+import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.domain.PetShuXing;
+import org.linlinjava.litemall.gameserver.domain.Petbeibao;
+import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 
-/*     */
-/*     */
+import java.util.List;
+
+import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
+
+
+/**
+ * CMD_OPEN_MENU
+ */
 @org.springframework.stereotype.Service
 /*     */ public class CMD_OPEN_MENU implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
@@ -35,6 +39,7 @@ import io.netty.buffer.ByteBuf;
         /*     */
         /*  29 */
         int type = org.linlinjava.litemall.gameserver.data.GameReadTool.readByte(buff);
+        System.out.println("CMD_OPEN_MENU:" + id + ":" + type);
         /*     */
         /*  31 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
@@ -66,7 +71,7 @@ import io.netty.buffer.ByteBuf;
                     /*  45 */
                     vo_8247_0.attrib = 0;
                     /*  46 */
-                    GameObjectChar.send(new M8247_0(), vo_8247_0);
+                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                     /*     */
                 }
                 /*     */
@@ -103,7 +108,7 @@ import io.netty.buffer.ByteBuf;
                         /*  66 */
                         vo_8247_0.attrib = 0;
                         /*  67 */
-                        GameObjectChar.send(new M8247_0(), vo_8247_0);
+                        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                         /*  68 */
                         return;
                         /*     */
@@ -127,7 +132,7 @@ import io.netty.buffer.ByteBuf;
                     /*  79 */
                     vo_8247_0.attrib = 0;
                     /*  80 */
-                    GameObjectChar.send(new M8247_0(), vo_8247_0);
+                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                     /*  81 */
                     return;
                     /*     */
@@ -164,7 +169,7 @@ import io.netty.buffer.ByteBuf;
                 /* 101 */
                 vo_8247_0.attrib = 0;
                 /* 102 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 103 */
                 return;
                 /*     */
@@ -195,13 +200,14 @@ import io.netty.buffer.ByteBuf;
                 /* 118 */
                 vo_8247_0.attrib = 0;
                 /* 119 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 120 */
                 return;
                 /*     */
             }
             /*     */
         }
+
         /*     */
         /* 124 */
         for (int i = 0; i < chara.npcshuadao.size(); i++) {
@@ -226,14 +232,21 @@ import io.netty.buffer.ByteBuf;
                 /* 135 */
                 vo_8247_0.attrib = 0;
                 /* 136 */
-                GameObjectChar.send(new M8247_0(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
                 /* 137 */
                 return;
                 /*     */
             }
             /*     */
         }
+
+        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
+        if (gameMap.isDugeno() && ((GameZone)gameMap).gameDugeon.meetNpc(chara, id))
+        {
+            return;
+        }
         /*     */
+
         /*     */
         /* 142 */
         Npc npc = GameData.that.baseNpcService.findById(id);
@@ -243,20 +256,37 @@ import io.netty.buffer.ByteBuf;
             return;
             /*     */
         }
+
         /* 146 */
         List<NpcDialogueFrame> npcDialogueFrameList = GameData.that.baseNpcDialogueFrameService.findByName(npc.getName());
         /* 147 */
         String content = "找我有什么事吗？[离开\\/离开]";
+
         /* 148 */
         if (npcDialogueFrameList.size() != 0) {
             /* 149 */
             content = ((NpcDialogueFrame) npcDialogueFrameList.get(0)).getUncontent();
             /*     */
         }
+        ShangGuYaoWangInfo info =
+                GameShangGuYaoWang.getYaoWangNpc(npc.getId(),
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
+        if (null != info){
+            int level = info.getLevel();
+            content =
+                    ("大胆狂徒，敢在本大王面前撒野，真是活得不耐烦了！(妖王等级"+level+"级，适合"+level+"-"+(level+29)+"级玩家挑战）\n[挑战]\n" + "[离开]".replace("\\",""));
+        }
 
-            if (id == 829) {
-                content = "[挑战掌门]" + content;
-          }
+        if (GameUtil.isZhangeMenNpc(npc.getName())) {//掌门npc
+            if(GameUtil.getMenPai(npc.getName()) == chara.menpai){//自己的掌门
+                content = getTalk(TIAO_ZHAN_ZHANG_MEN)+
+                        getTalk(CHA_KAN_ZHANG_MEN)+
+                        getTalk(JIN_RU_ZHENG_DAO_DIAN);
+            }else{//其他门派掌门
+                content = getTalk(KAN_KAN_YE_WU_FANG)+
+                        getTalk(BU_KAN_LE);
+            }
+        }
 
         /* 151 */
         if (npc.getName().equals(chara.npcName)) {
@@ -268,6 +298,22 @@ import io.netty.buffer.ByteBuf;
             /* 152 */
             content = "[【十绝阵】讨教/十绝阵_s1]" + content;
             /*     */
+        }
+        if(npc.getMapId()==37000){//通天塔
+            if (!chara.ttt_xj_success && npc.getName().equals(chara.ttt_xj_name)) {
+                content = "[挑战星君]"+ content;
+            }
+            if(npc.getName().equals("北斗神将")){
+                if(chara.ttt_challenge_num>0){//挑战了
+                    if(chara.ttt_xj_success){//挑战成功
+                        content = "道友已参透此处玄机，佩服，佩服[挑战下层][飞升][离开]";
+                    }else{//挑战失败
+                        content = "来日方长，待道友重整旗鼓，再来见识通天塔之玄妙[重新挑战][离开]";
+                    }
+                }else{//还没用挑战
+                    content = "吾奉天命，在此负责通天塔之传送事宜。[更换奖励类型][传送出塔][离开]";
+                }
+            }
         }
         /*     */
         /* 155 */
@@ -312,13 +358,20 @@ import io.netty.buffer.ByteBuf;
             content = "[【领取法宝】提交#R蟠螭结、雪魂丝链#n]" + content;
             /*     */
         }
+
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
+        if(dailyTaskItem != null){
+            content = "[" + dailyTaskItem.show_name + "]" + content;
+        }
         /*     */
         /*     */
         /*     */
         /* 179 */
-        Vo_8247_0 vo_8247_0 = GameUtil.a8247(npc, content);
+        Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, content);
         /* 180 */
-        GameObjectChar.send(new M8247_0(), vo_8247_0);
+        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
         /*     */
     }
 

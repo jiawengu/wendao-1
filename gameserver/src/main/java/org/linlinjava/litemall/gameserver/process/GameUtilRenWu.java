@@ -5,15 +5,21 @@
 /*     */ import java.util.Calendar;
 /*     */ import java.util.Date;
 /*     */
-/*     */ import java.util.Random;
+/*     */ import java.util.List;
+import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.Map;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
+/*     */ import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.db.domain.Pet;
+import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M_MSG_TASK_PROMPT;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61671_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65529_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 /*     */
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*     */
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */
@@ -38,7 +44,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  36 */     vo_61553_0.show_name = show_name;
 /*  37 */     vo_61553_0.tasktask_extra_para = "";
 /*  38 */     vo_61553_0.tasktask_state = "1";
-/*  39 */     GameObjectChar.sendduiwu(new M_MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
+/*  39 */     GameObjectChar.sendduiwu(new MSG_TASK_PROMPT(), vo_61553_0, chara1.id);
 /*     */   }
 /*     */   
 /*     */   public static String shidaolevel(Chara chara) {
@@ -129,13 +135,13 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 127 */           vo_61671_0.count = 2;
 /* 128 */           vo_61671_0.list.add(Integer.valueOf(2));
 /* 129 */           vo_61671_0.list.add(Integer.valueOf(5));
-/* 130 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 130 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /* 131 */           vo_61671_0 = new Vo_61671_0();
 /* 132 */           vo_61671_0.id = chara.id;
 /* 133 */           vo_61671_0.count = 2;
 /* 134 */           vo_61671_0.list.add(Integer.valueOf(2));
 /* 135 */           vo_61671_0.list.add(Integer.valueOf(3));
-/* 136 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 136 */           GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */         }
 /*     */       }
 /*     */     }
@@ -144,27 +150,27 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /* 143 */     for (int i = 0; i < chara.npcchubao.size(); i++) {
 /* 144 */       if (mapid == ((Vo_65529_0)chara.npcchubao.get(i)).mapid) {
-/* 145 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcchubao.get(i), chara.id);
+/* 145 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcchubao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /* 149 */     for (int i = 0; i < chara.npcshuadao.size(); i++) {
 /* 150 */       if (mapid == ((Vo_65529_0)chara.npcshuadao.get(i)).mapid) {
-/* 151 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcshuadao.get(i), chara.id);
+/* 151 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcshuadao.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /* 155 */     for (int i = 0; i < chara.npcxuanshang.size(); i++) {
 /* 156 */       if (mapid == ((Vo_65529_0)chara.npcxuanshang.get(i)).mapid) {
-/* 157 */         GameObjectChar.sendduiwu(new M65529_0(), chara.npcxuanshang.get(i), chara.id);
+/* 157 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcxuanshang.get(i), chara.id);
 /*     */       }
 /*     */     }
 /*     */     
 /*     */ 
 /*     */ 
 /*     */ 
-/* 164 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 165 */     GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/* 164 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 165 */     GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /* 166 */     if ((GameObjectCharMng.getGameObjectChar(chara.id).gameTeam != null) && (GameObjectCharMng.getGameObjectChar(chara.id).gameTeam.duiwu.size() > 0) && 
 /* 167 */       (((Chara)GameObjectCharMng.getGameObjectChar(chara.id).gameTeam.duiwu.get(0)).id == chara.id)) {
 /* 168 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -172,7 +178,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 170 */       vo_61671_0.count = 2;
 /* 171 */       vo_61671_0.list.add(Integer.valueOf(2));
 /* 172 */       vo_61671_0.list.add(Integer.valueOf(3));
-/* 173 */       GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new M61671_0(), vo_61671_0);
+/* 173 */       GameObjectCharMng.getGameObjectChar(chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
 /*     */     }
 /*     */     
 /*     */ 
@@ -185,29 +191,58 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ 
 /*     */ 
-/*     */   public static String[] luckFindDraw()
-/*     */   {
-/* 188 */     String nameType = "";
-/* 189 */     String[] yiDing = { "帅帅猴#变异", "蛋蛋鸡#变异", "乖乖狗#变异", "招财猪#变异", "岳麓剑#精怪", "筋斗云#精怪" };
-/* 190 */     String[] erDing = { "召唤令·十二生肖#物品" };
-/* 191 */     String[] siDing = { "60级首饰#首饰" };
-/* 192 */     Random random = new Random();
-/* 193 */     int r = random.nextInt(1000) + 1;
-/* 194 */     if (r <= 3) {
-/* 195 */       nameType = yiDing[random.nextInt(yiDing.length)];
-/* 196 */     } else if (r < 20) {
-/* 197 */       nameType = erDing[random.nextInt(erDing.length)];
-/*     */     }
-/* 199 */     else if (r < 50) {
-/* 200 */       nameType = siDing[random.nextInt(siDing.length)];
-/*     */     } else {
-/* 202 */       int money = 1000000 + random.nextInt(300000);
-/* 203 */       nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
-/*     */     }
-/*     */     
-/*     */ 
-/* 207 */     return nameType.split("#");
-/*     */   }
+    public static String[] luckFindDraw()
+    {
+         String nameType = "";
+         String[] yiDing = { "帅帅猴#变异", "蛋蛋鸡#变异", "酷酷龙#变异", "威威虎#变异", "伶俐鼠#变异", "跳跳兔#变异", "笨笨牛#变异" /*,
+                 "岳麓剑#精怪", "筋斗云#精怪" */ };
+         String[] erDing = { "召唤令·十二生肖#物品" };
+         String[] siDing = {"150000#潜能"};//{ "60级首饰#首饰" };
+         String[] siJinBi = {"50#10000000","200#5000000","750#800000"};
+         Random random = new Random();
+         int r = random.nextInt(100000) ;
+         r = 14+50+15000+2000;
+         if (r <= 14) {
+             nameType = yiDing[random.nextInt(yiDing.length)];
+         } else if (r < 14+50) {
+             nameType = erDing[random.nextInt(erDing.length)];
+         } else if (r < 14+50+15000) {
+             nameType = siDing[random.nextInt(siDing.length)];
+        } else if (r < 14+50+15000+20000){
+            List<ShangGuYaoWangInfo> infos =
+                    GameData.that.BaseShangGuYaoWangInfoService.findAllCloseState();
+            if(infos.size() > 0){
+                ShangGuYaoWangInfo info =
+                        infos.get(random.nextInt(infos.size()));
+                Npc npc = GameData.that.baseNpcService.findById(info.getNpcid());
+                nameType = npc.getName()+"#上古妖王";
+            }else{
+                int money = 0;
+                r = random.nextInt(1000);
+                for (int i = 0 ; i < siJinBi.length; i++){
+                    String [] tempStr = siJinBi[i].split("#");
+                    if (i < Integer.valueOf(tempStr[0])) {
+                        money = Integer.valueOf( tempStr[1]);
+                    }
+                }
+                nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
+            }
+
+         } else {
+           int money = 0;
+           r = random.nextInt(1000);
+           for (int i = 0 ; i < siJinBi.length; i++){
+               String [] tempStr = siJinBi[i].split("#");
+               if (i < Integer.valueOf(tempStr[0])) {
+                   money = Integer.valueOf( tempStr[1]);
+               }
+           }
+           nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
+         }
+
+
+         return nameType.split("#");
+    }
 /*     */   
 /*     */ 
 /*     */ 
@@ -254,7 +289,22 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */   
 /*     */ 
 /*     */ 
-/*     */ 
+/*     */   public static boolean isShangGuYaoWang(Chara chara){
+                if(0 == chara.changbaotu.icon) return  false;
+                List<Pet> monsterList = GameData.that.basePetService.findByZoon(GameObjectChar.getGameObjectChar().chara.mapName);
+                if(0 == monsterList.size()) return  false;
+                Pet pet = null;
+                for (int i = 0; i < monsterList.size(); i++) {
+                    Pet tempPet = monsterList.get(i);
+                    if (tempPet.getName().contains("上古妖王")){
+                        pet = tempPet;
+                        break;
+                    }
+                }
+                if (null == pet) return  false;
+
+                return  true;
+            }
 /*     */ 
 /*     */ 
 /*     */ 
@@ -288,6 +338,28 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     }
 /* 287 */     return false;
 /*     */   }
+
+    /**
+     * 通知通天塔任务
+     */
+    public static void notifyTTTTask(Chara chara){
+        if(chara.ttt_layer==0){
+            return;
+        }
+        Vo_61553_0 vo_61553_0 = new Vo_61553_0();
+        vo_61553_0.count = 1;
+        vo_61553_0.task_type = "通天塔";
+        vo_61553_0.task_desc = "通天塔";
+        vo_61553_0.task_prompt = "挑战#P"+chara.ttt_xj_name+"#P";
+        vo_61553_0.refresh = 1;
+        vo_61553_0.task_end_time = 1567909190;
+        vo_61553_0.attrib = 1;
+        vo_61553_0.reward = "#I经验|人物经验宠物经验#I#I道行|道行#I#I潜能|潜能#I#I武学|武学#I#I金钱|金钱#I";
+        vo_61553_0.show_name = "通天塔";
+        vo_61553_0.tasktask_extra_para = "";
+        vo_61553_0.tasktask_state = "1";
+        GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
+    }
 /*     */ }
 
 

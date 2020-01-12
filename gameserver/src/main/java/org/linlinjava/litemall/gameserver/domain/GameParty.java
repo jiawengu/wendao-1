@@ -22,6 +22,7 @@ public class GameParty {
     public HashMap<Integer, PartyMember> members = new HashMap<>();
     private HashMap<Integer, PartyRequest> requestList = new HashMap<>();
     private AtomicBoolean lock = new AtomicBoolean(false);
+    public PartyOfficers officers;
     public boolean lock() {
         return this.lock.compareAndSet(false, true);
     }
@@ -36,6 +37,11 @@ public class GameParty {
         this.lock();
         this.data = p;
         this.id = p.getId();
+        if(p.getOfficer() != null){
+            officers = JSONUtils.parseObject(p.getOfficer(), PartyOfficers.class);
+        }else{
+            officers = new PartyOfficers();
+        }
         String memstr = p.getMember();
         if(memstr != null && memstr != ""){
             List<Object> list = (List<Object>)JSONUtils.parseObject(memstr, Object.class);
@@ -52,13 +58,13 @@ public class GameParty {
                 }
                 this.members.put(m.id, m);
             });
-//            S.members.forEach(item->{
-//                this.members.put(item.id, item);
-//            });
+
+
         }
 
         if(creator != null){
             this.addMember(creator);
+            this.officers.put(PartyMgr.OFFICE_MONSTER, new PartyOfficers.Office(creator.id, creator.name));
             this.data.setCreator(creator.name);
         }
         this.unlock();
@@ -76,6 +82,7 @@ public class GameParty {
 //        S.members = list;
         String memstr = JSONUtils.toJSONString(list);
         this.data.setMember(memstr);
+        this.data.setOfficer(JSONUtils.toJSONString(this.officers));
         GameData.that.basePartyService.updateById(this.data);
         this.dirty = false;
         this.unlock();

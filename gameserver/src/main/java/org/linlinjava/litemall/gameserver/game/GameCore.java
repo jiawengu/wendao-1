@@ -10,10 +10,12 @@
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightTianshuMap;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.linlinjava.litemall.gameserver.netty.NettyServer;
-/*    */ import org.slf4j.Logger;
+/*    */ import org.linlinjava.litemall.gameserver.service.CharaStatueService;
+import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
-/*    */ import org.springframework.context.ApplicationContext;
+/*    */ import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
@@ -26,13 +28,16 @@
 /*    */   private ApplicationContext applicationContext;
 /*    */   @Autowired
 /*    */   private List<BaseWrite> baseWrites;
+           @Value("${serverId}")
+           private String serverId;
 /* 29 */   private static final Map<Integer, BaseWrite> basewriteMap = new HashMap();
 /*    */   public NettyServer server;
 /* 31 */   public long currentTime = 0L;
            public PartyMgr partyMgr;
 /*    */   public void init(NettyServer server) {
 /* 34 */     log.error("game init begin!");
-/*    */     
+                XLSConfigMgr.init();
+/*    */
 /* 36 */     this.server = server;
 /* 37 */     for (int i = 0; i < 14; i++) {
 /* 38 */       GameLine gameLine = (GameLine)this.applicationContext.getBean("glllbawsdfawelllll", GameLine.class);
@@ -46,6 +51,7 @@
 /* 46 */     BuildFields.add();
 /* 47 */     BattleUtils.init();
 /* 48 */     FightTianshuMap.init();
+/* 48 */     CharaStatueService.init(serverId);
              this.partyMgr = new PartyMgr();
              this.partyMgr.init();
 /* 49 */     log.error("game init over!");

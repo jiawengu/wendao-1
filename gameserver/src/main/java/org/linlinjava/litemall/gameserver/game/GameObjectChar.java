@@ -2,11 +2,6 @@ package org.linlinjava.litemall.gameserver.game;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
@@ -15,10 +10,16 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 import org.linlinjava.litemall.gameserver.data.write.M4121_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameObjectChar {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(GameObjectChar.class);
@@ -28,6 +29,7 @@ public class GameObjectChar {
 
     public Chara chara;
     public Characters characters;
+    public UserLogic logic;
     public GameMap gameMap;
     public GameTeam gameTeam;
     public int upduizhangid;
@@ -75,6 +77,8 @@ public class GameObjectChar {
         chara.id = characters.getId().intValue();
         this.chara = chara;
         this.characters = characters;
+        this.logic = new UserLogic();
+        this.logic.init(chara.id, this.logic);
         GameObjectCharMng.add(this);
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);
@@ -148,7 +152,7 @@ public class GameObjectChar {
                         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
                         vo_61671_0.id = ((Chara) this.gameTeam.duiwu.get(i)).id;
                         vo_61671_0.count = 0;
-                        GameObjectCharMng.getGameObjectChar(this.chara.id).gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+                        GameObjectCharMng.getGameObjectChar(this.chara.id).gameMap.send(new org.linlinjava.litemall.gameserver.data.write.MSG_TITLE(), vo_61671_0);
                     }
 
                     for (int i = 0; i < GameObjectCharMng.getGameObjectChar(this.chara.id).gameTeam.zhanliduiyuan.size() - 1; i++) {
@@ -169,7 +173,7 @@ public class GameObjectChar {
                     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
                     vo_61671_0.id = this.chara.id;
                     vo_61671_0.count = 0;
-                    GameObjectCharMng.getGameObjectChar(this.chara.id).gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+                    GameObjectCharMng.getGameObjectChar(this.chara.id).gameMap.send(new MSG_TITLE(), vo_61671_0);
                     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
                     GameObjectCharMng.getGameObjectChar(this.chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
                     List<Vo_4121_0> vo_4121_0List = new ArrayList();
@@ -179,8 +183,8 @@ public class GameObjectChar {
                     vo_20480_0.time = 1562593376;
                     GameObjectCharMng.getGameObjectChar(this.chara.id).sendOne(new M20480_0(), vo_20480_0);
                     for (int i = 0; i < this.gameTeam.duiwu.size(); i++) {
-                        org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = org.linlinjava.litemall.gameserver.process.GameUtil.a61661((Chara) this.gameTeam.duiwu.get(i));
-                        GameObjectCharMng.getGameObjectChar(((Chara) this.gameTeam.duiwu.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+                        org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = org.linlinjava.litemall.gameserver.process.GameUtil.MSG_UPDATE_APPEARANCE((Chara) this.gameTeam.duiwu.get(i));
+                        GameObjectCharMng.getGameObjectChar(((Chara) this.gameTeam.duiwu.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE(), vo_61661_0);
                     }
 
                     org.linlinjava.litemall.gameserver.data.vo.Vo_49189_0 vo_49189_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49189_0();

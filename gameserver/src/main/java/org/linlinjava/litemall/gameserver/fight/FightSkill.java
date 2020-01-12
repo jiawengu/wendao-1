@@ -58,6 +58,11 @@ public interface FightSkill {
         }
     }
 
+    /**
+     * 技能目标是否是敌方阵营
+     * @param para
+     * @return
+     */
     static boolean isOpSkill(int para) {
         switch(para) {
             case 31:
@@ -153,11 +158,11 @@ public interface FightSkill {
                     case 84:
                     case 85:
                         return new FuzhuMu81Skill();
-                    case 121:
-                    case 122:
-                    case 123:
-                    case 124:
-                    case 125:
+                    case 121://三九严寒
+                    case 122://天寒地冻
+                    case 123://冰冻三尺
+                    case 124://极地冰寒
+                    case 125://包罗万象
                         return new ZhangaiShui121Skill();
                     case 131:
                     case 132:

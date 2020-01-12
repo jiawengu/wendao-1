@@ -10,13 +10,14 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M61677_01;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65525_0;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
+/*     */
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*     */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ 
 /*     */ @org.springframework.stereotype.Service
@@ -66,7 +67,7 @@
 /*  66 */       chara.backpack.add(goods);
 /*  67 */       List<Goods> list = new ArrayList();
 /*  68 */       list.add(goods);
-/*  69 */       GameObjectChar.send(new M65525_0(), list);
+/*  69 */       GameObjectChar.send(new MSG_INVENTORY(), list);
 /*  70 */       chara.special_icon = Integer.valueOf(packModification.getFasionType()).intValue();
 /*  71 */       Vo_61677_0 vo_61677_12 = new Vo_61677_0();
 /*  72 */       vo_61677_12.store_type = "fasion_store";
@@ -116,8 +117,8 @@
 /* 116 */       chara.backpack.add(goods);
 /* 117 */       List<Goods> list = new ArrayList();
 /* 118 */       list.add(goods);
-/* 119 */       GameObjectChar.send(new M65525_0(), list);
-/* 120 */       GameObjectChar.send(new M65525_0(), chara.backpack);
+/* 119 */       GameObjectChar.send(new MSG_INVENTORY(), list);
+/* 120 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /* 121 */       Vo_61677_0 vo_61677_12 = new Vo_61677_0();
 /* 122 */       vo_61677_12.store_type = "effect_store";
 /* 123 */       vo_61677_12.npcID = 0;
@@ -170,7 +171,7 @@
 /* 170 */       chara.backpack.add(goods);
 /* 171 */       List<Goods> list = new ArrayList();
 /* 172 */       list.add(goods);
-/* 173 */       GameObjectChar.send(new M65525_0(), list);
+/* 173 */       GameObjectChar.send(new MSG_INVENTORY(), list);
 /* 174 */       Vo_61677_0 vo_61677_12 = new Vo_61677_0();
 /* 175 */       vo_61677_12.store_type = "follow_pet_store";
 /* 176 */       vo_61677_12.npcID = 0;
@@ -191,19 +192,19 @@
 /* 191 */       vo_65529_0.name = packModification.getStr();
 /* 192 */       vo_65529_0.org_icon = chara.genchong_icon;
 /* 193 */       vo_65529_0.portrait = chara.genchong_icon;
-/* 194 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M65529_0(), vo_65529_0);
+/* 194 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_APPEAR(), vo_65529_0);
 /*     */     }
 /*     */     
 /*     */ 
-/* 198 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.a61661(chara);
-/* 199 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61661_0(), vo_61661_0);
+/* 198 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
+/* 199 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
 /*     */     
 /*     */ 
 /* 202 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 203 */     vo_61671_0.id = chara.id;
 /* 204 */     vo_61671_0.count = 0;
 /*     */     
-/* 206 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 206 */     GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /* 207 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 208 */     vo_8165_0.msg = "穿戴成功";
 /* 209 */     vo_8165_0.active = 0;

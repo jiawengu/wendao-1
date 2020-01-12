@@ -2,15 +2,16 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.List;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20568_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
@@ -39,13 +40,13 @@
 /* 39 */     vo_61671_0.count = 2;
 /* 40 */     vo_61671_0.list.add(Integer.valueOf(2));
 /* 41 */     vo_61671_0.list.add(Integer.valueOf(3));
-/* 42 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 42 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /* 43 */     vo_61671_0 = new Vo_61671_0();
 /* 44 */     vo_61671_0.id = chara.id;
 /* 45 */     vo_61671_0.count = 2;
 /* 46 */     vo_61671_0.list.add(Integer.valueOf(2));
 /* 47 */     vo_61671_0.list.add(Integer.valueOf(5));
-/* 48 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M61671_0(), vo_61671_0);
+/* 48 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
 /* 49 */     int index = 0;
 /* 50 */     for (int i = 0; i < gameTeam.duiwu.size(); i++) {
 /* 51 */       if (((Chara)gameTeam.duiwu.get(i)).id == Integer.parseInt(new_leader_id)) {
@@ -60,7 +61,7 @@
 /* 60 */         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 61 */         vo_20481_0.msg = (((Chara)gameTeam.duiwu.get(0)).name + "成为队长。");
 /* 62 */         vo_20481_0.time = 1562987118;
-/* 63 */         GameObjectChar.getGameObjectChar();GameObjectChar.send(new M20481_0(), vo_20481_0);
+/* 63 */         GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */       }
 /*    */     }
 /* 66 */     Vo_4121_0 vo_4121_0 = (Vo_4121_0)gameTeam.zhanliduiyuan.get(0);
@@ -78,7 +79,7 @@
 /* 78 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 79 */     vo_20481_0.msg = "你被提升为队长。";
 /* 80 */     vo_20481_0.time = 1562987118;
-/* 81 */     GameObjectCharMng.getGameObjectChar(Integer.parseInt(new_leader_id)).sendOne(new M20481_0(), vo_20481_0);
+/* 81 */     GameObjectCharMng.getGameObjectChar(Integer.parseInt(new_leader_id)).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */     
 /*    */ 
 /* 84 */     GameUtil.a4119(gameTeam.duiwu);

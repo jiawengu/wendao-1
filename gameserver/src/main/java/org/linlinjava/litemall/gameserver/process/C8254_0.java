@@ -12,9 +12,9 @@ import io.netty.buffer.ByteBuf;
 /*     */ import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20481_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65507_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M65527_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -123,7 +123,7 @@ import io.netty.buffer.ByteBuf;
                 /*  78 */
                 vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                 /*  79 */
-                GameObjectChar.send(new M20481_0(), vo_20481_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /*     */
             } else {
                 /*  81 */
@@ -131,7 +131,7 @@ import io.netty.buffer.ByteBuf;
                 /*  82 */
                 ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
                 /*  83 */
-                GameObjectChar.send(new M65527_0(), listVo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 /*     */
             }
             /*     */
@@ -179,7 +179,7 @@ import io.netty.buffer.ByteBuf;
                         /* 121 */
                         vo_20481_0.time = 1562987118;
                         /* 122 */
-                        GameObjectChar.send(new M20481_0(), vo_20481_0);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     }else {
                         /*  90 */
                         chara.life += para1;
@@ -214,7 +214,7 @@ import io.netty.buffer.ByteBuf;
                         /* 121 */
                         vo_20481_0.time = 1562987118;
                         /* 122 */
-                        GameObjectChar.send(new M20481_0(), vo_20481_0);
+                        GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     }else {
                         chara.resist_metal += para5;
                         chara.wood += para1;
@@ -230,7 +230,7 @@ import io.netty.buffer.ByteBuf;
                 /* 104 */
                 ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
                 /* 105 */
-                GameObjectChar.send(new M65527_0(), vo_65527_0);
+                GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
                 /*     */
             } else {
                 for (int i = 0; i < chara.pets.size(); i++) {
@@ -252,7 +252,7 @@ import io.netty.buffer.ByteBuf;
 
                             List list = new ArrayList();
                             list.add(petbeibao);
-                            GameObjectChar.send(new M65507_0(), list);
+                            GameObjectChar.send(new MSG_UPDATE_PETS(), list);
                         }
                 }
             }

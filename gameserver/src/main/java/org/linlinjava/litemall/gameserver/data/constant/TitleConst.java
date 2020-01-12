@@ -19,6 +19,8 @@ public class TitleConst {
     public static final String TITLE_EVENT_YABIAO = "押镖";
 
     public static final String TITLE_EVENT_MAP = "地图守护神";
+
+    public static final String TITLE_EVENT_CHALLENGE_LEADER = "挑战掌门";
     /*
      * 称谓内容
      */

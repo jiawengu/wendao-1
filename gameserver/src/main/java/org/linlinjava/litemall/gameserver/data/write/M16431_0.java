@@ -3,7 +3,11 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16431_0;
-/*    */ 
+/*    */
+
+/**
+ * MSG_MOVED
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class M16431_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {

@@ -2,17 +2,18 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.List;
+/*    */
 /*    */ import org.linlinjava.litemall.db.domain.Characters;
-/*    */ import org.linlinjava.litemall.db.service.CharacterService;
+/*    */
 /*    */ import org.linlinjava.litemall.db.util.JSONUtils;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-/*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
+/*    */
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
@@ -42,7 +43,7 @@
 /* 42 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 43 */     vo_20481_0.msg = "你进入切磋战斗中！";
 /* 44 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 45 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20481_0(), vo_20481_0);
+/* 45 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */     
 /*    */ 
 /* 48 */     org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara, chara1);
