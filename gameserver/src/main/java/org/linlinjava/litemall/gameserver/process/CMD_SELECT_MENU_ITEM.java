@@ -15,6 +15,7 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.ChallengeLeaderService;
 import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
@@ -2838,6 +2839,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 chara.x = map.getX().intValue();
                 GameLine.getGameMapname(chara.line, "证道殿").join(GameObjectCharMng.getGameObjectChar(chara.id));
             }
+        }
+
+        if(MapGuardianService.isProtector(npc.getName())){
+            if(menu_item.contains("看看你们的实力")){
+                MapGuardianService.challenge(npc);
+            }
+            return;
         }
         /*      */
         /* 1235 */

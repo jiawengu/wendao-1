@@ -29,7 +29,8 @@ public interface MsgUtil {
     String WO_XIANG_SHI_120 =  "我想试一试（120-129级可挑战）";
     String WO_YAO_YI_DU_YING_XIONG =  "我要一睹英雄风采";
 
-    String KAN_KAN_NI_MEN_SHI_LI =  "看看你们的实力（97-112级可挑战）";
+    String ZHU_WEI_XIN_KU =  "诸位辛苦了，我只是路过";
+
 
     static String getTalk(String content){
         return "["+content+"]";
