@@ -18,10 +18,10 @@ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.GuardianService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
-import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 
 import java.util.List;
@@ -280,6 +280,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             /* 149 */
             content = ((NpcDialogueFrame) npcDialogueFrameList.get(0)).getUncontent();
             /*     */
+        }
+        if(GuardianService.isProtector(npc.getName())){//地图守护神
+            GuardianService.openMenu(chara, npc);
+            return;
         }
         ShangGuYaoWangInfo info =
                 GameShangGuYaoWang.getYaoWangNpc(npc.getId(),

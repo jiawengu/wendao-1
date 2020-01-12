@@ -10,7 +10,7 @@
 /*    */ 
 /*    */ 
 /*    */ @Service
-/*    */ public class C32824_0
+/*    */ public class CMD_ACTIVITY_LIST
 /*    */   implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
