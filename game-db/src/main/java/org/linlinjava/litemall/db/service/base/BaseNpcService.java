@@ -130,10 +130,24 @@ public class BaseNpcService {
         return this.mapper.selectOneByExample(example);
     }
 
+    public Npc findOneByNameEx(String name) {
+        NpcExample example = new NpcExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(true).andNameEqualTo(name);
+        return this.mapper.selectOneByExample(example);
+    }
+
     public Npc findOneByMapId(Integer mapId) {
         NpcExample example = new NpcExample();
         Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false).andMapIdEqualTo(mapId);
+        return this.mapper.selectOneByExample(example);
+    }
+
+    public Npc findOneById(Integer npcID) {
+        NpcExample example = new NpcExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(true).andIdNotEqualTo(npcID);
         return this.mapper.selectOneByExample(example);
     }
 

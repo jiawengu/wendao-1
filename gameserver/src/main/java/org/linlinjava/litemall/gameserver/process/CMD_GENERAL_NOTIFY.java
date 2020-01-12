@@ -123,11 +123,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
             }else if(strings[1].equals("上古妖王")){
                 Random random = new Random();
-                Npc npc = (Npc) GameData.that.baseNpcService.findOneByName(strings[0]);
+                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
                 npc.setDeleted(false);
                 npc.setX(random.nextInt(40)+1);
                 npc.setY(random.nextInt(40)+1);
+                npc.setDeleted(false);
                 GameData.that.baseNpcService.updateById(npc);
+                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
                 org.linlinjava.litemall.db.domain.Map map =
                         (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
