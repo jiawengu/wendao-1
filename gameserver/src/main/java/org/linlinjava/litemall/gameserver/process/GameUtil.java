@@ -1775,6 +1775,17 @@ import java.util.Random;
         /*      */
         /* 1588 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
         /*      */   }
+
+   public static void huodezhuangbeiEx(Chara chara, ZhuangbeiInfo zhuangb,
+                                       int degree_32, int owner_id, GoodsLanSe goodsLanSe)
+   {
+       huodezhuangbei(chara, zhuangb, degree_32, owner_id, goodsLanSe);
+       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+       vo_20481_0.msg = ("获得#R" + zhuangb.getStr() + "");
+       vo_20481_0.time = 1562987118;
+       GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+   }
+
     /*      */
     /*      */   public static void huodezhuangbeixiangwu(Chara chara, ZhuangbeiInfo zhuangb, int degree_32, int owner_id)
     /*      */   {
@@ -4376,7 +4387,7 @@ import java.util.Random;
             /*      */     }
                         if(strings[1].equals("上古妖王")){
                             Npc npc =
-                                    (Npc) GameData.that.baseNpcService.findOneByName(strings[0]);
+                                    (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
                             org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(chara.id);
 //                            GameShangGuYaoWang.setYaoWangAllFlat(npc,
 //                                    Integer.valueOf(strings[2]));
