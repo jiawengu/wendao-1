@@ -82,13 +82,13 @@ public class BaseShangGuYaoWangInfoService {
         return this.mapper.selectByExample(example);
     }
 
-//    public List<Npc> findByX(Integer x) {
-//        NpcExample example = new NpcExample();
-//        Criteria criteria = example.createCriteria();
-//        criteria.andDeletedEqualTo(false).andXEqualTo(x);
-//        return this.mapper.selectByExample(example);
-//    }
-//
+    public List<ShangGuYaoWangInfo> findByLevel(Integer level) {
+        ShangGuYaoWangInfoExample example = new ShangGuYaoWangInfoExample();
+        ShangGuYaoWangInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andLevelEqualTo(level);
+        return this.mapper.selectByExample(example);
+    }
+
 //    public List<Npc> findByY(Integer y) {
 //        NpcExample example = new NpcExample();
 //        Criteria criteria = example.createCriteria();

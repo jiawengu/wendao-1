@@ -43,9 +43,9 @@ public class MSG_APPEAR_NPC
 
         GameWriteTool.writeString(writeBuf, charaStatue==null?npc.getName():charaStatue.name);
 
-        GameWriteTool.writeShort(writeBuf, charaStatue==null?Integer.valueOf(0):charaStatue.level);
+        GameWriteTool.writeShort(writeBuf, charaStatue==null?Integer.valueOf(0):charaStatue.level);//等级
 
-        GameWriteTool.writeString(writeBuf, charaStatue==null?"":npc.getName());
+        GameWriteTool.writeString(writeBuf, charaStatue==null?"":charaStatue.chengHao);//称号
 
         GameWriteTool.writeString(writeBuf, "");
 

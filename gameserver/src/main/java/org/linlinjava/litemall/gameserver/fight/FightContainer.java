@@ -39,6 +39,7 @@ public class FightContainer {
     public Consumer<Boolean> fightCallback;
 
     public CharaStatue charaStatue;
+    public IFightNpcSuccess success;
 
     public FightContainer() {
     }

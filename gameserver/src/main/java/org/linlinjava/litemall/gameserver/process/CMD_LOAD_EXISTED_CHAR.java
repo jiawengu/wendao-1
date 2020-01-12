@@ -99,6 +99,8 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*  91 */       chara.npcxuanshang = new LinkedList();
 /*     */       
 /*  93 */       chara.npcXuanShangName = "";
+
+                chara.leaderTodayFailNum = 0;
 /*  94 */       for (int i = 0; i < chara.shenmiliwu.size(); i++) {
 /*  95 */         ((Vo_41480_0)chara.shenmiliwu.get(i)).online_time = 0;
 /*  96 */         ((Vo_41480_0)chara.shenmiliwu.get(i)).name = "";

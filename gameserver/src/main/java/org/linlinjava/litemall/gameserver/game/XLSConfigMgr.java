@@ -18,12 +18,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-
-public class XLSConfigMgr {
+import java.util.List;
+public class XLSConfigMgr{
     public static final String PARTY_SHOP = "party_shop";
     public static final String PARTY_DAILY_TASK = "party_daily_task";
-
-
     private static HashMap<String, Object> caches = new HashMap<>();
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
     private static final Logger log = LoggerFactory.getLogger(XLSConfigMgr.class);

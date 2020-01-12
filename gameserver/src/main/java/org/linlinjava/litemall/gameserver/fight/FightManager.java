@@ -98,7 +98,7 @@ public class FightManager {
     }
 
     //挑战掌门
-    public static void goFightChallengeLeader(Chara chara, int menpai) {
+    public static void goFightChallengeCharaStatue(Chara chara, int menpai) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
@@ -299,14 +299,21 @@ public class FightManager {
         send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
     }
-    //挑战掌门
-    public static void goFightChallengeLeader(Chara chara, CharaStatue defCharaStatue) {
+
+    public static void goFightChallengeCharaStatue(Chara chara, CharaStatue defCharaStatue, BattleType battleType) {
+        goFightChallengeCharaStatue(chara, defCharaStatue, battleType, null);
+    }
+    //挑战雕像
+    public static void goFightChallengeCharaStatue(Chara chara, CharaStatue defCharaStatue, BattleType battleType, IFightNpcSuccess success) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
         }
 
-        fc = new FightContainer(BattleType.CHALLENGE_LEADER);
+        fc = new FightContainer(battleType);
+        if(null!=success){
+            fc.success = success;
+        }
         FightTeam ft = new FightTeam();
         ft.type = 1;
         int num = 0;
@@ -362,15 +369,18 @@ public class FightManager {
         fightObject.fid = fc.id++;
         fightObject.leader = 1;
         fightObject.id = fightObject.fid;
+        fightObject.type = 3;
         monsterTeam.add(fightObject);
 
         //宠物
-        fightObject = new FightObject(defCharaStatue.petbeibao);
-        fightObject.pos = (Integer)MONSTER_POS.get(5);
-        fightObject.fid = fc.id++;
-        fightObject.type = 4;
-        fightObject.skillsList = defCharaStatue.petJiNengList;
-        monsterTeam.add(fightObject);
+        if(null!=defCharaStatue.petbeibao){
+            fightObject = new FightObject(defCharaStatue.petbeibao);
+            fightObject.pos = (Integer)MONSTER_POS.get(5);
+            fightObject.fid = fc.id++;
+            fightObject.type = 4;
+            fightObject.skillsList = defCharaStatue.petJiNengList;
+            monsterTeam.add(fightObject);
+        }
 
         fc.teamList.add(ft);
         fc.teamList.add(monsterTeam);
@@ -2256,6 +2266,10 @@ public class FightManager {
                     return;
                 }
 
+                if(null!=fightContainer.success){
+                    fightContainer.success.onSuccess(fightContainer);
+                }
+
                 //挑战掌门
                 if(fightContainer.isBattleType(BattleType.CHALLENGE_LEADER)){
                     String zhangMenName = GameUtil.getZhangMenName(fightContainer.charaStatue.menpai);
@@ -2268,6 +2282,7 @@ public class FightManager {
                             TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_CHALLENGE_LEADER, zhangMenName);
                         }
                     }else{
+                        charaStatue.copyChengHao(zhangMenName);
                         TitleService.grantTitle(GameObjectChar.getGameObjectChar(), TitleConst.TITLE_EVENT_CHALLENGE_LEADER, zhangMenName);
                     }
 
@@ -2539,6 +2554,13 @@ public class FightManager {
                     assert chara1.ttt_xj_name.equals(guaiwu.get(0).str);
                     chara1.onTttChallengeFail();
                     GameUtil.notifyTTTPanelInfo(chara1);
+                    return;
+                }
+
+                //妖王ti挑战失败
+                if (null != guaiwu && ((FightObject)guaiwu.get(0)).str.contains("妖王")){
+                    System.out.println("妖王");
+                    GameShangGuYaoWang.onChallengeFail(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
                 }
             }

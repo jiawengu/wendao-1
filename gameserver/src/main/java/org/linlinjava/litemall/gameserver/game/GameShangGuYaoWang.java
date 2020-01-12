@@ -1,10 +1,8 @@
 package org.linlinjava.litemall.gameserver.game;
 
-import org.linlinjava.litemall.db.domain.Npc;
-import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
-import org.linlinjava.litemall.db.domain.ShangGuYaoWangRewardInfo;
-import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
-import org.linlinjava.litemall.db.util.JSONUtils;
+import org.linlinjava.litemall.core.util.JSONUtils;
+import org.linlinjava.litemall.db.domain.*;
+import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -44,14 +42,81 @@ public class GameShangGuYaoWang {
         }
         return  true;
     }
-
-    public  static  boolean onReward(Chara chara, String npcName){
-        Npc npc = (Npc) GameData.that.baseNpcService.findOneByName(npcName);
+    public static  Npc getShangGuYaoWangInfo(int mapID, String npcName){
+        String levelstr = npcName.replace("上古妖王", "");
+        int ilevel = Integer.valueOf(levelstr);
+        List<ShangGuYaoWangInfo> infos =
+                GameData.that.BaseShangGuYaoWangInfoService.findByLevel(ilevel);
+        List<Npc> npcs = GameData.that.baseNpcService.findByMapId(mapID);
+        for (int i = 0 ;i < npcs.size(); i++){
+            for(int j = 0 ; j < infos.size(); j++){
+                if (infos.get(j).getNpcid().intValue() == npcs.get(i).getId().intValue()){
+                    return  npcs.get(i);
+                }
+            }
+        }
+        return  null;
+    }
+    public  static  boolean onChallengeFail(Chara chara, String npcName){
+        Npc npc = getShangGuYaoWangInfo(chara.mapid, npcName);
         if (null == npc) return  false;
+        Random random = new Random();
+        npc.setX(random.nextInt(40)+1);
+        npc.setY(random.nextInt(40)+1);
+        npc.setDeleted(false);
+        GameData.that.baseNpcService.updateById(npc);
+
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
         ShangGuYaoWangInfo  info =
                 GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
         if (null == info ) return  false;
+        info.setState(false);
+        GameData.that.BaseShangGuYaoWangInfoService.updateById(info);
+        String [] chufas = info.getChufa().split(",");
+        String[] rewardStr = info.getReward().split(",");
+        String tempRewardStr = "";
+        for (int i =0 ; i < chufas.length ; i++){
+            String[] tempWuPin = chufas[i].split("#");
+            if (tempWuPin[0].contains("经验")){
+                subReward(chara, tempWuPin[0], "",
+                        Integer.valueOf(tempWuPin[1]));
+                tempRewardStr += tempWuPin[0]+"#"+Integer.valueOf(tempWuPin[1]);
+            }else if(tempWuPin[0].contains("道行")){
+                subReward(chara, tempWuPin[0], "",
+                        Integer.valueOf(tempWuPin[1]));
+                tempRewardStr += tempWuPin[0]+"#"+Integer.valueOf(tempWuPin[1]);
+            }else if(tempWuPin[0].contains("装备")){
+                String [] zhuangBeiInfos = tempWuPin[1].split(":");
+                String zhuangbeiName = zhuangbname(chara, zhuangBeiInfos[0]);
+                subReward(chara, tempWuPin[0], zhuangbeiName,    1);
+                tempRewardStr += zhuangbeiName;
+            }else if(tempWuPin[0].contains("物品")){
+                String [] wuPins = tempWuPin[1].split(":");
+                String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
+                        wuPins[0].indexOf("]"));
+                String[] goods = good.split("'");
+                String tempGood = goods[random.nextInt(goods.length)];
+                subReward(chara, tempWuPin[0], tempGood,    1);
+                tempRewardStr += tempGood;
+            }
+        }
+        return true;
+    }
 
+    public  static  boolean onReward(Chara chara, String npcName){
+        Npc npc = getShangGuYaoWangInfo(chara.mapid, npcName);
+        if (null == npc) return  false;
+        Random random = new Random();
+        npc.setX(random.nextInt(40)+1);
+        npc.setY(random.nextInt(40)+1);
+        npc.setDeleted(false);
+        GameData.that.baseNpcService.updateById(npc);
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+        ShangGuYaoWangInfo  info =
+                GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
+        if (null == info ) return  false;
+        info.setState(false);
+        GameData.that.BaseShangGuYaoWangInfoService.updateById(info);
         String[] rewardStr = info.getReward().split(",");
         String tempRewardStr = "";
         for (int i =0 ; i < rewardStr.length ; i++){
@@ -74,12 +139,15 @@ public class GameShangGuYaoWang {
                 String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
                         wuPins[0].indexOf("]"));
                 String[] goods = good.split("'");
-                Random random = new Random();
                 String tempGood = goods[random.nextInt(goods.length)];
                 addReward(chara, tempWuPin[0], tempGood,    1);
                 tempRewardStr += tempGood;
             }
         }
+
+        Characters cs = GameData.that.baseCharactersService.findById(info.getWaChuAccountId());
+        Chara chara1 =  JSONUtils.parseObject(cs.getData(), Chara.class);
+        addWaChuAcountReward(info.getWaChuReward().split(","), chara1);
 
 //        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
 //        List<Chara> charas = team.duiwu;
@@ -103,6 +171,35 @@ public class GameShangGuYaoWang {
         return  true;
     }
 
+    public  static  void addWaChuAcountReward(String [] rewardStr, Chara chara){
+
+        for (int i =0 ; i < rewardStr.length ; i++){
+            String[] tempWuPin = rewardStr[i].split("#");
+            if (tempWuPin[0].contains("经验")){
+                GameUtil.huodejingyan(chara, Integer.valueOf(tempWuPin[1]));
+            }else if(tempWuPin[0].contains("道行")){
+                GameUtil.adddaohang(chara, Integer.valueOf(tempWuPin[1]));
+            }else if(tempWuPin[0].contains("装备")){
+                String [] zhuangBeiInfos = tempWuPin[1].split(":");
+                String zhuangbeiName = zhuangbname(chara, zhuangBeiInfos[0]);
+
+                ZhuangbeiInfo zhuangbeiInfo =
+                        GameData.that.baseZhuangbeiInfoService.findOneByStr(zhuangbeiName);
+                GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
+            }else if(tempWuPin[0].contains("物品")){
+                String [] wuPins = tempWuPin[1].split(":");
+                String  good = wuPins[0].substring(wuPins[0].indexOf("[")+1,
+                        wuPins[0].indexOf("]"));
+                String[] goods = good.split("'");
+                Random random = new Random();
+                String tempGood = goods[random.nextInt(goods.length)];
+
+                org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(tempGood);
+                GameUtil.huodedaoju(chara, info, 1);
+            }
+        }
+    }
+
     public  static  boolean addReward(Chara chara, String name,
                                       String jutiName, int count ){
 //        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
@@ -121,6 +218,28 @@ public class GameShangGuYaoWang {
                 org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(jutiName);
                 GameUtil.huodedaoju(chara, info, 1);
             }
+//        }
+        return  true;
+    }
+    public  static  boolean subReward(Chara chara, String name,
+                                      String jutiName, int count ){
+//        GameTeam team = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
+//        List<Chara> charas = team.duiwu;
+//        for (int i = 0;i < charas.size(); i++){
+        Chara tempChara = chara;//charas.get(i);
+        if (name.contains("经验")){
+            GameUtil.subjingyan(tempChara, count);
+        }else if (name.contains("道行")){
+            GameUtil.subdaohang(tempChara, count);
+        }
+//        else if(name.contains("装备")){
+//            ZhuangbeiInfo zhuangbeiInfo =
+//                    GameData.that.baseZhuangbeiInfoService.findOneByStr(jutiName);
+//            GameUtil.huodezhuangbei(chara, zhuangbeiInfo, 0, 1);
+//        }else if (name.contains("物品")){
+//            org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(jutiName);
+//            GameUtil.huodedaoju(chara, info, 1);
+//        }
 //        }
         return  true;
     }
