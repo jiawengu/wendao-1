@@ -20,6 +20,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -71,11 +72,7 @@ public class GameMap {
         gameObjectChar.sendOne(new MSG_EXITS(), list);
         Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
         this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
-            if(isTTTMap()){
-                return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
-            }else{
-                return true;
-            }
+            return isCanSee(gameObjectChar.chara, otherGameObjectChar.chara);
         });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
@@ -94,13 +91,10 @@ public class GameMap {
             if (gameSession.ctx != null && gameSession.chara != null) {
                 vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
-                if(isTTTMap()){
-                    if(gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
-                        gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
-                    }
-                }else{
+                if(isCanSee(chara, gameSession.chara)){
                     gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 }
+
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu != null && gameSession.gameTeam.duiwu.size() > 0) {
                      vo_61671_0 = new Vo_61671_0();
                     vo_61671_0.id = ((Chara)gameSession.gameTeam.duiwu.get(0)).id;
@@ -130,6 +124,20 @@ public class GameMap {
 
             GameUtil.a45704(chara);
         }
+
+        if(isZhengDaoDianMap()){
+            ZhengDaoDianService.onEngerMap(gameObjectChar);
+        }
+    }
+
+    private boolean isCanSee(Chara chara1, Chara chara2){
+        if(isZhengDaoDianMap()){
+            return chara1.menpai == chara2.menpai;
+        }
+        if(isTTTMap()){
+            return chara1.ttt_layer==chara2.ttt_layer;
+        }
+        return true;
     }
 
     /**
@@ -137,6 +145,12 @@ public class GameMap {
      */
     public boolean isTTTMap(){
         return id==37000;
+    }
+    /**
+     * 是否是正道殿地图
+     */
+    public boolean isZhengDaoDianMap(){
+        return id==ZhengDaoDianService.MAP_ID;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {

@@ -33,6 +33,7 @@ public class CharaStatue {
     public int autofight_select;
     public int autofight_skillaction;
     public int menpai;
+    public String chengHao;
 
     /**
      * 宠物
@@ -45,7 +46,7 @@ public class CharaStatue {
 
     public void copyFrom(Chara chara) {
         this.id = chara.id;
-        this.sex = sex;
+        this.sex = chara.sex;
         this.name = chara.name;
         this.menpai = chara.menpai;
         this.level = chara.level;
@@ -70,6 +71,10 @@ public class CharaStatue {
         this.autofight_select = chara.autofight_select;
         this.autofight_skillaction = chara.autofight_skillaction;
         this.zuowaiguan = chara.zuowaiguan;
+    }
+
+    public void copyChengHao(String chengHao){
+        this.chengHao = chengHao;
     }
 
     public void copyPet(Petbeibao petbeibao){

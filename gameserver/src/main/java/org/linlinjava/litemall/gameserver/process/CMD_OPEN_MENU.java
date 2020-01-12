@@ -17,8 +17,11 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
+import org.linlinjava.litemall.gameserver.util.MsgUtil;
+import org.linlinjava.litemall.gameserver.util.NpcIds;
 
 import java.util.List;
 
@@ -43,6 +46,11 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         /*     */
         /*  31 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
+
+        if(NpcIds.isZhengDaoDianNpc(id)){//证道殿npc
+           ZhengDaoDianService.openMenu(chara, id);
+            return;
+        }
         /*     */
         /*  33 */
         String[] shidaolevel = {"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};

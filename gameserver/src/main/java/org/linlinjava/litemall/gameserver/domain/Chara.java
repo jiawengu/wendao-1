@@ -206,8 +206,12 @@
 /*     */   
 /*     */ 
 /*     */   public long exp;
-/*     */   
-/*     */   public int sex;
+/*     */
+    /**
+     * 1:男
+     * 2：女
+     */
+    /*     */   public int sex;
 /*     */   
 /*     */   public int line;
 /*     */   
@@ -456,6 +460,10 @@
      * 挑战掌门-今日失败次数
      */
     public int leaderTodayFailNum;
+    /**
+     * 证道殿-护法留言
+     */
+    public String zdd_Notice;
 
     public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;

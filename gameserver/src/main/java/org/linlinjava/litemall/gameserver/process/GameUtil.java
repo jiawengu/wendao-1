@@ -2731,6 +2731,15 @@ import java.util.Random;
         /*      */   }
 
     /**
+     * 通知打开面板
+     * @param npc
+     * @param content
+     */
+        public static void notifyOpenMenu(Npc npc, String content){
+            GameObjectChar.send(new MSG_MENU_LIST(), GameUtil.MSG_MENU_LIST(npc, content));
+        }
+
+    /**
      * 随机通天塔星君名字
      * @return
      */
@@ -4798,6 +4807,61 @@ import java.util.Random;
         gameZone.join(GameObjectCharMng.getGameObjectChar(chara.id));
         gameZone.gameDugeon.enter(chara);
     }
+
+
+    /**
+     *
+     * @param menpai
+     * @param sex 1:男，2：女
+     * @return
+     */
+    public static int getCharWaiGuan(int menpai, int sex) {
+        if ((menpai == 1) && (sex == 1)) {
+         return 6001;
+          }
+        if ((menpai == 2) && (sex == 1)) {
+             return  7002;
+         }
+        if ((menpai == 3) && (sex == 1)) {
+            return  7003;
+         }
+        if ((menpai == 4) && (sex == 1)) {
+              return 6004;
+            }
+        if ((menpai == 5) && (sex == 1)) {
+              return  6005;
+             }
+         if ((menpai == 1) && (sex == 2)) {
+             return  7001;
+           }
+        if ((menpai == 2) && (sex == 2)) {
+                return 6002;
+              }
+         if ((menpai == 3) && (sex == 2)) {
+             return 6003;
+         }
+        if ((menpai == 4) && (sex == 2)) {
+            return 7004;
+        }
+       if ((menpai == 5) && (sex == 2)) {
+           return 7005;
+        }
+        throw new UnsupportedOperationException();
+     }
+
+    /**
+     * 通知提示消息
+     */
+    public static void notifyPrompt(int charaId, String msg){
+        Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+
+        vo_20481_0.msg = msg;
+
+        vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+
+        GameObjectCharMng.getGameObjectChar(charaId).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+     }
+
 
     /*      */ }
 

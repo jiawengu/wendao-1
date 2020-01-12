@@ -37,6 +37,7 @@ public class FightContainer {
     public long roundTime = System.currentTimeMillis();
 
     public CharaStatue charaStatue;
+    public IFightNpcSuccess success;
 
     public FightContainer() {
     }
