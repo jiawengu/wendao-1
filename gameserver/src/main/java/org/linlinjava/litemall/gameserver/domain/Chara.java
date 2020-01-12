@@ -492,7 +492,7 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
             .currentLevel(1)
             .currentMaxLevel(1)
             .resetTimeLeft(7)
-            .timesLeft(700)
+            .timesLeft(7)
             .status(0)
             .build();
 
