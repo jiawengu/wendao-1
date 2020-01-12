@@ -464,6 +464,10 @@
      * 证道殿-护法留言
      */
     public String zdd_Notice;
+    /**
+     * 英雄会-留言
+     */
+    public String yxh_Notice;
 
     public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;

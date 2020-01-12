@@ -173,7 +173,7 @@ public class ZhengDaoDianService {
         return NPC_NAME+"_"+menpai+"_"+(npcId-NpcIds.ZHEGN_DAO_NPC_ID_BEGIN);
     }
 
-    public static void onEngerMap(GameObjectChar gameObjectChar){
+    public static void onEnterMap(GameObjectChar gameObjectChar){
         Chara chara = gameObjectChar.chara;
         //男
         for(int i=0;i<manPos.length;++i){

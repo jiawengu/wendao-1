@@ -3,14 +3,13 @@ package org.linlinjava.litemall.gameserver.data.write;
 import io.netty.buffer.ByteBuf;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20689_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61613_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_BuildField;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 
 /**
- * 证道殿护法信息
+ * 英雄会信息
  */
-public class MSG_OVERCOME_NPC_INFO extends BaseWrite {
+public class MSG_HERO_NPC_INFO extends BaseWrite {
     private static M_BuildField m_buildField = new M_BuildField();
     @Override
     protected void writeO(ByteBuf writeBuf, Object object) {
@@ -33,6 +32,6 @@ public class MSG_OVERCOME_NPC_INFO extends BaseWrite {
     }
 
     public int cmd() {
-        return 20691;
+        return 20689;
     }
 }

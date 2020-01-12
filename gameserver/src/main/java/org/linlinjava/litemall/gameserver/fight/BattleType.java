@@ -12,5 +12,9 @@ public enum BattleType {
      * 证道殿
      */
     ZHEGN_DAO_DIAN,
+    /**
+     * 英雄会
+     */
+    HERO_PUB,
     ;
 }

@@ -20,6 +20,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.HeroPubService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -126,7 +127,10 @@ public class GameMap {
         }
 
         if(isZhengDaoDianMap()){
-            ZhengDaoDianService.onEngerMap(gameObjectChar);
+            ZhengDaoDianService.onEnterMap(gameObjectChar);
+        }
+        if(isHeroPubMap()){
+            HeroPubService.onEnterMap(gameObjectChar);
         }
     }
 
@@ -151,6 +155,12 @@ public class GameMap {
      */
     public boolean isZhengDaoDianMap(){
         return id==ZhengDaoDianService.MAP_ID;
+    }
+    /**
+     * 是否是英雄会地图
+     */
+    public boolean isHeroPubMap(){
+        return id== HeroPubService.MAP_ID;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {

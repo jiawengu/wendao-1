@@ -14,6 +14,7 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.ChallengeLeaderService;
+import org.linlinjava.litemall.gameserver.service.HeroPubService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
@@ -65,6 +66,28 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 ZhengDaoDianService.challenge(chara1, id);
             }else if(menu_item.equals(MsgUtil.WO_YAO_YI_DU_HU_FA)){//查看面板
                 ZhengDaoDianService.notifyPanel(chara1, id);
+                GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));
+            }else {//离开
+                GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));
+            }
+
+            return;
+        }
+        if(NpcIds.isHeroPubNpc(id)){//英雄会
+            if(menu_item.equals(MsgUtil.WO_XIANG_SHI_70)){//挑战70
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_XIANG_SHI_80)){//挑战80
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_XIANG_SHI_90)){//挑战90
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_XIANG_SHI_100)){//挑战100
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_XIANG_SHI_110)){//挑战110
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_XIANG_SHI_120)){//挑战120
+                HeroPubService.challenge(chara1, id);
+            }else if(menu_item.equals(MsgUtil.WO_YAO_YI_DU_YING_XIONG)){//查看面板
+                HeroPubService.notifyPanel(chara1, id);
                 GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));
             }else {//离开
                 GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(id));

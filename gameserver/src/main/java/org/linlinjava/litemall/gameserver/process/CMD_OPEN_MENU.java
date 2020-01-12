@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.service.HeroPubService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
@@ -49,6 +50,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 
         if(NpcIds.isZhengDaoDianNpc(id)){//证道殿npc
            ZhengDaoDianService.openMenu(chara, id);
+            return;
+        }
+        if(NpcIds.isHeroPubNpc(id)){//英雄会
+            HeroPubService.openMenu(chara, id);
             return;
         }
         /*     */
