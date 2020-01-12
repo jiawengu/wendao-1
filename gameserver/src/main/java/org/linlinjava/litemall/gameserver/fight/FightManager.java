@@ -13,6 +13,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.linlinjava.litemall.db.domain.Chara_Statue;
 import org.linlinjava.litemall.db.domain.Npc;
+import java.util.function.Consumer;
+
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
@@ -515,12 +517,17 @@ public class FightManager {
     }
 
     public static void goFight(Chara chara, List<String> monsterList) {
+        goFightWithCallback(chara, monsterList, null);
+    }
+
+    public static void goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
         }
 
         fc = new FightContainer();
+        fc.fightCallback = fightCallback;
         FightTeam ft = new FightTeam();
         ft.type = 1;
         GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);
@@ -1816,6 +1823,10 @@ public class FightManager {
                 fightObject.max_shengming = fightObject.shengming;
                 fightObject.update(fightContainer);
             }
+        }
+
+        if (fightContainer.fightCallback != null) {
+            fightContainer.fightCallback.accept(fightContainer.isPlayerWin());
         }
 
         afterFight(fightContainer);

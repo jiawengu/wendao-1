@@ -30,7 +30,7 @@ public class TitleService {
      * @param title 称谓内容
      */
     public static void grantTitle(GameObjectChar gameObjectChar, String event, String title) {
-        if (gameObjectChar.chara.chenghao.containsKey(event)) {
+        if (gameObjectChar.chara.chenghao.containsKey(event) && gameObjectChar.chara.chenghao.get(event).equals(title)) {
             return;
         }
         gameObjectChar.chara.chenghao.put(event, title);

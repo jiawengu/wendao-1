@@ -10,6 +10,7 @@ import org.linlinjava.litemall.gameserver.domain.CharaStatue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 public class FightContainer {
     /**
@@ -35,6 +36,7 @@ public class FightContainer {
      * 本回合开始时间
      */
     public long roundTime = System.currentTimeMillis();
+    public Consumer<Boolean> fightCallback;
 
     public CharaStatue charaStatue;
     public IFightNpcSuccess success;
@@ -49,5 +51,17 @@ public class FightContainer {
             return false;
         }
         return battleType == checkType;
+    }
+
+    public boolean isPlayerWin() {
+        FightTeam playerTeam = teamList.get(0);
+
+        for (FightObject fightObject : playerTeam.fightObjectList) {
+            if (fightObject.shengming > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

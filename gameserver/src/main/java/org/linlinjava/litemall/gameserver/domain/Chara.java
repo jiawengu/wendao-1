@@ -7,7 +7,9 @@
 /*     */ import java.util.Map;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ 
+import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
+
+/*     */
 /*     */ 
 /*     */ 
 /*     */ 
@@ -485,10 +487,13 @@
         this.ttt_xj_success = false;
         this.ttt_challenge_num++;
     }
-/*     */ }
 
+    public Baxian baxian = Baxian.builder()
+            .currentLevel(1)
+            .currentMaxLevel(1)
+            .resetTimeLeft(7)
+            .timesLeft(700)
+            .status(0)
+            .build();
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\domain\Chara.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+}

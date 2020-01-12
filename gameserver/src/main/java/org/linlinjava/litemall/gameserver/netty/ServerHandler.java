@@ -92,7 +92,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 gameHandler.process(ctx, buff);
             }
         } else {
-            log.error(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
+            log.debug(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
         }
     }
 

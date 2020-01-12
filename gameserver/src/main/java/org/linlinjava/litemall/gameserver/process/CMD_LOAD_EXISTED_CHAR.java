@@ -408,7 +408,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /* 397 */     vo_4321_0.name = GameCore.getGameLine(chara.line).lineName;
 /* 398 */     vo_4321_0.time = ((int)(System.currentTimeMillis() / 1000L));
 /* 399 */     vo_4321_0.c = 8;
-/* 400 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4321_0(), vo_4321_0);
+/* 400 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M_MSG_ENTER_GAME(), vo_4321_0);
 
 
                 UserLogic logic = GameObjectChar.getGameObjectChar().logic;
