@@ -41,29 +41,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0;
-import org.linlinjava.litemall.gameserver.data.write.M12016_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_1;
-import org.linlinjava.litemall.gameserver.data.write.M12269_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
-import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-import org.linlinjava.litemall.gameserver.data.write.M40964_0;
-import org.linlinjava.litemall.gameserver.data.write.M41051_0;
-import org.linlinjava.litemall.gameserver.data.write.M45074_0;
-import org.linlinjava.litemall.gameserver.data.write.M45075_0;
-import org.linlinjava.litemall.gameserver.data.write.M45128_0;
-import org.linlinjava.litemall.gameserver.data.write.M49153_0;
-import org.linlinjava.litemall.gameserver.data.write.M49169_0;
-import org.linlinjava.litemall.gameserver.data.write.M49179_0;
-import org.linlinjava.litemall.gameserver.data.write.M49183_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
-import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-import org.linlinjava.litemall.gameserver.data.write.M65527_1;
-import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-import org.linlinjava.litemall.gameserver.data.write.M9129_0;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -123,11 +101,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
             }else if(strings[1].equals("上古妖王")){
                 Random random = new Random();
-                Npc npc = (Npc) GameData.that.baseNpcService.findOneByName(strings[0]);
+                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
                 npc.setDeleted(false);
                 npc.setX(random.nextInt(40)+1);
                 npc.setY(random.nextInt(40)+1);
+                npc.setDeleted(false);
                 GameData.that.baseNpcService.updateById(npc);
+                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
                 org.linlinjava.litemall.db.domain.Map map =
                         (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
