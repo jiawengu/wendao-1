@@ -10,6 +10,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 import org.linlinjava.litemall.gameserver.data.write.M4121_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DISAPPEAR_Chara;
 import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
@@ -218,7 +219,7 @@ public class GameObjectChar {
             log.error("", e);
         }
         try {
-            this.gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(this.chara.id));
+            this.gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(this.chara.id));
             this.gameMap.leave(GameObjectCharMng.getGameObjectChar(this.chara.id));
         } catch (Exception e) {
             log.error("", e);

@@ -11,10 +11,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.linlinjava.litemall.db.domain.Chara_Statue;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.Pet;
-import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
@@ -43,6 +41,7 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.CharaStatueService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
@@ -632,6 +631,231 @@ public class FightManager {
             monsterTeam.add(fightObject);
         }
 
+        fc.teamList.add(ft);
+        fc.teamList.add(monsterTeam);
+        listFight.add(fc);
+        if (chara.autofight_select != 0) {
+            Vo_32985_0 vo_32985_0 = new Vo_32985_0();
+            vo_32985_0.user_is_multi = 0;
+            vo_32985_0.user_round = chara.autofight_select;
+            vo_32985_0.user_action = chara.autofight_skillaction;
+            vo_32985_0.user_next_action = chara.autofight_skillaction;
+            vo_32985_0.user_para = chara.autofight_skillno;
+            vo_32985_0.user_next_para = chara.autofight_skillno;
+            vo_32985_0.pet_is_multi = 0;
+            vo_32985_0.pet_round = 0;
+            vo_32985_0.pet_action = 0;
+            vo_32985_0.pet_next_action = 0;
+            vo_32985_0.pet_para = 0;
+            vo_32985_0.pet_next_para = 0;
+            GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
+        }
+
+        GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
+        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
+        Vo_3583_0 vo_3583_0 = new Vo_3583_0();
+        vo_3583_0.a = 1;
+        vo_3583_0.b = 3;
+        send(fc, new MSG_C_START_COMBAT(), vo_3583_0);
+        Vo_61671_0 vo_61671_0 = new Vo_61671_0();
+        vo_61671_0.id = chara.id;
+        vo_61671_0.count = 1;
+        vo_61671_0.list.add(1);
+        GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
+        FightTeam friendsFightTeam = getFightTeam(fc, chara.id);
+        List<FightObject> fightObjectList1 = friendsFightTeam.fightObjectList;
+        Iterator var31 = fightObjectList1.iterator();
+
+        while(var31.hasNext()) {
+            fightObject = (FightObject)var31.next();
+            if (fightObject.type == 2) {
+                Vo_64971_0 vo_64971_0 = new Vo_64971_0();
+                vo_64971_0.count = 1;
+                vo_64971_0.id = fightObject.id;
+                vo_64971_0.haveCalled = 1;
+                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
+            }
+        }
+
+        List<Vo_65017_0> list65019 = new ArrayList();
+        List<FightObject> fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+        Iterator var37 = fightObjectList.iterator();
+
+        while(var37.hasNext()) {
+            fightObject = (FightObject)var37.next();
+            Vo_65017_0 vo_65019_0 = new Vo_65017_0();
+            vo_65019_0.id = fightObject.fid;
+            vo_65019_0.leader = fightObject.leader;
+            vo_65019_0.weapon_icon = fightObject.weapon_icon;
+            vo_65019_0.pos = fightObject.pos;
+            vo_65019_0.rank = fightObject.rank;
+            vo_65019_0.vip_type = 0;
+            vo_65019_0.str = fightObject.str;
+            vo_65019_0.type = fightObject.org_icon;
+            vo_65019_0.durability = fightObject.durability;
+            vo_65019_0.req_level = 0;
+            vo_65019_0.upgrade_level = 0;
+            vo_65019_0.upgrade_type = 0;
+            vo_65019_0.dex = fightObject.max_mofa;
+            vo_65019_0.max_mana = fightObject.max_mofa;
+            vo_65019_0.max_life = fightObject.max_shengming;
+            vo_65019_0.def = fightObject.max_shengming;
+            vo_65019_0.org_icon = fightObject.org_icon;
+            vo_65019_0.suit_icon = fightObject.suit_icon;
+            vo_65019_0.suit_light_effect = fightObject.suit_light_effect;
+            vo_65019_0.special_icon = 0;
+            list65019.add(vo_65019_0);
+        }
+
+        send(fc, new MSG_C_FRIENDS(), list65019);
+        List<Vo_65017_0> list65017 = new ArrayList();
+        fightObjectList = getFightTeamDM(fc, chara.id).fightObjectList;
+        Iterator var39 = fightObjectList.iterator();
+
+        while(var39.hasNext()) {
+            fightObject = (FightObject)var39.next();
+            Vo_65017_0 vo_65017_0 = new Vo_65017_0();
+            vo_65017_0.id = fightObject.fid;
+            vo_65017_0.leader = fightObject.leader;
+            vo_65017_0.weapon_icon = 0;
+            vo_65017_0.pos = fightObject.pos;
+            vo_65017_0.rank = 0;
+            vo_65017_0.vip_type = 0;
+            vo_65017_0.str = fightObject.str;
+            vo_65017_0.type = fightObject.org_icon;
+            vo_65017_0.durability = 2;
+            vo_65017_0.req_level = 0;
+            vo_65017_0.upgrade_level = 0;
+            vo_65017_0.upgrade_type = 0;
+            vo_65017_0.dex = fightObject.max_mofa;
+            vo_65017_0.max_mana = fightObject.max_mofa;
+            vo_65017_0.max_life = fightObject.max_shengming;
+            vo_65017_0.def = fightObject.max_shengming;
+            vo_65017_0.org_icon = fightObject.org_icon;
+            vo_65017_0.suit_icon = fightObject.suit_icon;
+            vo_65017_0.suit_light_effect = fightObject.suit_light_effect;
+            vo_65017_0.special_icon = 0;
+            list65017.add(vo_65017_0);
+        }
+
+        send(fc, new MSG_C_OPPONENTS(), list65017);
+        fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+        vo_19959_0.round = fc.round;
+        vo_19959_0.aid = 0;
+        vo_19959_0.action = 0;
+        vo_19959_0.vid = 0;
+        vo_19959_0.para = 0;
+        send(fc, new MSG_C_ACTION(), vo_19959_0);
+        Iterator var42 = fightObjectList.iterator();
+
+        while(var42.hasNext()) {
+            fightObject = (FightObject)var42.next();
+            if (fightObject.godbook != 0) {
+                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
+                vo_12025_0.id = fightObject.fid;
+                vo_12025_0.effect_no = fightObject.godbook;
+                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
+            }
+        }
+
+        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+        vo_7655_0.id = 0;
+        send(fc, new MSG_C_END_ACTION(), vo_7655_0);
+        round(fc);
+    }
+    public static void goFightMapGuardian(String npcName, Chara chara, List<CharaStatue> defCharaStatueList) {
+        FightContainer fc;///战斗空间
+        for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
+            listFight.remove(fc);
+        }
+
+        fc = new FightContainer();
+        FightTeam ft = new FightTeam();
+        ft.type = 1;
+        GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);
+        int num = 0;
+        int i;
+        FightObject fightObject;
+        List<CharaStatue> attCharaStatueList = new ArrayList<>();
+
+        for(i = 0; i < session.gameTeam.duiwu.size(); ++i) {
+            fightObject = new FightObject((Chara)session.gameTeam.duiwu.get(i));
+            fightObject.pos = (Integer)PERSON_POS.get(num);
+            fightObject.fid = ((Chara)session.gameTeam.duiwu.get(i)).id;
+            fightObject.id = ((Chara)session.gameTeam.duiwu.get(i)).id;
+            addFabao(fc, (Chara)session.gameTeam.duiwu.get(i), fightObject);
+            if (i == 0) {
+                fightObject.leader = 1;
+            }
+            CharaStatue charaStatue = new CharaStatue();
+            charaStatue.copyFrom(session.gameTeam.duiwu.get(i));
+            charaStatue.copyJiNengList(fightObject.skillsList);
+            attCharaStatueList.add(charaStatue);
+
+            ft.add(fightObject);
+            List<Petbeibao> pets = ((Chara)session.gameTeam.duiwu.get(i)).pets;
+
+            for(int j = 0; j < pets.size(); ++j) {
+                Petbeibao petbeibao = (Petbeibao)pets.get(j);
+                if (((Petbeibao)pets.get(j)).id == ((Chara)session.gameTeam.duiwu.get(i)).chongwuchanzhanId) {
+                    fightObject = new FightObject(petbeibao);
+                    fightObject.pos = (Integer)PERSON_POS.get(num) + 5;
+                    fightObject.fid = petbeibao.id;
+                    fightObject.id = petbeibao.id;
+                    fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
+                    if (petbeibao.tianshu.size() != 0) {
+                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
+                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
+                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
+                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
+                            xiuluoshuSkill.buffObject = fightObject;
+                            xiuluoshuSkill.fightContainer = fc;
+                            fightObject.addSkill(xiuluoshuSkill);
+                        }
+                    }
+
+                    ft.add(fightObject);
+
+                    charaStatue.copyPet(petbeibao);
+                    charaStatue.copyPetJiNengList(fightObject.skillsList);
+                    break;
+                }
+            }
+
+            ++num;
+        }
+
+        FightTeam monsterTeam = new FightTeam();
+        monsterTeam.type = 2;
+        num = 0;
+
+        for(CharaStatue defCharaStatue:defCharaStatueList){
+            //玩家快照
+            fightObject = new FightObject(defCharaStatue);
+            fightObject.pos = (Integer)MONSTER_POS.get(num);
+            fightObject.fid = fc.id++;
+            if(num==0){
+                fightObject.leader = 1;
+            }
+            fightObject.id = fightObject.fid;
+            fightObject.type = 3;
+            monsterTeam.add(fightObject);
+
+            //宠物
+            if(null!=defCharaStatue.petbeibao){
+                fightObject = new FightObject(defCharaStatue.petbeibao);
+                fightObject.pos = (Integer)MONSTER_POS.get(num)+5;
+                fightObject.fid = fc.id++;
+                fightObject.type = 4;
+                fightObject.skillsList = defCharaStatue.petJiNengList;
+                monsterTeam.add(fightObject);
+            }
+            num++;
+        }
+        fc.success = (fightContainer)->{
+            MapGuardianService.onChallengeSuccess(npcName, attCharaStatueList, defCharaStatueList);
+        };
         fc.teamList.add(ft);
         fc.teamList.add(monsterTeam);
         listFight.add(fc);
@@ -2277,7 +2501,7 @@ public class FightManager {
 
 
                     //雕像
-                    CharaStatueService.saveCharaStature(chara1, zhangMenName, fightContainer.charaStatue);
+                    CharaStatueService.saveCharaStature(zhangMenName, fightContainer.charaStatue);
                     //刷新npc视野信息
                     Npc npc = GameData.that.baseNpcService.findOneByName(zhangMenName);
                     GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
@@ -2347,7 +2571,7 @@ public class FightManager {
                             GameUtil.nextshaxing(chara1, chara1, ((FightObject)guaiwu.get(0)).guaiwulevel, replace);
                         }
 
-                        GameObjectChar.sendduiwu(new M12285_1(), ((Vo_65529_0)GameLine.gameShuaGuai.shuaXing.get(i)).id, chara1.id);
+                        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), ((Vo_65529_0)GameLine.gameShuaGuai.shuaXing.get(i)).id, chara1.id);
                         GameLine.gameShuaGuai.shuaXing.remove(GameLine.gameShuaGuai.shuaXing.get(i));
                         return;
                     }

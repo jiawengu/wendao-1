@@ -143,7 +143,7 @@ public class ZhengDaoDianService {
             fightContainer.charaStatue.copyChengHao(titles[index]);
 
             //雕像
-            CharaStatueService.saveCharaStature(chara, getNpcName(chara.menpai, npcId), fightContainer.charaStatue);
+            CharaStatueService.saveCharaStature(getNpcName(chara.menpai, npcId), fightContainer.charaStatue);
             //刷新npc视野信息
             npc.setName(getNpcName(chara.menpai, npcId));
             npc.setMapId(MAP_ID);

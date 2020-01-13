@@ -21,7 +21,9 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
+import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -47,6 +49,13 @@ public class GameMap {
         return this.sessionList;
     }
 
+    private boolean isNpcAppear(Npc npc){
+        if(!MapGuardianService.isNpcAppear(npc)){
+            return false;
+        }
+        return true;
+    }
+
     public void join(GameObjectChar gameObjectChar) {
         gameObjectChar.gameMap.leave(gameObjectChar);
         this.sessionList.remove(gameObjectChar);
@@ -66,6 +75,9 @@ public class GameMap {
 
         while(var6.hasNext()) {
             Npc npc = (Npc)var6.next();
+            if(!isNpcAppear(npc)){
+                continue;
+            }
             gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
@@ -132,6 +144,8 @@ public class GameMap {
         if(isHeroPubMap()){
             HeroPubService.onEnterMap(gameObjectChar);
         }
+
+        MapGuardianService.onEnterMap(this.id, gameObjectChar);
     }
 
     private boolean isCanSee(Chara chara1, Chara chara2){
@@ -219,8 +233,8 @@ public class GameMap {
     }
 
     public void leave(GameObjectChar gameObjectChar) {
-        this.sendNoMe(new M12285_0(), gameObjectChar.chara.id, gameObjectChar);
-        this.sendNoMe(new M12285_1(), gameObjectChar.chara.genchong_icon, gameObjectChar);
+        this.sendNoMe(new MSG_DISAPPEAR_0(), gameObjectChar.chara.id, gameObjectChar);
+        this.sendNoMe(new MSG_DISAPPEAR_Chara(), gameObjectChar.chara.genchong_icon, gameObjectChar);
         this.sessionList.remove(gameObjectChar);
     }
 

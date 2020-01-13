@@ -133,7 +133,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 132 */       org.linlinjava.litemall.gameserver.data.vo.Vo_4197_0 vo_4197_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_4197_0();
 /* 133 */       vo_4197_0.id = 0;
 /* 134 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M4197_0(), vo_4197_0);
-/* 135 */       GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(chara.genchong_icon));
+/* 135 */       GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(chara.genchong_icon));
 /* 136 */       for (int i = 0; i < chara.backpack.size(); i++) {
 /* 137 */         if (((Goods)chara.backpack.get(i)).pos == 37) {
 /* 138 */           Goods goods = (Goods)chara.backpack.get(i);

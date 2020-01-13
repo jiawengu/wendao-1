@@ -56,6 +56,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             HeroPubService.openMenu(chara, id);
             return;
         }
+        if(NpcIds.isMapGuardianNpc(id)){//地图守护神
+            MapGuardianService.openMenu(chara, id);
+            return;
+        }
         /*     */
         /*  33 */
         String[] shidaolevel = {"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};

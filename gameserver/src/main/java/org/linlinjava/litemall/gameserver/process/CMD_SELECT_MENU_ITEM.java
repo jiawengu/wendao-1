@@ -5,7 +5,6 @@ import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
-import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.data.write.M9129_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -22,7 +21,6 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -95,6 +93,11 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }
 
             return;
+        }
+        if(NpcIds.isMapGuardianNpc(id)) {//地图守护神
+            if(menu_item.contains("看看你们的实力")){
+                MapGuardianService.challenge(id);
+            }
         }
         if (id == 992) {
 
@@ -443,7 +446,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFight(chara1, list);
 
-            GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(id));
+            GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(id));
 
             for (int i = 0; i < GameObjectChar.getGameObjectChar().gameMap.gameShiDao.shidaoyuanmo.size(); i++) {
 
