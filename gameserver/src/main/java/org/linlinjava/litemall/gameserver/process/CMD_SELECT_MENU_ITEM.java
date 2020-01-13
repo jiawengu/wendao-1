@@ -6,7 +6,6 @@ import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
-import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.data.write.M9129_0;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -18,8 +17,6 @@ import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.ChallengeLeaderService;
 import org.linlinjava.litemall.gameserver.service.HeroPubService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
-import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
-import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
@@ -27,7 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -2703,8 +2699,8 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             vo_9129_0.para = "DugeonCreateDlg";
             GameObjectChar.send(new M9129_0(), vo_9129_0);
 
-            org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0 vo_45056_0 = GameUtil.a45056(chara1);
-            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45056_0(), vo_45056_0);
+            MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara1);
+            GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
 /*            Vo_45058_0 vo_45058_0 = new Vo_45058_0();
             vo_45058_0.bonus = 0;
             vo_45058_0.hard_name = "111";
@@ -3062,9 +3058,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
         /* 1286 */
-        org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0 vo_45056_0 = GameUtil.a45056(chara);
+        MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara);
         /* 1287 */
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45056_0(), vo_45056_0);
+        GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
         /*      */
         /* 1289 */
         ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
