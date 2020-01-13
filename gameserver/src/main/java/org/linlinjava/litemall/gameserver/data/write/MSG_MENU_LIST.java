@@ -2,7 +2,7 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
-/*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */
 
@@ -14,7 +14,7 @@
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
-/* 13 */     Vo_8247_0 object1 = (Vo_8247_0)object;
+/* 13 */     MSG_MENU_LIST_VO object1 = (MSG_MENU_LIST_VO)object;
 /* 14 */     GameWriteTool.writeInt(writeBuf, Integer.valueOf(object1.id));
 /*    */     
 /* 16 */     GameWriteTool.writeInt(writeBuf, Integer.valueOf(object1.portrait));

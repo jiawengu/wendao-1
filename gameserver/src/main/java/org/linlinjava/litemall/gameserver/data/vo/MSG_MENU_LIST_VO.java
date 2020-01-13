@@ -5,7 +5,7 @@
 
 package org.linlinjava.litemall.gameserver.data.vo;
 
-public class Vo_8247_0 {
+public class MSG_MENU_LIST_VO {
   public int id;
   public int portrait;
   public int pic_no;
@@ -14,6 +14,6 @@ public class Vo_8247_0 {
   public String name;
   public int attrib;
 
-  public Vo_8247_0() {
+  public MSG_MENU_LIST_VO() {
   }
 }
