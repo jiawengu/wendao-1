@@ -12,7 +12,7 @@ import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.process.C4274_0;
+import org.linlinjava.litemall.gameserver.process.CMD_ECHO;
 import org.linlinjava.litemall.gameserver.process.CMD_MULTI_MOVE_TO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +78,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             if (session != null) {
                 if (session.lock()) {
                     try {
-                        if(! (gameHandler instanceof C4274_0 || gameHandler instanceof CMD_MULTI_MOVE_TO)){//todo 打印消息
+                        if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO)){//todo 打印消息
                             log.info("recive msg!=>"+gameHandler);
                         }
                         gameHandler.process(ctx, buff);
@@ -90,6 +90,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 }
             } else {
                 gameHandler.process(ctx, buff);
+                log.info("recive msg!=>"+gameHandler);
             }
         } else {
             log.error(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));

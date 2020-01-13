@@ -1350,7 +1350,7 @@ import java.util.Random;
      * @param date
      * @return
      */
-    /*      */   public static boolean isNow(java.util.Date date)
+    /*      */   public static boolean isToday(java.util.Date date)
     /*      */   {
         /* 1167 */     java.util.Date now = new java.util.Date();
         /* 1168 */     java.text.SimpleDateFormat sf = new java.text.SimpleDateFormat("yyyyMMdd");

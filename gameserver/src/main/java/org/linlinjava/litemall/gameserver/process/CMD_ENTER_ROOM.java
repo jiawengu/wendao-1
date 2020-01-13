@@ -21,7 +21,7 @@
  * CMD_ENTER_ROOM
  */
 /*    */ @Service
-/*    */ public class C4144
+/*    */ public class CMD_ENTER_ROOM
 /*    */   implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)

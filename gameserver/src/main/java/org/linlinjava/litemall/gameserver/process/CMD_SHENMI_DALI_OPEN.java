@@ -13,9 +13,13 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * 请求神秘大礼数据 -- 砸蛋版本
+ */
 /*    */ @Service
-/*    */ public class C41479_0
+/*    */ public class CMD_SHENMI_DALI_OPEN
 /*    */   implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
@@ -24,7 +28,7 @@
 /*    */     
 /*    */ 
 /* 26 */     Date date = new Date(chara.updatetime);
-/* 27 */     boolean isnow = GameUtil.isNow(date);
+/* 27 */     boolean isnow = GameUtil.isToday(date);
 /* 28 */     if ((!isnow) && (chara.online_time != 0L)) {
 /* 29 */       chara.online_time = 0L;
 /* 30 */       for (int i = 0; i < chara.shenmiliwu.size(); i++) {
