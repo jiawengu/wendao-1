@@ -2098,23 +2098,23 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 }
                 /*      */
                 /*  839 */
-                org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 vo_8247_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0();
+                MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
                 /*  840 */
-                vo_8247_0.id = npc_id;
+                menu_list_vo.id = npc_id;
                 /*  841 */
-                vo_8247_0.portrait = 6010;
+                menu_list_vo.portrait = 6010;
                 /*  842 */
-                vo_8247_0.pic_no = 1;
+                menu_list_vo.pic_no = 1;
                 /*  843 */
-                vo_8247_0.content = "天墉城里的百姓有了麻烦事都爱找我帮忙，忙不过来啊，你能来帮帮忙吗？[【助人】捐助穷人领取经验奖励/助人为乐_sa][【助人】捐助穷人领取道行奖励/助人为乐_sb][【助人】捐助穷人领取潜能奖励/助人为乐_sc][离开/离开]".replace("\\", "");
+                menu_list_vo.content = "天墉城里的百姓有了麻烦事都爱找我帮忙，忙不过来啊，你能来帮帮忙吗？[【助人】捐助穷人领取经验奖励/助人为乐_sa][【助人】捐助穷人领取道行奖励/助人为乐_sb][【助人】捐助穷人领取潜能奖励/助人为乐_sc][离开/离开]".replace("\\", "");
                 /*  844 */
-                vo_8247_0.secret_key = "";
+                menu_list_vo.secret_key = "";
                 /*  845 */
-                vo_8247_0.name = "白邦芒";
+                menu_list_vo.name = "白邦芒";
                 /*  846 */
-                vo_8247_0.attrib = 0;
+                menu_list_vo.attrib = 0;
                 /*  847 */
-                GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+                GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
                 /*  848 */
                 return;
                 /*      */
@@ -2876,7 +2876,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             if ("超级大BOSS".equals(menu_item)) {
                 org.linlinjava.litemall.db.domain.NpcDialogueFrame npcDialogueFrame = GameData.that.baseNpcDialogueFrameService
                         .findOneByContent(npc.getName() + "超级大BOSS");
-                GameUtil.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
+                DynamicNpcDialogService.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
                 return;
             }
             if ("查看BOSS图鉴".equals(menu_item)) {
@@ -2897,7 +2897,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 org.linlinjava.litemall.db.domain.NpcDialogueFrame npcDialogueFrame = GameData.that.baseNpcDialogueFrameService
                         .findOneByContent(npc.getName() + "七杀试炼");
 
-                GameUtil.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
+                DynamicNpcDialogService.sendNpcDlg(npc, npcDialogueFrame.getUncontent());
                 chara.nextJuBen = 0;
                 chara.currentJuBens = npcDialogueFrame.getNext().split(",");
 
@@ -2948,8 +2948,8 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         if(GameUtil.isZhangeMenNpc(npc.getName())){//掌门
             if(menu_item.equals(MsgUtil.TIAO_ZHAN_ZHANG_MEN)){//挑战掌门
                 if(chara.leaderTodayFailNum>0){
-                    Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, "修道不可急功近利，明天再来找我比试吧！[离开]");
-                    GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+                    MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(npc, "修道不可急功近利，明天再来找我比试吧！[离开]");
+                    GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
                     return;
                 }
                 ChallengeLeaderService.challengeLeader(chara);

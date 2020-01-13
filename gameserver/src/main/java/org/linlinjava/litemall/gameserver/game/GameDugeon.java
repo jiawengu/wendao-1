@@ -3,7 +3,7 @@ package org.linlinjava.litemall.gameserver.game;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
+import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
 import org.linlinjava.litemall.gameserver.data.write.MSG_DISAPPEAR_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
@@ -140,15 +140,15 @@ public class GameDugeon {
 
         if(content.equals("")) return false;
 
-        Vo_8247_0 vo_8247_0 = new Vo_8247_0();
-        vo_8247_0.id = id;
-        vo_8247_0.portrait = icon;
-        vo_8247_0.pic_no = 1;
-        vo_8247_0.content = content;
-        vo_8247_0.secret_key = "";
-        vo_8247_0.name = name;
-        vo_8247_0.attrib = 0;
-        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+        MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
+        menu_list_vo.id = id;
+        menu_list_vo.portrait = icon;
+        menu_list_vo.pic_no = 1;
+        menu_list_vo.content = content;
+        menu_list_vo.secret_key = "";
+        menu_list_vo.name = name;
+        menu_list_vo.attrib = 0;
+        GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
         return  true;
     }
 

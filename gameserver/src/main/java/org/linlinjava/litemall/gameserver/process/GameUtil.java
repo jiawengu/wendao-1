@@ -2728,17 +2728,17 @@ import java.util.Random;
     /**
      * MSG_MENU_LIST
      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 MSG_MENU_LIST(org.linlinjava.litemall.db.domain.Npc npc, String content)
+    /*      */   public static MSG_MENU_LIST_VO MSG_MENU_LIST(org.linlinjava.litemall.db.domain.Npc npc, String content)
     /*      */   {
-        /* 2528 */     org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0 vo_8247_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0();
-        /* 2529 */     vo_8247_0.id = npc.getId().intValue();
-        /* 2530 */     vo_8247_0.portrait = npc.getIcon().intValue();
-        /* 2531 */     vo_8247_0.pic_no = 1;
-        /* 2532 */     vo_8247_0.content = content.replace("\\", "");
-        /* 2533 */     vo_8247_0.secret_key = "";
-        /* 2534 */     vo_8247_0.name = npc.getName();
-        /* 2535 */     vo_8247_0.attrib = 0;
-        /* 2536 */     return vo_8247_0;
+        /* 2528 */     MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
+        /* 2529 */     menu_list_vo.id = npc.getId();
+        /* 2530 */     menu_list_vo.portrait = npc.getIcon();
+        /* 2531 */     menu_list_vo.pic_no = 1;
+        /* 2532 */     menu_list_vo.content = content.replace("\\", "");
+        /* 2533 */     menu_list_vo.secret_key = "";
+        /* 2534 */     menu_list_vo.name = npc.getName();
+        /* 2535 */     menu_list_vo.attrib = 0;
+        /* 2536 */     return menu_list_vo;
         /*      */   }
 
     /**
@@ -4864,23 +4864,6 @@ import java.util.Random;
             }
         }
 
-    }
-
-    /**
-     * 弹出 NPC 操作对话框
-     * @param npc
-     * @param content
-     */
-    public static void sendNpcDlg(Npc npc,String content){
-        Vo_8247_0 vo_8247_0 = new Vo_8247_0();
-        vo_8247_0.id = npc.getId();
-        vo_8247_0.portrait = npc.getIcon();
-        vo_8247_0.pic_no = 1;
-        vo_8247_0.content = content;
-        vo_8247_0.secret_key = "";
-        vo_8247_0.name = npc.getName();
-        vo_8247_0.attrib = 0;
-        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
     }
 
     // 进入副本

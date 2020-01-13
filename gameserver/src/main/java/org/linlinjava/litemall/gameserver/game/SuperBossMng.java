@@ -7,6 +7,7 @@ import org.linlinjava.litemall.gameserver.data.xls_config.superboss.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.service.DynamicNpcDialogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -270,7 +271,7 @@ public class SuperBossMng {
     public void sendBossDlg(int id){
         SuperBossNpc boss = getBossByid(id);
         if(boss != null) {
-            GameUtil.sendNpcDlg(boss, String.format("你好！小道长，我是#R%s#n，想要挑战我吗？ [我要挑战你/我要挑战超级大BOSS][离开/离开]", boss.getName()));
+            DynamicNpcDialogService.sendNpcDlg(boss, String.format("你好！小道长，我是#R%s#n，想要挑战我吗？ [我要挑战你/我要挑战超级大BOSS][离开/离开]", boss.getName()));
         }
     }
 
@@ -288,7 +289,7 @@ public class SuperBossMng {
             str.append("目前还没有妖魔来犯，道友切莫心急！");
         }
         str.append("[离开/离开]");
-        GameUtil.sendNpcDlg(npc, str.toString());
+        DynamicNpcDialogService.sendNpcDlg(npc, str.toString());
     }
 
     public void resetBoss(){
