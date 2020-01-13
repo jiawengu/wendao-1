@@ -2,91 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4993621a-738c-4447-b64f-bb07b6918c2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/Chara_StatueMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/UserPartyDailyTaskMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/UserPartyMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/UserPartyShopMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Chara_Statue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Chara_StatueExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserParty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserPartyDailyTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserPartyDailyTaskExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserPartyExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserPartyShop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/UserPartyShopExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/service/UserPartyDailyTaskService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/service/base/BaseCharaStatueService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/service/base/BaseUserPartyService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/UserPartyDailyTaskMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/UserPartyMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/UserPartyShopMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/vo/Vo_61613_0.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_APPEAR_NPC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_MASTER_INFO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/PartyDailyTaskCfg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/PartyDailyTaskItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/CharaStatue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/BattleType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_OPER_MASTER.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/service/BaseUserPartyShopService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/service/ChallengeLeaderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/service/CharaStatueService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/user_logic/BaseLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/user_logic/UserLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/user_logic/UserPartyDailyTaskLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/user_logic/UserPartyLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/user_logic/UserPartyShopLogic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/MsgUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gameserver/src/main/resources/xls_config/party_daily_task.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xls_config/xlsx/party_daily_task.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-all/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/game-all/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/mybatis-generator/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/mybatis-generator/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/PartyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/PartyMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/T_FightObjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/dao/T_FightObjectMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/Party.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/PartyExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/PartyExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/T_FightObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/T_FightObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/T_FightObjectExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/domain/T_FightObjectExample.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/service/base/BasePartyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/java/org/linlinjava/litemall/db/service/PartyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/PartyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/PartyMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/TTTPetMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/Chara_StatueMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/T_FightObjectMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-db/src/main/resources/org/linlinjava/litemall/db/dao/T_FightObjectMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/constant/TitleConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/constant/TitleConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M16383_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_MESSAGE_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M24505_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_FRIEND_UPDATE_PARTIAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M36871_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_CHAR_INFO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M4155_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_MENU_CLOSED.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M61545_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_FRIEND_ADD_CHAR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M65529_npc.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/M8247_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/write/MSG_MENU_LIST.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/Chara.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/domain/Chara.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameObjectChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameObjectChar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShiDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShuaGuai.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameShuaGuai.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameDugeon.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameDugeon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/XLSConfigMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/XLSConfigMgr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C20590_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_FRIEND_TELL_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C33287_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_GET_CHAR_INFO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4132_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_ACCEPT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C4156_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_REQUEST_JOIN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/C45073_0.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_RANDOM_NAME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_CHAT_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_CHAT_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_CREATE_PARTY.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_CREATE_PARTY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_GENERAL_NOTIFY.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_GENERAL_NOTIFY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_LOAD_EXISTED_CHAR.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_LOAD_EXISTED_CHAR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_OPEN_MENU.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_OPEN_MENU.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/service/TitleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/service/TitleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xls_config/xlsx/~$party_shop.xlsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +48,8 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="D:\repository" />
-        <option name="mavenHome" value="D:/work-soft/apache-maven-3.6.2" />
-        <option name="userSettingsFile" value="C:\Users\YGCH\.m2\settings.xml" />
+        <option name="mavenHome" value="D:/Program Files/Java/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\Program Files\Java\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -224,9 +142,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="game-all" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.linlinjava.litemall.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="game-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.linlinjava.litemall.wx.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Application" />
       <item itemvalue="Application.Test" />
+      <item itemvalue="Spring Boot.Application" />
+      <item itemvalue="Spring Boot.Application (1)" />
     </list>
     <recent_temporary>
       <list>
@@ -278,6 +212,7 @@
       <workItem from="1576263901364" duration="11917000" />
       <workItem from="1576347364836" duration="790000" />
       <workItem from="1576722696655" duration="9230000" />
+      <workItem from="1578709295244" duration="2863000" />
     </task>
     <servers />
   </component>
@@ -311,50 +246,60 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="498" height="438" key="DebuggerActiveHint/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577780461728" />
-    <state x="580" y="187" key="FileChooserDialogImpl" timestamp="1578108343549">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="495" y="158" key="FileChooserDialogImpl" timestamp="1578709766907">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="580" y="187" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108343549" />
-    <state width="1557" height="285" key="GridCell.Tab.0.bottom" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="495" y="158" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578709766907" />
+    <state width="1322" height="176" key="GridCell.Tab.0.bottom" timestamp="1578879589088">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.0.center" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578879589088" />
+    <state width="1322" height="176" key="GridCell.Tab.0.center" timestamp="1578879589088">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.0.left" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578879589088" />
+    <state width="1322" height="176" key="GridCell.Tab.0.left" timestamp="1578879589088">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.0.right" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578879589088" />
+    <state width="1322" height="176" key="GridCell.Tab.0.right" timestamp="1578879589088">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.bottom" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578879589088" />
+    <state width="1322" height="176" key="GridCell.Tab.1.bottom" timestamp="1578879589089">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.center" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578879589089" />
+    <state width="1322" height="176" key="GridCell.Tab.1.center" timestamp="1578879589089">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.left" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1578879589089" />
+    <state width="1322" height="176" key="GridCell.Tab.1.left" timestamp="1578879589089">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.right" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1322" height="176" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1578879589089" />
+    <state width="1322" height="176" key="GridCell.Tab.1.right" timestamp="1578879589089">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
+    <state width="1322" height="176" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1578879589089" />
     <state x="454" y="133" key="NewModule_or_Project.wizard" timestamp="1578108264094">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="454" y="133" key="NewModule_or_Project.wizard/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108264094" />
-    <state x="280" y="7" key="SettingsEditor" timestamp="1578108283751">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="239" y="0" key="SettingsEditor" timestamp="1578709771353">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="280" y="7" key="SettingsEditor/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108283751" />
+    <state x="239" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1578709771353" />
     <state x="521" y="171" width="549" height="524" key="StructurePopup" timestamp="1578020763022">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -363,10 +308,11 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="92" y="92" width="1416" height="676" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577775998352" />
-    <state x="487" y="190" width="806" height="480" key="find.popup" timestamp="1578045155345">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="416" y="161" width="689" height="480" key="find.popup" timestamp="1578879521320">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="487" y="190" width="806" height="480" key="find.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578045155345" />
+    <state x="416" y="161" width="689" height="480" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1578879521320" />
     <state width="972" height="500" key="javadoc.popup.new" timestamp="1578021091763">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -375,10 +321,11 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="503" y="62" key="refactoring.ChangeSignatureDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577762818163" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1578102141907">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1578879427246">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578102141907" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578879427246" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

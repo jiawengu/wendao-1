@@ -6,9 +6,8 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.M12285_0;
-import org.linlinjava.litemall.gameserver.data.write.M65529_npc;
-import org.linlinjava.litemall.gameserver.data.write.M8247_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyShopCfg;
@@ -151,7 +150,7 @@ public class GameDugeon {
         vo_8247_0.secret_key = "";
         vo_8247_0.name = name;
         vo_8247_0.attrib = 0;
-        GameObjectChar.send(new M8247_0(), vo_8247_0);
+        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
         return  true;
     }
 

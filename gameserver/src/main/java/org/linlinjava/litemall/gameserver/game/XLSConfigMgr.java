@@ -21,12 +21,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
+public class XLSConfigMgr {
     public static final String PARTY_SHOP = "party_shop";
     public static final String PARTY_DAILY_TASK = "party_daily_task";
-
-
-
-
 
     private static HashMap<String, Object> caches = new HashMap<>();
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
