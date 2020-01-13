@@ -28,6 +28,6 @@ logging:
 netty:
   port: 14721
   url: 0.0.0.0
-  ip: 192.168.0.106
+  ip: 117.24.6.15
 
 serverId: 1

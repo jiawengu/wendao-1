@@ -244,7 +244,7 @@ import java.util.Random;
         /*  245 */     Random random = new Random();
         /*      */
         /*      */
-        /*  248 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(id));
+        /*  248 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(id));
         /*  249 */     duiyuan.shidaodaguaijifen += 2;
         /*      */
         /*      */
@@ -282,7 +282,7 @@ import java.util.Random;
         /*      */
         /*  284 */     duiyuan.xuanshangcishu += 1;
         /*      */
-        /*  286 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcxuanshang.get(0)).id), chara1.id);
+        /*  286 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcxuanshang.get(0)).id), chara1.id);
         /*      */
         /*      */
         /*  289 */     int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
@@ -474,7 +474,7 @@ import java.util.Random;
         /*  415 */     int chubao = (chara1.shuadao - 1) % 10;
         /*      */
         /*  417 */     duiyuan.shuadao += 1;
-        /*  418 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).id), chara1.id);
+        /*  418 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).id), chara1.id);
         /*      */
         /*      */
         /*  421 */     if (duiyuan.shuadao <= 400) {
@@ -581,7 +581,7 @@ import java.util.Random;
         /*  518 */     org.linlinjava.litemall.db.domain.Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara1.current_task);
         /*  519 */     org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
         /*      */
-        /*  521 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcchubao.get(0)).id), chara1.id);
+        /*  521 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcchubao.get(0)).id), chara1.id);
         /*      */
         /*      */
         /*  524 */     if (duiyuan.chubao < 21) {
@@ -1350,7 +1350,7 @@ import java.util.Random;
      * @param date
      * @return
      */
-    /*      */   public static boolean isNow(java.util.Date date)
+    /*      */   public static boolean isToday(java.util.Date date)
     /*      */   {
         /* 1167 */     java.util.Date now = new java.util.Date();
         /* 1168 */     java.text.SimpleDateFormat sf = new java.text.SimpleDateFormat("yyyyMMdd");
@@ -4950,5 +4950,25 @@ import java.util.Random;
         GameObjectCharMng.getGameObjectChar(charaId).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
      }
 
+     public static void notifyNpcDisappear(Npc npc){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+            if(gameObjectChar.chara==null){
+                continue;
+            }
+            if(gameObjectChar.gameMap.id == npc.getMapId()){
+                GameObjectChar.getGameObjectChar().sendOne(new MSG_DISAPPEAR_Npc(), npc.getId());
+            }
+        }
+     }
+     public static void notifyNpcAppear(Npc npc){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+            if(gameObjectChar.chara==null){
+                continue;
+            }
+            if(gameObjectChar.gameMap.id == npc.getMapId()){
+                gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
+            }
+        }
+     }
 
 }

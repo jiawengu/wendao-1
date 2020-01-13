@@ -476,6 +476,17 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      */
     public String yxh_Notice;
 
+    /**
+     * 上次跨天的时间戳
+     */
+    public Map<String, Long> dayBreakTimeMap = new HashMap<>();
+
+    public void onTTTDayBreak(){
+        this.ttt_layer = 0;
+        this.ttt_xj_name = "";
+        this.ttt_challenge_num = 0;
+        this.ttt_xj_success = false;
+    }
     public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;
         this.ttt_xj_name = ttt_xj_name;

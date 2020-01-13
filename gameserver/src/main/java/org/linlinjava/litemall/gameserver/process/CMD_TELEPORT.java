@@ -29,7 +29,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 
 /*     */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C32768 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_TELEPORT implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(io.netty.channel.ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {

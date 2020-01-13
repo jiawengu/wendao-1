@@ -1,26 +1,21 @@
 package org.linlinjava.litemall.gameserver.service;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20689_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MASTER_INFO;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.data.write.MSG_OVERCOME_NPC_INFO;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.CharaStatue;
 import org.linlinjava.litemall.gameserver.fight.BattleType;
-import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
-import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static org.linlinjava.litemall.gameserver.data.constant.TitleConst.*;
@@ -144,7 +139,7 @@ public class ZhengDaoDianService {
             fightContainer.charaStatue.copyChengHao(titles[index]);
 
             //雕像
-            CharaStatueService.saveCharaStature(chara, getNpcName(chara.menpai, npcId), fightContainer.charaStatue);
+            CharaStatueService.saveCharaStature(getNpcName(chara.menpai, npcId), fightContainer.charaStatue);
             //刷新npc视野信息
             npc.setName(getNpcName(chara.menpai, npcId));
             npc.setMapId(MAP_ID);

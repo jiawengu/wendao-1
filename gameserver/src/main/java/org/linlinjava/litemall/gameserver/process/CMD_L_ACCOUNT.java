@@ -13,9 +13,9 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class C9040_0 implements GameHandler
+/*    */ public class CMD_L_ACCOUNT implements GameHandler
 /*    */ {
-/* 18 */   private static final Logger log = LoggerFactory.getLogger(C9040_0.class);
+/* 18 */   private static final Logger log = LoggerFactory.getLogger(CMD_L_ACCOUNT.class);
 /*    */   @Value("${netty.ip}")
 /*    */   private String ip;
 /*    */   
