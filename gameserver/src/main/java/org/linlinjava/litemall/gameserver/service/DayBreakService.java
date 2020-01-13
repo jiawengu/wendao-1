@@ -35,17 +35,11 @@ public class DayBreakService {
     }
 
     public static void checkDayBreak(Chara chara){
-        for(Iterator<Map.Entry<String, Long>> iter = chara.dayBreakTimeMap.entrySet().iterator();iter.hasNext();){
-            Map.Entry<String, Long> entry = iter.next();
-            String key = entry.getKey();
-            Long lastClearTime = entry.getValue();
+        for(Handler handler : handlerMap.values()){
+            Long lastClearTime = chara.dayBreakTimeMap.get(handler.getKey());
 
             if(null == lastClearTime){
                 lastClearTime = 0L;
-            }
-            Handler handler = handlerMap.get(key);
-            if(null == handler){
-                logger.error("canot found handler!"+entry.getKey());
             }
 
             final long curMill = System.currentTimeMillis();
@@ -59,8 +53,9 @@ public class DayBreakService {
             }
 
             if(lastClearTime<(shouldDayBreakTime)){
-                chara.dayBreakTimeMap.put(key, shouldDayBreakTime);
+                chara.dayBreakTimeMap.put(handler.getKey(), shouldDayBreakTime);
                 handler.onDayBreak(chara);
+                logger.info(handler.getClass()+"==>"+chara.name);
             }
         }
     }
@@ -86,7 +81,6 @@ public class DayBreakService {
 
         @Override
         public void onDayBreak(Chara chara) {
-            logger.info(getClass()+"==>"+chara.name);
         }
 
         @Override
@@ -106,7 +100,6 @@ public class DayBreakService {
 
         @Override
         public void onDayBreak(Chara chara) {
-            logger.info(getClass()+"==>"+chara.name);
             //通天塔
             chara.onTTTDayBreak();
 
