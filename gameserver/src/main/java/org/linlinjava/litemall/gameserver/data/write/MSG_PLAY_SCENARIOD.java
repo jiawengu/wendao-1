@@ -25,9 +25,3 @@ public class MSG_PLAY_SCENARIOD extends BaseWrite {
         return 0xB000;
     }
 }
-
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\MSG_PLAY_SCENARIOD.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
