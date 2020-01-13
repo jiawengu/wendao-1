@@ -75,7 +75,7 @@ public class SuperBossMng {
         //随机获取种类
         List<Integer> temps = new ArrayList<>();
         int id = 0, index = 0;
-        if(cfg.cfg.bossTypeCount < cfg.bosss.size()){ cfg.cfg.bossTypeCount = cfg.bosss.size(); }
+        if(cfg.cfg.bossTypeCount > cfg.bosss.size()){ cfg.cfg.bossTypeCount = cfg.bosss.size(); }
         for(int i = 0; i < cfg.cfg.bossTypeCount; i++){
             do{ id = SuperBossMng.RANDOM.nextInt(cfg.bosss.size()); } while (temps.contains(id));
             temps.add(id);
@@ -186,6 +186,13 @@ public class SuperBossMng {
                 else if("坐骑".equals(reward.type)){
 
                 }
+                else if("物品".equals(reward.type)){
+                    for(String vs: reward.value.split(",")){
+                        String[] v = vs.split(":");
+                        org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(v[0]);
+                        GameUtil.huodedaoju(chara, info, 1);
+                    }
+                }
                 else if("金币".equals(reward.type)){
                     int v = Integer.valueOf(reward.value);
                     GameUtil.addCoin(chara, v);
@@ -282,5 +289,10 @@ public class SuperBossMng {
         }
         str.append("[离开/离开]");
         GameUtil.sendNpcDlg(npc, str.toString());
+    }
+
+    public void resetBoss(){
+        this.bossMap = new HashMap<>();
+        this.bossList = new ArrayList<>();
     }
 }

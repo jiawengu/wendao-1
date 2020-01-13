@@ -12,7 +12,7 @@ public class SuperBossItem {
     //分身数量
     public Integer count;
     public List<SuperBossReward> rewards;
-    //经验#500,道行#500,装备#蓝色:200,物品#[风寂云清'枯月流魂'雷极弧光'凝香幻彩'炫影霜星'冰落残阳]:200
+
     public void setRewards(String rewards) {
         this.rewards = new ArrayList<>();
         for(String str: rewards.split("\\|")){

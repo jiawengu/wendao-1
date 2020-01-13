@@ -33,6 +33,7 @@ public class GmUtil {
             result.put("ljy", this::ljy_handler);
             result.put("goods", this::goods_handler);
             result.put("pos", this::npc_pos);
+            result.put("loadbossxls", this::loadbossxls);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -89,5 +90,11 @@ public class GmUtil {
     public void npc_pos(Chara chara, String[] cmds){
         Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, String.format("%s, %s", chara.x, chara.y), 1);
         GameObjectChar.send(new MSG_MESSAGE_EX(), vo_16383_0);
+    }
+
+    public void loadbossxls(Chara chara, String[] cmds){
+        GameData.that.superBossMng.resetBoss();
+        GameData.that.superBossCfg.load();
+        GameData.that.superBossMng.productionBoss();
     }
 }

@@ -4,14 +4,8 @@
     <list default="true" id="6400ac4f-deb5-46a8-a972-6560048e89f6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/fight/FightManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/SuperBossMng.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/SuperBossMng.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_MULTI_MOVE_TO.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_MULTI_MOVE_TO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gameserver/src/main/resources/xls_config/SuperBossMap.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/resources/xls_config/SuperBossMap.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/xls_config/xlsx/SuperBossItem.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/xls_config/xlsx/SuperBossItem.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xls_config/xlsx/SuperBossMap.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/xls_config/xlsx/SuperBossMap.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +48,9 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="localRepository" value="D:\repository" />
-        <option name="mavenHome" value="D:/work-soft/apache-maven-3.6.2" />
-        <option name="userSettingsFile" value="C:\Users\YGCH\.m2\settings.xml" />
+        <option name="localRepository" value="D:\apache-maven-3.6.3\.m2\repository" />
+        <option name="mavenHome" value="C:/Program Files/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="C:\Program Files\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -105,20 +99,20 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\process" />
+      <recent name="E:\wendaoshouyou" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.linlinjava.litemall.gameserver.data.write" />
+      <recent name="org.linlinjava.litemall.gameserver.data.vo" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\wendaoshouyou\game-api\src\main\resources\static\vip4\atm\g-bits" />
       <recent name="E:\wendaoshouyou\game-api\src\main\resources\static\vip4\wd" />
       <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\process" />
       <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\data" />
       <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\data\game" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.linlinjava.litemall.gameserver.data.write" />
-      <recent name="org.linlinjava.litemall.gameserver.data.vo" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\wendaoshouyou\gameserver\src\main\java\org\linlinjava\litemall\gameserver\process" />
-      <recent name="E:\wendaoshouyou" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -180,7 +174,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4993621a-738c-4447-b64f-bb07b6918c2b" name="Default Changelist" comment="" />
+      <changelist id="6400ac4f-deb5-46a8-a972-6560048e89f6" name="Default Changelist" comment="" />
       <created>1575795358049</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -223,14 +217,23 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="183" key="#Notifications" timestamp="1578854720491">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="183" key="#Notifications/0.0.1920.1050@0.0.1920.1050" timestamp="1578854720491" />
     <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578018943441">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="254" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578018943441" />
-    <state x="605" y="138" key="#com.intellij.ide.util.MemberChooser" timestamp="1577779976905">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="726" y="168" key="#com.intellij.ide.util.MemberChooser" timestamp="1578901972407">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="605" y="138" key="#com.intellij.ide.util.MemberChooser/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577779976905" />
+    <state x="726" y="168" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1578901972407" />
+    <state x="739" y="383" width="504" height="293" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1578898721493">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="739" y="383" width="504" height="293" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1050@0.0.1920.1050" timestamp="1578898721493" />
     <state x="677" y="138" width="590" height="584" key="#xdebugger.evaluate" timestamp="1577780470303">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -239,70 +242,93 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="498" height="438" key="DebuggerActiveHint/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577780461728" />
-    <state x="580" y="187" key="FileChooserDialogImpl" timestamp="1578108343549">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="184" y="87" key="DiffContextDialog" timestamp="1578906423369">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="184" y="87" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578906423369" />
+    <state x="696" y="228" key="FileChooserDialogImpl" timestamp="1578854651882">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="580" y="187" key="FileChooserDialogImpl/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108343549" />
-    <state width="1877" height="324" key="GridCell.Tab.0.bottom" timestamp="1578751034204">
+    <state x="696" y="228" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1578854651882" />
+    <state width="1877" height="209" key="GridCell.Tab.0.bottom" timestamp="1578906285610">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1877" height="324" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1578751034204" />
-    <state width="1877" height="324" key="GridCell.Tab.0.center" timestamp="1578751034203">
+    <state width="1877" height="209" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.0.center" timestamp="1578906285610">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1877" height="324" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1578751034203" />
-    <state width="1877" height="324" key="GridCell.Tab.0.left" timestamp="1578751034203">
+    <state width="1877" height="209" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.0.left" timestamp="1578906285609">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1877" height="324" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1578751034203" />
-    <state width="1877" height="324" key="GridCell.Tab.0.right" timestamp="1578751034204">
+    <state width="1877" height="209" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285609" />
+    <state width="1877" height="209" key="GridCell.Tab.0.right" timestamp="1578906285610">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.0.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1877" height="324" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1578751034204" />
-    <state width="1557" height="285" key="GridCell.Tab.1.bottom" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1877" height="209" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.1.bottom" timestamp="1578906285610">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.bottom/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.center" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1877" height="209" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.1.center" timestamp="1578906285610">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.center/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.left" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1877" height="209" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.1.left" timestamp="1578906285610">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.left/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
-    <state width="1557" height="285" key="GridCell.Tab.1.right" timestamp="1578041370658">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state width="1877" height="209" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
+    <state width="1877" height="209" key="GridCell.Tab.1.right" timestamp="1578906285610">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1557" height="285" key="GridCell.Tab.1.right/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578041370658" />
+    <state width="1877" height="209" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1578906285610" />
     <state x="454" y="133" key="NewModule_or_Project.wizard" timestamp="1578108264094">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="454" y="133" key="NewModule_or_Project.wizard/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108264094" />
-    <state x="280" y="7" key="SettingsEditor" timestamp="1578108283751">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="336" y="9" key="SettingsEditor" timestamp="1578854662984">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="280" y="7" key="SettingsEditor/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578108283751" />
+    <state x="336" y="9" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1578854662984" />
     <state x="521" y="171" width="549" height="524" key="StructurePopup" timestamp="1578020763022">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="521" y="171" width="549" height="524" key="StructurePopup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578020763022" />
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1578906484025">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1578906484025" />
     <state x="92" y="92" width="1416" height="676" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1577775998352">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="92" y="92" width="1416" height="676" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1577775998352" />
+    <state x="640" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1578906332741">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="640" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578906332741" />
     <state x="487" y="190" width="806" height="480" key="find.popup" timestamp="1578045155345">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="487" y="190" width="806" height="480" key="find.popup/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578045155345" />
-    <state width="972" height="500" key="javadoc.popup.new" timestamp="1578021091763">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="669" y="316" key="git4idea.merge.GitPullDialog" timestamp="1578906397960">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="669" y="316" key="git4idea.merge.GitPullDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578906397960" />
+    <state width="1167" height="611" key="javadoc.popup.new" timestamp="1578905132863">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="972" height="500" key="javadoc.popup.new/-1366.0.1366.728/0.0.1600.860@0.0.1600.860" timestamp="1578021091763" />
+    <state width="1167" height="611" key="javadoc.popup.new/0.0.1920.1050@0.0.1920.1050" timestamp="1578905132863" />
     <state x="503" y="62" key="refactoring.ChangeSignatureDialog" timestamp="1577762818163">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
