@@ -5,9 +5,13 @@ import org.linlinjava.litemall.db.domain.StoreInfo;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
+import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 import java.util.Collections;
@@ -34,6 +38,8 @@ public class GmUtil {
             result.put("goods", this::goods_handler);
             result.put("pos", this::npc_pos);
             result.put("loadbossxls", this::loadbossxls);
+            result.put("exp", this::exp_handler);
+            result.put("level", this::level_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -96,5 +102,25 @@ public class GmUtil {
         GameData.that.superBossMng.resetBoss();
         GameData.that.superBossCfg.load();
         GameData.that.superBossMng.productionBoss();
+    }
+    /**
+     * 添加经验:#gm exp 经验数量
+     * @param chara
+     * @param cmds
+     */
+    public void exp_handler(Chara chara, String[] cmds){
+        int exp = Integer.parseInt(cmds[1]);
+        GameUtil.huodejingyan(chara, exp);
+    }
+    /**
+     * 设置等级:#gm level 当前等级
+     * @param chara
+     * @param cmds
+     */
+    public void level_handler(Chara chara, String[] cmds){
+        int level = Integer.parseInt(cmds[1]);
+        chara.level = level;
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
     }
 }

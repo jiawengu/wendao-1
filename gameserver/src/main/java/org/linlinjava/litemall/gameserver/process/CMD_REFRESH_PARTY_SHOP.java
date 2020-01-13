@@ -25,7 +25,7 @@ public class CMD_REFRESH_PARTY_SHOP implements GameHandler {
         vo.list = new ArrayList<>();
         vo.costWing = 99;
 
-        PartyShopCfg cfg = (PartyShopCfg)XLSConfigMgr.getCfg("party_shop");
+        PartyShopCfg cfg = (PartyShopCfg) XLSConfigMgr.getCfg("party_shop");
         cfg.forEach(item->{
             Vo_MSG_REFRESH_PARTY_SHOP_item shop = new Vo_MSG_REFRESH_PARTY_SHOP_item();
             shop.cost = item.cost;

@@ -251,41 +251,42 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 250 */           vo_20481_0.time = 1562987118;
 /* 251 */           GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */         }
-/* 253 */         if (goods.goodsInfo.str.equals("超级藏宝图")) {
-/* 254 */           if (chara.changbaotu.mapid != 0) {
-/* 255 */             Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-/* 256 */             vo_20481_0.msg = "当前有藏宝图任务";
-/* 257 */             vo_20481_0.time = 1562987118;
-/* 258 */             GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-/* 259 */             return;
-/*     */           }
-/* 261 */           Random random = new Random();
-/* 262 */           List<RenwuMonster> renwuMonsterServiceAll = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(8));
-/* 263 */           RenwuMonster renwuMonster = (RenwuMonster)renwuMonsterServiceAll.get(random.nextInt(renwuMonsterServiceAll.size()));
-/* 264 */           org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0();
-/* 265 */           vo_61553_0.count = 1;
-/* 266 */           vo_61553_0.task_type = "超级宝藏";
-/* 267 */           vo_61553_0.task_desc = "在游戏中根据超级藏宝图进行寻宝。";
-/* 268 */           vo_61553_0.task_prompt = ("#前往#Z" + renwuMonster.getMapName() + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")#Z寻宝");
-/* 269 */           vo_61553_0.refresh = 1;
-/* 270 */           vo_61553_0.task_end_time = 1567909190;
-/* 271 */           vo_61553_0.attrib = 1;
-/* 272 */           vo_61553_0.reward = "#I道行|道行#I#I潜能|潜能#I#I金钱|金钱#I#I物品|召唤令·十二生肖#I#I宠物|十二生肖=F#I";
-/* 273 */           vo_61553_0.show_name = "超级宝藏";
-/* 274 */           vo_61553_0.tasktask_extra_para = "";
-/* 275 */           vo_61553_0.tasktask_state = "1";
-/* 276 */           GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
-/* 277 */           Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
-/* 278 */           chara.changbaotu.mapid = map.getMapId().intValue();
-/* 279 */           chara.changbaotu.name = renwuMonster.getMapName();
-/* 280 */           chara.changbaotu.x = renwuMonster.getX().intValue();
-/* 281 */           chara.changbaotu.y = renwuMonster.getY().intValue();
-/* 282 */           Vo_45063_0 vo_45063_0 = new Vo_45063_0();
-/* 283 */           vo_45063_0.task_name = ("#前往#Z" + renwuMonster.getMapName() + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")#Z寻宝");
-/* 284 */           vo_45063_0.check_point = 147761859;
-/* 285 */           GameObjectChar.getGameObjectChar();GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0);
-/*     */           
-/* 287 */           GameUtil.removemunber(chara, "超级藏宝图", 1);
+                 if (goods.goodsInfo.str.equals("超级藏宝图")) {
+                       if (chara.changbaotu.mapid != 0) {
+                         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                         vo_20481_0.msg = "当前有藏宝图任务";
+                         vo_20481_0.time = 1562987118;
+                         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                         return;
+                       }
+                       Random random = new Random();
+                       List<RenwuMonster> renwuMonsterServiceAll = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(8));
+                       RenwuMonster renwuMonster = (RenwuMonster)renwuMonsterServiceAll.get(random.nextInt(renwuMonsterServiceAll.size()));
+                       org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0 vo_61553_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0();
+                       vo_61553_0.count = 1;
+                       vo_61553_0.task_type = "超级宝藏";
+                       vo_61553_0.task_desc = "在游戏中根据超级藏宝图进行寻宝。";
+                       vo_61553_0.task_prompt = ("#前往#Z" + renwuMonster.getMapName() + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")#Z寻宝");
+                       vo_61553_0.refresh = 1;
+                       vo_61553_0.task_end_time = 1567909190;
+                       vo_61553_0.attrib = 1;
+                       vo_61553_0.reward = "#I道行|道行#I#I潜能|潜能#I#I金钱|金钱#I#I物品|召唤令·十二生肖#I#I宠物|十二生肖=F#I";
+                       vo_61553_0.show_name = "超级宝藏";
+                       vo_61553_0.tasktask_extra_para = "";
+                       vo_61553_0.tasktask_state = "1";
+                       GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
+                       Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
+                       chara.changbaotu.mapid = map.getMapId().intValue();
+                       chara.changbaotu.name = renwuMonster.getMapName();
+                       chara.changbaotu.x = renwuMonster.getX().intValue();
+                       chara.changbaotu.y = renwuMonster.getY().intValue();
+                       chara.changbaotu.icon = renwuMonster.getIcon().intValue();
+                       Vo_45063_0 vo_45063_0 = new Vo_45063_0();
+                       vo_45063_0.task_name = ("#前往#Z" + renwuMonster.getMapName() + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")#Z寻宝");
+                       vo_45063_0.check_point = 147761859;
+                       GameObjectChar.getGameObjectChar();GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0);
+
+                       GameUtil.removemunber(chara, "超级藏宝图", 1);
 /*     */         }
 /*     */       }
 /*     */     }

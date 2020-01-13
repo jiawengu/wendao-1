@@ -3,6 +3,7 @@
 /*    */ import java.util.ArrayList;
 /*    */ import java.util.HashMap;
 /*    */ import java.util.List;
+         import java.util.UUID;
 /*    */ import org.linlinjava.litemall.db.service.base.BaseMapService;
 /*    */ import org.springframework.context.annotation.Scope;
 /*    */ import org.springframework.stereotype.Service;
@@ -15,11 +16,9 @@
 /*    */   public String lineName;
 /* 16 */   private List<GameMap> gameRoomList = new ArrayList();
 /* 17 */   private java.util.Map<String, GameMap> gameRoomNameMap = new HashMap();
-/*    */   
+/*    */   private List<GameZone> gameZoneList = new java.util.concurrent.CopyOnWriteArrayList();
 /* 19 */   public static GameShuaGuai gameShuaGuai = new GameShuaGuai();
-/*    */   
-/*    */ 
-/*    */ 
+    /*    */
 /*    */   public void init()
 /*    */   {
 /* 25 */     List<org.linlinjava.litemall.db.domain.Map> all = GameData.that.baseMapService.findAll();
@@ -59,6 +58,51 @@
 /* 59 */     GameLine gameLine = GameCore.getGameLine(line);
 /* 60 */     return (GameMap)gameLine.gameRoomNameMap.get(mapName);
 /*    */   }
+
+            public static GameZone getGameZone(int line, String uuid) {
+                GameLine gameLine = GameCore.getGameLine(line);
+                for (GameZone gameZone : gameLine.gameZoneList) {
+                    if (gameZone.uid.equals(uuid)) {
+                       return  gameZone;
+                    }
+                }
+
+                return null;
+            }
+
+            // 创建动态地图，需要创建者保存uid,主动删除（动态地图没人的时候也会自动删除）
+            public static GameZone createGameZone(int line, int mapID) {
+                GameLine gameLine = GameCore.getGameLine(line);
+                GameZone gameZone = new GameZone();
+                for (GameMap gameMap : gameLine.gameRoomList) {
+                    if (gameMap.id == mapID) {
+                        gameZone.id = mapID;
+                        gameZone.name = gameMap.name;
+                        gameZone.x = gameMap.x;
+                        gameZone.y = gameMap.y;
+                        break;
+                    }
+                }
+                if (gameZone.id == 0)
+                {
+                    return null;
+                }
+
+                gameZone.uid = UUID.randomUUID().toString();
+                gameLine.gameZoneList.add(gameZone);
+
+                return gameZone;
+            }
+
+            public static void deleteZoneGameMap(int line, String uuid) {
+                GameLine gameLine = GameCore.getGameLine(line);
+                for (GameZone gameZone : gameLine.gameZoneList) {
+                    if (gameZone.uid.equals(uuid)) {
+                        gameLine.gameZoneList.remove(gameZone);
+                        return;
+                    }
+                }
+            }
 /*    */ }
 
 

@@ -2,11 +2,10 @@ package org.linlinjava.litemall.gameserver.service;
 
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61613_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MASTER_INFO;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.CharaStatue;
+import org.linlinjava.litemall.gameserver.fight.BattleType;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -101,9 +100,9 @@ public class ChallengeLeaderService {
         String zhangMen = GameUtil.getZhangMenName(chara.menpai);
         CharaStatue charaStatue = CharaStatueService.getCharStaure(zhangMen);
         if(null == charaStatue){
-            FightManager.goFightChallengeLeader(chara, chara.menpai);
+            FightManager.goFightChallengeCharaStatue(chara, chara.menpai);
         }else{
-            FightManager.goFightChallengeLeader(chara, charaStatue);
+            FightManager.goFightChallengeCharaStatue(chara, charaStatue, BattleType.CHALLENGE_LEADER);
         }
         chara.leaderTodayFailNum++;
     }
