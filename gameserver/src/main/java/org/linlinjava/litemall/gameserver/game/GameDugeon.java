@@ -4,7 +4,7 @@ import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
-import org.linlinjava.litemall.gameserver.data.write.M12285_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DISAPPEAR_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
@@ -176,7 +176,7 @@ public class GameDugeon {
         RenwuMonster renwuMonster = GameData.that.baseRenwuMonsterService.findById(cfg.monster_list.get(curStep - 1));
         if(renwuMonster == null) return;
         int id = renwuMonster.getId();
-        GameObjectChar.sendduiwu(new M12285_0(), Integer.valueOf(id), chara.id);
+        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_0(), Integer.valueOf(id), chara.id);
 
         curStep += 1;
         if(isFinish()){

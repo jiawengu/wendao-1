@@ -8,11 +8,11 @@ import io.netty.buffer.ByteBuf;
 
 import org.json.JSONObject;
 import org.linlinjava.litemall.db.domain.Accounts;
-/*    */ import org.linlinjava.litemall.db.service.base.BaseAccountsService;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45143_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45555_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M45143_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_L_WAIT_IN_LINE;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M45555_0;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.slf4j.Logger;
@@ -25,9 +25,9 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */
 /*    */
 @Service
-/*    */ public class C45144_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*    */ public class CMD_L_REQUEST_LINE_INFO implements org.linlinjava.litemall.gameserver.GameHandler
         /*    */ {
-    /* 20 */   private static final Logger logger = LoggerFactory.getLogger(C45144_0.class);
+    /* 20 */   private static final Logger logger = LoggerFactory.getLogger(CMD_L_REQUEST_LINE_INFO.class);
 
     /*    */
     /*    */
@@ -86,7 +86,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
         vo_45555_0.cookie = "2960226";
         /*    */
         /* 46 */
-        ByteBuf write = new M45143_0().write(vo_45143_0);
+        ByteBuf write = new MSG_L_WAIT_IN_LINE().write(vo_45143_0);
         /* 47 */
         ByteBuf write1 = new M45555_0().write(vo_45555_0);
         /* 48 */

@@ -5,15 +5,20 @@ import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
 import org.linlinjava.litemall.db.domain.Renwu;
+import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
+import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 import java.util.List;
 import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
@@ -24,10 +29,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 @org.springframework.stereotype.Service
  public class CMD_OPEN_MENU implements org.linlinjava.litemall.gameserver.GameHandler
          {
-    
+
     public void process(ChannelHandlerContext ctx, ByteBuf buff)
      {
-        
+
         int id = org.linlinjava.litemall.gameserver.data.GameReadTool.readInt(buff);
         int type = org.linlinjava.litemall.gameserver.data.GameReadTool.readByte(buff);
         System.out.println("CMD_OPEN_MENU:" + id + ":" + type);
@@ -41,9 +46,13 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             HeroPubService.openMenu(chara, id);
             return;
         }
+        if(NpcIds.isMapGuardianNpc(id)){//地图守护神
+            MapGuardianService.openMenu(chara, id);
+            return;
+        }
 
         String[] shidaolevel = {"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};
-        
+
         for (int k = 0; k < shidaolevel.length; k++) {
             GameMap gameMap = GameLine.getGameMap(1, shidaolevel[k]);
             for (int i = 0; i < gameMap.gameShiDao.shidaoyuanmo.size(); i++) {
@@ -57,9 +66,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                     menu_list_vo.secret_key = "";
                     menu_list_vo.name = ((Vo_65529_0) gameMap.gameShiDao.shidaoyuanmo.get(i)).name;
                     menu_list_vo.attrib = 0;
-                    
+
                     GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                    
+
                 }
             }
         }
@@ -77,9 +86,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                         menu_list_vo.secret_key = "";
                         menu_list_vo.name = ((Vo_65529_0) GameLine.gameShuaGuai.shuaXing.get(i)).name;
                         menu_list_vo.attrib = 0;
-                        
+
                         GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                        
+
                         return;
                     }
                     MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
@@ -91,9 +100,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                     menu_list_vo.secret_key = "";
                     menu_list_vo.name = ((Vo_65529_0) GameLine.gameShuaGuai.shuaXing.get(i)).name;
                     menu_list_vo.attrib = 0;
-                    
+
                     GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                    
+
                     return;
                 }
             }
@@ -108,9 +117,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                 menu_list_vo.secret_key = "";
                 menu_list_vo.name = ((Vo_65529_0) chara.npcxuanshang.get(i)).name;
                 menu_list_vo.attrib = 0;
-                
+
                 GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                
+
                 return;
             }
         }
@@ -124,9 +133,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                 menu_list_vo.secret_key = "";
                 menu_list_vo.name = ((Vo_65529_0) chara.npcchubao.get(i)).name;
                 menu_list_vo.attrib = 0;
-                
+
                 GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                
+
                 return;
             }
         }
@@ -140,9 +149,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                 menu_list_vo.secret_key = "";
                 menu_list_vo.name = ((Vo_65529_0) chara.npcshuadao.get(i)).name;
                 menu_list_vo.attrib = 0;
-                
+
                 GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-                
+
                 return;
             }
         }
@@ -151,7 +160,7 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         {
             return;
         }
-        
+
 
         if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
             //是超级BOSS;
@@ -162,21 +171,26 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         if (npc == null) {
             return;
         }
-        
+
         List<NpcDialogueFrame> npcDialogueFrameList = GameData.that.baseNpcDialogueFrameService.findByName(npc.getName());
-        
+
         String content = "找我有什么事吗？[离开\\/离开]";
         if (npcDialogueFrameList.size() != 0) {
             content = ((NpcDialogueFrame) npcDialogueFrameList.get(0)).getUncontent();
+
         }
-//        ShangGuYaoWangInfo info =
-//                GameShangGuYaoWang.getYaoWangNpc(npc.getId(),
-//                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
-//        if (null != info){
-//            int level = info.getLevel();
-//            content =
-//                    ("大胆狂徒，敢在本大王面前撒野，真是活得不耐烦了！(妖王等级"+level+"级，适合"+level+"-"+(level+29)+"级玩家挑战）\n[挑战]\n" + "[离开]".replace("\\",""));
-//        }
+        if(MapGuardianService.isProtector(npc.getName())){//地图守护神
+            MapGuardianService.openMenu(chara, npc);
+            return;
+        }
+        ShangGuYaoWangInfo info =
+                GameShangGuYaoWang.getYaoWangNpc(npc.getId(),
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
+        if (null != info){
+            int level = info.getLevel();
+            content =
+                    ("大胆狂徒，敢在本大王面前撒野，真是活得不耐烦了！(妖王等级"+level+"级，适合"+level+"-"+(level+29)+"级玩家挑战）\n[挑战]\n" + "[离开]".replace("\\",""));
+        }
         if (GameUtil.isZhangeMenNpc(npc.getName())) {//掌门npc
             if(GameUtil.getMenPai(npc.getName()) == chara.menpai){//自己的掌门
                 content = getTalk(TIAO_ZHAN_ZHANG_MEN)+
@@ -209,8 +223,8 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                 }
             }
         }
-        
-        
+
+
         Renwu renwu = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
         if ((renwu != null) && (renwu.getNpcName() != null)) {
             if (npc.getName().equals(renwu.getNpcName())) {
@@ -233,23 +247,23 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         if ((id == 928) && (chara.fabaorenwu == 1)) {
             content = "[【领取法宝】提交#R蟠螭结、雪魂丝链#n]" + content;
         }
-//        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
-//        UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-//        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
-//        if(dailyTaskItem != null){
-//            content = "[" + dailyTaskItem.show_name + "]" + content;
-//        }
-        
-        
-        
-        
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
+        if(dailyTaskItem != null){
+            content = "[" + dailyTaskItem.show_name + "]" + content;
+        }
+
+
+
+
         MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(npc, content);
-        
+
         GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
-        
+
     }
     public int cmd() {
         return 4150;
     }
-    
+
 }
