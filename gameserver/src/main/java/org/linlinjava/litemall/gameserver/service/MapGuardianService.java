@@ -1,8 +1,7 @@
 package org.linlinjava.litemall.gameserver.service;
 
 import org.linlinjava.litemall.db.domain.Npc;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
+import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.CharaStatue;
@@ -103,8 +102,8 @@ public class MapGuardianService {
         String content = "我们就是传说中美貌与智慧并存、英雄与侠义的化身——人见人爱的"+npc.getName()+"!我们守护着这片土地的一草一木。"+
                 MsgUtil.getTalk("看看你们的实力（"+template.minLevel+"-"+template.maxLevel+"级可挑战）")+
                 MsgUtil.getTalk(ZHU_WEI_XIN_KU);
-        Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, content);
-        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+        MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(npc, content);
+        GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
     }
     public static void openMenu(Chara chara, int charaStatueId){
         Template template = getTemplate(charaStatueId);

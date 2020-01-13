@@ -4,18 +4,22 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.service.base.BaseMapService;
 import org.linlinjava.litemall.db.service.base.BaseNpcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +38,10 @@ public class BaxianRepository {
     @PostConstruct
     private void init() {
         try {
-            File jsonFile = ResourceUtils.getFile("classpath:data/baxian.json");
-            String json = FileUtils.readFileToString(jsonFile, "UTF-8");
+            ClassPathResource resource = new ClassPathResource("data/baxian.json");
+            InputStream inputStream = resource.getInputStream();
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            String json = String.join("", IOUtils.readLines(reader));
             List<TaskChain> taskChainList = JSON.parseArray(json, TaskChain.class);
             for (TaskChain taskChain : taskChainList) {
                 for (TaskVO taskVO : taskChain.getTaskList()) {
