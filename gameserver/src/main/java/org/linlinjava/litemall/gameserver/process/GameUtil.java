@@ -2638,19 +2638,19 @@ import java.util.Random;
         /* 2439 */     return vo_16383_0;
         /*      */   }
     /*      */
-    /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0 a45056(Chara chara)
+    /*      */   public static MSG_PLAY_SCENARIOD_VO a45056(Chara chara)
     /*      */   {
-        /* 2444 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0 vo_45056_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0();
-        /* 2445 */     vo_45056_0.id = chara.id;
-        /* 2446 */     vo_45056_0.name = chara.name;
-        /* 2447 */     vo_45056_0.portrait = chara.waiguan;
-        /* 2448 */     vo_45056_0.pic_no = 0;
-        /* 2449 */     vo_45056_0.content = "";
-        /* 2450 */     vo_45056_0.isComplete = 1;
-        /* 2451 */     vo_45056_0.isInCombat = 0;
-        /* 2452 */     vo_45056_0.playTime = 20;
-        /* 2453 */     vo_45056_0.task_type = "主线—浮生若梦";
-        /* 2454 */     return vo_45056_0;
+        /* 2444 */     MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = new MSG_PLAY_SCENARIOD_VO();
+        /* 2445 */     MSGPLAYSCENARIODVO.id = chara.id;
+        /* 2446 */     MSGPLAYSCENARIODVO.name = chara.name;
+        /* 2447 */     MSGPLAYSCENARIODVO.portrait = chara.waiguan;
+        /* 2448 */     MSGPLAYSCENARIODVO.pic_no = 0;
+        /* 2449 */     MSGPLAYSCENARIODVO.content = "";
+        /* 2450 */     MSGPLAYSCENARIODVO.isComplete = 1;
+        /* 2451 */     MSGPLAYSCENARIODVO.isInCombat = 0;
+        /* 2452 */     MSGPLAYSCENARIODVO.playTime = 20;
+        /* 2453 */     MSGPLAYSCENARIODVO.task_type = "主线—浮生若梦";
+        /* 2454 */     return MSGPLAYSCENARIODVO;
         /*      */   }
     /*      */
     /*      */   public static String getRandomJianHan()
@@ -4841,22 +4841,22 @@ import java.util.Random;
             NpcDialogue npcDialogue = GameData.that.baseNpcDialogueService
                     .findById(Integer.valueOf(chara.currentJuBens[chara.nextJuBen]));
 
-            org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0 vo_45056_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45056_0();
+            MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = new MSG_PLAY_SCENARIOD_VO();
             if ("玩家".equals(npcDialogue.getName())) {
-                vo_45056_0.name = chara.name;
-                vo_45056_0.portrait = chara.waiguan;
+                MSGPLAYSCENARIODVO.name = chara.name;
+                MSGPLAYSCENARIODVO.portrait = chara.waiguan;
             } else {
-                vo_45056_0.name = npcDialogue.getName();
-                vo_45056_0.portrait = npcDialogue.getPortranit();
+                MSGPLAYSCENARIODVO.name = npcDialogue.getName();
+                MSGPLAYSCENARIODVO.portrait = npcDialogue.getPortranit();
             }
-            vo_45056_0.id = npcDialogue.getId();
-            vo_45056_0.pic_no = npcDialogue.getPicNo();
-            vo_45056_0.content = npcDialogue.getContent();
-            vo_45056_0.isComplete = npcDialogue.getIsconmlete();
-            vo_45056_0.playTime = npcDialogue.getPalytime();
-            vo_45056_0.task_type = npcDialogue.getTaskType();
+            MSGPLAYSCENARIODVO.id = npcDialogue.getId();
+            MSGPLAYSCENARIODVO.pic_no = npcDialogue.getPicNo();
+            MSGPLAYSCENARIODVO.content = npcDialogue.getContent();
+            MSGPLAYSCENARIODVO.isComplete = npcDialogue.getIsconmlete();
+            MSGPLAYSCENARIODVO.playTime = npcDialogue.getPalytime();
+            MSGPLAYSCENARIODVO.task_type = npcDialogue.getTaskType();
             chara.nextJuBen += 1;
-            GameObjectChar.send(new M45056_0(), vo_45056_0);
+            GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
 
             if(chara.nextJuBen >= chara.currentJuBens.length){
                 chara.nextJuBen = 0;
