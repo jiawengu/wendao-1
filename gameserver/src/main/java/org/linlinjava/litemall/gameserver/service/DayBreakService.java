@@ -1,8 +1,11 @@
 package org.linlinjava.litemall.gameserver.service;
 
 import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -34,6 +37,18 @@ public class DayBreakService {
         public abstract long getTodayDayBreakMillTime();
     }
 
+    /**
+     * 每天0点、5点执行
+     */
+    @Scheduled(cron="0 0 0,5 * * ?")
+    public void checkDayBreak(){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+            if(null!=gameObjectChar.chara){
+                checkDayBreak(gameObjectChar.chara);
+            }
+        }
+    }
+
     public static void checkDayBreak(Chara chara){
         for(Handler handler : handlerMap.values()){
             Long lastClearTime = chara.dayBreakTimeMap.get(handler.getKey());
@@ -54,7 +69,11 @@ public class DayBreakService {
 
             if(lastClearTime<(shouldDayBreakTime)){
                 chara.dayBreakTimeMap.put(handler.getKey(), shouldDayBreakTime);
-                handler.onDayBreak(chara);
+                try {
+                    handler.onDayBreak(chara);
+                }catch (Exception e){
+                    logger.error("", e);
+                }
                 logger.info(handler.getClass()+"==>"+chara.name);
             }
         }
