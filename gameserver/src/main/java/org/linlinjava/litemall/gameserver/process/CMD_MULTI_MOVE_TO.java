@@ -3,7 +3,8 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import java.util.List;
-/*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
+/*    */ import org.linlinjava.litemall.db.domain.UserPartyDailyTask;
+import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16431_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40981_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
@@ -14,6 +15,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*    */
 
 /**
@@ -42,7 +44,7 @@
 /*    */     }
 /*    */     
 /*    */
-//    System.out.println("x:"+x+",y:"+y);
+            System.out.println("x:"+x+",y:"+y);
 /*    */ 
 /* 42 */     int dir = GameReadTool.readShort(buff);
 /*    */     
@@ -72,7 +74,10 @@
 /* 67 */       org.linlinjava.litemall.gameserver.fight.FightManager.goFight(GameObjectChar.getGameObjectChar().chara, GameObjectChar.getGameObjectChar().chara.mapName);
 /* 68 */       return;
 /*    */     }
-/*    */     
+
+            UserPartyDailyTaskLogic partyDailyTaskLogic = (UserPartyDailyTaskLogic)GameObjectChar.getGameObjectChar().logic.getMod("party_daily_task");
+            partyDailyTaskLogic.multiMoveCheckMonster(map_id, x, y);
+/*    */
 /*    */ 
 /* 72 */     if ((chara.changbaotu.mapid == chara.mapid) && (chara.changbaotu.x == chara.x) && (chara.changbaotu.y == y)) {
 /* 73 */       Vo_40981_0 vo_40981_0 = new Vo_40981_0();

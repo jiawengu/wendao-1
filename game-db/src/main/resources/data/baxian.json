@@ -1,0 +1,370 @@
+[
+  {
+    "chainId": 1,
+    "name": "八仙梦境—吕洞宾",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "吕洞宾"
+      },
+      {
+        "taskId": 24,
+        "npcId": 949,
+        "npcName": "太白金星"
+      },
+      {
+        "taskId": 25,
+        "npcId": 1022,
+        "npcName": "牡丹仙子"
+      },
+      {
+        "taskId": 26,
+        "npcId": 1024,
+        "npcName": "守值天兵",
+        "monsterList": [
+          "守值天兵",
+          "守值天兵",
+          "守值天兵"
+        ]
+      },
+      {
+        "taskId": 27,
+        "npcId": 950,
+        "npcName": "穿山甲",
+        "monsterList": [
+          "穿山甲"
+        ]
+      },
+      {
+        "taskId": 28,
+        "npcId": 1023,
+        "npcName": "西王母"
+      }
+    ]
+  },
+  {
+    "chainId": 2,
+    "name": "八仙梦境—韩湘子",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "韩湘子"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "灵木道人"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "转灵台",
+        "monsterList": [
+          "竹灵心魔",
+          "竹灵心魔"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "东海龙王",
+        "monsterList": [
+          "东海龙王"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "韩湘子"
+      }
+    ]
+  },
+  {
+    "chainId": 3,
+    "name": "八仙梦境—张果老",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "张果老"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "兰花仙子"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "金灵龙",
+        "monsterList": [
+          "土灵龙",
+          "火灵龙",
+          "金灵龙"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "木灵龙",
+        "monsterList": [
+          "木灵龙",
+          "水灵龙"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "邪冥妖王",
+        "monsterList": [
+          "邪冥妖王"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "张果老"
+      }
+    ]
+  },
+  {
+    "chainId": 4,
+    "name": "八仙梦境—何仙姑",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "何仙姑"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "上古穿山甲",
+        "monsterList": [
+          "上古穿山甲"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "上古穿山甲",
+        "monsterList": [
+          "上古穿山甲",
+          "家仆"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "水芙蓉",
+        "monsterList": [
+          "护花使者1",
+          "护花使者2"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "何仙姑"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "吕洞宾"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "穿山魔甲",
+        "monsterList": [
+          "何仙姑",
+          "吕洞宾"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "土地公",
+        "monsterList": [
+          "土地公"
+        ]
+      }
+    ]
+  },
+  {
+    "chainId": 5,
+    "name": "八仙梦境—曹国舅",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "曹国舅"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "蛟龙",
+        "monsterList": [
+          "蛟龙",
+          "蛟龙"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "东胜尊神"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "东胜尊神",
+        "require": {
+          "蛟龙鳞": 10
+        }
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "蛟龙族长",
+        "monsterList": [
+          "蛟龙护卫",
+          "蛟龙族长",
+          "蛟龙护卫"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "东胜尊神"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "曹国舅"
+      }
+    ]
+  },
+  {
+    "chainId": 6,
+    "name": "八仙梦境—汉钟离",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "白发老人"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "士兵"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "钟离权",
+        "monsterList": [
+          "钟离权",
+          "士兵"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "白发老人"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "胡僧",
+        "monster": [
+          "胡僧幻影"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "东华上仙"
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "太上老君",
+        "monsterList": [
+          "嗜心魔"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "李副将",
+        "monsterList": [
+          "嗜心魔"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "玉匣"
+      }
+    ]
+  },
+  {
+    "chainId": 7,
+    "name": "八仙梦境—蓝采和",
+    "taskList": [
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "蓝采和",
+        "monsterList": [
+          "附体恶灵",
+          "附体恶灵"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "阎罗殿传送人",
+        "monsterList": [
+          "守卫之灵"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "牛头",
+        "monsterList": [
+          "牛头",
+          "马面"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "阎王爷",
+        "monsterList": [
+          "阎王爷"
+        ]
+      },
+      {
+        "taskId": 23,
+        "npcId": 948,
+        "npcName": "蓝采和"
+      }
+    ]
+  },
+  {
+    "chainId": 8,
+    "name": "八仙梦境—铁拐李",
+    "taskList": [
+    ]
+  },
+  {
+    "chainId": 9,
+    "name": "八仙梦境—八仙过海",
+    "taskList": [
+    ]
+  }
+]

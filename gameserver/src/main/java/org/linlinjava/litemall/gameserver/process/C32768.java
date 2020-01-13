@@ -14,6 +14,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameLine;
 /*     */
@@ -24,6 +25,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /**
  * CMD_TELEPORT 传送
  */
+/*     */
+
+/*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class C32768 implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {

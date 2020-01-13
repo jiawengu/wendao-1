@@ -5,9 +5,9 @@
 
 package org.linlinjava.litemall.gameserver.data.vo;
 
-public class Vo_24577_0 {
+public class BAXIAN_LEFT_TIME_VO {
   public int left_time;
 
-  public Vo_24577_0() {
+  public BAXIAN_LEFT_TIME_VO() {
   }
 }

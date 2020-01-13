@@ -17,8 +17,12 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
+import org.linlinjava.litemall.gameserver.util.MsgUtil;
+import org.linlinjava.litemall.gameserver.util.NpcIds;
 
 import java.util.List;
 
@@ -43,6 +47,15 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         /*     */
         /*  31 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
+
+        if(NpcIds.isZhengDaoDianNpc(id)){//证道殿npc
+           ZhengDaoDianService.openMenu(chara, id);
+            return;
+        }
+        if(NpcIds.isHeroPubNpc(id)){//英雄会
+            HeroPubService.openMenu(chara, id);
+            return;
+        }
         /*     */
         /*  33 */
         String[] shidaolevel = {"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};
@@ -361,9 +374,9 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 
         UserLogic logic = GameObjectChar.getGameObjectChar().logic;
         UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.getCurTask(id);
+        PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
         if(dailyTaskItem != null){
-            content = "[" + dailyTaskItem.show_name + "]";
+            content = "[" + dailyTaskItem.show_name + "]" + content;
         }
         /*     */
         /*     */
@@ -385,9 +398,3 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
     }
     /*     */
 }
-
-
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\process\C4150_0.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */

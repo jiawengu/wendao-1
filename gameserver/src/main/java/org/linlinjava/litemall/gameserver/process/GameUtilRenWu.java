@@ -191,46 +191,59 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ 
 /*     */ 
-/*     */   public static String[] luckFindDraw()
-/*     */   {
-/* 188 */     String nameType = "";
-/* 189 */     String[] yiDing = { "帅帅猴#变异", "蛋蛋鸡#变异", "乖乖狗#变异", "招财猪#变异", "岳麓剑#精怪", "筋斗云#精怪" };
-//              String[] shangGuYaoWang = { "上古妖王1#上古妖王#50", "上古妖王2#上古妖王#52",
-//                      "上古妖王3#上古妖王#54", "上古妖王4#上古妖王#56", "上古妖王5#上古妖王#58",
-//                      "上古妖王6#上古妖王#60", "上古妖王7#上古妖王#62","上古妖王8#上古妖王#64",
-//                      "上古妖王9#上古妖王#66", "上古妖王10#上古妖王#68", "上古妖王11#上古妖王#70",
-//                      "上古妖王12#上古妖王#72", "上古妖王13#上古妖王#74", "上古妖王14#上古妖王#76", "上古妖王15#上古妖王#78",
-//                      "上古妖王16#上古妖王#80", "上古妖王17#上古妖王#82", "上古妖王18#上古妖王#84", "上古妖王92#上古妖王#86",
-//                      "上古妖王20#上古妖王#88"};
-/* 190 */     String[] erDing = { "召唤令·十二生肖#物品" };
-/* 191 */     String[] siDing = { "60级首饰#首饰" };
-/* 192 */     Random random = new Random();
-/* 193 */     int r = random.nextInt(1000) + 1;
-/* 194 */     if (r <= 3) {
-/* 195 */       nameType = yiDing[random.nextInt(yiDing.length)];
-/* 196 */     } else if (r < 20) {
-/* 197 */       nameType = erDing[random.nextInt(erDing.length)];
-/*     */     }
-/* 199 */     else if (r < 50) {
-        /* 200 */
-                nameType = siDing[random.nextInt(siDing.length)];
-    }         else if (r < 100){
-                List<ShangGuYaoWangInfo> infos =
-                        GameData.that.BaseShangGuYaoWangInfoService.findAllCloseState();
+    public static String[] luckFindDraw()
+    {
+         String nameType = "";
+         String[] yiDing = { "帅帅猴#变异", "蛋蛋鸡#变异", "酷酷龙#变异", "威威虎#变异", "伶俐鼠#变异", "跳跳兔#变异", "笨笨牛#变异" /*,
+                 "岳麓剑#精怪", "筋斗云#精怪" */ };
+         String[] erDing = { "召唤令·十二生肖#物品" };
+         String[] siDing = {"150000#潜能"};//{ "60级首饰#首饰" };
+         String[] siJinBi = {"50#10000000","200#5000000","750#800000"};
+         Random random = new Random();
+         int r = random.nextInt(100000) ;
+         r = 14+50+15000+2000;
+         if (r <= 14) {
+             nameType = yiDing[random.nextInt(yiDing.length)];
+         } else if (r < 14+50) {
+             nameType = erDing[random.nextInt(erDing.length)];
+         } else if (r < 14+50+15000) {
+             nameType = siDing[random.nextInt(siDing.length)];
+        } else if (r < 14+50+15000+20000){
+            List<ShangGuYaoWangInfo> infos =
+                    GameData.that.BaseShangGuYaoWangInfoService.findAllCloseState();
+            if(infos.size() > 0){
                 ShangGuYaoWangInfo info =
                         infos.get(random.nextInt(infos.size()));
-                Npc npc = GameData.that.baseNpcService.findById(info.getNpcid());
-                //nameType =
-                //shangGuYaoWang[random.nextInt(shangGuYaoWang.length)];
-                    nameType = npc.getName();// shangGuYaoWang[0];
-/*     */     } else {
-/* 202 */       int money = 1000000 + random.nextInt(300000);
-/* 203 */       nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
-/*     */     }
-/*     */     
-/*     */ 
-/* 207 */     return nameType.split("#");
-/*     */   }
+                Npc npc =
+                        GameData.that.baseNpcService.findOneById(info.getNpcid().intValue());
+                nameType = npc.getName()+"#上古妖王";
+            }else{
+                int money = 0;
+                r = random.nextInt(1000);
+                for (int i = 0 ; i < siJinBi.length; i++){
+                    String [] tempStr = siJinBi[i].split("#");
+                    if (i < Integer.valueOf(tempStr[0])) {
+                        money = Integer.valueOf( tempStr[1]);
+                    }
+                }
+                nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
+            }
+
+         } else {
+           int money = 0;
+           r = random.nextInt(1000);
+           for (int i = 0 ; i < siJinBi.length; i++){
+               String [] tempStr = siJinBi[i].split("#");
+               if (i < Integer.valueOf(tempStr[0])) {
+                   money = Integer.valueOf( tempStr[1]);
+               }
+           }
+           nameType = String.format("%d#金币", new Object[] { Integer.valueOf(money) });
+         }
+
+
+         return nameType.split("#");
+    }
 /*     */   
 /*     */ 
 /*     */ 

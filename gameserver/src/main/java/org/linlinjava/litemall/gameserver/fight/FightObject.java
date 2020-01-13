@@ -392,6 +392,7 @@ public class FightObject {
         if (name.contains("龙神")) {
             strname = "龙神";
         }
+
 //        if (name.contains("上古妖王")) {
 //            strname = "上古妖王";
 //        }

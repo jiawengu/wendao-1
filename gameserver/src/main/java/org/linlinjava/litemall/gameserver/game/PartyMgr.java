@@ -12,6 +12,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class PartyMgr {
+    public static final String OFFICE_MONSTER = "帮主";
+    public static final  String OFFICE_NORMAL = "帮众";
+
+
     private HashMap<Integer, GameParty> map = new HashMap<>();
     private boolean inited = false;
     private AtomicBoolean lock = new AtomicBoolean(false);
