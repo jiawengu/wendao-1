@@ -126,7 +126,10 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         if(NpcIds.isMapGuardianNpc(npc_id)) {//地图守护神
             if(menu_item.contains("看看你们的实力")){
                 MapGuardianService.challenge(npc_id);
+            }else{
+                GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(npc_id));
             }
+            return;
         }
         if (npc_id == 992) {
 

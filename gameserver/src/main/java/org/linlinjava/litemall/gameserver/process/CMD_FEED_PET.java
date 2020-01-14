@@ -37,7 +37,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     
 /*     */ 
 /*     */ 
-/*  39 */     if ("inset".equals(para)) {
+/*  39 */     if ("inset".equals(para)) {//打入妖石
 /*  40 */       for (int i = 0; i < chara.backpack.size(); i++) {
 /*  41 */         if (pos == ((Goods)chara.backpack.get(i)).pos) {
 /*  42 */           Goods goods = (Goods)chara.backpack.get(i);

@@ -27,7 +27,8 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.ZHU_WEI_XIN_KU;
 public class MapGuardianService {
     private static final Logger logger = LoggerFactory.getLogger(MapGuardianService.class);
     private static final Map<String, Template> configMap = new LinkedHashMap<>();
-    static {
+
+    public MapGuardianService() {
         register("五龙窟四层守护神", 45, 55);
         register("蓬莱岛守护神", 45, 56);
         register("五龙窟五层守护神", 45, 58);
@@ -52,7 +53,7 @@ public class MapGuardianService {
         register("热砂荒漠守护神", 117, 132);
     }
 
-    private static void register(String npcName, int minLevel, int maxLevel){
+    private void register(String npcName, int minLevel, int maxLevel){
         Npc npc = GameData.that.baseNpcService.findOneByName(npcName);
         int npcIdBegin = NpcIds.MAP_GUARDIAN_NPC_ID_BEGIN+configMap.size()*5;
         int npcIdEnd = npcIdBegin + 4;
@@ -161,7 +162,12 @@ public class MapGuardianService {
 
     public static void challenge(int charaStatue){
         Template template = getTemplate(charaStatue);
-        challenge(template.npc);
+        Npc npc = new Npc();
+        npc.setId(charaStatue);
+        npc.setMapId(template.npc.getMapId());
+        npc.setIcon(template.npc.getIcon());
+        npc.setName(template.npc.getName());
+        challenge(npc);
     }
 
     public static void challenge(Npc npc){

@@ -22,7 +22,7 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
  * 障碍火
  * 	对敌方使用，成功后可令对手单人处于锁灵状态，该状态下所有战斗指令无效，但可以使用道具；死亡后锁灵状态马上解除但当前回合无法被复活。
  */
-public class ZhangaiHuo171Skill extends FightRoundSkill {
+public class ZhangaiHuo171Skill extends ZhangaiSkill {
     public ZhangaiHuo171Skill() {
     }
 
@@ -47,7 +47,7 @@ public class ZhangaiHuo171Skill extends FightRoundSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 2;
-        List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, jiNeng.range);
+        List<FightObject> targetList = findTargets(fightContainer, fightRequest, jiNeng.range);
         Iterator var10 = targetList.iterator();
 
         FightObject fightObject;

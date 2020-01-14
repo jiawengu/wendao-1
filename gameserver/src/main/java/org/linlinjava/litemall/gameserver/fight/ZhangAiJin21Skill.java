@@ -20,8 +20,9 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 /**
  * 障碍金-遗忘
+ * 对敌方使用，较低几率令对手处于遗忘状态，该状态下所有战斗指令无效，有一定概率选取敌对目标进行物理攻击。技能等级、道行越高则成功率越高
  */
-public class ZhangAiJin21Skill extends FightRoundSkill {
+public class ZhangAiJin21Skill extends ZhangaiSkill {
     public ZhangAiJin21Skill() {
     }
 
@@ -46,7 +47,7 @@ public class ZhangAiJin21Skill extends FightRoundSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 2;
-        List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, jiNeng.range);
+        List<FightObject> targetList = findTargets(fightContainer, fightRequest, jiNeng.range);
         Iterator var10 = targetList.iterator();
 
         while(var10.hasNext()) {
