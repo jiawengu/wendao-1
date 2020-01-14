@@ -20,5 +20,8 @@ public class JiNeng
   public String s1;
   public int s2;
   public int isTempSkill;
+  /**
+   * 持续回合数
+   */
   public int skillRound;
 }

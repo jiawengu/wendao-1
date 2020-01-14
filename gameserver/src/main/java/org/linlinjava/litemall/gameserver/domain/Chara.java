@@ -403,11 +403,17 @@
 /* 396 */   public int autofight_skillaction = 2;
 /* 397 */   public int autofight_skillno = 2;
 /*     */   
-/*     */ 
-/*     */   public int friend;
+/*     */
+    /**
+     * 道行
+     */
+    /*     */   public int friend;
 /*     */   
-/*     */ 
-/*     */   public int owner_name;
+/*     */
+    /**
+     * 道行点
+     */
+    /*     */   public int owner_name;
 /*     */   
 /* 405 */   public Map<String, String> chenghao = new HashMap();
 /*     */   

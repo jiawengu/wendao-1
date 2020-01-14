@@ -22,7 +22,7 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
  * 障碍水
  * 使用成功后可使敌方对象处于冰冻状态
  */
-public class ZhangaiShui121Skill extends FightRoundSkill {
+public class ZhangaiShui121Skill extends ZhangaiSkill {
     public ZhangaiShui121Skill() {
     }
 
@@ -47,7 +47,7 @@ public class ZhangaiShui121Skill extends FightRoundSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 2;
-        List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, jiNeng.range);
+        List<FightObject> targetList = findTargets(fightContainer, fightRequest, jiNeng.range);
         Iterator var10 = targetList.iterator();
 
         FightObject fightObject;

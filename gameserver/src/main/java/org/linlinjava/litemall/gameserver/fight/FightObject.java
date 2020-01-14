@@ -467,6 +467,7 @@ public class FightObject {
         this.accurate = (int)(t_fightObject.getPhyAttack()*(1+ttt_level*0.1));
         this.fangyu = (int)(t_fightObject.getDef()*(1+ttt_level*0.1));
         this.org_icon = t_fightObject.getIcon();
+        this.friend = (int) (t_fightObject.getDaohang()/1440 * (1+ttt_level*0.5));//道行武学上涨百分之五十
 
         this.skillsList = getJiNengListByName( metal, ttt_level, 123456, t_fightObject.getSkill());
         this.type = 4;
@@ -485,6 +486,7 @@ public class FightObject {
         this.accurate = t_fightObject.getPhyAttack();
         this.fangyu = t_fightObject.getDef();
         this.org_icon = t_fightObject.getIcon();
+        this.friend = t_fightObject.getDaohang()/1440;
 
         this.skillsList = getJiNengListByName( metal, 1, 123456, t_fightObject.getSkill());
         this.type = 4;
@@ -508,7 +510,7 @@ public class FightObject {
             canbe = false;
         }
 
-        if (this.hasBuffState(3844) || this.hasBuffState(3856)) {
+        if (this.isSuoLing() || this.hasBuffState(3856)) {
             canbe = false;
         }
 
@@ -926,7 +928,7 @@ public class FightObject {
         if (!this.canbeHurt()) {
             return 0;
         } else {
-            if (this.hasBuffState(3844)) {
+            if (this.isSuoLing()) {
                 this.removeBuffSK(FightManager.getFightContainer(this.fid), 3844);
             }
 
@@ -1109,6 +1111,10 @@ public class FightObject {
         return !isYiwang() && !isHunluan();
     }
 
+    /**
+     * 是否可以掉血
+     * @return
+     */
     public boolean canbeHurt() {
         return !this.hasBuffState(3856);
     }
@@ -1123,6 +1129,15 @@ public class FightObject {
 
     public boolean isYiwang() {
         return this.hasBuffState(3848);
+    }
+
+    /**
+     * 是否是锁灵状态
+     * 该状态下所有战斗指令无效，但可以使用道具；死亡后锁灵状态马上解除但当前回合无法被复活
+     * @return
+     */
+    public boolean isSuoLing(){
+        return this.hasBuffState(3844);
     }
 
     public boolean isBingdong() {

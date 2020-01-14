@@ -162,7 +162,12 @@ public class MapGuardianService {
 
     public static void challenge(int charaStatue){
         Template template = getTemplate(charaStatue);
-        challenge(template.npc);
+        Npc npc = new Npc();
+        npc.setId(charaStatue);
+        npc.setMapId(template.npc.getMapId());
+        npc.setIcon(template.npc.getIcon());
+        npc.setName(template.npc.getName());
+        challenge(npc);
     }
 
     public static void challenge(Npc npc){

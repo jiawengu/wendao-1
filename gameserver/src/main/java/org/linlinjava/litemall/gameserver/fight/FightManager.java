@@ -1900,6 +1900,11 @@ public class FightManager {
 
     }
 
+    /**
+     *
+     * @param fightContainer
+     * @return 是否战斗结束
+     */
     private static boolean fabao(FightContainer fightContainer) {
         List<FightObject> allFightObject = getAllFightObject(fightContainer);
         Iterator var2 = allFightObject.iterator();
@@ -1908,12 +1913,13 @@ public class FightManager {
             FightObject fightObject = (FightObject)var2.next();
             List<FightRoundSkill> fightSkillList = fightObject.getRoundSkill();
             Iterator var5 = fightSkillList.iterator();
-
+            //回合技能
             while(var5.hasNext()) {
                 FightRoundSkill fightSkill = (FightRoundSkill)var5.next();
                 fightSkill.doRoundSkill();
             }
 
+            //法宝技能
             FightFabaoSkill fabaoSkill = fightObject.getFabaoSkill();
             if (fabaoSkill != null) {
                 fabaoSkill.active();
