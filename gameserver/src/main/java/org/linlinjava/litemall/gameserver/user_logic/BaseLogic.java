@@ -1,5 +1,7 @@
 package org.linlinjava.litemall.gameserver.user_logic;
 
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+
 public class BaseLogic {
     public int id = 0;
     private boolean save_flag = false;
@@ -9,9 +11,11 @@ public class BaseLogic {
     }
 
     protected UserLogic userLogic;
-    public void init(int id, UserLogic lg){
+    protected GameObjectChar obj;
+    public void init(int id, UserLogic lg, GameObjectChar obj){
         this.id = id;
         this.userLogic = lg;
+        this.obj = obj;
         this.onInit();
         this.is_inited = true;
     }

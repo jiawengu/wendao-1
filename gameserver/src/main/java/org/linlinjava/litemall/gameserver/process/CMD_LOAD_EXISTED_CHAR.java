@@ -25,6 +25,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameCore;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.netty.ServerHandler;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*     */
@@ -55,10 +56,13 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*     */       }
 /*  48 */       GameObjectChar oldSession = org.linlinjava.litemall.gameserver.game.GameObjectCharMng.getGameObjectChar(characters.getId().intValue());
 /*  49 */       if (oldSession != null) {
-/*  50 */         characters = oldSession.characters;
-/*  51 */         org.linlinjava.litemall.gameserver.game.GameObjectCharMng.save(oldSession);
-/*     */       }
-/*  53 */       session.init(characters);
+                    ServerHandler.setCtxAttrSession(ctx, oldSession);
+                    GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(oldSession);
+                    oldSession.ctx = session.ctx;
+                    session = oldSession;
+/*     */       }else{
+                    session.init(characters);
+                }
 /*     */     }
 /*     */     
 /*     */ 

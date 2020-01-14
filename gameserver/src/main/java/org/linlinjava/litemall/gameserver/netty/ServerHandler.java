@@ -102,4 +102,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         }
         ctx.close();
     }
+
+    public static void setCtxAttrSession(ChannelHandlerContext ctx, GameObjectChar session){
+        ctx.channel().attr(akey).set(session);
+    }
 }

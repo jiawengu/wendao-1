@@ -1,6 +1,8 @@
 package org.linlinjava.litemall.gameserver.game;
 
 import io.netty.buffer.ByteBuf;
+
+import java.util.HashMap;
 import java.util.List;
 
 import org.linlinjava.litemall.db.domain.Characters;
@@ -14,68 +16,69 @@ import org.slf4j.LoggerFactory;
 public class GameObjectCharMng
 {
     private static final Logger log = LoggerFactory.getLogger(GameObjectCharMng.class);
-    private static final List<GameObjectChar> gameObjectCharList = new java.util.concurrent.CopyOnWriteArrayList();
+    private static final HashMap<Integer, GameObjectChar> gameObjectCharList = new HashMap<>();
 
-    public static void add(GameObjectChar gameObjectChar) {
-        if (gameObjectCharList.contains(gameObjectChar)) {
-            for (GameObjectChar gameSession : gameObjectCharList) {
-                if (gameObjectChar.chara.id == gameSession.chara.id) {
-                gameSession.ctx.disconnect();
-                gameObjectChar.gameTeam = gameSession.gameTeam;
-                gameObjectCharList.remove(gameSession);
-                }
-            }
-        }
-        gameObjectCharList.add(gameObjectChar);
-    }
+//    public static void add(GameObjectChar gameObjectChar) {
+//        if (gameObjectCharList.contains(gameObjectChar)) {
+//            for (GameObjectChar gameSession : gameObjectCharList) {
+//                if (gameObjectChar.chara.id == gameSession.chara.id) {
+//                gameSession.ctx.disconnect();
+//                gameObjectChar.gameTeam = gameSession.gameTeam;
+//                gameObjectCharList.remove(gameSession);
+//                }
+//            }
+//        }
+//        gameObjectCharList.add(gameObjectChar);
+//    }
 
     public static void sendAll(BaseWrite baseWrite, Object obj) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar session = gameObjectCharList.get(i);
-            ByteBuf write = baseWrite.write(obj);
-            session.ctx.writeAndFlush(write);
+        for(GameObjectChar session : gameObjectCharList.values()){
+            if(session.ctx != null){
+                ByteBuf write = baseWrite.write(obj);
+                session.ctx.writeAndFlush(write);
+            }
         }
     }
 
-    public static List<GameObjectChar> getGameObjectCharList() {
+    public static HashMap<Integer, GameObjectChar> getGameObjectCharList() {
         return gameObjectCharList;
     }
 
     public static void sendAllmap(BaseWrite baseWrite, Object obj, int mapid) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharList.get(i);
-            if (gameObjectChar.gameMap.id == mapid) {
-                ByteBuf write = baseWrite.write(obj);
-                gameObjectChar.ctx.writeAndFlush(write);
+        for (GameObjectChar session : gameObjectCharList.values()) {
+            if (session.gameMap.id == mapid) {
+                if(session.ctx != null){
+                    ByteBuf write = baseWrite.write(obj);
+                    session.ctx.writeAndFlush(write);
+                }
             }
         }
     }
 
     public static void sendAllmapname(BaseWrite baseWrite, Object obj, String mapname) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharList.get(i);
-            if (gameObjectChar.gameMap.name.equals(mapname)) {
+        for (GameObjectChar session : gameObjectCharList.values()) {
+            if (session.ctx != null && session.gameMap.name.equals(mapname)) {
                 ByteBuf write = baseWrite.write(obj);
-                gameObjectChar.ctx.writeAndFlush(write);
+                session.ctx.writeAndFlush(write);
             }
         }
     }
 
     public static final GameObjectChar getGameObjectChar(int id) {
-        for (GameObjectChar gameObjectChar : gameObjectCharList) {
-            if (gameObjectChar.chara.id == id) {
-                return gameObjectChar;
-            }
+        GameObjectChar exist = gameObjectCharList.get(id);
+        if(exist != null){
+            return exist;
         }
         Characters characters = GameData.that.baseCharactersService.findById(id);
         if (characters == null) {
             return null;
         }
         GameObjectChar gameObjectChar = new GameObjectChar(characters);
+        gameObjectCharList.put(id, gameObjectChar);
         return gameObjectChar;
     }
 
-    public static List<GameObjectChar> getAll() {
+    public static HashMap<Integer, GameObjectChar> getAll() {
         return gameObjectCharList;
     }
 
@@ -95,5 +98,13 @@ public class GameObjectCharMng
         }
         gameObjectChar.characters.setData(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara));
         GameData.that.baseCharactersService.updateById(gameObjectChar.characters);
+        gameObjectChar.logic.cacheSave();
     }
+
+    public static void offlineObj(GameObjectChar obj){
+        obj.offline();
+        obj.ctx = null;
+        gameObjectCharList.remove(obj.chara.id);
+    }
+
 }
