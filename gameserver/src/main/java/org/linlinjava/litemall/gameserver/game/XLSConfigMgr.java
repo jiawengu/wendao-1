@@ -69,6 +69,7 @@ public class XLSConfigMgr{
     }
 
     public static <T> List<T> loadJson(String name, Class<T> t)  {
+        log.info(String.format("开始加载配置文件[%s]", name));
         List<T> list = new ArrayList<T>();
         try {
             JSONArray objs = JSONObject.parseObject(resourceLoader.getResource("classpath:xls_config/" + name + ".json").getInputStream(), JSONArray.class);
@@ -78,6 +79,7 @@ public class XLSConfigMgr{
         }catch (Exception e) {
             e.printStackTrace();
         }
+        log.info(String.format("[%s]加载完毕", name));
         return list;
     }
 }

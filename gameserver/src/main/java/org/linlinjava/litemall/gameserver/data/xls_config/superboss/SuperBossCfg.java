@@ -2,6 +2,7 @@ package org.linlinjava.litemall.gameserver.data.xls_config.superboss;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.linlinjava.litemall.gameserver.data.xls_config.BaseCfg;
 import org.linlinjava.litemall.gameserver.game.XLSConfigMgr;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,14 +11,14 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
-@Order(value = 1)
-public class SuperBossCfg implements ApplicationRunner {
+public class SuperBossCfg extends BaseCfg {
 
     /**
      * BOSS 出现的时间周期：
@@ -26,7 +27,8 @@ public class SuperBossCfg implements ApplicationRunner {
      * w 周
      * m 月
      **/
-    public String timeUnit;
+    public String startTime;
+    public String endTime;
     /**BOSS 出现种类的数量*/
     public int bossTypeCount;
     /**每种 BOSS 出现的数量*/
@@ -41,8 +43,12 @@ public class SuperBossCfg implements ApplicationRunner {
         this.bossCount = bossCount;
     }
 
-    public void setTimeUnit(String timeUnit) {
-        this.timeUnit = timeUnit;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     public void setBossTypeCount(int bossTypeCount) {
@@ -50,17 +56,22 @@ public class SuperBossCfg implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments var1) throws Exception {
-        load();
-    }
-
-    public void load() {
+    public void startupLoad(){
+        log.info("SuperBossCfg.startupLoad");
         SuperBossCfg cfg = XLSConfigMgr.loadJson("SuperBossCfg", SuperBossCfg.class).get(0);
         this.bossCount = cfg.bossCount;
         this.bossTypeCount = cfg.bossTypeCount;
         this.challengeCount = cfg.challengeCount;
-        this.maps = XLSConfigMgr.loadJson("SuperBossMap", SuperBossMap.class);
+        this.startTime = cfg.startTime;
+        this.endTime = cfg.endTime;
         this.bosss = XLSConfigMgr.loadJson("SuperBossItem", SuperBossItem.class);
+    }
+
+    @Override
+    public void afterStartup(){
+        log.info("SuperBossCfg.afterStartup");
+        // 由于有些操作需要调用数据库，所以要在系统启动后加载文件
+        this.maps = XLSConfigMgr.loadJson("SuperBossMap", SuperBossMap.class);
     }
 
 }

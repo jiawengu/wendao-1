@@ -4817,6 +4817,10 @@ import java.util.Random;
         GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
     }
 
+    public static void sendTips(String msg, Object... objs){
+        sendTips(String.format(msg, objs));
+    }
+
     /**
      * 发送通知
      * 

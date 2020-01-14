@@ -1,6 +1,7 @@
 [
   {
-    "timeUnit": "d",
+    "startTime": "0 0 7 * * ?",
+    "endTime": "0 0 0 * * ?",
     "bossTypeCount": 4,
     "bossCount": 12,
     "challengeCount": 50

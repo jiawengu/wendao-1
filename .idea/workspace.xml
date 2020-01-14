@@ -1,20 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="97b8d731-0895-4f06-ae03-4a7af3b192c3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/Uitl.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/Uitl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/outdoorboss/OutdoorBossCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/outdoorboss/OutdoorBossCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossCfg.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossCfg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/data/xls_config/superboss/SuperBossReward.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/SuperBossMng.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/SuperBossMng.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/XLSConfigMgr.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/game/XLSConfigMgr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/job/SaveCharaTimes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/CMD_SELECT_MENU_ITEM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/process/GameUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/java/org/linlinjava/litemall/gameserver/util/GmUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameserver/src/main/resources/xls_config/SuperBossCfg.json" beforeDir="false" afterPath="$PROJECT_DIR$/gameserver/src/main/resources/xls_config/SuperBossCfg.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/xls_config/xlsx/SuperBossCfg.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/xls_config/xlsx/SuperBossCfg.xlsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WNTvKC8q3otV7WJtWYM7wRIsTC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.linlinjava.litemall.Application" />
+      <module name="game-all" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.linlinjava.litemall.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="97b8d731-0895-4f06-ae03-4a7af3b192c3" name="Default Changelist" comment="" />
+      <created>1578989283740</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578989283740</updated>
+    </task>
+    <servers />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="690" y="280" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1578994440315">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="280" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578994440315" />
+    <state x="414" y="180" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578991873284">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="414" y="180" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578991873284" />
+    <state x="765" y="234" key="#com.intellij.ide.util.MemberChooser" timestamp="1578997335309">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="765" y="234" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1578997335309" />
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578996536313">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="271" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578996536313" />
+    <state width="1877" height="270" key="GridCell.Tab.0.bottom" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.0.center" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.0.left" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.0.right" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.1.bottom" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.1.center" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.1.left" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
+    <state width="1877" height="270" key="GridCell.Tab.1.right" timestamp="1578997537321">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="270" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1578997537321" />
     <state x="669" y="240" key="MultipleFileMergeDialog" timestamp="1578987682353">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="669" y="240" key="MultipleFileMergeDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578987682353" />
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1578987750274">
+    <state x="124" y="96" key="SettingsEditor" timestamp="1579004586772">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1578987750274" />
+    <state x="124" y="96" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1579004586772" />
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2" timestamp="1578988031448">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="258" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1578988031448" />
+    <state x="640" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1578997988044">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="640" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578997988044" />
     <state x="669" y="316" key="git4idea.merge.GitPullDialog" timestamp="1578987671598">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="669" y="316" key="git4idea.merge.GitPullDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578987671598" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1579002466235">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1579002466235" />
   </component>
 </project>

@@ -75,6 +75,8 @@ public class GameMap {
 
         //超级BOSS的地图判断
         npcList.addAll(GameData.that.superBossMng.getBossListByMapid(this.id));
+        //野外BOSS的地图判断
+        npcList.addAll(GameData.that.outdoorBossMng.getBossListByMapid(this.id));
 
         gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
         Iterator var6 = npcList.iterator();

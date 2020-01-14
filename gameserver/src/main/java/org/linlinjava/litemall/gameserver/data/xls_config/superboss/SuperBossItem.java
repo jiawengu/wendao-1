@@ -9,7 +9,6 @@ public class SuperBossItem {
     public Integer id;
     public String name;
     public Integer icon;
-    //分身数量
     public Integer count;
     public List<SuperBossReward> rewards;
 

@@ -471,13 +471,6 @@ public class SaveCharaTimes {
     }
 
     @Scheduled(
-            fixedRate =  1000L
-    )
-    public void autoProductionBoss(){
-        GameData.that.superBossMng.productionBoss();
-    }
-    
-    @Scheduled(
             fixedRate =  5000L
     )
     public void autoCheckUserLogicSave(){
