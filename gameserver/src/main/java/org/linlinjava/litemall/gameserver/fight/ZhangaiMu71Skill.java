@@ -19,9 +19,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 /**
- * 障碍木-法系伤害
+ * 障碍木-中毒状态
+ * 中毒伤害：法系伤害
  */
-public class ZhangaiMu71Skill extends FightRoundSkill {
+public class ZhangaiMu71Skill extends ZhangaiSkill {
     private int xueliang;
 
     public ZhangaiMu71Skill() {
@@ -54,7 +55,7 @@ public class ZhangaiMu71Skill extends FightRoundSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 2;
-        List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, jiNeng.range);
+        List<FightObject> targetList = findTargets(fightContainer, fightRequest, jiNeng.range);
         Iterator var12 = targetList.iterator();
 
         FightObject fightObject;

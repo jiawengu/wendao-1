@@ -15,9 +15,12 @@ public class DateTimeUtil {
      * @return
      */
     public static String getDateTimeDisplayString(LocalDateTime dateTime) {
-        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
-        String strDate2 = dtf2.format(dateTime);
+        return getDateTimeFormatterString(dateTime, "yyyy年MM月dd日 HH:mm:ss");
+    }
 
+    public static String getDateTimeFormatterString(LocalDateTime time, String format){
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern(format);
+        String strDate2 = dtf2.format(time);
         return strDate2;
     }
 }

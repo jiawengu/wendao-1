@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +39,7 @@ public class CharaStatueService {
      * 保存人物雕像
      * @param npcName
      */
-    public static void saveCharaStature(Chara chara, String npcName, CharaStatue charaStatue){
+    public static void saveCharaStature(String npcName, CharaStatue charaStatue){
         cacheMap.put(npcName, charaStatue);//放缓存
 
         Chara_Statue chara_statue = GameData.that.baseCharaStatueService.findByName(serverId, npcName);
@@ -48,16 +49,25 @@ public class CharaStatueService {
             chara_statue.setServerid(serverId);
             chara_statue.setData(JSONUtils.toJSONString(charaStatue));
             GameData.that.baseCharaStatueService.insert(chara_statue);
-            log.info("插入一条新雕像！"+npcName+",玩家："+chara.name);
+            log.info("插入一条新雕像！"+npcName);
         }else{
             chara_statue.setData(JSONUtils.toJSONString(charaStatue));
             GameData.that.baseCharaStatueService.updateById(chara_statue);
-            log.info("更新一条新雕像！"+npcName+",玩家："+chara.name);
+            log.info("更新一条新雕像！"+npcName);
         }
     }
 
     public static CharaStatue getCharStaure(String npcName){
         return cacheMap.get(npcName);
     }
+    public static boolean containsCharStaure(String npcName){
+        return cacheMap.containsKey(npcName);
+    }
+
+    public static void putCache(String npcName, CharaStatue charaStatue){
+        assert !cacheMap.containsKey(npcName);
+        cacheMap.put(npcName, charaStatue);
+    }
+
 
 }

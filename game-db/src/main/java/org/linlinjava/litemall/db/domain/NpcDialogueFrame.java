@@ -169,7 +169,7 @@ public class NpcDialogueFrame implements Cloneable, Serializable {
     }
 
     public String getNext() {
-        return this.next;
+        return this.next != null ? this.next : "";
     }
 
     public void setNext(String next) {

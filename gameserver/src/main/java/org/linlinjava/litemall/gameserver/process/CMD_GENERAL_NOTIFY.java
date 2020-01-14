@@ -5,87 +5,40 @@
 
 package org.linlinjava.litemall.gameserver.process;
 
+import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import org.linlinjava.litemall.db.domain.Characters;
-import org.linlinjava.litemall.db.domain.DaySignPrize;
-import org.linlinjava.litemall.db.domain.PetHelpType;
-import org.linlinjava.litemall.db.domain.SaleGood;
-import org.linlinjava.litemall.db.domain.StoreInfo;
+import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
+import org.linlinjava.litemall.gameserver.data.constant.ClientButtonIdConst;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.NoviceGiftBagUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12269_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_41051_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45074_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45075_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_49153_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_49169_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_49183;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_49183_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0;
-import org.linlinjava.litemall.gameserver.data.write.M12016_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_REFRESH_PET_GODBOOK_SKILLS_1;
-import org.linlinjava.litemall.gameserver.data.write.M12269_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
-import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-import org.linlinjava.litemall.gameserver.data.write.M40964_0;
-import org.linlinjava.litemall.gameserver.data.write.M41051_0;
-import org.linlinjava.litemall.gameserver.data.write.M45074_0;
-import org.linlinjava.litemall.gameserver.data.write.M45075_0;
-import org.linlinjava.litemall.gameserver.data.write.M45128_0;
-import org.linlinjava.litemall.gameserver.data.write.M49153_0;
-import org.linlinjava.litemall.gameserver.data.write.M49169_0;
-import org.linlinjava.litemall.gameserver.data.write.M49179_0;
-import org.linlinjava.litemall.gameserver.data.write.M49183_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
-import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-import org.linlinjava.litemall.gameserver.data.write.M65527_1;
-import org.linlinjava.litemall.gameserver.data.write.M8165_0;
-import org.linlinjava.litemall.gameserver.data.write.M9129_0;
-import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
-import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
-import org.linlinjava.litemall.gameserver.domain.Chara;
-import org.linlinjava.litemall.gameserver.domain.Goods;
-import org.linlinjava.litemall.gameserver.domain.PetShuXing;
-import org.linlinjava.litemall.gameserver.domain.Petbeibao;
-import org.linlinjava.litemall.gameserver.domain.ShouHu;
-import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
+import org.linlinjava.litemall.gameserver.data.vo.*;
+import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.gameserver.domain.*;
+import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.fight.FightRequest;
-import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.game.GameData;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.Map;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 /**
  * CMD_GENERAL_NOTIFY    一般通知
@@ -94,11 +47,35 @@ import org.springframework.stereotype.Service;
 public class CMD_GENERAL_NOTIFY implements GameHandler {
     public CMD_GENERAL_NOTIFY() {
     }
+    @Autowired
+    private BaxianService baxianService;
+
+    @Autowired
+    private M_MSG_BAXIAN_LEFT_TIMES m_msg_baxian_left_times;
+
+    private java.util.Map<Integer, Consumer<CMD_GENERAL_NOTIFY_VO>> buttonHandlerMap = Maps.newHashMap();
+
+    @PostConstruct
+    private void init() {
+        buttonHandlerMap.put(ClientButtonIdConst.NOTIFY_BAXIAN_RESET, this::baxian_reset);
+        buttonHandlerMap.put(ClientButtonIdConst.NOTIFY_BAXIAN_ENTER, this::baxian_enter);
+    }
 
     public void process(ChannelHandlerContext ctx, ByteBuf buff) {
         int type = GameReadTool.readShort(buff);
         String para1 = GameReadTool.readString(buff);
         String para2 = GameReadTool.readString(buff);
+        Consumer<CMD_GENERAL_NOTIFY_VO> buttonHandler = buttonHandlerMap.getOrDefault(type, null);
+        if (buttonHandler != null) {
+            CMD_GENERAL_NOTIFY_VO cmd_general_notify_vo = CMD_GENERAL_NOTIFY_VO.builder()
+                    .type(type)
+                    .parameter1(para1)
+                    .parameter2(para2)
+                    .gameObjectChar(GameObjectChar.getGameObjectChar())
+                    .build();
+            buttonHandler.accept(cmd_general_notify_vo);
+            return;
+        }
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         if (type == 20023) {
             Vo_9129_0 vo_9129_52 = new Vo_9129_0();
@@ -122,21 +99,49 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
             String[] strings = GameUtilRenWu.luckFindDraw();
             GameUtil.huodechoujiang(strings, chara);
+            String msg;
+            if (strings[1].equals("金币")){
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" +strings[0]+ strings[1] + "#n ";
+            }else if(strings[1].equals("潜能")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
+            }else if(strings[1].equals("上古妖王")){
+                Random random = new Random();
+                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
+                npc.setDeleted(false);
+                npc.setX(random.nextInt(40)+1);
+                npc.setY(random.nextInt(40)+1);
+                npc.setDeleted(false);
+                GameData.that.baseNpcService.updateById(npc);
+                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+                org.linlinjava.litemall.db.domain.Map map =
+                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
+                        "#n, "+ "在地图#Z" + map.getName() + "|" + map.getName() +
+                        "(" + npc.getX() + "," + npc.getY() + ")#Z上,赶快去挑战吧!";
+            }else if(strings[1].equals("道行")){
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
+            }else {
+                msg =
+                        "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[0] + "#n ";
+            }
             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
-            vo_8165_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_8165_0.msg = msg;
             vo_8165_0.active = 0;
             GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
             GameObjectChar.send(new M8165_0(), vo_8165_0);
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
-            vo_20480_0.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+            vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
             GameObjectChar.send(new M20480_0(), vo_20480_0);
+
+
             if (!strings[1].equals("金币")) {
                 Vo_16383_0 vo_16383_5 = new Vo_16383_0();
                 vo_16383_5.channel = 6;
                 vo_16383_5.id = 0;
                 vo_16383_5.name = "";
-                vo_16383_5.msg = "喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R" + strings[1] + "#n ";
+                vo_16383_5.msg =msg;
                 vo_16383_5.time = (int)(System.currentTimeMillis() / 1000L);
                 vo_16383_5.privilege = 0;
                 vo_16383_5.server_name = "3周年14线";
@@ -148,6 +153,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_16383_5.token = "";
                 vo_16383_5.checksum = 0;
                 GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_5);
+
             }
         }
 
@@ -284,6 +290,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         }
 
         if (32 == type) {
+
         }
 
         int weizhi;
@@ -1231,6 +1238,35 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameUtil.enterDugeno(chara, para1);
         }
 
+    }
+
+    private void baxian_reset(CMD_GENERAL_NOTIFY_VO general_notify_vo) {
+        GameObjectChar gameObjectChar = general_notify_vo.getGameObjectChar();
+
+        Baxian baxian = gameObjectChar.chara.baxian;
+        if (baxian.getResetTimeLeft() > 0) {
+            baxian.setCurrentLevel(1);
+            baxian.setCurrentTaskId(null);
+            baxian.setStatus(0);
+            baxian.setResetTimeLeft(baxian.getResetTimeLeft() - 1);
+            GameObjectCharMng.save(gameObjectChar);
+        }
+    }
+
+    private void baxian_enter(CMD_GENERAL_NOTIFY_VO general_notify_vo) {
+        GameObjectChar gameObjectChar = general_notify_vo.getGameObjectChar();
+
+        Baxian baxian = gameObjectChar.chara.baxian;
+        if (baxian.getTimesLeft() > 0) {
+            baxian.setStatus(1);
+            baxian.setCurrentTaskId(null);
+            GameObjectCharMng.save(gameObjectChar);
+            baxianService.gotoNextTask(gameObjectChar, baxian.getCurrentLevel(), null);
+
+            BAXIAN_LEFT_TIME_VO baxian_left_time_vo = new BAXIAN_LEFT_TIME_VO();
+            baxian_left_time_vo.left_time = baxian.getTimesLeft();
+            GameObjectChar.send(m_msg_baxian_left_times, baxian_left_time_vo);
+        }
     }
 
     public int cmd() {

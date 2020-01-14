@@ -21,6 +21,7 @@ public class TitleConst {
     public static final String TITLE_EVENT_MAP = "地图守护神";
 
     public static final String TITLE_EVENT_CHALLENGE_LEADER = "挑战掌门";
+    public static final String TITLE_EVENT_SHI_DAO_DIAN = "试道殿";
     /*
      * 称谓内容
      */

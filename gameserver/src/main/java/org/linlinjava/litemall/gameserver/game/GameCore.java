@@ -34,8 +34,8 @@ import org.springframework.context.ApplicationContext;
 /*    */   public NettyServer server;
 /* 31 */   public long currentTime = 0L;
            public PartyMgr partyMgr;
-/*    */   public void init(NettyServer server) {
-/* 34 */     log.error("game init begin!");
+   public void init(NettyServer server) {
+     log.error("game init begin!");
                 XLSConfigMgr.init();
 /*    */
 /* 36 */     this.server = server;
@@ -91,4 +91,5 @@ import org.springframework.context.ApplicationContext;
 /* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\game\GameCore.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
+
  */

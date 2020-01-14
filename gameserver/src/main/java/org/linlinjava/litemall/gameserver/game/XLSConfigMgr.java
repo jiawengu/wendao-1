@@ -1,5 +1,7 @@
 package org.linlinjava.litemall.gameserver.game;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSON;
 import org.linlinjava.litemall.core.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskCfg;
@@ -15,8 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,9 +26,6 @@ public class XLSConfigMgr{
 
     public static final String PARTY_SHOP = "party_shop";
     public static final String PARTY_DAILY_TASK = "party_daily_task";
-
-
-
 
 
     private static HashMap<String, Object> caches = new HashMap<>();

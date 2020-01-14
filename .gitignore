@@ -8,5 +8,6 @@ logs/
 bin/
 .vs/
 .ini
+**/resources/*
+resources/**
 .factorypath
-classes/

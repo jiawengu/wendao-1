@@ -13,4 +13,16 @@ public class GrantTitleRequest {
     private String source;
 
     private String title;
+
+    public int getUid() {
+        return uid;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

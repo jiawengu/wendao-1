@@ -2,15 +2,13 @@ package org.linlinjava.litemall.gameserver.game;
 
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_0;
+import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DISAPPEAR_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
-import org.linlinjava.litemall.gameserver.data.xls_config.PartyShopCfg;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
@@ -142,15 +140,15 @@ public class GameDugeon {
 
         if(content.equals("")) return false;
 
-        Vo_8247_0 vo_8247_0 = new Vo_8247_0();
-        vo_8247_0.id = id;
-        vo_8247_0.portrait = icon;
-        vo_8247_0.pic_no = 1;
-        vo_8247_0.content = content;
-        vo_8247_0.secret_key = "";
-        vo_8247_0.name = name;
-        vo_8247_0.attrib = 0;
-        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+        MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
+        menu_list_vo.id = id;
+        menu_list_vo.portrait = icon;
+        menu_list_vo.pic_no = 1;
+        menu_list_vo.content = content;
+        menu_list_vo.secret_key = "";
+        menu_list_vo.name = name;
+        menu_list_vo.attrib = 0;
+        GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
         return  true;
     }
 
@@ -178,7 +176,7 @@ public class GameDugeon {
         RenwuMonster renwuMonster = GameData.that.baseRenwuMonsterService.findById(cfg.monster_list.get(curStep - 1));
         if(renwuMonster == null) return;
         int id = renwuMonster.getId();
-        GameObjectChar.sendduiwu(new M12285_0(), Integer.valueOf(id), chara.id);
+        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_0(), Integer.valueOf(id), chara.id);
 
         curStep += 1;
         if(isFinish()){

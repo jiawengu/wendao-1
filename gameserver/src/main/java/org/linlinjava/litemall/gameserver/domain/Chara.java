@@ -7,7 +7,9 @@
 /*     */ import java.util.Map;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*     */ 
+import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
+
+/*     */
 /*     */ 
 /*     */ 
 /*     */ 
@@ -206,8 +208,12 @@
 /*     */   
 /*     */ 
 /*     */   public long exp;
-/*     */   
-/*     */   public int sex;
+/*     */
+    /**
+     * 1:男
+     * 2：女
+     */
+    /*     */   public int sex;
 /*     */   
 /*     */   public int line;
 /*     */   
@@ -399,11 +405,17 @@
 /* 396 */   public int autofight_skillaction = 2;
 /* 397 */   public int autofight_skillno = 2;
 /*     */   
-/*     */ 
-/*     */   public int friend;
+/*     */
+    /**
+     * 道行-天
+     */
+    /*     */   public int friend;
 /*     */   
-/*     */ 
-/*     */   public int owner_name;
+/*     */
+    /**
+     * 道行点
+     */
+    /*     */   public int owner_name;
 /*     */   
 /* 405 */   public Map<String, String> chenghao = new HashMap();
 /*     */   
@@ -426,6 +438,11 @@
 
             public int partyId = 0;
             public String partyName = "";
+            
+  // 下一个剧本
+  public int nextJuBen = 0;
+  // 当前剧本
+  public String[] currentJuBens = null;
     /**
      * 通天塔-层数
      */
@@ -456,7 +473,26 @@
      * 挑战掌门-今日失败次数
      */
     public int leaderTodayFailNum;
+    /**
+     * 证道殿-护法留言
+     */
+    public String zdd_Notice;
+    /**
+     * 英雄会-留言
+     */
+    public String yxh_Notice;
 
+    /**
+     * 上次跨天的时间戳
+     */
+    public Map<String, Long> dayBreakTimeMap = new HashMap<>();
+
+    public void onTTTDayBreak(){
+        this.ttt_layer = 0;
+        this.ttt_xj_name = "";
+        this.ttt_challenge_num = 0;
+        this.ttt_xj_success = false;
+    }
     public void onEnterTttLayer(int ttt_layer, String ttt_xj_name) {
         this.ttt_layer = ttt_layer;
         this.ttt_xj_name = ttt_xj_name;
@@ -473,10 +509,13 @@
         this.ttt_xj_success = false;
         this.ttt_challenge_num++;
     }
-/*     */ }
 
+    public Baxian baxian = Baxian.builder()
+            .currentLevel(1)
+            .currentMaxLevel(1)
+            .resetTimeLeft(7)
+            .timesLeft(7)
+            .status(0)
+            .build();
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\domain\Chara.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+}

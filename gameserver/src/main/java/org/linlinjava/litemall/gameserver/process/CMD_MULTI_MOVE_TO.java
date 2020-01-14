@@ -69,8 +69,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /* 62 */     vo_16431_0.x = x;
 /* 63 */     vo_16431_0.y = y;
 /* 64 */     GameObjectChar.getGameObjectChar().gameMap.send(new M16431_0(), vo_16431_0);
-/* 65 */     if ((chara.qumoxiang != 1) && 
-/* 66 */       (FightMove.move(chara.id))) {
+/* 65 */     if ((chara.qumoxiang != 1) && (FightMove.move(chara.id))) {
 /* 67 */       org.linlinjava.litemall.gameserver.fight.FightManager.goFight(GameObjectChar.getGameObjectChar().chara, GameObjectChar.getGameObjectChar().chara.mapName);
 /* 68 */       return;
 /*    */     }

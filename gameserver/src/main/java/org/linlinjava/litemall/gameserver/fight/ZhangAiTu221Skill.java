@@ -18,7 +18,11 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
-public class ZhangAiTu221Skill extends FightRoundSkill {
+/**
+ * 障碍土
+ * 使用成功后可使敌方对象处于混乱状态
+ */
+public class ZhangAiTu221Skill extends ZhangaiSkill {
     public ZhangAiTu221Skill() {
     }
 
@@ -43,7 +47,7 @@ public class ZhangAiTu221Skill extends FightRoundSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = fightRequest.id;
         vo_64989_0.a = 2;
-        List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, jiNeng.range);
+        List<FightObject> targetList = findTargets(fightContainer, fightRequest, jiNeng.range);
         Iterator var10 = targetList.iterator();
 
         FightObject fightObject;

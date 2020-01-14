@@ -1,0 +1,7 @@
+[
+  {
+    "resetTime": "0 0 5 * * ? ",
+    "upperLimit": 20,
+    "lowerLimit": 15
+  }
+]

@@ -15,10 +15,10 @@ public class FightRequest {
    */
   public int vid;
   /**
-   * 2:
+   * 2:普通攻击
    * 3:使用技能
    * 4:使用背包物品
-   * 7:
+   * 7:逃跑
    */
   public int action;
   /**

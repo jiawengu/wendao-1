@@ -60,11 +60,11 @@ public interface FightSkill {
 
     /**
      * 技能目标是否是敌方阵营
-     * @param para
+     * @param skill_no
      * @return
      */
-    static boolean isOpSkill(int para) {
-        switch(para) {
+    static boolean isOpSkill(int skill_no) {
+        switch(skill_no) {
             case 31:
             case 32:
             case 33:
@@ -108,11 +108,11 @@ public interface FightSkill {
                 return new NormalAttackSkill();
             case 3:
                 switch(para) {
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
+                    case 11://金光乍现
+                    case 12://刀光剑影
+                    case 13://金虹贯日
+                    case 14://流光异彩
+                    case 15://逆天残刃
                     case 61:
                     case 62:
                     case 63:
@@ -134,7 +134,7 @@ public interface FightSkill {
                     case 213:
                     case 214:
                         return new CastMagic11Skill();
-                    case 21:
+                    case 21://流连忘返
                     case 22:
                     case 23:
                     case 24:

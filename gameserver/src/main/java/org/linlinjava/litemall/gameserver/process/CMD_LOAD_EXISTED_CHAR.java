@@ -26,6 +26,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.netty.ServerHandler;
+import org.linlinjava.litemall.gameserver.service.DayBreakService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*     */
@@ -69,11 +70,12 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*  57 */     Chara chara = session.chara;
 /*     */     
 /*     */ 
-/*     */ 
+/*     */
+    DayBreakService.checkDayBreak(chara);
 /*     */ 
 /*  62 */     chara.uptime = System.currentTimeMillis();
 /*  63 */     java.util.Date date = new java.util.Date(chara.updatetime);
-/*  64 */     boolean isnow = GameUtil.isNow(date);//是否是今天
+/*  64 */     boolean isnow = GameUtil.isToday(date);//是否是今天
 /*  65 */     if (!isnow) {
 /*  66 */       chara.isGet = 0;
 /*  67 */       chara.isCanSgin = 1;
@@ -103,6 +105,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*  91 */       chara.npcxuanshang = new LinkedList();
 /*     */       
 /*  93 */       chara.npcXuanShangName = "";
+
 /*  94 */       for (int i = 0; i < chara.shenmiliwu.size(); i++) {
 /*  95 */         ((Vo_41480_0)chara.shenmiliwu.get(i)).online_time = 0;
 /*  96 */         ((Vo_41480_0)chara.shenmiliwu.get(i)).name = "";
@@ -410,7 +413,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /* 397 */     vo_4321_0.name = GameCore.getGameLine(chara.line).lineName;
 /* 398 */     vo_4321_0.time = ((int)(System.currentTimeMillis() / 1000L));
 /* 399 */     vo_4321_0.c = 8;
-/* 400 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4321_0(), vo_4321_0);
+/* 400 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M_MSG_ENTER_GAME(), vo_4321_0);
 
 
                 UserLogic logic = GameObjectChar.getGameObjectChar().logic;

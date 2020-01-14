@@ -20,6 +20,10 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.HeroPubService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
+import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
+import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -37,12 +41,21 @@ public class GameMap {
     public List<GameObjectChar> sessionList = new CopyOnWriteArrayList();
     public GameShiDao gameShiDao = new GameShiDao();
 
+
+
     public GameMap() {
         map_type = 0;
     }
 
     public List<GameObjectChar> getSessionList() {
         return this.sessionList;
+    }
+
+    private boolean isNpcAppear(Npc npc){
+        if(!MapGuardianService.isNpcAppear(npc)){
+            return false;
+        }
+        return true;
     }
 
     public void join(GameObjectChar gameObjectChar) {
@@ -59,11 +72,20 @@ public class GameMap {
         vo_45157_0.mapId = chara.mapid;
         gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
         Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
+
+        //超级BOSS的地图判断
+        npcList.addAll(GameData.that.superBossMng.getBossListByMapid(this.id));
+        //野外BOSS的地图判断
+        npcList.addAll(GameData.that.outdoorBossMng.getBossListByMapid(this.id));
+
         gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
         Iterator var6 = npcList.iterator();
 
         while(var6.hasNext()) {
             Npc npc = (Npc)var6.next();
+            if(!isNpcAppear(npc)){
+                continue;
+            }
             gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
         }
 
@@ -71,11 +93,7 @@ public class GameMap {
         gameObjectChar.sendOne(new MSG_EXITS(), list);
         Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
         this.send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->{
-            if(isTTTMap()){
-                return otherGameObjectChar.chara.ttt_layer==gameObjectChar.chara.ttt_layer;
-            }else{
-                return true;
-            }
+            return isCanSee(gameObjectChar.chara, otherGameObjectChar.chara);
         });
         Vo_61671_0 vo_61671_0;
         if (gameObjectChar.gameTeam != null && gameObjectChar.gameTeam.duiwu != null && gameObjectChar.gameTeam.duiwu.size() > 0) {
@@ -94,13 +112,10 @@ public class GameMap {
             if (gameSession.ctx != null && gameSession.chara != null) {
                 vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
-                if(isTTTMap()){
-                    if(gameObjectChar.chara!=null && gameObjectChar.chara.ttt_layer==gameSession.chara.ttt_layer){
-                        gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
-                    }
-                }else{
+                if(isCanSee(chara, gameSession.chara)){
                     gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 }
+
                 if (gameSession.gameTeam != null && gameSession.gameTeam.duiwu != null && gameSession.gameTeam.duiwu.size() > 0) {
                      vo_61671_0 = new Vo_61671_0();
                     vo_61671_0.id = ((Chara)gameSession.gameTeam.duiwu.get(0)).id;
@@ -130,6 +145,25 @@ public class GameMap {
 
             GameUtil.a45704(chara);
         }
+
+        if(isZhengDaoDianMap()){
+            ZhengDaoDianService.onEnterMap(gameObjectChar);
+        }
+        if(isHeroPubMap()){
+            HeroPubService.onEnterMap(gameObjectChar);
+        }
+
+        MapGuardianService.onEnterMap(this.id, gameObjectChar);
+    }
+
+    private boolean isCanSee(Chara chara1, Chara chara2){
+        if(isZhengDaoDianMap()){
+            return chara1.menpai == chara2.menpai;
+        }
+        if(isTTTMap()){
+            return chara1.ttt_layer==chara2.ttt_layer;
+        }
+        return true;
     }
 
     /**
@@ -137,6 +171,18 @@ public class GameMap {
      */
     public boolean isTTTMap(){
         return id==37000;
+    }
+    /**
+     * 是否是正道殿地图
+     */
+    public boolean isZhengDaoDianMap(){
+        return id==ZhengDaoDianService.MAP_ID;
+    }
+    /**
+     * 是否是英雄会地图
+     */
+    public boolean isHeroPubMap(){
+        return id== HeroPubService.MAP_ID;
     }
 
     public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
@@ -195,8 +241,8 @@ public class GameMap {
     }
 
     public void leave(GameObjectChar gameObjectChar) {
-        this.sendNoMe(new M12285_0(), gameObjectChar.chara.id, gameObjectChar);
-        this.sendNoMe(new M12285_1(), gameObjectChar.chara.genchong_icon, gameObjectChar);
+        this.sendNoMe(new MSG_DISAPPEAR_0(), gameObjectChar.chara.id, gameObjectChar);
+        this.sendNoMe(new MSG_DISAPPEAR_Chara(), gameObjectChar.chara.genchong_icon, gameObjectChar);
         this.sessionList.remove(gameObjectChar);
     }
 
