@@ -16,7 +16,7 @@ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.write.M12285_1;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DISAPPEAR_Chara;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -184,7 +184,7 @@ public class SaveCharaTimes {
                 gameMap = GameLine.getGameMapname(1, shidaolevel[i]);
 
                 for(int j = 0; j < gameMap.gameShiDao.shidaoyuanmo.size(); ++j) {
-                    gameMap.send(new M12285_1(), ((Vo_65529_0)gameMap.gameShiDao.shidaoyuanmo.get(j)).id);
+                    gameMap.send(new MSG_DISAPPEAR_Chara(), ((Vo_65529_0)gameMap.gameShiDao.shidaoyuanmo.get(j)).id);
                 }
 
                 List<Chara> charas = new ArrayList();

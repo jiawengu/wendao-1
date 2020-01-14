@@ -3,7 +3,7 @@ package org.linlinjava.litemall.gameserver.service;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20689_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8247_0;
+import org.linlinjava.litemall.gameserver.data.vo.MSG_MENU_LIST_VO;
 import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MENU_LIST;
 import org.linlinjava.litemall.gameserver.data.write.MSG_OVERCOME_NPC_INFO;
@@ -47,8 +47,8 @@ public class HeroPubService {
                 MsgUtil.getTalk(HeroPubService.getContent(npcId))+
                 MsgUtil.getTalk(WO_YAO_YI_DU_YING_XIONG)+
                 MsgUtil.getTalk(KONG_PA_SHI_LI_BU_GOU);
-        Vo_8247_0 vo_8247_0 = GameUtil.MSG_MENU_LIST(npc, content);
-        GameObjectChar.send(new MSG_MENU_LIST(), vo_8247_0);
+        MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(npc, content);
+        GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
     }
 
     public static void notifyPanel(Chara chara, int npcId){
@@ -112,7 +112,7 @@ public class HeroPubService {
             fightContainer.charaStatue.copyChengHao(titles[index]);
 
             //雕像
-            CharaStatueService.saveCharaStature(chara, getNpcName(npcId), fightContainer.charaStatue);
+            CharaStatueService.saveCharaStature(getNpcName(npcId), fightContainer.charaStatue);
             //刷新npc视野信息
             npc.setName(getNpcName(npcId));
             npc.setMapId(MAP_ID);

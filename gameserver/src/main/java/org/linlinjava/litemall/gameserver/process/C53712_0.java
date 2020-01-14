@@ -50,7 +50,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  49 */     Vo_4197_0 vo_4197_0 = new Vo_4197_0();
 /*  50 */     vo_4197_0.id = 0;
 /*  51 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M4197_0(), vo_4197_0);
-/*  52 */     GameObjectChar.getGameObjectChar().gameMap.send(new org.linlinjava.litemall.gameserver.data.write.M12285_1(), Integer.valueOf(chara.genchong_icon));
+/*  52 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(chara.genchong_icon));
 /*  53 */     Goods goods = new Goods();
 /*  54 */     goods.goodsInfo.owner_id = 1;
 /*  55 */     goods.goodsInfo.value = 2097924;

@@ -15,7 +15,7 @@
  * CMD_ECHO
  */
 /*    */ @Service
-/*    */ public class C4274_0 implements GameHandler
+/*    */ public class CMD_ECHO implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {

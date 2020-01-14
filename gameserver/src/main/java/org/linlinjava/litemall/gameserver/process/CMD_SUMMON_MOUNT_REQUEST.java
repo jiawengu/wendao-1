@@ -40,7 +40,7 @@
 /*  36 */       vo_41043_0.flag = 1;
 /*  37 */       vo_41043_0.name = callMounts(true)[0];
 /*  38 */       GameObjectChar.send(new M41043_0(), vo_41043_0);
-/*  39 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12285_0(), Integer.valueOf(chara.id));
+/*  39 */       GameObjectChar.send(new MSG_DISAPPEAR_0(), Integer.valueOf(chara.id));
 /*     */     }
 /*     */     
 /*  42 */     if (flag == 3) {
@@ -118,7 +118,7 @@
 /* 114 */       vo_41043_0.flag = 1;
 /* 115 */       vo_41043_0.name = callMounts(true)[0];
 /* 116 */       GameObjectChar.send(new M41043_0(), vo_41043_0);
-/* 117 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12285_0(), Integer.valueOf(chara.id));
+/* 117 */       GameObjectChar.send(new MSG_DISAPPEAR_0(), Integer.valueOf(chara.id));
 /*     */     }
 /*     */     
 /* 120 */     if (flag == 4) {
