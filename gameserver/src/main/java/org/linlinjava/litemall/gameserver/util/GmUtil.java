@@ -40,6 +40,7 @@ public class GmUtil {
             result.put("loadbossxls", this::loadbossxls);
             result.put("exp", this::exp_handler);
             result.put("level", this::level_handler);
+            result.put("daohang", this::daohang_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -74,6 +75,22 @@ public class GmUtil {
 //        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
 //        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
 
+        int daohang = Integer.parseInt(cmds[1]);
+        GameUtil.adddaohang(GameObjectChar.getGameObjectChar().chara, daohang);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+    }
+
+    /**
+     * 加道行：#gm daohang 道行值
+     * @param chara
+     * @param cmds
+     */
+    public void daohang_handler(Chara chara, String[] cmds){
+        int daohang = Integer.parseInt(cmds[1]);
+        GameUtil.adddaohang(GameObjectChar.getGameObjectChar().chara, daohang);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
 
     /**

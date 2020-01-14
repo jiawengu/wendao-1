@@ -285,7 +285,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
            fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
+            if (fightObject.godbook != 0) {//宠物天书
                 Vo_12025_0 vo_12025_0 = new Vo_12025_0();
                 vo_12025_0.id = fightObject.fid;
                 vo_12025_0.effect_no = fightObject.godbook;
@@ -1913,6 +1913,11 @@ public class FightManager {
 
     }
 
+    /**
+     *
+     * @param fightContainer
+     * @return 是否战斗结束
+     */
     private static boolean fabao(FightContainer fightContainer) {
         List<FightObject> allFightObject = getAllFightObject(fightContainer);
         Iterator var2 = allFightObject.iterator();
@@ -1921,12 +1926,13 @@ public class FightManager {
             FightObject fightObject = (FightObject)var2.next();
             List<FightRoundSkill> fightSkillList = fightObject.getRoundSkill();
             Iterator var5 = fightSkillList.iterator();
-
+            //回合技能
             while(var5.hasNext()) {
                 FightRoundSkill fightSkill = (FightRoundSkill)var5.next();
                 fightSkill.doRoundSkill();
             }
 
+            //法宝技能
             FightFabaoSkill fabaoSkill = fightObject.getFabaoSkill();
             if (fabaoSkill != null) {
                 fabaoSkill.active();
@@ -3033,12 +3039,20 @@ public class FightManager {
 
                     ++num;
                 }
-
                 fc.teamList.add(ft);
                 fc.teamList.add(ftother);
                 listFight.add(fc);
                 List<FightObject> fightObjectListAll = getAllFightObject(fc);
                 Iterator var21 = fightObjectListAll.iterator();
+
+                for(FightTeam fightTeam:fc.teamList){
+                    for(FightObject f:fightTeam.fightObjectList){
+                        System.out.println(f.str+"======>");
+                        for(JiNeng jiNeng:f.skillsList){
+                            System.out.print(jiNeng.skill_no+"#");
+                        }
+                    }
+                }
 
                 while(var21.hasNext()) {
                     object = (FightObject)var21.next();
