@@ -57,21 +57,19 @@ public class SuperBossCfg extends BaseCfg {
 
     @Override
     public void startupLoad(){
-        log.info("SuperBossCfg.startupLoad");
-        SuperBossCfg cfg = XLSConfigMgr.loadJson("SuperBossCfg", SuperBossCfg.class).get(0);
+        SuperBossCfg cfg = loadJson("SuperBossCfg", SuperBossCfg.class).get(0);
         this.bossCount = cfg.bossCount;
         this.bossTypeCount = cfg.bossTypeCount;
         this.challengeCount = cfg.challengeCount;
         this.startTime = cfg.startTime;
         this.endTime = cfg.endTime;
-        this.bosss = XLSConfigMgr.loadJson("SuperBossItem", SuperBossItem.class);
+        this.bosss = loadJson("SuperBossItem", SuperBossItem.class);
     }
 
     @Override
     public void afterStartup(){
-        log.info("SuperBossCfg.afterStartup");
         // 由于有些操作需要调用数据库，所以要在系统启动后加载文件
-        this.maps = XLSConfigMgr.loadJson("SuperBossMap", SuperBossMap.class);
+        this.maps = loadJson("SuperBossMap", SuperBossMap.class);
     }
 
 }

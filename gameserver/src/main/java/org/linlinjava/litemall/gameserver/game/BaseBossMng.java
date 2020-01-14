@@ -56,7 +56,7 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
         return getBossByid(id) != null;
     }
     public abstract boolean isExtBoss();
-    public abstract void updateBossChallengeCount(int id);
+    public abstract void afterBattle(int id);
     public abstract void sendBossFight(Chara chara, int id);
     public void sendRewards(Chara chara, String name){
         BossNpc boss = getBossByname(name);
@@ -70,7 +70,7 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
     public void sendRewards(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-            updateBossChallengeCount(id);
+            afterBattle(id);
             for(SuperBossReward reward: boss.rewards){
                 if("道行".equals(reward.type)){
                     int v = Integer.valueOf(reward.value);

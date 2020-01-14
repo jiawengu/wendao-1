@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.gameserver.game;
 
+import com.alibaba.fastjson.JSONObject;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.xls_config.outdoorboss.OutdoorBossCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.outdoorboss.OutdoorBossItem;
@@ -110,24 +111,21 @@ public class OutdoorBossMng extends BaseBossMng {
         sendRewards(chara, boss.getId());
     }
 
-    /**
-     * 更新 Boss 挑战次数
-     */
     @Override
-    public void updateBossChallengeCount(int id){
+    public void afterBattle(int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-            if(--boss.count <= 0){
-                // 挑战数量消耗殆尽，场上NPC消失
-                this.bossList.remove(boss.index);
-                this.bossMap.remove(id);
-            }
+            this.bossList.remove(boss.index);
+            this.bossMap.remove(id);
         }
     }
 
     @Override
     public void productionBoss(){
-        this.bossList = getRandomBossList();
+        if(cfg.maps != null){
+            System.out.println("生产野怪");
+            this.bossList = getRandomBossList();
+        }
     }
 
     @Override
@@ -136,24 +134,27 @@ public class OutdoorBossMng extends BaseBossMng {
         this.bossMap = new HashMap<>();
         int id = 0, index = 0;
         for(OutdoorBossItem item: cfg.bossList){
-            OutdoorBossNpc boss = new OutdoorBossNpc();
-            boss.setLevel(item.level);
-            boss.setIndex(index++);
-            boss.setCount(item.count);
-            boss.setRewards(item.rewards);
-            boss.setIcon(item.icon);
-            boss.setId(item.id);
-            boss.setName(item.name);
+            for(int i = 0; i < item.count; i++){
+                OutdoorBossNpc boss = new OutdoorBossNpc();
+                boss.setLevel(item.level);
+                boss.setIndex(index++);
+                boss.setCount(item.count);
+                boss.setRewards(item.rewards);
+                boss.setIcon(item.icon);
+                boss.setId(item.id);
+                boss.setName(item.name);
 
-            SuperBossMap map = item.getRandomMap();
-            boss.setMapName(map.name);
-            boss.setMapId(map.id);
+                SuperBossMap map = item.getRandomMap();
+                boss.setMapName(map.name);
+                boss.setMapId(map.mapid);
 
-            SuperBossPosition pos = map.getRandomPosition();
-            boss.setX(pos.x);
-            boss.setY(pos.y);
+                SuperBossPosition pos = map.getRandomPosition();
+                boss.setX(pos.x);
+                boss.setY(pos.y);
 
-            bossMap.put(boss.getId(), boss);
+                bossMap.put(boss.getId(), boss);
+                list.add(boss);
+            }
         }
         return list;
     }

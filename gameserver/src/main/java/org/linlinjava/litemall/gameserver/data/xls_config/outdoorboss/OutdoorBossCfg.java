@@ -30,6 +30,15 @@ public class OutdoorBossCfg extends BaseCfg {
     public void setResetTime(String resetTime) {
         this.resetTime = resetTime;
     }
+
+    public void setLowerLimit(int lowerLimit) {
+        this.lowerLimit = lowerLimit;
+    }
+
+    public void setUpperLimit(int upperLimit) {
+        this.upperLimit = upperLimit;
+    }
+
     public OutdoorBossItem getBossByid(int id){
         return this.bossMap.get(id);
     }
@@ -46,16 +55,16 @@ public class OutdoorBossCfg extends BaseCfg {
 
     @Override
     public void startupLoad() {
-        log.info("OutdoorBossCfg.startupLoad");
-        OutdoorBossCfg cfg = XLSConfigMgr.loadJson("OutdoorBossCfg", OutdoorBossCfg.class).get(0);
+        OutdoorBossCfg cfg = loadJson("OutdoorBossCfg", OutdoorBossCfg.class).get(0);
         this.resetTime = cfg.resetTime;
+        this.lowerLimit = cfg.lowerLimit;
+        this.upperLimit = cfg.upperLimit;
     }
 
     @Override
     public void afterStartup() {
-        log.info("OutdoorBossCfg.afterStartup");
-        this.maps = XLSConfigMgr.loadJson("OutdoorBossMap", SuperBossMap.class);
-        this.bossList = XLSConfigMgr.loadJson("OutdoorBossItem", OutdoorBossItem.class);
+        this.maps = loadJson("OutdoorBossMap", SuperBossMap.class);
+        this.bossList = loadJson("OutdoorBossItem", OutdoorBossItem.class);
         this.bossMap = new HashMap<>();
         for(OutdoorBossItem item: this.bossList){
             this.bossMap.put(item.id, item);

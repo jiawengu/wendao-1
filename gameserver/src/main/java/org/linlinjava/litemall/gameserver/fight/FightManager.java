@@ -2627,6 +2627,11 @@ public class FightManager {
                     GameShangGuYaoWang.onReward(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
                 }
+                //野怪
+                if(guaiwu != null && GameData.that.outdoorBossMng.getBossByname(guaiwu.get(0).str) != null){
+                    GameData.that.outdoorBossMng.sendRewards(chara1, guaiwu.get(0).str);
+                    return;
+                }
                 //超级 BOSS
                 if(guaiwu != null && GameData.that.superBossMng.getBossByname(guaiwu.get(0).str) != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
                     for(Chara c : GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu){

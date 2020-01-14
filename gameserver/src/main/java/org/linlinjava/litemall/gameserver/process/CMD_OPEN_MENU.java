@@ -167,6 +167,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             GameData.that.superBossMng.sendBossDlg(id);
             return ;
         }
+        if(GameData.that.outdoorBossMng.isBoss(Integer.valueOf(id))){
+            //野怪
+            GameData.that.outdoorBossMng.sendBossDlg(id);
+        }
         Npc npc = GameData.that.baseNpcService.findById(id);
         if (npc == null) {
             return;

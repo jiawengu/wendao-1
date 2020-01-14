@@ -163,6 +163,7 @@ public class SuperBossMng extends BaseBossMng {
     @Override
     public void productionBoss (){
         if(cfg.maps != null){
+            System.out.println("生产BOSS");
             this.bossList = getRandomBossList();
         }
     }
@@ -176,7 +177,7 @@ public class SuperBossMng extends BaseBossMng {
      * 更新 Boss 挑战次数
      */
     @Override
-    public void updateBossChallengeCount(int id){
+    public void afterBattle(int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
             if(--boss.count <= 0){
