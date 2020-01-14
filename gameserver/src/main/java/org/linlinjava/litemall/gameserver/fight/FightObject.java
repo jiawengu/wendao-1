@@ -601,7 +601,7 @@ public class FightObject {
         this.autofight_skillno = pet.autofight_skillno;
         this.autofight_select = pet.autofight_select;
         this.autofight_skillaction = pet.autofight_skillaction;
-        this.friend = ((PetShuXing)pet.petShuXing.get(0)).intimacy / 2;
+        this.friend = ((PetShuXing)pet.petShuXing.get(0)).martial / 1000;
         this.durability = 32768;
         this.rank = 2;
     }
