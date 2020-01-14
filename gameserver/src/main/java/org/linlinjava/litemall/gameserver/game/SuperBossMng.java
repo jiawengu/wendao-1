@@ -75,17 +75,17 @@ public class SuperBossMng {
         //随机获取种类
         List<Integer> temps = new ArrayList<>();
         int id = 0, index = 0;
-        if(cfg.cfg.bossTypeCount > cfg.bosss.size()){ cfg.cfg.bossTypeCount = cfg.bosss.size(); }
-        for(int i = 0; i < cfg.cfg.bossTypeCount; i++){
+        if(cfg.bossTypeCount > cfg.bosss.size()){ cfg.bossTypeCount = cfg.bosss.size(); }
+        for(int i = 0; i < cfg.bossTypeCount; i++){
             do{ id = SuperBossMng.RANDOM.nextInt(cfg.bosss.size()); } while (temps.contains(id));
             temps.add(id);
             SuperBossItem item = cfg.bosss.get(id);
-            for(int j = 0; j < cfg.cfg.bossCount; j++){
+            for(int j = 0; j < cfg.bossCount; j++){
                 SuperBossNpc npc = new SuperBossNpc();
                 npc.setId(item.id);
                 npc.setName(item.name);
                 npc.setIcon(item.icon);
-                npc.setCount(cfg.cfg.challengeCount);
+                npc.setCount(cfg.challengeCount);
                 npc.setRewards(item.rewards);
                 npc.setIndex(index++);
                 setBossRandomMap(npc);
@@ -233,7 +233,7 @@ public class SuperBossMng {
     }
 
     public void productionBoss (){
-        if(cfg.cfg != null){
+        if(cfg.bosss != null){
             test();
 //            if("d".equals(cfg.cfg.timeUnit)){
 //                String h = DateTimeUtil.getDateTimeFormatterString(LocalDateTime.now(), "HHmms");

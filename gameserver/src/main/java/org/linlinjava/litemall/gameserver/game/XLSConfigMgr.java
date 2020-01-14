@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.gameserver.game;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSON;
 import org.linlinjava.litemall.core.util.JSONUtils;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 public class XLSConfigMgr{
@@ -66,5 +68,16 @@ public class XLSConfigMgr{
         return caches.get(name);
     }
 
-
+    public static <T> List<T> loadJson(String name, Class<T> t)  {
+        List<T> list = new ArrayList<T>();
+        try {
+            JSONArray objs = JSONObject.parseObject(resourceLoader.getResource("classpath:xls_config/" + name + ".json").getInputStream(), JSONArray.class);
+            for(int i = 0, l = objs.size(); i < l; i++){
+                list.add(objs.getObject(i, t));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
