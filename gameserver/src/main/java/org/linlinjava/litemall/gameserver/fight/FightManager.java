@@ -627,7 +627,7 @@ public class FightManager {
 
         for(Iterator var20 = monsterList.iterator(); var20.hasNext(); ++num) {
             String monsterName = (String)var20.next();
-            if(GameData.that.superBossMng.getBossByname(monsterName) != null){
+            if(GameData.that.superBossMng.getBossByname(monsterName) != null || GameData.that.outdoorBossMng.getBossByname(monsterName) != null){
                 //超级BOSs
                 T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(monsterName);
                 fightObject = new FightObject(t_fightObject);
