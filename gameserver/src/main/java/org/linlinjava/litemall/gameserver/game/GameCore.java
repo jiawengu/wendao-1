@@ -11,6 +11,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.linlinjava.litemall.gameserver.netty.NettyServer;
 /*    */ import org.linlinjava.litemall.gameserver.service.CharaStatueService;
+import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ import org.springframework.context.ApplicationContext;
 /*    */   private List<BaseWrite> baseWrites;
            @Value("${serverId}")
            private String serverId;
+           @Autowired
+            private MapGuardianService mapGuardianService;
 /* 29 */   private static final Map<Integer, BaseWrite> basewriteMap = new HashMap();
 /*    */   public NettyServer server;
 /* 31 */   public long currentTime = 0L;
@@ -50,6 +53,7 @@ import org.springframework.context.ApplicationContext;
 /* 45 */     BuildFields.init();
 /* 46 */     BuildFields.add();
 /* 47 */     BattleUtils.init();
+       mapGuardianService.init();
 /* 48 */     CharaStatueService.init(serverId);
              this.partyMgr = new PartyMgr();
              this.partyMgr.init();
