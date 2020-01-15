@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
+import org.linlinjava.litemall.gameserver.data.write.MSG_REPLY_ECHO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
@@ -41,7 +42,9 @@ public abstract class BaseWrite {
         cn.append(getName(ns[1].getClassName()));
         cn.append(getName(this.getClass().getName()));
 
-        System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
+        if(! (object instanceof MSG_REPLY_ECHO)){
+            System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
+        }
         int writerIndex = 0;
         ByteBuf writeBuf = Unpooled.buffer();
         writerIndex = beforeWrite(writeBuf);

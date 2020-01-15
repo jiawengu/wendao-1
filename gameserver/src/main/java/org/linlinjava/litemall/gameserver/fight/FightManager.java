@@ -1671,15 +1671,8 @@ public class FightManager {
 
             resultList = skill.doSkill(fightContainer, fightRequest, jiNeng);
 
-            int delta = fightObject.mofa*2/10;
-            fightObject.mofa -= delta;
-            Vo_41027_0 vo_41027_0 = new Vo_41027_0();
-            vo_41027_0.id = fightObject.id;
-            vo_41027_0.mana = fightObject.mofa;
-            vo_41027_0.max_mana = fightObject.max_mofa;
-
-            send(fightContainer, new MSG_C_UPDATE_COMBAT_INFO(), vo_41027_0);
-            send_MANA_DELTA(fightContainer, fightObject.id, -delta);
+            //消耗魔法
+            costMofa(fightContainer, fightObject, fightObject.max_mofa/100);
 
             if (resultList != null) {
                 var7 = resultList.iterator();
@@ -1696,6 +1689,19 @@ public class FightManager {
         } while(!isOver(fightContainer));
 
         doOver(fightContainer);
+    }
+
+    public static void costMofa(FightContainer fightContainer, FightObject fightObject, int consumeMofa){
+        fightObject.mofa -= consumeMofa;
+        if(fightObject.mofa<0){
+            fightObject.mofa = 0;
+        }
+        Vo_41027_0 vo_41027_0 = new Vo_41027_0();
+        vo_41027_0.id = fightObject.id;
+        vo_41027_0.mana = fightObject.mofa;
+        vo_41027_0.max_mana = fightObject.max_mofa;
+        send(fightContainer, new MSG_C_UPDATE_COMBAT_INFO(), vo_41027_0);
+
     }
 
     public static void send_LIFE_DELTA(FightContainer fightContainer, FightResult fightResult) {
