@@ -101,7 +101,8 @@ public class OutdoorBossMng extends BaseBossMng {
 
             List<String> monsterList = new ArrayList<String>();
             monsterList.add(boss.getName());
-            FightManager.goFight(chara, monsterList);
+            monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
+            FightManager.goFightBoss(chara, monsterList);
         }
     }
 

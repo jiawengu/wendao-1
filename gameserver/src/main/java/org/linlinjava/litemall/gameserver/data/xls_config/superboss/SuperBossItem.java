@@ -11,6 +11,11 @@ public class SuperBossItem {
     public Integer icon;
     public Integer count;
     public List<SuperBossReward> rewards;
+    public List<String> xiaoGuai;
+
+    public void setXiaoGuai(String xiaoGuai) {
+        this.xiaoGuai = Arrays.asList(xiaoGuai.split(","));
+    }
 
     public void setRewards(String rewards) {
         this.rewards = new ArrayList<>();

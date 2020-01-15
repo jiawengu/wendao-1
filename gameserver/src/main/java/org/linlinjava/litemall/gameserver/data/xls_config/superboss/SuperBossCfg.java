@@ -36,7 +36,8 @@ public class SuperBossCfg extends BaseCfg {
     /**每个boss 可挑战次数*/
     public int challengeCount;
 
-    public List<SuperBossItem> bosss;
+    public List<SuperBossItem> bossList;
+    public Map<Integer, SuperBossItem> bossMap;
     public List<SuperBossMap> maps;
 
     public void setBossCount(int bossCount) {
@@ -63,7 +64,11 @@ public class SuperBossCfg extends BaseCfg {
         this.challengeCount = cfg.challengeCount;
         this.startTime = cfg.startTime;
         this.endTime = cfg.endTime;
-        this.bosss = loadJson("SuperBossItem", SuperBossItem.class);
+        this.bossList = loadJson("SuperBossItem", SuperBossItem.class);
+        this.bossMap = new HashMap<>();
+        for(SuperBossItem item: this.bossList){
+            bossMap.put(item.id, item);
+        }
     }
 
     @Override
