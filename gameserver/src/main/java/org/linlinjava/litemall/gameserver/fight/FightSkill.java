@@ -113,7 +113,7 @@ public interface FightSkill {
                     case 13://金虹贯日
                     case 14://流光异彩
                     case 15://逆天残刃
-                    case 61:
+                    case 61://摘叶飞花
                     case 62:
                     case 63:
                     case 64:
@@ -126,7 +126,7 @@ public interface FightSkill {
                     case 161:
                     case 162:
                     case 163:
-                    case 164:
+                    case 164://焦金砾石
                     case 165:
                     case 210:
                     case 211:
@@ -194,7 +194,7 @@ public interface FightSkill {
                     case 234:
                     case 235:
                         return new FuzhuTu231Skill();
-                    case 501:
+                    case 501://力破千钧
                         return new CastMagic501Skill();
                 }
             case 14:

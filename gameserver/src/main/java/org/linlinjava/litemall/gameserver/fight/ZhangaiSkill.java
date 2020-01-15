@@ -7,6 +7,13 @@ import java.util.List;
  * 障碍技能
  */
 public abstract class ZhangaiSkill extends FightRoundSkill{
+    public ZhangaiSkill() {
+    }
+
+    public ZhangaiSkill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
+
     /**
      * 障碍技能选择目标
      * @param fightContainer

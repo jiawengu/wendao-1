@@ -17,7 +17,6 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 public class DefenseSkill extends FightRoundSkill {
     public DefenseSkill() {
     }
-
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         List<FightResult> resultList = new ArrayList();
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();

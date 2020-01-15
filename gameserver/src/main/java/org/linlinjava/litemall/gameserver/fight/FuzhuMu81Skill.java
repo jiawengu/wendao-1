@@ -27,6 +27,9 @@ public class FuzhuMu81Skill extends FightRoundSkill {
     public FuzhuMu81Skill() {
     }
 
+    public FuzhuMu81Skill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         List<FightResult> resultList = new ArrayList();
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
@@ -72,11 +75,8 @@ public class FuzhuMu81Skill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            FuzhuMu81Skill that = new FuzhuMu81Skill();
+            FuzhuMu81Skill that = new FuzhuMu81Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound;
-            that.fightContainer = fightContainer;
             if (fightObject.isDead()) {
                 that.doRoundSkill();
                 fightObject.removeSkill(that);
