@@ -1241,11 +1241,11 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameUtil.enterDugeno(chara, para1);
         }
 
-        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
-        UserPartyLogic partyLogic = (UserPartyLogic)logic.getMod("party");
 
         //帮派升级
         if(type == 41){
+            UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+            UserPartyLogic partyLogic = (UserPartyLogic)logic.getMod("party");
             if(partyLogic.party == null){ return; }
             GameParty party = partyLogic.party;
             if(party.data.getConstruction() < 100000) {
@@ -1256,6 +1256,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             party.data.setLevel(party.data.getLevel() + 1);
             party.dirty = true;
             GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
+            GameUtil.sendTips("帮派升级成功!");
         }
 
     }
