@@ -82,11 +82,12 @@ public class SuperBossMng extends BaseBossMng {
         //随机获取种类
         List<Integer> temps = new ArrayList<>();
         int id = 0, index = 0;
-        if(cfg.bossTypeCount > cfg.bosss.size()){ cfg.bossTypeCount = cfg.bosss.size(); }
+        this.bossMap = new HashMap<>();
+        if(cfg.bossTypeCount > cfg.bossList.size()){ cfg.bossTypeCount = cfg.bossList.size(); }
         for(int i = 0; i < cfg.bossTypeCount; i++){
-            do{ id = RANDOM.nextInt(cfg.bosss.size()); } while (temps.contains(id));
+            do{ id = RANDOM.nextInt(cfg.bossList.size()); } while (temps.contains(id));
             temps.add(id);
-            SuperBossItem item = cfg.bosss.get(id);
+            SuperBossItem item = cfg.bossList.get(id);
             for(int j = 0; j < cfg.bossCount; j++){
                 BossNpc boss = new BossNpc();
                 boss.setId(item.id);
@@ -141,22 +142,23 @@ public class SuperBossMng extends BaseBossMng {
     public void sendBossFight(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-            if(chara.level < 100){
-                GameUtil.sendTips("等级至少100级才能挑战哦");
-                return ;
-            }
-            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
-                GameUtil.sendTips("请先创建队伍");
-                return ;
-            }
-            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-            if (duiwu.size() < 3) {
-                GameUtil.sendTips("人数不足3人");
-                return;
-            }
+//            if(chara.level < 100){
+//                GameUtil.sendTips("等级至少100级才能挑战哦");
+//                return ;
+//            }
+//            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+//                GameUtil.sendTips("请先创建队伍");
+//                return ;
+//            }
+//            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+//            if (duiwu.size() < 3) {
+//                GameUtil.sendTips("人数不足3人");
+//                return;
+//            }
             List<String> monsterList = new ArrayList<String>();
             monsterList.add(boss.getName());
-            FightManager.goFight(chara, monsterList);
+            monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
+            FightManager.goFightBoss(chara, monsterList);
         }
     }
 

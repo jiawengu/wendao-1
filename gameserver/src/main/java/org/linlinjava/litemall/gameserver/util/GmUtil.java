@@ -116,11 +116,11 @@ public class GmUtil {
     }
 
     public void loadbossxls(Chara chara, String[] cmds){
-//        GameData.that.superBossMng.resetBoss();
-//        GameData.that.superBossCfg.load();
-//        GameData.that.superBossMng.productionBoss();
-        GameData.that.outdoorBossCfg.load();
-        GameData.that.outdoorBossMng.productionBoss();
+        GameData.that.superBossMng.resetBoss();
+        GameData.that.superBossCfg.load();
+        GameData.that.superBossMng.productionBoss();
+//        GameData.that.outdoorBossCfg.load();
+//        GameData.that.outdoorBossMng.productionBoss();
     }
     /**
      * 添加经验:#gm exp 经验数量
