@@ -1448,16 +1448,6 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                        if (petbeibao.tianshu.size() != 0) {
-                            Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                            fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                            if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                                xiuluoshuSkill.buffObject = fightObject;
-                                xiuluoshuSkill.fightContainer = fc;
-                                fightObject.addSkill(xiuluoshuSkill);
-                            }
-                        }
 
                         ft.add(fightObject);
                         break;
@@ -1484,16 +1474,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     break;
