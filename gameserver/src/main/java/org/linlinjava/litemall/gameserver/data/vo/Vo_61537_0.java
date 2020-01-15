@@ -6,7 +6,7 @@
 /*    */   public int extra_desc;
 /*    */   
 /*    */   public int trading_sell_buy_type;
-/*  9 */   public String trading_state = "";
+/*  9 */   public int trading_state;
 /*    */   public int passive_mode;
 /*    */   public int trading_left_time;
 /* 12 */   public String trading_buyout_price = "";

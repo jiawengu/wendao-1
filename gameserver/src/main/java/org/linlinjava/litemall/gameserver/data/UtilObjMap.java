@@ -338,7 +338,7 @@
 /* 338 */     objectObjectHashMap.put("master", Integer.valueOf(obj1.master));
 /* 339 */     objectObjectHashMap.put("level", obj1.level);
 /* 340 */     objectObjectHashMap.put("skill", Integer.valueOf(obj1.skill));
-/* 341 */     objectObjectHashMap.put("party_contrib", obj1.party_contrib);
+/* 341 */     objectObjectHashMap.put("party_contrib", obj1.party_name); //有错位，暂时先这么处理了
 /* 342 */     objectObjectHashMap.put("status_daofa_wubian", obj1.status_daofa_wubian);
 /* 343 */     objectObjectHashMap.put("nick", Integer.valueOf(obj1.nick));
 /* 344 */     objectObjectHashMap.put("family_title", obj1.family_title);
@@ -367,7 +367,8 @@
 /* 367 */     objectObjectHashMap.put("gift_key", Integer.valueOf(obj1.gift_key));
 /* 368 */     objectObjectHashMap.put("online", Integer.valueOf(obj1.online));
 /* 369 */     objectObjectHashMap.put("voucher", Integer.valueOf(obj1.voucher));
-/* 370 */     objectObjectHashMap.put("party_name", Integer.valueOf(obj1.party_name));
+/* 370 */     objectObjectHashMap.put("party_contrib", obj1.party_name); //有错位，临时占位
+                objectObjectHashMap.put("nick", obj1.party_contrib);
 /* 371 */     objectObjectHashMap.put("use_money_type", Integer.valueOf(obj1.use_money_type));
 /* 372 */     objectObjectHashMap.put("lock_exp", Integer.valueOf(obj1.lock_exp));
 /* 373 */     objectObjectHashMap.put("shuadaojiji_rulvling", Integer.valueOf(obj1.shuadaojiji_rulvling));

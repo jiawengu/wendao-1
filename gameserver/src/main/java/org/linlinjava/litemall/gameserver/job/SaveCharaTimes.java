@@ -428,7 +428,13 @@ public class SaveCharaTimes {
         HashMap<Integer, GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
         long time = System.currentTimeMillis();
 
-        sessionList.forEach((id, obj)->{
+        List<GameObjectChar> list = new ArrayList<>();
+
+        for(GameObjectChar obj : sessionList.values()){
+            list.add(obj);
+
+        }
+        list.forEach(obj->{
             try {
                 if (obj.gameMap.id == 38004 && obj.gameTeam == null) {
                     GameUtilRenWu.shidaohuicheng(obj.chara);
@@ -441,6 +447,7 @@ public class SaveCharaTimes {
                 log.error("", var6);
             }
         });
+
     }
 
     @Scheduled(

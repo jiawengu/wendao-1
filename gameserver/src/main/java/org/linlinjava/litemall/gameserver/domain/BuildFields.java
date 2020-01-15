@@ -208,7 +208,7 @@
 /*      */   public static final String CAN_BUY_DP_TIMES = "can_buy_dp_times";
 /*      */   public static final String ONLINE = "online";
 /*      */   public static final String ARENA_RANK = "arena_rank";
-/*      */   public static final String PARTY_NAME = "party_name";
+/*      */   public static final String PARTY_NAME = "party/name";
 /*      */   public static final String UNIDENTIFIED = "unidentified";
 /*      */   public static final String DEGREE_32 = "degree_32";
 /*      */   public static final String STORE_EXP = "store_exp";
@@ -777,7 +777,7 @@
 /*  777 */     data.put("can_buy_dp_times", "can_buy_dp_times");
 /*  778 */     data.put("online", "online");
 /*  779 */     data.put("arena_rank", "arena_rank");
-/*  780 */     data.put("party_name", "party_name");
+/*  780 */     data.put("party/name", "party/name");
 /*  781 */     data.put("unidentified", "unidentified");
 /*  782 */     data.put("degree_32", "degree_32");
 /*  783 */     data.put("store_exp", "store_exp");
@@ -1237,7 +1237,7 @@
 /* 1237 */     FIELDS.put("master", new BuildFields(29, 1));
 /* 1238 */     FIELDS.put("level", new BuildFields(30, 1));
 /* 1239 */     FIELDS.put("skill", new BuildFields(31, 1));
-/* 1240 */     FIELDS.put("party/name", new BuildFields(32, 1));
+/* 1240 */     FIELDS.put("party/name", new BuildFields(32, 4));
 /* 1241 */     FIELDS.put("party_contrib", new BuildFields(33, 1));
 /* 1242 */     FIELDS.put("nick", new BuildFields(34, 1));
 /* 1243 */     FIELDS.put("title", new BuildFields(35, 1));

@@ -57,13 +57,13 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             }
         }else{
             if(npcId != 1006){ return null; }//帮派总管
-            if(data.getDayNo() < 50){
+            //if(data.getDayNo() < 50){
                 ArrayList<PartyDailyTaskItem> list = taskCfg.randomGroup();
                 cfgItem = list.get(0);
                 this.data.setCurTaskId(cfgItem.id);
                 this.save();
                 return cfgItem;
-            }
+            //}
         }
         return null;
     }

@@ -31,6 +31,8 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +67,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         int type = GameReadTool.readShort(buff);
         String para1 = GameReadTool.readString(buff);
         String para2 = GameReadTool.readString(buff);
+        System.out.println("CMD_GENERAL_NOTIFY:" + type + ":" + para1 + ":" + para2);
         Consumer<CMD_GENERAL_NOTIFY_VO> buttonHandler = buttonHandlerMap.getOrDefault(type, null);
         if (buttonHandler != null) {
             CMD_GENERAL_NOTIFY_VO cmd_general_notify_vo = CMD_GENERAL_NOTIFY_VO.builder()
@@ -1236,6 +1239,23 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new M9129_0(), vo_9129_0);
 
             GameUtil.enterDugeno(chara, para1);
+        }
+
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        UserPartyLogic partyLogic = (UserPartyLogic)logic.getMod("party");
+
+        //帮派升级
+        if(type == 41){
+            if(partyLogic.party == null){ return; }
+            GameParty party = partyLogic.party;
+            if(party.data.getConstruction() < 100000) {
+                GameUtil.sendTips("帮贡不足!");
+                return;
+            }
+            party.addContrib(-100000);
+            party.data.setLevel(party.data.getLevel() + 1);
+            party.dirty = true;
+            GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
         }
 
     }
