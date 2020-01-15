@@ -42,7 +42,7 @@ public abstract class BaseWrite {
         cn.append(getName(ns[1].getClassName()));
         cn.append(getName(this.getClass().getName()));
 
-        if(! (object instanceof MSG_REPLY_ECHO)){
+        if(! (this instanceof MSG_REPLY_ECHO)){
             System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
         }
         int writerIndex = 0;

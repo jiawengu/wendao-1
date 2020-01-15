@@ -1672,7 +1672,7 @@ public class FightManager {
             resultList = skill.doSkill(fightContainer, fightRequest, jiNeng);
 
             //消耗魔法
-            costMofa(fightContainer, fightObject, fightObject.max_mofa/100);
+            costMofa(fightContainer, fightObject, fightObject.max_mofa/50);
 
             if (resultList != null) {
                 var7 = resultList.iterator();

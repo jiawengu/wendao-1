@@ -164,7 +164,11 @@ public class NormalAttackSkill implements FightSkill {
         }
         //魔引
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.MO_YIN)){
-            FightManager.costMofa(fightContainer, victimFightObject, hurt/20);
+            int cost = hurt/20;
+            if(cost>0){
+                FightManager.costMofa(fightContainer, victimFightObject, cost);
+                FightManager.send_MANA_DELTA(fightContainer, victimFightObject.fid, -cost);
+            }
         }
 
         //狂暴
