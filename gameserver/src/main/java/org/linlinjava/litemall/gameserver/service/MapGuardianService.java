@@ -28,7 +28,7 @@ public class MapGuardianService {
     private static final Logger logger = LoggerFactory.getLogger(MapGuardianService.class);
     private static final Map<String, Template> configMap = new LinkedHashMap<>();
 
-    public MapGuardianService() {
+    public void init(){
         register("五龙窟四层守护神", 45, 55);
         register("蓬莱岛守护神", 45, 56);
         register("五龙窟五层守护神", 45, 58);
