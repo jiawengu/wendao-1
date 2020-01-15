@@ -473,6 +473,12 @@ function GameFunctionDlg:onPartyButton()
         return
     end
 
+    local mt = getmetatable(Me)
+    mt.__newindex = function(m, k, v)
+        if k == "party/name" then
+            print("set party/name:", v, debug.traceback())
+        end
+    end
     if Me:queryBasic("party/name") == "" then
         -- 无帮派,有未处理的邀请则显示邀请界面
         local inviteData = PartyMgr:getInviteList()

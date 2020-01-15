@@ -512,9 +512,14 @@ local function http_get_script(url, mod)
     xhr:release()
     co = nil
     assert(data, url)
-    return loadstring(data, mod)()
+    return data
 end
 
+local function call_http_script(url, mod)
+    local ret, data = xpcall(http_get_script, print, url, mod)
+    assert(ret, data)
+    return loadstring(data, mod)()
+end
 
 
 local status, msg = xpcall(function()
@@ -522,14 +527,29 @@ local status, msg = xpcall(function()
         local loc_config = require "src/loc_config"
         if not loc_config.enable then return main() end
         local url = loc_config.url
-        xpcall(http_get_script, print, url, "loc_init")
-        local loc_list = http_get_script(url, "loc_list")
+        call_http_script(url, "loc_init")
+        local loc_list = call_http_script(url, "loc_list")
+        local loc_map = {}
         print(inspect(loc_list))
         for i, v in ipairs(loc_list) do
-            local ret, obj = xpcall(http_get_script, print, url, v)
-            assert(ret, obj)
-            package.loaded[v] = obj
+            local ret, data = xpcall(http_get_script, print, url, v)
+            assert(ret, data)
+            loc_map[v] = data
         end
+
+        local r_require = require
+        require = function(mod)
+            if package.loaded[mod] then
+                return package.loaded[mod]
+            end
+            if loc_map[mod] then
+                local ret, obj = xpcall(loadstring(loc_map[mod], mod), print)
+                package.loaded[mod] = obj or true
+                return obj or true
+            end
+            return r_require(mod)
+        end
+        call_http_script(url, "loc_init_after")
 
         main()
     end))

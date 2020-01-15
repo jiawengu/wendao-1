@@ -34,9 +34,11 @@ function Builders:BuildFields(pkt, data, suffix)
 			key = key .. suffix
 		end
 
+
         if not key then
             assert(nil, "BuildFields no find field " .. no)
         end
+
 
 		if key ~= nil then
 			local type = pkt:GetChar()
@@ -64,6 +66,11 @@ function Builders:BuildFields(pkt, data, suffix)
         		data[key] = string.gsub(data[key], CHS[6000324], CHS[5440002])
 			end
 		end
+
+
+        if key == "party/name" then
+            print("CharMgr:", key, no, inspect(data[key]))
+        end
 	end
 end
 

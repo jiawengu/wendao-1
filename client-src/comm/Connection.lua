@@ -435,6 +435,10 @@ function Connection:parsePacket(pkt, rawData)
     }
     func(MsgParser, pkt, data, rawData)
 
+    if msgStr ~= 'MSG_REPLY_ECHO' then
+        print("RECV=", msgStr, inspect(data))
+    end
+
     if ATM_IS_DEBUG_VER and msgStr ~= 'MSG_REPLY_ECHO' then
        -- 打印log
        gf:PrintMap(data)

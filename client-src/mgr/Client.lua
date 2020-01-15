@@ -57,6 +57,8 @@ end
 
 -- 追加调试信息
 function Client:pushDebugInfo(info)
+    print("pushDebugInfo:", info)
+    if not info then return end
     local timeStr = os.date("%m%d-%H%M%S", os.time())
     table.insert(self.debugInfo, timeStr .. ' ' .. info)
     Log:F(info) -- 记录到文件中
@@ -1178,7 +1180,7 @@ function Client:createNewPlayerBattle(char)
             -- 进入新手开场战斗，算作已经用新建角色登录了，此时要进行“是否保留之前聊天记录”的判断
             GameMgr:setLoginRole(char.gid)
         else
-            Client:pushDebugInfo('SEND CMD_LOAD_EXISTED_CHAR char = ' .. char["name"])
+            --Client:pushDebugInfo('SEND CMD_LOAD_EXISTED_CHAR char = ' .. char["name"])
             gf:CmdToServer("CMD_LOAD_EXISTED_CHAR", {
                 char_name=char["name"]
             })
