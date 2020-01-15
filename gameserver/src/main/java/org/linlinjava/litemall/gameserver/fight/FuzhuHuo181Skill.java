@@ -25,6 +25,10 @@ public class FuzhuHuo181Skill extends FightRoundSkill {
     public FuzhuHuo181Skill() {
     }
 
+    public FuzhuHuo181Skill(FightObject buffObject, int skillRound, FightContainer fightContainer) {
+        super(buffObject, fightContainer.round + skillRound - 1, fightContainer);
+    }
+
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         new ArrayList();
         int victim_id = fightRequest.vid;
@@ -72,10 +76,8 @@ public class FuzhuHuo181Skill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new FuzhuHuo181Skill();
+            that = new FuzhuHuo181Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound - 1;
             speed = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
         }
 

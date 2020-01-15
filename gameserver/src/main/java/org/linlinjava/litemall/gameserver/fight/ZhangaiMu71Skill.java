@@ -27,6 +27,9 @@ public class ZhangaiMu71Skill extends ZhangaiSkill {
 
     public ZhangaiMu71Skill() {
     }
+    public ZhangaiMu71Skill(FightObject buffObject, int skillRound, FightContainer fightContainer) {
+        super(buffObject, fightContainer.round + skillRound - 1, fightContainer);
+    }
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         List<FightResult> resultList = new ArrayList();
@@ -80,11 +83,8 @@ public class ZhangaiMu71Skill extends ZhangaiSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            ZhangaiMu71Skill that = new ZhangaiMu71Skill();
+            ZhangaiMu71Skill that = new ZhangaiMu71Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound;
-            that.fightContainer = fightContainer;
             int showhurt;
             int hurt = 0;
             if (hurt == 0) {

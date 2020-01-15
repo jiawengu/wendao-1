@@ -32,9 +32,9 @@ import org.slf4j.LoggerFactory;
  */
 /*     */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C12490_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_BUY_FROM_STALL implements org.linlinjava.litemall.gameserver.GameHandler
         /*     */ {
-                private static final Logger log = LoggerFactory.getLogger(C12490_0.class);
+                private static final Logger log = LoggerFactory.getLogger(CMD_BUY_FROM_STALL.class);
     /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
     /*     */   {
         /*  31 */     String id = GameReadTool.readString(buff);

@@ -50,7 +50,6 @@ import org.springframework.context.ApplicationContext;
 /* 45 */     BuildFields.init();
 /* 46 */     BuildFields.add();
 /* 47 */     BattleUtils.init();
-/* 48 */     FightTianshuMap.init();
 /* 48 */     CharaStatueService.init(serverId);
              this.partyMgr = new PartyMgr();
              this.partyMgr.init();

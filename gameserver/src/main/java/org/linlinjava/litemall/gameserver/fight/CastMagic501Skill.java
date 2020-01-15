@@ -79,20 +79,22 @@ public class CastMagic501Skill implements FightSkill {
             if (hurt == 0) {
                 showhurt = BattleUtils.skillAttack(attFightObject.accurate + attFightObject.accurate_ext, jiNeng.skill_level, "WS", jiNeng.skill_no - 501);
                 showhurt = (int)((float)showhurt * jiabei);
-                int thurt = BattleUtils.battle(attFightObject.accurate + attFightObject.accurate_ext, showhurt, fightObject.fangyu + fightObject.fangyu_ext);
+                int thurt = BattleUtils.battle(attFightObject.accurate + attFightObject.accurate_ext, showhurt, (int) (fightObject.fangyu + fightObject.fangyu_ext));
                 hurt = thurt;
             } else {
                 hurt = (int)((double)hurt * 0.9D);
             }
+            {
+                showhurt = fightObject.reduceShengming(hurt, fabao, false);
+                FightResult fightResult = new FightResult();
+                fightResult.id = fightRequest.id;
+                fightResult.vid = fightObject.fid;
+                fightResult.point = -showhurt;
+                fightResult.effect_no = 0;
+                fightResult.damage_type = 4097;
+                resultList.add(fightResult);
+            }
 
-            showhurt = fightObject.reduceShengming(hurt, fabao, false);
-            FightResult fightResult = new FightResult();
-            fightResult.id = fightRequest.id;
-            fightResult.vid = fightObject.fid;
-            fightResult.point = -showhurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 4097;
-            resultList.add(fightResult);
         }
 
         return resultList;

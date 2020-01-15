@@ -25,6 +25,9 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 public class ZhangaiHuo171Skill extends ZhangaiSkill {
     public ZhangaiHuo171Skill() {
     }
+    public ZhangaiHuo171Skill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         new ArrayList();
@@ -59,7 +62,7 @@ public class ZhangaiHuo171Skill extends ZhangaiSkill {
         FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
 
         ZhangaiHuo171Skill that;
-        for(var10 = targetList.iterator(); var10.hasNext(); that.removeRound = fightContainer.round + jiNeng.skillRound - 1) {
+        for(var10 = targetList.iterator(); var10.hasNext();) {
             fightObject = (FightObject)var10.next();
             vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fightContainer.round;
@@ -72,9 +75,8 @@ public class ZhangaiHuo171Skill extends ZhangaiSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new ZhangaiHuo171Skill();
+            that = new ZhangaiHuo171Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
         }
 
         return null;

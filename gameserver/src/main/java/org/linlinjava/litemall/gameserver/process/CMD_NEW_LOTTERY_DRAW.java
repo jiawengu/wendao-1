@@ -32,7 +32,7 @@
 /*     */ import org.springframework.stereotype.Service;
 /*     */ 
 /*     */ @Service
-/*     */ public class C45385_0 implements GameHandler
+/*     */ public class CMD_NEW_LOTTERY_DRAW implements GameHandler
 /*     */ {
 /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {

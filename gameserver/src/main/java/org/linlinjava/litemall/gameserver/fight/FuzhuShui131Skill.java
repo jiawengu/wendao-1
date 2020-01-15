@@ -23,6 +23,11 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
  */
 public class FuzhuShui131Skill extends FightRoundSkill {
     public FuzhuShui131Skill() {
+
+    }
+
+    protected FuzhuShui131Skill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
     }
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
@@ -70,10 +75,8 @@ public class FuzhuShui131Skill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new FuzhuShui131Skill();
+            that = new FuzhuShui131Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound - 1;
             fangyu = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
         }
 

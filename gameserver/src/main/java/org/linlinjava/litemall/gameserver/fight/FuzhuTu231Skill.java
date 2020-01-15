@@ -21,6 +21,9 @@ public class FuzhuTu231Skill extends FightRoundSkill {
     public FuzhuTu231Skill() {
     }
 
+    public FuzhuTu231Skill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
@@ -52,7 +55,7 @@ public class FuzhuTu231Skill extends FightRoundSkill {
         FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
 
         FuzhuTu231Skill that;
-        for(var8 = targetList.iterator(); var8.hasNext(); that.removeRound = fightContainer.round + jiNeng.skillRound - 1) {
+        for(var8 = targetList.iterator(); var8.hasNext(); ) {
             fightObject = (FightObject)var8.next();
             vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fightContainer.round;
@@ -65,9 +68,8 @@ public class FuzhuTu231Skill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new FuzhuTu231Skill();
+            that = new FuzhuTu231Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
         }
 
         return null;

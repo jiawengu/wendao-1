@@ -74,10 +74,6 @@ public class ZhaoChuSkill implements FightSkill {
                 fightObject.id = petbeibao.id;
                 fightObject.cid = chara.id;
                 petbeibaoChuzhan = petbeibao;
-                if (petbeibao.tianshu.size() != 0) {
-                    Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(FightManager.RANDOM.nextInt(petbeibao.tianshu.size()));
-                    fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                }
 
                 friendsFightTeam.add(fightObject);
                 break;
