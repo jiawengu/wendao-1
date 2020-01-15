@@ -46,11 +46,7 @@ public class GameObjectChar {
     }
 
     public GameObjectChar(Characters characters) {
-        String data = characters.getData();
-        Chara chara = org.linlinjava.litemall.db.util.JSONUtils.parseObject(data, Chara.class);
-        chara.id = characters.getId().intValue();
-        this.chara = chara;
-        this.characters = characters;
+        this.init(characters);
     }
 
     public GameObjectChar(int accountid, ChannelHandlerContext ctx) {
@@ -79,8 +75,8 @@ public class GameObjectChar {
         this.chara = chara;
         this.characters = characters;
         this.logic = new UserLogic();
-        this.logic.init(chara.id, this.logic);
-        GameObjectCharMng.add(this);
+        this.logic.init(chara.id, this.logic, this);
+        //GameObjectCharMng.add(this);
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);
         if(chara.partyId > 0){
@@ -101,13 +97,15 @@ public class GameObjectChar {
 
     public static void send(BaseWrite baseWrite, Object obj) {
         GameObjectChar gameObjectChar = (GameObjectChar) GAMEOBJECTCHAR_THREAD_LOCAL.get();
-        ByteBuf write = baseWrite.write(obj);
-        gameObjectChar.ctx.writeAndFlush(write);
+        if(gameObjectChar.ctx != null){
+            ByteBuf write = baseWrite.write(obj);
+            gameObjectChar.ctx.writeAndFlush(write);
+        }
     }
 
     public static void send(BaseWrite baseWrite, Object obj, int id) {
         GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(id);
-        if (gameObjectChar == null) {
+        if (gameObjectChar.ctx == null) {
             return;
         }
         ByteBuf write = baseWrite.write(obj);
@@ -245,6 +243,7 @@ public class GameObjectChar {
 
 
     public void sendOne(BaseWrite baseWrite, Object obj) {
+        if(this.ctx == null){ return; }
         ByteBuf buff = baseWrite.write(obj);
         ByteBuf copy = buff.copy();
         send0(copy);

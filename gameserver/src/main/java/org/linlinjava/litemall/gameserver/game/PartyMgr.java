@@ -16,6 +16,7 @@ public class PartyMgr {
     public static final  String OFFICE_NORMAL = "帮众";
 
 
+    public static PartyMgr that;
     private HashMap<Integer, GameParty> map = new HashMap<>();
     private boolean inited = false;
     private AtomicBoolean lock = new AtomicBoolean(false);
@@ -27,6 +28,7 @@ public class PartyMgr {
     }
 
     public void init(){
+        PartyMgr.that = this;
         this.map = new HashMap<>();
         Party a7913 = GameData.that.basePartyService.findById(7913);
         List<Party> list = GameData.that.basePartyService.getAll();
@@ -95,7 +97,7 @@ public class PartyMgr {
     }
 
     public static int parseStrId(String str){
-        return Integer.valueOf(str.substring(4, str.length() - 1));
+        return Integer.valueOf(str.substring(4, str.length()));
     }
 
 

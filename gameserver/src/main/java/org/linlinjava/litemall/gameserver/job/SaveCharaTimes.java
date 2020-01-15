@@ -5,10 +5,8 @@
 
 package org.linlinjava.litemall.gameserver.job;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
 import org.linlinjava.litemall.db.domain.Notice;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
@@ -44,24 +42,10 @@ public class SaveCharaTimes {
             fixedDelay = 5000L
     )
     public void resetCompileTimes() {
-        List<GameObjectChar> all = GameObjectCharMng.getAll();
-        Iterator var2 = all.iterator();
-
-        while(var2.hasNext()) {
-            GameObjectChar gameSession = (GameObjectChar)var2.next();
-            String data = gameSession.characters.getData();
-            if(data != null) {
-                Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-                if (chara111.level > gameSession.chara.level) {
-                    log.error("人物等级{old}", chara111.name, chara111.level);
-                    log.error("人物等级{new}", gameSession.chara.name, gameSession.chara.name);
-                    log.error("人物队伍信息", gameSession.gameTeam.toString());
-                    throw new RuntimeException("角色等级回档！！！");
-                }
-            }
-            gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
-            GameData.that.baseCharactersService.updateById(gameSession.characters);
-        }
+        HashMap<Integer, GameObjectChar> all = GameObjectCharMng.getAll();
+        all.forEach((id, obj)->{
+            GameObjectCharMng.save(obj);
+        });
 
     }
 
@@ -441,23 +425,28 @@ public class SaveCharaTimes {
             fixedRate = 2000L
     )
     public void autofightromve() {
-        List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+        HashMap<Integer, GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
         long time = System.currentTimeMillis();
 
-        for(int i = 0; i < sessionList.size(); ++i) {
-            try {
-                if (((GameObjectChar)sessionList.get(i)).gameMap.id == 38004 && ((GameObjectChar)sessionList.get(i)).gameTeam == null) {
-                    GameUtilRenWu.shidaohuicheng(((GameObjectChar)sessionList.get(i)).chara);
-                }
+        List<GameObjectChar> list = new ArrayList<>();
 
-                if (((GameObjectChar)sessionList.get(i)).heartEcho != 0L && ((GameObjectChar)sessionList.get(i)).heartEcho + 180000L < time) {
-                    ((GameObjectChar)sessionList.get(i)).offline();
-                    sessionList.remove(sessionList.get(i));
+        for(GameObjectChar obj : sessionList.values()){
+            list.add(obj);
+
+        }
+        list.forEach(obj->{
+            try {
+                if (obj.gameMap.id == 38004 && obj.gameTeam == null) {
+                    GameUtilRenWu.shidaohuicheng(obj.chara);
+                }
+                if (obj.heartEcho != 0L && obj.heartEcho + 180000L < time) {
+                    obj.offline();
+                    GameObjectCharMng.offlineObj(obj);
                 }
             } catch (Exception var6) {
                 log.error("", var6);
             }
-        }
+        });
 
     }
 
@@ -468,19 +457,6 @@ public class SaveCharaTimes {
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
         }
-    }
-
-    @Scheduled(
-            fixedRate =  5000L
-    )
-    public void autoCheckUserLogicSave(){
-        GameObjectCharMng.getAll().forEach(item->{
-            try {
-                item.logic.cacheSave();
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
     }
 
 }

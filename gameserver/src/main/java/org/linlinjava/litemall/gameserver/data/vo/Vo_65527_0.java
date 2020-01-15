@@ -47,7 +47,7 @@
 /*     */   public int master;
 /*  48 */   public String level = "";
 /*     */   public int skill;
-/*  50 */   public String party_contrib = "";
+/*  50 */   public int party_contrib;
 /*  51 */   public String status_daofa_wubian = "";
 /*     */   public int nick;
 /*  53 */   public String family_title = "";
@@ -79,7 +79,7 @@
 /*     */   public int gift_key;
 /*     */   public int online;
 /*     */   public int voucher;
-/*     */   public int party_name;
+/*     */   public String party_name;
 /*     */   public int use_money_type;
 /*     */   public int lock_exp;
 /*     */   public int shuadaojiji_rulvling;

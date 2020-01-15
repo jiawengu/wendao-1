@@ -1,7 +1,8 @@
 /*     */ package org.linlinjava.litemall.gameserver.game;
 /*     */ 
 /*     */ import java.util.ArrayList;
-/*     */ import java.util.List;
+/*     */ import java.util.HashMap;
+import java.util.List;
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.RenwuMonster;
 /*     */ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
@@ -23,10 +24,16 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */   {
 /*  22 */     for (int i = 0; i < dengdaishuaXing.size(); i++) {
 /*  23 */       GameObjectCharMng.sendAllmap(new MSG_APPEAR(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
-/*  24 */       List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
-/*  25 */       for (int j = 0; j < sessionList.size(); j++) {
-/*  26 */         if (((GameObjectChar)sessionList.get(j)).gameMap.id == ((Vo_65529_0)dengdaishuaXing.get(i)).mapid) {
-/*  27 */           List<GameObjectChar> sessionList1 = ((GameObjectChar)sessionList.get(j)).gameMap.getSessionList();
+/*  24 */       //List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+                HashMap<Integer, GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+
+/*  25 */       //for (int j = 0; j < sessionList.size(); j++) {
+                for(GameObjectChar obj : sessionList.values()){
+                    if(obj.ctx == null){
+                        continue;
+                    }
+/*  26 */         if (obj.gameMap.id == ((Vo_65529_0)dengdaishuaXing.get(i)).mapid) {
+/*  27 */           List<GameObjectChar> sessionList1 = obj.gameMap.getSessionList();
 /*  28 */           if (sessionList1.size() > 0) {
 /*  29 */             Random random = new Random();
 /*  30 */             GameObjectChar gameSession = (GameObjectChar)sessionList1.get(random.nextInt(sessionList1.size()));

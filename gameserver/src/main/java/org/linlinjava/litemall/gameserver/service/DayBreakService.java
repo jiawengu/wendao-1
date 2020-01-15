@@ -42,7 +42,7 @@ public class DayBreakService {
      */
     @Scheduled(cron="0 0 0,5 * * ?")
     public void checkDayBreak(){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList().values()){
             if(null!=gameObjectChar.chara){
                 checkDayBreak(gameObjectChar.chara);
             }

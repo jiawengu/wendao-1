@@ -13,6 +13,8 @@ import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.*;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -2887,6 +2889,9 @@ import java.util.Random;
                 /*      */       }
             /* 2641 */       chara.max_life += life;
             /*      */     }
+
+                    GameObjectChar objChar = GameObjectCharMng.getGameObjectChar(chara.id);
+                    UserPartyLogic partyLogic = (UserPartyLogic)objChar.logic.getMod("party");
         /*      */
         /* 2644 */     vo_65527_0.id = chara.id;
         /* 2645 */     vo_65527_0.vo_65527_0.str = chara.name;
@@ -2935,7 +2940,7 @@ import java.util.Random;
         /* 2688 */     vo_65527_0.vo_65527_0.master = chara.sex;
         /* 2689 */     vo_65527_0.vo_65527_0.level = "";
         /* 2690 */     vo_65527_0.vo_65527_0.skill = chara.level;
-        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = chara.chenhao;
+        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2692 */     vo_65527_0.vo_65527_0.status_daofa_wubian = "";
         /* 2693 */     vo_65527_0.vo_65527_0.nick = 0;
         /* 2694 */     vo_65527_0.vo_65527_0.family_title = "";
@@ -2969,7 +2974,8 @@ import java.util.Random;
         /*      */
         /* 2723 */     vo_65527_0.vo_65527_0.online = 0;
         /* 2724 */     vo_65527_0.vo_65527_0.voucher = 0;
-        /* 2725 */     vo_65527_0.vo_65527_0.party_name = 0;
+        /* 2725 */     vo_65527_0.vo_65527_0.party_name = chara.partyName;
+                        vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2726 */     vo_65527_0.vo_65527_0.use_money_type = chara.use_money_type;
         /* 2727 */     vo_65527_0.vo_65527_0.lock_exp = chara.lock_exp;
         /* 2728 */     vo_65527_0.vo_65527_0.shuadaochongfeng_san = chara.shuadaochongfeng_san;
@@ -4938,7 +4944,7 @@ import java.util.Random;
      }
 
      public static void notifyNpcDisappear(Npc npc){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList().values()){
             if(gameObjectChar.chara==null){
                 continue;
             }
@@ -4948,7 +4954,7 @@ import java.util.Random;
         }
      }
      public static void notifyNpcAppear(Npc npc){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList().values()){
             if(gameObjectChar.chara==null){
                 continue;
             }
