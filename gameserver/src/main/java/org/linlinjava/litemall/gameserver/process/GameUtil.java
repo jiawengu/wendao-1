@@ -23,7 +23,7 @@ import java.util.Random;
         /*      */ {
             private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天璇星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
     public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
-    public static final String[] ZHANG_MEN = new String[]{"金系掌门", "土系掌门", "水系掌门", "木系掌门", "火系掌门"};
+    public static final String[] ZHANG_MEN = new String[]{"金系掌门", "木系掌门", "水系掌门", "火系掌门", "土系掌门"};
     /*      */   public static void addshouhu(Chara chara)
     /*      */   {
         /*   30 */     for (int i = 0; i < chara.listshouhu.size(); i++)
