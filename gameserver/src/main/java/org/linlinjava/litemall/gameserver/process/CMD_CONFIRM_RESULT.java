@@ -10,16 +10,20 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameTeam;
-/*     */ 
+/*     */
+
+/**
+ * 确认框
+ */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class C20736_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*     */ public class CMD_CONFIRM_RESULT implements org.linlinjava.litemall.gameserver.GameHandler
 /*     */ {
 /*     */   public void process(io.netty.channel.ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {
@@ -34,20 +38,21 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  33 */       Vo_61591_0 vo_61591_0 = new Vo_61591_0();
 /*  34 */       vo_61591_0.ask_type = "request_team_leader";
 /*  35 */       vo_61591_0.name = chara1.name;
-/*  36 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61591_0(), vo_61591_0);
+/*  36 */       GameObjectChar.send(new MSG_CLEAN_REQUEST(), vo_61591_0);
 /*  37 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  38 */       vo_8165_0.msg = "队长拒绝了你的带队申请。";
 /*  39 */       vo_8165_0.active = 0;
-/*  40 */       GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+/*  40 */       GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */     }
 /*     */     
 /*  43 */     if (select.equals("1")) {
 /*  44 */       Vo_61593_0 vo_61593_0 = new Vo_61593_0();
 /*  45 */       vo_61593_0.ask_type = "request_join";
-/*  46 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61593_0(), vo_61593_0);
+/*  46 */       GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*  47 */       vo_61593_0 = new Vo_61593_0();
 /*  48 */       vo_61593_0.ask_type = "request_team_leader";
-/*  49 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61593_0(), vo_61593_0);
+/*  49 */       GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*     */       
 /*  51 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /*  52 */       vo_61671_0.id = chara1.id;
@@ -89,18 +94,18 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */       
 /*     */ 
 /*     */ 
-/*  91 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20568_0(), vo_20568_0);
+/*  91 */       GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*  92 */       vo_20568_0 = new Vo_20568_0();
 /*  93 */       vo_20568_0.gid = "";
-/*  94 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M20568_0(), vo_20568_0);
+/*  94 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*  95 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  96 */       vo_20481_0.msg = "你被提升为队长。";
 /*  97 */       vo_20481_0.time = 1562987118;
 /*  98 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*     */       
 /*     */ 
-/* 101 */       GameUtil.a4119(gameTeam.duiwu);
-/* 102 */       GameUtil.a4121(gameTeam.zhanliduiyuan);
+/* 101 */       GameUtil.MSG_UPDATE_TEAM_LIST(gameTeam.duiwu);
+/* 102 */       GameUtil.MSG_UPDATE_TEAM_LIST_EX(gameTeam.zhanliduiyuan);
 /*     */     }
 /*     */   }
 /*     */   

@@ -20,9 +20,9 @@ public class GameObjectCharMng
         if (gameObjectCharList.contains(gameObjectChar)) {
             for (GameObjectChar gameSession : gameObjectCharList) {
                 if (gameObjectChar.chara.id == gameSession.chara.id) {
-                gameSession.ctx.disconnect();
-                gameObjectChar.gameTeam = gameSession.gameTeam;
-                gameObjectCharList.remove(gameSession);
+                    gameSession.ctx.disconnect();
+                    gameObjectChar.gameTeam = gameSession.gameTeam;
+                    gameObjectCharList.remove(gameSession);
                 }
             }
         }
@@ -85,15 +85,22 @@ public class GameObjectCharMng
     }
 
     public static void save(GameObjectChar gameObjectChar) {
-        String data = gameObjectChar.characters.getData();
-        Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-        if (chara111.level > gameObjectChar.chara.level) {
-            log.error("人物等级{old}",chara111.name,chara111.level);
-            log.error("人物等级{new}",gameObjectChar.chara.name,gameObjectChar.chara.level);
-            log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
-            throw new RuntimeException("角色等级回档！！！");
+        if(null!=gameObjectChar.chara){
+            String data = gameObjectChar.characters.getData();
+            Chara chara111 = JSONUtils.parseObject(data, Chara.class);
+            if (chara111.level > gameObjectChar.chara.level) {
+                log.error("人物等级{old}",chara111.name,chara111.level);
+                log.error("人物等级{new}",gameObjectChar.chara.name,gameObjectChar.chara.level);
+                log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
+                throw new RuntimeException("角色等级回档！！！");
+            }
+            long beginMill = System.currentTimeMillis();
+            String charData = org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara);
+            gameObjectChar.characters.setData(charData);
+            long seriaCost = System.currentTimeMillis()-beginMill;
+            beginMill = System.currentTimeMillis();
+            GameData.that.baseCharactersService.updateById(gameObjectChar.characters);
+//            log.info("save char [{}] db: ==>charData size:{}, serialize cost:{}, db cost:{}", gameObjectChar.chara.name, charData.length(), seriaCost, (System.currentTimeMillis()-beginMill));
         }
-        gameObjectChar.characters.setData(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara));
-        GameData.that.baseCharactersService.updateById(gameObjectChar.characters);
     }
 }

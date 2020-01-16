@@ -10,7 +10,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -64,7 +64,7 @@
 /* 64 */         Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 65 */         vo_8165_0.msg = ("恭喜你将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
 /* 66 */         vo_8165_0.active = 0;
-/* 67 */         GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 67 */         GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 68 */         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 69 */         vo_20480_0.msg = ("恭喜你花费#R拘首环#n、#R困灵砂#n、#R驱力刺#n、#R定鞍石#n、#R控心玉#n各1个将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
 /* 70 */         vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));

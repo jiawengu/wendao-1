@@ -79,10 +79,15 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             if (session != null) {
                 if (session.lock()) {
                     try {
+                        long beginMill = System.currentTimeMillis();
                         if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO || gameHandler instanceof CMD_HEART_BEAT)){//todo 打印消息
-                            log.info("recive msg!=>"+gameHandler);
+//                            log.info("recive msg!=>"+gameHandler);
                         }
                         gameHandler.process(ctx, buff);
+                        long cost = System.currentTimeMillis()-beginMill;
+                        if(cost>30){
+                            log.error(gameHandler+",cost==>"+cost);
+                        }
                     } catch (Exception e) {
                         log.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
                     } finally {

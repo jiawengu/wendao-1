@@ -7,7 +7,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20568_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20568_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TEAM_COMMANDER_GID;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M53741_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Duiyuan;
@@ -54,10 +54,10 @@
 /*    */     }
 /*    */     
 /* 56 */     if (ask_type.equals("request_join")) {
-/* 57 */       GameUtil.a4121(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
+/* 57 */       GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
 /* 58 */       Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 59 */       vo_20568_0.gid = "";
-/* 60 */       GameObjectChar.send(new M20568_0(), vo_20568_0);
+/* 60 */       GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*    */       
 /* 62 */       List<LieBiao> lieBiaoList = new ArrayList();
 /*    */       

@@ -9,9 +9,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_49189_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*    */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -66,16 +65,16 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ 
 /* 65 */     Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 66 */     vo_20568_0.gid = "";
-/* 67 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20568_0(), vo_20568_0);
-/* 68 */     GameUtil.a4119(GameObjectChar.getGameObjectChar().gameTeam.duiwu);
-/* 69 */     GameUtil.a4121(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
+/* 67 */     GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
+/* 68 */     GameUtil.MSG_UPDATE_TEAM_LIST(GameObjectChar.getGameObjectChar().gameTeam.duiwu);
+/* 69 */     GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
 /* 70 */     Vo_49189_0 vo_49189_0 = new Vo_49189_0();
 /* 71 */     GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M49189_0(), vo_49189_0);
 /*    */     
 /* 73 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 74 */     vo_8165_0.msg = "你被请离了队伍";
 /* 75 */     vo_8165_0.active = 0;
-/* 76 */     GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+/* 76 */     GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_DIALOG_OK(), vo_8165_0);
 /*    */     
 /* 78 */     Vo_45124_0 vo_45124_0 = new Vo_45124_0();
 /* 79 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45124_0(), vo_45124_0);

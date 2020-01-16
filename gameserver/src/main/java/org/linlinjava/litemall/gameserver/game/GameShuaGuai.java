@@ -8,6 +8,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
@@ -49,7 +50,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  47 */             org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
 /*  48 */             vo_8165_0.msg = ("#R恭喜#n，你队伍已被#Y" + ((Vo_65529_0)dengdaishuaXing.get(i)).name + "#n选中，请速前往挑战。");
 /*  49 */             vo_8165_0.active = 0;
-/*  50 */             GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, gameSession.chara.id);
+/*  50 */             GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, gameSession.chara.id);
 /*     */             
 /*     */ 
 /*  53 */             String msglost = "染项很遗憾，" + ((Vo_65529_0)dengdaishuaXing.get(i)).name + "(" + ((Vo_65529_0)dengdaishuaXing.get(i)).level + "级)已邀请到玩家进行挑战,不过您的幸运值有了大幅增加,下次会优先挑选您的,诚请各位道友下一时段前往挑战。";

@@ -35,7 +35,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
     public void process(ChannelHandlerContext ctx, ByteBuf buff)
     /*    */ {
         /* 25 */
-        logger.error("C45144_0:"+buff.toString());
+//        logger.error("C45144_0:"+buff.toString());
         String token = GameReadTool.readString(buff);
         String account = null;
         try {

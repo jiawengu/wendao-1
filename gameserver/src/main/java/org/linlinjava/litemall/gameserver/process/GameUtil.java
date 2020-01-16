@@ -1457,7 +1457,7 @@ import java.util.Random;
         /* 1269 */     return vo_32747_0List;
         /*      */   }
     /*      */
-    /*      */   public static List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> a61545(Chara chara)
+    /*      */   public static List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> MSG_FRIEND_ADD_CHAR(Chara chara)
     /*      */   {
         /* 1274 */     List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = new ArrayList();
         /* 1275 */     org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0 vo_61545_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0();
@@ -1544,7 +1544,7 @@ import java.util.Random;
         /* 1356 */     vo_20467_0.party_contrib = "";
         /* 1357 */     vo_20467_0.teamMembersCount = 1;
         /* 1358 */     vo_20467_0.comeback_flag = 0;
-        /* 1359 */     GameObjectCharMng.getGameObjectChar(id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M20467_0(), vo_20467_0);
+        /* 1359 */     GameObjectCharMng.getGameObjectChar(id).sendOne(new MSG_DIALOG(), vo_20467_0);
         /*      */   }
     /*      */
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0 add4121(Chara chara, int memberteam_status) {
@@ -1573,7 +1573,7 @@ import java.util.Random;
         /* 1385 */     return vo_4121_0;
         /*      */   }
     /*      */
-    /*      */   public static void a4121(List<org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0> charaList) {
+    /*      */   public static void MSG_UPDATE_TEAM_LIST_EX(List<org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0> charaList) {
         /* 1389 */     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0> vo_4121_0List = new ArrayList();
         /*      */
         /* 1391 */     for (org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0 vo41210 : charaList) {
@@ -1606,7 +1606,7 @@ import java.util.Random;
             /*      */     }
         /*      */   }
     /*      */
-    /*      */   public static void a4119(List<Chara> charaList)
+    /*      */   public static void MSG_UPDATE_TEAM_LIST(List<Chara> charaList)
     /*      */   {
         /* 1423 */     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> vo_4119_0List = new ArrayList();
         /*      */
@@ -4380,7 +4380,7 @@ import java.util.Random;
             /* 4124 */       org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
             /* 4125 */       vo_8165_0.msg = ("你获得了#R" + pet.getName() + "#n宠物");
             /* 4126 */       vo_8165_0.active = 0;
-            /* 4127 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+            /* 4127 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             /*      */     }
         /* 4129 */     if (strings[1].equals("经验")) {
             /* 4130 */       huodejingyan(chara, Integer.valueOf(strings[0]).intValue());

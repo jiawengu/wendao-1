@@ -129,7 +129,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0.msg = msg;
             vo_8165_0.active = 0;
             GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
@@ -163,13 +163,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已开启宠风散功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.chongfengsan = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已关闭宠风散功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.chongfengsan = 0;
             }
         }
@@ -179,13 +179,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已开启紫气鸿蒙功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.ziqihongmeng = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已关闭紫气鸿蒙功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.ziqihongmeng = 0;
             }
         }
@@ -199,13 +199,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "成功开启双倍点数，部分活动将消耗双倍点数获得双倍奖励。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.charashuangbei = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "成功关闭双倍点数，双倍点数将不再消耗。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.charashuangbei = 0;
             }
         }
@@ -215,7 +215,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0 = new Vo_8165_0();
             vo_8165_0.msg = "成功关闭驱魔香，在练功区走动时将会遇怪。";
             vo_8165_0.active = 0;
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "0";
@@ -227,7 +227,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0 = new Vo_8165_0();
             vo_8165_0.msg = "成功开启驱魔香，在练功区走动时将无法遇怪。";
             vo_8165_0.active = 0;
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "1";
@@ -243,7 +243,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo81650 = new Vo_8165_0();
                 vo81650.msg = "该名字已有人使用";
                 vo81650.active = 0;
-                GameObjectChar.send(new M8165_0(), vo81650);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo81650);
                 return;
             }
 
@@ -256,7 +256,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo81650 = new Vo_8165_0();
             vo81650.msg = "修改成功";
             vo81650.active = 0;
-            GameObjectChar.send(new M8165_0(), vo81650);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo81650);
             GameData.that.baseCharactersService.updateById(characters);
         }
 
@@ -341,7 +341,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     Vo_8165_0 vo816501 = new Vo_8165_0();
                     vo816501.msg = "移除妖石成功！";
                     vo816501.active = 0;
-                    GameObjectChar.send(new M8165_0(), vo816501);
+                    GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
                 }
             }
         }
@@ -360,7 +360,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo816501 = new Vo_8165_0();
                 vo816501.msg = "你获得了#R" + split[0];
                 vo816501.active = 0;
-                GameObjectChar.send(new M8165_0(), vo816501);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
                 vo_20480_0 = new Vo_20480_0();
                 vo_20480_0.msg = "你获得了#R" + split[0];
                 vo_20480_0.time = (int)System.currentTimeMillis();
@@ -689,7 +689,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo816501 = new Vo_8165_0();
             vo816501.msg = "你提款了钱";
             vo816501.active = 0;
-            GameObjectChar.send(new M8165_0(), vo816501);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
             vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = "你提款了钱";
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
@@ -853,7 +853,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo816501 = new Vo_8165_0();
             vo816501.msg = "你获得了" + name;
             vo816501.active = 0;
-            GameObjectChar.send(new M8165_0(), vo816501);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
             Vo_20480_0 vo204800 = new Vo_20480_0();
             vo204800.msg = "你领取了签到奖励。";
             vo204800.time = 1562593376;

@@ -29,6 +29,7 @@ import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -43,26 +44,15 @@ public class SaveCharaTimes {
     @Scheduled(
             fixedDelay = 5000L
     )
+    @Async
     public void resetCompileTimes() {
         List<GameObjectChar> all = GameObjectCharMng.getAll();
         Iterator var2 = all.iterator();
 
         while(var2.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var2.next();
-            String data = gameSession.characters.getData();
-            if(data != null) {
-                Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-                if (chara111.level > gameSession.chara.level) {
-                    log.error("人物等级{old}", chara111.name, chara111.level);
-                    log.error("人物等级{new}", gameSession.chara.name, gameSession.chara.name);
-                    log.error("人物队伍信息", gameSession.gameTeam.toString());
-                    throw new RuntimeException("角色等级回档！！！");
-                }
-            }
-            gameSession.characters.setData(JSONUtils.toJSONString(gameSession.chara));
-            GameData.that.baseCharactersService.updateById(gameSession.characters);
+            GameObjectCharMng.save(gameSession);
         }
-
     }
 
 //    @Scheduled(
@@ -90,7 +80,6 @@ public class SaveCharaTimes {
                 FightManager.doTimeupSkill(fightContainer);
             }
         }
-
     }
 
     @Scheduled(
@@ -464,6 +453,7 @@ public class SaveCharaTimes {
     @Scheduled(
             fixedRate =  50000L
     )
+    @Async
     public void autoCheckPartyMgrSave(){
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
@@ -480,6 +470,7 @@ public class SaveCharaTimes {
     @Scheduled(
             fixedRate =  5000L
     )
+    @Async
     public void autoCheckUserLogicSave(){
         GameObjectCharMng.getAll().forEach(item->{
             try {

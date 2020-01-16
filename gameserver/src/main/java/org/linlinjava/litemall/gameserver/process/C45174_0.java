@@ -11,7 +11,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M45185_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -37,7 +37,7 @@
 /* 37 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 38 */       vo_8165_0.msg = ("已向#Y" + chara.name + "#n发送震动提醒。");
 /* 39 */       vo_8165_0.active = 0;
-/* 40 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 40 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*    */       
 /* 42 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 43 */       vo_20481_0.msg = (chara.name + "在队伍中向你发送了一次震动提醒");

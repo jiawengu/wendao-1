@@ -54,7 +54,7 @@
 /* 54 */     Chara chara1 = (Chara)JSONUtils.parseObject(data, Chara.class);
 /* 55 */     Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
 /* 56 */     GameObjectChar.send(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
-/* 57 */     List<Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
+/* 57 */     List<Vo_61545_0> vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara1);
 /* 58 */     GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /* 59 */     Vo_16383_0 vo_16383_0 = GameUtil.a16383(chara, msg, 9, chara1);
 /* 60 */     GameObjectChar.getGameObjectChar();GameObjectChar.send(new MSG_MESSAGE_EX(), vo_16383_0);

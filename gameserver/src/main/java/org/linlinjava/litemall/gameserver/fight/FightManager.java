@@ -2922,15 +2922,6 @@ public class FightManager {
                 List<FightObject> fightObjectListAll = getAllFightObject(fc);
                 Iterator var21 = fightObjectListAll.iterator();
 
-                for(FightTeam fightTeam:fc.teamList){
-                    for(FightObject f:fightTeam.fightObjectList){
-                        System.out.println(f.str+"======>");
-                        for(JiNeng jiNeng:f.skillsList){
-                            System.out.print(jiNeng.skill_no+"#");
-                        }
-                    }
-                }
-
                 while(var21.hasNext()) {
                     object = (FightObject)var21.next();
                     if (object.type == 1) {
