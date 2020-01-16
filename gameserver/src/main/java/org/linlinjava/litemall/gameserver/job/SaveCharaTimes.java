@@ -26,9 +26,11 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.DBService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -37,23 +39,24 @@ import org.springframework.stereotype.Component;
 public class SaveCharaTimes {
     private long gonggaotim = System.currentTimeMillis();
     private static final Logger log = LoggerFactory.getLogger(SaveCharaTimes.class);
-
+    @Autowired
+    private DBService dbService;
     public SaveCharaTimes() {
     }
 
     @Scheduled(
             fixedDelay = 5000L
     )
-    @Async
     public void resetCompileTimes() {
         List<GameObjectChar> all = GameObjectCharMng.getAll();
         Iterator var2 = all.iterator();
 
         while(var2.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var2.next();
-            GameObjectCharMng.save(gameSession);
+            dbService.save(gameSession);
         }
     }
+
 
 //    @Scheduled(
 //            fixedDelay = 10000L
@@ -453,7 +456,6 @@ public class SaveCharaTimes {
     @Scheduled(
             fixedRate =  50000L
     )
-    @Async
     public void autoCheckPartyMgrSave(){
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
@@ -470,7 +472,6 @@ public class SaveCharaTimes {
     @Scheduled(
             fixedRate =  5000L
     )
-    @Async
     public void autoCheckUserLogicSave(){
         GameObjectCharMng.getAll().forEach(item->{
             try {

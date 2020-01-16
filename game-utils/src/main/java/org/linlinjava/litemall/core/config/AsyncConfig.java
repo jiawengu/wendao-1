@@ -47,7 +47,7 @@ public class AsyncConfig implements SchedulingConfigurer, AsyncConfigurer {
     @Bean(destroyMethod = "shutdown", name = "asyncExecutor")
     public ThreadPoolTaskExecutor asyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(8);
+        executor.setCorePoolSize(1);
         executor.setQueueCapacity(10);
         executor.setKeepAliveSeconds(60);
         executor.setMaxPoolSize(8);
