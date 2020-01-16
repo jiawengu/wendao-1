@@ -50,7 +50,7 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
         characters.setMenpai(Integer.valueOf(chara.menpai));
         characters.setGid(uuid);
         characters.setData(JSONUtils.toJSONString(chara));
-        characters.setAccountId(Integer.valueOf(session.accountid));
+        characters.setAccountId(Integer.valueOf(session.getAccountid()));
 
         GameData.that.characterService.add(characters);
 
@@ -91,7 +91,7 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
         ByteBuf write = new M8285_0().write(vo_8285_0);
         ctx.writeAndFlush(write);
 
-        List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.accountid));
+        List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.getAccountid()));
         ListVo_61537_0 listvo_61537_0 = listjiaose(charactersList);
         ByteBuf write1 = new org.linlinjava.litemall.gameserver.data.write.M61537_0().write(listvo_61537_0);
         ctx.writeAndFlush(write1);

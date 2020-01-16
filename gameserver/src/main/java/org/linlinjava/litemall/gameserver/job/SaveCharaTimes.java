@@ -48,7 +48,7 @@ public class SaveCharaTimes {
             fixedDelay = 5000L
     )
     public void resetCompileTimes() {
-        List<GameObjectChar> all = GameObjectCharMng.getAll();
+        List<GameObjectChar> all = GameObjectCharMng.getGameObjectCharList();
         Iterator var2 = all.iterator();
 
         while(var2.hasNext()) {
@@ -187,16 +187,16 @@ public class SaveCharaTimes {
                     chara = ((GameObjectChar)gameMap.sessionList.get(j)).chara;
                     chara.balance -= chara.level * 10000;
                     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_UPDATE(), listVo_65527_0);
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "由于你在挑战元魔过程中取得了优异的成绩,因此获得了系统送出的" + chara.level * 10000 + "文钱的奖励。";
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     if (chara.shidaodaguaijifen >= 10) {
                         vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "由于你所在队伍的挑战元魔的积分充足,现在进入参加试道大会的巅峰对决阶段。";
                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                        GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     }
                 }
 
@@ -205,7 +205,7 @@ public class SaveCharaTimes {
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "由于你所在队伍的挑战元魔的积分不足,无法参加试道大会的巅峰对\n决阶段。";
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(((Chara)charas.get(j)).id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(charas.get(j).id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 }
 
                 for(j = 0; j < gameMap.sessionList.size(); ++j) {
@@ -219,7 +219,7 @@ public class SaveCharaTimes {
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "当前积分" + chara.shidaodaguaijifen;
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 }
             }
 
@@ -473,7 +473,7 @@ public class SaveCharaTimes {
             fixedRate =  5000L
     )
     public void autoCheckUserLogicSave(){
-        GameObjectCharMng.getAll().forEach(item->{
+        GameObjectCharMng.getGameObjectCharList().forEach(item->{
             try {
                 item.logic.cacheSave();
             }catch (Exception e) {

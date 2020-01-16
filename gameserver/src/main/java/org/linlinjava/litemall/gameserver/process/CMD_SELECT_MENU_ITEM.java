@@ -147,7 +147,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                     vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
 
-                    GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 
                     return;
 

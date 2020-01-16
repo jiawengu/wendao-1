@@ -42,9 +42,9 @@
 /* 42 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 43 */       vo_20481_0.msg = (chara.name + "在队伍中向你发送了一次震动提醒");
 /* 44 */       vo_20481_0.time = 1562987118;
-/* 45 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+/* 45 */       GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */       
-/* 47 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M45185_0(), "");
+/* 47 */       GameObjectCharMng.sendOne(chara1.id, new M45185_0(), "");
 /*    */     }
 /*    */   }
 /*    */   

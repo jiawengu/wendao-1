@@ -107,7 +107,7 @@ public class GameMap {
 
         while(var13.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var13.next();
-            if (gameSession.ctx != null && gameSession.chara != null) {
+            if (gameSession.isOnline()) {
                 vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 GameUtil.genchongfei(gameSession.chara);
                 if(isCanSee(chara, gameSession.chara)){
@@ -217,7 +217,7 @@ public class GameMap {
         Iterator var9 = this.sessionList.iterator();
         while(var9.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var9.next();
-            if (gameSession.ctx != null && gameSession.chara != null) {
+            if (gameSession.isOnline()) {
                 vo_65529_0 = GameUtil.MSG_APPEAR(gameSession.chara);
                 gameObjectChar.sendOne(new MSG_APPEAR(), vo_65529_0);
                 GameUtil.genchongfei(gameSession.chara);
@@ -253,7 +253,7 @@ public class GameMap {
 
         while(var7.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var7.next();
-            if (gameSession.ctx != null) {
+            if (gameSession.isOnline()) {
                 ++sendNum;
                 ByteBuf copy = buff.copy();
                 gameSession.send0(copy);
@@ -278,7 +278,7 @@ public class GameMap {
 
         while(var7.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var7.next();
-            if (gameSession.ctx != null && predicate.test(gameSession)) {
+            if (gameSession.isOnline() && predicate.test(gameSession)) {
                 ++sendNum;
                 ByteBuf copy = buff.copy();
                 gameSession.send0(copy);
@@ -305,7 +305,7 @@ public class GameMap {
 
         while(var6.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var6.next();
-            if (!gameObjectChar.equals(gameSession) && gameSession.ctx != null) {
+            if (!gameObjectChar.equals(gameSession) && gameSession.isOnline()) {
                 ++sendNum;
                 ByteBuf copy = buff.copy();
                 gameSession.send0(copy);
@@ -332,12 +332,12 @@ public class GameMap {
                         }
                     }
 
-                    if (!has && gameSession.ctx != null) {
+                    if (!has && gameSession.isOnline()) {
                         ++sendNum;
                         copy = buff.copy();
                         gameSession.send0(copy);
                     }
-                } else if (!gameObjectChar.equals(gameSession) && gameSession.ctx != null) {
+                } else if (!gameObjectChar.equals(gameSession) && gameSession.isOnline()) {
                     ++sendNum;
                     copy = buff.copy();
                     gameSession.send0(copy);
@@ -355,7 +355,7 @@ public class GameMap {
 
         while(var5.hasNext()) {
             GameObjectChar gameSession = (GameObjectChar)var5.next();
-            if (gameObjectChar.equals(gameSession) && gameSession.ctx != null) {
+            if (gameObjectChar.equals(gameSession) && gameSession.isOnline()) {
                 ByteBuf copy = buff.copy();
                 gameSession.send0(copy);
             }

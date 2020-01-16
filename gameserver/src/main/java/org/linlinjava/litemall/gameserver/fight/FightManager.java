@@ -1925,7 +1925,7 @@ public class FightManager {
             FightObject fightObject = (FightObject)var4.next();
             if (fightObject.type == 1) {
                 try {
-                    GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(baseWrite, obj);
+                    GameObjectCharMng.sendOne(fightObject.id, baseWrite, obj);
                 } catch (Exception var7) {
                     log.error("    public static void send(FightContainer fightContainer, BaseWrite baseWrite, Object obj) {\n", var7);
                 }

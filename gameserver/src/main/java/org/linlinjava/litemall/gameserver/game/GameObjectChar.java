@@ -18,11 +18,13 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class GameObjectChar {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(GameObjectChar.class);
-    public int accountid;
-    public ChannelHandlerContext ctx;
+    private final int accountid;
+    private ChannelHandlerContext ctx;
     public static final ThreadLocal<GameObjectChar> GAMEOBJECTCHAR_THREAD_LOCAL = new ThreadLocal();
 
     public Chara chara;
@@ -48,6 +50,17 @@ public class GameObjectChar {
         chara.id = characters.getId().intValue();
         this.chara = chara;
         this.characters = characters;
+        this.accountid = characters.getAccountId();
+    }
+
+    public boolean isOnline(){
+        return null!=ctx && chara!=null;
+    }
+
+    public void closeChannel(){
+        if(isOnline()){
+            ctx.close();
+        }
     }
 
     public GameObjectChar(int accountid, ChannelHandlerContext ctx) {
@@ -77,7 +90,6 @@ public class GameObjectChar {
         this.characters = characters;
         this.logic = new UserLogic();
         this.logic.init(chara.id, this.logic);
-        GameObjectCharMng.add(this);
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);
         if(chara.partyId > 0){
@@ -90,6 +102,16 @@ public class GameObjectChar {
             }
         }
         this.gameMap = gameMap;
+        GameObjectCharMng.add(this);
+    }
+    public void init(GameObjectChar oldSession) {
+        this.chara = oldSession.chara;
+        this.characters = oldSession.characters;
+        this.logic = oldSession.logic;
+        this.gameMap = oldSession.gameMap;
+        this.gameTeam = oldSession.gameTeam;
+        this.upduizhangid = oldSession.upduizhangid;
+        this.heartEcho = oldSession.heartEcho;
     }
 
     public static final GameObjectChar getGameObjectChar() {
@@ -98,13 +120,16 @@ public class GameObjectChar {
 
     public static void send(BaseWrite baseWrite, Object obj) {
         GameObjectChar gameObjectChar = (GameObjectChar) GAMEOBJECTCHAR_THREAD_LOCAL.get();
+        if(!gameObjectChar.isOnline()){
+            return;
+        }
         ByteBuf write = baseWrite.write(obj);
         gameObjectChar.ctx.writeAndFlush(write);
     }
 
     public static void send(BaseWrite baseWrite, Object obj, int id) {
         GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(id);
-        if (gameObjectChar == null) {
+        if (gameObjectChar == null || !gameObjectChar.isOnline()) {
             return;
         }
         ByteBuf write = baseWrite.write(obj);
@@ -116,6 +141,9 @@ public class GameObjectChar {
         if ((gameObjectChar.gameTeam != null) && (gameObjectChar.gameTeam.duiwu != null)) {
             for (int i = 0; i < gameObjectChar.gameTeam.duiwu.size(); i++) {
                 GameObjectChar gameObjectChar1 = GameObjectCharMng.getGameObjectChar(((Chara) gameObjectChar.gameTeam.duiwu.get(i)).id);
+                if(!gameObjectChar1.isOnline()){
+                    continue;
+                }
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar1.ctx.writeAndFlush(write);
             }
@@ -127,7 +155,9 @@ public class GameObjectChar {
 
 
     protected void send0(ByteBuf write) {
-        this.ctx.writeAndFlush(write);
+        if(isOnline()){
+            this.ctx.writeAndFlush(write);
+        }
     }
 
     public void offline() {
@@ -237,5 +267,9 @@ public class GameObjectChar {
         ByteBuf buff = baseWrite.write(obj);
         ByteBuf copy = buff.copy();
         send0(copy);
+    }
+
+    public int getAccountid() {
+        return accountid;
     }
 }

@@ -21,20 +21,43 @@ public class GameObjectCharMng
         if (gameObjectCharList.contains(gameObjectChar)) {
             for (GameObjectChar gameSession : gameObjectCharList) {
                 if (gameObjectChar.chara.id == gameSession.chara.id) {
-                    gameSession.ctx.disconnect();
+                    gameSession.closeChannel();
                     gameObjectChar.gameTeam = gameSession.gameTeam;
                     gameObjectCharList.remove(gameSession);
+                    throw new RuntimeException("不应该走到这里");
                 }
             }
         }
         gameObjectCharList.add(gameObjectChar);
     }
 
+    public static void relogin(GameObjectChar newSession, int charaId){
+        int count = 0;
+        for (GameObjectChar gameSession : gameObjectCharList) {
+            if (charaId == gameSession.chara.id) {
+                gameSession.closeChannel();
+                newSession.init(gameSession);
+                gameObjectCharList.remove(gameSession);
+                count++;
+            }
+        }
+        assert count==1;
+        gameObjectCharList.add(newSession);
+    }
+
+    public static void sendOne(int charaId,BaseWrite baseWrite, Object obj){
+        GameObjectChar gameObjectChar = getGameObjectChar(charaId);
+        if(gameObjectChar.isOnline()){
+            ByteBuf write = baseWrite.write(obj);
+            gameObjectChar.send0(write);
+        }
+    }
+
     public static void sendAll(BaseWrite baseWrite, Object obj) {
         for (int i = 0; i < gameObjectCharList.size(); i++) {
             GameObjectChar session = gameObjectCharList.get(i);
             ByteBuf write = baseWrite.write(obj);
-            session.ctx.writeAndFlush(write);
+            session.send0(write);
         }
     }
 
@@ -47,7 +70,7 @@ public class GameObjectCharMng
             GameObjectChar gameObjectChar = gameObjectCharList.get(i);
             if (gameObjectChar.gameMap.id == mapid) {
                 ByteBuf write = baseWrite.write(obj);
-                gameObjectChar.ctx.writeAndFlush(write);
+                gameObjectChar.send0(write);
             }
         }
     }
@@ -57,11 +80,19 @@ public class GameObjectCharMng
             GameObjectChar gameObjectChar = gameObjectCharList.get(i);
             if (gameObjectChar.gameMap.name.equals(mapname)) {
                 ByteBuf write = baseWrite.write(obj);
-                gameObjectChar.ctx.writeAndFlush(write);
+                gameObjectChar.send0(write);
             }
         }
     }
 
+    public static final boolean isCharaOnline(int charaId) {
+        for (GameObjectChar gameObjectChar : gameObjectCharList) {
+            if (gameObjectChar.isOnline() && charaId==gameObjectChar.chara.id) {
+                return true;
+            }
+        }
+        return false;
+    }
     public static final GameObjectChar getGameObjectChar(int id) {
         for (GameObjectChar gameObjectChar : gameObjectCharList) {
             if (gameObjectChar.chara.id == id) {
@@ -73,11 +104,8 @@ public class GameObjectCharMng
             return null;
         }
         GameObjectChar gameObjectChar = new GameObjectChar(characters);
+        gameObjectCharList.add(gameObjectChar);
         return gameObjectChar;
-    }
-
-    public static List<GameObjectChar> getAll() {
-        return gameObjectCharList;
     }
 
     public static void remove(GameObjectChar gameObjectChar) {

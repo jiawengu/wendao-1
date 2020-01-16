@@ -111,7 +111,7 @@ public class GameShangGuYaoWang {
         npc.setY(random.nextInt(40)+1);
         npc.setDeleted(true);
         GameData.that.baseNpcService.updateById(npc);
-        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+        GameObjectCharMng.sendOne(chara.id, new MSG_APPEAR_NPC(), npc);
         ShangGuYaoWangInfo  info =
                 GameData.that.BaseShangGuYaoWangInfoService.findByNpcID(npc.getId());
         if (null == info ) return  false;

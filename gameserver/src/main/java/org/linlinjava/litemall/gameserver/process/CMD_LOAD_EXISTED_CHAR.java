@@ -10,6 +10,7 @@ import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameCore;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.service.DayBreakService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
@@ -28,7 +29,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameObjectChar session = GameObjectChar.getGameObjectChar();
 
         if (session.chara == null) {
-            List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.accountid));
+            List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.getAccountid()));
             Characters characters = null;
             for (Characters tcharacters : charactersList) {
                 if (tcharacters.getName().equals(char_name)) {
@@ -39,12 +40,12 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
                 ctx.disconnect();
                 return;
             }
-            GameObjectChar oldSession = org.linlinjava.litemall.gameserver.game.GameObjectCharMng.getGameObjectChar(characters.getId().intValue());
-            if (oldSession != null) {
-                characters = oldSession.characters;
-                org.linlinjava.litemall.gameserver.game.GameObjectCharMng.save(oldSession);
+
+            if(GameObjectCharMng.isCharaOnline(characters.getId().intValue())){
+                GameObjectCharMng.relogin(session, characters.getId());
+            }else{
+                session.init(characters);
             }
-            session.init(characters);
         }
 
 
