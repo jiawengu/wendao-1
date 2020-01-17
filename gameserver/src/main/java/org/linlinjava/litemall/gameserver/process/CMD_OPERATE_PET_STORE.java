@@ -7,10 +7,7 @@ import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_1;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.M61677_0;
 import org.linlinjava.litemall.gameserver.data.write.M61677_1;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -48,7 +45,6 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
                 chara.chongwucangku.add(chongwu);
                 chongwu.no = GameUtil.getChongwuCangkuNextWeizhi(chara);
             }
-            return ;
         }
         else if(type == 2){
             for(Petbeibao p:chara.chongwucangku){
@@ -61,13 +57,11 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
                 chara.pets.add(chongwu);
                 chongwu.no = GameUtil.getNo(chara, 1);
             }
-            return ;
         }
 
         Vo_61677_1 vo_61677_1 = new Vo_61677_1();
         vo_61677_1.store_type = "chongwu";
         vo_61677_1.list = chara.chongwucangku;
-
         GameObjectChar.send(new M61677_1(), vo_61677_1);
         GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
     }

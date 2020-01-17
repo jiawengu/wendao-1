@@ -671,10 +671,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_61677_0.list = chara.cangku;
             GameObjectChar.send(new M61677_0(), vo_61677_0);
 
-            CMD_OPERATE_PET_STORE.Vo_61677_1 vo_61677_1 = new CMD_OPERATE_PET_STORE.Vo_61677_1();
+            Vo_61677_1 vo_61677_1 = new Vo_61677_1();
             vo_61677_1.store_type = "chongwu";
             vo_61677_1.list = chara.chongwucangku;
-            GameObjectChar.send(new CMD_OPERATE_PET_STORE.M61677_1(), vo_61677_1);
+            GameObjectChar.send(new M61677_1(), vo_61677_1);
         }
 
         Vo_49179_0 vo_49179_0;
