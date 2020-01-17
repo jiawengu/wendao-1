@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * 超级大BOSS 管理类
@@ -90,7 +91,6 @@ public class SuperBossMng extends BaseBossMng {
             SuperBossItem item = cfg.bossList.get(id);
             for(int j = 0; j < cfg.bossCount; j++){
                 BossNpc boss = new BossNpc();
-                boss.setId(item.id);
                 boss.setName(item.name);
                 boss.setIcon(item.icon);
                 boss.setCount(cfg.challengeCount);
@@ -142,23 +142,31 @@ public class SuperBossMng extends BaseBossMng {
     public void sendBossFight(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-//            if(chara.level < 100){
-//                GameUtil.sendTips("等级至少100级才能挑战哦");
-//                return ;
-//            }
-//            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
-//                GameUtil.sendTips("请先创建队伍");
-//                return ;
-//            }
-//            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-//            if (duiwu.size() < 3) {
-//                GameUtil.sendTips("人数不足3人");
-//                return;
-//            }
+            if(chara.level < 100){
+                GameUtil.sendTips("等级至少100级才能挑战哦");
+                return ;
+            }
+            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+                GameUtil.sendTips("请先创建队伍");
+                return ;
+            }
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            if (duiwu.size() < 3) {
+                GameUtil.sendTips("人数不足3人");
+                return;
+            }
             List<String> monsterList = new ArrayList<String>();
             monsterList.add(boss.getName());
             monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
-            FightManager.goFightBoss(chara, monsterList);
+            FightManager.goFightBoss(chara, monsterList, new Consumer<List<Chara>>() {
+                @Override
+                public void accept(List<Chara> charas) {
+                    afterBattle(id);
+                    for(Chara chara : charas){
+                        sendRewards(chara, id);
+                    }
+                }
+            });
         }
     }
 

@@ -26,14 +26,14 @@ public class UserPartyLogic extends BaseLogic {
             s.insert(data);
         }
 
-        if(this.data.getPartyid() > 0){
-            this.party = PartyMgr.that.get(this.data.getPartyid());
-            if(this.party == null){
-                this.data.setPartyid(0);
-                this.data.setPartyname("");
-                this.save();
-            }
-        }
+//        if(this.data.getPartyid() > 0){
+//            this.party = PartyMgr.that.get(this.data.getPartyid());
+//            if(this.party == null){
+//                this.data.setPartyid(0);
+//                this.data.setPartyname("");
+//                this.save();
+//            }
+//        }
     }
 
     @Override

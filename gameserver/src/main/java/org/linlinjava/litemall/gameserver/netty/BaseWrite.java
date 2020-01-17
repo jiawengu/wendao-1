@@ -40,7 +40,7 @@ public abstract class BaseWrite {
         cn.append(getName(ns[2].getClassName()));
         cn.append(getName(ns[1].getClassName()));
         cn.append(getName(this.getClass().getName()));
-
+        if(cn.indexOf("MSG_REPLY_ECHO") == -1)
         System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
         int writerIndex = 0;
         ByteBuf writeBuf = Unpooled.buffer();

@@ -17,6 +17,7 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * 野外妖王
@@ -102,7 +103,13 @@ public class OutdoorBossMng extends BaseBossMng {
             List<String> monsterList = new ArrayList<String>();
             monsterList.add(boss.getName());
             monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
-            FightManager.goFightBoss(chara, monsterList);
+            FightManager.goFightBoss(chara, monsterList, new Consumer<Chara>() {
+                @Override
+                public void accept(Chara chara) {
+                    afterBattle(id);
+                    sendRewards(chara, id);
+                }
+            });
         }
     }
 
@@ -142,7 +149,6 @@ public class OutdoorBossMng extends BaseBossMng {
                 boss.setCount(item.count);
                 boss.setRewards(item.rewards);
                 boss.setIcon(item.icon);
-                boss.setId(item.id);
                 boss.setName(item.name);
 
                 SuperBossMap map = item.getRandomMap();

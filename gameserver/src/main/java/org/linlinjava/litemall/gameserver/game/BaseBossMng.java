@@ -33,6 +33,7 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
 
         public void setIndex(int index) {
             this.index = index;
+            this.setId(index);
         }
 
         public void setCount(int count) {
@@ -70,7 +71,6 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
     public void sendRewards(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-            afterBattle(id);
             for(SuperBossReward reward: boss.rewards){
                 if("道行".equals(reward.type)){
                     int v = Integer.valueOf(reward.value);

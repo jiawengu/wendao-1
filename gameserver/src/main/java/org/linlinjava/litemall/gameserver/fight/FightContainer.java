@@ -36,7 +36,7 @@ public class FightContainer {
      * 本回合开始时间
      */
     public long roundTime = System.currentTimeMillis();
-    public Consumer<Boolean> fightCallback;
+    public Consumer fightCallback;
 
     public CharaStatue charaStatue;
     public IFightNpcSuccess success;
