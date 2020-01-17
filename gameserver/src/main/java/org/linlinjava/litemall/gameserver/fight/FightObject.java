@@ -17,11 +17,7 @@ import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
 import org.linlinjava.litemall.gameserver.data.game.SuitEffectUtils;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_11757_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7667_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
@@ -265,16 +261,19 @@ public class FightObject {
         return null;
     }
 
-    public boolean isActiveTianshu(FightContainer fc, int state) {
+    public boolean isActiveTianshu(FightContainer fc, TianShuSkillType type) {
         Iterator var3 = this.fightSkillList.iterator();
 
         while(var3.hasNext()) {
             FightSkill fightSkill = (FightSkill)var3.next();
             if (fightSkill instanceof FightTianshuSkill) {
                 FightTianshuSkill fts = (FightTianshuSkill)fightSkill;
-                if (fts.getStateType() == state) {
-                    fts.sendEffect(fc);
-                    return fts.isActive();
+                if (fts.getType() == type) {
+                    boolean isActive = fts.isActive();
+                    if(isActive){
+                        fts.sendEffect(fc);
+                        return true;
+                    }
                 }
             }
         }
@@ -604,7 +603,17 @@ public class FightObject {
         this.friend = ((PetShuXing)pet.petShuXing.get(0)).martial*360/1000;
         this.durability = 32768;
         this.rank = 2;
+
+        if (pet.tianshu.size() != 0) {
+            Vo_12023_0 vo_12023_0 = (Vo_12023_0)pet.tianshu.get(new Random().nextInt(pet.tianshu.size()));
+            TianShuSkillType tianShuSkillType = TianShuSkillType.getType(vo_12023_0.god_book_skill_name);
+            this.godbook = tianShuSkillType.getId();
+            FightTianshuSkill fightTianshuSkill = tianShuSkillType.createSkill();
+            fightTianshuSkill.buffObject = this;
+            this.addSkill(fightTianshuSkill);
+        }
     }
+
 
     /**
      * 奔雷

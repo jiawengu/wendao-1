@@ -17,24 +17,7 @@ import java.util.function.Consumer;
 import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.db.domain.T_FightObject;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12025_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_15857_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_32985_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_3581_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_3583_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_45141_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_64971_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65017_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7653_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7659_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7669_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.*;
@@ -130,16 +113,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     charaStatue.copyPet(petbeibao);
@@ -339,16 +312,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     charaStatue.copyPet(petbeibao);
@@ -555,16 +518,6 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                        if (petbeibao.tianshu.size() != 0) {
-                            Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                            fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                            if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                                xiuluoshuSkill.buffObject = fightObject;
-                                xiuluoshuSkill.fightContainer = fc;
-                                fightObject.addSkill(xiuluoshuSkill);
-                            }
-                        }
 
                         ft.add(fightObject);
                         break;
@@ -591,16 +544,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     break;
@@ -810,16 +753,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
 
@@ -1032,16 +965,6 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                        if (petbeibao.tianshu.size() != 0) {
-                            Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                            fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                            if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                                xiuluoshuSkill.buffObject = fightObject;
-                                xiuluoshuSkill.fightContainer = fc;
-                                fightObject.addSkill(xiuluoshuSkill);
-                            }
-                        }
 
                         ft.add(fightObject);
                         break;
@@ -1068,16 +991,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     break;
@@ -1295,16 +1208,6 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                        if (petbeibao.tianshu.size() != 0) {
-                            Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                            fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                            if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                                xiuluoshuSkill.buffObject = fightObject;
-                                xiuluoshuSkill.fightContainer = fc;
-                                fightObject.addSkill(xiuluoshuSkill);
-                            }
-                        }
 
                         ft.add(fightObject);
                         break;
@@ -1331,16 +1234,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     break;
@@ -1549,16 +1442,6 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
-                        if (petbeibao.tianshu.size() != 0) {
-                            Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                            fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                            if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                                xiuluoshuSkill.buffObject = fightObject;
-                                xiuluoshuSkill.fightContainer = fc;
-                                fightObject.addSkill(xiuluoshuSkill);
-                            }
-                        }
 
                         ft.add(fightObject);
                         break;
@@ -1585,16 +1468,6 @@ public class FightManager {
                     fightObject.fid = petbeibao.id;
                     fightObject.id = petbeibao.id;
                     fightObject.cid = chara.id;
-                    if (petbeibao.tianshu.size() != 0) {
-                        Vo_12023_0 vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                        fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                        if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                            XiuluoshuSkill xiuluoshuSkill = new XiuluoshuSkill();
-                            xiuluoshuSkill.buffObject = fightObject;
-                            xiuluoshuSkill.fightContainer = fc;
-                            fightObject.addSkill(xiuluoshuSkill);
-                        }
-                    }
 
                     ft.add(fightObject);
                     break;
@@ -2020,6 +1893,17 @@ public class FightManager {
             } while(jiNeng == null && fightRequest.action == 3);
 
             resultList = skill.doSkill(fightContainer, fightRequest, jiNeng);
+
+            int delta = fightObject.mofa*2/10;
+            fightObject.mofa -= delta;
+            Vo_41027_0 vo_41027_0 = new Vo_41027_0();
+            vo_41027_0.id = fightObject.id;
+            vo_41027_0.mana = fightObject.mofa;
+            vo_41027_0.max_mana = fightObject.max_mofa;
+
+            send(fightContainer, new MSG_C_UPDATE_COMBAT_INFO(), vo_41027_0);
+            send_MANA_DELTA(fightContainer, fightObject.id, -delta);
+
             if (resultList != null) {
                 var7 = resultList.iterator();
 
@@ -2065,6 +1949,15 @@ public class FightManager {
             }
         }
 
+    }
+
+    public static void send_MANA_DELTA(FightContainer fightContainer, int fightObjectId, int mana) {
+        Vo_15855_0 vo_15855_0 = new Vo_15855_0();
+        vo_15855_0.id = fightObjectId;
+        vo_15855_0.hitter_id = fightObjectId;
+        vo_15855_0.point = mana;
+        vo_15855_0.effect_no = 0;
+        send(fightContainer, new MSG_C_MANA_DELTA(), vo_15855_0);
     }
 
     public static void doOver(FightContainer fightContainer) {
@@ -3155,16 +3048,6 @@ public class FightManager {
                                 fightObject.id = ((Petbeibao)fightObjectList.get(j)).id;
                                 fightObject.cid = ((Chara)session.gameTeam.duiwu.get(num)).id;
                                 ft.add(fightObject);
-                                if (petbeibao.tianshu.size() != 0) {
-                                    vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                                    fightObject.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                                    if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                        xiuluoshuSkill = new XiuluoshuSkill();
-                                        xiuluoshuSkill.buffObject = fightObject;
-                                        xiuluoshuSkill.fightContainer = fc;
-                                        fightObject.addSkill(xiuluoshuSkill);
-                                    }
-                                }
                                 break;
                             }
                         }
@@ -3190,17 +3073,6 @@ public class FightManager {
                             object.id = ((Petbeibao)pets.get(j)).id;
                             object.cid = chara.id;
                             ft.add(object);
-
-                            if (petbeibao2.tianshu.size() != 0) {
-                                Vo_12023_0 vo120230 = (Vo_12023_0)petbeibao2.tianshu.get(RANDOM.nextInt(petbeibao2.tianshu.size()));
-                                object.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo120230.god_book_skill_name);
-                                if (vo120230.god_book_skill_name.equals("修罗术")) {
-                                    XiuluoshuSkill skill = new XiuluoshuSkill();
-                                    skill.buffObject = object;
-                                    skill.fightContainer = fc;
-                                    object.addSkill(skill);
-                                }
-                            }
                             break;
                         }
                     }
@@ -3236,17 +3108,6 @@ public class FightManager {
                                 object.id = ((Petbeibao)pets.get(j)).id;
                                 object.cid = ((Chara)gameObjectChar.gameTeam.duiwu.get(i)).id;
                                 ftother.add(object);
-
-                                if (q.tianshu.size() != 0) {
-                                    Vo_12023_0 vo120230 = (Vo_12023_0)q.tianshu.get(RANDOM.nextInt(q.tianshu.size()));
-                                    object.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo120230.god_book_skill_name);
-                                    if (vo120230.god_book_skill_name.equals("修罗术")) {
-                                        XiuluoshuSkill skill = new XiuluoshuSkill();
-                                        skill.buffObject = object;
-                                        skill.fightContainer = fc;
-                                        object.addSkill(skill);
-                                    }
-                                }
                                 break;
                             }
                         }
@@ -3271,16 +3132,6 @@ public class FightManager {
                             object.fid = ((Petbeibao)fightObjectList.get(j)).id;
                             object.id = ((Petbeibao)fightObjectList.get(j)).id;
                             object.cid = charaduishou.id;
-                            if (petbeibao.tianshu.size() != 0) {
-                                vo_12023_0 = (Vo_12023_0)petbeibao.tianshu.get(RANDOM.nextInt(petbeibao.tianshu.size()));
-                                object.godbook = (Integer)FightTianshuMap.TIANSHU_EFFECT.get(vo_12023_0.god_book_skill_name);
-                                if (vo_12023_0.god_book_skill_name.equals("修罗术")) {
-                                    xiuluoshuSkill = new XiuluoshuSkill();
-                                    xiuluoshuSkill.buffObject = object;
-                                    xiuluoshuSkill.fightContainer = fc;
-                                    object.addSkill(xiuluoshuSkill);
-                                }
-                            }
 
                             ftother.add(object);
                             break;

@@ -6,12 +6,20 @@
 package org.linlinjava.litemall.gameserver.fight;
 
 public abstract class FightRoundSkill implements FightSkill {
-    protected FightObject buffObject = null;
+    protected FightObject buffObject;
     protected int removeRound;
     protected FightContainer fightContainer;
 
     public FightRoundSkill() {
+        this(null, 0, null);
     }
+
+    protected FightRoundSkill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        this.buffObject = buffObject;
+        this.removeRound = removeRound;
+        this.fightContainer = fightContainer;
+    }
+
 
     /**
      * 消失

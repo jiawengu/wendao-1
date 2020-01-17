@@ -12,13 +12,12 @@ import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public abstract class FightTianshuSkill implements FightSkill {
     protected FightObject buffObject = null;
-    protected FightContainer fightContainer;
 
     public FightTianshuSkill() {
     }
 
     public boolean isActive() {
-        return FightManager.RANDOM.nextBoolean();
+        return FightManager.RANDOM.nextInt(100)<10;
     }
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
@@ -30,9 +29,14 @@ public abstract class FightTianshuSkill implements FightSkill {
         vo_12028_0.id = this.buffObject.fid;
         vo_12028_0.effect_no = 0;
         vo_12028_0.type = 4;
-        vo_12028_0.name = this.getName();
+        vo_12028_0.name = this.getType().getName();
         FightManager.send(fightContainer, new MSG_ATTACH_SKILL_LIGHT_EFFECT(), vo_12028_0);
     }
 
-    public abstract String getName();
+    public abstract TianShuSkillType getType();
+
+    @Override
+    public int getStateType() {
+        return getType().getId();
+    }
 }

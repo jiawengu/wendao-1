@@ -44,6 +44,11 @@ public class RuYiQuanSkill extends FightRoundSkill {
     public RuYiQuanSkill() {
     }
 
+    protected RuYiQuanSkill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
+
+
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
@@ -88,10 +93,8 @@ public class RuYiQuanSkill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new RuYiQuanSkill();
+            that = new RuYiQuanSkill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound - 1;
         }
 
         return null;

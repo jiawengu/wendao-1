@@ -25,8 +25,12 @@ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
  */
 public class FuzhuJin31Skill extends FightRoundSkill {
     public FuzhuJin31Skill() {
+
     }
 
+    public FuzhuJin31Skill(FightObject buffObject, int removeRound, FightContainer fightContainer) {
+        super(buffObject, removeRound, fightContainer);
+    }
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         int victim_id = fightRequest.vid;
         FightManager.getFightObject(fightContainer, victim_id);
@@ -87,10 +91,8 @@ public class FuzhuJin31Skill extends FightRoundSkill {
             vo_7655_0.id = fightObject.fid;
             FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
             fightObject.addBuffState(fightContainer, this.getStateType());
-            that = new FuzhuJin31Skill();
+            that = new FuzhuJin31Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            that.buffObject = fightObject;
-            that.removeRound = fightContainer.round + jiNeng.skillRound - 1;
             gongjili = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
             that.buffObject.accurate_ext = that.buffObject.accurate * gongjili / 100;
         }
