@@ -4964,4 +4964,19 @@ import java.util.Random;
         }
      }
 
+    /**
+     * 获取宠物仓库的下一个位置
+     * @param chara
+     * @return
+     */
+    public static int getChongwuCangkuNextWeizhi(Chara chara) {
+        int no = 1;
+        for (int j = 0; j < chara.chongwucangku.size(); j++) {
+            if (no < chara.chongwucangku.get(j).no) {
+                no = chara.chongwucangku.get(j).no;
+            }
+        }
+        return no + 1;
+    }
+
 }

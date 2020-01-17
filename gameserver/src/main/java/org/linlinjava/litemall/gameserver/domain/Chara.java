@@ -486,6 +486,10 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      * 上次跨天的时间戳
      */
     public Map<String, Long> dayBreakTimeMap = new HashMap<>();
+    /**
+     * 宠物仓库
+     */
+    public List<Petbeibao> chongwucangku = new LinkedList();
 
     public void onTTTDayBreak(){
         this.ttt_layer = 0;
