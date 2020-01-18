@@ -75,6 +75,7 @@ public class GameObjectChar {
         this.chara = chara;
         this.characters = characters;
         this.logic = new UserLogic();
+        System.out.println("obj init");
         this.logic.init(chara.id, this.logic, this);
         //GameObjectCharMng.add(this);
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);

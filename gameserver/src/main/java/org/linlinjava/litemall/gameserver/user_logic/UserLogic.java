@@ -27,6 +27,7 @@ public class UserLogic extends BaseLogic {
 
         this.registerMod("party", new UserPartyLogic());
         this.registerMod("party_daily_task", new UserPartyDailyTaskLogic());
+        this.registerMod("party_daily_challenge", new UserPartyDailyChallengeLogic());
     }
 
     @Override
