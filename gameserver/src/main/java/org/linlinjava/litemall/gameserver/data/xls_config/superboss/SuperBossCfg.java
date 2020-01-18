@@ -37,7 +37,7 @@ public class SuperBossCfg extends BaseCfg {
     public int challengeCount;
 
     public List<SuperBossItem> bossList;
-    public Map<Integer, SuperBossItem> bossMap;
+    public Map<String, SuperBossItem> bossMap;
     public List<SuperBossMap> maps;
 
     public void setBossCount(int bossCount) {
@@ -67,7 +67,7 @@ public class SuperBossCfg extends BaseCfg {
         this.bossList = loadJson("SuperBossItem", SuperBossItem.class);
         this.bossMap = new HashMap<>();
         for(SuperBossItem item: this.bossList){
-            bossMap.put(item.id, item);
+            bossMap.put(item.name, item);
         }
     }
 

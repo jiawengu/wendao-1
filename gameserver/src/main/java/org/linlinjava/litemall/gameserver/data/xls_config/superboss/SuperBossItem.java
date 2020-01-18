@@ -12,6 +12,21 @@ public class SuperBossItem {
     public Integer count;
     public List<SuperBossReward> rewards;
     public List<String> xiaoGuai;
+    public String dlgContent;
+    public String startButtonTip;
+    public String exitButtonTip;
+
+    public void setDlgContent(String dlgContent) {
+        this.dlgContent = dlgContent;
+    }
+
+    public void setStartButtonTip(String startButtonTip) {
+        this.startButtonTip = startButtonTip;
+    }
+
+    public void setExitButtonTip(String exitButtonTip) {
+        this.exitButtonTip = exitButtonTip;
+    }
 
     public void setXiaoGuai(String xiaoGuai) {
         this.xiaoGuai = Arrays.asList(xiaoGuai.split(","));

@@ -2861,6 +2861,12 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 GameData.that.outdoorBossMng.sendBossFight(chara, npc_id);
                 return ;
             }
+
+            //是海盗
+            if(GameData.that.outdoorBossMng.isBoss(npc_id) ){
+                GameData.that.pirateMng.sendBossFight(chara, npc_id);
+                return ;
+            }
         }
 
         /* 1228 */

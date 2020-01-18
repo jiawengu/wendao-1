@@ -2784,6 +2784,13 @@ public class FightManager {
                     return ;
                 }
 
+                //海盗
+                if(guaiwu != null && GameData.that.pirateMng.getBossByname(guaiwu.get(0).str) != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
+                    if(fightContainer.fightCallback != null){
+                        fightContainer.fightCallback.accept(GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu);
+                    }
+                    return ;
+                }
                 if (guaiwu != null) {
                     GameMap gameMap = GameObjectCharMng.getGameObjectChar(chara1.id).gameMap;
                     if (gameMap.isDugeno()){
