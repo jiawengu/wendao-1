@@ -125,7 +125,7 @@ public class FightObject {
     /**
      * 天书技能列表
      */
-    private List<FightTianshuSkill> fightTianshuSkillList = new ArrayList<>();
+    private final List<FightTianshuSkill> fightTianshuSkillList = new ArrayList<>();
     /**
      * 下次出手的天书技能
      */
@@ -149,6 +149,10 @@ public class FightObject {
      * 通天塔星君
      */
     public FightObject tttXingjun;
+    /**
+     * 战斗属性
+     */
+    private final FightAttribute fightAttribute = new FightAttribute();
 
     public FightObject(Chara chara) {
         this.id = chara.id;
@@ -261,7 +265,10 @@ public class FightObject {
         return null;
     }
 
-    public boolean isActiveTianshu(FightContainer fc, TianShuSkillType type) {
+    public boolean isActiveTianshu(FightContainer fc, FightObject victimFightObject, TianShuSkillType type) {
+        if(null!=victimFightObject && victimFightObject.isDead()){
+            return false;
+        }
         if(null == nextTianshuSkill || nextTianshuSkill.getType()!=type){
             return false;
         }
@@ -899,6 +906,9 @@ public class FightObject {
     }
 
     public void updateState(FightContainer fightContainer) {
+        if(null == fightContainer){
+            return;
+        }
         Vo_11757_0 vo_11757_0 = new Vo_11757_0();
         vo_11757_0.id = this.fid;
         if (this.buffState.isEmpty()) {
@@ -971,6 +981,11 @@ public class FightObject {
             if (this.shengming <= reduce) {
                 reduce = this.shengming;
                 this.shengming = 0;
+
+                if(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM)>0){
+
+                }
+
                 if (this.type != 1 && this.type != 3) {
                     if (this.canbeRevive()) {
                         this.state = 6;

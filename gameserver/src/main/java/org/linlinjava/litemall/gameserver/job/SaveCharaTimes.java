@@ -438,13 +438,14 @@ public class SaveCharaTimes {
 
         for(int i = 0; i < sessionList.size(); ++i) {
             try {
-                if (((GameObjectChar)sessionList.get(i)).gameMap.id == 38004 && ((GameObjectChar)sessionList.get(i)).gameTeam == null) {
-                    GameUtilRenWu.shidaohuicheng(((GameObjectChar)sessionList.get(i)).chara);
+                GameObjectChar gameObjectChar = sessionList.get(i);
+                if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
+                    gameObjectChar.offline();
+                    sessionList.remove(gameObjectChar);
                 }
 
-                if (((GameObjectChar)sessionList.get(i)).heartEcho != 0L && ((GameObjectChar)sessionList.get(i)).heartEcho + 180000L < time) {
-                    ((GameObjectChar)sessionList.get(i)).offline();
-                    sessionList.remove(sessionList.get(i));
+                if (gameObjectChar.gameMap!=null && gameObjectChar.gameMap.id == 38004 && gameObjectChar.gameTeam == null) {
+                    GameUtilRenWu.shidaohuicheng(gameObjectChar.chara);
                 }
             } catch (Exception var6) {
                 log.error("", var6);

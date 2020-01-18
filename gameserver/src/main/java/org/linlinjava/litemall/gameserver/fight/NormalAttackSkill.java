@@ -52,7 +52,7 @@ public class NormalAttackSkill implements FightSkill {
 
         //破天
         float jianFangPer = 1.0F;
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.PO_TIAN)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.PO_TIAN)){
             jianFangPer = 0.5F;
         }
 
@@ -79,7 +79,7 @@ public class NormalAttackSkill implements FightSkill {
         }
 
         //反击
-        if(victimFightObject.isActiveTianshu(fightContainer, TianShuSkillType.FAN_JI)){
+        if(victimFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.FAN_JI)){
             int fanShang = hurt*10/6;
             attFightObject.reduceShengming(fanShang, false, false);
 
@@ -93,32 +93,43 @@ public class NormalAttackSkill implements FightSkill {
         }
 
         //烈炎
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.LIE_YAN)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.LIE_YAN)){
             FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 164);//焦金砾石
-            resultList.add(fightResult);
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+
         }
         //惊雷
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.JING_LEI)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.JING_LEI)){
             FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 14);//流光异彩
-            resultList.add(fightResult);
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
         }
         //碎石
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.SUI_SHI)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.SUI_SHI)){
             FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 213);//天塌地陷
-            resultList.add(fightResult);
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
         }
         //青木
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.QING_MU)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.QING_MU)){
             FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 64);//落叶缤纷
-            resultList.add(fightResult);
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
         }
         //寒冰
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.HAN_BING)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.HAN_BING)){
             FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 113);//怒波狂涛
-            resultList.add(fightResult);
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
         }
         //魔引
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.MO_YIN)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.MO_YIN)){
             int cost = hurt/20;
             if(cost>0){
                 FightManager.costMofa(fightContainer, victimFightObject, cost);
@@ -127,7 +138,7 @@ public class NormalAttackSkill implements FightSkill {
         }
 
         //狂暴
-        if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.KUANG_BAO)){
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.KUANG_BAO)){
             int randomNum = new Random().nextInt(3)+1;
                 List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, randomNum);
 
