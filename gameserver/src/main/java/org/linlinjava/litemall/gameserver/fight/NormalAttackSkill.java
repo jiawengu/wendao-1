@@ -8,12 +8,16 @@ package org.linlinjava.litemall.gameserver.fight;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 
 public class NormalAttackSkill implements FightSkill {
@@ -71,6 +75,7 @@ public class NormalAttackSkill implements FightSkill {
             fightResult.effect_no = 0;
             fightResult.damage_type = 1;
             resultList.add(fightResult);
+
         }
 
         //反击
@@ -89,77 +94,27 @@ public class NormalAttackSkill implements FightSkill {
 
         //烈炎
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.LIE_YAN)){
-            int skillAttack = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, 1, "FS", 164);//焦金砾石
-            int thurt = (int) (2.5*BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
-
-            victimFightObject.reduceShengming(thurt, false, true);
-
-            FightResult fightResult = new FightResult();
-            fightResult.id = attFightObject.id;
-            fightResult.vid = victimFightObject.fid;
-            fightResult.point = -thurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 2;
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 164);//焦金砾石
             resultList.add(fightResult);
         }
         //惊雷
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.JING_LEI)){
-            int skillAttack = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, 1, "FS", 14);//流光异彩
-            int thurt = (int) (2.5*BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
-
-            victimFightObject.reduceShengming(thurt, false, true);
-
-            FightResult fightResult = new FightResult();
-            fightResult.id = attFightObject.id;
-            fightResult.vid = victimFightObject.fid;
-            fightResult.point = -thurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 2;
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 14);//流光异彩
             resultList.add(fightResult);
         }
         //碎石
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.SUI_SHI)){
-            int skillAttack = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, 1, "FS", 213);//天塌地陷
-            int thurt = (int) (2.5*BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
-
-            victimFightObject.reduceShengming(thurt, false, true);
-
-            FightResult fightResult = new FightResult();
-            fightResult.id = attFightObject.id;
-            fightResult.vid = victimFightObject.fid;
-            fightResult.point = -thurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 2;
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 213);//天塌地陷
             resultList.add(fightResult);
         }
         //青木
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.QING_MU)){
-            int skillAttack = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, 1, "FS", 64);//落叶缤纷
-            int thurt = (int) (2.5*BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
-
-            victimFightObject.reduceShengming(thurt, false, true);
-
-            FightResult fightResult = new FightResult();
-            fightResult.id = attFightObject.id;
-            fightResult.vid = victimFightObject.fid;
-            fightResult.point = -thurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 2;
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 64);//落叶缤纷
             resultList.add(fightResult);
         }
         //寒冰
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.HAN_BING)){
-            int skillAttack = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, 1, "FS", 113);//怒波狂涛
-            int thurt = (int) (2.5*BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
-
-            victimFightObject.reduceShengming(thurt, false, true);
-
-            FightResult fightResult = new FightResult();
-            fightResult.id = attFightObject.id;
-            fightResult.vid = victimFightObject.fid;
-            fightResult.point = -thurt;
-            fightResult.effect_no = 0;
-            fightResult.damage_type = 2;
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 113);//怒波狂涛
             resultList.add(fightResult);
         }
         //魔引
@@ -173,50 +128,101 @@ public class NormalAttackSkill implements FightSkill {
 
         //狂暴
         if(attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.KUANG_BAO)){
-            List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, 4);
-            vo_19945_0 = new Vo_19945_0();
-            vo_19945_0.id = fightRequest.vid;
-            vo_19945_0.hid = fightRequest.id;
-            vo_19945_0.para_ex = 0;
-            vo_19945_0.missed = 1;
-            vo_19945_0.para = 0;
-            vo_19945_0.damage_type = 1;
-            FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
-            Vo_64989_0 vo_64989_0 = new Vo_64989_0();
-            vo_64989_0.hid = fightRequest.id;
-            vo_64989_0.a = 1;
-            Iterator var14 = targetList.iterator();
+            int randomNum = new Random().nextInt(3)+1;
+                List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, randomNum);
 
-            while(var14.hasNext()) {
-                FightObject fightObject = (FightObject)var14.next();
-                vo_64989_0.list.add(fightObject.fid);
-                vo_64989_0.missList.add(1);
-            }
+                Vo_64989_0 vo_64989_0 = new Vo_64989_0();
+                vo_64989_0.hid = fightRequest.id;
+                vo_64989_0.a = 1;
+                Iterator var14 = targetList.iterator();
+
+                while(var14.hasNext()) {
+                    FightObject fightObject = (FightObject)var14.next();
+                    if(fightObject.id == victimFightObject.id){
+                        continue;
+                    }
+
+                    vo_64989_0.list.add(fightObject.fid);
+                    vo_64989_0.missList.add(1);
+
+                    vo_19945_0 = new Vo_19945_0();
+                    vo_19945_0.id = fightObject.id;
+                    vo_19945_0.hid = fightRequest.id;
+                    vo_19945_0.para_ex = 0;
+                    vo_19945_0.missed = 1;
+                    vo_19945_0.para = 0;
+                    vo_19945_0.damage_type = 1;
+                    FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
+                }
 
             FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
-            Iterator var20 = targetList.iterator();
+                Iterator var20 = targetList.iterator();
 
-            while(var20.hasNext()) {
-                FightObject fightObject = (FightObject)var20.next();
-                if(fightObject.id == victimFightObject.id){
-                    continue;
-                }
-                int showhurt = (int)((double)hurt * 0.5D);
-                {
-                    showhurt = fightObject.reduceShengming(showhurt, fabao, false);
-                    FightResult fightResult = new FightResult();
-                    fightResult.id = fightRequest.id;
-                    fightResult.vid = fightObject.fid;
-                    fightResult.point = -showhurt;
-                    fightResult.effect_no = 0;
-                    fightResult.damage_type = 4097;
-                    resultList.add(fightResult);
-                }
+                while(var20.hasNext()) {
+                    FightObject fightObject = (FightObject)var20.next();
+                    if(fightObject.id == victimFightObject.id){
+                        continue;
+                    }
+                    int showhurt = (int)((double)hurt * 0.5D);
+                    {
+                        showhurt = fightObject.reduceShengming(showhurt, fabao, false);
 
+                        FightResult fightResult = new FightResult();
+                        fightResult.id = fightRequest.id;
+                        fightResult.vid = fightObject.fid;
+                        fightResult.point = -showhurt;
+                        fightResult.effect_no = 0;
+                        fightResult.damage_type = 1;
+                        resultList.add(fightResult);
+                    }
+
+                }
             }
-        }
+
 
         return resultList;
+    }
+
+    private FightResult tianshuSkill(FightContainer fightContainer, FightObject attFightObject, FightObject victimFightObject, int skillNo){
+        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+        vo_7655_0.id = attFightObject.fid;
+        FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
+
+        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+        vo_19959_0.round = fightContainer.round;
+        vo_19959_0.aid = attFightObject.id;
+        vo_19959_0.vid = victimFightObject.id;
+        vo_19959_0.action = 3;
+        vo_19959_0.para = skillNo;
+        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
+
+        Vo_19945_0 vo_19945_0 = new Vo_19945_0();
+        vo_19945_0.hid = attFightObject.id;
+        vo_19945_0.id = victimFightObject.id;
+        vo_19945_0.para_ex = 0;
+        vo_19945_0.missed = 1;
+        vo_19945_0.para = 0;
+        vo_19945_0.damage_type = 2;
+        FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
+
+        Vo_64989_0 vo_64989_0 = new Vo_64989_0();
+        vo_64989_0.hid = attFightObject.id;
+        vo_64989_0.a = 1;
+        vo_64989_0.list.add(victimFightObject.id);
+        vo_64989_0.missList.add(1);
+        FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
+
+        int skillAttack = BattleUtils.skillAttack(attFightObject.accurate + attFightObject.accurate_ext, 1, "WS", skillNo);
+        int thurt = (int) (2.5*BattleUtils.battle(attFightObject.accurate + attFightObject.accurate_ext, skillAttack, victimFightObject.fangyu + victimFightObject.fangyu_ext));
+        victimFightObject.reduceShengming(thurt, false, false);
+
+        FightResult fightResult = new FightResult();
+        fightResult.id = attFightObject.id;
+        fightResult.vid = victimFightObject.fid;
+        fightResult.point = -thurt;
+        fightResult.effect_no = 0;
+        fightResult.damage_type = 2;
+        return fightResult;
     }
 
 

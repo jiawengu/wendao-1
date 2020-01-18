@@ -258,12 +258,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
            fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {//宠物天书
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -464,12 +459,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
            fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -707,12 +697,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
             fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -922,12 +907,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
             fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -1162,12 +1142,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
             fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -1400,12 +1375,7 @@ public class FightManager {
 
         while(var42.hasNext()) {
            fightObject = (FightObject)var42.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
@@ -3042,12 +3012,7 @@ public class FightManager {
 
                 while(var43.hasNext()) {
                     object1 = (FightObject)var43.next();
-                    if (object1.godbook != 0) {
-                        Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                        vo_12025_0.id = object1.fid;
-                        vo_12025_0.effect_no = object1.godbook;
-                        send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-                    }
+                    object1.randomTianShuSkill(fc);
                 }
 
                 round(fc);
@@ -3251,12 +3216,7 @@ public class FightManager {
 
         while(var33.hasNext()) {
             fightObject = (FightObject)var33.next();
-            if (fightObject.godbook != 0) {
-                Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                vo_12025_0.id = fightObject.fid;
-                vo_12025_0.effect_no = fightObject.godbook;
-                send(fc, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-            }
+            fightObject.randomTianShuSkill(fc);
         }
 
         round(fc);
@@ -3400,12 +3360,7 @@ public class FightManager {
 
             while(var16.hasNext()) {
                 FightObject fightObject = (FightObject)var16.next();
-                if (fightObject.godbook != 0) {
-                    Vo_12025_0 vo_12025_0 = new Vo_12025_0();
-                    vo_12025_0.id = fightObject.fid;
-                    vo_12025_0.effect_no = fightObject.godbook;
-                    GameObjectChar.send(new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
-                }
+                fightObject.randomTianShuSkill(fc);
             }
 
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();

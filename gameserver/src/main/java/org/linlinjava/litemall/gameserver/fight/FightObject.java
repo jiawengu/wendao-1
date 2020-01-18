@@ -18,11 +18,7 @@ import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
 import org.linlinjava.litemall.gameserver.data.game.SuitEffectUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_REVIVE;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
@@ -126,6 +122,14 @@ public class FightObject {
      * 战斗技能列表
      */
     private List<FightSkill> fightSkillList = new ArrayList();
+    /**
+     * 天书技能列表
+     */
+    private List<FightTianshuSkill> fightTianshuSkillList = new ArrayList<>();
+    /**
+     * 下次出手的天书技能
+     */
+    public FightTianshuSkill nextTianshuSkill;
     public int autofight_select = 0;
     public int autofight_skillaction;
     public int autofight_skillno;
@@ -137,10 +141,6 @@ public class FightObject {
      * 守护、宠物:2
      */
     public int rank;
-    /**
-     * 天书技能id
-     */
-    public int godbook;
     /**
      * 是否逃跑
      */
@@ -262,23 +262,21 @@ public class FightObject {
     }
 
     public boolean isActiveTianshu(FightContainer fc, TianShuSkillType type) {
-        Iterator var3 = this.fightSkillList.iterator();
-
-        while(var3.hasNext()) {
-            FightSkill fightSkill = (FightSkill)var3.next();
-            if (fightSkill instanceof FightTianshuSkill) {
-                FightTianshuSkill fts = (FightTianshuSkill)fightSkill;
-                if (fts.getType() == type) {
-                    boolean isActive = fts.isActive();
-                    if(isActive){
-                        fts.sendEffect(fc);
-                        return true;
-                    }
-                }
-            }
+        if(null == nextTianshuSkill || nextTianshuSkill.getType()!=type){
+            return false;
         }
 
-        return false;
+
+        boolean isActive = nextTianshuSkill.isActive();
+        if(!isActive){
+            return false;
+        }
+
+        nextTianshuSkill.sendEffect(fc);
+
+        randomTianShuSkill(fc);
+
+        return true;
     }
 
     public FightObject(Chara chara, String name) {
@@ -605,16 +603,25 @@ public class FightObject {
         this.rank = 2;
 
         if (pet.tianshu.size() != 0) {
-            Vo_12023_0 vo_12023_0 = (Vo_12023_0)pet.tianshu.get(new Random().nextInt(pet.tianshu.size()));
-            TianShuSkillType tianShuSkillType = TianShuSkillType.getType(vo_12023_0.god_book_skill_name);
-            this.godbook = tianShuSkillType.getId();
-            FightTianshuSkill fightTianshuSkill = tianShuSkillType.createSkill();
-            fightTianshuSkill.buffObject = this;
-            this.addSkill(fightTianshuSkill);
+            for(Vo_12023_0 vo_12023_0:pet.tianshu){
+                TianShuSkillType tianShuSkillType = TianShuSkillType.getType(vo_12023_0.god_book_skill_name);
+                FightTianshuSkill fightTianshuSkill = tianShuSkillType.createSkill();
+                fightTianshuSkill.buffObject = this;
+                fightTianshuSkillList.add(fightTianshuSkill);
+            }
         }
     }
 
-
+    public void randomTianShuSkill(FightContainer fightContainer){
+        if(fightTianshuSkillList.isEmpty()){
+            return;
+        }
+        this.nextTianshuSkill = fightTianshuSkillList.get(new Random().nextInt(fightTianshuSkillList.size()));
+        Vo_12025_0 vo_12025_0 = new Vo_12025_0();
+        vo_12025_0.id = fid;
+        vo_12025_0.effect_no = nextTianshuSkill.getType().getId();
+        FightManager.send(fightContainer, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
+    }
     /**
      * 奔雷
      * @param name
