@@ -26,6 +26,54 @@ public class NormalAttackSkill implements FightSkill {
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {
         List<FightResult> resultList = new ArrayList();
+        int id = fightRequest.id;
+        FightObject attFightObject = FightManager.getFightObject(fightContainer, id);
+        FightObject victimFightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);
+
+        //烈炎
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.LIE_YAN)){
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 164);//焦金砾石
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+            return resultList;
+        }
+        //惊雷
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.JING_LEI)){
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 14);//流光异彩
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+            return resultList;
+        }
+        //碎石
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.SUI_SHI)){
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 213);//天塌地陷
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+            return resultList;
+        }
+        //青木
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.QING_MU)){
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 64);//落叶缤纷
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+            return resultList;
+        }
+        //寒冰
+        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.HAN_BING)){
+            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 113);//怒波狂涛
+            if(null!=fightResult){
+                resultList.add(fightResult);
+            }
+            return resultList;
+        }
+
+
+
+
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
         vo_19959_0.aid = fightRequest.id;
@@ -33,9 +81,7 @@ public class NormalAttackSkill implements FightSkill {
         vo_19959_0.vid = fightRequest.vid;
         vo_19959_0.para = fightRequest.para;
         FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
-        int id = fightRequest.id;
-        FightObject attFightObject = FightManager.getFightObject(fightContainer, id);
-        FightObject victimFightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);
+
         boolean fabao = true;
         FightFabaoSkill fabaoSkill = attFightObject.getFabaoSkill();
         float jiabei = 1.0F;
@@ -92,42 +138,7 @@ public class NormalAttackSkill implements FightSkill {
             resultList.add(fightResult);
         }
 
-        //烈炎
-        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.LIE_YAN)){
-            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 164);//焦金砾石
-            if(null!=fightResult){
-                resultList.add(fightResult);
-            }
 
-        }
-        //惊雷
-        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.JING_LEI)){
-            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 14);//流光异彩
-            if(null!=fightResult){
-                resultList.add(fightResult);
-            }
-        }
-        //碎石
-        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.SUI_SHI)){
-            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 213);//天塌地陷
-            if(null!=fightResult){
-                resultList.add(fightResult);
-            }
-        }
-        //青木
-        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.QING_MU)){
-            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 64);//落叶缤纷
-            if(null!=fightResult){
-                resultList.add(fightResult);
-            }
-        }
-        //寒冰
-        if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.HAN_BING)){
-            FightResult fightResult = tianshuSkill(fightContainer, attFightObject, victimFightObject, 113);//怒波狂涛
-            if(null!=fightResult){
-                resultList.add(fightResult);
-            }
-        }
         //魔引
         if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.MO_YIN)){
             int cost = hurt/20;
@@ -195,15 +206,12 @@ public class NormalAttackSkill implements FightSkill {
     }
 
     private FightResult tianshuSkill(FightContainer fightContainer, FightObject attFightObject, FightObject victimFightObject, int skillNo){
-        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
-        vo_7655_0.id = attFightObject.fid;
-        FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
 
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
         vo_19959_0.aid = attFightObject.id;
         vo_19959_0.vid = victimFightObject.id;
-        vo_19959_0.action = 3;
+        vo_19959_0.action = 2;
         vo_19959_0.para = skillNo;
         FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
 
@@ -213,7 +221,7 @@ public class NormalAttackSkill implements FightSkill {
         vo_19945_0.para_ex = 0;
         vo_19945_0.missed = 1;
         vo_19945_0.para = 0;
-        vo_19945_0.damage_type = 2;
+        vo_19945_0.damage_type = 1;
         FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
 
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
