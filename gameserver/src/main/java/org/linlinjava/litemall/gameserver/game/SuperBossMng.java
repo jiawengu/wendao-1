@@ -158,9 +158,12 @@ public class SuperBossMng extends BaseBossMng {
                 GameUtil.sendTips("人数不足3人");
                 return;
             }
-            List<String> monsterList = new ArrayList<String>();
-            monsterList.add(boss.getName());
-            monsterList.addAll(cfg.bossMap.get(boss.getName()).xiaoGuai);
+            Map<Integer, String> monsterList = new HashMap<>();
+            Integer index = 0;
+            monsterList.put(boss.getId(), boss.getName());
+            for(String xiaoguai : cfg.bossMap.get(boss.getName()).xiaoGuai){
+                monsterList.put(boss.getId() + index++, xiaoguai);
+            }
             FightManager.goFightBoss(chara, monsterList, new Consumer<List<Chara>>() {
                 @Override
                 public void accept(List<Chara> charas) {

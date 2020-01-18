@@ -5,10 +5,7 @@
 
 package org.linlinjava.litemall.gameserver.fight;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.linlinjava.litemall.db.domain.Npc;
@@ -1406,7 +1403,7 @@ public class FightManager {
         send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
     }
-    public static void goFightBoss(Chara chara, List<String> monsterList , Consumer fightCallback) {
+    public static void goFightBoss(Chara chara, Map<Integer, String> monsterList , Consumer fightCallback) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
@@ -1491,10 +1488,11 @@ public class FightManager {
         monsterTeam.type = 2;
         num = 0;
 
-        for(Iterator var20 = monsterList.iterator(); var20.hasNext(); ++num) {
-            String monsterName = (String)var20.next();
+        for(Iterator var20 = monsterList.keySet().iterator(); var20.hasNext(); ++num) {
+            Integer key = Integer.valueOf(var20.next().toString());
+            String monsterName = monsterList.get(key);
             T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(monsterName);
-            fightObject = new FightObject(t_fightObject);
+            fightObject = new FightObject(t_fightObject, key);
             fightObject.pos = (Integer)MONSTER_POS.get(num);
             fightObject.fid = fc.id++;
             if (num == 1) {
@@ -2770,14 +2768,14 @@ public class FightManager {
                     return;
                 }
                 //野怪
-                if(guaiwu != null && GameData.that.outdoorBossMng.getBossByname(guaiwu.get(0).str) != null){
+                if(guaiwu != null && GameData.that.outdoorBossMng.isBoss(guaiwu.get(0).bossid)){
                     if(fightContainer.fightCallback != null){
                         fightContainer.fightCallback.accept(chara1);
                     }
                     return;
                 }
                 //超级 BOSS
-                if(guaiwu != null && GameData.that.superBossMng.getBossByname(guaiwu.get(0).str) != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
+                if(guaiwu != null && GameData.that.superBossMng.isBoss(guaiwu.get(0).bossid) && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
                     if(fightContainer.fightCallback != null){
                         fightContainer.fightCallback.accept(GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu);
                     }
@@ -2785,7 +2783,7 @@ public class FightManager {
                 }
 
                 //海盗
-                if(guaiwu != null && GameData.that.pirateMng.getBossByname(guaiwu.get(0).str) != null && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
+                if(guaiwu != null && GameData.that.pirateMng.isBoss(guaiwu.get(0).bossid) && GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) {
                     if(fightContainer.fightCallback != null){
                         fightContainer.fightCallback.accept(GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu);
                     }
