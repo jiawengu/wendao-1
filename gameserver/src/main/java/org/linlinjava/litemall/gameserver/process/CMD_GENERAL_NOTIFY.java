@@ -1237,6 +1237,12 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             {
                 para1 = "黑风洞一层";
             }
+            else if(para1.equals("兰若寺")){
+                para1 = "兰若寺后山1";
+            }
+            else if(para1.equals("烈火涧")){
+                para1 = "烈火涧1";
+            }
 
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 98;

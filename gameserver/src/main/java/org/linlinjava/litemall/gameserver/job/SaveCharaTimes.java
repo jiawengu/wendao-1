@@ -436,7 +436,7 @@ public class SaveCharaTimes {
         }
         list.forEach(obj->{
             try {
-                if (obj.gameMap.id == 38004 && obj.gameTeam == null) {
+                if ((obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
                     GameUtilRenWu.shidaohuicheng(obj.chara);
                 }
                 if (obj.heartEcho != 0L && obj.heartEcho + 180000L < time) {

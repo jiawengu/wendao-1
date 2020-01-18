@@ -39,6 +39,21 @@ public class BaseFightObjectService {
         return list.get(0);
     }
 
+    public List<T_FightObject> findByID(Integer id) {
+        T_FightObjectExample example = new T_FightObjectExample();
+        T_FightObjectExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false).andIdEqualTo(id);
+        return this.mapper.selectByExample(example);
+    }
+
+    public T_FightObject findOneByID(Integer id) {
+        List<T_FightObject> list = findByID(id);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
+
     public List<T_FightObject> findAll(int page, int size, String sort, String order) {
         T_FightObjectExample example = new T_FightObjectExample();
         T_FightObjectExample.Criteria criteria = example.createCriteria();

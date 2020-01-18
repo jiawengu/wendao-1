@@ -565,9 +565,16 @@ public class FightManager {
         num = 0;
 
 
+        GameMap gameMap = GameObjectCharMng.getGameObjectChar(chara.id).gameMap;
         for(Iterator var20 = monsterList.iterator(); var20.hasNext(); ++num) {
             String monsterName = (String)var20.next();
-            fightObject = new FightObject(chara, monsterName);
+            if(gameMap.isDugeno()){
+                T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(monsterName);
+                fightObject = new FightObject(t_fightObject);
+            }
+            else {
+                fightObject = new FightObject(chara, monsterName);
+            }
             fightObject.pos = (Integer)MONSTER_POS.get(num);
             fightObject.fid = fc.id++;
             if (num == 1) {
