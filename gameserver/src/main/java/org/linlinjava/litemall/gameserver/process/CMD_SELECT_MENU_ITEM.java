@@ -2742,7 +2742,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
         if(gameMap.isDugeno()){
             GameZone gameZone = (GameZone)gameMap;
-            gameZone.gameDugeon.selectNpc(chara1, npc_id);
+            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
         }
 
         if (npc_id == 978) {
@@ -2860,6 +2860,12 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             //是野外BOSS
             if(GameData.that.outdoorBossMng.isBoss(npc_id) ){
                 GameData.that.outdoorBossMng.sendBossFight(chara, npc_id);
+                return ;
+            }
+
+            //是海盗
+            if(GameData.that.outdoorBossMng.isBoss(npc_id) ){
+                GameData.that.pirateMng.sendBossFight(chara, npc_id);
                 return ;
             }
         }
@@ -3076,9 +3082,11 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
         /* 1286 */
-        MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara);
-        /* 1287 */
-        GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+        if(!gameMap.isDugeno()) {
+            MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara);
+            /* 1287 */
+            GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+        }
         /*      */
         /* 1289 */
         ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);

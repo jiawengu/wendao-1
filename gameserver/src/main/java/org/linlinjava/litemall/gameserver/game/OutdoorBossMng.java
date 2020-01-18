@@ -17,6 +17,7 @@ import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * 野外妖王
@@ -99,10 +100,19 @@ public class OutdoorBossMng extends BaseBossMng {
                 return ;
             }
 
-            List<String> monsterList = new ArrayList<String>();
-            monsterList.add(boss.getName());
-            monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
-            FightManager.goFightBoss(chara, monsterList);
+            Map<Integer, String> monsterList = new HashMap<>();
+            Integer index = 0;
+            monsterList.put(boss.getId(), boss.getName());
+            for(String xiaoguai : cfg.bossMap.get(boss.getName()).xiaoGuai){
+                monsterList.put(boss.getId() + index++, xiaoguai);
+            }
+            FightManager.goFightBoss(chara, monsterList, new Consumer<Chara>() {
+                @Override
+                public void accept(Chara chara) {
+                    afterBattle(id);
+                    sendRewards(chara, id);
+                }
+            });
         }
     }
 
@@ -117,7 +127,7 @@ public class OutdoorBossMng extends BaseBossMng {
         BossNpc boss = getBossByid(id);
         if(boss != null){
             this.bossList.remove(boss.index);
-            this.bossMap.remove(id);
+            this.bossMap.remove(boss);
         }
     }
 
@@ -133,16 +143,15 @@ public class OutdoorBossMng extends BaseBossMng {
     public List<OutdoorBossNpc> getRandomBossList() {
         List<OutdoorBossNpc> list = new ArrayList<>();
         this.bossMap = new HashMap<>();
-        int id = 0, index = 0;
+        int id = 10, index = 0;
         for(OutdoorBossItem item: cfg.bossList){
             for(int i = 0; i < item.count; i++){
                 OutdoorBossNpc boss = new OutdoorBossNpc();
                 boss.setLevel(item.level);
-                boss.setIndex(index++);
+                boss.setIndex(index++, 10);
                 boss.setCount(item.count);
                 boss.setRewards(item.rewards);
                 boss.setIcon(item.icon);
-                boss.setId(item.id);
                 boss.setName(item.name);
 
                 SuperBossMap map = item.getRandomMap();
@@ -152,6 +161,9 @@ public class OutdoorBossMng extends BaseBossMng {
                 SuperBossPosition pos = map.getRandomPosition();
                 boss.setX(pos.x);
                 boss.setY(pos.y);
+                boss.setDlgContent(item.dlgContent);
+                boss.setStartButtonTip(item.startButtonTip);
+                boss.setExitButtonTip(item.exitButtonTip);
 
                 bossMap.put(boss.getId(), boss);
                 list.add(boss);

@@ -2940,7 +2940,7 @@ import java.util.Random;
         /* 2688 */     vo_65527_0.vo_65527_0.master = chara.sex;
         /* 2689 */     vo_65527_0.vo_65527_0.level = "";
         /* 2690 */     vo_65527_0.vo_65527_0.skill = chara.level;
-        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
+//        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2692 */     vo_65527_0.vo_65527_0.status_daofa_wubian = "";
         /* 2693 */     vo_65527_0.vo_65527_0.nick = 0;
         /* 2694 */     vo_65527_0.vo_65527_0.family_title = "";
@@ -2975,7 +2975,7 @@ import java.util.Random;
         /* 2723 */     vo_65527_0.vo_65527_0.online = 0;
         /* 2724 */     vo_65527_0.vo_65527_0.voucher = 0;
         /* 2725 */     vo_65527_0.vo_65527_0.party_name = chara.partyName;
-                        vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
+//                        vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2726 */     vo_65527_0.vo_65527_0.use_money_type = chara.use_money_type;
         /* 2727 */     vo_65527_0.vo_65527_0.lock_exp = chara.lock_exp;
         /* 2728 */     vo_65527_0.vo_65527_0.shuadaochongfeng_san = chara.shuadaochongfeng_san;
@@ -4841,32 +4841,40 @@ import java.util.Random;
     }
 
     /**
+     * 剧本对话
+     * */
+    public static void playNpcDialogueJuBen(int nJuBenID){
+        Chara chara = GameObjectChar.getGameObjectChar().chara;
+        NpcDialogue npcDialogue = GameData.that.baseNpcDialogueService.findById(nJuBenID);
+        if(npcDialogue == null) return;
+
+        MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = new MSG_PLAY_SCENARIOD_VO();
+        if ("玩家".equals(npcDialogue.getName())) {
+            MSGPLAYSCENARIODVO.name = chara.name;
+            MSGPLAYSCENARIODVO.portrait = chara.waiguan;
+        }
+        else {
+            MSGPLAYSCENARIODVO.name = npcDialogue.getName();
+            MSGPLAYSCENARIODVO.portrait = npcDialogue.getPortranit();
+        }
+        MSGPLAYSCENARIODVO.id = npcDialogue.getId();
+        MSGPLAYSCENARIODVO.pic_no = npcDialogue.getPicNo();
+        MSGPLAYSCENARIODVO.content = npcDialogue.getContent();
+        MSGPLAYSCENARIODVO.isComplete = npcDialogue.getIsconmlete();
+        MSGPLAYSCENARIODVO.playTime = npcDialogue.getPalytime();
+        MSGPLAYSCENARIODVO.task_type = npcDialogue.getTaskType();
+        GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+    }
+
+    /**
      * 播放下一个NPC对话剧本
      */
     public static void playNextNpcDialogueJuBen() {
 
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         if(chara.currentJuBens != null){
-
-            NpcDialogue npcDialogue = GameData.that.baseNpcDialogueService
-                    .findById(Integer.valueOf(chara.currentJuBens[chara.nextJuBen]));
-
-            MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = new MSG_PLAY_SCENARIOD_VO();
-            if ("玩家".equals(npcDialogue.getName())) {
-                MSGPLAYSCENARIODVO.name = chara.name;
-                MSGPLAYSCENARIODVO.portrait = chara.waiguan;
-            } else {
-                MSGPLAYSCENARIODVO.name = npcDialogue.getName();
-                MSGPLAYSCENARIODVO.portrait = npcDialogue.getPortranit();
-            }
-            MSGPLAYSCENARIODVO.id = npcDialogue.getId();
-            MSGPLAYSCENARIODVO.pic_no = npcDialogue.getPicNo();
-            MSGPLAYSCENARIODVO.content = npcDialogue.getContent();
-            MSGPLAYSCENARIODVO.isComplete = npcDialogue.getIsconmlete();
-            MSGPLAYSCENARIODVO.playTime = npcDialogue.getPalytime();
-            MSGPLAYSCENARIODVO.task_type = npcDialogue.getTaskType();
+            playNpcDialogueJuBen(Integer.valueOf(chara.currentJuBens[chara.nextJuBen]));
             chara.nextJuBen += 1;
-            GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
 
             if(chara.nextJuBen >= chara.currentJuBens.length){
                 chara.nextJuBen = 0;
@@ -4877,9 +4885,12 @@ import java.util.Random;
     }
 
     // 进入副本
-    public static void enterDugeno(Chara chara, String map_name) {
+    public static void enterDugeno(Chara chara, String name) {
         DugenoCfg cfgMgr = (DugenoCfg)XLSConfigMgr.getCfg("dugeno");
-        DugenoItem cfg = cfgMgr.getByName(map_name);
+        DugenoItem cfg = cfgMgr.getByName(name);
+        if(cfg == null){
+            cfg = cfgMgr.getByMapName(name);
+        }
         org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(cfg.map_name);
         chara.y = map.getY().intValue();
         chara.x = map.getX().intValue();
@@ -4963,5 +4974,20 @@ import java.util.Random;
             }
         }
      }
+
+    /**
+     * 获取宠物仓库的下一个位置
+     * @param chara
+     * @return
+     */
+    public static int getChongwuCangkuNextWeizhi(Chara chara) {
+        int no = 1;
+        for (int j = 0; j < chara.chongwucangku.size(); j++) {
+            if (no < chara.chongwucangku.get(j).no) {
+                no = chara.chongwucangku.get(j).no;
+            }
+        }
+        return no + 1;
+    }
 
 }

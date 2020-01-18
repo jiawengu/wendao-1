@@ -25,7 +25,7 @@ public class OutdoorBossCfg extends BaseCfg {
 
     public List<SuperBossMap> maps;
     public List<OutdoorBossItem> bossList;
-    public Map<Integer, OutdoorBossItem> bossMap;
+    public Map<String, OutdoorBossItem> bossMap;
 
     public void setResetTime(String resetTime) {
         this.resetTime = resetTime;
@@ -39,9 +39,6 @@ public class OutdoorBossCfg extends BaseCfg {
         this.upperLimit = upperLimit;
     }
 
-    public OutdoorBossItem getBossByid(int id){
-        return this.bossMap.get(id);
-    }
     public SuperBossMap getMapByname(String name){
         if(maps != null){
             for(SuperBossMap map: maps){
@@ -67,7 +64,7 @@ public class OutdoorBossCfg extends BaseCfg {
         this.bossList = loadJson("OutdoorBossItem", OutdoorBossItem.class);
         this.bossMap = new HashMap<>();
         for(OutdoorBossItem item: this.bossList){
-            this.bossMap.put(item.id, item);
+            this.bossMap.put(item.name, item);
         }
     }
 }

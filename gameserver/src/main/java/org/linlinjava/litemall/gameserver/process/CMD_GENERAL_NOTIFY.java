@@ -670,6 +670,11 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_61677_0 vo_61677_0 = new Vo_61677_0();
             vo_61677_0.list = chara.cangku;
             GameObjectChar.send(new M61677_0(), vo_61677_0);
+
+            Vo_61677_1 vo_61677_1 = new Vo_61677_1();
+            vo_61677_1.store_type = "chongwu";
+            vo_61677_1.list = chara.chongwucangku;
+            GameObjectChar.send(new M61677_1(), vo_61677_1);
         }
 
         Vo_49179_0 vo_49179_0;
@@ -1231,6 +1236,12 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             if (para1.matches("黑风洞"))
             {
                 para1 = "黑风洞一层";
+            }
+            else if(para1.equals("兰若寺")){
+                para1 = "兰若寺后山1";
+            }
+            else if(para1.equals("烈火涧")){
+                para1 = "烈火涧1";
             }
 
             vo_9129_0 = new Vo_9129_0();

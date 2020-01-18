@@ -13,6 +13,7 @@ import org.linlinjava.litemall.db.service.CharacterService;
 import org.linlinjava.litemall.db.service.SaleGoodService;
 import org.linlinjava.litemall.db.service.base.*;
 import org.linlinjava.litemall.gameserver.data.xls_config.outdoorboss.OutdoorBossCfg;
+import org.linlinjava.litemall.gameserver.data.xls_config.pirate.PirateCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.superboss.SuperBossCfg;
 import org.linlinjava.litemall.gameserver.service.BaseUserPartyShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +118,10 @@ public class GameData {
     public OutdoorBossCfg outdoorBossCfg;
     @Autowired
     public OutdoorBossMng outdoorBossMng;
+    @Autowired
+    public PirateMng pirateMng;
+    @Autowired
+    public PirateCfg pirateCfg;
 
     public GameData() {
     }

@@ -26,13 +26,29 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
         public int count = 50;
         //奖品
         public List<SuperBossReward> rewards;
+        public String dlgContent;
+        public String startButtonTip;
+        public String exitButtonTip;
+
+        public void setDlgContent(String dlgContent) {
+            this.dlgContent = dlgContent;
+        }
+
+        public void setStartButtonTip(String startButtonTip) {
+            this.startButtonTip = startButtonTip;
+        }
+
+        public void setExitButtonTip(String exitButtonTip) {
+            this.exitButtonTip = exitButtonTip;
+        }
 
         public void setRewards(List<SuperBossReward> rewards) {
             this.rewards = rewards;
         }
 
-        public void setIndex(int index) {
+        public void setIndex(int index, int id) {
             this.index = index;
+            this.setId(index + id);
         }
 
         public void setCount(int count) {
@@ -70,7 +86,6 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
     public void sendRewards(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-            afterBattle(id);
             for(SuperBossReward reward: boss.rewards){
                 if("道行".equals(reward.type)){
                     int v = Integer.valueOf(reward.value);
@@ -138,7 +153,7 @@ public abstract class BaseBossMng implements SchedulingConfigurer {
     public void sendBossDlg(int id){
         BossNpc boss = getBossByid(id);
         if(boss != null) {
-            DynamicNpcDialogService.sendNpcDlg(boss, String.format("你好！小道长，我是#R%s#n，想要挑战我吗？ [我要挑战你/我要挑战BOSS][离开/离开]", boss.getName()));
+            DynamicNpcDialogService.sendNpcDlg(boss, String.format("%s [%s/我要挑战BOSS][%s/离开]", boss.dlgContent, boss.startButtonTip, boss.exitButtonTip));
         }
     }
 }

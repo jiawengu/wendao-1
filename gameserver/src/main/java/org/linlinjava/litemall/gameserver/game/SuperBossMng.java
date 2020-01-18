@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * 超级大BOSS 管理类
@@ -90,12 +91,11 @@ public class SuperBossMng extends BaseBossMng {
             SuperBossItem item = cfg.bossList.get(id);
             for(int j = 0; j < cfg.bossCount; j++){
                 BossNpc boss = new BossNpc();
-                boss.setId(item.id);
                 boss.setName(item.name);
                 boss.setIcon(item.icon);
                 boss.setCount(cfg.challengeCount);
                 boss.setRewards(item.rewards);
-                boss.setIndex(index++);
+                boss.setIndex(index++, 30);
 
                 SuperBossMap map = cfg.maps.get(SuperBossMng.RANDOM.nextInt(cfg.maps.size()));
                 boss.setMapId(map.mapid);
@@ -104,6 +104,9 @@ public class SuperBossMng extends BaseBossMng {
                 SuperBossPosition pos = map.getRandomPosition();
                 boss.setX(pos.x);
                 boss.setY(pos.y);
+                boss.setDlgContent(item.dlgContent);
+                boss.setStartButtonTip(item.startButtonTip);
+                boss.setExitButtonTip(item.exitButtonTip);
 
                 list.add(boss);
                 bossMap.put(boss.getId(), boss);
@@ -142,23 +145,34 @@ public class SuperBossMng extends BaseBossMng {
     public void sendBossFight(Chara chara, int id){
         BossNpc boss = getBossByid(id);
         if(boss != null){
-//            if(chara.level < 100){
-//                GameUtil.sendTips("等级至少100级才能挑战哦");
-//                return ;
-//            }
-//            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
-//                GameUtil.sendTips("请先创建队伍");
-//                return ;
-//            }
-//            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-//            if (duiwu.size() < 3) {
-//                GameUtil.sendTips("人数不足3人");
-//                return;
-//            }
-            List<String> monsterList = new ArrayList<String>();
-            monsterList.add(boss.getName());
-            monsterList.addAll(cfg.bossMap.get(id).xiaoGuai);
-            FightManager.goFightBoss(chara, monsterList);
+            if(chara.level < 100){
+                GameUtil.sendTips("等级至少100级才能挑战哦");
+                return ;
+            }
+            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+                GameUtil.sendTips("请先创建队伍");
+                return ;
+            }
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            if (duiwu.size() < 3) {
+                GameUtil.sendTips("人数不足3人");
+                return;
+            }
+            Map<Integer, String> monsterList = new HashMap<>();
+            Integer index = 0;
+            monsterList.put(boss.getId(), boss.getName());
+            for(String xiaoguai : cfg.bossMap.get(boss.getName()).xiaoGuai){
+                monsterList.put(boss.getId() + index++, xiaoguai);
+            }
+            FightManager.goFightBoss(chara, monsterList, new Consumer<List<Chara>>() {
+                @Override
+                public void accept(List<Chara> charas) {
+                    afterBattle(id);
+                    for(Chara chara : charas){
+                        sendRewards(chara, id);
+                    }
+                }
+            });
         }
     }
 
@@ -185,7 +199,7 @@ public class SuperBossMng extends BaseBossMng {
             if(--boss.count <= 0){
                 // 挑战数量消耗殆尽，场上NPC消失
                 this.bossList.remove(boss.index);
-                this.bossMap.remove(id);
+                this.bossMap.remove(boss);
             }
         }
     }
