@@ -18,7 +18,7 @@ public class CMD_OPER_SCENARIOD implements GameHandler {
     Chara chara = GameObjectChar.getGameObjectChar().chara;
     int id = GameReadTool.readInt(buff);
     if (chara.currentJuBens != null) {
-        GameUtil.playNextNpcDialogueJuBen();
+        GameUtil.playNextNpcDialogueJuBen(chara);
         return ;
     }
     //这里的ID代表最后一个剧本的ID

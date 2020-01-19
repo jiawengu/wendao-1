@@ -2918,7 +2918,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }
             if ("了解七杀试炼".equals(menu_item)) {
 
-                GameUtil.playNextNpcDialogueJuBen();
+                GameUtil.playNextNpcDialogueJuBen(chara);
                 return;
             }
 

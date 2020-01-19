@@ -1232,6 +1232,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 return;
             }
+            if(!GameUtil.isTeamLeader(chara)) {
+                GameUtil.sendTips("请队长带入");
+                return;
+            }
 
             if (para1.matches("黑风洞"))
             {

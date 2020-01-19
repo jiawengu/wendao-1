@@ -4843,8 +4843,7 @@ import java.util.Random;
     /**
      * 剧本对话
      * */
-    public static void playNpcDialogueJuBen(int nJuBenID){
-        Chara chara = GameObjectChar.getGameObjectChar().chara;
+    public static void playNpcDialogueJuBen(Chara chara, int nJuBenID){
         NpcDialogue npcDialogue = GameData.that.baseNpcDialogueService.findById(nJuBenID);
         if(npcDialogue == null) return;
 
@@ -4863,22 +4862,22 @@ import java.util.Random;
         MSGPLAYSCENARIODVO.isComplete = npcDialogue.getIsconmlete();
         MSGPLAYSCENARIODVO.playTime = npcDialogue.getPalytime();
         MSGPLAYSCENARIODVO.task_type = npcDialogue.getTaskType();
-        GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+        if(chara.jubenAllTeam) GameObjectChar.sendduiwu(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO, chara.id);
+        else GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
     }
 
     /**
      * 播放下一个NPC对话剧本
      */
-    public static void playNextNpcDialogueJuBen() {
-
-        Chara chara = GameObjectChar.getGameObjectChar().chara;
+    public static void playNextNpcDialogueJuBen(Chara chara) {
         if(chara.currentJuBens != null){
-            playNpcDialogueJuBen(Integer.valueOf(chara.currentJuBens[chara.nextJuBen]));
+            playNpcDialogueJuBen(chara, Integer.valueOf(chara.currentJuBens[chara.nextJuBen]));
             chara.nextJuBen += 1;
 
             if(chara.nextJuBen >= chara.currentJuBens.length){
                 chara.nextJuBen = 0;
                 chara.currentJuBens = null;
+                chara.jubenAllTeam = false;
             }
         }
 
@@ -4988,6 +4987,12 @@ import java.util.Random;
             }
         }
         return no + 1;
+    }
+
+    public static boolean isTeamLeader(Chara chara) {
+        GameTeam gameTeam = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
+        if(gameTeam == null) return false;
+        return (gameTeam.duiwu.get(0).id == chara.id);
     }
 
 }

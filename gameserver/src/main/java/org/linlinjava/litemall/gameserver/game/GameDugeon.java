@@ -168,8 +168,9 @@ public class GameDugeon {
             if(npcDialogueFramelist.size() > 0 && !(npcDialogueFramelist.get(0)).getNext().equals("")){
                 chara.nextJuBen = 0;
                 chara.currentJuBens = (npcDialogueFramelist.get(0)).getNext().split(",");
+                chara.jubenAllTeam = true;
                 juben_end_id = Integer.valueOf(chara.currentJuBens[chara.currentJuBens.length - 1]);
-                GameUtil.playNextNpcDialogueJuBen();
+                GameUtil.playNextNpcDialogueJuBen(chara);
                 juben_form = "meetnpc";
             }
             return true;
@@ -223,6 +224,8 @@ public class GameDugeon {
 
     // 挑战胜利
     public void fightWin(Chara chara) {
+        // 转化为队长
+        chara = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam.duiwu.get(0);
         // 移除怪物
         removeCurStepMonster(chara);
 
@@ -234,8 +237,9 @@ public class GameDugeon {
         if(cfg.fightwinjuben_list.size() > juben_idx && cfg.fightwinjuben_list.get(juben_idx).length > 0){
             chara.nextJuBen = 0;
             chara.currentJuBens = cfg.fightwinjuben_list.get(juben_idx);
+            chara.jubenAllTeam = true;
             juben_end_id = Integer.valueOf(chara.currentJuBens[chara.currentJuBens.length - 1]);
-            GameUtil.playNextNpcDialogueJuBen();
+            GameUtil.playNextNpcDialogueJuBen(chara);
             juben_form = "fightwin";
             return;
         }
@@ -259,7 +263,8 @@ public class GameDugeon {
         if (cfg.enterjuben_list.length > 0){
             chara.nextJuBen = 0;
             chara.currentJuBens = cfg.enterjuben_list;
-            GameUtil.playNextNpcDialogueJuBen();
+            chara.jubenAllTeam = true;
+            GameUtil.playNextNpcDialogueJuBen(chara);
             juben_form = "enter";
         }
 
@@ -367,8 +372,9 @@ public class GameDugeon {
 
             chara1.nextJuBen = 0;
             chara1.currentJuBens = (npcDialogueFrame.get(0)).getNext().split(",");
+            chara1.jubenAllTeam = true;
             juben_end_id = Integer.valueOf(chara1.currentJuBens[chara1.currentJuBens.length - 1]);
-            GameUtil.playNextNpcDialogueJuBen();
+            GameUtil.playNextNpcDialogueJuBen(chara1);
             juben_form = "selectnpc";
             return;
         }
@@ -403,6 +409,8 @@ public class GameDugeon {
 
     // 剧本结束
     public void OnJuBenEnd(Chara chara, int juben_id) {
+        if(!GameUtil.isTeamLeader(chara)) return;
+
         int tmp_id = juben_end_id;
         juben_end_id = 0;
         DugenoItem cfg = getDugenoItemCfg();
