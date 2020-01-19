@@ -201,7 +201,6 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
          String[] siJinBi = {"50#10000000","200#5000000","750#800000"};
          Random random = new Random();
          int r = random.nextInt(100000) ;
-         r = 14+50+15000+2000;
          if (r <= 14) {
              nameType = yiDing[random.nextInt(yiDing.length)];
          } else if (r < 14+50) {
@@ -214,9 +213,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             if(infos.size() > 0){
                 ShangGuYaoWangInfo info =
                         infos.get(random.nextInt(infos.size()));
-                Npc npc =
-                        GameData.that.baseNpcService.findOneById(info.getNpcid().intValue());
-                nameType = npc.getName()+"#上古妖王";
+//                Npc npc =
+//                        GameData.that.baseNpcService.findOneById(info.getNpcid().intValue());
+                nameType = info.getId()+"#上古妖王";
             }else{
                 int money = 0;
                 r = random.nextInt(1000);
@@ -287,29 +286,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 249 */     chara.shidaodaguaijifen = 0;
 /* 250 */     huicheng(chara);
 /*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */   public static boolean isShangGuYaoWang(Chara chara){
-                if(0 == chara.changbaotu.icon) return  false;
-                List<Pet> monsterList = GameData.that.basePetService.findByZoon(GameObjectChar.getGameObjectChar().chara.mapName);
-                if(0 == monsterList.size()) return  false;
-                Pet pet = null;
-                for (int i = 0; i < monsterList.size(); i++) {
-                    Pet tempPet = monsterList.get(i);
-                    if (tempPet.getName().contains("上古妖王")){
-                        pet = tempPet;
-                        break;
-                    }
-                }
-                if (null == pet) return  false;
 
-                return  true;
-            }
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
 /*     */   public static boolean belongCalendarshidao()
 /*     */   {
 /* 262 */     Date nowTime = null;

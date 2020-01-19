@@ -628,10 +628,10 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
 
-//        ShangGuYaoWangInfo info =
-//                GameShangGuYaoWang.getYaoWangNpc(id,
-//                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
-//        if (menu_item.equals("挑战") && null != info){
+        ShangGuYaoWangInfo info =
+                GameShangGuYaoWang.getYaoWangNpc(npc_id,
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
+        if (menu_item.equals("挑战") && null != info){
 //            if (GameObjectChar.getGameObjectChar().gameTeam == null){
 //                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 //                vo_20481_0.msg = "人数不足3人！";
@@ -674,23 +674,37 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 //                    return;
 //                }
 //            }
-//
-//            org.linlinjava.litemall.db.domain.Npc npc =
-//                    GameData.that.baseNpcService.findById(id);
-//
-//            List<String> list = new ArrayList();
-//            list.add("上古妖王"+(info.getLevel()/10)*10);
-//
-//            Random RANDOM = new Random();
-//            String []  xiaoGuai = info.getXiaoGuai().split(",");
-//
-//
-//            for(int i = 0; i < 9; ++i) {
-//                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]+(info.getLevel()/10)*10);
-//            }
-//
-//            org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
-//        }
+
+            org.linlinjava.litemall.db.domain.Npc npc =
+                    GameData.that.baseNpcService.findById(npc_id);
+
+            List<String> list = new ArrayList();
+
+
+            Random RANDOM = new Random();
+            String []  xiaoGuai = info.getXiaoGuai().split(",");
+
+            boolean isWanNianLaoYao = false;
+            if (info.getName().contains("万年老妖")){
+                list.add(info.getName()+"("+(info.getLevel()/10)*10+")");
+                list.add("狗头军师"+"("+(info.getLevel()/10)*10+")");
+                list.add("狗头军师"+"("+(info.getLevel()/10)*10+")");
+                isWanNianLaoYao = true;
+            }else{
+                list.add(info.getName()+(info.getLevel()/10)*10);
+            }
+
+            int size = 10 - list.size();
+            for(int i = 0; i < size; ++i) {
+                if (isWanNianLaoYao){
+                    list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]+"(" + (info.getLevel() / 10) * 10+")");
+                }else {
+                    list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)] + (info.getLevel() / 10) * 10);
+                }
+            }
+
+            org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
+        }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(npc_id))) && (menu_item.equals("我是来向你挑战的"))) {
             /*  292 */

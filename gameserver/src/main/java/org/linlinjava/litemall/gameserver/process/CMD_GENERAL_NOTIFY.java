@@ -107,18 +107,19 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
             }else if(strings[1].equals("上古妖王")){
                 Random random = new Random();
-                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
-                npc.setDeleted(false);
-                npc.setX(random.nextInt(40)+1);
-                npc.setY(random.nextInt(40)+1);
-                npc.setDeleted(false);
-                GameData.that.baseNpcService.updateById(npc);
-                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+//                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
+//                npc.setDeleted(false);
+//                npc.setX(random.nextInt(40)+1);
+//                npc.setY(random.nextInt(40)+1);
+//                npc.setDeleted(false);
+//                GameData.that.baseNpcService.updateById(npc);
+//                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+                ShangGuYaoWangInfo info = GameShangGuYaoWang.sendYaoWang(chara, Integer.valueOf( strings[0]));
                 org.linlinjava.litemall.db.domain.Map map =
-                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
-                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
+                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(info.getMapId());
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + info.getName() +
                         "#n, "+ "在地图#Z" + map.getName() + "|" + map.getName() +
-                        "(" + npc.getX() + "," + npc.getY() + ")#Z上,赶快去挑战吧!";
+                        "(" + info.getX() + "," + info.getY() + ")#Z上,赶快去挑战吧!";
             }else if(strings[1].equals("道行")){
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
             }else {
