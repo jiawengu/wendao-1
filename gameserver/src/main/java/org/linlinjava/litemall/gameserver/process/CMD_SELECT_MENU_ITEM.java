@@ -68,6 +68,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         log.debug("npc id: " + npc_id + " menu_item: " + menu_item + " para: " + para);
 
         Chara chara1 = GameObjectChar.getGameObjectChar().chara;
+        // 处理副本内选择npc，先处理副本的，可能是monsterid,可能是npcid，为避免冲突尽量不要放在这个前面处理
+        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
+        if(gameMap.isDugeno()){
+            GameZone gameZone = (GameZone)gameMap;
+            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
+        }
+
         Consumer<CMD_DIALOG_CHOOSE_RESULT_VO> npcHandler = npcHandlerMap.getOrDefault(npc_id, null);
         if (npcHandler != null) {
             CMD_DIALOG_CHOOSE_RESULT_VO cmd_dialog_choose_result_vo = CMD_DIALOG_CHOOSE_RESULT_VO.builder()
@@ -2735,13 +2742,6 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /* 1166 */
             GameObjectChar.send(new MSG_MENU_CLOSED(), Integer.valueOf(0));
             /*      */
-        }
-
-        // 处理副本内选择npc
-        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
-        if(gameMap.isDugeno()){
-            GameZone gameZone = (GameZone)gameMap;
-            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
         }
 
         if (npc_id == 978) {

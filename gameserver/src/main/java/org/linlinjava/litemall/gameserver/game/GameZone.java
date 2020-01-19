@@ -1,6 +1,7 @@
 package org.linlinjava.litemall.gameserver.game;
 
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 
 public class GameZone extends GameMap {
@@ -14,6 +15,15 @@ public class GameZone extends GameMap {
     public GameZone() {
         super();
         super.map_type = 1;
+    }
+
+    @Override
+    public void joinduiyuan(GameObjectChar gameObjectChar, Chara charaduizhang) {
+        super.joinduiyuan(gameObjectChar, charaduizhang);
+
+        if(gameDugeon != null) {
+            gameDugeon.onJoinMap(gameObjectChar.chara);
+        }
     }
 
     @Override
