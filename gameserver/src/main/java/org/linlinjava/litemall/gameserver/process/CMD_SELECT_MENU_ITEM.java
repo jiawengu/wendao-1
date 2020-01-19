@@ -16,6 +16,7 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.*;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
@@ -3068,6 +3069,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             UserLogic logic = GameObjectChar.getGameObjectChar().logic;
             UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
             dailyTaskLogic.selectMenuItem(npc_id, menu_item);
+
+            UserPartyDailyChallengeLogic dailyChallengeLogic = (UserPartyDailyChallengeLogic)logic.getMod("party_daily_challenge");
+            dailyChallengeLogic.selectMenuItem(npc_id, menu_item);
 
             /* 1282 */
             ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);

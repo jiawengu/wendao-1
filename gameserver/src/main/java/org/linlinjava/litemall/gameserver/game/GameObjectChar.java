@@ -78,6 +78,7 @@ public class GameObjectChar {
         this.chara = chara;
         this.characters = characters;
         this.logic = new UserLogic();
+        System.out.println("obj init");
         this.logic.init(chara.id, this.logic, this);
         //GameObjectCharMng.add(this);
         // herder todo 不允许在副本地图登录
