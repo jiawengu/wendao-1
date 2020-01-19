@@ -29,6 +29,7 @@ import org.linlinjava.litemall.gameserver.fight.FightRequest;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
