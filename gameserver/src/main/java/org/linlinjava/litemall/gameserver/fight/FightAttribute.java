@@ -12,6 +12,12 @@ public class FightAttribute {
     public void setAttribute(FightAttribtueType type, float newValue){
         attributeArray[index(type)] = newValue;
     }
+    public void reduceAttribute(FightAttribtueType type, float reduceValue){
+        attributeArray[index(type)] -= reduceValue;
+    }
+    public void addAttribute(FightAttribtueType type, float reduceValue){
+        attributeArray[index(type)] += reduceValue;
+    }
     private int index(FightAttribtueType type){
         return type.ordinal();
     }

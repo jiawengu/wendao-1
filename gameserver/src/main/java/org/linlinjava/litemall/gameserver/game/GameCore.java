@@ -5,9 +5,10 @@
 /*    */ import java.util.List;
 /*    */ import java.util.Map;
 /*    */ import javax.annotation.PostConstruct;
-/*    */ import org.linlinjava.litemall.gameserver.domain.BuildFields;
+/*    */ import org.linlinjava.litemall.db.service.base.BasePetIntimacyService;
+import org.linlinjava.litemall.gameserver.domain.BuildFields;
 /*    */ import org.linlinjava.litemall.gameserver.fight.BattleUtils;
-/*    */ import org.linlinjava.litemall.gameserver.fight.FightTianshuMap;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.linlinjava.litemall.gameserver.netty.NettyServer;
 /*    */ import org.linlinjava.litemall.gameserver.service.CharaStatueService;
@@ -33,6 +34,8 @@ import org.springframework.context.ApplicationContext;
            private String serverId;
            @Autowired
             private MapGuardianService mapGuardianService;
+           @Autowired
+           private BasePetIntimacyService basePetIntimacyService;
 /* 29 */   private static final Map<Integer, BaseWrite> basewriteMap = new HashMap();
 /*    */   public NettyServer server;
 /* 31 */   public long currentTime = 0L;
@@ -54,6 +57,7 @@ import org.springframework.context.ApplicationContext;
 /* 46 */     BuildFields.add();
 /* 47 */     BattleUtils.init();
        mapGuardianService.init();
+       basePetIntimacyService.init();
 /* 48 */     CharaStatueService.init(serverId);
              this.partyMgr = new PartyMgr();
              this.partyMgr.init();

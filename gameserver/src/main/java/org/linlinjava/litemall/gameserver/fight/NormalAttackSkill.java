@@ -19,6 +19,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
+import org.linlinjava.litemall.gameserver.util.RandomUtil;
 
 public class NormalAttackSkill implements FightSkill {
     public NormalAttackSkill() {
@@ -96,6 +97,21 @@ public class NormalAttackSkill implements FightSkill {
             }
         }
 
+        //必杀
+        if(jiabei == 1.0F && RandomUtil.checkSuccess(attFightObject.getAttribute(FightAttribtueType.HIT_KILL_RATE))){
+            FightManager.send(fightContainer, new MSG_C_END_ACTION(), new Vo_7655_0(attFightObject.id));
+            vo_19959_0 = new Vo_19959_0();
+            vo_19959_0.round = fightContainer.round;
+            vo_19959_0.aid = fightRequest.id;
+            vo_19959_0.action = 26;
+            vo_19959_0.vid = fightRequest.vid;
+            vo_19959_0.para = 0;
+            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
+            System.out.println(attFightObject.str+"==>释放必杀");
+            jiabei = 2.0F;
+        }
+
+
         //破天
         float jianFangPer = 1.0F;
         if(attFightObject.isActiveTianshu(fightContainer, victimFightObject, TianShuSkillType.PO_TIAN)){
@@ -121,6 +137,32 @@ public class NormalAttackSkill implements FightSkill {
             fightResult.effect_no = 0;
             fightResult.damage_type = 1;
             resultList.add(fightResult);
+        }
+
+        //连击
+        if(RandomUtil.checkSuccess(victimFightObject.getAttribute(FightAttribtueType.CONTI_HIT_RATE))){
+            int num = (int) victimFightObject.getAttribute(FightAttribtueType.CONTI_HIT_NUM);
+            System.out.println(attFightObject.str+"==>连击"+num+"次");
+            for(int i=0;i<num;++i){
+                vo_19945_0 = new Vo_19945_0();
+                vo_19945_0.id = fightRequest.vid;
+                vo_19945_0.hid = fightRequest.id;
+                vo_19945_0.para_ex = 0;
+                vo_19945_0.missed = 1;
+                vo_19945_0.para = 0;
+                vo_19945_0.damage_type = 1;
+                FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
+
+                hurt = victimFightObject.reduceShengming(hurt, fabao, false);
+
+                FightResult fightResult = new FightResult();
+                fightResult.id = fightRequest.id;
+                fightResult.vid = fightRequest.vid;
+                fightResult.point = -hurt;
+                fightResult.effect_no = 0;
+                fightResult.damage_type = 1;
+                resultList.add(fightResult);
+            }
 
         }
 
@@ -210,14 +252,14 @@ public class NormalAttackSkill implements FightSkill {
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
         vo_19959_0.aid = attFightObject.id;
-        vo_19959_0.vid = victimFightObject.id;
-        vo_19959_0.action = 2;
+        vo_19959_0.vid = victimFightObject.fid;
+        vo_19959_0.action = 3;
         vo_19959_0.para = skillNo;
         FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
 
         Vo_19945_0 vo_19945_0 = new Vo_19945_0();
         vo_19945_0.hid = attFightObject.id;
-        vo_19945_0.id = victimFightObject.id;
+        vo_19945_0.id = victimFightObject.fid;
         vo_19945_0.para_ex = 0;
         vo_19945_0.missed = 1;
         vo_19945_0.para = 0;
@@ -227,8 +269,7 @@ public class NormalAttackSkill implements FightSkill {
         Vo_64989_0 vo_64989_0 = new Vo_64989_0();
         vo_64989_0.hid = attFightObject.id;
         vo_64989_0.a = 1;
-        vo_64989_0.list.add(victimFightObject.id);
-        vo_64989_0.missList.add(1);
+        vo_64989_0.list.add(victimFightObject.fid);
         FightManager.send(fightContainer, new MSG_C_ACCEPT_MAGIC_HIT(), vo_64989_0);
 
         int skillAttack = BattleUtils.skillAttack(attFightObject.accurate + attFightObject.accurate_ext, 1, "WS", skillNo);

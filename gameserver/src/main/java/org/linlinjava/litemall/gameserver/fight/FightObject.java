@@ -10,10 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import org.json.JSONObject;
-import org.linlinjava.litemall.db.domain.Pet;
-import org.linlinjava.litemall.db.domain.SkillMonster;
-import org.linlinjava.litemall.db.domain.T_FightObject;
-import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
+import org.linlinjava.litemall.db.domain.*;
+import org.linlinjava.litemall.db.service.base.BasePetIntimacyService;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
 import org.linlinjava.litemall.gameserver.data.game.SuitEffectUtils;
@@ -23,6 +21,7 @@ import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.util.RandomUtil;
 
 public class FightObject {
     /**
@@ -112,6 +111,11 @@ public class FightObject {
      * 7：不是人或守护且不可复活时
      */
     public int state = 1;
+    /**
+     * 回合结束后复活
+     */
+    private boolean actionEndRevive = false;
+
     private List<Integer> buffState = new ArrayList();
     /**
      * 技能列表
@@ -200,6 +204,10 @@ public class FightObject {
 
     public boolean isDead() {
         return this.state == 2 || this.state == 3;
+    }
+
+    public float getAttribute(FightAttribtueType type){
+        return fightAttribute.getAttribute(type);
     }
 
     public boolean doDead() {
@@ -617,6 +625,29 @@ public class FightObject {
                 fightTianshuSkillList.add(fightTianshuSkill);
             }
         }
+
+        //亲密度
+        int intimacy = pet.petShuXing.get(0).intimacy;
+        T_Pet_INTIMACY t_pet_intimacy = BasePetIntimacyService.getT_Pet_INTIMACY(str, intimacy);
+        if(null!=t_pet_intimacy){
+            //复活率
+            this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_RATE, 1.0F*t_pet_intimacy.getRevivePer()/100);
+            //剩余复活次数
+            this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_NUM, t_pet_intimacy.getReviveNum());
+            //连击率
+            this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_RATE, 1.0F*t_pet_intimacy.getContiHitPer()/100);
+            //连击次数
+            this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_NUM, t_pet_intimacy.getContiHitNum());
+            //必杀率
+            this.fightAttribute.addAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F*t_pet_intimacy.getHitKillPer()/100);
+            //攻击力提示百分比
+            this.fightAttribute.addAttribute(FightAttribtueType.ATTACK_RATE, 1.0F*t_pet_intimacy.getAttackPer()/100);
+            //防御力提示百分比
+            this.fightAttribute.addAttribute(FightAttribtueType.DEFENCE_RATE, 1.0F*t_pet_intimacy.getDefencePer()/100);
+
+        }
+
+        this.fightAttribute.addAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F);//TODO
     }
 
     public void randomTianShuSkill(FightContainer fightContainer){
@@ -982,10 +1013,6 @@ public class FightObject {
                 reduce = this.shengming;
                 this.shengming = 0;
 
-                if(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM)>0){
-
-                }
-
                 if (this.type != 1 && this.type != 3) {
                     if (this.canbeRevive()) {
                         this.state = 6;
@@ -1108,6 +1135,52 @@ public class FightObject {
                 this.fightSkillList.remove(fightRoundSkill);
             }
         }
+
+    }
+
+    public boolean checkRevive(FightContainer fightContainer){
+        if(!isDead()){
+            return false;
+        }
+        if(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM)>0 && RandomUtil.checkSuccess(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_RATE))){
+            fightAttribute.reduceAttribute(FightAttribtueType.REVIVAL_NUM, 1);
+            actionEndRevive = true;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isActionEndRevive() {
+        return actionEndRevive;
+    }
+
+    public void actionEndRevive(FightContainer fightContainer){
+        if(!actionEndRevive){
+            return;
+        }
+        actionEndRevive = false;
+        this.shengming = max_shengming;
+
+//        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+//        vo_19959_0.round = fightContainer.round;
+//        vo_19959_0.aid = id;
+//        vo_19959_0.action = 26;
+//        vo_19959_0.vid = id;
+//        vo_19959_0.para = 0;
+//        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
+
+        state=1;
+        revive(fightContainer);
+        System.out.println(str+"=>复活了！leftReviveNum:"+fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM));
+
+//        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+//        vo_7655_0.id = id;
+//        FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
+
+//        Vo_32913_0 vo_32913_0 = new Vo_32913_0();
+//        vo_32913_0.id = id;
+//        vo_32913_0.content = "猫有九条命而我有十条，主人不用为我担心";
+//        FightManager.send(fightContainer, new MSG_AUTO_TALK_DATA(), vo_32913_0);
 
     }
 

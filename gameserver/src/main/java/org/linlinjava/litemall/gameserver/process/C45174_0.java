@@ -17,7 +17,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * 客户端请求震动提醒玩家
+ */
 /*    */ @Service
 /*    */ public class C45174_0 implements GameHandler
 /*    */ {

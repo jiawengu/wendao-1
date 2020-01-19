@@ -30,6 +30,7 @@ import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
+import org.linlinjava.litemall.gameserver.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1656,6 +1657,7 @@ public class FightManager {
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
             send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
+
         } while(!isOver(fightContainer));
 
         doOver(fightContainer);
@@ -1695,7 +1697,12 @@ public class FightManager {
             vo_7669_0.id = victimObject.fid;
             vo_7669_0.damage_type = 4098;
             send(fightContainer, new MSG_C_CHAR_DIED(), vo_7669_0);
-            if (victimObject.state == 3) {
+
+            victimObject.checkRevive(fightContainer);
+
+            victimObject.actionEndRevive(fightContainer);
+
+            if (victimObject.state == 3 && !victimObject.isActionEndRevive()) {
                 Vo_7653_0 vo_7653_0 = new Vo_7653_0();
                 vo_7653_0.id = victimObject.fid;
                 send(fightContainer, new MSG_C_QUIT_COMBAT(), vo_7653_0);
@@ -1795,9 +1802,7 @@ public class FightManager {
                 vo_7655_0.id = fightObject.fid;
                 FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
                 log.info("通天塔=>:"+fightObject.str+"救活了："+fightObject.tttXingjun.str);
-                break;
             }
-
         }
 
     }
@@ -1981,6 +1986,7 @@ public class FightManager {
 
             while(var8.hasNext()) {
                 FightObject fightObject = (FightObject)var8.next();
+
                 if (!fightObject.isDead() && !fightObject.isRun()) {
                     over = false;
                 }

@@ -21,6 +21,10 @@ public enum FightAttribtueType {
      */
     CONTI_HIT_NUM,
     /**
+     * 必杀率
+     */
+    HIT_KILL_RATE,
+    /**
      * 攻击力提示百分比
      */
     ATTACK_RATE,
