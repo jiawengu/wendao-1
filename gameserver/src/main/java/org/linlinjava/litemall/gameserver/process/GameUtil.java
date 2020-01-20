@@ -12,6 +12,8 @@ import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.*;
+import org.linlinjava.litemall.gameserver.fight.FightContainer;
+import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 
 import java.util.ArrayList;
@@ -4952,6 +4954,15 @@ import java.util.Random;
                 gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
             }
         }
+     }
+
+     public static void showImg(FightContainer fightContainer, int id, String imgName){
+         Vo_12028_0 vo_12028_0 = new Vo_12028_0();
+         vo_12028_0.id = id;
+         vo_12028_0.effect_no = 0;
+         vo_12028_0.type = 4;
+         vo_12028_0.name = imgName;
+         FightManager.send(fightContainer, new MSG_ATTACH_SKILL_LIGHT_EFFECT(), vo_12028_0);
      }
 
 }

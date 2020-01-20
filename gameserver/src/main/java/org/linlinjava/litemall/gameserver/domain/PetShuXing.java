@@ -20,9 +20,6 @@ public class PetShuXing {
      * 敏捷
      */
     public int dex;
-    /**
-     * 携带等级
-     */
     public int skill;
     /**
      * 破防
@@ -37,6 +34,9 @@ public class PetShuXing {
      */
     public int metal;
     public int stamina;
+    /**
+     * icon
+     */
     public int type;
     public int durability;
     public int phy_power;

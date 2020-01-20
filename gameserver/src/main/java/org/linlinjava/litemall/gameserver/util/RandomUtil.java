@@ -15,4 +15,21 @@ public class RandomUtil {
         randomNum = randomNum + 1;
         return rate * 10000 >= randomNum;
     }
+
+    /**
+     * 生成随机数 [0, max)
+     * @param max
+     * @return
+     */
+    public static int randomInt(int max){
+        return ThreadLocalRandom.current().nextInt(max);
+    }
+    /**
+     * 生成随机数 [1, max]
+     * @param max
+     * @return
+     */
+    public static int randomNotZeroInt(int max){
+        return randomInt(max)+1;
+    }
 }

@@ -647,7 +647,9 @@ public class FightObject {
 
         }
 
-        this.fightAttribute.addAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F);//TODO
+        this.accurate = (int) (accurate*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
+        this.fashang = (int) (fashang*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
+        this.fangyu = (int) (fangyu*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
     }
 
     public void randomTianShuSkill(FightContainer fightContainer){

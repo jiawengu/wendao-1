@@ -17,8 +17,8 @@ public abstract class FightTianshuSkill implements FightSkill {
     }
 
     public boolean isActive() {
-//        return FightManager.RANDOM.nextInt(100)<20;
-        return true;
+        return FightManager.RANDOM.nextInt(100)<20;
+//        return true;
     }
 
     public List<FightResult> doSkill(FightContainer fightContainer, FightRequest fightRequest, JiNeng jiNeng) {

@@ -10,15 +10,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
+import org.linlinjava.litemall.gameserver.data.vo.*;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.util.GmUtil;
 import org.linlinjava.litemall.gameserver.util.RandomUtil;
 
 public class NormalAttackSkill implements FightSkill {
@@ -99,18 +95,11 @@ public class NormalAttackSkill implements FightSkill {
 
         //必杀
         if(jiabei == 1.0F && RandomUtil.checkSuccess(attFightObject.getAttribute(FightAttribtueType.HIT_KILL_RATE))){
-            FightManager.send(fightContainer, new MSG_C_END_ACTION(), new Vo_7655_0(attFightObject.id));
-            vo_19959_0 = new Vo_19959_0();
-            vo_19959_0.round = fightContainer.round;
-            vo_19959_0.aid = fightRequest.id;
-            vo_19959_0.action = 26;
-            vo_19959_0.vid = fightRequest.vid;
-            vo_19959_0.para = 0;
-            FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
-            System.out.println(attFightObject.str+"==>释放必杀");
-            jiabei = 2.0F;
+            if(!victimFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.YUN_TI)){//云体
+                GameUtil.showImg(fightContainer, fightRequest.id, "必杀");
+                jiabei = 2.0F;
+            }
         }
-
 
         //破天
         float jianFangPer = 1.0F;
@@ -142,7 +131,13 @@ public class NormalAttackSkill implements FightSkill {
         //连击
         if(RandomUtil.checkSuccess(victimFightObject.getAttribute(FightAttribtueType.CONTI_HIT_RATE))){
             int num = (int) victimFightObject.getAttribute(FightAttribtueType.CONTI_HIT_NUM);
-            System.out.println(attFightObject.str+"==>连击"+num+"次");
+            num = RandomUtil.randomNotZeroInt(num);
+
+            if(victimFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIAN_FENG)){//仙风
+                num = 1;
+            }
+
+            GameUtil.showImg(fightContainer, fightRequest.id, "连击");
             for(int i=0;i<num;++i){
                 vo_19945_0 = new Vo_19945_0();
                 vo_19945_0.id = fightRequest.vid;
