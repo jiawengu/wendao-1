@@ -8,12 +8,14 @@ import org.linlinjava.litemall.gameserver.domain.GameParty;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.PartyMgr;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Date;
 
 public class UserPartyLogic extends BaseLogic {
     public UserParty data;
     public GameParty party;
+
     @Override
     protected void onInit() {
         super.onInit();

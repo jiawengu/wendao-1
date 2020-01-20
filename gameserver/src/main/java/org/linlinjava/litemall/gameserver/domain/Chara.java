@@ -443,6 +443,8 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
   public int nextJuBen = 0;
   // 当前剧本
   public String[] currentJuBens = null;
+  // 剧本队伍共享
+  public boolean jubenAllTeam = false;
     /**
      * 通天塔-层数
      */

@@ -51,7 +51,6 @@
 ///*    */
 ///* 51 */     int not_replace = GameReadTool.readByte(buff);
 ///*    */
-/* 53 */     int size = GameObjectCharMng.getAll().size();
 /* 54 */     Vo_13143_0 vo_13143_0 = new Vo_13143_0();
 /* 55 */     vo_13143_0.result = 1;
 /* 56 */     vo_13143_0.privilege = 0;  // 改成一千是gm 账号

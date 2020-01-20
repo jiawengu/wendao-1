@@ -9,7 +9,7 @@
  * MSG_MOVED
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M16431_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_MOVED extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

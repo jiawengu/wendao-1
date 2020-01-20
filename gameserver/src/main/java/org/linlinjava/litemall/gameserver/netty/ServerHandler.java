@@ -13,6 +13,7 @@ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.CMD_ECHO;
+import org.linlinjava.litemall.gameserver.process.CMD_HEART_BEAT;
 import org.linlinjava.litemall.gameserver.process.CMD_MULTI_MOVE_TO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,11 +56,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         if (attr == null) {
             return;
         }
-        GameObjectChar session = (GameObjectChar) attr.get();
+        GameObjectChar session = attr.get();
         if ((session == null) || (session.chara == null)) {
             return;
         }
-        GameObjectCharMng.remove(session);
+        GameObjectCharMng.downline(session);
     }
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -78,10 +79,15 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             if (session != null) {
                 if (session.lock()) {
                     try {
-                        if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO)){//todo 打印消息
+                        long beginMill = System.currentTimeMillis();
+                        if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO || gameHandler instanceof CMD_HEART_BEAT)){//todo 打印消息
                             log.info("recive msg!=>"+gameHandler);
                         }
                         gameHandler.process(ctx, buff);
+                        long cost = System.currentTimeMillis()-beginMill;
+                        if(cost>30){
+                            log.error(gameHandler+",cost==>"+cost);
+                        }
                     } catch (Exception e) {
                         log.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
                     } finally {
@@ -104,7 +110,4 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    public static void setCtxAttrSession(ChannelHandlerContext ctx, GameObjectChar session){
-        ctx.channel().attr(akey).set(session);
-    }
 }

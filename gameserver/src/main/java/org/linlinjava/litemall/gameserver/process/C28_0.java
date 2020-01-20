@@ -12,7 +12,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -60,7 +60,7 @@
 /*  56 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  57 */       vo_8165_0.msg = (chara.name + "回到队伍中");
 /*  58 */       vo_8165_0.active = 0;
-/*  59 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new M8165_0(), vo_8165_0);
+/*  59 */       GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i)).id).sendOne(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */     }
 /*     */     
 /*  62 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -85,8 +85,8 @@
 /*  81 */     vo_20480_0.time = 1562593376;
 /*  82 */     GameObjectChar.send(new M20480_0(), vo_20480_0);
 /*     */     
-/*  84 */     GameUtil.a4119(gameTeam.duiwu);
-/*  85 */     GameUtil.a4121(gameTeam.zhanliduiyuan);
+/*  84 */     GameUtil.MSG_UPDATE_TEAM_LIST(gameTeam.duiwu);
+/*  85 */     GameUtil.MSG_UPDATE_TEAM_LIST_EX(gameTeam.zhanliduiyuan);
 /*     */     
 /*     */ 
 /*  88 */     vo_61671_0 = new Vo_61671_0();

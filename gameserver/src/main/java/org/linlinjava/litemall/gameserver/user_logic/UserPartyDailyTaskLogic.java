@@ -80,7 +80,7 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
     public void selectMenuItem(int npcId, String menu){
         PartyDailyTaskItem item = this.checkCurTaskByNpcId(npcId);
         if(item == null){ return; }
-        if(item.npc_id == npcId) {
+        if(item.npc_id == npcId && menu != null && menu.compareTo(item.show_name) == 0) {
             if (item.reward > 0) {
                 ((UserPartyLogic) this.userLogic.getMod("party")).addContrib(item.reward);
             }

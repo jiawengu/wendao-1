@@ -10,10 +10,15 @@ import java.util.List;
 
 public class ListVo_61537_0 {
     public List<Vo_61537_0> vo_61537_0 = new LinkedList();
-    public int a;
+    public int severState;
     public int count;
-    public int c;
-    public int d;
+    public int openServerTime;
+    /**
+     * 0:不在线
+     * 1：在线
+     * 2：托管中
+     */
+    public int account_online;
 
     public ListVo_61537_0() {
     }
