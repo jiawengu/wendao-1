@@ -110,7 +110,9 @@ public class GameObjectCharMng
 
     public static void remove(GameObjectChar gameObjectChar) {
         gameObjectChar.chara.updatetime = System.currentTimeMillis();
+        gameObjectChar.offline();
         save(gameObjectChar);
+        gameObjectCharList.remove(gameObjectChar);
     }
 
     public static void save(GameObjectChar gameObjectChar) {

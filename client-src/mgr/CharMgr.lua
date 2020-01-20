@@ -792,6 +792,7 @@ end
 
 function CharMgr:MSG_UPDATE(map)
 
+    print("CharMgr befor:", Me:queryBasic("party/name") or "nil", map["party/name"] or nil)
     -- 由于支持部分字段更新的对象只有宠物和Me，如果要扩展请在下面逻辑扩展。
     local pet = PetMgr:getPetById(map.id)
 
@@ -860,6 +861,7 @@ function CharMgr:MSG_UPDATE(map)
             end
         end
     end
+    print("CharMgr:", Me:queryBasic("party/name"))
 end
 
 -- 播放角色光效

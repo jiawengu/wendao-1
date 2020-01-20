@@ -32,6 +32,8 @@ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +68,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         int type = GameReadTool.readShort(buff);
         String para1 = GameReadTool.readString(buff);
         String para2 = GameReadTool.readString(buff);
+        System.out.println("CMD_GENERAL_NOTIFY:" + type + ":" + para1 + ":" + para2);
         Consumer<CMD_GENERAL_NOTIFY_VO> buttonHandler = buttonHandlerMap.getOrDefault(type, null);
         if (buttonHandler != null) {
             CMD_GENERAL_NOTIFY_VO cmd_general_notify_vo = CMD_GENERAL_NOTIFY_VO.builder()
@@ -669,6 +672,11 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_61677_0 vo_61677_0 = new Vo_61677_0();
             vo_61677_0.list = chara.cangku;
             GameObjectChar.send(new M61677_0(), vo_61677_0);
+
+            Vo_61677_1 vo_61677_1 = new Vo_61677_1();
+            vo_61677_1.store_type = "chongwu";
+            vo_61677_1.list = chara.chongwucangku;
+            GameObjectChar.send(new M61677_1(), vo_61677_1);
         }
 
         Vo_49179_0 vo_49179_0;
@@ -1231,6 +1239,12 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             {
                 para1 = "黑风洞一层";
             }
+            else if(para1.equals("兰若寺")){
+                para1 = "兰若寺后山1";
+            }
+            else if(para1.equals("烈火涧")){
+                para1 = "烈火涧1";
+            }
 
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 98;
@@ -1238,6 +1252,25 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new M9129_0(), vo_9129_0);
 
             GameUtil.enterDugeno(chara, para1);
+        }
+
+
+        UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+        System.out.println("logic ==");
+        //帮派升级
+        if(type == 41){
+            UserPartyLogic partyLogic = (UserPartyLogic)logic.getMod("party");
+            if(partyLogic.party == null){ return; }
+            GameParty party = partyLogic.party;
+            if(party.data.getConstruction() < 100000) {
+                GameUtil.sendTips("帮贡不足!");
+                return;
+            }
+            party.addContrib(-100000);
+            party.data.setLevel(party.data.getLevel() + 1);
+            party.dirty = true;
+            GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
+            GameUtil.sendTips("帮派升级成功!");
         }
 
     }

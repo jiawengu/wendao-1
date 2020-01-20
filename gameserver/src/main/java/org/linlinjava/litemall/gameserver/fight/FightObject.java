@@ -29,6 +29,7 @@ public class FightObject {
      * 宠物id
      */
     public int id;
+    public int bossid;
     /**
      * 玩家id
      */
@@ -487,6 +488,25 @@ public class FightObject {
     public FightObject(T_FightObject t_fightObject){
         int metal = GameUtil.getMetal(t_fightObject.getPolar());
 
+        this.str = t_fightObject.getName();
+        this.guaiwulevel = 1;
+        this.shengming = t_fightObject.getLife();
+        this.max_shengming = t_fightObject.getLife();
+        this.mofa = t_fightObject.getMana();
+        this.max_mofa = t_fightObject.getMana();
+        this.fashang = t_fightObject.getMagAttack();
+        this.parry = t_fightObject.getSpeed();
+        this.accurate = t_fightObject.getPhyAttack();
+        this.fangyu = t_fightObject.getDef();
+        this.org_icon = t_fightObject.getIcon();
+        this.friend = t_fightObject.getDaohang();
+
+        this.skillsList = getJiNengListByName( metal, 1, 123456, t_fightObject.getSkill());
+        this.type = 4;
+    }
+    public FightObject(T_FightObject t_fightObject, Integer id){
+        int metal = GameUtil.getMetal(t_fightObject.getPolar());
+        this.bossid = id;
         this.str = t_fightObject.getName();
         this.guaiwulevel = 1;
         this.shengming = t_fightObject.getLife();

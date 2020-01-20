@@ -154,5 +154,44 @@
     "map_y": 0,
     "npc_id": 1006,
     "monster": 0
+  },
+  {
+    "id": 13,
+    "group": 5,
+    "show_name": "帮派日常-消灭盗贼",
+    "task_desc": "",
+    "task_prompt": "",
+    "reward": 0,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 1006,
+    "monster": 0
+  },
+  {
+    "id": 14,
+    "group": 5,
+    "show_name": "帮派日常-消灭盗贼",
+    "task_desc": "消灭#Z帮派盗贼|帮派总坛(25,17)|$1#Z",
+    "task_prompt": "消灭#Z帮派盗贼|帮派总坛(25,17)|$1#Z",
+    "reward": 0,
+    "map_id": 26000,
+    "map_x": 25,
+    "map_y": 17,
+    "npc_id": 0,
+    "monster": "帮派盗贼"
+  },
+  {
+    "id": 15,
+    "group": 5,
+    "show_name": "帮派日常-消灭盗贼",
+    "task_desc": "向#P帮派总管|$0#P复命",
+    "task_prompt": "向#P帮派总管|$0#P复命",
+    "reward": 100,
+    "map_id": 0,
+    "map_x": 0,
+    "map_y": 0,
+    "npc_id": 1006,
+    "monster": 0
   }
 ]

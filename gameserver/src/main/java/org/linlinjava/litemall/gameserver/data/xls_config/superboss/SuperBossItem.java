@@ -9,9 +9,28 @@ public class SuperBossItem {
     public Integer id;
     public String name;
     public Integer icon;
-    //分身数量
     public Integer count;
     public List<SuperBossReward> rewards;
+    public List<String> xiaoGuai;
+    public String dlgContent;
+    public String startButtonTip;
+    public String exitButtonTip;
+
+    public void setDlgContent(String dlgContent) {
+        this.dlgContent = dlgContent;
+    }
+
+    public void setStartButtonTip(String startButtonTip) {
+        this.startButtonTip = startButtonTip;
+    }
+
+    public void setExitButtonTip(String exitButtonTip) {
+        this.exitButtonTip = exitButtonTip;
+    }
+
+    public void setXiaoGuai(String xiaoGuai) {
+        this.xiaoGuai = Arrays.asList(xiaoGuai.split(","));
+    }
 
     public void setRewards(String rewards) {
         this.rewards = new ArrayList<>();

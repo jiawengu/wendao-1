@@ -18,6 +18,7 @@ import org.linlinjava.litemall.gameserver.service.HeroPubService;
 import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.ZhengDaoDianService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 import java.util.List;
@@ -167,6 +168,10 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             GameData.that.superBossMng.sendBossDlg(id);
             return ;
         }
+        if(GameData.that.outdoorBossMng.isBoss(Integer.valueOf(id))){
+            //野怪
+            GameData.that.outdoorBossMng.sendBossDlg(id);
+        }
         Npc npc = GameData.that.baseNpcService.findById(id);
         if (npc == null) {
             return;
@@ -252,6 +257,11 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         PartyDailyTaskItem dailyTaskItem = dailyTaskLogic.checkCurTaskByNpcId(id);
         if(dailyTaskItem != null){
             content = "[" + dailyTaskItem.show_name + "]" + content;
+        }
+
+        UserPartyDailyChallengeLogic dailyChallengeLogic = (UserPartyDailyChallengeLogic)logic.getMod("party_daily_challenge");
+        if(dailyChallengeLogic.openMenu(id) != null){
+            content = dailyChallengeLogic.openMenu(id) + content;
         }
 
 

@@ -3,7 +3,9 @@ package org.linlinjava.litemall.gameserver.user_logic;
 import org.linlinjava.litemall.db.dao.UserPartyDailyTaskMapper;
 import org.linlinjava.litemall.db.domain.UserPartyDailyTask;
 import org.linlinjava.litemall.db.service.UserPartyDailyTaskService;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61553_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
@@ -11,6 +13,7 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.game.XLSConfigMgr;
 
 import java.util.ArrayList;
@@ -54,13 +57,13 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             }
         }else{
             if(npcId != 1006){ return null; }//帮派总管
-            if(data.getDayNo() < 50){
+            //if(data.getDayNo() < 50){
                 ArrayList<PartyDailyTaskItem> list = taskCfg.randomGroup();
                 cfgItem = list.get(0);
                 this.data.setCurTaskId(cfgItem.id);
                 this.save();
                 return cfgItem;
-            }
+            //}
         }
         return null;
     }
@@ -77,7 +80,7 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
     public void selectMenuItem(int npcId, String menu){
         PartyDailyTaskItem item = this.checkCurTaskByNpcId(npcId);
         if(item == null){ return; }
-        if(item.npc_id == npcId) {
+        if(item.npc_id == npcId && menu != null && menu.compareTo(item.show_name) == 0) {
             if (item.reward > 0) {
                 ((UserPartyLogic) this.userLogic.getMod("party")).addContrib(item.reward);
             }
@@ -91,7 +94,7 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             }else{
                 item = null;
             }
-            this.notiveTaskPrompt(item);
+            this.notifyTaskPrompt(item);
         }
     }
 
@@ -151,12 +154,12 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             }else{
                 item = null;
             }
-            this.notiveTaskPrompt(item);
+            this.notifyTaskPrompt(item);
         }
 
     }
 
-    private void notiveTaskPrompt(PartyDailyTaskItem item){
+    private void notifyTaskPrompt(PartyDailyTaskItem item){
         if(item != null){
             Vo_61553_0 vo_61553_0 = new Vo_61553_0();
             vo_61553_0.count = 1;
@@ -187,5 +190,7 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             GameObjectChar.send(new MSG_TASK_PROMPT(), vo_61553_0);
         }
     }
+
+
 
 }

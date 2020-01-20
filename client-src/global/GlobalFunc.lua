@@ -103,7 +103,7 @@ end
 
 -- 发送命令给服务器
 function gf:CmdToServer(cmd, data, type)
-    Client:pushDebugInfo(string.format("CmdToServer:%s   %s", cmd,  inspect(data)))
+    print("send:", cmd,  inspect(data))
     local conn = CommThread:getConnection(type)
     if conn ~= nil then
         conn:sendCmdToServer(cmd, data)

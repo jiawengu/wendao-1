@@ -1,5 +1,9 @@
 
 return {
-    "mgr/PartyMgr",
-    "dlg/PartyMemberDlg",
+    "dlg/GameFunctionDlg",
+    "comm/Connection",
+    "mgr/Client",
+    "global/GlobalFunc",
+    "mgr/CharMgr",
+    "comm/Builders",
 }

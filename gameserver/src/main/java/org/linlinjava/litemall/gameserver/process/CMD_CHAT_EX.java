@@ -106,7 +106,7 @@ import org.springframework.stereotype.Service;
                 /*  61 */
                 if (session != null) {
                     /*  62 */
-                    session.offline();
+                    GameObjectCharMng.remove(session);
                     /*     */
                 }
                 /*     */

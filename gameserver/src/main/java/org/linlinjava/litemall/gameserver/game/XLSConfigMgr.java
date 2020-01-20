@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSON;
 import org.linlinjava.litemall.core.util.JSONUtils;
-import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.DugenoCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyShopCfg;
@@ -22,9 +21,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 public class XLSConfigMgr{
+
     public static final String PARTY_SHOP = "party_shop";
     public static final String PARTY_DAILY_TASK = "party_daily_task";
+
+
     private static HashMap<String, Object> caches = new HashMap<>();
     private static ResourceLoader resourceLoader = new DefaultResourceLoader();
     private static final Logger log = LoggerFactory.getLogger(XLSConfigMgr.class);
@@ -68,16 +71,4 @@ public class XLSConfigMgr{
         return caches.get(name);
     }
 
-    public static <T> List<T> loadJson(String name, Class<T> t)  {
-        List<T> list = new ArrayList<T>();
-        try {
-            JSONArray objs = JSONObject.parseObject(resourceLoader.getResource("classpath:xls_config/" + name + ".json").getInputStream(), JSONArray.class);
-            for(int i = 0, l = objs.size(); i < l; i++){
-                list.add(objs.getObject(i, t));
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 }

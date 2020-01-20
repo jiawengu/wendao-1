@@ -132,4 +132,11 @@ public class GameParty {
         return list;
     }
 
+    public int addContrib(int v){
+        int constrib = this.data.getConstruction() + v;
+        if(constrib < 0){ constrib = 0; }
+        this.data.setConstruction(constrib);
+        this.dirty = true;
+        return constrib;
+    }
 }

@@ -3,7 +3,7 @@ package org.linlinjava.litemall.gameserver.game;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.db.domain.Characters;
-import org.linlinjava.litemall.db.util.JSONUtils;
+import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
@@ -11,15 +11,15 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
-import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GameObjectChar {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(GameObjectChar.class);
@@ -89,7 +89,23 @@ public class GameObjectChar {
         this.chara = chara;
         this.characters = characters;
         this.logic = new UserLogic();
-        this.logic.init(chara.id, this.logic);
+
+        this.logic.init(chara.id, this.logic, this);
+        //GameObjectCharMng.add(this);
+        // herder todo 不允许在副本地图登录
+        String mapSS[]  = {"黑风洞", "兰若寺", "烈火涧"};
+        for(String s: mapSS){
+            Pattern pattern = Pattern.compile(s + "(.*?)");
+            Matcher matcher = pattern.matcher(chara.mapName);
+            if(matcher.find()){
+                chara.mapName = "天墉城";
+                Map map = GameData.that.baseMapService.findOneByName("天墉城");
+                chara.x = map.getX().intValue();
+                chara.y = map.getY().intValue();
+                break;
+            }
+        }
+
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);
         if(chara.partyId > 0){
@@ -120,6 +136,7 @@ public class GameObjectChar {
 
     public static void send(BaseWrite baseWrite, Object obj) {
         GameObjectChar gameObjectChar = (GameObjectChar) GAMEOBJECTCHAR_THREAD_LOCAL.get();
+
         if(!gameObjectChar.isOnline()){
             return;
         }
@@ -250,19 +267,25 @@ public class GameObjectChar {
         } catch (Exception e) {
             log.error("", e);
         }
+
+        if(this.gameMap.isDugeno()){
+            Map map = GameData.that.baseMapService.findOneByName("天墉城");
+            this.chara.mapid = map.getMapId();
+            this.chara.y = map.getY().intValue();
+            this.chara.x = map.getX().intValue();
+        }
+
         this.chara.updatetime = System.currentTimeMillis();
         this.chara.online_time += this.chara.updatetime - this.chara.uptime;
 
-        try {
-            GameObjectCharMng.save(this);
-        } catch (Exception e) {
-            log.error("", e);
+        if(null!=this.ctx){
+            this.ctx.disconnect();
         }
-        this.ctx.disconnect();
     }
 
 
     public void sendOne(BaseWrite baseWrite, Object obj) {
+        if(this.ctx == null){ return; }
         ByteBuf buff = baseWrite.write(obj);
         ByteBuf copy = buff.copy();
         send0(copy);

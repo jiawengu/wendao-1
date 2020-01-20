@@ -9,10 +9,19 @@ import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.service.DynamicNpcDialogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.Trigger;
+import org.springframework.scheduling.TriggerContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.SchedulingConfigurer;
+import org.springframework.scheduling.config.CronTask;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * 超级大BOSS 管理类
@@ -31,94 +40,86 @@ import java.util.*;
  * 2、再将每个BOSS 分别放置到随机地图中
  */
 @Component
-public class SuperBossMng {
+public class SuperBossMng extends BaseBossMng {
 
-    public static class SuperBossNpc extends Npc {
-        public int index;
-        //BOSS 当前所在的地图，当玩家进入该地图或者在天机老人查询时使用
-        public String mapName = "";
-        //当前BOSS的可挑战次数
-        public int count = 50;
-        //奖品
-        public List<SuperBossReward> rewards;
-
-        public void setRewards(List<SuperBossReward> rewards) {
-            this.rewards = rewards;
-        }
-
-        public void setIndex(int index) {
-            this.index = index;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public void setMapName(String mapName) {
-            this.mapName = mapName;
-        }
-
-    }
-
-    public static final Random RANDOM = new Random();
     @Autowired
     public SuperBossCfg cfg;
+    public List<BossNpc> bossList = new ArrayList<>();
+    public Map<Integer, BossNpc> bossMap = new HashMap<>();
 
-    public List<SuperBossNpc> bossList = new ArrayList<>();
-    public Map<Integer, SuperBossNpc> bossMap = new HashMap<>();
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
+            @Override
+            public void run() {
+                productionBoss();
+            }
+        }, new Trigger() {
+            @Override
+            public Date nextExecutionTime(TriggerContext triggerContext) {
+                return new CronTrigger(cfg.startTime).nextExecutionTime(triggerContext);
+            }
+        });
 
+        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
+            @Override
+            public void run() {
+                resetBoss();
+            }
+        }, new Trigger() {
+            @Override
+            public Date nextExecutionTime(TriggerContext triggerContext) {
+                return new CronTrigger(cfg.endTime).nextExecutionTime(triggerContext);
+            }
+        });
+    }
     /**
      * 获取随机 BOSS
      * @return
      */
-    public List<SuperBossNpc> getRandomBossList(){
-        List<SuperBossNpc> list = new ArrayList<>();
+    @Override
+    public List<BossNpc> getRandomBossList(){
+        List<BossNpc> list = new ArrayList<>();
         //随机获取种类
         List<Integer> temps = new ArrayList<>();
         int id = 0, index = 0;
-        if(cfg.bossTypeCount > cfg.bosss.size()){ cfg.bossTypeCount = cfg.bosss.size(); }
+        this.bossMap = new HashMap<>();
+        if(cfg.bossTypeCount > cfg.bossList.size()){ cfg.bossTypeCount = cfg.bossList.size(); }
         for(int i = 0; i < cfg.bossTypeCount; i++){
-            do{ id = SuperBossMng.RANDOM.nextInt(cfg.bosss.size()); } while (temps.contains(id));
+            do{ id = RANDOM.nextInt(cfg.bossList.size()); } while (temps.contains(id));
             temps.add(id);
-            SuperBossItem item = cfg.bosss.get(id);
+            SuperBossItem item = cfg.bossList.get(id);
             for(int j = 0; j < cfg.bossCount; j++){
-                SuperBossNpc npc = new SuperBossNpc();
-                npc.setId(item.id);
-                npc.setName(item.name);
-                npc.setIcon(item.icon);
-                npc.setCount(cfg.challengeCount);
-                npc.setRewards(item.rewards);
-                npc.setIndex(index++);
-                setBossRandomMap(npc);
-                list.add(npc);
-                bossMap.put(npc.getId(), npc);
+                BossNpc boss = new BossNpc();
+                boss.setName(item.name);
+                boss.setIcon(item.icon);
+                boss.setCount(cfg.challengeCount);
+                boss.setRewards(item.rewards);
+                boss.setIndex(index++, 30);
+
+                SuperBossMap map = cfg.maps.get(SuperBossMng.RANDOM.nextInt(cfg.maps.size()));
+                boss.setMapId(map.mapid);
+                boss.setMapName(map.name);
+
+                SuperBossPosition pos = map.getRandomPosition();
+                boss.setX(pos.x);
+                boss.setY(pos.y);
+                boss.setDlgContent(item.dlgContent);
+                boss.setStartButtonTip(item.startButtonTip);
+                boss.setExitButtonTip(item.exitButtonTip);
+
+                list.add(boss);
+                bossMap.put(boss.getId(), boss);
             }
         }
 
         return list;
     }
 
-    public SuperBossMap getRandomMap(){
-        return cfg.maps.get(SuperBossMng.RANDOM.nextInt(cfg.maps.size()));
-    }
-
-    /**
-     * 将 BOSS 随机分配到某个地图上的某个坐标
-     * @param boss
-     */
-    public void setBossRandomMap(SuperBossNpc boss){
-        SuperBossMap map = getRandomMap();
-        SuperBossPosition pos = map.getRandomPosition();
-        boss.setMapId(map.mapid);
-        boss.setMapName(map.name);
-        boss.setMapId(map.mapid);
-        boss.setX(pos.x);
-        boss.setY(pos.y);
-    }
-
+    @Override
     public List<Npc> getBossListByMapid(int id){
         List<Npc> list = new ArrayList<>();
-        for(SuperBossNpc boss : this.bossList){
+        for(BossNpc boss : this.bossList){
             if(boss.getMapId() == id){
                 list.add(boss);
             }
@@ -126,11 +127,13 @@ public class SuperBossMng {
         return list;
     }
 
-    public SuperBossNpc getBossByid(int id){
+    @Override
+    public BossNpc getBossByid(int id){
         return this.bossMap.get(id);
     }
-    public SuperBossNpc getBossByname(String name){
-        for(SuperBossNpc boss : this.bossList){
+    @Override
+    public BossNpc getBossByname(String name){
+        for(BossNpc boss : this.bossList){
             if(name.equals(boss.getName())){
                 return boss;
             }
@@ -138,118 +141,50 @@ public class SuperBossMng {
         return null;
     }
 
-    public boolean isBoss(int id){
-        return getBossByid(id) != null;
-    }
-
+    @Override
     public void sendBossFight(Chara chara, int id){
-        SuperBossNpc boss = getBossByid(id);
+        BossNpc boss = getBossByid(id);
         if(boss != null){
-            List<String> monsterList = new ArrayList<String>();
-            monsterList.add(boss.getName());
-            FightManager.goFight(chara, monsterList);
-        }
-    }
-
-    public void sendRewards(Chara chara, String name){
-        SuperBossNpc boss = getBossByname(name);
-        sendRewards(chara, boss.getId());
-    }
-
-    /**
-     * 发送奖励
-     * @param id boss id
-     */
-    public void sendRewards(Chara chara, int id){
-        SuperBossNpc boss = getBossByid(id);
-        if(boss != null){
-            updateBossChallengeCount(id);
-            for(SuperBossReward reward: boss.rewards){
-                if("道行".equals(reward.type)){
-                    int v = Integer.valueOf(reward.value);
-                    GameUtil.adddaohang(chara, v);
-                }
-                else if("武学".equals(reward.type)){
-
-                }
-                else if("妖石".equals(reward.type)){
-
-                }
-                else if("首饰".equals(reward.type)){
-
-                }
-                else if("商城道具".equals(reward.type)){
-
-                }
-                else if("幼兽".equals(reward.type)){
-
-                }
-                else if("坐骑".equals(reward.type)){
-
-                }
-                else if("物品".equals(reward.type)){
-                    for(String vs: reward.value.split(",")){
-                        String[] v = vs.split(":");
-                        org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(v[0]);
-                        GameUtil.huodedaoju(chara, info, 1);
+            if(chara.level < 100){
+                GameUtil.sendTips("等级至少100级才能挑战哦");
+                return ;
+            }
+            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
+                GameUtil.sendTips("请先创建队伍");
+                return ;
+            }
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            if (duiwu.size() < 3) {
+                GameUtil.sendTips("人数不足3人");
+                return;
+            }
+            Map<Integer, String> monsterList = new HashMap<>();
+            Integer index = 0;
+            monsterList.put(boss.getId(), boss.getName());
+            for(String xiaoguai : cfg.bossMap.get(boss.getName()).xiaoGuai){
+                monsterList.put(boss.getId() + index++, xiaoguai);
+            }
+            FightManager.goFightBoss(chara, monsterList, new Consumer<List<Chara>>() {
+                @Override
+                public void accept(List<Chara> charas) {
+                    afterBattle(id);
+                    for(Chara chara : charas){
+                        sendRewards(chara, id);
                     }
                 }
-                else if("金币".equals(reward.type)){
-                    int v = Integer.valueOf(reward.value);
-                    GameUtil.addCoin(chara, v);
-                }
-                else if("元宝".equals(reward.type)){
-                    int v = Integer.valueOf(reward.value);
-                    GameUtil.addYuanBao(chara, v);
-                }
-                else if("经验".equals(reward.type)){
-                    int v = Integer.valueOf(reward.value);
-                    GameUtil.addjingyan(chara, v);
-//                    GameUtil.add4121();
-//                    GameUtil.addfabaojingyan();
-//                    GameUtil.addpetjingyan();
-//                    GameUtil.addshouhu();
-//                    GameUtil.addwupin();
-//                    GameUtil.addVip();
-//                    GameUtil.addYuanBao();
-//                    GameUtil.addCoin();
-//                    GameUtil.adddaohang();
-//
-//                    GameUtil.huodecaifen();
-//                    GameUtil.huodechoujiang();
-//                    GameUtil.huodedaoju();
-//                    GameUtil.huodejingyan();
-//                    GameUtil.huodezhuangbeixiangwu();
-//                    GameUtil.huodezhuangbei();
-
-
-                }
-            }
+            });
         }
     }
 
-    public void test(){
-        if(!isExtBoss())
-        this.bossList = getRandomBossList();
-    }
-
+    @Override
     public void productionBoss (){
-        if(cfg.bosss != null){
-            test();
-//            if("d".equals(cfg.cfg.timeUnit)){
-//                String h = DateTimeUtil.getDateTimeFormatterString(LocalDateTime.now(), "HHmms");
-//                if("00:00:0".equals(h) ){
-//                    // 表示每日的 0 点
-//                    this.bossList = new ArrayList<>();
-//                }
-//                else if ("07:00:0".equals(h) ){
-//                    //表示每日早上的7点
-//                    this.bossList = getRandomBossList();
-//                }
-//            }
+        if(cfg.maps != null){
+            System.out.println("生产BOSS");
+            this.bossList = getRandomBossList();
         }
     }
 
+    @Override
     public boolean isExtBoss(){
         return this.bossList.size() > 0;
     }
@@ -257,21 +192,15 @@ public class SuperBossMng {
     /**
      * 更新 Boss 挑战次数
      */
-    public void updateBossChallengeCount(int id){
-        SuperBossNpc boss = getBossByid(id);
+    @Override
+    public void afterBattle(int id){
+        BossNpc boss = getBossByid(id);
         if(boss != null){
             if(--boss.count <= 0){
                 // 挑战数量消耗殆尽，场上NPC消失
                 this.bossList.remove(boss.index);
-                this.bossMap.remove(id);
+                this.bossMap.remove(boss);
             }
-        }
-    }
-
-    public void sendBossDlg(int id){
-        SuperBossNpc boss = getBossByid(id);
-        if(boss != null) {
-            DynamicNpcDialogService.sendNpcDlg(boss, String.format("你好！小道长，我是#R%s#n，想要挑战我吗？ [我要挑战你/我要挑战超级大BOSS][离开/离开]", boss.getName()));
         }
     }
 
@@ -281,7 +210,7 @@ public class SuperBossMng {
     public void sendBossPosDlg(Npc npc){
         StringBuffer str = new StringBuffer();
         if(isExtBoss()){
-            for(SuperBossNpc boss: this.bossList){
+            for(BossNpc boss: this.bossList){
                 str.append(String.format("#R%s#n在#R%s#n作乱", boss.getName(), boss.mapName)).append("\r\n");
             }
         }
@@ -292,6 +221,7 @@ public class SuperBossMng {
         DynamicNpcDialogService.sendNpcDlg(npc, str.toString());
     }
 
+    @Override
     public void resetBoss(){
         this.bossMap = new HashMap<>();
         this.bossList = new ArrayList<>();

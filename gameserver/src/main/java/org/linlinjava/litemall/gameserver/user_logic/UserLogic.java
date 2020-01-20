@@ -14,7 +14,7 @@ public class UserLogic extends BaseLogic {
         BaseLogic mod = modMap.get(name);
         if(mod == null){ return null; }
         if(!mod.is_inited){
-            mod.init(this.id, this);
+            mod.init(this.id, this, this.obj);
             mod.is_inited = true;
         }
         return mod;
@@ -27,6 +27,7 @@ public class UserLogic extends BaseLogic {
 
         this.registerMod("party", new UserPartyLogic());
         this.registerMod("party_daily_task", new UserPartyDailyTaskLogic());
+        this.registerMod("party_daily_challenge", new UserPartyDailyChallengeLogic());
     }
 
     @Override

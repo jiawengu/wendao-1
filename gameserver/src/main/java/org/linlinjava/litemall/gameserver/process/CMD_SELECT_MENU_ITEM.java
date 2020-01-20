@@ -12,6 +12,9 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.*;
+import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
@@ -2750,7 +2753,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
         if(gameMap.isDugeno()){
             GameZone gameZone = (GameZone)gameMap;
-            gameZone.gameDugeon.selectNpc(chara1, npc_id);
+            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
         }
 
         if (npc_id == 978) {
@@ -2858,24 +2861,26 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         /*      */
         /* 1227 */
         Chara chara = GameObjectChar.getGameObjectChar().chara;
-        
-        if(GameData.that.superBossMng.isBoss(Integer.valueOf(npc_id)) && "我要挑战超级大BOSS".equals(menu_item)){
-            if(chara.level < 100){
-                GameUtil.sendTips("等级至少100级才能挑战哦");
+
+        if("我要挑战BOSS".equals(menu_item)){
+            if(GameData.that.superBossMng.isBoss(Integer.valueOf(npc_id))){
+                GameData.that.superBossMng.sendBossFight(chara, npc_id);
                 return ;
             }
-            if (GameObjectChar.getGameObjectChar().gameTeam == null) {
-                GameUtil.sendTips("请先创建队伍");
+
+            //是野外BOSS
+            if(GameData.that.outdoorBossMng.isBoss(npc_id) ){
+                GameData.that.outdoorBossMng.sendBossFight(chara, npc_id);
                 return ;
             }
-            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-            if (duiwu.size() < 3) {
-                GameUtil.sendTips("人数不足3人");
-                return;
+
+            //是海盗
+            if(GameData.that.outdoorBossMng.isBoss(npc_id) ){
+                GameData.that.pirateMng.sendBossFight(chara, npc_id);
+                return ;
             }
-            GameData.that.superBossMng.sendBossFight(chara, npc_id);
-            return ;
         }
+
         /* 1228 */
         org.linlinjava.litemall.db.domain.Npc npc = GameData.that.baseNpcService.findById(npc_id);
         /* 1229 */
@@ -3072,9 +3077,12 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
             /*      */
 
-//            UserLogic logic = GameObjectChar.getGameObjectChar().logic;
-//            UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-//            dailyTaskLogic.selectMenuItem(id, menu_item);
+            UserLogic logic = GameObjectChar.getGameObjectChar().logic;
+            UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
+            dailyTaskLogic.selectMenuItem(npc_id, menu_item);
+
+            UserPartyDailyChallengeLogic dailyChallengeLogic = (UserPartyDailyChallengeLogic)logic.getMod("party_daily_challenge");
+            dailyChallengeLogic.selectMenuItem(npc_id, menu_item);
 
             /* 1282 */
             ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
@@ -3085,9 +3093,11 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
         /* 1286 */
-        MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara);
-        /* 1287 */
-        GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+        if(!gameMap.isDugeno()) {
+            MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara);
+            /* 1287 */
+            GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+        }
         /*      */
         /* 1289 */
         ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);

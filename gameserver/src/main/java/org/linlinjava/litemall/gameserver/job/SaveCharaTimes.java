@@ -5,10 +5,8 @@
 
 package org.linlinjava.litemall.gameserver.job;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+
 import org.linlinjava.litemall.db.domain.Notice;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
@@ -436,21 +434,26 @@ public class SaveCharaTimes {
         List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
         long time = System.currentTimeMillis();
 
-        for(int i = 0; i < sessionList.size(); ++i) {
+        List<GameObjectChar> list = new ArrayList<>();
+
+        for(GameObjectChar obj : sessionList){
+            list.add(obj);
+
+        }
+        list.forEach(obj->{
             try {
-                GameObjectChar gameObjectChar = sessionList.get(i);
+                GameObjectChar gameObjectChar = obj;
                 if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
-                    gameObjectChar.offline();
-                    sessionList.remove(gameObjectChar);
+                    GameObjectCharMng.remove(gameObjectChar);
                 }
 
-                if (gameObjectChar.gameMap!=null && gameObjectChar.gameMap.id == 38004 && gameObjectChar.gameTeam == null) {
-                    GameUtilRenWu.shidaohuicheng(gameObjectChar.chara);
+                if (gameObjectChar.gameMap!=null && (obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
+                    GameUtilRenWu.shidaohuicheng(obj.chara);
                 }
             } catch (Exception var6) {
                 log.error("", var6);
             }
-        }
+        });
 
     }
 
@@ -462,6 +465,7 @@ public class SaveCharaTimes {
             GameCore.that.partyMgr.checkDirty();
         }
     }
+
 
     @Scheduled(
             fixedRate =  1000L
