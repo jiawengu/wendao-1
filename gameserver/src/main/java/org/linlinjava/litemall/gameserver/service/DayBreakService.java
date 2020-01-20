@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 跨天事件
@@ -19,9 +16,10 @@ import java.util.Map;
 @Service
 public class DayBreakService {
     private static final Logger logger = LoggerFactory.getLogger(DayBreakService.class);
-    private static final Map<String, Handler> handlerMap = new HashMap<>();
+    private static final Map<String, Handler> handlerMap = new LinkedHashMap<>();
     private static final long ONE_DAY_MILL = 24*3600*1000;
     static {
+        //注意顺序
         registerHandler(new clock0Handler());
         registerHandler(new clock5Handler());
     }
@@ -42,7 +40,7 @@ public class DayBreakService {
      */
     @Scheduled(cron="0 0 0,5 * * ?")
     public void checkDayBreak(){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList().values()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
             if(null!=gameObjectChar.chara){
                 checkDayBreak(gameObjectChar.chara);
             }
@@ -74,7 +72,7 @@ public class DayBreakService {
                 }catch (Exception e){
                     logger.error("", e);
                 }
-                logger.info(handler.getClass()+"==>"+chara.name);
+//                logger.info(handler.getClass()+"==>"+chara.name);
             }
         }
     }

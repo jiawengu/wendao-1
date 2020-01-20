@@ -153,7 +153,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                     vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
 
-                    GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 
                     return;
 
@@ -1400,7 +1400,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  568 */
             vo_8165_0.active = 0;
             /*  569 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*      */
             /*  572 */
@@ -1584,7 +1584,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  568 */
             vo_8165_0.active = 0;
             /*  569 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*      */
             /*  572 */
@@ -1781,7 +1781,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  661 */
             vo_8165_0.active = 0;
             /*  662 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*  664 */
             if (chara1.mapid == ((Vo_65529_0) chara1.npcshuadao.get(0)).mapid) {
@@ -3157,7 +3157,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /* 1320 */
                 vo_8165_0.active = 0;
                 /* 1321 */
-                GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 /* 1322 */
                 org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0 vo_40964_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0();
                 /* 1323 */

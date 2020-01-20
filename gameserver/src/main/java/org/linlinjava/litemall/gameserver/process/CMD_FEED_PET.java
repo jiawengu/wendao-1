@@ -50,7 +50,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  49 */                   Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  50 */                   vo_8165_0.msg = "不可重复打入！";
 /*  51 */                   vo_8165_0.active = 0;
-/*  52 */                   GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  52 */                   GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*  53 */                   return;
 /*     */                 }
 /*     */               }
@@ -76,7 +76,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  75 */               Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  76 */               vo_8165_0.msg = "打入妖石成功";
 /*  77 */               vo_8165_0.active = 0;
-/*  78 */               GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  78 */               GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*  79 */               org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0 vo_9129_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0();
 /*  80 */               vo_9129_0.notify = 12000;
 /*  81 */               vo_9129_0.para = "383174";
@@ -164,13 +164,13 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 163 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 164 */             vo_8165_0.msg = "恭喜强化成功！";
 /* 165 */             vo_8165_0.active = 0;
-/* 166 */             GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 166 */             GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           } else {
 /* 168 */             ((PetShuXing)petbeibao.petShuXing.get(0)).life_add_temp = ints[2];
 /* 169 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 170 */             vo_8165_0.msg = "成长完成度增加了！";
 /* 171 */             vo_8165_0.active = 0;
-/* 172 */             GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 172 */             GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           }
 /* 174 */           GameUtil.removemunber(chara, "宠物强化丹", 1);
 /* 175 */           List list = new ArrayList();
@@ -198,7 +198,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 197 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 198 */             vo_8165_0.msg = "恭喜强化成功！";
 /* 199 */             vo_8165_0.active = 0;
-/* 200 */             GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 200 */             GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           }
 /*     */           else
 /*     */           {
@@ -206,7 +206,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 205 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 206 */             vo_8165_0.msg = "成长完成度增加了！";
 /* 207 */             vo_8165_0.active = 0;
-/* 208 */             GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 208 */             GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           }
 /* 210 */           List list = new ArrayList();
 /* 211 */           BasicAttributesUtils.petshuxing((PetShuXing)petbeibao.petShuXing.get(0));
@@ -284,7 +284,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 283 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 284 */           vo_8165_0.msg = ("洗练成功，宠物#Y" + pet.getName() + "(野生)#n已洗炼成为1级#Y" + pet.getName() + "(宝宝)#n");
 /* 285 */           vo_8165_0.active = 0;
-/* 286 */           GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 286 */           GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 287 */           GameUtil.removemunber(chara, "超级归元露", 1);
 /*     */         }
 /*     */       }
@@ -348,7 +348,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 347 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 348 */           vo_8165_0.msg = ("你的#Y" + pet.getName() + "#n经过洗炼，基础成长已重新生成。");
 /* 349 */           vo_8165_0.active = 0;
-/* 350 */           GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 350 */           GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 351 */           GameUtil.removemunber(chara, "超级归元露", 1);
 /*     */         }
 /*     */       }

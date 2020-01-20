@@ -45,7 +45,7 @@
 /*     */       }
 /*     */       
 /*     */ 
-/*  48 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara1);
+/*  48 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara1);
 /*  49 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*  51 */       org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
@@ -55,7 +55,7 @@
 /*  55 */       Vo_61591_0 vo_61591_0 = new Vo_61591_0();
 /*  56 */       vo_61591_0.ask_type = ask_type;
 /*  57 */       vo_61591_0.name = peer_name;
-/*  58 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61591_0(), vo_61591_0);
+/*  58 */       GameObjectChar.send(new MSG_CLEAN_REQUEST(), vo_61591_0);
 /*     */       
 /*  60 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  61 */       vo_20480_0.msg = ("#Y#<" + peer_name + "#>#n加入你的的队伍");
@@ -69,7 +69,7 @@
 /*  69 */       vo_61671_0.list.add(Integer.valueOf(5));
 /*  70 */       GameObjectChar.send(new MSG_TITLE(), vo_61671_0);
 /*     */       
-/*  72 */       vo_61545_0List = GameUtil.a61545(chara1);
+/*  72 */       vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara1);
 /*  73 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*  75 */       vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
@@ -82,7 +82,7 @@
 /*     */ 
 /*  83 */       Vo_61593_0 vo_61593_0 = new Vo_61593_0();
 /*  84 */       vo_61593_0.ask_type = "invite_join";
-/*  85 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M61593_0(), vo_61593_0);
+/*  85 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*     */       
 /*  87 */       vo_20480_0 = new Vo_20480_0();
 /*  88 */       vo_20480_0.msg = ("你加入#Y#<" + chara.name + "#>#n的队伍");
@@ -103,7 +103,7 @@
 /* 103 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_TITLE(), vo_61671_0);
 /*     */       
 /*     */ 
-/* 106 */       vo_61545_0List = GameUtil.a61545(chara);
+/* 106 */       vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara);
 /* 107 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /*     */ 
@@ -127,12 +127,12 @@
 /* 127 */       GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam = GameObjectChar.getGameObjectChar().gameTeam;
 /* 128 */       GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.liebiao.clear();
 /* 129 */       List<Chara> charas = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
-/* 130 */       GameUtil.a4119(charas);
-/* 131 */       GameUtil.a4121(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
+/* 130 */       GameUtil.MSG_UPDATE_TEAM_LIST(charas);
+/* 131 */       GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
 /*     */       
 /* 133 */       Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 134 */       vo_20568_0.gid = "";
-/* 135 */       GameObjectChar.send(new M20568_0(), vo_20568_0);
+/* 135 */       GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*     */       
 /* 137 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
 /* 138 */       GameObjectChar.send(new MSG_UPDATE_APPEARANCE(), vo_61661_0);
@@ -143,10 +143,10 @@
 /* 143 */       org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
 /* 144 */       vo_8165_0.msg = (peer_name + "加入队伍");
 /* 145 */       vo_8165_0.active = 0;
-/* 146 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+/* 146 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */       
 /*     */ 
-/* 149 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M20568_0(), vo_20568_0);
+/* 149 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*     */       
 /*     */ 
 /* 152 */       vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara1);
@@ -157,7 +157,7 @@
 /*     */ 
 /* 158 */       vo_61593_0 = new Vo_61593_0();
 /* 159 */       vo_61593_0.ask_type = "invite_join";
-/* 160 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M61593_0(), vo_61593_0);
+/* 160 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*     */       
 /*     */ 
 /* 163 */       vo_61671_0 = new Vo_61671_0();
@@ -181,14 +181,14 @@
 /* 181 */         GameObjectChar.getGameObjectChar().gameTeam.duiwu = null;
 /* 182 */         Vo_61593_0 vo_61593_0 = new Vo_61593_0();
 /* 183 */         vo_61593_0.ask_type = ask_type;
-/* 184 */         GameObjectChar.send(new M61593_0(), vo_61593_0);
+/* 184 */         GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /* 185 */         Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 186 */         vo_20568_0.gid = "";
-/* 187 */         GameObjectChar.send(new M20568_0(), vo_20568_0);
+/* 187 */         GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*     */         
 /* 189 */         return;
 /*     */       }
-/* 191 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.a61545(chara);
+/* 191 */       List<org.linlinjava.litemall.gameserver.data.vo.Vo_61545_0> vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara);
 /* 192 */       GameObjectChar.send(new MSG_FRIEND_ADD_CHAR(), vo_61545_0List);
 /*     */       
 /* 194 */       GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
@@ -196,11 +196,11 @@
 /* 196 */       Vo_61591_0 vo_61591_0 = new Vo_61591_0();
 /* 197 */       vo_61591_0.ask_type = ask_type;
 /* 198 */       vo_61591_0.name = peer_name;
-/* 199 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61591_0(), vo_61591_0);
+/* 199 */       GameObjectChar.send(new MSG_CLEAN_REQUEST(), vo_61591_0);
 /*     */       
 /* 201 */       Vo_61593_0 vo_61593_0 = new Vo_61593_0();
 /* 202 */       vo_61593_0.ask_type = ask_type;
-/* 203 */       GameObjectChar.send(new M61593_0(), vo_61593_0);
+/* 203 */       GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*     */       
 /* 205 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 206 */       vo_20480_0.msg = ("你加入#Y#<" + peer_name + "#>#n的队伍");
@@ -230,12 +230,12 @@
 /* 230 */       GameTeam gameTeam = GameObjectChar.getGameObjectChar().gameTeam;
 /* 231 */       GameObjectChar.getGameObjectChar().gameTeam.liebiao.clear();
 /* 232 */       List<Chara> charas = GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu;
-/* 233 */       GameUtil.a4119(charas);
-/* 234 */       GameUtil.a4121(GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.zhanliduiyuan);
+/* 233 */       GameUtil.MSG_UPDATE_TEAM_LIST(charas);
+/* 234 */       GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.zhanliduiyuan);
 /*     */       
 /* 236 */       Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 237 */       vo_20568_0.gid = "";
-/* 238 */       GameObjectChar.send(new M20568_0(), vo_20568_0);
+/* 238 */       GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /*     */       
 /*     */ 
 /* 241 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara1);

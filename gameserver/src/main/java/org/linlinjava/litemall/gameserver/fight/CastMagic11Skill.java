@@ -52,18 +52,18 @@ public class CastMagic11Skill implements FightSkill {
             }
         }
 
-        if (attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.XIU_LUO)) {
+        if (attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIU_LUO)) {
             attTimes = 2;
             attFightObject.fightRequest = fightRequest;
         }
 
         int hurt = 0;
         float jiabei = 1.0F;
-        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.XIANG_MO_ZHAN)) {
+        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIANG_MO_ZHAN)) {
             jiabei = 2F;
         }
 
-        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, TianShuSkillType.NU_JI)) {
+        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer,null, TianShuSkillType.NU_JI)) {
             jiabei = 2.5F;
         }
 

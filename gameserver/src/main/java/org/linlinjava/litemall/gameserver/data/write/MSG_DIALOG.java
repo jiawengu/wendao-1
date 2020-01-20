@@ -14,7 +14,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M20467_0 extends BaseWrite
+/*    */ public class MSG_DIALOG extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

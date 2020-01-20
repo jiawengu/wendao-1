@@ -208,7 +208,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 207 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 208 */     vo_8165_0.msg = "穿戴成功";
 /* 209 */     vo_8165_0.active = 0;
-/* 210 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+/* 210 */     GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 211 */     Vo_41505_0 vo_41505_0 = new Vo_41505_0();
 /* 212 */     vo_41505_0.type = "equip_fasion";
 /* 213 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41505_0(), vo_41505_0);

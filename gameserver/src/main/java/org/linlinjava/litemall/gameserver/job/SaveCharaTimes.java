@@ -24,9 +24,12 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.service.DBService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -34,7 +37,8 @@ import org.springframework.stereotype.Component;
 public class SaveCharaTimes {
     private long gonggaotim = System.currentTimeMillis();
     private static final Logger log = LoggerFactory.getLogger(SaveCharaTimes.class);
-
+    @Autowired
+    private DBService dbService;
     public SaveCharaTimes() {
     }
 
@@ -42,12 +46,15 @@ public class SaveCharaTimes {
             fixedDelay = 5000L
     )
     public void resetCompileTimes() {
-        HashMap<Integer, GameObjectChar> all = GameObjectCharMng.getAll();
-        all.forEach((id, obj)->{
-            GameObjectCharMng.save(obj);
-        });
+        List<GameObjectChar> all = GameObjectCharMng.getGameObjectCharList();
+        Iterator var2 = all.iterator();
 
+        while(var2.hasNext()) {
+            GameObjectChar gameSession = (GameObjectChar)var2.next();
+            dbService.save(gameSession);
+        }
     }
+
 
 //    @Scheduled(
 //            fixedDelay = 10000L
@@ -74,7 +81,6 @@ public class SaveCharaTimes {
                 FightManager.doTimeupSkill(fightContainer);
             }
         }
-
     }
 
     @Scheduled(
@@ -179,16 +185,16 @@ public class SaveCharaTimes {
                     chara = ((GameObjectChar)gameMap.sessionList.get(j)).chara;
                     chara.balance -= chara.level * 10000;
                     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_UPDATE(), listVo_65527_0);
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "由于你在挑战元魔过程中取得了优异的成绩,因此获得了系统送出的" + chara.level * 10000 + "文钱的奖励。";
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     if (chara.shidaodaguaijifen >= 10) {
                         vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "由于你所在队伍的挑战元魔的积分充足,现在进入参加试道大会的巅峰对决阶段。";
                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                        GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                     }
                 }
 
@@ -197,7 +203,7 @@ public class SaveCharaTimes {
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "由于你所在队伍的挑战元魔的积分不足,无法参加试道大会的巅峰对\n决阶段。";
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(((Chara)charas.get(j)).id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(charas.get(j).id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 }
 
                 for(j = 0; j < gameMap.sessionList.size(); ++j) {
@@ -211,7 +217,7 @@ public class SaveCharaTimes {
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "当前积分" + chara.shidaodaguaijifen;
                     vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
-                    GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 }
             }
 
@@ -425,23 +431,24 @@ public class SaveCharaTimes {
             fixedRate = 2000L
     )
     public void autofightromve() {
-        HashMap<Integer, GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+        List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
         long time = System.currentTimeMillis();
 
         List<GameObjectChar> list = new ArrayList<>();
 
-        for(GameObjectChar obj : sessionList.values()){
+        for(GameObjectChar obj : sessionList){
             list.add(obj);
 
         }
         list.forEach(obj->{
             try {
-                if ((obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
-                    GameUtilRenWu.shidaohuicheng(obj.chara);
+                GameObjectChar gameObjectChar = obj;
+                if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
+                    GameObjectCharMng.remove(gameObjectChar);
                 }
-                if (obj.heartEcho != 0L && obj.heartEcho + 180000L < time) {
-                    obj.offline();
-                    GameObjectCharMng.offlineObj(obj);
+
+                if (gameObjectChar.gameMap!=null && (obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
+                    GameUtilRenWu.shidaohuicheng(obj.chara);
                 }
             } catch (Exception var6) {
                 log.error("", var6);
@@ -457,6 +464,27 @@ public class SaveCharaTimes {
         if(GameCore.that != null && GameCore.that.partyMgr != null){
             GameCore.that.partyMgr.checkDirty();
         }
+    }
+
+
+    @Scheduled(
+            fixedRate =  1000L
+    )
+    public void autoProductionBoss(){
+        GameData.that.superBossMng.productionBoss();
+    }
+    
+    @Scheduled(
+            fixedRate =  5000L
+    )
+    public void autoCheckUserLogicSave(){
+        GameObjectCharMng.getGameObjectCharList().forEach(item->{
+            try {
+                item.logic.cacheSave();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

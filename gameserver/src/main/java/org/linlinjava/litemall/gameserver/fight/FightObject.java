@@ -10,23 +10,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import org.json.JSONObject;
-import org.linlinjava.litemall.db.domain.Pet;
-import org.linlinjava.litemall.db.domain.SkillMonster;
-import org.linlinjava.litemall.db.domain.T_FightObject;
-import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
+import org.linlinjava.litemall.db.domain.*;
+import org.linlinjava.litemall.db.service.base.BasePetIntimacyService;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils;
 import org.linlinjava.litemall.gameserver.data.game.SuitEffectUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_STATUS;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.M64981_Fight_Blood;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_CHAR_REVIVE;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameShuaGuai;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.util.RandomUtil;
 
 public class FightObject {
     /**
@@ -117,6 +112,11 @@ public class FightObject {
      * 7：不是人或守护且不可复活时
      */
     public int state = 1;
+    /**
+     * 回合结束后复活
+     */
+    private boolean actionEndRevive = false;
+
     private List<Integer> buffState = new ArrayList();
     /**
      * 技能列表
@@ -127,6 +127,14 @@ public class FightObject {
      * 战斗技能列表
      */
     private List<FightSkill> fightSkillList = new ArrayList();
+    /**
+     * 天书技能列表
+     */
+    private final List<FightTianshuSkill> fightTianshuSkillList = new ArrayList<>();
+    /**
+     * 下次出手的天书技能
+     */
+    public FightTianshuSkill nextTianshuSkill;
     public int autofight_select = 0;
     public int autofight_skillaction;
     public int autofight_skillno;
@@ -139,10 +147,6 @@ public class FightObject {
      */
     public int rank;
     /**
-     * 天书技能id
-     */
-    public int godbook;
-    /**
      * 是否逃跑
      */
     public boolean run;
@@ -150,6 +154,10 @@ public class FightObject {
      * 通天塔星君
      */
     public FightObject tttXingjun;
+    /**
+     * 战斗属性
+     */
+    private final FightAttribute fightAttribute = new FightAttribute();
 
     public FightObject(Chara chara) {
         this.id = chara.id;
@@ -197,6 +205,10 @@ public class FightObject {
 
     public boolean isDead() {
         return this.state == 2 || this.state == 3;
+    }
+
+    public float getAttribute(FightAttribtueType type){
+        return fightAttribute.getAttribute(type);
     }
 
     public boolean doDead() {
@@ -262,24 +274,25 @@ public class FightObject {
         return null;
     }
 
-    public boolean isActiveTianshu(FightContainer fc, TianShuSkillType type) {
-        Iterator var3 = this.fightSkillList.iterator();
-
-        while(var3.hasNext()) {
-            FightSkill fightSkill = (FightSkill)var3.next();
-            if (fightSkill instanceof FightTianshuSkill) {
-                FightTianshuSkill fts = (FightTianshuSkill)fightSkill;
-                if (fts.getType() == type) {
-                    boolean isActive = fts.isActive();
-                    if(isActive){
-                        fts.sendEffect(fc);
-                        return true;
-                    }
-                }
-            }
+    public boolean isActiveTianshu(FightContainer fc, FightObject victimFightObject, TianShuSkillType type) {
+        if(null!=victimFightObject && victimFightObject.isDead()){
+            return false;
+        }
+        if(null == nextTianshuSkill || nextTianshuSkill.getType()!=type){
+            return false;
         }
 
-        return false;
+
+        boolean isActive = nextTianshuSkill.isActive();
+        if(!isActive){
+            return false;
+        }
+
+        nextTianshuSkill.sendEffect(fc);
+
+        randomTianShuSkill(fc);
+
+        return true;
     }
 
     public FightObject(Chara chara, String name) {
@@ -625,16 +638,50 @@ public class FightObject {
         this.rank = 2;
 
         if (pet.tianshu.size() != 0) {
-            Vo_12023_0 vo_12023_0 = (Vo_12023_0)pet.tianshu.get(new Random().nextInt(pet.tianshu.size()));
-            TianShuSkillType tianShuSkillType = TianShuSkillType.getType(vo_12023_0.god_book_skill_name);
-            this.godbook = tianShuSkillType.getId();
-            FightTianshuSkill fightTianshuSkill = tianShuSkillType.createSkill();
-            fightTianshuSkill.buffObject = this;
-            this.addSkill(fightTianshuSkill);
+            for(Vo_12023_0 vo_12023_0:pet.tianshu){
+                TianShuSkillType tianShuSkillType = TianShuSkillType.getType(vo_12023_0.god_book_skill_name);
+                FightTianshuSkill fightTianshuSkill = tianShuSkillType.createSkill();
+                fightTianshuSkill.buffObject = this;
+                fightTianshuSkillList.add(fightTianshuSkill);
+            }
         }
+
+        //亲密度
+        int intimacy = pet.petShuXing.get(0).intimacy;
+        T_Pet_INTIMACY t_pet_intimacy = BasePetIntimacyService.getT_Pet_INTIMACY(str, intimacy);
+        if(null!=t_pet_intimacy){
+            //复活率
+            this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_RATE, 1.0F*t_pet_intimacy.getRevivePer()/100);
+            //剩余复活次数
+            this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_NUM, t_pet_intimacy.getReviveNum());
+            //连击率
+            this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_RATE, 1.0F*t_pet_intimacy.getContiHitPer()/100);
+            //连击次数
+            this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_NUM, t_pet_intimacy.getContiHitNum());
+            //必杀率
+            this.fightAttribute.addAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F*t_pet_intimacy.getHitKillPer()/100);
+            //攻击力提示百分比
+            this.fightAttribute.addAttribute(FightAttribtueType.ATTACK_RATE, 1.0F*t_pet_intimacy.getAttackPer()/100);
+            //防御力提示百分比
+            this.fightAttribute.addAttribute(FightAttribtueType.DEFENCE_RATE, 1.0F*t_pet_intimacy.getDefencePer()/100);
+
+        }
+
+        this.accurate = (int) (accurate*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
+        this.fashang = (int) (fashang*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
+        this.fangyu = (int) (fangyu*(1+1.0F*getAttribute(FightAttribtueType.ATTACK_RATE)/100));
     }
 
-
+    public void randomTianShuSkill(FightContainer fightContainer){
+        if(fightTianshuSkillList.isEmpty()){
+            return;
+        }
+        this.nextTianshuSkill = fightTianshuSkillList.get(new Random().nextInt(fightTianshuSkillList.size()));
+        Vo_12025_0 vo_12025_0 = new Vo_12025_0();
+        vo_12025_0.id = fid;
+        vo_12025_0.effect_no = nextTianshuSkill.getType().getId();
+        FightManager.send(fightContainer, new MSG_GODBOOK_EFFECT_NORMAL(), vo_12025_0);
+    }
     /**
      * 奔雷
      * @param name
@@ -912,6 +959,9 @@ public class FightObject {
     }
 
     public void updateState(FightContainer fightContainer) {
+        if(null == fightContainer){
+            return;
+        }
         Vo_11757_0 vo_11757_0 = new Vo_11757_0();
         vo_11757_0.id = this.fid;
         if (this.buffState.isEmpty()) {
@@ -984,6 +1034,7 @@ public class FightObject {
             if (this.shengming <= reduce) {
                 reduce = this.shengming;
                 this.shengming = 0;
+
                 if (this.type != 1 && this.type != 3) {
                     if (this.canbeRevive()) {
                         this.state = 6;
@@ -1106,6 +1157,52 @@ public class FightObject {
                 this.fightSkillList.remove(fightRoundSkill);
             }
         }
+
+    }
+
+    public boolean checkRevive(FightContainer fightContainer){
+        if(!isDead()){
+            return false;
+        }
+        if(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM)>0 && RandomUtil.checkSuccess(fightAttribute.getAttribute(FightAttribtueType.REVIVAL_RATE))){
+            fightAttribute.reduceAttribute(FightAttribtueType.REVIVAL_NUM, 1);
+            actionEndRevive = true;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isActionEndRevive() {
+        return actionEndRevive;
+    }
+
+    public void actionEndRevive(FightContainer fightContainer){
+        if(!actionEndRevive){
+            return;
+        }
+        actionEndRevive = false;
+        this.shengming = max_shengming;
+
+//        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+//        vo_19959_0.round = fightContainer.round;
+//        vo_19959_0.aid = id;
+//        vo_19959_0.action = 26;
+//        vo_19959_0.vid = id;
+//        vo_19959_0.para = 0;
+//        FightManager.send(fightContainer, new MSG_C_ACTION(), vo_19959_0);
+
+        state=1;
+        revive(fightContainer);
+        System.out.println(str+"=>复活了！leftReviveNum:"+fightAttribute.getAttribute(FightAttribtueType.REVIVAL_NUM));
+
+//        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+//        vo_7655_0.id = id;
+//        FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
+
+//        Vo_32913_0 vo_32913_0 = new Vo_32913_0();
+//        vo_32913_0.id = id;
+//        vo_32913_0.content = "猫有九条命而我有十条，主人不用为我担心";
+//        FightManager.send(fightContainer, new MSG_AUTO_TALK_DATA(), vo_32913_0);
 
     }
 
