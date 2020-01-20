@@ -2523,7 +2523,7 @@ public class FightManager {
                 }
 
                 //妖王
-                if (null != guaiwu && ((FightObject)guaiwu.get(0)).str.contains("妖王")){
+                if (null != guaiwu && GameShangGuYaoWang.isYaoWang(((FightObject)guaiwu.get(0)).str)){
                     System.out.println("妖王");
                     GameShangGuYaoWang.onReward(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
@@ -2696,7 +2696,7 @@ public class FightManager {
                 }
 
                 //妖王ti挑战失败
-                if (null != guaiwu && ((FightObject)guaiwu.get(0)).str.contains("妖王")){
+                if (null != guaiwu && GameShangGuYaoWang.isYaoWang(((FightObject)guaiwu.get(0)).str)){
                     System.out.println("妖王");
                     GameShangGuYaoWang.onChallengeFail(chara1,((FightObject)guaiwu.get(0)).str);
                     return;

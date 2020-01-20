@@ -4388,13 +4388,13 @@ import java.util.Random;
             /* 4130 */       huodejingyan(chara, Integer.valueOf(strings[0]).intValue());
             /*      */     }
                         if(strings[1].equals("上古妖王")){
-                            Npc npc =
-                                    (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
-                            org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(chara.id);
-//                            GameShangGuYaoWang.setYaoWangAllFlat(npc,
-//                                    Integer.valueOf(strings[2]));
-                            GameShangGuYaoWang.setYaoWangState(npc.getId(),
-                                    GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN, characters.getId());
+//                            Npc npc =
+//                                    (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
+//                            org.linlinjava.litemall.db.domain.Characters characters = GameData.that.baseCharactersService.findById(chara.id);
+////                            GameShangGuYaoWang.setYaoWangAllFlat(npc,
+////                                    Integer.valueOf(strings[2]));
+//                            GameShangGuYaoWang.setYaoWangState(npc.getId(),
+//                                    GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN, characters.getId());
                         }
                         if (strings[1].equals("潜能")){
                             chara.cash += Integer.valueOf(strings[0]).intValue();
