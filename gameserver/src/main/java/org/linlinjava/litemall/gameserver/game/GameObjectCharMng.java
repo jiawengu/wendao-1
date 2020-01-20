@@ -1,6 +1,8 @@
 package org.linlinjava.litemall.gameserver.game;
 
 import io.netty.buffer.ByteBuf;
+
+import java.util.Iterator;
 import java.util.List;
 
 import org.linlinjava.litemall.db.domain.Characters;
@@ -33,11 +35,13 @@ public class GameObjectCharMng
 
     public static void relogin(GameObjectChar newSession, int charaId){
         int count = 0;
-        for (GameObjectChar gameSession : gameObjectCharList) {
+        for (Iterator<GameObjectChar> iter = gameObjectCharList.iterator();iter.hasNext();) {
+            GameObjectChar gameSession = iter.next();
             if (charaId == gameSession.chara.id) {
                 gameSession.closeChannel();
-                newSession.init(gameSession);
                 gameObjectCharList.remove(gameSession);
+
+                newSession.init(gameSession);
                 count++;
             }
         }
@@ -68,7 +72,7 @@ public class GameObjectCharMng
     public static void sendAllmap(BaseWrite baseWrite, Object obj, int mapid) {
         for (int i = 0; i < gameObjectCharList.size(); i++) {
             GameObjectChar gameObjectChar = gameObjectCharList.get(i);
-            if (gameObjectChar.gameMap.id == mapid) {
+            if (gameObjectChar.isOnline() && gameObjectChar.gameMap.id == mapid ) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
             }
@@ -78,16 +82,16 @@ public class GameObjectCharMng
     public static void sendAllmapname(BaseWrite baseWrite, Object obj, String mapname) {
         for (int i = 0; i < gameObjectCharList.size(); i++) {
             GameObjectChar gameObjectChar = gameObjectCharList.get(i);
-            if (gameObjectChar.gameMap.name.equals(mapname)) {
+            if (gameObjectChar.isOnline() && gameObjectChar.gameMap.name.equals(mapname)) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
             }
         }
     }
 
-    public static final boolean isCharaOnline(int charaId) {
+    public static final boolean isCharaCached(int charaId) {
         for (GameObjectChar gameObjectChar : gameObjectCharList) {
-            if (gameObjectChar.isOnline() && charaId==gameObjectChar.chara.id) {
+            if (charaId==gameObjectChar.chara.id) {
                 return true;
             }
         }
@@ -108,7 +112,7 @@ public class GameObjectCharMng
         return gameObjectChar;
     }
 
-    public static void remove(GameObjectChar gameObjectChar) {
+    public static void downline(GameObjectChar gameObjectChar) {
         gameObjectChar.chara.updatetime = System.currentTimeMillis();
         gameObjectChar.offline();
         save(gameObjectChar);

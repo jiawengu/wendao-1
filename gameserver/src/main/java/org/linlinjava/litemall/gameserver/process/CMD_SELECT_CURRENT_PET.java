@@ -11,12 +11,12 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class C4162_0 implements GameHandler
+/*    */ public class CMD_SELECT_CURRENT_PET implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
 /* 18 */     int id = GameReadTool.readInt(buff);
-/*    */     
+/*    */     //1:参战，2:掠阵
 /* 20 */     int pet_status = GameReadTool.readShort(buff);
 /*    */     
 /* 22 */     Chara chara = GameObjectChar.getGameObjectChar().chara;

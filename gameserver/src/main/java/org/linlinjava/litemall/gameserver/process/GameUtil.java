@@ -2893,7 +2893,6 @@ import java.util.Random;
             /*      */     }
 
                     GameObjectChar objChar = GameObjectCharMng.getGameObjectChar(chara.id);
-                    UserPartyLogic partyLogic = (UserPartyLogic)objChar.logic.getMod("party");
         /*      */
         /* 2644 */     vo_65527_0.id = chara.id;
         /* 2645 */     vo_65527_0.vo_65527_0.str = chara.name;

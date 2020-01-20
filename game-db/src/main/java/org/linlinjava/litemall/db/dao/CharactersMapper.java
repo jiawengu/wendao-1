@@ -55,4 +55,5 @@ public interface CharactersMapper {
     int logicalDeleteByExample(@Param("example") CharactersExample example);
 
     int logicalDeleteByPrimaryKey(Integer id);
+    void updateByName(Characters record);
 }

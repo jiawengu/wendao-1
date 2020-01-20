@@ -12,7 +12,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_61537_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61537_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_EXISTED_CHAR_LIST;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.netty.ServerHandler;
@@ -67,7 +67,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /* 59 */     ListVo_61537_0 listvo_61537_0 = CMD_CREATE_NEW_CHAR.listjiaose(charactersList);
 /*    */
 /*    */ 
-/* 62 */     ByteBuf write = new M61537_0().write(listvo_61537_0);
+/* 62 */     ByteBuf write = new MSG_EXISTED_CHAR_LIST().write(listvo_61537_0);
 /* 63 */     ctx.writeAndFlush(write);
 /*    */     
 /*    */ 

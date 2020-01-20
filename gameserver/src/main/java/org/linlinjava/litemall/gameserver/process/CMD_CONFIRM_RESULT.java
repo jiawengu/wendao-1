@@ -31,9 +31,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  26 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*  27 */     GameTeam gameTeam = GameObjectChar.getGameObjectChar().gameTeam;
 /*     */     
-/*  29 */     Characters characters = GameData.that.characterService.findOneByID(GameObjectChar.getGameObjectChar().upduizhangid);
-/*  30 */     String data = characters.getData();
-/*  31 */     Chara chara1 = (Chara)org.linlinjava.litemall.db.util.JSONUtils.parseObject(data, Chara.class);
+/*  31 */     Chara chara1 = GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid).chara;
 /*  32 */     if (select.equals("0")) {
 /*  33 */       Vo_61591_0 vo_61591_0 = new Vo_61591_0();
 /*  34 */       vo_61591_0.ask_type = "request_team_leader";

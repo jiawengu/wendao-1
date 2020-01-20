@@ -8,6 +8,7 @@ import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_61537_0;
 import org.linlinjava.litemall.gameserver.data.write.M8285_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_EXISTED_CHAR_LIST;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
@@ -93,7 +94,7 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
 
         List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.getAccountid()));
         ListVo_61537_0 listvo_61537_0 = listjiaose(charactersList);
-        ByteBuf write1 = new org.linlinjava.litemall.gameserver.data.write.M61537_0().write(listvo_61537_0);
+        ByteBuf write1 = new MSG_EXISTED_CHAR_LIST().write(listvo_61537_0);
         ctx.writeAndFlush(write1);
     }
 
@@ -139,10 +140,10 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
 
     public static ListVo_61537_0 listjiaose(List<Characters> charactersList) {
         ListVo_61537_0 listvo_61537_0 = new ListVo_61537_0();
-        listvo_61537_0.a = 1;
+        listvo_61537_0.severState = 1;
         listvo_61537_0.count = charactersList.size();
-        listvo_61537_0.c = 0;
-        listvo_61537_0.d = 0;
+        listvo_61537_0.openServerTime = 0;
+        listvo_61537_0.account_online = 0;
         for (Characters character : charactersList) {
             org.linlinjava.litemall.gameserver.data.vo.Vo_61537_0 v61537 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61537_0();
             String arr = character.getData();

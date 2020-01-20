@@ -242,7 +242,6 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
         ListVo_65527_0 listVo_65527_0;
         Vo_8165_0 vo81650;
-        Characters characters;
         if (type == 1) {
             if (GameData.that.baseCharactersService.findOneByName(para1) != null) {
                 vo81650 = new Vo_8165_0();
@@ -252,23 +251,23 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 return;
             }
 
-            characters = GameData.that.baseCharactersService.findById(chara.id);
-            characters.setName(para1);
             GameUtil.removemunber(chara, "改头换面卡", 1);
             chara.name = para1;
+            Characters characters = GameObjectChar.getGameObjectChar().characters;
+            GameData.that.baseCharactersService.updateName(characters, para1);
+
             listVo_65527_0 = GameUtil.a65527(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             vo81650 = new Vo_8165_0();
             vo81650.msg = "修改成功";
             vo81650.active = 0;
             GameObjectChar.send(new MSG_DIALOG_OK(), vo81650);
-            GameData.that.baseCharactersService.updateById(characters);
         }
 
         String name;
         int def;
         if (type == 40005) {
-            characters = GameData.that.characterService.finOnByGiD(para1);
+            Characters characters = GameData.that.characterService.finOnByGiD(para1);
             name = characters.getData();
             Chara charaCha = (Chara)JSONUtils.parseObject(name, Chara.class);
             Vo_49153_0 vo_49153_0 = new Vo_49153_0();

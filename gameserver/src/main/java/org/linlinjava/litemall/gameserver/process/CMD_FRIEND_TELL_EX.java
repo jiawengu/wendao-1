@@ -50,8 +50,7 @@
 /*    */ 
 /* 51 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /* 52 */     Characters characters = GameData.that.characterService.findOneByName(name);
-/* 53 */     String data = characters.getData();
-/* 54 */     Chara chara1 = (Chara)JSONUtils.parseObject(data, Chara.class);
+/* 54 */     Chara chara1 = GameObjectCharMng.getGameObjectChar(characters.getId()).chara;
 /* 55 */     Vo_24505_0 vo_24505_0 = GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara1);
 /* 56 */     GameObjectChar.send(new MSG_FRIEND_UPDATE_PARTIAL(), vo_24505_0);
 /* 57 */     List<Vo_61545_0> vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara1);

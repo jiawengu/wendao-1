@@ -8,7 +8,6 @@ package org.linlinjava.litemall.gameserver.job;
 import java.util.*;
 
 import org.linlinjava.litemall.db.domain.Notice;
-import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
@@ -29,7 +28,6 @@ import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -444,7 +442,7 @@ public class SaveCharaTimes {
             try {
                 GameObjectChar gameObjectChar = obj;
                 if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
-                    GameObjectCharMng.remove(gameObjectChar);
+                    GameObjectCharMng.downline(gameObjectChar);
                 }
 
                 if (gameObjectChar.gameMap!=null && (obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
@@ -480,7 +478,9 @@ public class SaveCharaTimes {
     public void autoCheckUserLogicSave(){
         GameObjectCharMng.getGameObjectCharList().forEach(item->{
             try {
-                item.logic.cacheSave();
+                if(item.logic!=null){
+                    item.logic.cacheSave();
+                }
             }catch (Exception e) {
                 e.printStackTrace();
             }

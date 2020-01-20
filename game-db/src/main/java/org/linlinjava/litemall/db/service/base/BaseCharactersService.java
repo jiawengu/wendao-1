@@ -7,6 +7,7 @@ package org.linlinjava.litemall.db.service.base;
 
 import com.github.pagehelper.PageHelper;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 import org.linlinjava.litemall.db.dao.CharactersMapper;
 import org.linlinjava.litemall.db.domain.Characters;
@@ -60,6 +61,16 @@ public class BaseCharactersService {
         return this.mapper.updateByPrimaryKeySelective(characters);
     }
 
+    /**
+     * 修改玩家名字
+     * @param characters
+     * @param name
+     */
+    public void updateName(Characters characters, String name){
+        characters.setName(name);
+        mapper.updateByName(characters);
+    }
+
     @CacheEvict(
             cacheNames = {"Characters"},
             key = "#id"
@@ -68,78 +79,33 @@ public class BaseCharactersService {
         this.mapper.logicalDeleteByPrimaryKey(id);
     }
 
-    public List<Characters> findByMenpai(Integer menpai) {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false).andMenpaiEqualTo(menpai);
-        return this.mapper.selectByExample(example);
-    }
-
-    public List<Characters> findByName(String name) {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false).andNameEqualTo(name);
-        return this.mapper.selectByExample(example);
-    }
-
     public List<Characters> findByAccountId(Integer accountId) {
         CharactersExample example = new CharactersExample();
         Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false).andAccountIdEqualTo(accountId);
-        return this.mapper.selectByExample(example);
-    }
-
-    public List<Characters> findByGid(String gid) {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false).andGidEqualTo(gid);
-        return this.mapper.selectByExample(example);
-    }
-
-    public Characters findOneByMenpai(Integer menpai) {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false).andMenpaiEqualTo(menpai);
-        return this.mapper.selectOneByExample(example);
+        return this.mapper.selectByExampleWithBLOBs(example);
     }
 
     public Characters findOneByName(String name) {
         CharactersExample example = new CharactersExample();
         Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false).andNameEqualTo(name);
-        return this.mapper.selectOneByExample(example);
+        return this.mapper.selectOneByExampleWithBLOBs(example);
     }
 
-    public Characters findOneByAccountId(Integer accountId) {
+    public Characters findOneByAccountIdAndName(int accountId, String charName) {
         CharactersExample example = new CharactersExample();
         Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false).andAccountIdEqualTo(accountId);
-        return this.mapper.selectOneByExample(example);
+        criteria.andDeletedEqualTo(false).andAccountIdEqualTo(accountId).andNameEqualTo(charName);
+        return this.mapper.selectOneByExampleWithBLOBs(example);
     }
 
-    public Characters findOneByGid(String gid) {
+    public Characters finOnByGiD(String gid) {
         CharactersExample example = new CharactersExample();
         Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false).andGidEqualTo(gid);
-        return this.mapper.selectOneByExample(example);
+        return this.mapper.selectOneByExampleWithBLOBs(example);
     }
 
-    public List<Characters> findAll(int page, int size, String sort, String order) {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false);
-        if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
-            example.setOrderByClause(sort + " " + order);
-        }
 
-        PageHelper.startPage(page, size);
-        return this.mapper.selectByExample(example);
-    }
-
-    public List<Characters> findAll() {
-        CharactersExample example = new CharactersExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andDeletedEqualTo(false);
-        return this.mapper.selectByExample(example);
-    }
 }

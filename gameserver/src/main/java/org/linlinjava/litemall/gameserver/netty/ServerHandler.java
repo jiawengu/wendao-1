@@ -56,11 +56,11 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         if (attr == null) {
             return;
         }
-        GameObjectChar session = (GameObjectChar) attr.get();
+        GameObjectChar session = attr.get();
         if ((session == null) || (session.chara == null)) {
             return;
         }
-        GameObjectCharMng.remove(session);
+        GameObjectCharMng.downline(session);
     }
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -110,7 +110,4 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
         ctx.close();
     }
 
-    public static void setCtxAttrSession(ChannelHandlerContext ctx, GameObjectChar session){
-        ctx.channel().attr(akey).set(session);
-    }
 }

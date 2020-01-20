@@ -58,7 +58,7 @@ public class GameObjectChar {
     }
 
     public void closeChannel(){
-        if(isOnline()){
+        if(null!=ctx){
             ctx.close();
         }
     }
@@ -261,18 +261,20 @@ public class GameObjectChar {
         } catch (Exception e) {
             log.error("", e);
         }
-        try {
-            this.gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(this.chara.id));
-            this.gameMap.leave(GameObjectCharMng.getGameObjectChar(this.chara.id));
-        } catch (Exception e) {
-            log.error("", e);
-        }
+        if(null!=gameMap){
+            try {
+                this.gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(this.chara.id));
+                this.gameMap.leave(GameObjectCharMng.getGameObjectChar(this.chara.id));
+            } catch (Exception e) {
+                log.error("", e);
+            }
 
-        if(this.gameMap.isDugeno()){
-            Map map = GameData.that.baseMapService.findOneByName("天墉城");
-            this.chara.mapid = map.getMapId();
-            this.chara.y = map.getY().intValue();
-            this.chara.x = map.getX().intValue();
+            if(this.gameMap.isDugeno()){
+                Map map = GameData.that.baseMapService.findOneByName("天墉城");
+                this.chara.mapid = map.getMapId();
+                this.chara.y = map.getY().intValue();
+                this.chara.x = map.getX().intValue();
+            }
         }
 
         this.chara.updatetime = System.currentTimeMillis();

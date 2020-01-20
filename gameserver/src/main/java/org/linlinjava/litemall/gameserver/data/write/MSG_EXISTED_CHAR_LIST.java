@@ -8,12 +8,12 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ 
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M61537_0 extends BaseWrite
+/*    */ public class MSG_EXISTED_CHAR_LIST extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
 /* 15 */     ListVo_61537_0 vo_61537_0 = (ListVo_61537_0)object;
-/* 16 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(vo_61537_0.a));
+/* 16 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(vo_61537_0.severState));
 /* 17 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(vo_61537_0.count));
 /*    */     
 /* 19 */     for (Vo_61537_0 vo : vo_61537_0.vo_61537_0) {
@@ -37,9 +37,9 @@
 /* 37 */       BuildFields.get("trading_appointee_name").write(writeBuf, Integer.valueOf(vo.trading_appointee_name));
 /* 38 */       GameWriteTool.writeInt(writeBuf, Integer.valueOf(vo.last_login_time));
 /*    */     }
-/* 40 */     GameWriteTool.writeInt(writeBuf, Integer.valueOf(vo_61537_0.c));
+/* 40 */     GameWriteTool.writeInt(writeBuf, Integer.valueOf(vo_61537_0.openServerTime));
 /*    */     
-/* 42 */     GameWriteTool.writeByte(writeBuf, Integer.valueOf(vo_61537_0.d));
+/* 42 */     GameWriteTool.writeByte(writeBuf, Integer.valueOf(vo_61537_0.account_online));
 /*    */   }
 /*    */   
 /*    */   public int cmd()

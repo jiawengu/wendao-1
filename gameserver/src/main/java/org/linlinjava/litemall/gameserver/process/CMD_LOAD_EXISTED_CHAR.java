@@ -29,25 +29,18 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameObjectChar session = GameObjectChar.getGameObjectChar();
 
         if (session.chara == null) {
-            List<Characters> charactersList = GameData.that.characterService.findByAccountId(Integer.valueOf(session.getAccountid()));
-            Characters characters = null;
-            for (Characters tcharacters : charactersList) {
-                if (tcharacters.getName().equals(char_name)) {
-                    characters = tcharacters;
-                }
-            }
+            Characters characters = GameData.that.characterService.findOneByAccountIdAndName(session.getAccountid(), char_name);
             if (characters == null) {
                 ctx.disconnect();
                 return;
             }
 
-            if(GameObjectCharMng.isCharaOnline(characters.getId().intValue())){
+            if(GameObjectCharMng.isCharaCached(characters.getId().intValue())){
                 GameObjectCharMng.relogin(session, characters.getId());
             }else{
                 session.init(characters);
             }
         }
-
 
         Chara chara = session.chara;
 

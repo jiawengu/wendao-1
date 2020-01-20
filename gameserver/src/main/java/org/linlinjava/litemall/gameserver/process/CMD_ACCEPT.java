@@ -28,14 +28,13 @@
 /*  28 */     String ask_type = org.linlinjava.litemall.gameserver.data.GameReadTool.readString(buff);
 /*  29 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*  30 */     org.linlinjava.litemall.db.domain.Characters characters = org.linlinjava.litemall.gameserver.game.GameData.that.characterService.findOneByName(peer_name);
-/*  31 */     String data = characters.getData();
-/*  32 */     Chara chara1 = (Chara)org.linlinjava.litemall.db.util.JSONUtils.parseObject(data, Chara.class);
+/*  32 */     Chara chara1 = GameObjectCharMng.getGameObjectChar(characters.getId()).chara;
 /*  33 */     if (GameObjectChar.getGameObjectChar().gameTeam.duiwu.size() >= 5) {
 /*  34 */       return;
 /*     */     }
 /*  36 */     if ("request_join".equals(ask_type))
 /*     */     {
-/*  38 */       if ((GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) && 
+/*  38 */       if ((GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam != null) &&
 /*  39 */         (GameObjectCharMng.getGameObjectChar(chara1.id).gameTeam.duiwu != null)) {
 /*  40 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
 /*  41 */         vo_20481_0.msg = ("#Y#<" + peer_name + "#>#n已有队伍");

@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BasePetIntimacyService {
-    private static List<T_Pet_INTIMACY> cache = new ArrayList<>();
+    private static Map<String, List<T_Pet_INTIMACY>> cache = new HashMap<>();
     @Autowired
     protected T_Pet_INTIMACYMapper mapper;
 
@@ -25,15 +27,32 @@ public class BasePetIntimacyService {
 
 
     public void init(){
-        cache.addAll(findAll());
+        for(T_Pet_INTIMACY t_pet_intimacy:findAll()){
+            String[] petNames = t_pet_intimacy.getName().split(",");
+            for(String petName : petNames){
+                List<T_Pet_INTIMACY> list = cache.get(petName);
+                if(null==list){
+                    list = new ArrayList<>();
+                    cache.put(petName, list);
+                }
+                list.add(t_pet_intimacy);
+            }
+        }
     }
 
     public static T_Pet_INTIMACY getT_Pet_INTIMACY(String petName, int intimacy){
         if(null==petName){
             return null;
         }
-        for(T_Pet_INTIMACY t_Pet_INTIMACY:cache){
-            if(petName.endsWith(t_Pet_INTIMACY.getName())&&intimacy>=t_Pet_INTIMACY.getIntimacyBegin()&&intimacy<=t_Pet_INTIMACY.getIntimacyEnd()){
+        List<T_Pet_INTIMACY> list = cache.get(petName);
+        if(null == list){
+            list = cache.get("默认");
+            if(null == list){
+                return null;
+            }
+        }
+        for(T_Pet_INTIMACY t_Pet_INTIMACY:list){
+            if(intimacy>t_Pet_INTIMACY.getIntimacyBegin()&&intimacy<=t_Pet_INTIMACY.getIntimacyEnd()){
                 return t_Pet_INTIMACY;
             }
         }

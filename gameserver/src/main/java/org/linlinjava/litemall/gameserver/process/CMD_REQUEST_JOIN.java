@@ -33,13 +33,9 @@ import java.util.List;
 /*     */     
 /*  34 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*     */     
-/*  36 */     GameObjectChar session = GameObjectChar.getGameObjectChar();
-/*     */     
 /*  38 */     Characters characters = GameData.that.characterService.findOneByName(peer_name);
-/*  39 */     String data = characters.getData();
-/*  40 */     Chara chara1 = (Chara)org.linlinjava.litemall.db.util.JSONUtils.parseObject(data, Chara.class);
-/*     */     
-/*  42 */     GameObjectChar session1 = GameObjectCharMng.getGameObjectChar(chara1.id);
+/*  42 */     GameObjectChar session1 = GameObjectCharMng.getGameObjectChar(characters.getId());
+              Chara chara1 = session1.chara;
 /*     */     
 /*  44 */     if ("request_team_leader".equals(ask_type)) {
 /*  45 */       List<Vo_61545_0> vo_61545_0List = GameUtil.MSG_FRIEND_ADD_CHAR(chara1);
