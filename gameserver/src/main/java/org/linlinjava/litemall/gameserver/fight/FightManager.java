@@ -1882,6 +1882,12 @@ public class FightManager {
             vo_7655_0.id = fightObject.fid;
             send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
 
+
+            for(FightObject fb:getAllFightObject(fightContainer)){
+                if(fb.isQuitCombat){
+                    lueZhen(fightContainer, fb);
+                }
+            }
         } while(!isOver(fightContainer));
 
         doOver(fightContainer);
@@ -2001,6 +2007,11 @@ public class FightManager {
 //                                gameObjectChar.sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
 
 
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                         notifyTeamFriendList(fc, Arrays.asList(fightObject));
                                 notifyTeamEnemyList(fc, Arrays.asList(fightObject));
 
@@ -2112,13 +2123,6 @@ public class FightManager {
                 log.info("通天塔=>:"+fightObject.str+"救活了："+fightObject.tttXingjun.str);
             }
         }
-
-        for(FightObject fb:getAllFightObject(fightContainer)){
-            if(fb.isQuitCombat){
-                lueZhen(fightContainer, fb);
-            }
-        }
-
     }
 
     /**
