@@ -27,7 +27,7 @@ public class AsyncConfig implements SchedulingConfigurer, AsyncConfigurer {
     @Bean(destroyMethod = "shutdown", name = "taskScheduler")
     public ThreadPoolTaskScheduler taskScheduler(){
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(1);
+        scheduler.setPoolSize(3);
         scheduler.setThreadNamePrefix("scheduler-");
         scheduler.setAwaitTerminationSeconds(600);
         scheduler.setWaitForTasksToCompleteOnShutdown(true);

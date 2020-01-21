@@ -130,15 +130,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         }
 
 
-        Vo_4163_0 vo_4163_0 = new Vo_4163_0();
-        vo_4163_0.id = chara.chongwuchanzhanId;
-        vo_4163_0.pet_status = 1;
-        GameObjectChar.send(new MSG_SET_CURRENT_PET(), vo_4163_0);
-
-        vo_4163_0 = new Vo_4163_0();
-        vo_4163_0.id = chara.petLueZhenId;
-        vo_4163_0.pet_status = 2;
-        GameObjectChar.send(new MSG_SET_CURRENT_PET(), vo_4163_0);
+       GameUtil.notifyFightPet(GameObjectChar.getGameObjectChar());
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_8425_0 vo_8425_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8425_0();

@@ -115,7 +115,7 @@ public class FightObject {
     /**
      * 是否触发了掠阵
      */
-    public boolean isQuitCombat = false;
+    public boolean isLueZhen = false;
     /**
      * 回合结束后复活
      */

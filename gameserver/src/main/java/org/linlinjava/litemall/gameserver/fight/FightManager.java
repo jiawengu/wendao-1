@@ -1881,13 +1881,6 @@ public class FightManager {
             Vo_7655_0 vo_7655_0 = new Vo_7655_0();
             vo_7655_0.id = fightObject.fid;
             send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
-
-
-            for(FightObject fb:getAllFightObject(fightContainer)){
-                if(fb.isQuitCombat){
-                    lueZhen(fightContainer, fb);
-                }
-            }
         } while(!isOver(fightContainer));
 
         doOver(fightContainer);
@@ -1943,7 +1936,7 @@ public class FightManager {
                     if (null != gameObjectChar && gameObjectChar.isOnline() && gameObjectChar.chara.petLueZhenId > 0 && gameObjectChar.chara.petLueZhenId != victimObject.id) {
                         Petbeibao petbeibao = gameObjectChar.chara.getLueZhenPet();
                         if (null != petbeibao) {
-                            victimObject.isQuitCombat = true;
+                            victimObject.isLueZhen = true;
                         }
                     }
                 }
@@ -1952,12 +1945,12 @@ public class FightManager {
 
     }
 
-    private static void lueZhen(FightContainer fc, FightObject victimObject){
+    public static void lueZhen(FightContainer fc, FightObject victimObject){
         //掠阵宠物上场
-         if(!victimObject.isQuitCombat) {
+         if(!victimObject.isLueZhen) {
             return;
          }
-        victimObject.isQuitCombat = false;
+        victimObject.isLueZhen = false;
 //                        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
 //                        vo_19959_0.round = fc.round;
 //                        vo_19959_0.aid = 0;
@@ -1995,11 +1988,6 @@ public class FightManager {
 
 //                                gameObjectChar.sendOne(new MSG_UPDATE_PETS(), gameObjectChar.chara.pets);
 
-//                        Vo_4163_0 vo_4163_0 = new Vo_4163_0();
-//                        vo_4163_0.id = fightObject.id;
-//                        vo_4163_0.pet_status = 1;
-//                        gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
-//
 //                                Vo_64971_0 vo_64971_0 = new Vo_64971_0();
 //                                vo_64971_0.count = 1;
 //                                vo_64971_0.id = fightObject.id;
@@ -2007,14 +1995,14 @@ public class FightManager {
 //                                gameObjectChar.sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
 
 
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                         notifyTeamFriendList(fc, Arrays.asList(fightObject));
                                 notifyTeamEnemyList(fc, Arrays.asList(fightObject));
 
+                    Vo_4163_0 vo_4163_0 = new Vo_4163_0();
+                    vo_4163_0.id = fightObject.id;
+                    vo_4163_0.pet_status = 1;
+                    gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
+//
 //                                notifyTeamEnemyList(fightContainer, friendsFightTeam.fightObjectList);
 
 //                                friendsFightTeam = getFightTeamDM(fightContainer, fightObject.id);
@@ -2310,7 +2298,7 @@ public class FightManager {
                 if (!fightObject.isDead() && !fightObject.isRun() ) {
                     over = false;
                 }
-                if(fightObject.isQuitCombat){
+                if(fightObject.isLueZhen){
                    over = false;
                 }
 
@@ -2503,7 +2491,7 @@ public class FightManager {
         return null;
     }
 
-    private static List<FightObject> getAllFightObject(FightContainer fightContainer) {
+    public static List<FightObject> getAllFightObject(FightContainer fightContainer) {
         List<FightObject> list = new ArrayList();
         Iterator var2 = fightContainer.teamList.iterator();
 
