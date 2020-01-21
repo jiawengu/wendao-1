@@ -2,10 +2,8 @@ package org.linlinjava.litemall.gameserver.process;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import org.linlinjava.litemall.db.domain.Accounts;
+import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.domain.Map;
-import org.linlinjava.litemall.db.domain.RenwuMonster;
-import org.linlinjava.litemall.db.domain.ZhuangbeiInfo;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -25,10 +23,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.function.Consumer;
 
 import static org.linlinjava.litemall.gameserver.data.constant.NpcConst.PENGLAI_XIANREN;
@@ -69,6 +65,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         log.debug("npc id: " + npc_id + " menu_item: " + menu_item + " para: " + para);
 
         Chara chara1 = GameObjectChar.getGameObjectChar().chara;
+        // 处理副本内选择npc，先处理副本的，可能是monsterid,可能是npcid，为避免冲突尽量不要放在这个前面处理
+        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
+        if(gameMap.isDugeno()){
+            GameZone gameZone = (GameZone)gameMap;
+            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
+        }
+
         Consumer<CMD_DIALOG_CHOOSE_RESULT_VO> npcHandler = npcHandlerMap.getOrDefault(npc_id, null);
         if (npcHandler != null) {
             CMD_DIALOG_CHOOSE_RESULT_VO cmd_dialog_choose_result_vo = CMD_DIALOG_CHOOSE_RESULT_VO.builder()
@@ -150,7 +153,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                     vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
 
-                    GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 
                     return;
 
@@ -631,10 +634,10 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
 
-//        ShangGuYaoWangInfo info =
-//                GameShangGuYaoWang.getYaoWangNpc(id,
-//                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
-//        if (menu_item.equals("挑战") && null != info){
+        ShangGuYaoWangInfo info =
+                GameShangGuYaoWang.getYaoWangNpc(npc_id,
+                        GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);
+        if (menu_item.equals("挑战") && null != info){
 //            if (GameObjectChar.getGameObjectChar().gameTeam == null){
 //                Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 //                vo_20481_0.msg = "人数不足3人！";
@@ -677,23 +680,37 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 //                    return;
 //                }
 //            }
-//
-//            org.linlinjava.litemall.db.domain.Npc npc =
-//                    GameData.that.baseNpcService.findById(id);
-//
-//            List<String> list = new ArrayList();
-//            list.add("上古妖王"+(info.getLevel()/10)*10);
-//
-//            Random RANDOM = new Random();
-//            String []  xiaoGuai = info.getXiaoGuai().split(",");
-//
-//
-//            for(int i = 0; i < 9; ++i) {
-//                list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]+(info.getLevel()/10)*10);
-//            }
-//
-//            org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
-//        }
+
+            org.linlinjava.litemall.db.domain.Npc npc =
+                    GameData.that.baseNpcService.findById(npc_id);
+
+            List<String> list = new ArrayList();
+
+
+            Random RANDOM = new Random();
+            String []  xiaoGuai = info.getXiaoGuai().split(",");
+
+            boolean isWanNianLaoYao = false;
+            if (info.getName().contains("万年老妖")){
+                list.add(info.getName()+"("+(info.getLevel()/10)*10+")");
+                list.add("狗头军师"+"("+(info.getLevel()/10)*10+")");
+                list.add("狗头军师"+"("+(info.getLevel()/10)*10+")");
+                isWanNianLaoYao = true;
+            }else{
+                list.add(info.getName()+(info.getLevel()/10)*10);
+            }
+
+            int size = 10 - list.size();
+            for(int i = 0; i < size; ++i) {
+                if (isWanNianLaoYao){
+                    list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)]+"(" + (info.getLevel() / 10) * 10+")");
+                }else {
+                    list.add(xiaoGuai[RANDOM.nextInt(xiaoGuai.length)] + (info.getLevel() / 10) * 10);
+                }
+            }
+
+            org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
+        }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(npc_id))) && (menu_item.equals("我是来向你挑战的"))) {
             /*  292 */
@@ -1383,7 +1400,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  568 */
             vo_8165_0.active = 0;
             /*  569 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*      */
             /*  572 */
@@ -1567,7 +1584,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  568 */
             vo_8165_0.active = 0;
             /*  569 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*      */
             /*  572 */
@@ -1764,7 +1781,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  661 */
             vo_8165_0.active = 0;
             /*  662 */
-            GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0, chara1.id);
+            GameObjectChar.sendduiwu(new MSG_DIALOG_OK(), vo_8165_0, chara1.id);
             /*      */
             /*  664 */
             if (chara1.mapid == ((Vo_65529_0) chara1.npcshuadao.get(0)).mapid) {
@@ -2738,13 +2755,6 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*      */
         }
 
-        // 处理副本内选择npc
-        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
-        if(gameMap.isDugeno()){
-            GameZone gameZone = (GameZone)gameMap;
-            gameZone.gameDugeon.selectNpc(chara1, npc_id, menu_item, para);
-        }
-
         if (npc_id == 978) {
             /* 1173 */
             if (menu_item.equals("清理背包")) {
@@ -2918,7 +2928,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }
             if ("了解七杀试炼".equals(menu_item)) {
 
-                GameUtil.playNextNpcDialogueJuBen();
+                GameUtil.playNextNpcDialogueJuBen(chara);
                 return;
             }
 
@@ -3147,7 +3157,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /* 1320 */
                 vo_8165_0.active = 0;
                 /* 1321 */
-                GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 /* 1322 */
                 org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0 vo_40964_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0();
                 /* 1323 */

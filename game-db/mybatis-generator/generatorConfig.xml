@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
@@ -67,15 +67,16 @@
         </javaClientGenerator>
 
         <!-- 数据表名及实体类名称  -->
-        <table tableName="party" domainObjectName="Party">
-            <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />
-        </table>
-        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>
-        <table tableName="user_party" domainObjectName="UserParty"></table>
-        <table tableName="user_party_daily_task" domainObjectName="UserPartyDailyTask"></table>
-        <table tableName="user_party_shop" domainObjectName="UserPartyShop"></table>
-        <table tableName="chara_statue" domainObjectName="Chara_Statue"> </table>
+<!--        <table tableName="party" domainObjectName="Party">-->
+<!--            <columnOverride column="member" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--            <columnOverride column="request_join" javaType="java.lang.String" jdbcType="VARCHAR" />-->
+<!--        </table>-->
+<!--        <table tableName="t_fight_object" domainObjectName="T_FightObject"> </table>-->
+<!--        <table tableName="user_party" domainObjectName="UserParty"></table>-->
+<!--        <table tableName="user_party_daily_task" domainObjectName="UserPartyDailyTask"></table>-->
+<!--        <table tableName="user_party_shop" domainObjectName="UserPartyShop"></table>-->
+<!--        <table tableName="chara_statue" domainObjectName="Chara_Statue"> </table>-->
+        <table tableName="t_pet_intimacy" domainObjectName="T_Pet_INTIMACY"> </table>
 
 
     </context>

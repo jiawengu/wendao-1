@@ -8,10 +8,7 @@ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
 import org.linlinjava.litemall.gameserver.data.vo.*;
-import org.linlinjava.litemall.gameserver.data.write.M61677_0;
-import org.linlinjava.litemall.gameserver.data.write.M61677_1;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -34,6 +31,7 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
 
         Petbeibao chongwu = null;
         Chara chara = GameObjectChar.getGameObjectChar().chara;
+
         if(type == 1){
             for(Petbeibao p:chara.pets){
                 if(p.no == pos){
@@ -42,8 +40,19 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
             }
             if(chongwu != null){
                 chara.pets.remove(chongwu);
-                chara.chongwucangku.add(chongwu);
                 chongwu.no = GameUtil.getChongwuCangkuNextWeizhi(chara);
+                chara.chongwucangku.add(chongwu);
+
+                Vo_61677_1 vo_61677_1 = new Vo_61677_1();
+                vo_61677_1.store_type = "chongwu";
+                vo_61677_1.list = chara.chongwucangku;
+                GameObjectChar.send(new M61677_1(), vo_61677_1);
+
+                //删除宠物背包的前端数据
+                Vo_12269_0 vo_12269_0 = new Vo_12269_0();
+                vo_12269_0.id = chongwu.id;
+                vo_12269_0.owner_id = 96780;
+                GameObjectChar.send(new M12269_0(), vo_12269_0);
             }
         }
         else if(type == 2){
@@ -53,17 +62,16 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
                 }
             }
             if(chongwu != null){
+                //删除宠物仓库的前端数据
+                GameObjectChar.send(new M61677_1(), pos);
                 chara.chongwucangku.remove(chongwu);
-                chara.pets.add(chongwu);
                 chongwu.no = GameUtil.getNo(chara, 1);
+                chara.pets.add(chongwu);
+                GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
             }
         }
 
-        Vo_61677_1 vo_61677_1 = new Vo_61677_1();
-        vo_61677_1.store_type = "chongwu";
-        vo_61677_1.list = chara.chongwucangku;
-        GameObjectChar.send(new M61677_1(), vo_61677_1);
-        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
+
     }
 
     @Override

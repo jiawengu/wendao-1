@@ -79,7 +79,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 78 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 79 */     vo_8165_0.msg = "卸下成功！";
 /* 80 */     vo_8165_0.active = 0;
-/* 81 */     GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 81 */     GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 82 */     Vo_41505_0 vo_41505_0 = new Vo_41505_0();
 /* 83 */     vo_41505_0.type = "unequip_fasion";
 /* 84 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41505_0(), vo_41505_0);

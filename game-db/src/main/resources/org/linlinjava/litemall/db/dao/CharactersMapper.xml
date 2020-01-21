@@ -470,4 +470,14 @@
     update characters set deleted = 1
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateByName" parameterType="org.linlinjava.litemall.db.domain.Characters">
+    update characters
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

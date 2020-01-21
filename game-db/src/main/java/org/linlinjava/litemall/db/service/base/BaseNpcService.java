@@ -37,6 +37,14 @@ public class BaseNpcService {
 
     @Cacheable(
             cacheNames = {"Npc"},
+            key = "#id"
+    )
+    public Npc findByIdEx(int id) {
+        return this.mapper.selectByPrimaryKeyWithLogicalDelete(id, true);
+    }
+
+    @Cacheable(
+            cacheNames = {"Npc"},
             key = "#id",
             condition = "#result.deleted == 0"
     )

@@ -29,6 +29,7 @@ import org.linlinjava.litemall.gameserver.fight.FightRequest;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
@@ -110,18 +111,19 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能"+ "#n ";
             }else if(strings[1].equals("上古妖王")){
                 Random random = new Random();
-                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
-                npc.setDeleted(false);
-                npc.setX(random.nextInt(40)+1);
-                npc.setY(random.nextInt(40)+1);
-                npc.setDeleted(false);
-                GameData.that.baseNpcService.updateById(npc);
-                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+//                Npc npc = (Npc) GameData.that.baseNpcService.findOneByNameEx(strings[0]);
+//                npc.setDeleted(false);
+//                npc.setX(random.nextInt(40)+1);
+//                npc.setY(random.nextInt(40)+1);
+//                npc.setDeleted(false);
+//                GameData.that.baseNpcService.updateById(npc);
+//                GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPEAR_NPC(), npc);
+                ShangGuYaoWangInfo info = GameShangGuYaoWang.sendYaoWang(chara, Integer.valueOf( strings[0]));
                 org.linlinjava.litemall.db.domain.Map map =
-                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(npc.getMapId());
-                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + strings[0] +
+                        (org.linlinjava.litemall.db.domain.Map) GameData.that.baseMapService.findOneByMapId(info.getMapId());
+                msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中挖出#R" + info.getName() +
                         "#n, "+ "在地图#Z" + map.getName() + "|" + map.getName() +
-                        "(" + npc.getX() + "," + npc.getY() + ")#Z上,赶快去挑战吧!";
+                        "(" + info.getX() + "," + info.getY() + ")#Z上,赶快去挑战吧!";
             }else if(strings[1].equals("道行")){
                 msg ="喜从天降,恭喜#Y" + chara.name + "#n在高级挖宝中获得#R"  + Integer.valueOf(strings[0]).intValue() + "#n点" + "道行"+ "#n ";
             }else {
@@ -132,7 +134,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0.msg = msg;
             vo_8165_0.active = 0;
             GameObjectCharMng.getGameObjectChar(GameObjectChar.getGameObjectChar().upduizhangid);
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
@@ -166,13 +168,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已开启宠风散功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.chongfengsan = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已关闭宠风散功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.chongfengsan = 0;
             }
         }
@@ -182,13 +184,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已开启紫气鸿蒙功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.ziqihongmeng = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "你已关闭紫气鸿蒙功能。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.ziqihongmeng = 0;
             }
         }
@@ -202,13 +204,13 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "成功开启双倍点数，部分活动将消耗双倍点数获得双倍奖励。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.charashuangbei = 1;
             } else {
                 vo_8165_0 = new Vo_8165_0();
                 vo_8165_0.msg = "成功关闭双倍点数，双倍点数将不再消耗。";
                 vo_8165_0.active = 0;
-                GameObjectChar.send(new M8165_0(), vo_8165_0);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
                 chara.charashuangbei = 0;
             }
         }
@@ -218,7 +220,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0 = new Vo_8165_0();
             vo_8165_0.msg = "成功关闭驱魔香，在练功区走动时将会遇怪。";
             vo_8165_0.active = 0;
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "0";
@@ -230,7 +232,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_8165_0 = new Vo_8165_0();
             vo_8165_0.msg = "成功开启驱魔香，在练功区走动时将无法遇怪。";
             vo_8165_0.active = 0;
-            GameObjectChar.send(new M8165_0(), vo_8165_0);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "1";
@@ -240,33 +242,32 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
         ListVo_65527_0 listVo_65527_0;
         Vo_8165_0 vo81650;
-        Characters characters;
         if (type == 1) {
             if (GameData.that.baseCharactersService.findOneByName(para1) != null) {
                 vo81650 = new Vo_8165_0();
                 vo81650.msg = "该名字已有人使用";
                 vo81650.active = 0;
-                GameObjectChar.send(new M8165_0(), vo81650);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo81650);
                 return;
             }
 
-            characters = GameData.that.baseCharactersService.findById(chara.id);
-            characters.setName(para1);
             GameUtil.removemunber(chara, "改头换面卡", 1);
             chara.name = para1;
+            Characters characters = GameObjectChar.getGameObjectChar().characters;
+            GameData.that.baseCharactersService.updateName(characters, para1);
+
             listVo_65527_0 = GameUtil.a65527(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             vo81650 = new Vo_8165_0();
             vo81650.msg = "修改成功";
             vo81650.active = 0;
-            GameObjectChar.send(new M8165_0(), vo81650);
-            GameData.that.baseCharactersService.updateById(characters);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo81650);
         }
 
         String name;
         int def;
         if (type == 40005) {
-            characters = GameData.that.characterService.finOnByGiD(para1);
+            Characters characters = GameData.that.characterService.finOnByGiD(para1);
             name = characters.getData();
             Chara charaCha = (Chara)JSONUtils.parseObject(name, Chara.class);
             Vo_49153_0 vo_49153_0 = new Vo_49153_0();
@@ -344,7 +345,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     Vo_8165_0 vo816501 = new Vo_8165_0();
                     vo816501.msg = "移除妖石成功！";
                     vo816501.active = 0;
-                    GameObjectChar.send(new M8165_0(), vo816501);
+                    GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
                 }
             }
         }
@@ -363,7 +364,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo816501 = new Vo_8165_0();
                 vo816501.msg = "你获得了#R" + split[0];
                 vo816501.active = 0;
-                GameObjectChar.send(new M8165_0(), vo816501);
+                GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
                 vo_20480_0 = new Vo_20480_0();
                 vo_20480_0.msg = "你获得了#R" + split[0];
                 vo_20480_0.time = (int)System.currentTimeMillis();
@@ -697,7 +698,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo816501 = new Vo_8165_0();
             vo816501.msg = "你提款了钱";
             vo816501.active = 0;
-            GameObjectChar.send(new M8165_0(), vo816501);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
             vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = "你提款了钱";
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
@@ -861,7 +862,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo816501 = new Vo_8165_0();
             vo816501.msg = "你获得了" + name;
             vo816501.active = 0;
-            GameObjectChar.send(new M8165_0(), vo816501);
+            GameObjectChar.send(new MSG_DIALOG_OK(), vo816501);
             Vo_20480_0 vo204800 = new Vo_20480_0();
             vo204800.msg = "你领取了签到奖励。";
             vo204800.time = 1562593376;
@@ -1230,6 +1231,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                 GameObjectChar.getGameObjectChar();
                 GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                return;
+            }
+            if(!GameUtil.isTeamLeader(chara)) {
+                GameUtil.sendTips("请队长带入");
                 return;
             }
 

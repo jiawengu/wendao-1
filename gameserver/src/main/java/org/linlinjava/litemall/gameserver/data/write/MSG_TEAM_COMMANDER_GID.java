@@ -4,9 +4,13 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20568_0;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*    */ 
+/*    */
+
+/**
+ * 队伍指挥 - 拥有指挥权限的玩家
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M20568_0 extends BaseWrite
+/*    */ public class MSG_TEAM_COMMANDER_GID extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

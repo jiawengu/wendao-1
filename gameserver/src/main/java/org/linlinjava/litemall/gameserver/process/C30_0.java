@@ -9,8 +9,10 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61593_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_CLEAN_ALL_REQUEST;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TEAM_COMMANDER_GID;
+import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -30,10 +32,10 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */     
 /* 30 */     Vo_61593_0 vo_61593_0 = new Vo_61593_0();
 /* 31 */     vo_61593_0.ask_type = "request_join";
-/* 32 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61593_0(), vo_61593_0);
+/* 32 */     GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /* 33 */     vo_61593_0 = new Vo_61593_0();
 /* 34 */     vo_61593_0.ask_type = "request_team_leader";
-/* 35 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61593_0(), vo_61593_0);
+/* 35 */     GameObjectChar.send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
 /*    */     
 /* 37 */     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 38 */     vo_61671_0.id = Integer.parseInt(new_leader_id);
@@ -72,18 +74,18 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */     }
 /* 72 */     Vo_20568_0 vo_20568_0 = new Vo_20568_0();
 /* 73 */     vo_20568_0.gid = "";
-/* 74 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20568_0(), vo_20568_0);
+/* 74 */     GameObjectChar.send(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /* 75 */     vo_20568_0 = new Vo_20568_0();
 /* 76 */     vo_20568_0.gid = "";
-/* 77 */     GameObjectCharMng.getGameObjectChar(Integer.parseInt(new_leader_id)).sendOne(new org.linlinjava.litemall.gameserver.data.write.M20568_0(), vo_20568_0);
+/* 77 */     GameObjectCharMng.getGameObjectChar(Integer.parseInt(new_leader_id)).sendOne(new MSG_TEAM_COMMANDER_GID(), vo_20568_0);
 /* 78 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 79 */     vo_20481_0.msg = "你被提升为队长。";
 /* 80 */     vo_20481_0.time = 1562987118;
 /* 81 */     GameObjectCharMng.getGameObjectChar(Integer.parseInt(new_leader_id)).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */     
 /*    */ 
-/* 84 */     GameUtil.a4119(gameTeam.duiwu);
-/* 85 */     GameUtil.a4121(gameTeam.zhanliduiyuan);
+/* 84 */     GameUtil.MSG_UPDATE_TEAM_LIST(gameTeam.duiwu);
+/* 85 */     GameUtil.MSG_UPDATE_TEAM_LIST_EX(gameTeam.zhanliduiyuan);
 /*    */   }
 /*    */   
 /*    */ 

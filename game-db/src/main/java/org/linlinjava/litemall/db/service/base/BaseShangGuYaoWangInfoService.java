@@ -10,6 +10,7 @@ import org.linlinjava.litemall.db.domain.ShangGuYaoWangInfo;
 import org.linlinjava.litemall.db.domain.example.ShangGuYaoWangInfoExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,13 +23,13 @@ public class BaseShangGuYaoWangInfoService {
     public BaseShangGuYaoWangInfoService() {
     }
 
-//    @Cacheable(
-//            cacheNames = {"ShangGuYaoWangInfoMapper"},
-//            key = "#id"
-//    )
-//    public ShangGuYaoWangInfoMapper findById(int id) {
-//        return this.mapper.selectByPrimaryKeyWithLogicalDelete(id, false);
-//    }
+    @Cacheable(
+            cacheNames = {"ShangGuYaoWangInfoMapper"},
+            key = "#id"
+    )
+    public ShangGuYaoWangInfo findById(int id) {
+        return this.mapper.selectByPrimaryKey(id);
+    }
 //
 //    @Cacheable(
 //            cacheNames = {"ShangGuYaoWangInfoMapper"},

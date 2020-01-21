@@ -1,19 +1,23 @@
 package org.linlinjava.litemall.gameserver.util;
 
-import org.linlinjava.litemall.db.domain.Npc;
+import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.domain.StoreInfo;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR_NPC;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
+import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.domain.Chara;
+import org.linlinjava.litemall.gameserver.domain.PetShuXing;
+import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +45,7 @@ public class GmUtil {
             result.put("exp", this::exp_handler);
             result.put("level", this::level_handler);
             result.put("daohang", this::daohang_handler);
+            result.put("qinmidu", this::qinmidu_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -72,13 +77,7 @@ public class GmUtil {
     }
 
     public void ljy_handler(Chara chara, String[] cmds){
-//        Npc npc = GameData.that.baseNpcService.findOneByName("金系掌门");
-//        GameObjectChar.getGameObjectChar().sendOne(new MSG_APPEAR_NPC(), npc);
-
-        int daohang = Integer.parseInt(cmds[1]);
-        GameUtil.adddaohang(GameObjectChar.getGameObjectChar().chara, daohang);
-        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
-        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
     }
 
     /**
@@ -141,5 +140,24 @@ public class GmUtil {
         chara.level = level;
         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+    }
+
+    /**
+     * 设置宠物：#gm qinmidu 宠物名字 亲密度值
+     * @param chara
+     * @param cmds
+     */
+    private void qinmidu_handler(Chara chara, String[] cmds){
+        String petName = cmds[1];
+        int qinmidu = Integer.parseInt(cmds[2]);
+        for(Petbeibao petbeibao:chara.pets){
+            PetShuXing petShuXing = petbeibao.petShuXing.get(0);
+            if(petShuXing.str.equals(petName)){
+                petShuXing.intimacy = qinmidu;
+
+                GameObjectChar.send(new MSG_UPDATE_PETS(), Arrays.asList(petbeibao));
+                break;
+            }
+        }
     }
 }

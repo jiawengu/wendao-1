@@ -2,19 +2,19 @@
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
-/*    */ import java.util.List;
-/*    */ import org.linlinjava.litemall.db.domain.UserPartyDailyTask;
+/*    */
+/*    */
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16431_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40981_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M16431_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_MOVED;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M40981_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.fight.FightMove;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameTeam;
+/*    */
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*    */
 
@@ -44,7 +44,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /*    */     }
 /*    */     
 /*    */
-            System.out.println("x:"+x+",y:"+y);
+//            System.out.println("x:"+x+",y:"+y);
 /*    */ 
 /* 42 */     int dir = GameReadTool.readShort(buff);
 /*    */     
@@ -68,7 +68,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 /* 61 */     vo_16431_0.id = id;
 /* 62 */     vo_16431_0.x = x;
 /* 63 */     vo_16431_0.y = y;
-/* 64 */     GameObjectChar.getGameObjectChar().gameMap.send(new M16431_0(), vo_16431_0);
+/* 64 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_MOVED(), vo_16431_0);
 /* 65 */     if ((chara.qumoxiang != 1) && (FightMove.move(chara.id))) {
 /* 67 */       org.linlinjava.litemall.gameserver.fight.FightManager.goFight(GameObjectChar.getGameObjectChar().chara, GameObjectChar.getGameObjectChar().chara.mapName);
 /* 68 */       return;

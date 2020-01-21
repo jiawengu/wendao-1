@@ -12,7 +12,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_SKILLS;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
@@ -78,7 +78,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  77 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  78 */           vo_8165_0.msg = ("恭喜，你意外获得了#R" + name + "#n奖励");
 /*  79 */           vo_8165_0.active = 0;
-/*  80 */           GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  80 */           GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           
 /*  82 */           GameUtil.a49159(chara);
 /*     */           
@@ -151,7 +151,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 150 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 151 */       vo_8165_0.msg = ("恭喜，你意外获得了#R" + name + "#n奖励");
 /* 152 */       vo_8165_0.active = 0;
-/* 153 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 153 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */       
 /* 155 */       GameUtil.a49159(chara);
 /*     */       

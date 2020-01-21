@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*    */
 
 /**
@@ -32,16 +33,17 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /* 27 */     int y = GameReadTool.readShort(buff);
 /* 28 */     int taskwalk = GameReadTool.readShort(buff);
 /* 29 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
-/* 30 */     Characters characters = GameData.that.characterService.findOneByID(id);
-/* 31 */     String data = characters.getData();
-/* 32 */     Chara chara1 = (Chara)JSONUtils.parseObject(data, Chara.class);
+/* 32 */     Chara chara1 = GameObjectCharMng.getGameObjectChar(id).chara;
 /* 33 */     chara1.x = chara.x;
 /* 34 */     chara1.y = chara.y;
 /* 35 */     chara1.mapid = chara.mapid;
 /* 36 */     chara1.mapName = chara.mapName;
-/*    */     
-/* 38 */     org.linlinjava.litemall.gameserver.game.GameLine.getGameMap(chara.line, chara.mapName).joinduiyuan(org.linlinjava.litemall.gameserver.game.GameObjectCharMng.getGameObjectChar(chara1.id), chara);
-/*    */     
+             if(GameObjectChar.getGameObjectChar().gameMap != null){
+                 GameObjectChar.getGameObjectChar().gameMap.joinduiyuan(GameObjectCharMng.getGameObjectChar(chara1.id), chara);
+             }
+             else {
+                 org.linlinjava.litemall.gameserver.game.GameLine.getGameMap(chara.line, chara.mapName).joinduiyuan(org.linlinjava.litemall.gameserver.game.GameObjectCharMng.getGameObjectChar(chara1.id), chara);
+             }
 /* 40 */     for (int i = 0; i < chara.npcchubao.size(); i++) {
 /* 41 */       if (chara1.mapid == ((Vo_65529_0)chara.npcchubao.get(i)).mapid) {
 /* 42 */         GameObjectChar.sendduiwu(new MSG_APPEAR(), chara.npcchubao.get(i), chara.id);

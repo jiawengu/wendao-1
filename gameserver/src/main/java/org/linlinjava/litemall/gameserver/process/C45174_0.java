@@ -11,13 +11,17 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M45185_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * 客户端请求震动提醒玩家
+ */
 /*    */ @Service
 /*    */ public class C45174_0 implements GameHandler
 /*    */ {
@@ -37,14 +41,14 @@
 /* 37 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 38 */       vo_8165_0.msg = ("已向#Y" + chara.name + "#n发送震动提醒。");
 /* 39 */       vo_8165_0.active = 0;
-/* 40 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 40 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*    */       
 /* 42 */       Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 43 */       vo_20481_0.msg = (chara.name + "在队伍中向你发送了一次震动提醒");
 /* 44 */       vo_20481_0.time = 1562987118;
-/* 45 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+/* 45 */       GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /*    */       
-/* 47 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M45185_0(), "");
+/* 47 */       GameObjectCharMng.sendOne(chara1.id, new M45185_0(), "");
 /*    */     }
 /*    */   }
 /*    */   

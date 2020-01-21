@@ -6,8 +6,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16429_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_16431_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M16429_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M16431_0;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_MOVED;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */
@@ -47,7 +47,7 @@
 /* 43 */     vo_16431_0.id = id;
 /* 44 */     vo_16431_0.x = x;
 /* 45 */     vo_16431_0.y = y;
-/* 46 */     GameObjectChar.getGameObjectChar().gameMap.send(new M16431_0(), vo_16431_0);
+/* 46 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_MOVED(), vo_16431_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

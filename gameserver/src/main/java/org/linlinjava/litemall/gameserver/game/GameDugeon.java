@@ -28,6 +28,7 @@ public class GameDugeon {
     public int juben_end_id = 0;
     private String juben_form = "";
     private boolean had_call_monster = false;
+    public List<RenwuMonster> renwuMonsterList = new LinkedList();
 
     private enum ACTION{
         NONE,
@@ -84,7 +85,7 @@ public class GameDugeon {
         vo_65529_0.org_icon = vo_65529_0.icon;
         vo_65529_0.portrait = vo_65529_0.icon;
         gameMap.send(new MSG_APPEAR(), vo_65529_0);
-
+        renwuMonsterList.add(renwuMonster);
         updateTaskInfo(GameObjectChar.getGameObjectChar().chara);
     }
 
@@ -167,8 +168,9 @@ public class GameDugeon {
             if(npcDialogueFramelist.size() > 0 && !(npcDialogueFramelist.get(0)).getNext().equals("")){
                 chara.nextJuBen = 0;
                 chara.currentJuBens = (npcDialogueFramelist.get(0)).getNext().split(",");
+                chara.jubenAllTeam = true;
                 juben_end_id = Integer.valueOf(chara.currentJuBens[chara.currentJuBens.length - 1]);
-                GameUtil.playNextNpcDialogueJuBen();
+                GameUtil.playNextNpcDialogueJuBen(chara);
                 juben_form = "meetnpc";
             }
             return true;
@@ -222,6 +224,8 @@ public class GameDugeon {
 
     // 挑战胜利
     public void fightWin(Chara chara) {
+        // 转化为队长
+        chara = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam.duiwu.get(0);
         // 移除怪物
         removeCurStepMonster(chara);
 
@@ -233,8 +237,9 @@ public class GameDugeon {
         if(cfg.fightwinjuben_list.size() > juben_idx && cfg.fightwinjuben_list.get(juben_idx).length > 0){
             chara.nextJuBen = 0;
             chara.currentJuBens = cfg.fightwinjuben_list.get(juben_idx);
+            chara.jubenAllTeam = true;
             juben_end_id = Integer.valueOf(chara.currentJuBens[chara.currentJuBens.length - 1]);
-            GameUtil.playNextNpcDialogueJuBen();
+            GameUtil.playNextNpcDialogueJuBen(chara);
             juben_form = "fightwin";
             return;
         }
@@ -258,12 +263,34 @@ public class GameDugeon {
         if (cfg.enterjuben_list.length > 0){
             chara.nextJuBen = 0;
             chara.currentJuBens = cfg.enterjuben_list;
-            GameUtil.playNextNpcDialogueJuBen();
+            chara.jubenAllTeam = true;
+            GameUtil.playNextNpcDialogueJuBen(chara);
             juben_form = "enter";
         }
 
         initMonster();
     }
+
+    // 进入副本
+    public void onJoinMap(Chara chara) {
+        for (RenwuMonster renwuMonster: renwuMonsterList) {
+            Vo_65529_0 vo_65529_0 = new Vo_65529_0();
+            vo_65529_0.id = renwuMonster.getId();
+            vo_65529_0.name = renwuMonster.getName();
+            vo_65529_0.type = 2;
+            vo_65529_0.leixing = renwuMonster.getType();
+            vo_65529_0.mapid = GameObjectCharMng.getGameObjectChar(chara.id).gameMap.id;
+            vo_65529_0.x = renwuMonster.getX().intValue();
+            vo_65529_0.y = renwuMonster.getY().intValue();
+            vo_65529_0.dir = 1;
+            vo_65529_0.icon = renwuMonster.getIcon();
+            vo_65529_0.org_icon = vo_65529_0.icon;
+            vo_65529_0.portrait = vo_65529_0.icon;
+            GameObjectChar.send(new MSG_APPEAR(), vo_65529_0, chara.id);
+        }
+        updateTaskInfo(chara);
+    }
+
 
     // 离开副本返回指定位置
     public void leaveBack(Chara chara) {
@@ -329,7 +356,7 @@ public class GameDugeon {
         Vo_45063_0 vo_45063_0 = new Vo_45063_0();
         vo_45063_0.task_name = task_prompt;
         vo_45063_0.check_point = 147761859;
-        GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara.id);
+        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara.id);
     }
 
     // 选择npc选项
@@ -345,8 +372,9 @@ public class GameDugeon {
 
             chara1.nextJuBen = 0;
             chara1.currentJuBens = (npcDialogueFrame.get(0)).getNext().split(",");
+            chara1.jubenAllTeam = true;
             juben_end_id = Integer.valueOf(chara1.currentJuBens[chara1.currentJuBens.length - 1]);
-            GameUtil.playNextNpcDialogueJuBen();
+            GameUtil.playNextNpcDialogueJuBen(chara1);
             juben_form = "selectnpc";
             return;
         }
@@ -381,6 +409,8 @@ public class GameDugeon {
 
     // 剧本结束
     public void OnJuBenEnd(Chara chara, int juben_id) {
+        if(!GameUtil.isTeamLeader(chara)) return;
+
         int tmp_id = juben_end_id;
         juben_end_id = 0;
         DugenoItem cfg = getDugenoItemCfg();
@@ -424,5 +454,6 @@ public class GameDugeon {
         if(renwuMonster == null || !renwuMonster.getMapName().equals(gameMap.name)) return;
         int id = renwuMonster.getId();
         GameObjectChar.sendduiwu(new MSG_DISAPPEAR_0(), Integer.valueOf(id), chara.id);
+        renwuMonsterList.remove(renwuMonster);
     }
 }

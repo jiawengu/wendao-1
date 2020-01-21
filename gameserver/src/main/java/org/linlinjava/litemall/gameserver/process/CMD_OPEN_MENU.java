@@ -39,7 +39,14 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         System.out.println("CMD_OPEN_MENU:" + id + ":" + type);
 
         Chara chara = GameObjectChar.getGameObjectChar().chara;
-        if(NpcIds.isZhengDaoDianNpc(id)){//证道殿npc
+        // 先处理副本的，可能是monsterid,可能是npcid，为避免冲突尽量不要放在这个前面处理
+         GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
+         if (gameMap.isDugeno() && ((GameZone)gameMap).gameDugeon.meetNpc(chara, id))
+         {
+             return;
+         }
+
+         if(NpcIds.isZhengDaoDianNpc(id)){//证道殿npc
            ZhengDaoDianService.openMenu(chara, id);
             return;
         }
@@ -55,7 +62,7 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         String[] shidaolevel = {"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};
 
         for (int k = 0; k < shidaolevel.length; k++) {
-            GameMap gameMap = GameLine.getGameMap(1, shidaolevel[k]);
+            gameMap = GameLine.getGameMap(1, shidaolevel[k]);
             for (int i = 0; i < gameMap.gameShiDao.shidaoyuanmo.size(); i++) {
                 if (id == ((Vo_65529_0) gameMap.gameShiDao.shidaoyuanmo.get(i)).id) {
                     MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
@@ -156,12 +163,6 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
                 return;
             }
         }
-        GameMap gameMap = GameObjectChar.getGameObjectChar().gameMap;
-        if (gameMap.isDugeno() && ((GameZone)gameMap).gameDugeon.meetNpc(chara, id))
-        {
-            return;
-        }
-
 
         if(GameData.that.superBossMng.isBoss(Integer.valueOf(id))){
             //是超级BOSS;

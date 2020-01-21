@@ -16,7 +16,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*     */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -54,7 +54,7 @@
 /*  54 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  55 */       vo_8165_0.msg = "购买成功";
 /*  56 */       vo_8165_0.active = 0;
-/*  57 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  57 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*  58 */       return;
 /*     */     }
 /*  60 */     if (barcode.equals("C0000002")) {
@@ -75,7 +75,7 @@
 /*  75 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  76 */       vo_8165_0.msg = "购买成功";
 /*  77 */       vo_8165_0.active = 0;
-/*  78 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  78 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*  79 */       return;
 /*     */     }
 /*  81 */     if (barcode.equals("C0000003")) {
@@ -96,7 +96,7 @@
 /*  96 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  97 */       vo_8165_0.msg = "购买成功";
 /*  98 */       vo_8165_0.active = 0;
-/*  99 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/*  99 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 100 */       return;
 /*     */     }
 /* 102 */     if (barcode.equals("C0000004")) {
@@ -117,7 +117,7 @@
 /* 117 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 118 */       vo_8165_0.msg = "购买成功";
 /* 119 */       vo_8165_0.active = 0;
-/* 120 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 120 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 121 */       return;
 /*     */     }
 /* 123 */     if (barcode.equals("C0000005")) {
@@ -138,7 +138,7 @@
 /* 138 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 139 */       vo_8165_0.msg = "购买成功";
 /* 140 */       vo_8165_0.active = 0;
-/* 141 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 141 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 142 */       return;
 /*     */     }
 /* 144 */     if (barcode.equals("C0000006")) {
@@ -159,7 +159,7 @@
 /* 159 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 160 */       vo_8165_0.msg = "购买成功";
 /* 161 */       vo_8165_0.active = 0;
-/* 162 */       GameObjectChar.send(new M8165_0(), vo_8165_0);
+/* 162 */       GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 163 */       return;
 /*     */     }
 /*     */     

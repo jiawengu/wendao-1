@@ -2,12 +2,11 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import org.linlinjava.litemall.db.domain.Party;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-import org.linlinjava.litemall.gameserver.data.write.M8165_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.data.write.M_MSG_CREATE_PARTY_SUCC;
 import org.linlinjava.litemall.gameserver.data.write.M_MSG_PARTY_INFO;
@@ -26,7 +25,7 @@ public class CMD_CREATE_PARTY implements GameHandler {
         Vo_8165_0 vo_8165_0 = new Vo_8165_0();
         vo_8165_0.msg = err;
         vo_8165_0.active = 0;
-        GameObjectChar.send(new M8165_0(), vo_8165_0);
+        GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
     }
 
     @Override
