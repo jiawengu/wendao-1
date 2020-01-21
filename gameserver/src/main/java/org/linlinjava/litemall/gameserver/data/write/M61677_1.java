@@ -11,14 +11,36 @@ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class M61677_1  extends BaseWrite {
 
     @Override
     protected void writeO(ByteBuf writeBuf, Object paramObject) {
+        if(paramObject instanceof List){
+            //清空列表
+            List<Petbeibao> petbeibaos = (List)paramObject;
+            GameWriteTool.writeString(writeBuf, "");
+            GameWriteTool.writeInt(writeBuf, 0);
+            GameWriteTool.writeShort(writeBuf, petbeibaos.size());
+            for(Petbeibao petbeibao: petbeibaos){
+                GameWriteTool.writeByte(writeBuf, 0);
+                GameWriteTool.writeShort(writeBuf, petbeibao.no);
+            }
+            return ;
+        }
+        if(paramObject instanceof Integer){
+            //清空列表
+            Integer pos = (Integer)paramObject;
+            GameWriteTool.writeString(writeBuf, "");
+            GameWriteTool.writeInt(writeBuf, 0);
+            GameWriteTool.writeShort(writeBuf, 1);
+            GameWriteTool.writeByte(writeBuf, 0);
+            GameWriteTool.writeShort(writeBuf, pos);
+            return ;
+        }
         Vo_61677_1 vo = (Vo_61677_1)paramObject;
-
         GameWriteTool.writeString(writeBuf, vo.store_type);
         GameWriteTool.writeInt(writeBuf, vo.npcID);
         GameWriteTool.writeShort(writeBuf, vo.list.size());
