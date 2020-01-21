@@ -1973,46 +1973,21 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = gameObjectChar.chara.id;
-//                        fightObject.shengming = 9999999;
-//                        fightObject.max_shengming = 9999999;
-
-//                        victimObject.state=1;
-//                        victimObject.shengming = victimObject.max_shengming;
 
                         FightTeam friendsFightTeam = getFightTeam(fc, victimObject.fid);
-//                        friendsFightTeam.fightObjectList.remove(victimObject);
                         fc.doActionList.remove(victimObject);
 
                         friendsFightTeam.fightObjectList.add(fightObject);
-//                        fc.doActionList.add(victimObject);
-
-//                                gameObjectChar.sendOne(new MSG_UPDATE_PETS(), gameObjectChar.chara.pets);
-
-//                                Vo_64971_0 vo_64971_0 = new Vo_64971_0();
-//                                vo_64971_0.count = 1;
-//                                vo_64971_0.id = fightObject.id;
-//                                vo_64971_0.haveCalled = 1;
-//                                gameObjectChar.sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
-
 
                         notifyTeamFriendList(fc, Arrays.asList(fightObject));
                                 notifyTeamEnemyList(fc, Arrays.asList(fightObject));
 
-                    Vo_4163_0 vo_4163_0 = new Vo_4163_0();
-                    vo_4163_0.id = fightObject.id;
-                    vo_4163_0.pet_status = 1;
-                    gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
-//
-//                                notifyTeamEnemyList(fightContainer, friendsFightTeam.fightObjectList);
+                        Vo_4163_0 vo_4163_0 = new Vo_4163_0();
+                        vo_4163_0.id = fightObject.id;
+                        vo_4163_0.pet_status = 1;
+                        gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
 
-//                                friendsFightTeam = getFightTeamDM(fightContainer, fightObject.id);
-//                                notifyTeamFriendList(fightContainer, friendsFightTeam.fightObjectList);
-//                                notifyTeamEnemyList(fightContainer, friendsFightTeam.fightObjectList);
-
-//                                fightObject.randomTianShuSkill(fightContainer);
-
-
-                        System.out.println("掠阵");
+                        fightObject.randomTianShuSkill(fc);
                     }
                 }
             }
