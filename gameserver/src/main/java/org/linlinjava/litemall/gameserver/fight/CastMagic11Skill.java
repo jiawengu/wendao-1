@@ -17,6 +17,8 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
+import org.linlinjava.litemall.gameserver.util.RandomUtil;
 
 /**
  * 法攻技能
@@ -29,6 +31,7 @@ public class CastMagic11Skill implements FightSkill {
         List<FightResult> resultList = new ArrayList();
         int attaNum = jiNeng.range;
         FightObject attFightObject = FightManager.getFightObject(fightContainer, fightRequest.id);
+        FightObject affFightObject = FightManager.getFightObject(fightContainer, fightRequest.vid);
         List<FightObject> targetList = FightManager.findTarget(fightContainer, fightRequest, 1, attaNum);
         Vo_19959_0 vo_19959_0 = new Vo_19959_0();
         vo_19959_0.round = fightContainer.round;
@@ -59,9 +62,6 @@ public class CastMagic11Skill implements FightSkill {
 
         int hurt = 0;
         float jiabei = 1.0F;
-        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIANG_MO_ZHAN)) {
-            jiabei = 2F;
-        }
 
         if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer,null, TianShuSkillType.NU_JI)) {
             jiabei = 2.5F;
@@ -126,6 +126,38 @@ public class CastMagic11Skill implements FightSkill {
                 fightResult.point = -remove;
                 fightResult.effect_no = 0;
                 fightResult.damage_type = 2;
+                resultList.add(fightResult);
+            }
+        }
+
+        //修罗术
+        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIANG_MO_ZHAN)) {
+            int randomNum = RandomUtil.randomNotZeroInt(5);
+            GameUtil.showImg(fightContainer, fightRequest.id, "连击");
+            int xiuluoHurt = hurt;
+            for(int i=0;i<randomNum;++i){
+                xiuluoHurt = xiuluoHurt/2;
+                if(affFightObject.isDead() || xiuluoHurt<1){
+                   break;
+                }
+
+                vo_19945_0 = new Vo_19945_0();
+                vo_19945_0.id = fightRequest.vid;
+                vo_19945_0.hid = fightRequest.id;
+                vo_19945_0.para_ex = 0;
+                vo_19945_0.missed = 1;
+                vo_19945_0.para = 0;
+                vo_19945_0.damage_type = 1;
+                FightManager.send(fightContainer, new MSG_C_ACCEPT_HIT(), vo_19945_0);
+
+                xiuluoHurt = affFightObject.reduceShengming(xiuluoHurt, fabao, false);
+
+                FightResult fightResult = new FightResult();
+                fightResult.id = fightRequest.id;
+                fightResult.vid = fightRequest.vid;
+                fightResult.point = -hurt;
+                fightResult.effect_no = 0;
+                fightResult.damage_type = 1;
                 resultList.add(fightResult);
             }
         }

@@ -5,7 +5,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4163_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M4163_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_SET_CURRENT_PET;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
@@ -20,14 +20,23 @@
 /* 20 */     int pet_status = GameReadTool.readShort(buff);
 /*    */     
 /* 22 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
-/* 23 */     chara.chongwuchanzhanId = id;
-/* 24 */     if (pet_status == 0) {
-/* 25 */       chara.chongwuchanzhanId = 0;
-/*    */     }
+            if(0 == pet_status){
+                if(chara.chongwuchanzhanId == id){
+                    chara.chongwuchanzhanId = 0;
+                }
+                if(chara.petLueZhenId == id){
+                    chara.petLueZhenId = 0;
+                }
+            }else if(1 == pet_status){
+                chara.chongwuchanzhanId = id;
+            }else if(2 == pet_status){
+                chara.petLueZhenId = id;
+            }
+
 /* 27 */     Vo_4163_0 vo_4163_0 = new Vo_4163_0();
 /* 28 */     vo_4163_0.id = id;
-/* 29 */     vo_4163_0.b = pet_status;
-/* 30 */     GameObjectChar.send(new M4163_0(), vo_4163_0);
+/* 29 */     vo_4163_0.pet_status = pet_status;
+/* 30 */     GameObjectChar.send(new MSG_SET_CURRENT_PET(), vo_4163_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

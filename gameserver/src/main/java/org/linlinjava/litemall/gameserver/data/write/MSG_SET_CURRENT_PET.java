@@ -12,14 +12,14 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
 
 @Service
-public class M4163_0 extends BaseWrite {
-    public M4163_0() {
+public class MSG_SET_CURRENT_PET extends BaseWrite {
+    public MSG_SET_CURRENT_PET() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {
         Vo_4163_0 object1 = (Vo_4163_0)object;
         GameWriteTool.writeInt(writeBuf, object1.id);
-        GameWriteTool.writeShort(writeBuf, object1.b);
+        GameWriteTool.writeShort(writeBuf, object1.pet_status);
     }
 
     public int cmd() {

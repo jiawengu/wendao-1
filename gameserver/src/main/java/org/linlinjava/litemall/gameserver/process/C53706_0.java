@@ -32,8 +32,10 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /* 31 */     if (flag == 1) {
 /* 32 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 33 */         if (((Petbeibao)chara.pets.get(i)).no == no) {
-/* 34 */           ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).shape += 2000 * num;
-/* 35 */           GameUtil.removemunber(chara, "超级神兽丹", num);
+                /* 35 */           GameUtil.removemunber(chara, "超级神兽丹", num);
+                PetShuXing petShuXing = chara.pets.get(i).petShuXing.get(0);
+                petShuXing.intimacy += 2000 * num;
+                petShuXing.longevity += 5000 * num;
 /* 36 */           List list = new ArrayList();
 /* 37 */           list.add(chara.pets.get(i));
 /* 38 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);

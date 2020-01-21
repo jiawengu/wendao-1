@@ -113,6 +113,10 @@ public class FightObject {
      */
     public int state = 1;
     /**
+     * 是否触发了掠阵
+     */
+    public boolean isQuitCombat = false;
+    /**
      * 回合结束后复活
      */
     private boolean actionEndRevive = false;
@@ -1407,5 +1411,13 @@ public class FightObject {
      */
     public boolean isTTTPet(){
         return null!=tttXingjun;
+    }
+
+    /**
+     * 是否是宠物
+     * @return
+     */
+    public boolean isPet(){
+        return type == 2;
     }
 }
