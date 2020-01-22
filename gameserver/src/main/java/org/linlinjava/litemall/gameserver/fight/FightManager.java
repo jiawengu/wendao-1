@@ -1988,6 +1988,7 @@ public class FightManager {
                         gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
 
                         fightObject.randomTianShuSkill(fc);
+                        log.info(fightObject.str+"掠阵");
                     }
                 }
             }
