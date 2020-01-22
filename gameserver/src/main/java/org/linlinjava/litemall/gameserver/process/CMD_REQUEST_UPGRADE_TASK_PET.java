@@ -4,13 +4,17 @@
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45315_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M45315_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPGRADE_TASK_PET;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * 请求正在飞升的宠物
+ */
 /*    */ @Service
-/*    */ public class C45314_0 implements GameHandler
+/*    */ public class CMD_REQUEST_UPGRADE_TASK_PET implements GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
@@ -18,7 +22,7 @@
 /*    */     
 /* 19 */     Vo_45315_0 vo_45315_0 = new Vo_45315_0();
 /* 20 */     vo_45315_0.id = chara.chongwuchanzhanId;
-/* 21 */     GameObjectChar.send(new M45315_0(), vo_45315_0);
+/* 21 */     GameObjectChar.send(new MSG_UPGRADE_TASK_PET(), vo_45315_0);
 /*    */   }
 /*    */   
 /*    */ 

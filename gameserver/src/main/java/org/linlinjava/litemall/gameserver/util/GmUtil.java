@@ -46,6 +46,8 @@ public class GmUtil {
             result.put("level", this::level_handler);
             result.put("daohang", this::daohang_handler);
             result.put("qinmidu", this::qinmidu_handler);
+            result.put("coin", this::coin_handler);
+            result.put("exitbattle", this::exitbattle_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -78,13 +80,16 @@ public class GmUtil {
 
     public void ljy_handler(Chara chara, String[] cmds){
 //        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
-        FightContainer fightContainer = FightManager.getFightContainer(chara.id);
-        if(null!=fightContainer){
-            FightManager.doOver(fightContainer);
-            FightManager.nextRoundOrSendOver(fightContainer);
-        }
+//        FightContainer fightContainer = FightManager.getFightContainer(chara.id);
+//        if(null!=fightContainer){
+//            FightManager.doOver(fightContainer);
+//            FightManager.nextRoundOrSendOver(fightContainer);
+//        }
 
-
+        int coin = Integer.parseInt(cmds[1]);
+        chara.gold_coin += coin;
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
 
     /**
@@ -165,6 +170,31 @@ public class GmUtil {
                 GameObjectChar.send(new MSG_UPDATE_PETS(), Arrays.asList(petbeibao));
                 break;
             }
+        }
+    }
+
+    /**
+     * 添加银元宝：#gm coin 添加的银元宝数值
+     * @param chara
+     * @param cmds
+     */
+    public void coin_handler(Chara chara, String[] cmds){
+        int coin = Integer.parseInt(cmds[1]);
+        chara.gold_coin += coin;
+        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+    }
+
+    /**
+     * 退出战斗：#gm exitbattle
+     * @param chara
+     * @param cmds
+     */
+    public void exitbattle_handler(Chara chara, String[] cmds){
+        FightContainer fightContainer = FightManager.getFightContainer(chara.id);
+        if(null!=fightContainer){
+            FightManager.doOver(fightContainer);
+            FightManager.nextRoundOrSendOver(fightContainer);
         }
     }
 }

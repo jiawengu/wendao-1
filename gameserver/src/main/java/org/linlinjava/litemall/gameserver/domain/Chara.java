@@ -278,10 +278,17 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */ 
 /*     */   public int weapon_icon;
 /*     */   
-/*     */ 
-/*     */   public int gold_coin;
+/*     */
+    /**
+     * 银元宝
+     */
+    /*     */   public int gold_coin;
 /*     */   
-/*     */ 
+/*     */
+    /**
+     * 元宝
+     */
+
 /*     */   public int extra_life;
 /*     */   
 /*     */ 

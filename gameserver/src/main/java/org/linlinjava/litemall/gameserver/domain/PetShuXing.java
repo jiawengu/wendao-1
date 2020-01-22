@@ -128,10 +128,22 @@ public class PetShuXing {
      * 携带等级
      */
     public int attrib;
+    /**
+     * 点化灵气
+     */
     public int enchant_nimbus;
+    /**
+     * 最大点化灵气
+     */
     public int max_enchant_nimbus;
     public int card_type;
+    /**
+     * 羽化灵气
+     */
     public int eclosion_nimbus;
+    /**
+     * 最大羽化灵气
+     */
     public int max_eclosion_nimbus;
     public int status_all_resist_except_add;
     public int status_yanchuan_shenjiao = 0;

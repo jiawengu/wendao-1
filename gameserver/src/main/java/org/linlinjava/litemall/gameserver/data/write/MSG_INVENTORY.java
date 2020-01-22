@@ -15,7 +15,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsGaiZaoGongMing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsHuangSe;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
-/*     */ 
+/*     */
+
+/**
+ * 库存
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class MSG_INVENTORY extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*     */ {

@@ -1,15 +1,23 @@
 /*    */ package org.linlinjava.litemall.gameserver.data.write;
 /*    */ 
 /*    */ import io.netty.buffer.ByteBuf;
-/*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+/*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
+import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * 羽化操作结果通知
+ */
 /*    */ @Service
-/*    */ public class M53607_0
+/*    */ public class MSG_PET_ECLOSION_RESULT
 /*    */   extends BaseWrite
 /*    */ {
-/*    */   protected void writeO(ByteBuf writeBuf, Object object) {}
+/*    */   protected void writeO(ByteBuf writeBuf, Object object) {
+    int result = (int) object;
+            GameWriteTool.writeByte(writeBuf, result);//result
+}
 /*    */   
 /*    */   public int cmd()
 /*    */   {
