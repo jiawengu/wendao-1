@@ -79,7 +79,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                         /*     */           }
                     /*     */
                     /*  79 */           chara.balance -= coin;
-                    /*  80 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    /*  80 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     /*  81 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     /*     */
                     /*  83 */           GameUtil.removemunber(chara, (Goods)chara.backpack.get(i), 1);
@@ -115,7 +115,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                 /*     */       }
             if(chara.balance<coin) {return;}
             chara.balance -= coin;
-            /* 115 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+            /* 115 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
             /* 116 */       for (int i = 0; i < chara.pets.size(); i++) {
                 /* 117 */         if (((Petbeibao)chara.pets.get(i)).id == inventoryPos) {
                     /* 118 */           Petbeibao pet = (Petbeibao)chara.pets.get(i);

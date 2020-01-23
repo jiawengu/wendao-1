@@ -91,7 +91,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  86 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     
 /*  88 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
-/*  89 */     ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+/*  89 */     ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  90 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*     */     
 /*  92 */     Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);

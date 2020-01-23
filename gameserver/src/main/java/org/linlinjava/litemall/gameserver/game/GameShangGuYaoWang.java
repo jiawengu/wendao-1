@@ -4,7 +4,6 @@ import org.linlinjava.litemall.core.util.JSONUtils;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
@@ -335,7 +334,7 @@ public class GameShangGuYaoWang {
                 vo_20480_0.msg = ("你获得了#R" + Integer.valueOf(tempWuPin[1]).intValue() + "#n点" + "潜能");
                 vo_20480_0.time = 1562593376;
                 GameObjectChar.send(new M20480_0(), vo_20480_0, chara.id);
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
             }
         }
@@ -404,7 +403,7 @@ public class GameShangGuYaoWang {
                 vo_20480_0.msg = ("你获得了#R" + count + "#n点" + "潜能");
                 vo_20480_0.time = 1562593376;
                 GameObjectChar.send(new M20480_0(), vo_20480_0, chara.id);
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
             }
 //        }

@@ -52,7 +52,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  51 */           if (chara.extra_mana > 90000000) {
 /*  52 */             chara.extra_mana = 90000000;
 /*     */           }
-/*  54 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  54 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  55 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  56 */           GameUtil.removemunber(chara, "血池", 1);
 /*     */         }
@@ -61,7 +61,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  60 */           if (chara.extra_mana > 90000000) {
 /*  61 */             chara.extra_mana = 90000000;
 /*     */           }
-/*  63 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  63 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  64 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  65 */           GameUtil.removemunber(chara, "中级血池", 1);
 /*     */         }
@@ -71,7 +71,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  70 */           if (chara.extra_mana > 90000000) {
 /*  71 */             chara.extra_mana = 90000000;
 /*     */           }
-/*  73 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  73 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  74 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  75 */           GameUtil.removemunber(chara, "高级血池", 1);
 /*     */         }
@@ -80,7 +80,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  79 */           if (chara.have_coin_pwd > 90000000) {
 /*  80 */             chara.have_coin_pwd = 90000000;
 /*     */           }
-/*  82 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  82 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  83 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  84 */           GameUtil.removemunber(chara, "灵池", 1);
 /*     */         }
@@ -89,7 +89,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  88 */           if (chara.have_coin_pwd > 90000000) {
 /*  89 */             chara.have_coin_pwd = 90000000;
 /*     */           }
-/*  91 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  91 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  92 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  93 */           GameUtil.removemunber(chara, "中级灵池", 1);
 /*     */         }
@@ -98,7 +98,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  97 */           if (chara.have_coin_pwd > 90000000) {
 /*  98 */             chara.have_coin_pwd = 90000000;
 /*     */           }
-/* 100 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 100 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 101 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 102 */           GameUtil.removemunber(chara, "高级灵池", 1);
 /*     */         }
@@ -107,7 +107,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 106 */           if (chara.use_skill_d > 90000000) {
 /* 107 */             chara.use_skill_d = 90000000;
 /*     */           }
-/* 109 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 109 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 110 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 111 */           GameUtil.removemunber(chara, "驯兽诀", 1);
 /*     */         }
@@ -118,7 +118,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 117 */           if (chara.enable_double_points > 12000) {
 /* 118 */             chara.enable_double_points = 12000;
 /*     */           }
-/* 120 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 120 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 121 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 122 */           GameUtil.removemunber(chara, "超级仙风散", 1);
 /*     */           
@@ -133,7 +133,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 132 */           if (chara.enable_shenmu_points > 8000) {
 /* 133 */             chara.enable_shenmu_points = 8000;
 /*     */           }
-/* 135 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 135 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 136 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 137 */           GameUtil.removemunber(chara, "神木鼎", 1);
 /*     */           
@@ -148,7 +148,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 147 */           if (chara.extra_skill > 12000) {
 /* 148 */             chara.extra_skill = 12000;
 /*     */           }
-/* 150 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 150 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 151 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 152 */           GameUtil.removemunber(chara, "紫气鸿蒙", 1);
 /* 153 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
@@ -162,7 +162,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 161 */           if (chara.chushi_ex > 4000) {
 /* 162 */             chara.chushi_ex = 4000;
 /*     */           }
-/* 164 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 164 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 165 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 166 */           GameUtil.removemunber(chara, "如意刷到令", 1);
 /* 167 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
@@ -176,7 +176,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 175 */           if (chara.fetch_nice > 4000) {
 /* 176 */             chara.fetch_nice = 4000;
 /*     */           }
-/* 178 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 178 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 179 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 180 */           GameUtil.removemunber(chara, "急急如律令", 1);
 /* 181 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
@@ -190,7 +190,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 189 */           if (chara.shuadaochongfeng_san > 12000) {
 /* 190 */             chara.shuadaochongfeng_san = 12000;
 /*     */           }
-/* 192 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 192 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 193 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 194 */           GameUtil.removemunber(chara, "宠风散", 1);
 /* 195 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
@@ -205,7 +205,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /* 204 */           if (chara.use_skill_d < 0) {
 /* 205 */             chara.use_skill_d = 3000000;
 /*     */           }
-/* 207 */           ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 207 */           ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 208 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 209 */           GameUtil.removemunber(chara, "高级驯兽诀", 1);
 /*     */         }

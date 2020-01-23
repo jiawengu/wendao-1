@@ -256,7 +256,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Characters characters = GameObjectChar.getGameObjectChar().characters;
             GameData.that.baseCharactersService.updateName(characters, para1);
 
-            listVo_65527_0 = GameUtil.a65527(chara);
+            listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             vo81650 = new Vo_8165_0();
             vo81650.msg = "修改成功";
@@ -463,19 +463,19 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             i = Integer.valueOf(para1);
             if (i == 1) {
                 chara.extra_life += 100;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
             if (i == 2) {
                 chara.extra_life += 120;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
             if (i == 3) {
                 chara.extra_life += 150;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             }
 
@@ -497,21 +497,21 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             i = Integer.valueOf(para1);
             if (i == 1) {
                 chara.extra_life -= 3000;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 2592000;
             }
 
             if (i == 2) {
                 chara.extra_life -= 9000;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 7776000;
             }
 
             if (i == 3) {
                 chara.extra_life -= 36000;
-                listVo_65527_0 = GameUtil.a65527(chara);
+                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 chara.vipTimeShengYu += 31536000;
             }
@@ -656,7 +656,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 if (goods.pos == Integer.parseInt(para1)) {
                     GameUtil.removemunber(chara, goods, Integer.valueOf(para2));
                     chara.use_money_type += goods.goodsInfo.rebuild_level / 5 * Integer.valueOf(para2);
-                    listVo6552701 = GameUtil.a65527(chara);
+                    listVo6552701 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo6552701);
                     Vo_20481_0 vo204810 = new Vo_20481_0();
                     vo204810.msg = "你成功出售" + goods.goodsInfo.str + "#n获得代金券#n。";
@@ -684,7 +684,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         if (40022 == type) {
             chara.balance += chara.jishou_coin;
             chara.jishou_coin = 0;
-            ListVo_65527_0 vo655270 = GameUtil.a65527(chara);
+            ListVo_65527_0 vo655270 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), vo655270);
             list1 = GameData.that.baseSaleGoodService.findByOwnerUuid(chara.uuid);
             vo_49179_0 = GameUtil.a49179(list1, chara);
@@ -846,7 +846,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_40964_0.rightNow = 0;
                 GameObjectChar.send(new M40964_0(), vo_40964_0);
                 chara.gold_coin += 100;
-                ListVo_65527_0 listVo655270 = GameUtil.a65527(chara);
+                ListVo_65527_0 listVo655270 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo655270);
             } else {
                 StoreInfo storeInfo = GameData.that.baseStoreInfoService.findOneByName(name);
@@ -1045,7 +1045,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 chara.balance -= coin;
             }
 
-            listVo6552701 = GameUtil.a65527(chara);
+            listVo6552701 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo6552701);
             ShouHu shouHu = new ShouHu();
             shouHu.id = GameUtil.getCard(chara);

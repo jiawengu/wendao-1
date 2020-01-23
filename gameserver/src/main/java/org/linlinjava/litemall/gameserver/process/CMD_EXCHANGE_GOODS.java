@@ -82,7 +82,7 @@
 /*     */       
 /*  79 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /*  80 */       chara.balance -= price.intValue();
-/*  81 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  81 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  82 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  83 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  84 */       vo_40964_0.type = 2;

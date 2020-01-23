@@ -31,7 +31,7 @@
 /* 31 */     if (!haschenhao) {
 /* 32 */       chara.chenhao = "";
 /*    */     }
-/* 34 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 34 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 35 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */     
 /* 37 */     Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);

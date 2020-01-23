@@ -27,7 +27,7 @@
 /* 27 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*    */     
 /* 29 */     chara.balance -= amount;
-/* 30 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 30 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 31 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */     
 /* 33 */     int prize = prize();

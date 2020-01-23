@@ -230,8 +230,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int speed;
 /*     */   
 /*     */   public int mag_power;
-/*     */   
-/*     */   public int accurate;
+/*     */
+    /**
+     * 物伤
+     */
+    /*     */   public int accurate;
 /*     */   
 /*     */   public int def;
 /*     */   

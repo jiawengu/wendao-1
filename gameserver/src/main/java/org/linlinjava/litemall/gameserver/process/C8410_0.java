@@ -39,7 +39,7 @@
 /*  39 */     if (barcode.equals("C0000001")) {
 /*  40 */       chara.balance += 3000000;
 /*  41 */       chara.extra_life -= 300;
-/*  42 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  42 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  43 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  44 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  45 */       vo_40964_0.type = 3;
@@ -60,7 +60,7 @@
 /*  60 */     if (barcode.equals("C0000002")) {
 /*  61 */       chara.balance += 6000000;
 /*  62 */       chara.extra_life -= 600;
-/*  63 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  63 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  64 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  65 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  66 */       vo_40964_0.type = 3;
@@ -81,7 +81,7 @@
 /*  81 */     if (barcode.equals("C0000003")) {
 /*  82 */       chara.balance += 10000000;
 /*  83 */       chara.extra_life -= 1100;
-/*  84 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  84 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  85 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  86 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  87 */       vo_40964_0.type = 3;
@@ -102,7 +102,7 @@
 /* 102 */     if (barcode.equals("C0000004")) {
 /* 103 */       chara.balance += 30000000;
 /* 104 */       chara.extra_life -= 3300;
-/* 105 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 105 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 106 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 107 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 108 */       vo_40964_0.type = 3;
@@ -123,7 +123,7 @@
 /* 123 */     if (barcode.equals("C0000005")) {
 /* 124 */       chara.balance += 60000000;
 /* 125 */       chara.extra_life -= 7200;
-/* 126 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 126 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 127 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 128 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 129 */       vo_40964_0.type = 3;
@@ -144,7 +144,7 @@
 /* 144 */     if (barcode.equals("C0000006")) {
 /* 145 */       chara.balance += 100000000;
 /* 146 */       chara.extra_life -= 7200;
-/* 147 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 147 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 148 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 149 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 150 */       vo_40964_0.type = 3;
@@ -206,7 +206,7 @@
 /*     */     }
 /*     */     
 /*     */ 
-/* 209 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 209 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 210 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */   }
 /*     */   

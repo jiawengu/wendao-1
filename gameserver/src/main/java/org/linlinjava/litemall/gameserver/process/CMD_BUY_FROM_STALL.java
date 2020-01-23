@@ -112,7 +112,7 @@ import org.slf4j.LoggerFactory;
         /* 103 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
         /*     */
         /* 105 */     chara.balance -= price;
-        /* 106 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        /* 106 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         /* 107 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
         /*     */
         /* 109 */     GameData.that.saleGoodService.deleteById(saleGood.getId().intValue());

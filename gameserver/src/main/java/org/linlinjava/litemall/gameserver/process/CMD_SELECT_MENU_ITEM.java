@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -433,7 +432,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                 chara1.chongzhijifen += jifen;
 
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
 
                 GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
 
@@ -597,7 +596,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     /*  270 */
                     chara1.extra_life -= 500;
                     /*  271 */
-                    ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                    ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
                     /*  272 */
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     /*  273 */
@@ -794,13 +793,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                         /*  336 */
                         base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
                         /*  337 */
-                        int intimacy = 878 * petShuXing.skill / (petShuXing.intimacy > base_pet_dh ? petShuXing.intimacy / base_pet_dh : 1);
+                        int martial = 878 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
                         /*  338 */
-                        petShuXing.intimacy += intimacy;
+                        petShuXing.martial += martial;
                         /*  339 */
                         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         /*  340 */
-                        vo_20481_0.msg = ("宠物获得武学#R" + intimacy);
+                        vo_20481_0.msg = ("宠物获得武学#R" + martial);
                         /*  341 */
                         vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
                         /*  342 */
@@ -810,7 +809,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     /*      */
                 }
                 /*  345 */
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
                 /*  346 */
                 GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                 /*      */
@@ -2000,7 +1999,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /*  776 */
             chara1.use_money_type += (int) (chara1.level / 10 * 4374 * (1.0D + 0.1D * chara1.shimencishu));
             /*  777 */
-            ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+            ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
             /*  778 */
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
             /*      */
@@ -2177,7 +2176,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 GameUtil.weijianding(chara1);
                 /*      */
                 /*  868 */
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
                 /*  869 */
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 /*      */
@@ -2250,7 +2249,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 GameObjectChar.getGameObjectChar();
                 GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /*  905 */
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
                 /*  906 */
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 /*      */
@@ -2306,7 +2305,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                 /*      */
                 /*  936 */
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara1);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara1);
                 /*  937 */
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 /*      */
@@ -3084,7 +3083,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             dailyChallengeLogic.selectMenuItem(npc_id, menu_item);
 
             /* 1282 */
-            ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+            ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
             /* 1283 */
             GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
             /* 1284 */
@@ -3099,7 +3098,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
         }
         /*      */
         /* 1289 */
-        ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
         /* 1290 */
         GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
         /*      */

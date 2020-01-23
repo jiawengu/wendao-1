@@ -140,7 +140,7 @@ public interface FightSkill {
                     case 24:
                     case 25:
                         return new ZhangAiJin21Skill();
-                    case 31:
+                    case 31://天生神力
                     case 32:
                     case 33:
                     case 34:

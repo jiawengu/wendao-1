@@ -104,7 +104,7 @@
 /*     */       } else {
 /* 105 */         chara.use_money_type -= storeInfo.getRebuildLevel().intValue();
 /*     */       }
-/* 107 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 107 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 108 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */     }
 /* 110 */     if (shipper == 15907) {
@@ -129,7 +129,7 @@
 /*     */       } else {
 /* 130 */         chara.use_money_type -= storeInfo.getRebuildLevel().intValue();
 /*     */       }
-/* 132 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 132 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 133 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */     }
 /*     */   }

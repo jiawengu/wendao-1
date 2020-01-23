@@ -47,7 +47,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     
 /*  47 */     chara.texiao_icon = Integer.valueOf(packModification.getFasionType()).intValue();
 /*  48 */     chara.extra_life -= packModification.getGoodsPrice().intValue();
-/*  49 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  49 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  50 */     Goods goods = new Goods();
 /*  51 */     goods.goodsInfo.owner_id = 1;
 /*  52 */     goods.goodsInfo.value = 2097924;

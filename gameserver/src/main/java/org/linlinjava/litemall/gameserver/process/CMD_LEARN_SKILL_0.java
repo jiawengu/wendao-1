@@ -84,13 +84,13 @@
 /*     */         } else {
 /*  85 */           chara.use_money_type -= cash;
 /*     */         }
-/*  87 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  87 */         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  88 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       } else {
 /*  90 */         chara.cash -= cash;
 /*     */       }
 /*     */       
-/*  93 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+/*  93 */       ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  94 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*  95 */       List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);
 /*  96 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
@@ -142,12 +142,12 @@
 /*     */         } else {
 /* 143 */           chara.use_money_type -= cash;
 /*     */         }
-/* 145 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 145 */         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 146 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       } else {
 /* 148 */         chara.cash -= cash;
 /*     */       }
-/* 150 */       ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+/* 150 */       ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 151 */       GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /* 152 */       List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);
 /* 153 */       GameObjectChar.send(new MSG_UPDATE_SKILLS(), vo_32747_0List);
@@ -159,7 +159,7 @@
 /*     */     
 /*     */ 
 /*     */ 
-/* 162 */     ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+/* 162 */     ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 163 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
 /*     */   }
 /*     */   

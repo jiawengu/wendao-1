@@ -104,7 +104,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4099_0(), vo_4099_0);
 
 
-        org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 
         GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45388_0(), null);

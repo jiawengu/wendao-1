@@ -182,7 +182,7 @@ public class SaveCharaTimes {
                 for(j = 0; j < gameMap.sessionList.size(); ++j) {
                     chara = ((GameObjectChar)gameMap.sessionList.get(j)).chara;
                     chara.balance -= chara.level * 10000;
-                    ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectCharMng.sendOne(chara.id, new MSG_UPDATE(), listVo_65527_0);
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                     vo_20481_0.msg = "由于你在挑战元魔过程中取得了优异的成绩,因此获得了系统送出的" + chara.level * 10000 + "文钱的奖励。";
@@ -251,7 +251,7 @@ public class SaveCharaTimes {
                                 vo_20481_9.msg = "你获得了200000元宝的称谓。";
                                 vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_9);
-                                listVo_65527_0 = GameUtil.a65527(chara);
+                                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                             }
                         }
@@ -264,7 +264,7 @@ public class SaveCharaTimes {
                                 vo_20481_9.msg = "你获得了100000元宝的称谓。";
                                 vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_9);
-                                listVo_65527_0 = GameUtil.a65527(chara);
+                                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                             }
                         }
@@ -277,7 +277,7 @@ public class SaveCharaTimes {
                                 vo_20481_9.msg = "你获得了50000元宝的称谓。";
                                 vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_9);
-                                listVo_65527_0 = GameUtil.a65527(chara);
+                                listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                                 GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                             }
                         }
@@ -366,7 +366,7 @@ public class SaveCharaTimes {
                             vo_20481_9.msg = "你获得了200000元宝的称谓。";
                             vo_20481_9.time = (int)(System.currentTimeMillis() / 1000L);
                             GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_9);
-                            ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                            ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                             GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                             GameUtilRenWu.shidaohuicheng(chara);
                         }

@@ -77,8 +77,7 @@ public class FuzhuJin31Skill extends FightRoundSkill {
         FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);
 
         FuzhuJin31Skill that;
-        int gongjili;
-        for(Iterator var12 = targetList.iterator(); var12.hasNext(); that.buffObject.fashang_ext = that.buffObject.fashang * gongjili / 100) {
+        for(Iterator var12 = targetList.iterator(); var12.hasNext(); ) {
             FightObject fightObject = (FightObject)var12.next();
             vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fightContainer.round;
@@ -93,8 +92,9 @@ public class FuzhuJin31Skill extends FightRoundSkill {
             fightObject.addBuffState(fightContainer, this.getStateType());
             that = new FuzhuJin31Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
-            gongjili = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
+            int gongjili = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
             that.buffObject.accurate_ext = that.buffObject.accurate * gongjili / 100;
+            that.buffObject.fashang_ext = that.buffObject.fashang * gongjili / 100;
         }
 
         return null;

@@ -2940,7 +2940,7 @@ public class FightManager {
                                         vo_20481_0.msg = "你获得了50000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                                        listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
+                                        listVo_65527_0 = GameUtil.MSG_UPDATE(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 
@@ -2957,7 +2957,7 @@ public class FightManager {
                                         vo_20481_0.msg = "你获得了100000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                                        listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
+                                        listVo_65527_0 = GameUtil.MSG_UPDATE(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 

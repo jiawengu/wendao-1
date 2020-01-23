@@ -46,7 +46,7 @@
 /*  42 */     if (flag == 3) {
 /*  43 */       int coin = 5000000;
 /*  44 */       chara.balance -= coin;
-/*  45 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  45 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  46 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*  48 */       GameUtil.removemunber(chara, "精怪诱饵", 1);
@@ -124,7 +124,7 @@
 /* 120 */     if (flag == 4) {
 /* 121 */       int coin = 50000000;
 /* 122 */       chara.balance -= coin;
-/* 123 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 123 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 124 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 125 */       String[] strings = callMounts(false);
 /* 126 */       GameUtil.removemunber(chara, "精怪诱饵", 10);

@@ -33,7 +33,7 @@
 /* 33 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*    */     
 /* 35 */     chara.balance -= 20000;
-/* 36 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 36 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*    */     
 /* 38 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 39 */     vo_20481_0.msg = "改价成功";

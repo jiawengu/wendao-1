@@ -1,10 +1,8 @@
 package org.linlinjava.litemall.gameserver.util;
 
-import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.domain.StoreInfo;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -16,7 +14,6 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 
-import javax.sql.rowset.CachedRowSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -88,7 +85,7 @@ public class GmUtil {
 
         int coin = Integer.parseInt(cmds[1]);
         chara.gold_coin += coin;
-        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
 
@@ -100,7 +97,7 @@ public class GmUtil {
     public void daohang_handler(Chara chara, String[] cmds){
         int daohang = Integer.parseInt(cmds[1]);
         GameUtil.adddaohang(GameObjectChar.getGameObjectChar().chara, daohang);
-        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
 
@@ -150,7 +147,7 @@ public class GmUtil {
     public void level_handler(Chara chara, String[] cmds){
         int level = Integer.parseInt(cmds[1]);
         chara.level = level;
-        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
     }
 
@@ -181,7 +178,7 @@ public class GmUtil {
     public void coin_handler(Chara chara, String[] cmds){
         int coin = Integer.parseInt(cmds[1]);
         chara.gold_coin += coin;
-        ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
 

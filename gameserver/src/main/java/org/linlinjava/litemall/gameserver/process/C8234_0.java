@@ -50,7 +50,7 @@
 /*    */ 
 /* 51 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*    */     
-/* 53 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 53 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 54 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */   }
 /*    */   

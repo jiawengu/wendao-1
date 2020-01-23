@@ -222,7 +222,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 
                     GameObjectChar.send(new MSG_UPDATE_PETS(), list);
                     GameObjectChar.send(new MSG_PET_ECLOSION_RESULT(), 1);
-                    ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+                    ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
                     if (split.length == 1 && split[0] == "") {
                         return;

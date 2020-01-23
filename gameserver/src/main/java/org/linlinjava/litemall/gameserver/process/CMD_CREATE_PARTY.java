@@ -51,7 +51,7 @@ public class CMD_CREATE_PARTY implements GameHandler {
         chara.partyName = name;
         GameObjectChar.send(new M_MSG_CREATE_PARTY_SUCC(), name);
         GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
-        ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+        ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
     }
 

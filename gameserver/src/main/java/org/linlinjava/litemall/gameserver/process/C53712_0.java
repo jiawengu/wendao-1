@@ -31,7 +31,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     
 /*  31 */     PackModification packModification = GameData.that.basePackModificationService.findOneByAlias(name);
 /*  32 */     chara.extra_life -= packModification.getGoodsPrice().intValue();
-/*  33 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  33 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*     */     
 /*     */ 
 /*  36 */     for (int i = 0; i < chara.backpack.size(); i++) {
