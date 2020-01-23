@@ -14,7 +14,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class M61677_1  extends BaseWrite {
+/**
+ * 仓库
+ */
+public class MSG_STORE extends BaseWrite {
 
     @Override
     protected void writeO(ByteBuf writeBuf, Object paramObject) {

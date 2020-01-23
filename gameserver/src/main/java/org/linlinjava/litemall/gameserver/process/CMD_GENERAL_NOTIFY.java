@@ -290,7 +290,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 }
             }
 
-            GameObjectChar.send(new M49153_0(), vo_49153_0);
+            GameObjectChar.send(new MSG_LOOK_PLAYER_EQUIP(), vo_49153_0);
         }
 
         if (32 == type) {
@@ -592,7 +592,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
                     list = new ArrayList();
                     list.add(chara.listshouhu.get(i));
-                    GameObjectChar.send(new M12016_0(), list);
+                    GameObjectChar.send(new MSG_GUARDS_REFRESH(), list);
                 }
 
                 if (((ShouHu)chara.listshouhu.get(i)).id == Integer.parseInt(para1)) {
@@ -611,11 +611,11 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
                     list = new ArrayList();
                     list.add(chara.listshouhu.get(i));
-                    GameObjectChar.send(new M12016_0(), list);
+                    GameObjectChar.send(new MSG_GUARDS_REFRESH(), list);
                 }
             }
 
-            GameObjectChar.send(new M12016_0(), chara.listshouhu);
+            GameObjectChar.send(new MSG_GUARDS_REFRESH(), chara.listshouhu);
             List<Vo_45074_0> arrayList = new ArrayList();
 
             for(coin = 0; coin < chara.listshouhu.size(); ++coin) {
@@ -644,7 +644,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     ((ShouHuShuXing)((ShouHu)chara.listshouhu.get(i)).listShouHuShuXing.get(0)).max_degree = Integer.parseInt(para2);
                     list = new ArrayList();
                     list.add(chara.listshouhu.get(i));
-                    GameObjectChar.send(new M12016_0(), list);
+                    GameObjectChar.send(new MSG_GUARDS_REFRESH(), list);
                 }
             }
         }
@@ -675,7 +675,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_61677_1 vo_61677_1 = new Vo_61677_1();
             vo_61677_1.store_type = "chongwu";
             vo_61677_1.list = chara.chongwucangku;
-            GameObjectChar.send(new M61677_1(), vo_61677_1);
+            GameObjectChar.send(new MSG_STORE(), vo_61677_1);
         }
 
         Vo_49179_0 vo_49179_0;
@@ -1085,7 +1085,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             chara.listshouhu.add(shouHu);
             List arrayList = new ArrayList();
             arrayList.add(shouHu);
-            GameObjectChar.send(new M12016_0(), arrayList);
+            GameObjectChar.send(new MSG_GUARDS_REFRESH(), arrayList);
             Vo_20481_0 vo2048101 = new Vo_20481_0();
             vo2048101.msg = "#n召唤守护#Y" + para1 + "#n";
             vo2048101.time = 1562987118;
@@ -1139,7 +1139,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_45128_0.mana = ints[3];
             vo_45128_0.parry = ints[4];
             vo_45128_0.wiz = ints[5];
-            GameObjectChar.send(new M45128_0(), vo_45128_0);
+            GameObjectChar.send(new MSG_BASIC_GUARD_ATTRI(), vo_45128_0);
         }
 
         if (30023 == type) {
@@ -1152,7 +1152,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             List linkedList = new LinkedList();
             linkedList.add(chara.id);
             linkedList.add(Integer.parseInt(para1));
-            GameObjectChar.send(new M65527_1(), linkedList);
+            GameObjectChar.send(new MSG_UPDATE_1(), linkedList);
         }
 
         if (type == 40008) {

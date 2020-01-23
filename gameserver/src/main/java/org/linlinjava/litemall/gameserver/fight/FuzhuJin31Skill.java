@@ -14,7 +14,7 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
-import org.linlinjava.litemall.gameserver.data.write.M64991_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_UPDATE_IMPROVEMENT;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
@@ -71,7 +71,7 @@ public class FuzhuJin31Skill extends FightRoundSkill {
         ZbAttribute zbAttribute = new ZbAttribute();
         zbAttribute.id = fightRequest.vid;
         zbAttribute.accurate = 2600;
-        FightManager.send(fightContainer, new M64991_0(), zbAttribute);
+        FightManager.send(fightContainer, new MSG_C_UPDATE_IMPROVEMENT(), zbAttribute);
         Vo_7655_0 vo_7655_0 = new Vo_7655_0();
         vo_7655_0.id = 0;
         FightManager.send(fightContainer, new MSG_C_END_ACTION(), vo_7655_0);

@@ -22,7 +22,7 @@
 /* 22 */     int money = GameReadTool.readInt(buff);
 /*    */     
 /* 24 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
-/* 25 */     chara.gender -= money;
+/* 25 */     chara.cash -= money;
 /* 26 */     if (chara.balance + money > 2000000000) {
 /* 27 */       chara.balance = 2000000000;
 /*    */     } else {

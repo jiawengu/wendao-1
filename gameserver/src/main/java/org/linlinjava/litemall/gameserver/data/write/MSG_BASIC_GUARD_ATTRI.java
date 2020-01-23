@@ -13,7 +13,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M45128_0 extends BaseWrite
+/*    */ public class MSG_BASIC_GUARD_ATTRI extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

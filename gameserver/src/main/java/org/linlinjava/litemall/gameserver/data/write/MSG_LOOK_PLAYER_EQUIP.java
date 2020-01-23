@@ -14,9 +14,13 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsGaiZao;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsGaiZaoGongMing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsHuangSe;
-/*     */ 
+/*     */
+
+/**
+ * 查看装备
+ */
 /*     */ @org.springframework.stereotype.Service
-/*     */ public class M49153_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*     */ public class MSG_LOOK_PLAYER_EQUIP extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*     */ {
 /*     */   protected void writeO(io.netty.buffer.ByteBuf writeBuf, Object object)
 /*     */   {

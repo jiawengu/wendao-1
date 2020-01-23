@@ -200,7 +200,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 
 
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12016_0(), chara.listshouhu);
+        GameObjectChar.send(new MSG_GUARDS_REFRESH(), chara.listshouhu);
 
         for (int i = 0; i < chara.listshouhu.size(); i++) {
             ShouHu shouHu = (ShouHu) chara.listshouhu.get(i);

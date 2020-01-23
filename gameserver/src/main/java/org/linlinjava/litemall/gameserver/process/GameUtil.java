@@ -14,6 +14,7 @@ import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.game.*;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ import java.util.Random;
             /*   57 */       shouHuShuXing.salary = 0;
             /*   58 */       List list = new ArrayList();
             /*   59 */       list.add(shouHu);
-            /*   60 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12016_0(), list);
+            /*   60 */       GameObjectChar.send(new MSG_GUARDS_REFRESH(), list);
             /*   61 */       dujineng(2, shouHuShuXing.metal, shouHuShuXing.skill, true, shouHu.id, chara);
             /*      */     }
         /*      */   }
@@ -1604,7 +1605,7 @@ import java.util.Random;
             /* 1414 */       vo_4121_0List.add(vo_4121_0);
             /*      */     }
         /* 1416 */     for (org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0 vo41210 : charaList) {
-            /* 1417 */       GameObjectCharMng.getGameObjectChar(vo41210.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4121_0(), vo_4121_0List);
+            /* 1417 */       GameObjectCharMng.getGameObjectChar(vo41210.id).sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
             /*      */     }
         /*      */   }
     /*      */
@@ -1646,7 +1647,7 @@ import java.util.Random;
             /*      */     }
         /* 1457 */     for (Chara chara : charaList) {
             /* 1458 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M45074_0(), list);
-            /* 1459 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), vo_4119_0List);
+            /* 1459 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE_TEAM_LIST(), vo_4119_0List);
             /*      */     }
         /*      */   }
     /*      */
@@ -2905,13 +2906,13 @@ import java.util.Random;
         /* 2655 */     vo_65527_0.vo_65527_0.dex = chara.dex;
         /* 2656 */     vo_65527_0.vo_65527_0.speed = chara.speed;
         /* 2657 */     vo_65527_0.vo_65527_0.parry = chara.parry;
-        /* 2658 */     vo_65527_0.vo_65527_0.attrib_point = 0;
-        /* 2659 */     vo_65527_0.vo_65527_0.metal = chara.menpai;
-        /* 2660 */     vo_65527_0.vo_65527_0.wood = chara.wood;
-        /* 2661 */     vo_65527_0.vo_65527_0.water = chara.water;
-        /* 2662 */     vo_65527_0.vo_65527_0.fire = chara.fire;
-        /* 2663 */     vo_65527_0.vo_65527_0.earth = chara.earth;
-        /* 2664 */     vo_65527_0.vo_65527_0.resist_metal = chara.resist_metal;
+        /* 2658 */     vo_65527_0.vo_65527_0.attrib_point = 0;//属性点
+        /* 2659 */     vo_65527_0.vo_65527_0.metal = 0;//金
+        /* 2660 */     vo_65527_0.vo_65527_0.wood = chara.wood;//木
+        /* 2661 */     vo_65527_0.vo_65527_0.water = chara.water;//水
+        /* 2662 */     vo_65527_0.vo_65527_0.fire = chara.fire;//火
+        /* 2663 */     vo_65527_0.vo_65527_0.earth = chara.earth;//土
+        /* 2664 */     vo_65527_0.vo_65527_0.resist_metal = chara.resist_metal;//抗金
         /* 2665 */     vo_65527_0.vo_65527_0.resist_wood = 0;
         /* 2666 */     vo_65527_0.vo_65527_0.resist_water = 0;
         /* 2667 */     vo_65527_0.vo_65527_0.resist_fire = 0;
@@ -2920,7 +2921,7 @@ import java.util.Random;
         /* 2670 */     vo_65527_0.vo_65527_0.polar_point = chara.polar_point;
         /* 2671 */     vo_65527_0.vo_65527_0.stamina = chara.stamina;
         /* 2672 */     vo_65527_0.vo_65527_0.max_stamina = 1000;
-        /* 2673 */     vo_65527_0.vo_65527_0.tao = 105;
+        /* 2673 */     vo_65527_0.vo_65527_0.tao = 105;//道
         /* 2674 */     vo_65527_0.vo_65527_0.friend = chara.friend;
         /* 2675 */     vo_65527_0.vo_65527_0.owner_name = chara.owner_name;
         /* 2676 */     vo_65527_0.vo_65527_0.mon_tao_ex = 0;
@@ -2932,21 +2933,23 @@ import java.util.Random;
         /* 2682 */     vo_65527_0.vo_65527_0.pot = chara.pot;
         /* 2683 */     vo_65527_0.vo_65527_0.cash = chara.cash;
         /* 2684 */     vo_65527_0.vo_65527_0.balance = chara.balance;
-        /* 2685 */     vo_65527_0.vo_65527_0.gender = chara.gender;
+        /* 2685 */     vo_65527_0.vo_65527_0.gender = chara.sex;
         /* 2686 */     vo_65527_0.vo_65527_0.max_balance = 2000000000;
         /* 2687 */     vo_65527_0.vo_65527_0.ignore_resist_metal = 2000000000;
         /* 2688 */     vo_65527_0.vo_65527_0.master = chara.sex;
-        /* 2689 */     vo_65527_0.vo_65527_0.level = "";
-        /* 2690 */     vo_65527_0.vo_65527_0.skill = chara.level;
+        /* 2689 */     vo_65527_0.vo_65527_0.level = chara.level;
+
+
+        /* 2690 */     vo_65527_0.vo_65527_0.skill = chara.use_skill_d;
 //        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2692 */     vo_65527_0.vo_65527_0.status_daofa_wubian = "";
         /* 2693 */     vo_65527_0.vo_65527_0.nick = 0;
         /* 2694 */     vo_65527_0.vo_65527_0.family_title = "";
-        /* 2695 */     vo_65527_0.vo_65527_0.title = "";
-        /* 2696 */     vo_65527_0.vo_65527_0.nice = chara.chenhao;
+        /* 2695 */     vo_65527_0.vo_65527_0.title = chara.chenhao;
+        /* 2696 */     vo_65527_0.vo_65527_0.nice = 0;
         /* 2697 */     vo_65527_0.vo_65527_0.reputation = 0;
         /* 2698 */     vo_65527_0.vo_65527_0.couple = 0;
-        /* 2699 */     vo_65527_0.vo_65527_0.icon = "";
+        /* 2699 */     vo_65527_0.vo_65527_0.icon = ""+chara.waiguan;
         /* 2700 */     vo_65527_0.vo_65527_0.type = chara.waiguan;
         /* 2701 */     vo_65527_0.vo_65527_0.resist_poison = chara.resist_poison;
         /*      */
@@ -3283,7 +3286,7 @@ import java.util.Random;
         /* 3023 */     vo_61661_0.level = chara.level;
         /*      */
         /* 3025 */     vo_61661_0.title = chara.chenhao;
-        /* 3026 */     vo_61661_0.family = chara.chenhao;
+        /* 3026 */     vo_61661_0.family = chara.partyName;
         /* 3027 */     vo_61661_0.partyname = chara.partyName;
         /* 3028 */     vo_61661_0.status = 0;
         /* 3029 */     vo_61661_0.special_icon = chara.special_icon;
@@ -4862,6 +4865,31 @@ import java.util.Random;
         MSGPLAYSCENARIODVO.task_type = npcDialogue.getTaskType();
         if(chara.jubenAllTeam) GameObjectChar.sendduiwu(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO, chara.id);
         else GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);
+    }
+
+    public static Vo_65017_0 vo_65017_0(FightObject fightObject){
+        Vo_65017_0 vo_65017_0 = new Vo_65017_0();
+        vo_65017_0.id = fightObject.fid;
+        vo_65017_0.leader = fightObject.leader;
+        vo_65017_0.weapon_icon = 0;
+        vo_65017_0.pos = fightObject.pos;
+        vo_65017_0.rank = 0;
+        vo_65017_0.vip_type = 0;
+        vo_65017_0.str = fightObject.str;
+        vo_65017_0.type = fightObject.org_icon;
+        vo_65017_0.durability = 2;
+        vo_65017_0.req_level = 0;
+        vo_65017_0.upgrade_level = 0;
+        vo_65017_0.upgrade_type = 0;
+        vo_65017_0.dex = fightObject.max_mofa;
+        vo_65017_0.max_mana = fightObject.max_mofa;
+        vo_65017_0.max_life = fightObject.max_shengming;
+        vo_65017_0.def = fightObject.fangyu;
+        vo_65017_0.org_icon = fightObject.org_icon;
+        vo_65017_0.suit_icon = fightObject.suit_icon;
+        vo_65017_0.suit_light_effect = fightObject.suit_light_effect;
+        vo_65017_0.special_icon = 0;
+        return vo_65017_0;
     }
 
     /**

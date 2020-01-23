@@ -255,8 +255,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int have_coin_pwd;
 /*     */   
 /*     */   public int use_skill_d;
-/*     */   
-/*     */   public int resist_metal;
+/*     */
+    /**
+     * 抗金
+     */
+    /*     */   public int resist_metal;
 /*     */   
 /*     */   public int wood;
 /*     */   
@@ -294,8 +297,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 
 /*     */   public int extra_life;
 /*     */   
-/*     */ 
-/*     */   public int balance;
+/*     */
+    /**
+     * 余额
+     */
+    /*     */   public int balance;
 /*     */   
 /*     */ 
 /*     */   public int jishou_coin;
@@ -310,8 +316,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      */
     /*     */   public int petLueZhenId;
 /*     */
-/*     */ 
-/*     */   public int cash;
+/*     */
+    /**
+     * 现金
+     */
+    /*     */   public int cash;
 /*     */   
 /*     */ 
 /*     */   public long uptime;
@@ -327,9 +336,8 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   
 /* 305 */   public int isCanSgin = 1;
 /*     */   
-/*     */ 
-/*     */   public int gender;
-/*     */   
+/*     */
+/*     */
 /* 310 */   public int canzhanshouhunumber = 0;
 /*     */   
 /*     */ 

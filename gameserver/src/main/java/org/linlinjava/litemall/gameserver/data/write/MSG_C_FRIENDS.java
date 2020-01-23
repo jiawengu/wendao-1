@@ -25,7 +25,7 @@
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
 /* 22 */     List<Vo_65017_0> obj = (List)object;
-/* 23 */     GameWriteTool.writeByte(writeBuf, Integer.valueOf(obj.size()));
+/* 23 */     GameWriteTool.writeByte(writeBuf, Integer.valueOf(obj.size()));//count
 /* 24 */     for (int i = 0; i < obj.size(); i++) {
 /* 25 */       Vo_65017_0 object1 = (Vo_65017_0)obj.get(i);
 /*    */       

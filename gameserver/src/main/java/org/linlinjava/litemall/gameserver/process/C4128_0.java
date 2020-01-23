@@ -8,10 +8,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TEAM_COMMANDER_GID;
-import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*    */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
@@ -50,7 +48,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 46 */     list.remove(chararemove);
 /* 47 */     GameUtil.MSG_UPDATE_TEAM_LIST(list);
 /* 48 */     List<Vo_4119_0> object1 = new java.util.ArrayList();
-/* 49 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+/* 49 */     GameObjectChar.send(new MSG_UPDATE_TEAM_LIST(), object1);
 /*    */     
 /* 51 */     for (int i = 0; i < GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan.size(); i++) {
 /* 52 */       if (chara.id == ((Vo_4121_0)GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan.get(i)).id) {

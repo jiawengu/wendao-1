@@ -8,7 +8,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53411_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M53411_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_4;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -31,7 +32,7 @@
 /*  31 */     List list = new LinkedList();
 /*  32 */     list.add(Integer.valueOf(petId));
 /*  33 */     list.add(Integer.valueOf(isHide));
-/*  34 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65527_4(), list);
+/*  34 */     GameObjectChar.send(new MSG_UPDATE_4(), list);
 /*     */     
 /*  36 */     if (isHide == 1) {
 /*  37 */       chara.zuowaiguan = 0;

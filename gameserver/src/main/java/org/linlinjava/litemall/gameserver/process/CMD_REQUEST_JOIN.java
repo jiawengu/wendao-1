@@ -229,7 +229,7 @@ import java.util.List;
                         item.bf_list.add(Vo_BuildField.int32(31, chara.level)); //level
                         item.bf_list.add(Vo_BuildField.int32(44, chara.polar_point)); //polar
                         item.bf_list.add(Vo_BuildField.int32(20, 0)); //tao
-                        item.bf_list.add(Vo_BuildField.int32(29, chara.gender)); //gender
+                        item.bf_list.add(Vo_BuildField.int32(29, chara.sex)); //gender
                         vo.list.add(item);
                         c.sendOne(new M_MSG_DIALOG(), vo);
                     }

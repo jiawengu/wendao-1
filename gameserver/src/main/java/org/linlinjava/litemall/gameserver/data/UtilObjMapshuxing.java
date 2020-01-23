@@ -97,7 +97,7 @@
 /*  97 */     objectObjectHashMap.put("online_time", Long.valueOf(obj1.online_time));
 /*  98 */     objectObjectHashMap.put("signDays", Integer.valueOf(obj1.signDays));
 /*  99 */     objectObjectHashMap.put("isCanSgin", Integer.valueOf(obj1.isCanSgin));
-/* 100 */     objectObjectHashMap.put("gender", Integer.valueOf(obj1.gender));
+/* 100 */     objectObjectHashMap.put("gender", Integer.valueOf(obj1.sex));
 /* 101 */     objectObjectHashMap.put("canzhanshouhunumber", Integer.valueOf(obj1.canzhanshouhunumber));
 /* 102 */     objectObjectHashMap.put("zuoqiwaiguan", Integer.valueOf(obj1.zuoqiwaiguan));
 /* 103 */     objectObjectHashMap.put("zuoqiId", Integer.valueOf(obj1.zuoqiId));
@@ -140,10 +140,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> Duiyuan(Object obj)
+/*     */   public static Map<Object, Object> Duiyuan(Duiyuan obj1)
 /*     */   {
 /* 145 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 146 */     Duiyuan obj1 = (Duiyuan)obj;
 /* 147 */     objectObjectHashMap.put("org_icon", Integer.valueOf(obj1.org_icon));
 /* 148 */     objectObjectHashMap.put("iid_str", obj1.iid_str);
 /* 149 */     objectObjectHashMap.put("skill", Integer.valueOf(obj1.skill));
@@ -231,10 +230,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsFenSe(Object obj)
+/*     */   public static Map<Object, Object> GoodsFenSe(GoodsFenSe obj1)
 /*     */   {
 /* 236 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 237 */     GoodsFenSe obj1 = (GoodsFenSe)obj;
 /* 238 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 239 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 240 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
@@ -279,10 +277,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsGaiZao(Object obj)
+/*     */   public static Map<Object, Object> GoodsGaiZao(GoodsGaiZao obj1)
 /*     */   {
 /* 283 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 284 */     GoodsGaiZao obj1 = (GoodsGaiZao)obj;
 /* 285 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 286 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 287 */     objectObjectHashMap.put("accurate", Integer.valueOf(obj1.accurate));
@@ -343,10 +340,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsGaiZaoGongMingChengGong(Object obj)
+/*     */   public static Map<Object, Object> GoodsGaiZaoGongMingChengGong(GoodsGaiZaoGongMingChengGong obj1)
 /*     */   {
 /* 347 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 348 */     GoodsGaiZaoGongMingChengGong obj1 = (GoodsGaiZaoGongMingChengGong)obj;
 /* 349 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 350 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 351 */     objectObjectHashMap.put("color", Integer.valueOf(obj1.color));
@@ -393,10 +389,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsHuangSe(Object obj)
+/*     */   public static Map<Object, Object> GoodsHuangSe(GoodsHuangSe obj1)
 /*     */   {
 /* 397 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 398 */     GoodsHuangSe obj1 = (GoodsHuangSe)obj;
 /* 399 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 400 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 401 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
@@ -442,10 +437,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsInfo(Object obj)
+/*     */   public static Map<Object, Object> GoodsInfo(GoodsInfo obj1)
 /*     */   {
 /* 444 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 445 */     GoodsInfo obj1 = (GoodsInfo)obj;
 /* 446 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 447 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 448 */     objectObjectHashMap.put("value", Integer.valueOf(obj1.value));
@@ -497,10 +491,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsLanSe(Object obj)
+/*     */   public static Map<Object, Object> GoodsLanSe(GoodsLanSe obj1)
 /*     */   {
 /* 498 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 499 */     GoodsLanSe obj1 = (GoodsLanSe)obj;
 /* 500 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 501 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 502 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
@@ -610,10 +603,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> GoodsLvSeGongMing(Object obj)
+/*     */   public static Map<Object, Object> GoodsLvSeGongMing(GoodsLvSeGongMing obj1)
 /*     */   {
 /* 611 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 612 */     GoodsLvSeGongMing obj1 = (GoodsLvSeGongMing)obj;
 /* 613 */     objectObjectHashMap.put("groupNo", Integer.valueOf(obj1.groupNo));
 /* 614 */     objectObjectHashMap.put("groupType", Integer.valueOf(obj1.groupType));
 /* 615 */     objectObjectHashMap.put("mana", Integer.valueOf(obj1.mana));
@@ -675,10 +667,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> PetShuXing(Object obj)
+/*     */   public static Map<Object, Object> PetShuXing(PetShuXing obj1)
 /*     */   {
 /* 676 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 677 */     PetShuXing obj1 = (PetShuXing)obj;
 /* 678 */     objectObjectHashMap.put("no", Integer.valueOf(obj1.no));
 /* 679 */     objectObjectHashMap.put("type1", Integer.valueOf(obj1.type1));
 /* 680 */     objectObjectHashMap.put("str", obj1.str);
@@ -822,10 +813,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> ShouHuShuXing(Object obj)
+/*     */   public static Map<Object, Object> ShouHuShuXing(ShouHuShuXing obj1)
 /*     */   {
 /* 823 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 824 */     ShouHuShuXing obj1 = (ShouHuShuXing)obj;
 /* 825 */     objectObjectHashMap.put("no", Integer.valueOf(obj1.no));
 /* 826 */     objectObjectHashMap.put("type1", Integer.valueOf(obj1.type1));
 /* 827 */     objectObjectHashMap.put("str", obj1.str);
@@ -868,10 +858,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static Map<Object, Object> ZbAttribute(Object obj)
+/*     */   public static Map<Object, Object> ZbAttribute(ZbAttribute obj1)
 /*     */   {
 /* 869 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 870 */     ZbAttribute obj1 = (ZbAttribute)obj;
 /* 871 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /* 872 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
 /* 873 */     objectObjectHashMap.put("mag_power", Integer.valueOf(obj1.mag_power));

@@ -45,15 +45,24 @@
 /*     */   public int max_balance;
 /*     */   public int ignore_resist_metal;
 /*     */   public int master;
-/*  48 */   public String level = "";
+
+/*  48 */   public int level;
+
+
 /*     */   public int skill;
 /*  50 */   public int party_contrib;
 /*  51 */   public String status_daofa_wubian = "";
 /*     */   public int nick;
 /*  53 */   public String family_title = "";
 /*  54 */   public String title = "";
-/*  55 */   public String nice = "";
-/*     */   public int reputation;
+    /**
+     * 好心值
+     */
+    /*  55 */   public int nice;
+    /**
+     * 声望
+     */
+    /*     */   public int reputation;
 /*     */   public int couple;
 /*  58 */   public String icon = "";
 /*     */   

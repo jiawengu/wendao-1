@@ -1,16 +1,16 @@
 /*     */ package org.linlinjava.litemall.gameserver.data;
 /*     */ 
 /*     */ import java.util.HashMap;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65017_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65527_0;
-/*     */ 
+/*     */ import org.linlinjava.litemall.gameserver.data.vo.*;
+/*     */
+/*     */
+
+/*     */
 /*     */ public class UtilObjMap
 /*     */ {
-/*     */   public static java.util.Map<Object, Object> Vo_16383_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_16383_0(Vo_16383_0 obj1)
 /*     */   {
 /*  12 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/*  13 */     org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0 obj1 = (org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0)obj;
 /*  14 */     objectObjectHashMap.put("channel", Integer.valueOf(obj1.channel));
 /*  15 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /*  16 */     objectObjectHashMap.put("name", obj1.name);
@@ -34,10 +34,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_20467_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_20467_0(Vo_20467_0 obj1)
 /*     */   {
 /*  39 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/*  40 */     org.linlinjava.litemall.gameserver.data.vo.Vo_20467_0 obj1 = (org.linlinjava.litemall.gameserver.data.vo.Vo_20467_0)obj;
 /*  41 */     objectObjectHashMap.put("caption", obj1.caption);
 /*  42 */     objectObjectHashMap.put("content", obj1.content);
 /*  43 */     objectObjectHashMap.put("peer_name", obj1.peer_name);
@@ -62,10 +61,9 @@
 /*     */ 
 /*     */ 
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_24505_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_24505_0(Vo_24505_0 obj1)
 /*     */   {
 /*  67 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/*  68 */     org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0 obj1 = (org.linlinjava.litemall.gameserver.data.vo.Vo_24505_0)obj;
 /*  69 */     objectObjectHashMap.put("update_type", Integer.valueOf(obj1.update_type));
 /*  70 */     objectObjectHashMap.put("groupBuf", obj1.groupBuf);
 /*  71 */     objectObjectHashMap.put("charBuf", obj1.charBuf);
@@ -92,10 +90,9 @@
 /*     */   
 /*     */ 
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_4119_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_4119_0(Vo_4119_0 obj1)
 /*     */   {
 /*  97 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/*  98 */     org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0 obj1 = (org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0)obj;
 /*  99 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /* 100 */     objectObjectHashMap.put("gid", obj1.gid);
 /* 101 */     objectObjectHashMap.put("suit_icon", Integer.valueOf(obj1.suit_icon));
@@ -114,10 +111,9 @@
 /* 114 */     return objectObjectHashMap;
 /*     */   }
 /*     */   
-/*     */   public static java.util.Map<Object, Object> Vo_4121_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_4121_0(Vo_4121_0 obj1)
 /*     */   {
 /* 119 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 120 */     org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0 obj1 = (org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0)obj;
 /* 121 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /* 122 */     objectObjectHashMap.put("gid", obj1.gid);
 /* 123 */     objectObjectHashMap.put("suit_icon", Integer.valueOf(obj1.suit_icon));
@@ -145,10 +141,9 @@
 /*     */ 
 /*     */ 
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_45128_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_45128_0(Vo_45128_0 obj1)
 /*     */   {
 /* 150 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 151 */     Vo_45128_0 obj1 = (Vo_45128_0)obj;
 /* 152 */     objectObjectHashMap.put("no", Integer.valueOf(obj1.no));
 /* 153 */     objectObjectHashMap.put("type1", Integer.valueOf(obj1.type1));
 /* 154 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
@@ -233,10 +228,9 @@
 /*     */   
 /*     */ 
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_65017_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_65017_0(Vo_65017_0 obj1)
 /*     */   {
 /* 238 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 239 */     Vo_65017_0 obj1 = (Vo_65017_0)obj;
 /* 240 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /* 241 */     objectObjectHashMap.put("leader", Integer.valueOf(obj1.leader));
 /* 242 */     objectObjectHashMap.put("weapon_icon", Integer.valueOf(obj1.weapon_icon));
@@ -260,10 +254,9 @@
 /* 260 */     return objectObjectHashMap;
 /*     */   }
 /*     */   
-/*     */   public static java.util.Map<Object, Object> Vo_65019_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_65019_0(Vo_65017_0 obj1)
 /*     */   {
 /* 265 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 266 */     Vo_65017_0 obj1 = (Vo_65017_0)obj;
 /* 267 */     objectObjectHashMap.put("id", Integer.valueOf(obj1.id));
 /* 268 */     objectObjectHashMap.put("leader", Integer.valueOf(obj1.leader));
 /* 269 */     objectObjectHashMap.put("weapon_icon", Integer.valueOf(obj1.weapon_icon));
@@ -288,10 +281,9 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public static java.util.Map<Object, Object> Vo_65527_0(Object obj)
+/*     */   public static java.util.Map<Object, Object> Vo_65527_0(Vo_65527_0 obj1)
 /*     */   {
 /* 293 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-/* 294 */     Vo_65527_0 obj1 = (Vo_65527_0)obj;
 /* 295 */     objectObjectHashMap.put("str", obj1.str);
 /* 296 */     objectObjectHashMap.put("phy_power", Integer.valueOf(obj1.phy_power));
 /* 297 */     objectObjectHashMap.put("accurate", Integer.valueOf(obj1.accurate));
@@ -336,23 +328,26 @@
 /* 336 */     objectObjectHashMap.put("max_balance", Integer.valueOf(obj1.max_balance));
 /* 337 */     objectObjectHashMap.put("ignore_resist_metal", Integer.valueOf(obj1.ignore_resist_metal));
 /* 338 */     objectObjectHashMap.put("master", Integer.valueOf(obj1.master));
+
 /* 339 */     objectObjectHashMap.put("level", obj1.level);
-/* 340 */     objectObjectHashMap.put("skill", Integer.valueOf(obj1.skill));
-/* 341 */     objectObjectHashMap.put("party_contrib", obj1.party_name); //有错位，暂时先这么处理了
+/* 340 */     objectObjectHashMap.put("skill", obj1.skill);
+/* 341 */     objectObjectHashMap.put("party_contrib", obj1.party_contrib); //有错位，暂时先这么处理了
 /* 342 */     objectObjectHashMap.put("status_daofa_wubian", obj1.status_daofa_wubian);
 /* 343 */     objectObjectHashMap.put("nick", Integer.valueOf(obj1.nick));
 /* 344 */     objectObjectHashMap.put("family_title", obj1.family_title);
 /* 345 */     objectObjectHashMap.put("title", obj1.title);
 /* 346 */     objectObjectHashMap.put("nice", obj1.nice);
-/* 347 */     objectObjectHashMap.put("reputation", Integer.valueOf(obj1.reputation));
+/* 347 */     objectObjectHashMap.put("reputation", obj1.reputation);
 /* 348 */     objectObjectHashMap.put("couple", Integer.valueOf(obj1.couple));
 /* 349 */     objectObjectHashMap.put("icon", obj1.icon);
 /* 350 */     objectObjectHashMap.put("type", Integer.valueOf(obj1.type));
+
 /* 351 */     objectObjectHashMap.put("resist_poison", Integer.valueOf(obj1.resist_poison));
 /* 352 */     objectObjectHashMap.put("item_unique", Integer.valueOf(obj1.item_unique));
 /* 353 */     objectObjectHashMap.put("passive_mode", Integer.valueOf(obj1.passive_mode));
 /* 354 */     objectObjectHashMap.put("req_str", obj1.req_str);
 /* 355 */     objectObjectHashMap.put("locked", Integer.valueOf(obj1.locked));
+//
 /* 356 */     objectObjectHashMap.put("extra_desc", Integer.valueOf(obj1.extra_desc));
 /* 357 */     objectObjectHashMap.put("gold_coin", Integer.valueOf(obj1.gold_coin));
 /* 358 */     objectObjectHashMap.put("extra_life", Integer.valueOf(obj1.extra_life));
@@ -361,17 +356,20 @@
 /* 361 */     objectObjectHashMap.put("max_req_level", Integer.valueOf(obj1.max_req_level));
 /* 362 */     objectObjectHashMap.put("use_skill_d", Integer.valueOf(obj1.use_skill_d));
 /* 363 */     objectObjectHashMap.put("double_points", Integer.valueOf(obj1.double_points));
+
 /* 364 */     objectObjectHashMap.put("enable_double_points", Integer.valueOf(obj1.enable_double_points));
 /* 365 */     objectObjectHashMap.put("can_buy_dp_times", Integer.valueOf(obj1.can_buy_dp_times));
 /* 366 */     objectObjectHashMap.put("enable_shenmu_points", Integer.valueOf(obj1.enable_shenmu_points));
 /* 367 */     objectObjectHashMap.put("gift_key", Integer.valueOf(obj1.gift_key));
 /* 368 */     objectObjectHashMap.put("online", Integer.valueOf(obj1.online));
 /* 369 */     objectObjectHashMap.put("voucher", Integer.valueOf(obj1.voucher));
-/* 370 */     objectObjectHashMap.put("party_contrib", obj1.party_name); //有错位，临时占位
-                objectObjectHashMap.put("nick", obj1.party_contrib);
+
+/* 370 */     objectObjectHashMap.put("party_contrib", obj1.party_contrib); //有错位，临时占位
+                objectObjectHashMap.put("nick", obj1.nick);
 /* 371 */     objectObjectHashMap.put("use_money_type", Integer.valueOf(obj1.use_money_type));
 /* 372 */     objectObjectHashMap.put("lock_exp", Integer.valueOf(obj1.lock_exp));
 /* 373 */     objectObjectHashMap.put("shuadaojiji_rulvling", Integer.valueOf(obj1.shuadaojiji_rulvling));
+
 /* 374 */     objectObjectHashMap.put("equip_identify", Integer.valueOf(obj1.equip_identify));
 /* 375 */     objectObjectHashMap.put("fetch_nice", Integer.valueOf(obj1.fetch_nice));
 /* 376 */     objectObjectHashMap.put("recharge", Integer.valueOf(obj1.recharge));
@@ -382,11 +380,12 @@
 /* 381 */     objectObjectHashMap.put("higest_feixdx", Integer.valueOf(obj1.higest_feixdx));
 /* 382 */     objectObjectHashMap.put("ct_datascore", Integer.valueOf(obj1.ct_datascore));
 /* 383 */     objectObjectHashMap.put("marriagemarry_id", obj1.marriagemarry_id);
-/* 384 */     objectObjectHashMap.put("shuadaochongfeng_san", Integer.valueOf(obj1.shuadaochongfeng_san));
+/* 384 */     objectObjectHashMap.put("shuadao/chongfeng-san", Integer.valueOf(obj1.shuadaochongfeng_san));
 /* 385 */     objectObjectHashMap.put("extra_skill", Integer.valueOf(obj1.extra_skill));
 /* 386 */     objectObjectHashMap.put("chushi_ex", Integer.valueOf(obj1.chushi_ex));
 /* 387 */     objectObjectHashMap.put("settingrefuse_stranger_level", Integer.valueOf(obj1.settingrefuse_stranger_level));
 /* 388 */     objectObjectHashMap.put("settingauto_reply_msg", obj1.settingauto_reply_msg);
+
 /* 389 */     objectObjectHashMap.put("setting_refuse_be_add_level", Integer.valueOf(obj1.setting_refuse_be_add_level));
 /* 390 */     objectObjectHashMap.put("mount_attrib_end_time", Integer.valueOf(obj1.mount_attrib_end_time));
 /* 391 */     objectObjectHashMap.put("ct_data_top_rank", Integer.valueOf(obj1.ct_data_top_rank));
@@ -410,6 +409,7 @@
 /* 409 */     objectObjectHashMap.put("upgrade_total", Integer.valueOf(obj1.upgrade_total));
 /* 410 */     objectObjectHashMap.put("house_house_class", obj1.house_house_class);
 /* 411 */     objectObjectHashMap.put("plant_level", Integer.valueOf(obj1.plant_level));
+
 /* 412 */     objectObjectHashMap.put("phy_power_without_intimacy", Integer.valueOf(obj1.phy_power_without_intimacy));
 /* 413 */     objectObjectHashMap.put("plant_exp", Integer.valueOf(obj1.plant_exp));
 /* 414 */     objectObjectHashMap.put("marriage_couple_gid", obj1.marriage_couple_gid);
@@ -427,10 +427,10 @@
 /* 426 */     objectObjectHashMap.put("marriage_book_id", Integer.valueOf(obj1.marriage_book_id));
 /* 427 */     objectObjectHashMap.put("strengthen_level", Integer.valueOf(obj1.strengthen_level));
 /* 428 */     objectObjectHashMap.put("status_diliebo_flag", Integer.valueOf(obj1.status_diliebo_flag));
-/* 429 */     objectObjectHashMap.put("exp_ware_data_lock_time", Integer.valueOf(obj1.exp_ware_data_lock_time));
-/* 430 */     objectObjectHashMap.put("exp_ware_data_exp_ware", Integer.valueOf(obj1.exp_ware_data_exp_ware));
-/* 431 */     objectObjectHashMap.put("exp_ware_data_fetch_times", Integer.valueOf(obj1.exp_ware_data_fetch_times));
-/* 432 */     objectObjectHashMap.put("exp_ware_data_today_fetch_times", Integer.valueOf(obj1.exp_ware_data_today_fetch_times));
+/* 429 */     objectObjectHashMap.put("exp_ware_data/lock_time", Integer.valueOf(obj1.exp_ware_data_lock_time));
+/* 430 */     objectObjectHashMap.put("exp_ware_data/exp_ware", Integer.valueOf(obj1.exp_ware_data_exp_ware));
+/* 431 */     objectObjectHashMap.put("exp_ware_data/fetch_times", Integer.valueOf(obj1.exp_ware_data_fetch_times));
+/* 432 */     objectObjectHashMap.put("exp_ware_data/today_fetch_times", Integer.valueOf(obj1.exp_ware_data_today_fetch_times));
 /* 433 */     objectObjectHashMap.put("free_rename", Integer.valueOf(obj1.free_rename));
 /* 434 */     return objectObjectHashMap;
 /*     */   }

@@ -8,7 +8,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M65527_1 extends BaseWrite
+/*    */ public class MSG_UPDATE_5 extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
@@ -17,7 +17,7 @@
 /* 17 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
 /* 19 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(1));
-/* 20 */     BuildFields.get("lock_exp").write(writeBuf, object1.get(1));
+/* 20 */     BuildFields.get("shape").write(writeBuf, object1.get(1));
 /*    */   }
 /*    */   
 /*    */ 
@@ -29,7 +29,7 @@
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M65527_1.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M65527_5.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */

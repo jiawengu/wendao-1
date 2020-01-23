@@ -333,7 +333,7 @@ public class C32776_0 implements GameHandler
                         }
                         final GoodsInfo goodsInfo = goods4.goodsInfo;
                         ++goodsInfo.color;
-                        GameObjectChar.send(new M32775_0(), goods4);
+                        GameObjectChar.send(new MSG_PRE_UPGRADE_EQUIP(), goods4);
                         final List<Goods> listgood = new ArrayList<Goods>();
                         listgood.add(goods4);
                         GameObjectChar.send(new MSG_INVENTORY(), listgood);

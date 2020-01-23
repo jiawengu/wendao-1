@@ -8,28 +8,30 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M65527_5 extends BaseWrite
+/*    */ public class MSG_UPDATE_3
+/*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {
-/* 15 */     List object1 = (List)object;
+/* 16 */     List object1 = (List)object;
 /*    */     
-/* 17 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
+/* 18 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
-/* 19 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(1));
-/* 20 */     BuildFields.get("shape").write(writeBuf, object1.get(1));
+/* 20 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(2));
+/* 21 */     BuildFields.get("pot").write(writeBuf, object1.get(1));
+/* 22 */     BuildFields.get("resist_poison").write(writeBuf, object1.get(2));
 /*    */   }
 /*    */   
 /*    */ 
 /*    */ 
 /*    */   public int cmd()
 /*    */   {
-/* 27 */     return 65527;
+/* 29 */     return 65527;
 /*    */   }
 /*    */ }
 
 
-/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M65527_5.class
+/* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\write\M65527_3.class
  * Java compiler version: 8 (52.0)
  * JD-Core Version:       0.7.1
  */

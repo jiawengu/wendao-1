@@ -16,7 +16,7 @@
 /*    */ 
 /*    */ 
 /*    */ @Service
-/*    */ public class M12016_0
+/*    */ public class MSG_GUARDS_REFRESH
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)

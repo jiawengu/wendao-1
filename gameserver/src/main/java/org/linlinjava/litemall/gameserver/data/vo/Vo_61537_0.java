@@ -3,20 +3,32 @@
 /*    */ 
 /*    */ public class Vo_61537_0
 /*    */ {
-/*    */   public int extra_desc;
+/*    */   public int left_time_to_delete;
 /*    */   
 /*    */   public int trading_sell_buy_type;
 /*  9 */   public int trading_state;
-/*    */   public int passive_mode;
+    /**
+     * 肖像
+     */
+    /*    */   public int portrait;
 /*    */   public int trading_left_time;
 /* 12 */   public String trading_buyout_price = "";
 /*    */   public int trading_price;
-/*    */   public int skill;
-/*    */   public int metal;
-/*    */   public int type;
+    /**
+     * 等级
+     */
+    /*    */   public int level;
+    /**
+     * 门派
+     */
+    /*    */   public int polar;
+/*    */   public int icon;
 /*    */   public int trading_cg_price_ti;
-/* 18 */   public String str = "";
-/* 19 */   public String iid_str = "";
+    /**
+     * 名字
+     */
+    /* 18 */   public String name = "";
+/* 19 */   public String gid = "";
 /*    */   public int dan_datastate;
 /*    */   public int char_online_state;
 /*    */   public int trading_org_price;

@@ -20,7 +20,7 @@
  * MSG_REQUEST_LIST -- 通知客户端请求数据
  */
 /*    */ @Service
-/*    */ public class M53741_0
+/*    */ public class MSG_REQUEST_LIST
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)

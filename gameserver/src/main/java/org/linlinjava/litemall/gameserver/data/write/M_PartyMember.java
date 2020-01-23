@@ -35,7 +35,7 @@ public class M_PartyMember extends BaseWrite {
         GameWriteTool.writeInt(buf, m.construction);
         GameWriteTool.writeInt(buf, 0); //active
         GameWriteTool.writeShort(buf, 0); //polor
-        GameWriteTool.writeShort(buf, chara.gender);
+        GameWriteTool.writeShort(buf, chara.sex);
         GameWriteTool.writeInt(buf, 0); //lastWeekActive
         GameWriteTool.writeInt(buf, 0); //thisWeekActive
         GameWriteTool.writeInt(buf, m.joinTime);

@@ -148,12 +148,12 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
             org.linlinjava.litemall.gameserver.data.vo.Vo_61537_0 v61537 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61537_0();
             String arr = character.getData();
             Chara chara1 = (Chara) JSONUtils.parseObject(character.getData(), Chara.class);
-            v61537.passive_mode = chara1.waiguan;
-            v61537.metal = chara1.menpai;
-            v61537.str = chara1.name;
-            v61537.iid_str = chara1.uuid;
-            v61537.skill = chara1.level;
-            v61537.type = chara1.waiguan;
+            v61537.portrait = chara1.waiguan;
+            v61537.polar = chara1.menpai;
+            v61537.name = chara1.name;
+            v61537.gid = chara1.uuid;
+            v61537.level = chara1.level;
+            v61537.icon = chara1.waiguan;
             v61537.last_login_time = 1558062000;
 
 

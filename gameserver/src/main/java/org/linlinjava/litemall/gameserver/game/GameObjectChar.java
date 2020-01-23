@@ -173,9 +173,9 @@ public class GameObjectChar {
                 if (((Chara) this.gameTeam.duiwu.get(0)).id == this.chara.id) {
                     for (int i = 0; i < this.gameTeam.zhanliduiyuan.size(); i++) {
                         List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
-                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new MSG_UPDATE_TEAM_LIST(), object1);
                         List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new M4121_0(), vo_4121_0List);
+                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                         vo_20480_0.msg = "队伍解散了。";
                         vo_20480_0.time = 1562593376;
@@ -197,7 +197,7 @@ public class GameObjectChar {
                     vo_61593_0.ask_type = "request_team_leader";
                     send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
                     List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                    sendOne(new M4121_0(), vo_4121_0List);
+                    sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                     this.gameTeam = null;
                 } else {
                     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -205,9 +205,9 @@ public class GameObjectChar {
                     vo_61671_0.count = 0;
                     gameMap.send(new MSG_TITLE(), vo_61671_0);
                     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
-                    sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+                    sendOne(new MSG_UPDATE_TEAM_LIST(), object1);
                     List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                    sendOne(new M4121_0(), vo_4121_0List);
+                    sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                     vo_20480_0.msg = "你离开了队伍";
                     vo_20480_0.time = 1562593376;

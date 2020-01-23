@@ -8,7 +8,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20568_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_TEAM_COMMANDER_GID;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M53741_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_REQUEST_LIST;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Duiyuan;
 /*    */ import org.linlinjava.litemall.gameserver.domain.LieBiao;
@@ -49,7 +49,7 @@
 /*    */           
 /* 50 */           lieBiaoList.add(lieBiao);
 /*    */         }
-/* 52 */         GameObjectChar.send(new M53741_0(), lieBiaoList);
+/* 52 */         GameObjectChar.send(new MSG_REQUEST_LIST(), lieBiaoList);
 /*    */       }
 /*    */     }
 /*    */     
@@ -84,7 +84,7 @@
 /*    */           }
 /* 85 */           lieBiaoList.add(lieBiao);
 /*    */         }
-/* 87 */         GameObjectChar.send(new M53741_0(), lieBiaoList);
+/* 87 */         GameObjectChar.send(new MSG_REQUEST_LIST(), lieBiaoList);
 /*    */       }
 /*    */     }
 /*    */   }

@@ -10,7 +10,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_5;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_5;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -42,7 +42,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /* 39 */           List list1 = new LinkedList();
 /* 40 */           list1.add(Integer.valueOf(((Petbeibao)chara.pets.get(i)).id));
 /* 41 */           list1.add(Integer.valueOf(((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).shape));
-/* 42 */           GameObjectChar.send(new M65527_5(), list1);
+/* 42 */           GameObjectChar.send(new MSG_UPDATE_5(), list1);
 /* 43 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 44 */           vo_20481_0.msg = ("增加#R" + 2000 * num + "点#n亲密度。");
 /* 45 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));

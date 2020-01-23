@@ -18,8 +18,8 @@ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
 //MSG_UPDATE_TEAM_LIST
 @Service
-public class M4119_0 extends BaseWrite {
-    public M4119_0() {
+public class MSG_UPDATE_TEAM_LIST extends BaseWrite {
+    public MSG_UPDATE_TEAM_LIST() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {

@@ -8,7 +8,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M65527_3;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_3;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -61,7 +61,7 @@
 /* 61 */     list.add(Integer.valueOf(id));
 /* 62 */     list.add(Integer.valueOf(pot));
 /* 63 */     list.add(Integer.valueOf(resist_poison));
-/* 64 */     GameObjectChar.send(new M65527_3(), list);
+/* 64 */     GameObjectChar.send(new MSG_UPDATE_3(), list);
 /*    */   }
 /*    */   
 /*    */ 

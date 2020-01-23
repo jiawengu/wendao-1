@@ -7,7 +7,7 @@ package org.linlinjava.litemall.gameserver.fight;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0;
+
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64971_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_65017_0;
@@ -15,14 +15,15 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_7653_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_SET_FIGHT_PET;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_REFRESH_PET_LIST;
-import org.linlinjava.litemall.gameserver.data.write.M64993_0;
-import org.linlinjava.litemall.gameserver.data.write.M64995_0;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ADD_OPPONENT;
+import org.linlinjava.litemall.gameserver.data.write.MSG_C_ADD_FRIEND;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.data.write.MSG_C_QUIT_COMBAT;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 /**
  * 招出宠物
@@ -83,31 +84,10 @@ public class ZhaoChuSkill implements FightSkill {
         if (fightObject == null) {
             return null;
         } else {
-            Vo_65017_0 vo_65017_0 = new Vo_65017_0();
-            vo_65017_0.id = fightObject.fid;
-            vo_65017_0.leader = fightObject.leader;
-            vo_65017_0.weapon_icon = 0;
-            vo_65017_0.pos = fightObject.pos;
-            vo_65017_0.rank = 0;
-            vo_65017_0.vip_type = 0;
-            vo_65017_0.str = fightObject.str;
-            vo_65017_0.type = fightObject.org_icon;
-            vo_65017_0.durability = 2;
-            vo_65017_0.req_level = 0;
-            vo_65017_0.upgrade_level = 0;
-            vo_65017_0.upgrade_type = 0;
-            vo_65017_0.dex = fightObject.max_mofa;
-            vo_65017_0.max_mana = fightObject.max_mofa;
-            vo_65017_0.max_life = fightObject.max_shengming;
-            vo_65017_0.def = fightObject.max_shengming;
-            vo_65017_0.org_icon = fightObject.org_icon;
-            vo_65017_0.suit_icon = fightObject.suit_icon;
-            vo_65017_0.suit_light_effect = fightObject.suit_light_effect;
-            vo_65017_0.special_icon = 0;
             List<Vo_65017_0> list65017 = new ArrayList();
-            list65017.add(vo_65017_0);
-            FightManager.sendTeam(fightContainer, friendsFightTeam.fightObjectList, new M64995_0(), list65017);
-            FightManager.sendTeam(fightContainer, opponentsFightTeam.fightObjectList, new M64993_0(), list65017);
+            list65017.add(GameUtil.vo_65017_0(fightObject));
+            FightManager.sendTeam(fightContainer, friendsFightTeam.fightObjectList, new MSG_C_ADD_FRIEND(), list65017);
+            FightManager.sendTeam(fightContainer, opponentsFightTeam.fightObjectList, new MSG_C_ADD_OPPONENT(), list65017);
             Vo_64971_0 vo_64971_0 = new Vo_64971_0();
             vo_64971_0.count = 1;
             vo_64971_0.id = fightObject.id;

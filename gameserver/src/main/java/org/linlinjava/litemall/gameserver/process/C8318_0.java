@@ -11,7 +11,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
-/*    */ 
+/*    */
+
+/**
+ * CMD_DEPOSIT 存钱
+ */
 /*    */ @Service
 /*    */ public class C8318_0 implements GameHandler
 /*    */ {
@@ -24,10 +28,10 @@
 /* 24 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*    */     
 /* 26 */     chara.balance -= money;
-/* 27 */     if (chara.gender + money > 2000000000) {
-/* 28 */       chara.gender = 2000000000;
+/* 27 */     if (chara.balance + money > 2000000000) {
+/* 28 */       chara.balance = 2000000000;
 /*    */     } else {
-/* 30 */       chara.gender += money;
+/* 30 */       chara.balance += money;
 /*    */     }
 /* 32 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 33 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);

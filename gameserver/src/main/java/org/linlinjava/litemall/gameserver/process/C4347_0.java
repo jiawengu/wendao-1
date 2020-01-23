@@ -6,7 +6,7 @@
 /*    */ import java.util.List;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M12016_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_GUARDS_REFRESH;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.domain.ShouHu;
 /*    */ import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
@@ -43,7 +43,7 @@
 /* 43 */         ((ShouHuShuXing)((ShouHu)chara.listshouhu.get(i)).listShouHuShuXing.get(0)).nil = cheer;
 /* 44 */         List<ShouHu> list = new LinkedList();
 /* 45 */         list.add(chara.listshouhu.get(i));
-/* 46 */         GameObjectChar.send(new M12016_0(), list);
+/* 46 */         GameObjectChar.send(new MSG_GUARDS_REFRESH(), list);
 /*    */       }
 /*    */     }
 /*    */   }

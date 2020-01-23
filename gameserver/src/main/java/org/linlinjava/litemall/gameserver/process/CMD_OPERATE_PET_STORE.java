@@ -2,20 +2,13 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
-import org.linlinjava.litemall.gameserver.data.GameWriteTool;
-import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
-import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 /**
  * 保存宠物
@@ -46,7 +39,7 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
                 Vo_61677_1 vo_61677_1 = new Vo_61677_1();
                 vo_61677_1.store_type = "chongwu";
                 vo_61677_1.list = chara.chongwucangku;
-                GameObjectChar.send(new M61677_1(), vo_61677_1);
+                GameObjectChar.send(new MSG_STORE(), vo_61677_1);
 
                 //删除宠物背包的前端数据
                 Vo_12269_0 vo_12269_0 = new Vo_12269_0();
@@ -63,7 +56,7 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
             }
             if(chongwu != null){
                 //删除宠物仓库的前端数据
-                GameObjectChar.send(new M61677_1(), pos);
+                GameObjectChar.send(new MSG_STORE(), pos);
                 chara.chongwucangku.remove(chongwu);
                 chongwu.no = GameUtil.getNo(chara, 1);
                 chara.pets.add(chongwu);
