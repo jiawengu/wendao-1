@@ -9,7 +9,7 @@
  * MSG_TASK_STATUS_INFO
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M41023_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_TASK_STATUS_INFO extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

@@ -13,10 +13,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */
@@ -44,7 +43,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*  43 */           org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0 vo_9129_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0();
 /*  44 */           vo_9129_0.notify = 97;
 /*  45 */           vo_9129_0.para = "HornDlg=喇叭";
-/*  46 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M9129_0(), vo_9129_0);
+/*  46 */           GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 /*     */         }
 /*     */         
 /*  49 */         if (goods.goodsInfo.str.equals("血池")) {

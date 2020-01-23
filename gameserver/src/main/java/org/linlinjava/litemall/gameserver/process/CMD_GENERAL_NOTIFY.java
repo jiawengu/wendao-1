@@ -86,7 +86,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_9129_52.notify = 10001;
             vo_9129_52.para = "chaoji_goon";
             GameObjectChar.getGameObjectChar();
-            GameObjectChar.send(new M9129_0(), vo_9129_52);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_52);
             Vo_61553_0 vo_61553_0 = new Vo_61553_0();
             vo_61553_0.count = 1;
             vo_61553_0.task_type = "超级宝藏";
@@ -224,7 +224,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "0";
-            GameObjectChar.send(new M9129_0(), vo_9129_0);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
             chara.qumoxiang = 0;
         }
 
@@ -236,7 +236,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 20010;
             vo_9129_0.para = "1";
-            GameObjectChar.send(new M9129_0(), vo_9129_0);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
             chara.qumoxiang = 1;
         }
 
@@ -1252,7 +1252,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 98;
             vo_9129_0.para = "DugeonCreateDlg";
-            GameObjectChar.send(new M9129_0(), vo_9129_0);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 
             GameUtil.enterDugeno(chara, para1);
         }

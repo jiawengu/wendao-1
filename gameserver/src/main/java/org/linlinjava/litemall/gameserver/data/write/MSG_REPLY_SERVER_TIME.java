@@ -9,7 +9,7 @@
  * MSG_REPLY_SERVER_TIME    -- 更新服务器时间
  */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M41009_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_REPLY_SERVER_TIME extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

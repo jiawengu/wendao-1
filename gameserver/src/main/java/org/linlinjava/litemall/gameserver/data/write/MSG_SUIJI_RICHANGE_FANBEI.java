@@ -6,7 +6,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M41017_0
+/*    */ public class MSG_SUIJI_RICHANGE_FANBEI
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)

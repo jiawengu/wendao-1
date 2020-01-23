@@ -13,8 +13,12 @@
 /*    */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ //MSG_UPDATE_IMPROVEMENT
+
+/**
+ * 装备属性的详细信息
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M65511_0 extends BaseWrite
+/*    */ public class MSG_UPDATE_IMPROVEMENT extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

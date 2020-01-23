@@ -3,9 +3,13 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_53257_0;
-/*    */ 
+/*    */
+
+/**
+ * vip界面信息
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M53257_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_INSIDER_INFO extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

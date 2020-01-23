@@ -3,9 +3,13 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_33055_0;
-/*    */ 
+/*    */
+
+/**
+ * 通知客户端珍宝系统的配置信息
+ */
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M33055_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_GOLD_STALL_CONFIG extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

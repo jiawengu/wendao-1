@@ -14,7 +14,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_GENERAL_NOTIFY;
+import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -239,7 +240,7 @@
 /* 239 */     Vo_9129_0 vo_9129_0 = new Vo_9129_0();
 /* 240 */     vo_9129_0.notify = 46;
 /* 241 */     vo_9129_0.para = "1";
-/* 242 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M9129_0(), vo_9129_0);
+/* 242 */     GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 /*     */   }
 /*     */ }
 

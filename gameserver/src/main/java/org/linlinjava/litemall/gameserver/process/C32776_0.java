@@ -74,7 +74,7 @@ public class C32776_0 implements GameHandler
                         final Vo_9129_0 vo_9129_0 = new Vo_9129_0();
                         vo_9129_0.notify = 10000;
                         vo_9129_0.para = "20691134";
-                        GameObjectChar.send(new M9129_0(), vo_9129_0);
+                        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
                         final Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "你成功合成了1个#R" + zhuangbeiInfo.getStr() + "#n。";
                         vo_20481_0.time = 1562987118;
@@ -182,7 +182,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
             vo_9129_2.notify = 10000;
             vo_9129_2.para = "20643387";
-            GameObjectChar.send(new M9129_0(), vo_9129_2);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_2);
         }
         if (24 == type) {
             for (int i = 0; i < chara.backpack.size(); ++i) {
@@ -451,7 +451,7 @@ public class C32776_0 implements GameHandler
                             final Vo_9129_0 vo_9129_3 = new Vo_9129_0();
                             vo_9129_3.notify = 50;
                             vo_9129_3.para = "39563320";
-                            GameObjectChar.send(new M9129_0(), vo_9129_3);
+                            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_3);
                         }
                     }
                     else {
@@ -543,7 +543,7 @@ public class C32776_0 implements GameHandler
                         final Vo_9129_0 vo_9129_4 = new Vo_9129_0();
                         vo_9129_4.notify = 50;
                         vo_9129_4.para = "39563320";
-                        GameObjectChar.send(new M9129_0(), vo_9129_4);
+                        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_4);
                     }
                     GameUtil.removemunber(chara, "超级粉水晶", 1);
                 }
@@ -638,7 +638,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_5 = new Vo_9129_0();
             vo_9129_5.notify = 51;
             vo_9129_5.para = "33927504";
-            GameObjectChar.send(new M9129_0(), vo_9129_5);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_5);
             final int coin5 = ConsumeMoneyUtils.appendEqMoney(leve);
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
@@ -733,7 +733,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_5 = new Vo_9129_0();
             vo_9129_5.notify = 51;
             vo_9129_5.para = "33927504";
-            GameObjectChar.send(new M9129_0(), vo_9129_5);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_5);
             final int coin5 = ConsumeMoneyUtils.appendEqMoney(leve);
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
@@ -817,7 +817,7 @@ public class C32776_0 implements GameHandler
                 final Vo_9129_0 vo_9129_0 = new Vo_9129_0();
                 vo_9129_0.notify = 51;
                 vo_9129_0.para = "33927504";
-                GameObjectChar.send(new M9129_0(), vo_9129_0);
+                GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
             }
             else {
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
@@ -941,7 +941,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_6 = new Vo_9129_0();
             vo_9129_6.notify = 49;
             vo_9129_6.para = "32271173";
-            GameObjectChar.send(new M9129_0(), vo_9129_6);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_6);
         }
         if (type == 2) {
             for (int i = 0; i < chara.backpack.size(); ++i) {
@@ -1191,7 +1191,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_7 = new Vo_9129_0();
             vo_9129_7.notify = 20022;
             vo_9129_7.para = "11516529|1";
-            GameObjectChar.send(new M9129_0(), vo_9129_7);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_7);
         }
     }
 

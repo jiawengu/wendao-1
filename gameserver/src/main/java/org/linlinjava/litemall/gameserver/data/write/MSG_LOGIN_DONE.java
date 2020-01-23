@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
  * MSG_LOGIN_DONE
  */
 @Service
-public class M4099_0 extends BaseWrite {
-    public M4099_0() {
+public class MSG_LOGIN_DONE extends BaseWrite {
+    public MSG_LOGIN_DONE() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {

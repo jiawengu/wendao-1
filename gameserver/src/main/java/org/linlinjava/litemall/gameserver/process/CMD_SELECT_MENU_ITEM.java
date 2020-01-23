@@ -2717,7 +2717,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             /* 1155 */
             vo_9129_0.para = "PetCallDlg";
             /* 1156 */
-            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M9129_0(), vo_9129_0);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
             /*      */
         }
 
@@ -2725,7 +2725,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             Vo_9129_0 vo_9129_0 = new Vo_9129_0();
             vo_9129_0.notify = 97;
             vo_9129_0.para = "DugeonCreateDlg";
-            GameObjectChar.send(new M9129_0(), vo_9129_0);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 
             MSG_PLAY_SCENARIOD_VO MSGPLAYSCENARIODVO = GameUtil.a45056(chara1);
             GameObjectChar.send(new MSG_PLAY_SCENARIOD(), MSGPLAYSCENARIODVO);

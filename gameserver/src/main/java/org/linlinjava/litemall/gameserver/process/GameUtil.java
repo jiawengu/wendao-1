@@ -812,7 +812,7 @@ import java.util.Random;
         /*  736 */     vo_53257_0.curTime = 622080000;
         /*  737 */     vo_53257_0.isGet = chara.isGet;
         /*  738 */     vo_53257_0.tempInsider = 0;
-        /*  739 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M53257_0(), vo_53257_0);
+        /*  739 */     GameObjectChar.send(new MSG_INSIDER_INFO(), vo_53257_0);
         /*      */   }
     /*      */
     /*      */   public static void genchongfei(Chara chara) {
@@ -2854,7 +2854,7 @@ import java.util.Random;
     /*      */   public static org.linlinjava.litemall.gameserver.data.vo.Vo_65511_0 MSG_UPDATE_IMPROVEMENT(Chara chara) {
         /* 2596 */     zhuangbeiValue(chara);
         /* 2597 */     chara.zbAttribute.id = chara.id;
-        /* 2598 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M65511_0(), chara.zbAttribute);
+        /* 2598 */     GameObjectChar.send(new MSG_UPDATE_IMPROVEMENT(), chara.zbAttribute);
         /*      */
         /* 2600 */     ListVo_65527_0 vo_65527_0 = MSG_UPDATE(chara);
         /* 2601 */     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
@@ -4759,7 +4759,7 @@ import java.util.Random;
         final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
         vo_9129_2.notify = 97;
         vo_9129_2.para = dlgName;
-        GameObjectChar.send(new M9129_0(), vo_9129_2);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_2);
     }
 
     /**
@@ -4835,7 +4835,7 @@ import java.util.Random;
         Vo_9129_0 vo_9129_2 = new Vo_9129_0();
         vo_9129_2.notify = notify;
         vo_9129_2.para = para;
-        GameObjectChar.send(new M9129_0(), vo_9129_2);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_2);
     }
 
     /**

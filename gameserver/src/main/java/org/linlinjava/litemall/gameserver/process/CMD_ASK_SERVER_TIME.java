@@ -4,7 +4,8 @@
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41009_0;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_REPLY_SERVER_TIME;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ //CMD_ASK_SERVER_TIME  -- 请求更新服务器时间
 /*    */ @Service
@@ -15,7 +16,7 @@
 /* 15 */     Vo_41009_0 vo_41009_0 = new Vo_41009_0();
 /* 16 */     vo_41009_0.server_time = ((int)(System.currentTimeMillis() / 1000L));
 /* 17 */     vo_41009_0.time_zone = 8;
-/* 18 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41009_0(), vo_41009_0);
+/* 18 */     GameObjectChar.send(new MSG_REPLY_SERVER_TIME(), vo_41009_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

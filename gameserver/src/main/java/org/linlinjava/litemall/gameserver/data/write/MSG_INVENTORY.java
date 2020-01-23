@@ -18,7 +18,7 @@
 /*     */
 
 /**
- * 库存
+ * 物品的详细目录
  */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class MSG_INVENTORY extends org.linlinjava.litemall.gameserver.netty.BaseWrite
