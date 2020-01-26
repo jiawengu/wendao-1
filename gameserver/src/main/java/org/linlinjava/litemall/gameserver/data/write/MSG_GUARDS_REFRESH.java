@@ -14,7 +14,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
-/*    */ 
+/*    */
+
+/**
+ * 守护属性
+ */
 /*    */ @Service
 /*    */ public class MSG_GUARDS_REFRESH
 /*    */   extends BaseWrite

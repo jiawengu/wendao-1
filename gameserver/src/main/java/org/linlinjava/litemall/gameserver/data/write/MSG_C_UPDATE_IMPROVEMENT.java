@@ -12,7 +12,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.domain.BuildFields;
 /*    */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
 /*    */ import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-/*    */ 
+/*    */
+
+/**
+ * 装备属性
+ */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class MSG_C_UPDATE_IMPROVEMENT extends BaseWrite
 /*    */ {
