@@ -18,9 +18,12 @@ import org.linlinjava.litemall.gameserver.domain.Goods;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
 
+/**
+ * -- 集市
+ */
 @Service
-public class M45104_0 extends BaseWrite {
-    public M45104_0() {
+public class MSG_MARKET_GOOD_CARD extends BaseWrite {
+    public MSG_MARKET_GOOD_CARD() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {

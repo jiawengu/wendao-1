@@ -1,7 +1,7 @@
 /*     */ package org.linlinjava.litemall.gameserver.data.vo;
 /*     */ 
 /*     */ public class Vo_65527_0 {
-/*   4 */   public String str = "";
+/*   4 */   public String name = "";
 /*     */   public int phy_power;
 /*     */   public int accurate;
 /*     */   public int life;

@@ -9,7 +9,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45104_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45105_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M45104_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_MARKET_GOOD_CARD;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_MARKET_PET_CARD;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Petbeibao;
@@ -42,7 +42,7 @@
 /* 42 */       vo_45104_0.status = 2;
 /* 43 */       vo_45104_0.endTime = saleGood.getEndTime().intValue();
 /* 44 */       vo_45104_0.goods = goods1;
-/* 45 */       GameObjectChar.send(new M45104_0(), vo_45104_0);
+/* 45 */       GameObjectChar.send(new MSG_MARKET_GOOD_CARD(), vo_45104_0);
 /*    */     }
 /*    */     else {
 /* 48 */       Petbeibao petbeibao = (Petbeibao)JSONUtils.parseObject(goods, Petbeibao.class);

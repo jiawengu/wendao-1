@@ -2893,7 +2893,7 @@ import java.util.Random;
 
         /*      */
         /* 2644 */     vo_65527_0.id = chara.id;
-        /* 2645 */     vo_65527_0.vo_65527_0.str = chara.name;
+        /* 2645 */     vo_65527_0.vo_65527_0.name = chara.name;
         /* 2646 */     vo_65527_0.vo_65527_0.phy_power = chara.phy_power;
         /* 2647 */     vo_65527_0.vo_65527_0.accurate = chara.accurate;
         /* 2648 */     vo_65527_0.vo_65527_0.life = chara.life;
