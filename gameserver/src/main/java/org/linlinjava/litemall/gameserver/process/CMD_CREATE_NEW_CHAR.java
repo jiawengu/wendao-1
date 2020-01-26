@@ -65,19 +65,19 @@ public class CMD_CREATE_NEW_CHAR implements org.linlinjava.litemall.gameserver.G
         List<Petbeibao> list = new java.util.ArrayList();
         chara.pets.add(petbeibao);
         list.add(petbeibao);
+        ((PetShuXing) petbeibao.petShuXing.get(0)).enchant = 0;
         ((PetShuXing) petbeibao.petShuXing.get(0)).enchant_nimbus = 0;
-        ((PetShuXing) petbeibao.petShuXing.get(0)).max_enchant_nimbus = 0;
-        ((PetShuXing) petbeibao.petShuXing.get(0)).suit_light_effect = 1;
-        ((PetShuXing) petbeibao.petShuXing.get(0)).hide_mount = 2;
+        ((PetShuXing) petbeibao.petShuXing.get(0)).mount_type = 1;
+        ((PetShuXing) petbeibao.petShuXing.get(0)).capacity_level = 2;
         PetShuXing shuXing = new PetShuXing();
         shuXing.no = 23;
         shuXing.type1 = 2;
-        shuXing.accurate = 4;
-        shuXing.mana = 4;
-        shuXing.wiz = 3;
-        shuXing.all_polar = 0;
+        shuXing.phy_power = 4;
+        shuXing.mag_power = 4;
+        shuXing.def = 3;
+        shuXing.all_attrib = 0;
+        shuXing.upgrade_immortal = 0;
         shuXing.upgrade_magic = 0;
-        shuXing.upgrade_total = 0;
         petbeibao.petShuXing.add(shuXing);
         GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 

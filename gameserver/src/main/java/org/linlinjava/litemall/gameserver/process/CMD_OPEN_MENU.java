@@ -246,7 +246,7 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         }
         if (id == 978) {
             for (int i = 0; i < chara.pets.size(); i++) {
-                content = "[销毁#R" + ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).str + "#n\\/"
+                content = "[销毁#R" + ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).name + "#n\\/"
                         + ((Petbeibao) chara.pets.get(i)).id + "]" + content;
             }
         }

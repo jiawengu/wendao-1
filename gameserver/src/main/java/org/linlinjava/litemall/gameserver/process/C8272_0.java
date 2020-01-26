@@ -5,7 +5,7 @@
 /*    */ import java.util.LinkedList;
 /*    */ import java.util.List;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
-/*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65527_0;
+/*    */
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_2;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -28,7 +28,7 @@
 /* 28 */     for (int i = 0; i < chara.pets.size(); i++) {
 /* 29 */       if (((Petbeibao)chara.pets.get(i)).no == no) {
 /* 30 */         id = ((Petbeibao)chara.pets.get(i)).id;
-/* 31 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str = name;
+/* 31 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).name = name;
 /*    */       }
 /*    */     }
 /* 34 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();

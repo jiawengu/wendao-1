@@ -56,28 +56,28 @@
 /*  52 */       chara.pets.add(petbeibao);
 /*     */       
 /*     */ 
-/*  55 */       shuXing.skill = pet.getLevelReq().intValue();
-/*  56 */       shuXing.attrib = pet.getLevelReq().intValue();
-/*  57 */       int polar_point = shuXing.skill * 4;
-/*  58 */       int addpoint = subtraction(polar_point - shuXing.skill * 3);
+/*  55 */       shuXing.level = pet.getLevelReq().intValue();
+/*  56 */       shuXing.req_level = pet.getLevelReq().intValue();
+/*  57 */       int polar_point = shuXing.level * 4;
+/*  58 */       int addpoint = subtraction(polar_point - shuXing.level * 3);
 /*  59 */       polar_point -= addpoint;
-/*  60 */       shuXing.life = (shuXing.skill + addpoint);
+/*  60 */       shuXing.con = (shuXing.level + addpoint);
 /*  61 */       addpoint = subtraction(polar_point);
 /*  62 */       polar_point -= addpoint;
-/*  63 */       shuXing.mag_power = (shuXing.skill + addpoint);
+/*  63 */       shuXing.wiz = (shuXing.level + addpoint);
 /*  64 */       addpoint = subtraction(polar_point);
 /*  65 */       polar_point -= addpoint;
-/*  66 */       shuXing.phy_power = (shuXing.skill + addpoint);
+/*  66 */       shuXing.str = (shuXing.level + addpoint);
 /*  67 */       addpoint = subtraction(polar_point);
 /*  68 */       polar_point -= addpoint;
-/*  69 */       shuXing.speed = (shuXing.skill + addpoint);
+/*  69 */       shuXing.dex = (shuXing.level + addpoint);
 /*     */       
 /*     */ 
-/*  72 */       shuXing.polar_point = 0;
+/*  72 */       shuXing.rank = 0;
 /*  73 */       List list = new ArrayList();
 /*  74 */       BasicAttributesUtils.petshuxing(shuXing);
-/*  75 */       shuXing.max_life = shuXing.def;
-/*  76 */       shuXing.max_mana = shuXing.dex;
+/*  75 */       shuXing.life = shuXing.max_life;
+/*  76 */       shuXing.mana = shuXing.max_mana;
 /*  77 */       list.add(petbeibao);
 /*     */       
 /*  79 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
@@ -94,8 +94,8 @@
 /*  90 */       vo_20481_0.msg = ("你购买了一只#Y" + name + "（野生）#n。");
 /*  91 */       vo_20481_0.time = 1562987118;
 /*  92 */       GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-/*  93 */       boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-/*  94 */       GameUtil.dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, petbeibao.id, chara);
+/*  93 */       boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+/*  94 */       GameUtil.dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, petbeibao.id, chara);
 /*     */     }
 /*     */   }
 /*     */   

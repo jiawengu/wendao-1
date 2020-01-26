@@ -125,8 +125,8 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
             list.add(chara.pets.get(i));
             GameObjectChar.send(new MSG_UPDATE_PETS(), list);
             GameObjectChar.send(new MSG_REFRESH_PET_GODBOOK_SKILLS_0(), ((Petbeibao) chara.pets.get(i)).tianshu);
-            boolean isfagong = ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).rank > ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).pet_mag_shape;
-            GameUtil.dujineng(1, ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).metal, ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).skill, isfagong, ((Petbeibao) chara.pets.get(i)).id, chara);
+            boolean isfagong = ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).pet_mag_shape > ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).pet_phy_shape;
+            GameUtil.dujineng(1, ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).polar, ((PetShuXing) ((Petbeibao) chara.pets.get(i)).petShuXing.get(0)).level, isfagong, ((Petbeibao) chara.pets.get(i)).id, chara);
         }
 
 

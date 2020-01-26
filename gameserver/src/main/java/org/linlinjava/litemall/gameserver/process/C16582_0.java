@@ -119,9 +119,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
             /* 116 */       for (int i = 0; i < chara.pets.size(); i++) {
                 /* 117 */         if (((Petbeibao)chara.pets.get(i)).id == inventoryPos) {
                     /* 118 */           Petbeibao pet = (Petbeibao)chara.pets.get(i);
-                    /* 119 */           SaleClassifyGood saleClassifyGood = GameData.that.baseSaleClassifyGoodService.findOneByStr(((PetShuXing)pet.petShuXing.get(0)).str);
+                    /* 119 */           SaleClassifyGood saleClassifyGood = GameData.that.baseSaleClassifyGoodService.findOneByStr(((PetShuXing)pet.petShuXing.get(0)).name);
                     if (saleClassifyGood == null) {
-                        /* 121 */             System.out.println(((PetShuXing)pet.petShuXing.get(0)).type);
+                        /* 121 */             System.out.println(((PetShuXing)pet.petShuXing.get(0)).icon);
                         /* 122 */             return;
                         /*     */           }
                     /* 124 */           Vo_12269_0 vo_12269_0 = new Vo_12269_0();
@@ -142,10 +142,10 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                     /* 139 */           int time = (int)(System.currentTimeMillis() / 1000L);
                     /* 140 */           saleGood.setStartTime(Integer.valueOf(time));
                     /* 141 */           saleGood.setEndTime(Integer.valueOf(time - 604800));
-                    /* 142 */           saleGood.setGoodsId(((PetShuXing)pet.petShuXing.get(0)).auto_fight);
+                    /* 142 */           saleGood.setGoodsId(((PetShuXing)pet.petShuXing.get(0)).iid_str);
                     /* 143 */           saleGood.setName(saleClassifyGood.getStr());
                     /* 144 */           saleGood.setPrice(Integer.valueOf(price));
-                    /* 145 */           saleGood.setReqLevel(Integer.valueOf(((PetShuXing)pet.petShuXing.get(0)).skill));
+                    /* 145 */           saleGood.setReqLevel(Integer.valueOf(((PetShuXing)pet.petShuXing.get(0)).level));
                     /* 146 */           saleGood.setOwnerUuid(chara.uuid);
                     /* 147 */           saleGood.setStr(str);
                     /* 148 */           saleGood.setGoods(JSONUtils.toJSONString(pet));

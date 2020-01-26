@@ -180,13 +180,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                 list.add(petbeibao);
 
+                ((PetShuXing) petbeibao.petShuXing.get(0)).enchant = 0;
+
                 ((PetShuXing) petbeibao.petShuXing.get(0)).enchant_nimbus = 0;
 
-                ((PetShuXing) petbeibao.petShuXing.get(0)).max_enchant_nimbus = 0;
+                ((PetShuXing) petbeibao.petShuXing.get(0)).mount_type = 1;
 
-                ((PetShuXing) petbeibao.petShuXing.get(0)).suit_light_effect = 1;
-
-                ((PetShuXing) petbeibao.petShuXing.get(0)).hide_mount = jieshu;
+                ((PetShuXing) petbeibao.petShuXing.get(0)).capacity_level = jieshu;
 
                 PetShuXing shuXing = new PetShuXing();
 
@@ -194,17 +194,17 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                 shuXing.type1 = 2;
 
-                shuXing.accurate = (4 * (jieshu - 1));
+                shuXing.phy_power = (4 * (jieshu - 1));
 
-                shuXing.mana = (4 * (jieshu - 1));
+                shuXing.mag_power = (4 * (jieshu - 1));
 
-                shuXing.wiz = (3 * (jieshu - 1));
+                shuXing.def = (3 * (jieshu - 1));
 
-                shuXing.all_polar = 0;
+                shuXing.all_attrib = 0;
+
+                shuXing.upgrade_immortal = 0;
 
                 shuXing.upgrade_magic = 0;
-
-                shuXing.upgrade_total = 0;
 
                 petbeibao.petShuXing.add(shuXing);
 
@@ -314,13 +314,13 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                 list.add(petbeibao);
 
+                ((PetShuXing) petbeibao.petShuXing.get(0)).enchant = 0;
+
                 ((PetShuXing) petbeibao.petShuXing.get(0)).enchant_nimbus = 0;
 
-                ((PetShuXing) petbeibao.petShuXing.get(0)).max_enchant_nimbus = 0;
+                ((PetShuXing) petbeibao.petShuXing.get(0)).mount_type = 1;
 
-                ((PetShuXing) petbeibao.petShuXing.get(0)).suit_light_effect = 1;
-
-                ((PetShuXing) petbeibao.petShuXing.get(0)).hide_mount = jieshu;
+                ((PetShuXing) petbeibao.petShuXing.get(0)).capacity_level = jieshu;
 
                 PetShuXing shuXing = new PetShuXing();
 
@@ -328,17 +328,17 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
                 shuXing.type1 = 2;
 
-                shuXing.accurate = (4 * (jieshu - 1));
+                shuXing.phy_power = (4 * (jieshu - 1));
 
-                shuXing.mana = (4 * (jieshu - 1));
+                shuXing.mag_power = (4 * (jieshu - 1));
 
-                shuXing.wiz = (3 * (jieshu - 1));
+                shuXing.def = (3 * (jieshu - 1));
 
-                shuXing.all_polar = 0;
+                shuXing.all_attrib = 0;
+
+                shuXing.upgrade_immortal = 0;
 
                 shuXing.upgrade_magic = 0;
-
-                shuXing.upgrade_total = 0;
 
                 petbeibao.petShuXing.add(shuXing);
 
@@ -791,11 +791,11 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                         /*  335 */
                         PetShuXing petShuXing = (PetShuXing) ((Petbeibao) chara1.pets.get(i)).petShuXing.get(0);
                         /*  336 */
-                        base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
+                        base_pet_dh = (int) (0.29D * petShuXing.level * petShuXing.level * petShuXing.level);
                         /*  337 */
-                        int martial = 878 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
+                        int martial = 878 * petShuXing.level / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1);
                         /*  338 */
-                        petShuXing.martial += martial;
+                        petShuXing.longevity += martial;
                         /*  339 */
                         Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         /*  340 */
@@ -2226,7 +2226,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     /*  893 */
                     if (((Petbeibao) chara1.pets.get(i)).id == chara1.chongwuchanzhanId) {
                         /*  894 */
-                        ((PetShuXing) ((Petbeibao) chara1.pets.get(i)).petShuXing.get(0)).intimacy += 76 * ((PetShuXing) ((Petbeibao) chara1.pets.get(i)).petShuXing.get(0)).skill;
+                        ((PetShuXing) ((Petbeibao) chara1.pets.get(i)).petShuXing.get(0)).martial += 76 * ((PetShuXing) ((Petbeibao) chara1.pets.get(i)).petShuXing.get(0)).level;
                         /*  895 */
                         List<Petbeibao> list = new ArrayList();
                         /*  896 */

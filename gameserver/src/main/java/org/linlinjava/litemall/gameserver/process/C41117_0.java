@@ -36,7 +36,7 @@
 /*    */     
 /* 37 */     for (int i = 0; i < chara.pets.size(); i++) {
 /* 38 */       if (((Petbeibao)chara.pets.get(i)).no == no) {
-/* 39 */         if ((((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).skill >= chara.level) || (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).skill >= 120)) {
+/* 39 */         if ((((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).level >= chara.level) || (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).level >= 120)) {
 /* 40 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 41 */           vo_20481_0.msg = "无法使用";
 /* 42 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -45,8 +45,8 @@
 /*    */         }
 /* 46 */         id = ((Petbeibao)chara.pets.get(i)).id;
 /* 47 */         GameUtil.addpetjingyan((Petbeibao)chara.pets.get(i), num1 * 500000, chara);
-/* 48 */         pot = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).pot;
-/* 49 */         resist_poison = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).resist_poison;
+/* 48 */         pot = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).exp;
+/* 49 */         resist_poison = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).exp_to_next_level;
 /* 50 */         break;
 /*    */       }
 /*    */     }

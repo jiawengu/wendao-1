@@ -6,21 +6,21 @@ public class PetShuXing {
     public int type1 = 1;
 
 
-    public String str = "";
-    public int max_life;
+    public String name = "";
+    public int life;
     /**
      * 防御
      */
-    public int def;
+    public int max_life;
     /**
      * 法力
      */
-    public int max_mana;
+    public int mana;
     /**
      * 敏捷
      */
-    public int dex;
-    public int skill;
+    public int max_mana;
+    public int level;
     /**
      * 破防
      */
@@ -28,134 +28,135 @@ public class PetShuXing {
     /**
      * 相性点
      */
-    public int polar_point;
+    public int rank;
     /**
      * 相性
      */
-    public int metal;
-    public int stamina;
+    public int polar;
+    public int polar_point;
     /**
      * icon
      */
+    public int icon;
     public int type;
-    public int durability;
-    public int phy_power;
-    public int mag_power;
-    public int life;
-    public int speed;
+    public int str;
+    public int wiz;
+    public int con;
+    public int dex;
     /**
      * 准确
      */
-    public int accurate;
+    public int phy_power;
     /**
      * 魔法
      */
-    public int mana;
+    public int mag_power;
     /**
      * 灵敏/速度
      */
-    public int parry;
+    public int speed;
     /**
      * 灵力
      */
-    public int wiz;
-    public int shape;
-    public int pot;
-    public int loyalty;
+    public int def;
+    public int intimacy;
+    public int exp;
+    public int resist_point;
     /**
      * 抗木
      */
+    public int resist_metal;
     public int resist_wood;
     public int resist_water;
     public int resist_fire;
     public int resist_earth;
-    public int exp_to_next_level;
+    public int resist_poison;
     public int resist_frozen;
     public int resist_sleep;
     public int resist_forgotten;
-    public int resist_confusion;
     /**
      * 寿命
      */
-    public int longevity;
+    public int resist_confusion;
     /**
      * 武学
      */
-    public int martial;
-    public int resist_point;
+    public int longevity;
+    public int shape;
     /**
      * 亲密
      */
-    public int intimacy;
+    public int martial;
     /**
      * 上月武学
      */
+    public int mon_martial;
     public int last_mon_martial;
-    public int mon_tao_rank;
-    public int double_hit;
-    public int resist_poison;
-    public int passive_mode;
+    public int loyalty;
+    public int exp_to_next_level;
+    public int portrait;
+    public int pet_life_shape;
     public int pet_mana_shape;
     public int pet_speed_shape;
     public int pet_phy_shape;
     public int pet_mag_shape;
-    public int rank;
+    public int locked;
+    public int recognize_recognized;
     public int pet_upgraded;
-    public int party_stage_party_name;
-    public int left_time_to_delete;
+    public int extra_life;
     public int extra_mana;
-    public int have_coin_pwd;
+    public int phy_rebuild_level;
     public int mag_rebuild_level;
-    public int raw_name;
-    public int suit_light_effect;
+    public int mount_type;
+    public int phy_rebuild_rate;
     public int mag_rebuild_rate;
-    public int life_add_temp;
+    public int phy_rebuild_add;
     public int mag_rebuild_add;
     public int pet_life_shape_temp;
     public int pet_mana_shape_temp;
     public int pet_speed_shape_temp;
     public int pet_phy_shape_temp;
     public int pet_mag_shape_temp;
-    public int evolve_degree;
+    public int life_add_temp;
     public int mana_add_temp;
-    public int phy_power_add_temp;
-    public int def_add_temp;
-    public int mag_power_add_temp;
     public int speed_add_temp;
-    public int shuadaojiji_rulvling;
-    public int recognize_recognized;
+    public int phy_power_add_temp;
+    public int mag_power_add_temp;
+    public int lock_exp;
+    public int gift;
     /**
      * 携带等级
      */
-    public int attrib;
+    public int req_level;
     /**
      * 点化灵气
      */
-    public int enchant_nimbus;
+    public int enchant;
     /**
      * 最大点化灵气
      */
+    public int enchant_nimbus;
     public int max_enchant_nimbus;
-    public int card_type;
     /**
      * 羽化灵气
      */
-    public int eclosion_nimbus;
+    public int eclosion;
     /**
      * 最大羽化灵气
      */
+    public int eclosion_nimbus;
     public int max_eclosion_nimbus;
-    public int status_all_resist_except_add;
-    public int status_yanchuan_shenjiao = 0;
-    public String insider_level = "";
+    public int eclosion_stage = 0;
+    public String evolve = "";
+    public int life_effect;
     public int mana_effect;
-    public int attack_effect;
+    public int speed_effect;
     public int phy_effect;
-    public int mag_effect;
     /**
      * 物理抗性
      */
-    public int phy_absorb;
+    public int mag_effect;
+    public int extra_life_effect;
     public int extra_mana_effect;
     public int extra_mag_effect;
     public int extra_phy_effect;
@@ -170,34 +171,33 @@ public class PetShuXing {
     public int morph_speed_stat;
     public int morph_phy_stat;
     public int morph_mag_stat;
-    public int free_unlock_exp_times;
+    public int mount_attrib_end_time;
     public int mount_attribmove_speed;
     public int capacity_level;
-    public int hide_mount;
-    public int equip_perfect_percent;
-    public int deadline;
     public int merge_rate;
+    public int hide_mount;
+    public int deadline;
+    public int dunwu_times;
     public int dunwu_rate;
     public int pet_anger;
-    public int status_huanbing_zhiji;
-    public int gm_attribsmax_life;
     public int gm_attribsmax_mana;
     public int gm_attribsphy_power;
     public int gm_attribsmag_power;
     public int gm_attribsdef;
     public int gm_attribsspeed;
-    public int limit_use_time;
+    public int marriage_couple_gid;
+    public int has_upgraded;
+    public int phy_power_without_intimacy;
     public int mag_power_without_intimacy;
     public int def_without_intimacy;
     public int origin_intimacy;
-    public int douchong_rank;
+    public int dye_icon;
     public int fasion_id;
-    public int fasion_visible;
-    public String auto_fight = "";
-    public String suit_polar = "";
-    public int all_polar = 0;
+    public String iid_str = "";
+    public String raw_name = "";
+    public int all_attrib = 0;
+    public int upgrade_immortal = 0;
     public int upgrade_magic = 0;
-    public int upgrade_total = 0;
-    public int silver_coin;
+    public int nimbus;
 }
 

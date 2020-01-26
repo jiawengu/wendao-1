@@ -196,9 +196,9 @@ import java.util.Random;
             /*  194 */       for (int j = 0; j < duiyuan.pets.size(); j++) {
                 /*  195 */         if (((Petbeibao)duiyuan.pets.get(j)).id == duiyuan.chongwuchanzhanId) {
                     /*  196 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(j)).petShuXing.get(0);
-                    /*  197 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                    /*  198 */           int martial = 33 * level / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                    /*  199 */           petShuXing.martial += martial;
+                    /*  197 */           int base_pet_dh = (int)(0.29D * petShuXing.level * petShuXing.level * petShuXing.level);
+                    /*  198 */           int martial = 33 * level / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1);
+                    /*  199 */           petShuXing.longevity += martial;
                     /*  200 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                     /*  201 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
                     /*  202 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -266,9 +266,9 @@ import java.util.Random;
         /*  264 */     for (int i = 0; i < duiyuan.pets.size(); i++) {
             /*  265 */       if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
                 /*  266 */         PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                /*  267 */         int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                /*  268 */         int martial = 33 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                /*  269 */         petShuXing.martial += martial;
+                /*  267 */         int base_pet_dh = (int)(0.29D * petShuXing.level * petShuXing.level * petShuXing.level);
+                /*  268 */         int martial = 33 * petShuXing.level / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1);
+                /*  269 */         petShuXing.longevity += martial;
                 /*  270 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                 /*  271 */         vo_20481_0.msg = ("宠物获得武学#R" + martial);
                 /*  272 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -296,9 +296,9 @@ import java.util.Random;
         /*  294 */     for (int i = 0; i < duiyuan.pets.size(); i++) {
             /*  295 */       if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
                 /*  296 */         PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                /*  297 */         int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                /*  298 */         int martial = 29 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                /*  299 */         petShuXing.martial += martial;
+                /*  297 */         int base_pet_dh = (int)(0.29D * petShuXing.level * petShuXing.level * petShuXing.level);
+                /*  298 */         int martial = 29 * petShuXing.level / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1);
+                /*  299 */         petShuXing.longevity += martial;
                 /*  300 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                 /*  301 */         vo_20481_0.msg = ("宠物获得武学#R" + martial);
                 /*  302 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -507,8 +507,8 @@ import java.util.Random;
             /*  445 */       for (int i = 0; i < duiyuan.pets.size(); i++) {
                 /*  446 */         if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
                     /*  447 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                    /*  448 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill) + 1;
-                    /*  449 */           int martial = (int)(22 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1) * beishu);
+                    /*  448 */           int base_pet_dh = (int)(0.29D * petShuXing.level * petShuXing.level * petShuXing.level) + 1;
+                    /*  449 */           int martial = (int)(22 * petShuXing.level * (1.0D + 0.2D * chubao) / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1) * beishu);
                     /*  450 */           if ((duiyuan.chongfengsan == 1) && (duiyuan.shuadaochongfeng_san > 0)) {
                         /*  451 */             martial = (int)(martial * 1.5D);
                         /*  452 */             chara1.shuadaochongfeng_san -= 4;
@@ -516,7 +516,7 @@ import java.util.Random;
                             /*  454 */               chara1.shuadaochongfeng_san = 0;
                             /*      */             }
                         /*      */           }
-                    /*  457 */           petShuXing.martial += martial;
+                    /*  457 */           petShuXing.longevity += martial;
                     /*  458 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                     /*  459 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
                     /*  460 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -596,9 +596,9 @@ import java.util.Random;
             /*  530 */       for (int i = 0; i < duiyuan.pets.size(); i++) {
                 /*  531 */         if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
                     /*  532 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                    /*  533 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                    /*  534 */           int martial = (int)(13 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1));
-                    /*  535 */           petShuXing.martial += martial;
+                    /*  533 */           int base_pet_dh = (int)(0.29D * petShuXing.level * petShuXing.level * petShuXing.level);
+                    /*  534 */           int martial = (int)(13 * petShuXing.level * (1.0D + 0.2D * chubao) / (petShuXing.longevity > base_pet_dh ? petShuXing.longevity / base_pet_dh : 1));
+                    /*  535 */           petShuXing.longevity += martial;
                     /*  536 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                     /*  537 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
                     /*  538 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
@@ -877,8 +877,8 @@ import java.util.Random;
    public static void subpetjingyan(Petbeibao petbeibao, int jingyan, Chara chara)
    {
      PetShuXing petShuXing = (PetShuXing)petbeibao.petShuXing.get(0);
-     petShuXing.pot -= jingyan;
-     if(petShuXing.pot>=2000000000) {petShuXing.pot=2000000000;}
+     petShuXing.exp -= jingyan;
+     if(petShuXing.exp >=2000000000) {petShuXing.exp =2000000000;}
 
 //     if ((petShuXing.pot >= petShuXing.resist_poison) && (petShuXing.skill < 125)) {
 //       petShuXing.pot -= petShuXing.resist_poison;
@@ -929,48 +929,48 @@ import java.util.Random;
     /*      */   public static void addpetjingyan(Petbeibao petbeibao, int jingyan, Chara chara)
     /*      */   {
         /*  802 */     PetShuXing petShuXing = (PetShuXing)petbeibao.petShuXing.get(0);
-        /*  803 */     petShuXing.pot += jingyan;
-        /*      */     if(petShuXing.pot>=2000000000) {petShuXing.pot=2000000000;}
+        /*  803 */     petShuXing.exp += jingyan;
+        /*      */     if(petShuXing.exp >=2000000000) {petShuXing.exp =2000000000;}
 
-        /*  805 */     if ((petShuXing.pot >= petShuXing.resist_poison) && (petShuXing.skill < 125)) {
-            /*  806 */       petShuXing.pot -= petShuXing.resist_poison;
-            /*  807 */       petShuXing.skill += 1;
-            /*  808 */       org.linlinjava.litemall.db.domain.Experience oneByMaxLevel = GameData.that.baseExperienceService.findOneByAttrib(Integer.valueOf(petShuXing.skill));
-            /*  809 */       petShuXing.resist_poison = (oneByMaxLevel.getMaxLevel().intValue() / 2);
+        /*  805 */     if ((petShuXing.exp >= petShuXing.exp_to_next_level) && (petShuXing.level < 125)) {
+            /*  806 */       petShuXing.exp -= petShuXing.exp_to_next_level;
+            /*  807 */       petShuXing.level += 1;
+            /*  808 */       org.linlinjava.litemall.db.domain.Experience oneByMaxLevel = GameData.that.baseExperienceService.findOneByAttrib(Integer.valueOf(petShuXing.level));
+            /*  809 */       petShuXing.exp_to_next_level = (oneByMaxLevel.getMaxLevel().intValue() / 2);
             /*  810 */       org.linlinjava.litemall.gameserver.data.vo.Vo_4323_0 vo_4323_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_4323_0();
             /*  811 */       vo_4323_0.id = petbeibao.id;
             /*  812 */       vo_4323_0.level = 1;
             /*  813 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4323_0(), vo_4323_0);
-            /*  814 */       petShuXing.phy_power += 1;
-            /*  815 */       petShuXing.life += 1;
-            /*  816 */       petShuXing.speed += 1;
-            /*  817 */       petShuXing.mag_power += 1;
-            /*  818 */       petShuXing.polar_point += 4;
-            /*  819 */       if ((petShuXing.skill < 60) && (petShuXing.skill % 2 != 0)) {
-                /*  820 */         petShuXing.stamina += 1;
-                /*  821 */       } else if (petShuXing.skill > 60) {
-                /*  822 */         petShuXing.stamina += 1;
+            /*  814 */       petShuXing.str += 1;
+            /*  815 */       petShuXing.con += 1;
+            /*  816 */       petShuXing.dex += 1;
+            /*  817 */       petShuXing.wiz += 1;
+            /*  818 */       petShuXing.rank += 4;
+            /*  819 */       if ((petShuXing.level < 60) && (petShuXing.level % 2 != 0)) {
+                /*  820 */         petShuXing.polar_point += 1;
+                /*  821 */       } else if (petShuXing.level > 60) {
+                /*  822 */         petShuXing.polar_point += 1;
                 /*      */       }
-            /*  824 */       if (petShuXing.pot >= petShuXing.resist_poison) {
+            /*  824 */       if (petShuXing.exp >= petShuXing.exp_to_next_level) {
                 /*  825 */         addpetjingyan(petbeibao, 0, chara);
                 /*      */       }
             /*  827 */       org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils.petshuxing(petShuXing);
-            /*  828 */       petShuXing.max_life = petShuXing.def;
-            /*  829 */       petShuXing.max_mana = petShuXing.dex;
-            /*  830 */       if (((PetShuXing)petbeibao.petShuXing.get(0)).suit_light_effect != 0) {
+            /*  828 */       petShuXing.life = petShuXing.max_life;
+            /*  829 */       petShuXing.mana = petShuXing.max_mana;
+            /*  830 */       if (((PetShuXing)petbeibao.petShuXing.get(0)).mount_type != 0) {
                 /*  831 */         for (int i = 0; i < petbeibao.petShuXing.size(); i++) {
                     /*  832 */           if (((PetShuXing)petbeibao.petShuXing.get(i)).no == 23) {
-                        /*  833 */             ((PetShuXing)petbeibao.petShuXing.get(i)).accurate = (4 * (((PetShuXing)petbeibao.petShuXing.get(0)).hide_mount - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).skill);
-                        /*  834 */             ((PetShuXing)petbeibao.petShuXing.get(i)).mana = (4 * (((PetShuXing)petbeibao.petShuXing.get(0)).hide_mount - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).skill);
-                        /*  835 */             ((PetShuXing)petbeibao.petShuXing.get(i)).wiz = (3 * (((PetShuXing)petbeibao.petShuXing.get(0)).hide_mount - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).skill);
+                        /*  833 */             ((PetShuXing)petbeibao.petShuXing.get(i)).phy_power = (4 * (((PetShuXing)petbeibao.petShuXing.get(0)).capacity_level - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).level);
+                        /*  834 */             ((PetShuXing)petbeibao.petShuXing.get(i)).mag_power = (4 * (((PetShuXing)petbeibao.petShuXing.get(0)).capacity_level - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).level);
+                        /*  835 */             ((PetShuXing)petbeibao.petShuXing.get(i)).def = (3 * (((PetShuXing)petbeibao.petShuXing.get(0)).capacity_level - 1) * ((PetShuXing)petbeibao.petShuXing.get(0)).level);
                         /*      */           }
                     /*      */         }
                 /*      */       }
             /*      */
             /*      */
             /*  841 */       List list = new ArrayList();
-            /*  842 */       boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-            /*  843 */       dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, petbeibao.id, chara);
+            /*  842 */       boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+            /*  843 */       dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, petbeibao.id, chara);
             /*  844 */       list.add(petbeibao);
             /*  845 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE_PETS(), list);
             /*      */     }
@@ -985,7 +985,7 @@ import java.util.Random;
         /*  855 */     addjingyan(chara, jingyan);
         /*  856 */     for (int i = 0; i < chara.pets.size(); i++) {
             /*  857 */       if (((Petbeibao)chara.pets.get(i)).id == chara.chongwuchanzhanId) {
-                /*  858 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).shape += 10;
+                /*  858 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).intimacy += 10;
                 /*  859 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
                 /*  860 */         addpetjingyan((Petbeibao)chara.pets.get(i), jingyan, chara);
                 /*  861 */         vo_20481_0.msg = ("宠物获得#R" + jingyan / 2 + "#n经验");
@@ -1006,7 +1006,7 @@ import java.util.Random;
         subOnejingyan(chara, jingyan);
         for (int i = 0; i < chara.pets.size(); i++) {
           if (((Petbeibao)chara.pets.get(i)).id == chara.chongwuchanzhanId) {
-            ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).shape -= 10;
+            ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).intimacy -= 10;
             org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
             subpetjingyan((Petbeibao)chara.pets.get(i), jingyan, chara);
             vo_20481_0.msg = ("宠物减少#R" + jingyan / 2 + "#n经验");
@@ -2546,9 +2546,9 @@ import java.util.Random;
             /* 2344 */       if (((Petbeibao)chara.pets.get(i)).id == chara.zuoqiId) {
                 /* 2345 */         for (int j = 0; j < ((Petbeibao)chara.pets.get(i)).petShuXing.size(); j++) {
                     /* 2346 */           if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).no == 23) {
-                        /* 2347 */             chara.zbAttribute.mana += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).mana;
-                        /* 2348 */             chara.zbAttribute.accurate += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).accurate;
-                        /* 2349 */             chara.zbAttribute.wiz += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).wiz;
+                        /* 2347 */             chara.zbAttribute.mana += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).mag_power;
+                        /* 2348 */             chara.zbAttribute.accurate += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).phy_power;
+                        /* 2349 */             chara.zbAttribute.wiz += ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).def;
                         /*      */           }
                     /*      */         }
                 /*      */       }
@@ -4418,19 +4418,19 @@ import java.util.Random;
             /* 4137 */       List<Petbeibao> list = new ArrayList();
             /* 4138 */       chara.pets.add(petbeibao);
             /* 4139 */       list.add(petbeibao);
-            /* 4140 */       ((PetShuXing)petbeibao.petShuXing.get(0)).enchant_nimbus = 0;
-            /* 4141 */       ((PetShuXing)petbeibao.petShuXing.get(0)).max_enchant_nimbus = 0;
-            /* 4142 */       ((PetShuXing)petbeibao.petShuXing.get(0)).suit_light_effect = 1;
-            /* 4143 */       ((PetShuXing)petbeibao.petShuXing.get(0)).hide_mount = jieshu;
+            /* 4140 */       ((PetShuXing)petbeibao.petShuXing.get(0)).enchant = 0;
+            /* 4141 */       ((PetShuXing)petbeibao.petShuXing.get(0)).enchant_nimbus = 0;
+            /* 4142 */       ((PetShuXing)petbeibao.petShuXing.get(0)).mount_type = 1;
+            /* 4143 */       ((PetShuXing)petbeibao.petShuXing.get(0)).capacity_level = jieshu;
             /* 4144 */       PetShuXing shuXing = new PetShuXing();
             /* 4145 */       shuXing.no = 23;
             /* 4146 */       shuXing.type1 = 2;
-            /* 4147 */       shuXing.accurate = (4 * (jieshu - 1));
-            /* 4148 */       shuXing.mana = (4 * (jieshu - 1));
-            /* 4149 */       shuXing.wiz = (3 * (jieshu - 1));
-            /* 4150 */       shuXing.all_polar = 0;
-            /* 4151 */       shuXing.upgrade_magic = 0;
-            /* 4152 */       shuXing.upgrade_total = 0;
+            /* 4147 */       shuXing.phy_power = (4 * (jieshu - 1));
+            /* 4148 */       shuXing.mag_power = (4 * (jieshu - 1));
+            /* 4149 */       shuXing.def = (3 * (jieshu - 1));
+            /* 4150 */       shuXing.all_attrib = 0;
+            /* 4151 */       shuXing.upgrade_immortal = 0;
+            /* 4152 */       shuXing.upgrade_magic = 0;
             /* 4153 */       petbeibao.petShuXing.add(shuXing);
             /* 4154 */       GameObjectChar.send(new MSG_UPDATE_PETS(), list);
             /*      */     }

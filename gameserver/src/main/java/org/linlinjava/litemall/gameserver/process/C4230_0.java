@@ -31,7 +31,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 30 */     for (int i = 0; i < chara.pets.size(); i++) {
 /* 31 */       if (((Petbeibao)chara.pets.get(i)).id == id)
 /*    */       {
-/* 33 */         if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).skill >= 50) {
+/* 33 */         if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).level >= 50) {
 /* 34 */           owner_id = 10;
 /*    */         }
 /* 36 */         if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).penetrate == 1) {

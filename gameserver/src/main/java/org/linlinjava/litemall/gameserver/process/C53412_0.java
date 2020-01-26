@@ -41,7 +41,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*  40 */     if (isHide == 0) {
 /*  41 */       for (int i = 0; i < chara.pets.size(); i++) {
 /*  42 */         if (petId == ((Petbeibao)chara.pets.get(i)).id) {
-/*  43 */           chara.zuoqiwaiguan = (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).type + 1000);
+/*  43 */           chara.zuoqiwaiguan = (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).icon + 1000);
 /*  44 */           chara.zuowaiguan = typeMounts(chara.zuoqiwaiguan, chara.menpai, chara.sex - 1);
 /*     */         }
 /*     */       }

@@ -281,7 +281,7 @@
         /*     */   }
     /*     */
     /*     */
-    /*     */   public static java.util.Map<Object, Object> Vo_65527_0(Vo_65527_0 obj1)
+    /*     */   public static java.util.Map<Object, Object> MSG_UPDATE(Vo_65527_0 obj1)
     /*     */   {
         /* 293 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
         /* 295 */     objectObjectHashMap.put("name", obj1.name);

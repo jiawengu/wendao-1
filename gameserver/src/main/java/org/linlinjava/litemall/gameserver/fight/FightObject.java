@@ -455,18 +455,18 @@ public class FightObject {
         }
 
         this.str = name;
-        this.guaiwulevel = ((PetShuXing)petbeibao.petShuXing.get(0)).skill;
-        this.shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_life * 0.8D);
-        this.mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_mana * 0.8D);
-        this.max_mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).dex * 0.8D);
-        this.max_shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).def * 0.8D);
-        this.fashang = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mana * 0.8D);
-        this.parry = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).parry * 0.8D);
-        this.accurate = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).accurate * 0.8D);
-        this.fangyu = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).wiz * 0.8D);
-        this.org_icon = ((PetShuXing)petbeibao.petShuXing.get(0)).type;
-        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
+        this.guaiwulevel = ((PetShuXing)petbeibao.petShuXing.get(0)).level;
+        this.shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).life * 0.8D);
+        this.mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mana * 0.8D);
+        this.max_mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_mana * 0.8D);
+        this.max_shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_life * 0.8D);
+        this.fashang = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mag_power * 0.8D);
+        this.parry = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).speed * 0.8D);
+        this.accurate = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).phy_power * 0.8D);
+        this.fangyu = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).def * 0.8D);
+        this.org_icon = ((PetShuXing)petbeibao.petShuXing.get(0)).icon;
+        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, 123456, skills);
         this.type = 4;
     }
     public FightObject(T_FightObject t_fightObject, int ttt_level){
@@ -569,17 +569,17 @@ public class FightObject {
     public FightObject(String name) {
         this.str = name;
         Petbeibao petbeibao = this.petCreate(name);
-        this.shengming = ((PetShuXing)petbeibao.petShuXing.get(0)).max_life;
-        this.mofa = ((PetShuXing)petbeibao.petShuXing.get(0)).max_mana;
-        this.max_mofa = ((PetShuXing)petbeibao.petShuXing.get(0)).dex;
-        this.max_shengming = ((PetShuXing)petbeibao.petShuXing.get(0)).def;
-        this.fashang = ((PetShuXing)petbeibao.petShuXing.get(0)).mana;
-        this.parry = ((PetShuXing)petbeibao.petShuXing.get(0)).parry;
-        this.accurate = ((PetShuXing)petbeibao.petShuXing.get(0)).accurate;
-        this.fangyu = ((PetShuXing)petbeibao.petShuXing.get(0)).wiz;
-        this.org_icon = ((PetShuXing)petbeibao.petShuXing.get(0)).type;
-        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, "");
+        this.shengming = ((PetShuXing)petbeibao.petShuXing.get(0)).life;
+        this.mofa = ((PetShuXing)petbeibao.petShuXing.get(0)).mana;
+        this.max_mofa = ((PetShuXing)petbeibao.petShuXing.get(0)).max_mana;
+        this.max_shengming = ((PetShuXing)petbeibao.petShuXing.get(0)).max_life;
+        this.fashang = ((PetShuXing)petbeibao.petShuXing.get(0)).mag_power;
+        this.parry = ((PetShuXing)petbeibao.petShuXing.get(0)).speed;
+        this.accurate = ((PetShuXing)petbeibao.petShuXing.get(0)).phy_power;
+        this.fangyu = ((PetShuXing)petbeibao.petShuXing.get(0)).def;
+        this.org_icon = ((PetShuXing)petbeibao.petShuXing.get(0)).icon;
+        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, 123456, "");
         this.type = 4;
     }
 
@@ -616,28 +616,28 @@ public class FightObject {
     }
 
     public FightObject(Petbeibao pet) {
-        int life = ((PetShuXing)pet.petShuXing.get(0)).def;
-        if (((PetShuXing)pet.petShuXing.get(0)).max_life > ((PetShuXing)pet.petShuXing.get(0)).def) {
-            life = ((PetShuXing)pet.petShuXing.get(0)).max_life;
+        int life = ((PetShuXing)pet.petShuXing.get(0)).max_life;
+        if (((PetShuXing)pet.petShuXing.get(0)).life > ((PetShuXing)pet.petShuXing.get(0)).max_life) {
+            life = ((PetShuXing)pet.petShuXing.get(0)).life;
         }
 
-        this.str = ((PetShuXing)pet.petShuXing.get(0)).str;
+        this.str = ((PetShuXing)pet.petShuXing.get(0)).name;
         this.shengming = life;
-        this.mofa = ((PetShuXing)pet.petShuXing.get(0)).dex;
-        this.max_mofa = ((PetShuXing)pet.petShuXing.get(0)).max_mana;
+        this.mofa = ((PetShuXing)pet.petShuXing.get(0)).max_mana;
+        this.max_mofa = ((PetShuXing)pet.petShuXing.get(0)).mana;
         this.max_shengming = life;
-        this.fashang = ((PetShuXing)pet.petShuXing.get(0)).mana;
-        this.parry = ((PetShuXing)pet.petShuXing.get(0)).parry;
-        this.accurate = ((PetShuXing)pet.petShuXing.get(0)).accurate;
-        this.fangyu = ((PetShuXing)pet.petShuXing.get(0)).wiz;
-        this.org_icon = ((PetShuXing)pet.petShuXing.get(0)).type;
-        boolean isfagong = ((PetShuXing)pet.petShuXing.get(0)).rank > ((PetShuXing)pet.petShuXing.get(0)).pet_mag_shape;
-        this.skillsList = dujineng(1, ((PetShuXing)pet.petShuXing.get(0)).metal, ((PetShuXing)pet.petShuXing.get(0)).skill, isfagong, pet.id, "");
+        this.fashang = ((PetShuXing)pet.petShuXing.get(0)).mag_power;
+        this.parry = ((PetShuXing)pet.petShuXing.get(0)).speed;
+        this.accurate = ((PetShuXing)pet.petShuXing.get(0)).phy_power;
+        this.fangyu = ((PetShuXing)pet.petShuXing.get(0)).def;
+        this.org_icon = ((PetShuXing)pet.petShuXing.get(0)).icon;
+        boolean isfagong = ((PetShuXing)pet.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)pet.petShuXing.get(0)).pet_phy_shape;
+        this.skillsList = dujineng(1, ((PetShuXing)pet.petShuXing.get(0)).polar, ((PetShuXing)pet.petShuXing.get(0)).level, isfagong, pet.id, "");
         this.type = 2;
         this.autofight_skillno = pet.autofight_skillno;
         this.autofight_select = pet.autofight_select;
         this.autofight_skillaction = pet.autofight_skillaction;
-        this.friend = ((PetShuXing)pet.petShuXing.get(0)).martial*360/1000;
+        this.friend = ((PetShuXing)pet.petShuXing.get(0)).longevity *360/1000;
         this.durability = 32768;
         this.rank = 2;
 
@@ -651,7 +651,7 @@ public class FightObject {
         }
 
         //亲密度
-        int intimacy = pet.petShuXing.get(0).intimacy;
+        int intimacy = pet.petShuXing.get(0).martial;
         T_Pet_INTIMACY t_pet_intimacy = BasePetIntimacyService.getT_Pet_INTIMACY(str, intimacy);
         if(null!=t_pet_intimacy){
             //复活率
@@ -695,66 +695,66 @@ public class FightObject {
         Pet pet = GameData.that.basePetService.findOneByName(name);
         Petbeibao petbeibao = new Petbeibao();
         PetShuXing shuXing = new PetShuXing();
-        shuXing.type = pet.getIcon();
-        shuXing.passive_mode = pet.getIcon();
-        shuXing.attrib = pet.getLevelReq();
-        shuXing.str = pet.getName();
-        shuXing.skill = 1;
-        shuXing.pot = 0;
-        shuXing.resist_poison = 258;
-        shuXing.martial = 10000;
-        shuXing.suit_polar = pet.getName();
-        shuXing.auto_fight = shuXing.auto_fight + this.id;
+        shuXing.icon = pet.getIcon();
+        shuXing.portrait = pet.getIcon();
+        shuXing.req_level = pet.getLevelReq();
+        shuXing.name = pet.getName();
+        shuXing.level = 1;
+        shuXing.exp = 0;
+        shuXing.exp_to_next_level = 258;
+        shuXing.longevity = 10000;
+        shuXing.raw_name = pet.getName();
+        shuXing.iid_str = shuXing.iid_str + this.id;
         if (pet.getPolar().equals("金")) {
-            shuXing.metal = 1;
+            shuXing.polar = 1;
         }
 
         if (pet.getPolar().equals("木")) {
-            shuXing.metal = 2;
+            shuXing.polar = 2;
         }
 
         if (pet.getPolar().equals("水")) {
-            shuXing.metal = 3;
+            shuXing.polar = 3;
         }
 
         if (pet.getPolar().equals("火")) {
-            shuXing.metal = 4;
+            shuXing.polar = 4;
         }
 
         if (pet.getPolar().equals("土")) {
-            shuXing.metal = 5;
+            shuXing.polar = 5;
         }
 
-        shuXing.mana_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.attack_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.mag_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_absorb = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.life_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mana_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mag_effect = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.speed_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.pet_life_shape = shuXing.life_effect + 40;
         shuXing.pet_mana_shape = shuXing.mana_effect + 40;
-        shuXing.pet_speed_shape = shuXing.attack_effect + 40;
+        shuXing.pet_speed_shape = shuXing.speed_effect + 40;
         shuXing.pet_phy_shape = shuXing.phy_effect + 40;
         shuXing.pet_mag_shape = shuXing.mag_effect + 40;
-        shuXing.rank = shuXing.phy_absorb + 40;
-        shuXing.resist_point = shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank;
-        shuXing.skill = pet.getLevelReq();
-        shuXing.attrib = pet.getLevelReq();
-        int polar_point = shuXing.skill * 4;
-        int addpoint = FightManager.RANDOM.nextInt(polar_point - shuXing.skill * 3);
+        shuXing.shape = shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape;
+        shuXing.level = pet.getLevelReq();
+        shuXing.req_level = pet.getLevelReq();
+        int polar_point = shuXing.level * 4;
+        int addpoint = FightManager.RANDOM.nextInt(polar_point - shuXing.level * 3);
         polar_point -= addpoint;
-        shuXing.life = shuXing.skill + addpoint;
+        shuXing.con = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.mag_power = shuXing.skill + addpoint;
+        shuXing.wiz = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.phy_power = shuXing.skill + addpoint;
+        shuXing.str = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         int var10000 = polar_point - addpoint;
-        shuXing.speed = shuXing.skill + addpoint;
+        shuXing.dex = shuXing.level + addpoint;
         petbeibao.petShuXing.add(shuXing);
         BasicAttributesUtils.petshuxing(shuXing);
-        shuXing.max_life = shuXing.def;
-        shuXing.max_mana = shuXing.dex;
+        shuXing.life = shuXing.max_life;
+        shuXing.mana = shuXing.max_mana;
         petbeibao.petShuXing.add(shuXing);
         return petbeibao;
     }
@@ -763,64 +763,64 @@ public class FightObject {
         Pet pet = GameData.that.basePetService.findOneByName(name);
         Petbeibao petbeibao = new Petbeibao();
         PetShuXing shuXing = new PetShuXing();
-        shuXing.type = pet.getIcon();
-        shuXing.passive_mode = pet.getIcon();
-        shuXing.attrib = pet.getLevelReq();
-        shuXing.str = pet.getName();
-        shuXing.skill = level;
-        shuXing.pot = 0;
-        shuXing.resist_poison = 258;
-        shuXing.martial = 10000;
-        shuXing.suit_polar = pet.getName();
-        shuXing.auto_fight = shuXing.auto_fight + this.id;
+        shuXing.icon = pet.getIcon();
+        shuXing.portrait = pet.getIcon();
+        shuXing.req_level = pet.getLevelReq();
+        shuXing.name = pet.getName();
+        shuXing.level = level;
+        shuXing.exp = 0;
+        shuXing.exp_to_next_level = 258;
+        shuXing.longevity = 10000;
+        shuXing.raw_name = pet.getName();
+        shuXing.iid_str = shuXing.iid_str + this.id;
         if (pet.getPolar().equals("金")) {
-            shuXing.metal = 1;
+            shuXing.polar = 1;
         }
 
         if (pet.getPolar().equals("木")) {
-            shuXing.metal = 2;
+            shuXing.polar = 2;
         }
 
         if (pet.getPolar().equals("水")) {
-            shuXing.metal = 3;
+            shuXing.polar = 3;
         }
 
         if (pet.getPolar().equals("火")) {
-            shuXing.metal = 4;
+            shuXing.polar = 4;
         }
 
         if (pet.getPolar().equals("土")) {
-            shuXing.metal = 5;
+            shuXing.polar = 5;
         }
 
-        shuXing.mana_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.attack_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.mag_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_absorb = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.life_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mana_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mag_effect = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.speed_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.pet_life_shape = shuXing.life_effect + 40;
         shuXing.pet_mana_shape = shuXing.mana_effect + 40;
-        shuXing.pet_speed_shape = shuXing.attack_effect + 40;
+        shuXing.pet_speed_shape = shuXing.speed_effect + 40;
         shuXing.pet_phy_shape = shuXing.phy_effect + 40;
         shuXing.pet_mag_shape = shuXing.mag_effect + 40;
-        shuXing.rank = shuXing.phy_absorb + 40;
-        shuXing.resist_point = shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank;
-        int polar_point = shuXing.skill * 4;
+        shuXing.shape = shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape;
+        int polar_point = shuXing.level * 4;
         int addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.life = shuXing.skill + addpoint;
+        shuXing.con = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.mag_power = shuXing.skill + addpoint;
+        shuXing.wiz = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.phy_power = shuXing.skill + addpoint;
+        shuXing.str = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         int var10000 = polar_point - addpoint;
-        shuXing.speed = shuXing.skill + addpoint;
+        shuXing.dex = shuXing.level + addpoint;
         petbeibao.petShuXing.add(shuXing);
         BasicAttributesUtils.petshuxing(shuXing);
-        shuXing.max_life = shuXing.def;
-        shuXing.max_mana = shuXing.dex;
+        shuXing.life = shuXing.max_life;
+        shuXing.mana = shuXing.max_mana;
         petbeibao.petShuXing.add(shuXing);
         return petbeibao;
     }
@@ -828,64 +828,64 @@ public class FightObject {
         T_FightObject pet = GameData.that.baseFightObjectService.findOneByName(name);
         Petbeibao petbeibao = new Petbeibao();
         PetShuXing shuXing = new PetShuXing();
-        shuXing.type = pet.getIcon();
-        shuXing.passive_mode = pet.getIcon();
-        shuXing.attrib = level;
-        shuXing.str = pet.getName();
-        shuXing.skill = level;
-        shuXing.pot = 0;
-        shuXing.resist_poison = 258;
-        shuXing.martial = 10000;
-        shuXing.suit_polar = pet.getName();
-        shuXing.auto_fight = shuXing.auto_fight + this.id;
+        shuXing.icon = pet.getIcon();
+        shuXing.portrait = pet.getIcon();
+        shuXing.req_level = level;
+        shuXing.name = pet.getName();
+        shuXing.level = level;
+        shuXing.exp = 0;
+        shuXing.exp_to_next_level = 258;
+        shuXing.longevity = 10000;
+        shuXing.raw_name = pet.getName();
+        shuXing.iid_str = shuXing.iid_str + this.id;
         if (pet.getPolar().equals("金")) {
-            shuXing.metal = 1;
+            shuXing.polar = 1;
         }
 
         if (pet.getPolar().equals("木")) {
-            shuXing.metal = 2;
+            shuXing.polar = 2;
         }
 
         if (pet.getPolar().equals("水")) {
-            shuXing.metal = 3;
+            shuXing.polar = 3;
         }
 
         if (pet.getPolar().equals("火")) {
-            shuXing.metal = 4;
+            shuXing.polar = 4;
         }
 
         if (pet.getPolar().equals("土")) {
-            shuXing.metal = 5;
+            shuXing.polar = 5;
         }
 
-        shuXing.mana_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.attack_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.mag_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_absorb = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
-        shuXing.phy_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.life_effect = pet.getLife() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mana_effect = pet.getMana() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.phy_effect = pet.getPhyAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.mag_effect = pet.getMagAttack() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.speed_effect = pet.getSpeed() - 40 - FightManager.RANDOM.nextInt(20) - 10;
+        shuXing.pet_life_shape = shuXing.life_effect + 40;
         shuXing.pet_mana_shape = shuXing.mana_effect + 40;
-        shuXing.pet_speed_shape = shuXing.attack_effect + 40;
+        shuXing.pet_speed_shape = shuXing.speed_effect + 40;
         shuXing.pet_phy_shape = shuXing.phy_effect + 40;
         shuXing.pet_mag_shape = shuXing.mag_effect + 40;
-        shuXing.rank = shuXing.phy_absorb + 40;
-        shuXing.resist_point = shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank;
-        int polar_point = shuXing.skill * 4;
+        shuXing.shape = shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape;
+        int polar_point = shuXing.level * 4;
         int addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.life = shuXing.skill + addpoint;
+        shuXing.con = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.mag_power = shuXing.skill + addpoint;
+        shuXing.wiz = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         polar_point -= addpoint;
-        shuXing.phy_power = shuXing.skill + addpoint;
+        shuXing.str = shuXing.level + addpoint;
         addpoint = FightManager.RANDOM.nextInt(polar_point);
         int var10000 = polar_point - addpoint;
-        shuXing.speed = shuXing.skill + addpoint;
+        shuXing.dex = shuXing.level + addpoint;
         petbeibao.petShuXing.add(shuXing);
         BasicAttributesUtils.petshuxing(shuXing);
-        shuXing.max_life = shuXing.def;
-        shuXing.max_mana = shuXing.dex;
+        shuXing.life = shuXing.max_life;
+        shuXing.mana = shuXing.max_mana;
         petbeibao.petShuXing.add(shuXing);
         return petbeibao;
     }
@@ -1380,28 +1380,28 @@ public class FightObject {
 
         while(var15.hasNext()) {
             ZhuangbeiInfo zhuangbeiInfo = (ZhuangbeiInfo)var15.next();
-            if (zhuangbeiInfo.getAmount() == 1 && zhuangbeiInfo.getMetal() == ((PetShuXing)petbeibao.petShuXing.get(0)).metal) {
+            if (zhuangbeiInfo.getAmount() == 1 && zhuangbeiInfo.getMetal() == ((PetShuXing)petbeibao.petShuXing.get(0)).polar) {
                 i = zhuangbeiInfo.getType();
             }
         }
 
         this.str = name;
         this.guaiwulevel = vo_65529_0.level;
-        this.shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_life * 0.8D);
-        this.mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_mana * 0.8D);
-        this.max_mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).dex * 0.8D);
-        this.max_shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).def * 0.8D);
-        this.fashang = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mana * 0.8D);
-        this.parry = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).parry * 0.8D);
-        this.accurate = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).accurate * 0.8D);
-        this.fangyu = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).wiz * 0.8D);
+        this.shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).life * 0.8D);
+        this.mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mana * 0.8D);
+        this.max_mofa = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_mana * 0.8D);
+        this.max_shengming = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).max_life * 0.8D);
+        this.fashang = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).mag_power * 0.8D);
+        this.parry = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).speed * 0.8D);
+        this.accurate = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).phy_power * 0.8D);
+        this.fangyu = (int)((double)((PetShuXing)petbeibao.petShuXing.get(0)).def * 0.8D);
         this.weapon_icon = i;
         this.org_icon = icon;
         this.suit_icon = suit_iconlinshi;
         this.suit_light_effect = suit_light_effectlinshi;
         this.friend = (int)(0.29D * (double)vo_65529_0.level * (double)vo_65529_0.level * (double)vo_65529_0.level * 0.29D * (double)vo_65529_0.level * (double)vo_65529_0.level * (double)vo_65529_0.level);
-        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, 123456, skills);
+        boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+        this.skillsList = dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, 123456, skills);
         this.type = 4;
     }
 

@@ -34,14 +34,14 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /* 33 */         if (((Petbeibao)chara.pets.get(i)).no == no) {
                 /* 35 */           GameUtil.removemunber(chara, "超级神兽丹", num);
                 PetShuXing petShuXing = chara.pets.get(i).petShuXing.get(0);
-                petShuXing.intimacy += 2000 * num;
-                petShuXing.longevity += 5000 * num;
+                petShuXing.martial += 2000 * num;
+                petShuXing.resist_confusion += 5000 * num;
 /* 36 */           List list = new ArrayList();
 /* 37 */           list.add(chara.pets.get(i));
 /* 38 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 39 */           List list1 = new LinkedList();
 /* 40 */           list1.add(Integer.valueOf(((Petbeibao)chara.pets.get(i)).id));
-/* 41 */           list1.add(Integer.valueOf(((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).shape));
+/* 41 */           list1.add(Integer.valueOf(((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).intimacy));
 /* 42 */           GameObjectChar.send(new MSG_UPDATE_5(), list1);
 /* 43 */           Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 44 */           vo_20481_0.msg = ("增加#R" + 2000 * num + "点#n亲密度。");

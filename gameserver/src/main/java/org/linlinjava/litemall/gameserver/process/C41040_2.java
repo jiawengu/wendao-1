@@ -47,26 +47,26 @@
 /* 47 */     for (int i = 0; i < chara.pets.size(); i++) {
 /* 48 */       if (pet == ((Petbeibao)chara.pets.get(i)).id) {
 /* 49 */         PetShuXing petShuXing = new PetShuXing();
-/* 50 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).suit_light_effect = 2;
+/* 50 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).mount_type = 2;
 /* 51 */         for (int j = 0; j < ((Petbeibao)chara.pets.get(i)).petShuXing.size(); j++) {
 /* 52 */           if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).no == 23) {
-/* 53 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).upgrade_magic = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).hide_mount;
-/* 54 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).upgrade_total = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).hide_mount;
-/* 55 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).all_polar = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).hide_mount;
+/* 53 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).upgrade_immortal = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level;
+/* 54 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).upgrade_magic = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level;
+/* 55 */             ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).all_attrib = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level;
 /*    */           }
 /*    */         }
-/* 58 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level = (5 * ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).hide_mount);
-/* 59 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).mount_attribmove_speed = 2067321385;
+/* 58 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).mount_attribmove_speed = (5 * ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level);
+/* 59 */         ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).mount_attrib_end_time = 2067321385;
 /*    */         
 /* 61 */         List list = new ArrayList();
 /* 62 */         list.add(chara.pets.get(i));
 /* 63 */         GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 64 */         Vo_8165_0 vo_8165_0 = new Vo_8165_0();
-/* 65 */         vo_8165_0.msg = ("恭喜你将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
+/* 65 */         vo_8165_0.msg = ("恭喜你将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).name + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
 /* 66 */         vo_8165_0.active = 0;
 /* 67 */         GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /* 68 */         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
-/* 69 */         vo_20480_0.msg = ("恭喜你花费#R拘首环#n、#R困灵砂#n、#R驱力刺#n、#R定鞍石#n、#R控心玉#n各1个将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
+/* 69 */         vo_20480_0.msg = ("恭喜你花费#R拘首环#n、#R困灵砂#n、#R驱力刺#n、#R定鞍石#n、#R控心玉#n各1个将#R" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).name + "#n驯化为御灵了，并增加了#R30#n天风灵丸时间。");
 /* 70 */         vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
 /* 71 */         GameObjectChar.send(new M20480_0(), vo_20480_0);
 /*    */       }

@@ -2,7 +2,7 @@
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
 /*     */ import io.netty.channel.ChannelHandlerContext;
-/*     */ import java.util.List;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 /*     */ import org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils;
@@ -89,7 +89,7 @@
 /*  89 */         if (petbeibao.id == id) {
 /*  90 */           PetShuXing petShuXing = (PetShuXing)petbeibao.petShuXing.get(0);
 /*     */           
-/*  92 */           boolean fagong = petShuXing.rank > petShuXing.pet_mag_shape;
+/*  92 */           boolean fagong = petShuXing.pet_mag_shape > petShuXing.pet_phy_shape;
 /*     */           
 /*     */ 
 /*     */ 
@@ -99,8 +99,8 @@
 /*     */ 
 /*     */ 
 /*     */ 
-/* 102 */           int[] ints = PetAttributesUtils.petAttributes(fagong, petShuXing.skill, petShuXing.life + para1, petShuXing.mag_power + para2, petShuXing.phy_power + para3, petShuXing.speed + para4, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape, petShuXing.rank);
-/* 103 */           int[] ints1 = PetAttributesUtils.petAttributes(fagong, petShuXing.skill, petShuXing.life, petShuXing.mag_power, petShuXing.phy_power, petShuXing.speed, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape, petShuXing.rank);
+/* 102 */           int[] ints = PetAttributesUtils.petAttributes(fagong, petShuXing.level, petShuXing.con + para1, petShuXing.wiz + para2, petShuXing.str + para3, petShuXing.dex + para4, petShuXing.pet_life_shape, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape);
+/* 103 */           int[] ints1 = PetAttributesUtils.petAttributes(fagong, petShuXing.level, petShuXing.con, petShuXing.wiz, petShuXing.str, petShuXing.dex, petShuXing.pet_life_shape, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape);
 /* 104 */           Vo_14337_0 vo_14337_0 = new Vo_14337_0();
 /* 105 */           vo_14337_0.id = id;
 /* 106 */           vo_14337_0.type = 1;

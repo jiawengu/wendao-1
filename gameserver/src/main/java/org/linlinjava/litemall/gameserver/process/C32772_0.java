@@ -35,37 +35,37 @@
 /* 35 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 36 */         Petbeibao petbeibao = (Petbeibao)chara.pets.get(i);
 /* 37 */         if (petbeibao.no == no) {
-/* 38 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).str);
+/* 38 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).name);
 /* 39 */           PetShuXing shuXing = (PetShuXing)petbeibao.petShuXing.get(0);
-/* 40 */           shuXing.pet_mana_shape += shuXing.pet_mana_shape_temp;
-/* 41 */           shuXing.pet_speed_shape += shuXing.pet_speed_shape_temp;
-/* 42 */           shuXing.pet_phy_shape += shuXing.pet_phy_shape_temp;
-/* 43 */           shuXing.pet_mag_shape += shuXing.pet_mag_shape_temp;
-/* 44 */           shuXing.rank += shuXing.evolve_degree;
+/* 40 */           shuXing.pet_life_shape += shuXing.pet_life_shape_temp;
+/* 41 */           shuXing.pet_mana_shape += shuXing.pet_mana_shape_temp;
+/* 42 */           shuXing.pet_speed_shape += shuXing.pet_speed_shape_temp;
+/* 43 */           shuXing.pet_phy_shape += shuXing.pet_phy_shape_temp;
+/* 44 */           shuXing.pet_mag_shape += shuXing.pet_mag_shape_temp;
 /*    */           
-/* 46 */           shuXing.mana_effect += shuXing.pet_mana_shape_temp;
-/* 47 */           shuXing.attack_effect += shuXing.pet_speed_shape_temp;
-/* 48 */           shuXing.mag_effect += shuXing.pet_mag_shape_temp;
-/* 49 */           shuXing.phy_absorb += shuXing.evolve_degree;
-/* 50 */           shuXing.phy_effect += shuXing.pet_phy_shape_temp;
+/* 46 */           shuXing.life_effect += shuXing.pet_life_shape_temp;
+/* 47 */           shuXing.mana_effect += shuXing.pet_mana_shape_temp;
+/* 48 */           shuXing.phy_effect += shuXing.pet_phy_shape_temp;
+/* 49 */           shuXing.mag_effect += shuXing.pet_mag_shape_temp;
+/* 50 */           shuXing.speed_effect += shuXing.pet_speed_shape_temp;
 /*    */           
 /*    */ 
-/* 53 */           shuXing.pet_mana_shape_temp = 0;
+/* 53 */           shuXing.pet_life_shape_temp = 0;
 /*    */           
-/* 55 */           shuXing.pet_speed_shape_temp = 0;
+/* 55 */           shuXing.pet_mana_shape_temp = 0;
 /*    */           
-/* 57 */           shuXing.pet_phy_shape_temp = 0;
+/* 57 */           shuXing.pet_speed_shape_temp = 0;
 /*    */           
-/* 59 */           shuXing.pet_mag_shape_temp = 0;
+/* 59 */           shuXing.pet_phy_shape_temp = 0;
 /*    */           
-/* 61 */           shuXing.evolve_degree = 0;
+/* 61 */           shuXing.pet_mag_shape_temp = 0;
 /*    */           
 /*    */ 
 /* 64 */           List list = new ArrayList();
 /*    */           
 /* 66 */           BasicAttributesUtils.petshuxing((PetShuXing)petbeibao.petShuXing.get(0));
-/* 67 */           shuXing.max_life = shuXing.def;
-/* 68 */           shuXing.max_mana = shuXing.dex;
+/* 67 */           shuXing.life = shuXing.max_life;
+/* 68 */           shuXing.mana = shuXing.max_mana;
 /* 69 */           list.add(petbeibao);
 /* 70 */           GameObjectChar.send(new MSG_UPDATE_PETS(), list);
 /* 71 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();

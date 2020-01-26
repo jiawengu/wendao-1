@@ -46,7 +46,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  45 */             int weizhi = 12;
 /*  46 */             if (((Petbeibao)chara.pets.get(j)).no == no) {
 /*  47 */               for (int k = 0; k < ((Petbeibao)chara.pets.get(j)).petShuXing.size(); k++) {
-/*  48 */                 if (((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(k)).str.equals(goods.goodsInfo.str)) {
+/*  48 */                 if (((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(k)).name.equals(goods.goodsInfo.str)) {
 /*  49 */                   Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  50 */                   vo_8165_0.msg = "不可重复打入！";
 /*  51 */                   vo_8165_0.active = 0;
@@ -59,15 +59,15 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  58 */               PetShuXing petShuXing = new PetShuXing();
 /*  59 */               petShuXing.no = weizhi;
 /*  60 */               petShuXing.type1 = 2;
-/*  61 */               petShuXing.skill = goods.goodsInfo.skill;
-/*  62 */               petShuXing.str = goods.goodsInfo.str;
-/*  63 */               petShuXing.accurate = goods.goodsLanSe.accurate;
-/*  64 */               petShuXing.wiz = goods.goodsLanSe.wiz;
-/*  65 */               petShuXing.parry = goods.goodsLanSe.parry;
-/*  66 */               petShuXing.def = goods.goodsLanSe.def;
-/*  67 */               petShuXing.dex = goods.goodsLanSe.dex;
-/*  68 */               petShuXing.mana = goods.goodsLanSe.mana;
-/*  69 */               petShuXing.silver_coin = 8000;
+/*  61 */               petShuXing.level = goods.goodsInfo.skill;
+/*  62 */               petShuXing.name = goods.goodsInfo.str;
+/*  63 */               petShuXing.phy_power = goods.goodsLanSe.accurate;
+/*  64 */               petShuXing.def = goods.goodsLanSe.wiz;
+/*  65 */               petShuXing.speed = goods.goodsLanSe.parry;
+/*  66 */               petShuXing.max_life = goods.goodsLanSe.def;
+/*  67 */               petShuXing.max_mana = goods.goodsLanSe.dex;
+/*  68 */               petShuXing.mag_power = goods.goodsLanSe.mana;
+/*  69 */               petShuXing.nimbus = 8000;
 /*  70 */               ((Petbeibao)chara.pets.get(j)).petShuXing.add(petShuXing);
 /*  71 */               List list = new ArrayList();
 /*  72 */               list.add(chara.pets.get(j));
@@ -123,8 +123,8 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 122 */               List list = new ArrayList();
 /* 123 */               list.add(chara.pets.get(j));
 /* 124 */               GameObjectChar.send(new MSG_UPDATE_PETS(), list);
-/* 125 */               boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).rank > ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).pet_mag_shape;
-/* 126 */               GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).metal, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).skill, isfagong, ((Petbeibao)chara.pets.get(j)).id, chara);
+/* 125 */               boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).pet_mag_shape > ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).pet_phy_shape;
+/* 126 */               GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).polar, ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).level, isfagong, ((Petbeibao)chara.pets.get(j)).id, chara);
 /* 127 */               org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0 vo_12023_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_12023_0();
 /* 128 */               vo_12023_0.owner_id = chara.id;
 /* 129 */               vo_12023_0.id = ((Petbeibao)chara.pets.get(j)).id;
@@ -137,7 +137,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */               
 /*     */ 
 /* 138 */               org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-/* 139 */               vo_20481_0.msg = ("恭喜，你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).str + "#n领悟了新的天书技能");
+/* 139 */               vo_20481_0.msg = ("恭喜，你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(j)).petShuXing.get(0)).name + "#n领悟了新的天书技能");
 /* 140 */               vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
 /* 141 */               GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 142 */               GameUtil.removemunber(chara, goods.goodsInfo.str, 1);
@@ -154,19 +154,19 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 153 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 154 */         Petbeibao petbeibao = (Petbeibao)chara.pets.get(i);
 /* 155 */         if (petbeibao.no == no) {
-/* 156 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).str);
-/* 157 */           int[] ints = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.upgradePet(true, pet.getMagAttack().intValue(), ((PetShuXing)petbeibao.petShuXing.get(0)).raw_name, ((PetShuXing)petbeibao.petShuXing.get(0)).life_add_temp);
-/* 158 */           if (((PetShuXing)petbeibao.petShuXing.get(0)).raw_name < ints[0]) {
-/* 159 */             ((PetShuXing)petbeibao.petShuXing.get(0)).pet_life_shape_temp += ints[1];
-/* 160 */             ((PetShuXing)petbeibao.petShuXing.get(0)).rank += ints[1];
-/* 161 */             ((PetShuXing)petbeibao.petShuXing.get(0)).life_add_temp = 0;
-/* 162 */             ((PetShuXing)petbeibao.petShuXing.get(0)).raw_name = ints[0];
+/* 156 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).name);
+/* 157 */           int[] ints = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.upgradePet(true, pet.getMagAttack().intValue(), ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level, ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate);
+/* 158 */           if (((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level < ints[0]) {
+/* 159 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_add += ints[1];
+/* 160 */             ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape += ints[1];
+/* 161 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate = 0;
+/* 162 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level = ints[0];
 /* 163 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 164 */             vo_8165_0.msg = "恭喜强化成功！";
 /* 165 */             vo_8165_0.active = 0;
 /* 166 */             GameObjectChar.send(new MSG_DIALOG_OK(), vo_8165_0);
 /*     */           } else {
-/* 168 */             ((PetShuXing)petbeibao.petShuXing.get(0)).life_add_temp = ints[2];
+/* 168 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate = ints[2];
 /* 169 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 170 */             vo_8165_0.msg = "成长完成度增加了！";
 /* 171 */             vo_8165_0.active = 0;
@@ -186,15 +186,15 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 185 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 186 */         Petbeibao petbeibao = (Petbeibao)chara.pets.get(i);
 /* 187 */         if (petbeibao.no == no) {
-/* 188 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).str);
-/* 189 */           int[] ints = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.upgradePet(false, pet.getPhyAttack().intValue(), ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level, ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate);
+/* 188 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).name);
+/* 189 */           int[] ints = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.upgradePet(false, pet.getPhyAttack().intValue(), ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_level, ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_rate);
 /*     */           
 /*     */ 
-/* 192 */           if (((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level < ints[0]) {
-/* 193 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_add += ints[1];
-/* 194 */             ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape += ints[1];
-/* 195 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate = 0;
-/* 196 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_level = ints[0];
+/* 192 */           if (((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_level < ints[0]) {
+/* 193 */             ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_add += ints[1];
+/* 194 */             ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape += ints[1];
+/* 195 */             ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_rate = 0;
+/* 196 */             ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_level = ints[0];
 /* 197 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 198 */             vo_8165_0.msg = "恭喜强化成功！";
 /* 199 */             vo_8165_0.active = 0;
@@ -202,7 +202,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */           }
 /*     */           else
 /*     */           {
-/* 204 */             ((PetShuXing)petbeibao.petShuXing.get(0)).mag_rebuild_rate = ints[2];
+/* 204 */             ((PetShuXing)petbeibao.petShuXing.get(0)).phy_rebuild_rate = ints[2];
 /* 205 */             Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 206 */             vo_8165_0.msg = "成长完成度增加了！";
 /* 207 */             vo_8165_0.active = 0;
@@ -224,40 +224,40 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 223 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 224 */         Petbeibao petbeibao = (Petbeibao)chara.pets.get(i);
 /* 225 */         if (petbeibao.no == no) {
-/* 226 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).str);
+/* 226 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).name);
 /*     */           
 /* 228 */           PetShuXing shuXing = (PetShuXing)petbeibao.petShuXing.get(0);
 /* 229 */           shuXing.penetrate = 2;
-/* 230 */           shuXing.skill = 1;
-/* 231 */           shuXing.pot = 0;
-/* 232 */           shuXing.resist_poison = 258;
-/* 233 */           shuXing.mana_effect = (pet.getLife().intValue() - 40 - subtraction());
-/* 234 */           shuXing.attack_effect = (pet.getMana().intValue() - 40 - subtraction());
-/* 235 */           shuXing.mag_effect = (pet.getPhyAttack().intValue() - 40 - subtraction());
-/* 236 */           shuXing.phy_absorb = (pet.getMagAttack().intValue() - 40 - subtraction());
-/* 237 */           shuXing.phy_effect = (pet.getSpeed().intValue() - 40 - subtraction());
-/* 238 */           shuXing.pet_mana_shape = (shuXing.mana_effect + 40);
-/* 239 */           shuXing.pet_speed_shape = (shuXing.attack_effect + 40);
-/* 240 */           shuXing.pet_phy_shape = (shuXing.phy_effect + 40);
-/* 241 */           shuXing.pet_mag_shape = (shuXing.mag_effect + 40);
-/* 242 */           shuXing.rank = (shuXing.phy_absorb + 40);
-/* 243 */           shuXing.phy_power = 1;
-/* 244 */           shuXing.mag_power = 1;
-/* 245 */           shuXing.life = 1;
-/* 246 */           shuXing.speed = 1;
-/* 247 */           shuXing.polar_point = 4;
-/* 248 */           shuXing.resist_point = (shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank);
+/* 230 */           shuXing.level = 1;
+/* 231 */           shuXing.exp = 0;
+/* 232 */           shuXing.exp_to_next_level = 258;
+/* 233 */           shuXing.life_effect = (pet.getLife().intValue() - 40 - subtraction());
+/* 234 */           shuXing.mana_effect = (pet.getMana().intValue() - 40 - subtraction());
+/* 235 */           shuXing.phy_effect = (pet.getPhyAttack().intValue() - 40 - subtraction());
+/* 236 */           shuXing.mag_effect = (pet.getMagAttack().intValue() - 40 - subtraction());
+/* 237 */           shuXing.speed_effect = (pet.getSpeed().intValue() - 40 - subtraction());
+/* 238 */           shuXing.pet_life_shape = (shuXing.life_effect + 40);
+/* 239 */           shuXing.pet_mana_shape = (shuXing.mana_effect + 40);
+/* 240 */           shuXing.pet_speed_shape = (shuXing.speed_effect + 40);
+/* 241 */           shuXing.pet_phy_shape = (shuXing.phy_effect + 40);
+/* 242 */           shuXing.pet_mag_shape = (shuXing.mag_effect + 40);
+/* 243 */           shuXing.str = 1;
+/* 244 */           shuXing.wiz = 1;
+/* 245 */           shuXing.con = 1;
+/* 246 */           shuXing.dex = 1;
+/* 247 */           shuXing.rank = 4;
+/* 248 */           shuXing.shape = (shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape);
 /* 249 */           List list = new ArrayList();
 /* 250 */           BasicAttributesUtils.petshuxing((PetShuXing)petbeibao.petShuXing.get(0));
-/* 251 */           shuXing.max_life = shuXing.def;
-/* 252 */           shuXing.max_mana = shuXing.dex;
+/* 251 */           shuXing.life = shuXing.max_life;
+/* 252 */           shuXing.mana = shuXing.max_mana;
 /* 253 */           list.add(petbeibao);
 /*     */           
 /*     */ 
-/* 256 */           boolean isfagong = shuXing.rank > shuXing.pet_mag_shape;
+/* 256 */           boolean isfagong = shuXing.pet_mag_shape > shuXing.pet_phy_shape;
 /*     */           
 /* 258 */           List<JiNeng> jiNengList = new ArrayList();
-/* 259 */           List<JSONObject> nomelSkills = org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils.getNomelSkills(1, shuXing.metal, 100, isfagong);
+/* 259 */           List<JSONObject> nomelSkills = org.linlinjava.litemall.gameserver.data.game.PetAndHelpSkillUtils.getNomelSkills(1, shuXing.polar, 100, isfagong);
 /* 260 */           for (int j = 0; j < nomelSkills.size(); j++) {
 /* 261 */             JiNeng jiNeng = new JiNeng();
 /* 262 */             JSONObject jsonObject = (JSONObject)nomelSkills.get(j);
@@ -295,22 +295,21 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 294 */       for (int i = 0; i < chara.pets.size(); i++) {
 /* 295 */         Petbeibao petbeibao = (Petbeibao)chara.pets.get(i);
 /* 296 */         if (petbeibao.no == no) {
-/* 297 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).str);
+/* 297 */           Pet pet = GameData.that.basePetService.findOneByName(((PetShuXing)petbeibao.petShuXing.get(0)).name);
 /* 298 */           PetShuXing shuXing = (PetShuXing)petbeibao.petShuXing.get(0);
 /*     */           
 /*     */ 
-/* 301 */           shuXing.pet_mana_shape_temp = (pet.getLife().intValue() - subtraction() - shuXing.mana_effect - 40);
+/* 301 */           shuXing.pet_life_shape_temp = (pet.getLife().intValue() - subtraction() - shuXing.life_effect - 40);
 /*     */           
-/* 303 */           shuXing.pet_speed_shape_temp = (pet.getMana().intValue() - subtraction() - shuXing.attack_effect - 40);
-/*     */           
-/*     */ 
-/* 306 */           shuXing.pet_phy_shape_temp = (pet.getSpeed().intValue() - subtraction() - shuXing.phy_effect - 40);
-/*     */           
-/* 308 */           shuXing.pet_mag_shape_temp = (pet.getPhyAttack().intValue() - subtraction() - shuXing.mag_effect - 40);
-/*     */           
-/* 310 */           shuXing.evolve_degree = (pet.getMagAttack().intValue() - subtraction() - shuXing.phy_absorb - 40);
+/* 303 */           shuXing.pet_mana_shape_temp = (pet.getMana().intValue() - subtraction() - shuXing.mana_effect - 40);
 /*     */           
 /*     */ 
+/* 306 */           shuXing.pet_speed_shape_temp = (pet.getSpeed().intValue() - subtraction() - shuXing.speed_effect - 40);
+/*     */           
+/* 308 */           shuXing.pet_phy_shape_temp = (pet.getPhyAttack().intValue() - subtraction() - shuXing.phy_effect - 40);
+/*     */           
+/* 310 */           shuXing.pet_mag_shape_temp = (pet.getMagAttack().intValue() - subtraction() - shuXing.mag_effect - 40);
+/*     */           
 /*     */ 
 /*     */ 
 /*     */ 
@@ -321,20 +320,21 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ 
 /*     */ 
-/* 323 */           if (shuXing.mana_effect + 40 == pet.getLife().intValue()) {
-/* 324 */             shuXing.pet_mana_shape_temp = 0;
+/*     */ 
+/* 323 */           if (shuXing.life_effect + 40 == pet.getLife().intValue()) {
+/* 324 */             shuXing.pet_life_shape_temp = 0;
 /*     */           }
-/* 326 */           if (shuXing.attack_effect + 40 == pet.getMana().intValue()) {
-/* 327 */             shuXing.pet_speed_shape_temp = 0;
+/* 326 */           if (shuXing.mana_effect + 40 == pet.getMana().intValue()) {
+/* 327 */             shuXing.pet_mana_shape_temp = 0;
 /*     */           }
-/* 329 */           if (shuXing.phy_absorb + 40 == pet.getMagAttack().intValue()) {
-/* 330 */             shuXing.evolve_degree = 0;
+/* 329 */           if (shuXing.mag_effect + 40 == pet.getMagAttack().intValue()) {
+/* 330 */             shuXing.pet_mag_shape_temp = 0;
 /*     */           }
-/* 332 */           if (shuXing.mag_effect + 40 == pet.getPhyAttack().intValue()) {
-/* 333 */             shuXing.pet_mag_shape_temp = 0;
+/* 332 */           if (shuXing.phy_effect + 40 == pet.getPhyAttack().intValue()) {
+/* 333 */             shuXing.pet_phy_shape_temp = 0;
 /*     */           }
-/* 335 */           if (shuXing.phy_effect + 40 == pet.getSpeed().intValue()) {
-/* 336 */             shuXing.pet_phy_shape_temp = 0;
+/* 335 */           if (shuXing.speed_effect + 40 == pet.getSpeed().intValue()) {
+/* 336 */             shuXing.pet_speed_shape_temp = 0;
 /*     */           }
 /* 338 */           List list = new ArrayList();
 /* 339 */           BasicAttributesUtils.petshuxing((PetShuXing)petbeibao.petShuXing.get(0));

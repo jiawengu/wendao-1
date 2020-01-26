@@ -33,11 +33,11 @@
 /*  33 */       if (((Petbeibao)chara.pets.get(i)).id == pet_id) {
 /*  34 */         for (int j = 0; j < ((Petbeibao)chara.pets.get(i)).petShuXing.size(); j++) {
 /*  35 */           if (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(j)).no == 23) {
-/*  36 */             chara.yidongsudu = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).capacity_level;
+/*  36 */             chara.yidongsudu = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).mount_attribmove_speed;
 /*     */           }
 /*     */         }
-/*  39 */         chara.zuoqiwaiguan = (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).type + 1000);
-/*  40 */         chara.zuowaiguan = typeMounts(((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).type + 1000, chara.menpai, chara.sex - 1);
+/*  39 */         chara.zuoqiwaiguan = (((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).icon + 1000);
+/*  40 */         chara.zuowaiguan = typeMounts(((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).icon + 1000, chara.menpai, chara.sex - 1);
 /*  41 */         chara.zuoqiId = ((Petbeibao)chara.pets.get(i)).id;
 /*     */       }
 /*     */     }

@@ -238,16 +238,16 @@ import io.netty.buffer.ByteBuf;
                     if (petbeibao.id == id) {
                         PetShuXing petShuXing = (PetShuXing) petbeibao.petShuXing.get(0);
                         int count = para1 + para2 + para3 + para4 + para5;
-                        if ((petShuXing.polar_point == 0&&count3>0)
-                                || count3 > petShuXing.polar_point
-                                || petShuXing.skill > petShuXing.life+para1 || petShuXing.skill>petShuXing.phy_power+para3||petShuXing.skill>petShuXing.speed+para4||petShuXing.skill>petShuXing.mag_power+para2){
+                        if ((petShuXing.rank == 0&&count3>0)
+                                || count3 > petShuXing.rank
+                                || petShuXing.level > petShuXing.con +para1 || petShuXing.level >petShuXing.str +para3||petShuXing.level >petShuXing.dex +para4||petShuXing.level >petShuXing.wiz +para2){
 
                         }else {
-                            petShuXing.life += para1;
-                            petShuXing.mag_power += para2;
-                            petShuXing.phy_power += para3;
-                            petShuXing.speed += para4;
-                            petShuXing.polar_point -= count;
+                            petShuXing.con += para1;
+                            petShuXing.wiz += para2;
+                            petShuXing.str += para3;
+                            petShuXing.dex += para4;
+                            petShuXing.rank -= count;
                             BasicAttributesUtils.petshuxing(petShuXing);
 
                             List list = new ArrayList();

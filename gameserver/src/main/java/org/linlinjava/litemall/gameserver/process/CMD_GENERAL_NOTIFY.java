@@ -315,14 +315,14 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
                     PetShuXing petShuXing;
                     for(size = 0; size < petbeibao.petShuXing.size(); ++size) {
-                        if (((PetShuXing)petbeibao.petShuXing.get(size)).str.equals(para2)) {
+                        if (((PetShuXing)petbeibao.petShuXing.get(size)).name.equals(para2)) {
                             petShuXing = (PetShuXing)petbeibao.petShuXing.get(size);
-                            pos1 = petShuXing.wiz;
-                            pos2 = petShuXing.parry;
-                            def = petShuXing.def;
-                            pos1 = petShuXing.dex;
-                            pos2 = petShuXing.mana;
-                            weizhi = petShuXing.accurate;
+                            pos1 = petShuXing.def;
+                            pos2 = petShuXing.speed;
+                            def = petShuXing.max_life;
+                            pos1 = petShuXing.max_mana;
+                            pos2 = petShuXing.mag_power;
+                            weizhi = petShuXing.phy_power;
                             petbeibao.petShuXing.remove(petbeibao.petShuXing.get(size));
                         }
                     }
@@ -330,12 +330,12 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                     for(size = 0; size < petbeibao.petShuXing.size(); ++size) {
                         if (((PetShuXing)petbeibao.petShuXing.get(size)).no == 0) {
                             petShuXing = (PetShuXing)petbeibao.petShuXing.get(size);
-                            petShuXing.wiz -= pos1;
-                            petShuXing.parry -= pos2;
-                            petShuXing.def -= def;
-                            petShuXing.dex -= pos1;
-                            petShuXing.mana -= pos2;
-                            petShuXing.accurate -= weizhi;
+                            petShuXing.def -= pos1;
+                            petShuXing.speed -= pos2;
+                            petShuXing.max_life -= def;
+                            petShuXing.max_mana -= pos1;
+                            petShuXing.mag_power -= pos2;
+                            petShuXing.phy_power -= weizhi;
                         }
                     }
 
@@ -554,8 +554,8 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                             List list = new ArrayList();
                             list.add(chara.pets.get(i));
                             GameObjectChar.send(new MSG_UPDATE_PETS(), list);
-                            boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).rank > ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).pet_mag_shape;
-                            GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).metal, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).skill, isfagong, ((Petbeibao)chara.pets.get(i)).id, chara);
+                            boolean isfagong = ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).pet_mag_shape > ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).pet_phy_shape;
+                            GameUtil.dujineng(1, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).polar, ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).level, isfagong, ((Petbeibao)chara.pets.get(i)).id, chara);
                             if (((Petbeibao)chara.pets.get(i)).tianshu.size() == 0) {
                                 Vo_12023_0 vo_12023_0 = new Vo_12023_0();
                                 vo_12023_0.owner_id = chara.id;
@@ -568,7 +568,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                             StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(para2);
                             GameUtil.huodedaoju(chara, info, 1);
                             vo_20481_0 = new Vo_20481_0();
-                            vo_20481_0.msg = "你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).str + "#n成功取出了天书散卷#R" + para2 + "#n。";
+                            vo_20481_0.msg = "你的宠物#Y" + ((PetShuXing)((Petbeibao)chara.pets.get(i)).petShuXing.get(0)).name + "#n成功取出了天书散卷#R" + para2 + "#n。";
                             vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
                             GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
                             break;
@@ -735,7 +735,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_40964_0 = new Vo_40964_0();
                 vo_40964_0.type = 2;
                 vo_40964_0.name = "立正";
-                vo_40964_0.param = String.valueOf(((PetShuXing)petbeibao.petShuXing.get(0)).type);
+                vo_40964_0.param = String.valueOf(((PetShuXing)petbeibao.petShuXing.get(0)).icon);
                 vo_40964_0.rightNow = 0;
                 GameObjectChar.send(new M40964_0(), vo_40964_0);
                 vo_20481_0 = new Vo_20481_0();
@@ -745,8 +745,8 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 List arrayList = new ArrayList();
                 arrayList.add(petbeibao);
                 GameObjectChar.send(new MSG_UPDATE_PETS(), arrayList);
-                boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).rank > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape;
-                GameUtil.dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).metal, ((PetShuXing)petbeibao.petShuXing.get(0)).skill, isfagong, petbeibao.id, chara);
+                boolean isfagong = ((PetShuXing)petbeibao.petShuXing.get(0)).pet_mag_shape > ((PetShuXing)petbeibao.petShuXing.get(0)).pet_phy_shape;
+                GameUtil.dujineng(1, ((PetShuXing)petbeibao.petShuXing.get(0)).polar, ((PetShuXing)petbeibao.petShuXing.get(0)).level, isfagong, petbeibao.id, chara);
                 chara.pets.add(petbeibao);
                 GameData.that.baseSaleGoodService.deleteById(saleGood.getId());
             }

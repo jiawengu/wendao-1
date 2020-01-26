@@ -63,22 +63,22 @@ public class BasicAttributesUtils {
     }
 
     public static void petshuxing(PetShuXing petShuXing) {
-        boolean fagong = petShuXing.rank > petShuXing.pet_mag_shape;
-        int[] attributes = PetAttributesUtils.petAttributes(fagong, petShuXing.skill, petShuXing.life, petShuXing.mag_power, petShuXing.phy_power, petShuXing.speed, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape, petShuXing.rank);
-        petShuXing.def = attributes[0];
-        petShuXing.dex = attributes[1];
-        if (petShuXing.max_life >= petShuXing.def) {
-            petShuXing.max_life = petShuXing.def;
+        boolean fagong = petShuXing.pet_mag_shape > petShuXing.pet_phy_shape;
+        int[] attributes = PetAttributesUtils.petAttributes(fagong, petShuXing.level, petShuXing.con, petShuXing.wiz, petShuXing.str, petShuXing.dex, petShuXing.pet_life_shape, petShuXing.pet_mana_shape, petShuXing.pet_speed_shape, petShuXing.pet_phy_shape, petShuXing.pet_mag_shape);
+        petShuXing.max_life = attributes[0];
+        petShuXing.max_mana = attributes[1];
+        if (petShuXing.life >= petShuXing.max_life) {
+            petShuXing.life = petShuXing.max_life;
         }
 
-        if (petShuXing.max_mana >= petShuXing.dex) {
-            petShuXing.max_mana = petShuXing.dex;
+        if (petShuXing.mana >= petShuXing.max_mana) {
+            petShuXing.mana = petShuXing.max_mana;
         }
 
-        petShuXing.accurate = attributes[2];
-        petShuXing.mana = attributes[3];
-        petShuXing.parry = attributes[4];
-        petShuXing.wiz = attributes[5];
+        petShuXing.phy_power = attributes[2];
+        petShuXing.mag_power = attributes[3];
+        petShuXing.speed = attributes[4];
+        petShuXing.def = attributes[5];
     }
 
     public static void shuxing(Chara chara) {

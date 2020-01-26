@@ -84,7 +84,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  79 */     Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  80 */     vo_40964_0.type = 2;
 /*  81 */     vo_40964_0.name = name;
-/*  82 */     vo_40964_0.param = String.valueOf(((PetShuXing)petbeibao.petShuXing.get(0)).type);
+/*  82 */     vo_40964_0.param = String.valueOf(((PetShuXing)petbeibao.petShuXing.get(0)).icon);
 /*  83 */     vo_40964_0.rightNow = 0;
 /*  84 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40964_0(), vo_40964_0);
 /*  85 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();

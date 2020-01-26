@@ -21,109 +21,109 @@ public class Petbeibao {
 
     public void PetCreate(Pet pet, Chara chara, int suiji, int penetrate) {
         PetShuXing shuXing = new PetShuXing();
-        shuXing.type = pet.getIcon().intValue();
-        shuXing.passive_mode = pet.getIcon().intValue();
-        shuXing.attrib = pet.getLevelReq().intValue();
-        shuXing.str = pet.getName();
-        shuXing.skill = 1;
+        shuXing.icon = pet.getIcon().intValue();
+        shuXing.portrait = pet.getIcon().intValue();
+        shuXing.req_level = pet.getLevelReq().intValue();
+        shuXing.name = pet.getName();
+        shuXing.level = 1;
         this.id = GameUtil.getCard(chara);
         this.no = GameUtil.getNo(chara, 1);
-        shuXing.pot = 0;
-        shuXing.resist_poison = 258;
-        shuXing.martial = 15000;
-        shuXing.double_hit = 100;
-        shuXing.suit_polar = pet.getName();
-        shuXing.auto_fight += this.id;
+        shuXing.exp = 0;
+        shuXing.exp_to_next_level = 258;
+        shuXing.longevity = 15000;
+        shuXing.loyalty = 100;
+        shuXing.raw_name = pet.getName();
+        shuXing.iid_str += this.id;
         if (pet.getPolar().equals("金")) {
-            shuXing.metal = 1;
+            shuXing.polar = 1;
         }
         if (pet.getPolar().equals("木")) {
-            shuXing.metal = 2;
+            shuXing.polar = 2;
         }
         if (pet.getPolar().equals("水")) {
-            shuXing.metal = 3;
+            shuXing.polar = 3;
         }
         if (pet.getPolar().equals("火")) {
-            shuXing.metal = 4;
+            shuXing.polar = 4;
         }
         if (pet.getPolar().equals("土")) {
-            shuXing.metal = 5;
+            shuXing.polar = 5;
         }
-        shuXing.mana_effect = (pet.getLife().intValue() - 40 - subtraction(suiji));
-        shuXing.attack_effect = (pet.getMana().intValue() - 40 - subtraction(suiji));
-        shuXing.mag_effect = (pet.getPhyAttack().intValue() - 40 - subtraction(suiji));
-        shuXing.phy_absorb = (pet.getMagAttack().intValue() - 40 - subtraction(suiji));
-        shuXing.phy_effect = (pet.getSpeed().intValue() - 40 - subtraction(suiji));
+        shuXing.life_effect = (pet.getLife().intValue() - 40 - subtraction(suiji));
+        shuXing.mana_effect = (pet.getMana().intValue() - 40 - subtraction(suiji));
+        shuXing.phy_effect = (pet.getPhyAttack().intValue() - 40 - subtraction(suiji));
+        shuXing.mag_effect = (pet.getMagAttack().intValue() - 40 - subtraction(suiji));
+        shuXing.speed_effect = (pet.getSpeed().intValue() - 40 - subtraction(suiji));
+        shuXing.pet_life_shape = (shuXing.life_effect + 40);
         shuXing.pet_mana_shape = (shuXing.mana_effect + 40);
-        shuXing.pet_speed_shape = (shuXing.attack_effect + 40);
+        shuXing.pet_speed_shape = (shuXing.speed_effect + 40);
         shuXing.pet_phy_shape = (shuXing.phy_effect + 40);
         shuXing.pet_mag_shape = (shuXing.mag_effect + 40);
-        shuXing.rank = (shuXing.phy_absorb + 40);
-        shuXing.resist_point = (shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank);
+        shuXing.shape = (shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape);
 
 
         shuXing.penetrate = penetrate;
-        shuXing.polar_point = 4;
+        shuXing.rank = 4;
 
+        shuXing.enchant = 0;
         shuXing.enchant_nimbus = 0;
-        shuXing.max_enchant_nimbus = 0;
-        shuXing.suit_light_effect = 0;
-        shuXing.hide_mount = 0;
-        shuXing.phy_power = 1;
-        shuXing.mag_power = 1;
-        shuXing.life = 1;
-        shuXing.speed = 1;
+        shuXing.mount_type = 0;
+        shuXing.capacity_level = 0;
+        shuXing.str = 1;
+        shuXing.wiz = 1;
+        shuXing.con = 1;
+        shuXing.dex = 1;
 
         BasicAttributesUtils.petshuxing(shuXing);
-        shuXing.max_life = shuXing.def;
-        shuXing.max_mana = shuXing.dex;
+        shuXing.life = shuXing.max_life;
+        shuXing.mana = shuXing.max_mana;
         this.petShuXing.add(shuXing);
     }
 
 
     public void petCreate(Pet pet, Chara chara, int suiji) {
         PetShuXing shuXing = new PetShuXing();
-        shuXing.type = pet.getIcon().intValue();
-        shuXing.passive_mode = pet.getIcon().intValue();
-        shuXing.attrib = pet.getLevelReq().intValue();
-        shuXing.str = pet.getName();
-        shuXing.skill = 1;
+        shuXing.icon = pet.getIcon().intValue();
+        shuXing.portrait = pet.getIcon().intValue();
+        shuXing.req_level = pet.getLevelReq().intValue();
+        shuXing.name = pet.getName();
+        shuXing.level = 1;
         this.id = GameUtil.getCard(chara);
         this.no = GameUtil.getNo(chara, 1);
-        shuXing.pot = 0;
-        shuXing.resist_poison = 258;
-        shuXing.martial = 15000;
-        shuXing.double_hit = 100;
-        shuXing.suit_polar = pet.getName();
-        shuXing.auto_fight += this.id;
+        shuXing.exp = 0;
+        shuXing.exp_to_next_level = 258;
+        shuXing.longevity = 15000;
+        shuXing.loyalty = 100;
+        shuXing.raw_name = pet.getName();
+        shuXing.iid_str += this.id;
         if (pet.getPolar().equals("金")) {
-            shuXing.metal = 1;
+            shuXing.polar = 1;
         }
         if (pet.getPolar().equals("木")) {
-            shuXing.metal = 2;
+            shuXing.polar = 2;
         }
         if (pet.getPolar().equals("水")) {
-            shuXing.metal = 3;
+            shuXing.polar = 3;
         }
         if (pet.getPolar().equals("火")) {
-            shuXing.metal = 4;
+            shuXing.polar = 4;
         }
         if (pet.getPolar().equals("土")) {
-            shuXing.metal = 5;
+            shuXing.polar = 5;
         }
 
 
-        shuXing.mana_effect = (pet.getLife().intValue() - 40 - subtraction(suiji));
-        shuXing.attack_effect = (pet.getMana().intValue() - 40 - subtraction(suiji));
-        shuXing.mag_effect = (pet.getPhyAttack().intValue() - 40 - subtraction(suiji));
-        shuXing.phy_absorb = (pet.getMagAttack().intValue() - 40 - subtraction(suiji));
-        shuXing.phy_effect = (pet.getSpeed().intValue() - 40 - subtraction(suiji));
+        shuXing.life_effect = (pet.getLife().intValue() - 40 - subtraction(suiji));
+        shuXing.mana_effect = (pet.getMana().intValue() - 40 - subtraction(suiji));
+        shuXing.phy_effect = (pet.getPhyAttack().intValue() - 40 - subtraction(suiji));
+        shuXing.mag_effect = (pet.getMagAttack().intValue() - 40 - subtraction(suiji));
+        shuXing.speed_effect = (pet.getSpeed().intValue() - 40 - subtraction(suiji));
+        shuXing.pet_life_shape = (shuXing.life_effect + 40);
         shuXing.pet_mana_shape = (shuXing.mana_effect + 40);
-        shuXing.pet_speed_shape = (shuXing.attack_effect + 40);
+        shuXing.pet_speed_shape = (shuXing.speed_effect + 40);
         shuXing.pet_phy_shape = (shuXing.phy_effect + 40);
         shuXing.pet_mag_shape = (shuXing.mag_effect + 40);
-        shuXing.rank = (shuXing.phy_absorb + 40);
-        shuXing.resist_point = (shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape + shuXing.rank);
+        shuXing.shape = (shuXing.pet_life_shape + shuXing.pet_mana_shape + shuXing.pet_speed_shape + shuXing.pet_phy_shape + shuXing.pet_mag_shape);
         this.petShuXing.add(shuXing);
     }
 

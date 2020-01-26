@@ -1,12 +1,12 @@
 /*     */ package org.linlinjava.litemall.gameserver.data.write;
 /*     */ 
 /*     */ import io.netty.buffer.ByteBuf;
-/*     */ import java.io.PrintStream;
+/*     */
 /*     */ import java.util.HashMap;
 /*     */ import java.util.Iterator;
 /*     */ import java.util.Map;
 /*     */ import java.util.Map.Entry;
-/*     */ import java.util.Set;
+/*     */
 /*     */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.UtilObjMap;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
@@ -29,7 +29,7 @@
 /*  25 */     GameWriteTool.writeInt(writeBuf, Integer.valueOf(listVo_65527_0.id));
 /*  26 */     Vo_65527_0 vo = listVo_65527_0.vo_65527_0;
 /*  27 */     Map<Object, Object> map = new HashMap();
-/*  28 */     map = UtilObjMap.Vo_65527_0(vo);
+/*  28 */     map = UtilObjMap.MSG_UPDATE(vo);
 /*  29 */     Iterator<Entry<Object, Object>> it = map.entrySet().iterator();
 /*  30 */     Entry<Object, Object> entry; while (it.hasNext()) {
 /*  31 */       entry = (Entry)it.next();

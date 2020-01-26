@@ -161,8 +161,8 @@ public class GmUtil {
         int qinmidu = Integer.parseInt(cmds[2]);
         for(Petbeibao petbeibao:chara.pets){
             PetShuXing petShuXing = petbeibao.petShuXing.get(0);
-            if(petShuXing.str.equals(petName)){
-                petShuXing.intimacy = qinmidu;
+            if(petShuXing.name.equals(petName)){
+                petShuXing.martial = qinmidu;
 
                 GameObjectChar.send(new MSG_UPDATE_PETS(), Arrays.asList(petbeibao));
                 break;
