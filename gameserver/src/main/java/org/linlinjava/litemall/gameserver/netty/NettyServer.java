@@ -22,15 +22,22 @@
 /*    */   
 /* 23 */   public void start(InetSocketAddress address) { EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 /* 24 */     EventLoopGroup workerGroup = new NioEventLoopGroup();
-/*    */     
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
 /*    */     try
 /*    */     {
-/* 32 */       ServerBootstrap bootstrap = ((ServerBootstrap)((ServerBootstrap)((ServerBootstrap)new ServerBootstrap().group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)).localAddress(address)).childHandler(this.serverChannelInitializer).option(ChannelOption.SO_BACKLOG, Integer.valueOf(128))).childOption(ChannelOption.SO_KEEPALIVE, Boolean.valueOf(true));
-/*    */       
+/* 32 */       ServerBootstrap bootstrap = new ServerBootstrap().group(bossGroup, workerGroup)
+                .channel(NioServerSocketChannel.class)
+                .localAddress(address)
+                .option(ChannelOption.SO_REUSEADDR, true)
+                .option(ChannelOption.SO_BACKLOG, 400)
+                .option(ChannelOption.SO_RCVBUF, 8196)
+
+                .childOption(ChannelOption.SO_KEEPALIVE, false)
+                .childOption(ChannelOption.TCP_NODELAY, true)
+                .childOption(ChannelOption.SO_SNDBUF, 2048)
+                .childOption(ChannelOption.SO_LINGER, 0)
+                .childHandler(this.serverChannelInitializer)
+                ;
+
 /* 34 */       ChannelFuture localChannelFuture = bootstrap.bind(address).sync();
 /*    */     } catch (Exception e) {
 /* 36 */       e.printStackTrace();

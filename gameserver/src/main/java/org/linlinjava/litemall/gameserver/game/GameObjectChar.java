@@ -82,7 +82,7 @@ public class GameObjectChar {
         this.gameTeam = gameTeam;
     }
 
-    public void init(Characters characters) {
+    public synchronized void init(Characters characters) {
         String data = characters.getData();
         Chara chara = (Chara) org.linlinjava.litemall.db.util.JSONUtils.parseObject(data, Chara.class);
         chara.id = characters.getId().intValue();
@@ -120,16 +120,6 @@ public class GameObjectChar {
         this.gameMap = gameMap;
         GameObjectCharMng.add(this);
     }
-    public void init(GameObjectChar oldSession) {
-        this.chara = oldSession.chara;
-        this.characters = oldSession.characters;
-        this.logic = oldSession.logic;
-        this.gameMap = oldSession.gameMap;
-        this.gameTeam = oldSession.gameTeam;
-        this.upduizhangid = oldSession.upduizhangid;
-        this.heartEcho = oldSession.heartEcho;
-    }
-
     public static final GameObjectChar getGameObjectChar() {
         return GAMEOBJECTCHAR_THREAD_LOCAL.get();
     }
@@ -280,9 +270,7 @@ public class GameObjectChar {
         this.chara.updatetime = System.currentTimeMillis();
         this.chara.online_time += this.chara.updatetime - this.chara.uptime;
 
-        if(null!=this.ctx){
-            this.ctx.disconnect();
-        }
+        this.closeChannel();
     }
 
 

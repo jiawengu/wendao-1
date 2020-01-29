@@ -4667,7 +4667,7 @@ import java.util.Random;
             vo_49155_0.challengeCount = 3-chara.ttt_challenge_num;
             vo_49155_0.bonusType = chara.ttt_award_type;
             vo_49155_0.hasNotCompletedSmfj = 1;
-            GameObjectChar.send(new MSG_TONGTIANTA_INFO(), vo_49155_0);
+            GameObjectChar.send(new MSG_TONGTIANTA_INFO(), vo_49155_0, chara.id);
         }
 
     /**
@@ -4966,7 +4966,7 @@ import java.util.Random;
      }
      public static void notifyNpcAppear(Npc npc){
         for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
-            if(gameObjectChar.chara==null){
+            if(!gameObjectChar.isOnline()){
                 continue;
             }
             if(gameObjectChar.gameMap.id == npc.getMapId()){
@@ -5004,6 +5004,24 @@ import java.util.Random;
         GameTeam gameTeam = GameObjectCharMng.getGameObjectChar(chara.id).gameTeam;
         if(gameTeam == null) return false;
         return (gameTeam.duiwu.get(0).id == chara.id);
+    }
+
+    public static void notifyFightPet(GameObjectChar gameObjectChar){
+        Chara chara = gameObjectChar.chara;
+        Petbeibao fightPet = chara.getFightPet();
+        if(null!=fightPet){
+            Vo_4163_0 vo_4163_0 = new Vo_4163_0();
+            vo_4163_0.id = fightPet.id;
+            vo_4163_0.pet_status = 1;
+            gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
+        }
+        Petbeibao lueZhenPet = chara.getLueZhenPet();
+        if(null!=lueZhenPet){
+            Vo_4163_0 vo_4163_0 = new Vo_4163_0();
+            vo_4163_0.id = lueZhenPet.id;
+            vo_4163_0.pet_status = 2;
+            gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
+        }
     }
 
 }

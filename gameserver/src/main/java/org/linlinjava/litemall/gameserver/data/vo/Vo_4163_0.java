@@ -7,7 +7,7 @@ package org.linlinjava.litemall.gameserver.data.vo;
 
 public class Vo_4163_0 {
   public int id;
-  public int b;
+  public int pet_status;
 
   public Vo_4163_0() {
   }

@@ -295,7 +295,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   
 /*     */ 
 /*     */   public int chongwuchanzhanId;
-/*     */   
+    /**
+     * 掠阵的宠物id
+     */
+    /*     */   public int petLueZhenId;
+/*     */
 /*     */ 
 /*     */   public int cash;
 /*     */   
@@ -524,4 +528,28 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
             .status(0)
             .build();
 
+    /**
+     * 获取出战宠物
+     * @return
+     */
+    public Petbeibao getFightPet(){
+        for(Petbeibao petbeibao:pets){
+            if (petbeibao.id == chongwuchanzhanId) {
+                return petbeibao;
+            }
+        }
+        return null;
+    }
+    /**
+     * 获取掠阵宠物
+     * @return
+     */
+    public Petbeibao getLueZhenPet(){
+        for(Petbeibao petbeibao:pets){
+            if (petbeibao.id == petLueZhenId) {
+                return petbeibao;
+            }
+        }
+        return null;
+    }
 }

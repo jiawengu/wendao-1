@@ -20,6 +20,7 @@ public class GameObjectCharMng
     private static final List<GameObjectChar> gameObjectCharList = new java.util.concurrent.CopyOnWriteArrayList();
 
     public static void add(GameObjectChar gameObjectChar) {
+        log.info(gameObjectChar.chara.name+"put GameObjectMng cache!");
         if (gameObjectCharList.contains(gameObjectChar)) {
             for (GameObjectChar gameSession : gameObjectCharList) {
                 if (gameObjectChar.chara.id == gameSession.chara.id) {
@@ -38,20 +39,19 @@ public class GameObjectCharMng
         for (Iterator<GameObjectChar> iter = gameObjectCharList.iterator();iter.hasNext();) {
             GameObjectChar gameSession = iter.next();
             if (charaId == gameSession.chara.id) {
-                gameSession.closeChannel();
-                gameObjectCharList.remove(gameSession);
-
-                newSession.init(gameSession);
+                downline(gameSession);
                 count++;
             }
         }
         assert count==1;
-        gameObjectCharList.add(newSession);
+        newSession.init(GameData.that.characterService.findById(charaId));
+        log.info(newSession.chara.name+"relogin!");
     }
 
     public static void sendOne(int charaId,BaseWrite baseWrite, Object obj){
         GameObjectChar gameObjectChar = getGameObjectChar(charaId);
         if(gameObjectChar.isOnline()){
+//            GameObjectChar.send(baseWrite, obj, charaId);
             ByteBuf write = baseWrite.write(obj);
             gameObjectChar.send0(write);
         }
@@ -113,29 +113,33 @@ public class GameObjectCharMng
     }
 
     public static void downline(GameObjectChar gameObjectChar) {
-        gameObjectChar.chara.updatetime = System.currentTimeMillis();
+        log.info(gameObjectChar.characters.getName()+"downline!");
         gameObjectChar.offline();
         save(gameObjectChar);
+
         gameObjectCharList.remove(gameObjectChar);
     }
 
     public static void save(GameObjectChar gameObjectChar) {
-        if(null!=gameObjectChar.chara){
-            String data = gameObjectChar.characters.getData();
-            Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-            if (chara111.level > gameObjectChar.chara.level) {
-                log.error("人物等级{old}",chara111.name,chara111.level);
-                log.error("人物等级{new}",gameObjectChar.chara.name,gameObjectChar.chara.level);
-                log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
-                throw new RuntimeException("角色等级回档！！！");
-            }
-            long beginMill = System.currentTimeMillis();
-            String charData = org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara);
-            gameObjectChar.characters.setData(charData);
-            long seriaCost = System.currentTimeMillis()-beginMill;
-            beginMill = System.currentTimeMillis();
-            GameData.that.baseCharactersService.updateById(gameObjectChar.characters);
+        if(null!=gameObjectChar.chara) {
+            synchronized (gameObjectChar) {
+                String data = gameObjectChar.characters.getData();
+                Chara chara111 = JSONUtils.parseObject(data, Chara.class);
+                if (chara111.level > gameObjectChar.chara.level) {
+                    log.error("人物等级{old}", chara111.name, chara111.level);
+                    log.error("人物等级{new}", gameObjectChar.chara.name, gameObjectChar.chara.level);
+                    log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
+                    throw new RuntimeException("角色等级回档！！！");
+                }
+                long beginMill = System.currentTimeMillis();
+                String charData = org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara);
+                gameObjectChar.characters.setData(charData);
+                long seriaCost = System.currentTimeMillis() - beginMill;
+                beginMill = System.currentTimeMillis();
+                GameData.that.baseCharactersService.updateById(gameObjectChar.characters);
 //            log.info("save char [{}] db: ==>charData size:{}, serialize cost:{}, db cost:{}", gameObjectChar.chara.name, charData.length(), seriaCost, (System.currentTimeMillis()-beginMill));
+
+            }
         }
     }
 }

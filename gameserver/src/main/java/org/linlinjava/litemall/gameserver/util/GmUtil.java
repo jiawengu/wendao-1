@@ -5,18 +5,18 @@ import org.linlinjava.litemall.db.domain.StoreInfo;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
-import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
-import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
+import org.linlinjava.litemall.gameserver.fight.FightContainer;
+import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 
+import javax.sql.rowset.CachedRowSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -77,7 +77,14 @@ public class GmUtil {
     }
 
     public void ljy_handler(Chara chara, String[] cmds){
-        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
+//        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
+        FightContainer fightContainer = FightManager.getFightContainer(chara.id);
+        if(null!=fightContainer){
+            FightManager.doOver(fightContainer);
+            FightManager.nextRoundOrSendOver(fightContainer);
+        }
+
+
     }
 
     /**

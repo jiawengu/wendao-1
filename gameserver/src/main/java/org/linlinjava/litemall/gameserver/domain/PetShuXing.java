@@ -74,6 +74,9 @@ public class PetShuXing {
     public int resist_sleep;
     public int resist_forgotten;
     public int resist_confusion;
+    /**
+     * 寿命
+     */
     public int longevity;
     /**
      * 武学

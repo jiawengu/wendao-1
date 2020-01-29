@@ -6,6 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,11 @@ public class CMD_C_END_ANIMATE implements org.linlinjava.litemall.gameserver.Gam
         FightContainer fightContainer = FightManager.getFightContainer();
         if (fightContainer == null) {
             return;
+        }
+        for(FightObject fb:FightManager.getAllFightObject(fightContainer)){
+            if(fb.isLueZhen){
+                FightManager.lueZhen(fightContainer, fb);
+            }
         }
         if ((fightContainer.state.compareAndSet(3, 1)) || (fightContainer.state.get() == 4)) {
             FightManager.nextRoundOrSendOver(FightManager.getFightContainer());

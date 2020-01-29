@@ -1259,7 +1259,6 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
 
         UserLogic logic = GameObjectChar.getGameObjectChar().logic;
-        System.out.println("logic ==");
         //帮派升级
         if(type == 41){
             UserPartyLogic partyLogic = (UserPartyLogic)logic.getMod("party");
