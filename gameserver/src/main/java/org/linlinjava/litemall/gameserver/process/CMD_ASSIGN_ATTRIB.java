@@ -25,7 +25,7 @@ import io.netty.buffer.ByteBuf;
 /*     */
 /*     */
 @Service
-/*     */ public class C8254_0
+/*     */ public class CMD_ASSIGN_ATTRIB
         /*     */ implements GameHandler
         /*     */ {
     /*     */

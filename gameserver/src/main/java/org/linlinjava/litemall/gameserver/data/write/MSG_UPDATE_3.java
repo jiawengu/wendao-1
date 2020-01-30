@@ -18,8 +18,8 @@
 /* 18 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
 /* 20 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(2));
-/* 21 */     BuildFields.get("pot").write(writeBuf, object1.get(1));
-/* 22 */     BuildFields.get("resist_poison").write(writeBuf, object1.get(2));
+/* 21 */     BuildFields.get("exp").write(writeBuf, object1.get(1));
+/* 22 */     BuildFields.get("exp_to_next_level").write(writeBuf, object1.get(2));
 /*    */   }
 /*    */   
 /*    */ 

@@ -18,7 +18,7 @@
 /* 18 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
 /* 20 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(1));
-/* 21 */     BuildFields.get("deadline").write(writeBuf, object1.get(1));
+/* 21 */     BuildFields.get("hide_mount").write(writeBuf, object1.get(1));
 /*    */   }
 /*    */   
 /*    */ 

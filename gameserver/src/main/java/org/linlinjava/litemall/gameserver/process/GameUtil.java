@@ -1104,12 +1104,12 @@ import java.util.Random;
             /*  919 */       java.util.Map<Object, Object> objectMapGoodxin = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods.goodsInfo);
             /*  920 */       java.util.Map<Object, Object> objectMapGoodxin1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
             /*      */
-            /*  922 */       objectMapGoodxin.remove("auto_fight");
-            /*  923 */       objectMapGoodxin.remove("owner_id");
+            /*  922 */       objectMapGoodxin.remove("iid_str");
+            /*  923 */       objectMapGoodxin.remove("amount");
             /*  924 */       java.util.Map<Object, Object> objectMapGoodjold = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods1.goodsInfo);
             /*  925 */       java.util.Map<Object, Object> objectMapGoodjold1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
-            /*  926 */       objectMapGoodjold.remove("auto_fight");
-            /*  927 */       objectMapGoodjold.remove("owner_id");
+            /*  926 */       objectMapGoodjold.remove("iid_str");
+            /*  927 */       objectMapGoodjold.remove("amount");
             /*  928 */       if ((objectMapGoodjold.toString().equals(objectMapGoodxin.toString())) && (objectMapGoodxin1.toString().equals(objectMapGoodjold1.toString())) && (goods1.goodsInfo.degree_32 == 1))
                 /*      */       {
                 /*  930 */         if (goods1.goodsInfo.owner_id < munber) {
@@ -1185,12 +1185,12 @@ import java.util.Random;
             /* 1000 */       Goods goods1 = (Goods)chara.backpack.get(i);
             /* 1001 */       java.util.Map<Object, Object> objectMapGoodxin = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods.goodsInfo);
             /* 1002 */       java.util.Map<Object, Object> objectMapGoodxin1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods.goodsLanSe);
-            /* 1003 */       objectMapGoodxin.remove("auto_fight");
-            /* 1004 */       objectMapGoodxin.remove("owner_id");
+            /* 1003 */       objectMapGoodxin.remove("iid_str");
+            /* 1004 */       objectMapGoodxin.remove("amount");
             /* 1005 */       java.util.Map<Object, Object> objectMapGoodjold = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods1.goodsInfo);
             /* 1006 */       java.util.Map<Object, Object> objectMapGoodjold1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
-            /* 1007 */       objectMapGoodjold.remove("auto_fight");
-            /* 1008 */       objectMapGoodjold.remove("owner_id");
+            /* 1007 */       objectMapGoodjold.remove("iid_str");
+            /* 1008 */       objectMapGoodjold.remove("amount");
             /* 1009 */       if ((objectMapGoodjold.toString().equals(objectMapGoodxin.toString())) && (objectMapGoodxin1.toString().equals(objectMapGoodjold1.toString())) && (goods1.goodsInfo.degree_32 == 1))
                 /*      */       {
                 /* 1011 */         if (goods1.goodsInfo.owner_id < munber) {
@@ -2894,6 +2894,7 @@ import java.util.Random;
         /*      */
         /* 2644 */     vo_65527_0.id = chara.id;
         /* 2645 */     vo_65527_0.vo_65527_0.name = chara.name;
+        vo_65527_0.vo_65527_0.str = chara.phy_power;
         /* 2646 */     vo_65527_0.vo_65527_0.phy_power = chara.phy_power;
         /* 2647 */     vo_65527_0.vo_65527_0.accurate = chara.accurate;
         /* 2648 */     vo_65527_0.vo_65527_0.life = chara.life;
@@ -2922,6 +2923,7 @@ import java.util.Random;
         /* 2671 */     vo_65527_0.vo_65527_0.stamina = chara.stamina;
         /* 2672 */     vo_65527_0.vo_65527_0.max_stamina = 1000;
         /* 2673 */     vo_65527_0.vo_65527_0.tao = 105;//道
+        /* 2673 */     vo_65527_0.vo_65527_0.tao_ex = 0;
         /* 2674 */     vo_65527_0.vo_65527_0.friend = chara.friend;
         /* 2675 */     vo_65527_0.vo_65527_0.owner_name = chara.owner_name;
         /* 2676 */     vo_65527_0.vo_65527_0.mon_tao_ex = 0;
@@ -2944,6 +2946,7 @@ import java.util.Random;
 //        /* 2691 */     vo_65527_0.vo_65527_0.party_contrib = partyLogic.data.getContrib();
         /* 2692 */     vo_65527_0.vo_65527_0.status_daofa_wubian = "";
         /* 2693 */     vo_65527_0.vo_65527_0.nick = 0;
+        /* 2693 */     vo_65527_0.vo_65527_0.con = chara.tizhi;
         /* 2694 */     vo_65527_0.vo_65527_0.family_title = "";
         /* 2695 */     vo_65527_0.vo_65527_0.title = chara.chenhao;
         /* 2696 */     vo_65527_0.vo_65527_0.nice = 0;
@@ -2952,6 +2955,7 @@ import java.util.Random;
         /* 2699 */     vo_65527_0.vo_65527_0.icon = ""+chara.waiguan;
         /* 2700 */     vo_65527_0.vo_65527_0.type = chara.waiguan;
         /* 2701 */     vo_65527_0.vo_65527_0.resist_poison = chara.resist_poison;
+        /* 2701 */     vo_65527_0.vo_65527_0.polar = chara.menpai;
         /*      */
         /* 2703 */     vo_65527_0.vo_65527_0.item_unique = 0;
         /* 2704 */     vo_65527_0.vo_65527_0.passive_mode = chara.waiguan;

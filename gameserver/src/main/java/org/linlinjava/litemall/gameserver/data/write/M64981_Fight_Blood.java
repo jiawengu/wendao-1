@@ -17,7 +17,7 @@
 /* 17 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
 /* 19 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(1));
-/* 20 */     BuildFields.get("max_life").write(writeBuf, object1.get(1));
+/* 20 */     BuildFields.get("life").write(writeBuf, object1.get(1));
 /*    */   }
 /*    */   
 /*    */ 

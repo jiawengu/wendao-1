@@ -4,6 +4,10 @@
 /*   4 */   public String name = "";
 /*     */   public int phy_power;
 /*     */   public int accurate;
+    /**
+     * 体质
+     */
+            public int con;
 /*     */   public int life;
 /*     */   public int max_life;
 /*     */   public int def;
@@ -14,6 +18,10 @@
 /*     */   public int dex;
 /*     */   public int speed;
 /*     */   public int parry;
+    /**
+     * 相性
+     */
+            public int polar;
 /*     */   public int attrib_point;
 /*     */   public int metal;
 /*     */   public int wood;
@@ -30,6 +38,7 @@
 /*     */   public int stamina;
 /*     */   public int max_stamina;
 /*     */   public int tao;
+/*     */   public int tao_ex;
 /*     */   public int friend;
 /*     */   public int owner_name;
 /*     */   public int mon_tao_ex;
@@ -153,7 +162,13 @@
 /*     */   public int exp_ware_data_fetch_times;
 /*     */   public int exp_ware_data_today_fetch_times;
 /*     */   public int free_rename;
-/*     */ }
+    public int mon_tao;
+    public int total_pk;
+    public int max_cash;
+    public int total_died;
+    public int portrait;
+    public int str;
+    /*     */ }
 
 
 /* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\data\vo\Vo_65527_0.class

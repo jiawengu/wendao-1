@@ -330,7 +330,7 @@
 /*      */   public static final String ACHIEVE_TIME = "achieve_time";
 /*      */   public static final String UPGRADE__STATE = "upgrade_state";
 /*      */   public static final String UPGRADE__TYPE = "upgrade_type";
-/*      */   public static final String UPGRADE__LEVEL = "upgrade_level";
+/*      */   public static final String UPGRADE__LEVEL = "upgrade/level";
 /*      */   public static final String UPGRADE__EXP = "upgrade_exp";
 /*      */   public static final String UPGRADE__EXP_TO_NEXT_LEVEL = "upgrade_exp_to_next_level";
 /*      */   public static final String UPGRADE__MAX_POLAR_EXTRA = "upgrade_max_polar_extra";
@@ -899,7 +899,7 @@
 /*  899 */     data.put("achieve_time", "achieve_time");
 /*  900 */     data.put("upgrade_state", "upgrade_state");
 /*  901 */     data.put("upgrade_type", "upgrade_type");
-/*  902 */     data.put("upgrade_level", "upgrade_level");
+/*  902 */     data.put("upgrade/level", "upgrade/level");
 /*  903 */     data.put("upgrade_exp", "upgrade_exp");
 /*  904 */     data.put("upgrade_exp_to_next_level", "upgrade_exp_to_next_level");
 /*  905 */     data.put("upgrade_max_polar_extra", "upgrade_max_polar_extra");
@@ -1490,7 +1490,7 @@
 /* 1516 */     FIELDS.put("achieve_time", new BuildFields(338, 1));
 /* 1517 */     FIELDS.put("upgrade_state", new BuildFields(340, 1));
 /* 1518 */     FIELDS.put("upgrade_type", new BuildFields(341, 1));
-/* 1519 */     FIELDS.put("upgrade_level", new BuildFields(342, 1));
+/* 1519 */     FIELDS.put("upgrade/level", new BuildFields(342, 1));
 /* 1520 */     FIELDS.put("upgrade_exp", new BuildFields(343, 1));
 /* 1521 */     FIELDS.put("upgrade_exp_to_next_level", new BuildFields(344, 1));
 /* 1522 */     FIELDS.put("upgrade_max_polar_extra", new BuildFields(345, 1));

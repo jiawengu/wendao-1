@@ -17,7 +17,7 @@
 /* 17 */     GameWriteTool.writeInt(writeBuf, (Integer)object1.get(0));
 /*    */     
 /* 19 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(1));
-/* 20 */     BuildFields.get("lock_exp").write(writeBuf, object1.get(1));
+/* 20 */     BuildFields.get("use_money_type").write(writeBuf, object1.get(1));
 /*    */   }
 /*    */   
 /*    */ 
