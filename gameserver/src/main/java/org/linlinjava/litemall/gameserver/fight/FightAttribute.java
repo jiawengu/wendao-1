@@ -15,8 +15,17 @@ public class FightAttribute {
     public void reduceAttribute(FightAttribtueType type, float reduceValue){
         attributeArray[index(type)] -= reduceValue;
     }
-    public void addAttribute(FightAttribtueType type, float reduceValue){
-        attributeArray[index(type)] += reduceValue;
+    public void addAttribute(FightAttribtueType type, float addValue){
+        attributeArray[index(type)] += addValue;
+    }
+
+    /**
+     * 增加百分比
+     * @param type
+     * @param addPer
+     */
+    public void addPerAttribute(FightAttribtueType type, float addPer){
+        attributeArray[index(type)] *= (1+addPer);
     }
     private int index(FightAttribtueType type){
         return type.ordinal();

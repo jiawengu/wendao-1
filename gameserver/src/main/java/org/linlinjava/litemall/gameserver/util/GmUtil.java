@@ -87,6 +87,8 @@ public class GmUtil {
 //        chara.gold_coin += coin;
         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+
+        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
     }
 
     /**
