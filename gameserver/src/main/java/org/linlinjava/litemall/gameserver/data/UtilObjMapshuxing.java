@@ -670,16 +670,16 @@
 /*     */   public static Map<Object, Object> PetShuXing(PetShuXing obj1)
 /*     */   {
 /* 676 */     HashMap<Object, Object> objectObjectHashMap = new HashMap();
-///* 678 */     objectObjectHashMap.put("no", Integer.valueOf(obj1.no));
-///* 679 */     objectObjectHashMap.put("type1", Integer.valueOf(obj1.type1));
+/* 678 */     objectObjectHashMap.put("no", Integer.valueOf(obj1.no));
+/* 679 */     objectObjectHashMap.put("type1", Integer.valueOf(obj1.type1));
 /* 680 */     objectObjectHashMap.put("name", obj1.str);
 /* 681 */     objectObjectHashMap.put("life", Integer.valueOf(obj1.max_life));
 /* 682 */     objectObjectHashMap.put("max_life", Integer.valueOf(obj1.def));
 /* 683 */     objectObjectHashMap.put("mana", Integer.valueOf(obj1.max_mana));
 /* 684 */     objectObjectHashMap.put("max_mana", Integer.valueOf(obj1.dex));
 /* 685 */     objectObjectHashMap.put("level", Integer.valueOf(obj1.skill));
-/* 686 */     objectObjectHashMap.put("penetrate", Integer.valueOf(obj1.penetrate));
-/* 687 */     objectObjectHashMap.put("rank", Integer.valueOf(obj1.polar_point));
+/* 686 */     objectObjectHashMap.put("rank", Integer.valueOf(obj1.penetrate));
+/* 687 */     objectObjectHashMap.put("attrib_point", Integer.valueOf(obj1.polar_point));
 /* 688 */     objectObjectHashMap.put("polar", Integer.valueOf(obj1.metal));
 /* 689 */     objectObjectHashMap.put("polar_point", Integer.valueOf(obj1.stamina));
 /* 690 */     objectObjectHashMap.put("icon", Integer.valueOf(obj1.type));
