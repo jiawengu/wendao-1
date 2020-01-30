@@ -24,7 +24,10 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.ShuXingUtil;
 /*     */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
-/*     */ 
+import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.fight.FightObject;
+
+/*     */
 /*     */ public class UtilObjMapshuxing
 /*     */ {
 /*     */   public static Map<Object, Object> Chara(Object obj)

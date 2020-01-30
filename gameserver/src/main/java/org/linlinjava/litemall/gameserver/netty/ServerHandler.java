@@ -81,7 +81,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                     try {
                         long beginMill = System.currentTimeMillis();
                         if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO || gameHandler instanceof CMD_HEART_BEAT)){//todo 打印消息
-                            log.info("recive msg!=>"+gameHandler);
+//                            log.info("recive msg!=>"+gameHandler);
                         }
                         gameHandler.process(ctx, buff);
                         long cost = System.currentTimeMillis()-beginMill;

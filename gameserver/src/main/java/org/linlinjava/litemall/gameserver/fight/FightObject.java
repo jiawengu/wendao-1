@@ -1420,4 +1420,11 @@ public class FightObject {
     public boolean isPet(){
         return type == 2;
     }
+    /**
+     * 是否是人
+     * @return
+     */
+    public boolean isPlayer(){
+        return type == 1;
+    }
 }

@@ -14,6 +14,8 @@ import org.linlinjava.litemall.gameserver.data.xls_config.DugenoItem;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.fight.FightObject;
+import org.linlinjava.litemall.gameserver.fight.FuzhuJin31Skill;
 import org.linlinjava.litemall.gameserver.game.*;
 
 import java.util.ArrayList;
@@ -3046,6 +3048,19 @@ import java.util.Random;
         /*      */
         /*      */
         /* 2797 */     vo_65527_0.vo_65527_0.free_rename = (chara.autofight_select == 0 ? 0 : 1);
+
+        FightObject fightObject = FightManager.getFightObject(chara.id);
+        if(fightObject!=null){
+            vo_65527_0.vo_65527_0.accurate+=fightObject.accurate_ext;
+            vo_65527_0.vo_65527_0.mana+=fightObject.fashang_ext;
+            vo_65527_0.vo_65527_0.wiz+=fightObject.fangyu_ext;
+            vo_65527_0.vo_65527_0.parry+=fightObject.parry_ext;
+            System.out.println("accurate_ext:"+fightObject.accurate_ext+",total:"+vo_65527_0.vo_65527_0.accurate);
+            System.out.println("fashang_ext:"+fightObject.fashang_ext+",total:"+vo_65527_0.vo_65527_0.mana);
+        }
+
+
+
         /* 2798 */     return vo_65527_0;
         /*      */   }
     /*      */

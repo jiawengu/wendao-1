@@ -1980,7 +1980,7 @@ public class FightManager {
                         friendsFightTeam.fightObjectList.add(fightObject);
 
                         notifyTeamFriendList(fc, Arrays.asList(fightObject));
-                                notifyTeamEnemyList(fc, Arrays.asList(fightObject));
+//                        notifyTeamEnemyList(fc, fightObjectList, Arrays.asList(fightObject));
 
                         Vo_4163_0 vo_4163_0 = new Vo_4163_0();
                         vo_4163_0.id = fightObject.id;
@@ -3248,10 +3248,12 @@ public class FightManager {
                 }
 
                 fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+                List<FightObject> fightObjectListOther = getFightTeam(fc, charaduishou.id).fightObjectList;
                 notifyTeamFriendList(fc, fightObjectList);
+                notifyTeamEnemyList(fc, fightObjectList, fightObjectListOther);
 
-                List<FightObject> fightObjectListOther = getFightTeamDM(fc, chara.id).fightObjectList;
-                notifyTeamEnemyList(fc, fightObjectListOther);
+                notifyTeamFriendList(fc, fightObjectListOther);
+                notifyTeamEnemyList(fc, fightObjectListOther, fightObjectList);
 
                 for(FightObject fb : getAllFightObject(fc)) {
                     fb.randomTianShuSkill(fc);
@@ -3465,7 +3467,7 @@ public class FightManager {
     }
 
 
-    public static void notifyTeamEnemyList(FightContainer fightContainer, List<FightObject> fightObjectList){
+    public static void notifyTeamEnemyList(FightContainer fightContainer, List<FightObject> notifyObjectList, List<FightObject> fightObjectList){
         Iterator var43 = fightObjectList.iterator();
         List<Vo_65017_0> list65017 = new ArrayList<>();
         while(var43.hasNext()) {
@@ -3494,7 +3496,7 @@ public class FightManager {
             vo_65017_0.special_icon = 0;
             list65017.add(vo_65017_0);
         }
-        send(fightContainer, new MSG_C_OPPONENTS(), list65017);
+        sendTeam(fightContainer, notifyObjectList, new MSG_C_OPPONENTS(), list65017);
     }
 
     public static void notifyTeamFriendList(FightContainer fightContainer, List<FightObject> fightObjectList){
@@ -3527,7 +3529,7 @@ public class FightManager {
             list65019.add(vo_65019_0);
         }
 
-        send(fightContainer, new MSG_C_FRIENDS(), list65019);
+        sendTeam(fightContainer, fightObjectList, new MSG_C_FRIENDS(), list65019);
     }
 
     public static FightObject getRandomObject(FightContainer fightContainer, List<FightObject> exclude) {
@@ -3595,8 +3597,8 @@ public class FightManager {
             List<FightObject> fightObjectList = getFightTeam(fc, id).fightObjectList;
             notifyTeamFriendList(fc, fightObjectList);
 
-            fightObjectList = getFightTeamDM(fc, id).fightObjectList;
-            notifyTeamEnemyList(fc, fightObjectList);
+            List<FightObject> enemyObjectList = getFightTeamDM(fc, id).fightObjectList;
+            notifyTeamEnemyList(fc, fightObjectList, enemyObjectList);
 
             Vo_19959_0 vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fc.round;

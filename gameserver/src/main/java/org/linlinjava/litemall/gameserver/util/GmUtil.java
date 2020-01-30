@@ -83,8 +83,8 @@ public class GmUtil {
 //            FightManager.nextRoundOrSendOver(fightContainer);
 //        }
 
-        int coin = Integer.parseInt(cmds[1]);
-        chara.gold_coin += coin;
+//        int coin = Integer.parseInt(cmds[1]);
+//        chara.gold_coin += coin;
         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
     }
