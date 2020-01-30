@@ -9,6 +9,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 import org.linlinjava.litemall.gameserver.data.write.MSG_TASK_PROMPT;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
+import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.game.GameData;
@@ -22,6 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UserPartyDailyTaskLogic extends BaseLogic {
     public UserPartyDailyTask data;
+    private FightContainer curFc = null;
+
     @Override
     protected void onInit() {
         super.onInit();
@@ -116,7 +119,7 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
             }
             List<String> monsterList = new ArrayList<>();
             monsterList.add(item.monster);
-            FightManager.goFight(GameObjectChar.getGameObjectChar().chara, monsterList);
+            this.curFc = FightManager.goFight(GameObjectChar.getGameObjectChar().chara, monsterList);
         }
     }
 
@@ -129,34 +132,24 @@ public class UserPartyDailyTaskLogic extends BaseLogic {
         return this.getCfgItem(this.data.getCurTaskId());
     }
 
-    public void fightAfterWin(int mapId, List<FightObject> monsters){
+    public void fightAfterWin(FightContainer fc, List<FightObject> monsters){
+        if(this.curFc == null || this.curFc != fc){ return;}
         PartyDailyTaskItem item = this.getHasTask();
         if(item == null){ return; }
-        if(item.map_id ==  mapId && item.monster.compareTo("") != 0) {
-            boolean hasMonster = false;
-            for(int i = 0; i < monsters.size(); i ++){
-                if(monsters.get(i).str.compareTo(item.monster) == 0){
-                    hasMonster = true;
-                    break;
-                }
-            }
-            if(!hasMonster){ return; }
-            if (item.reward > 0) {
-                ((UserPartyLogic) this.userLogic.getMod("party")).addContrib(item.reward);
-            }
-            if (item.next == 0) {
-                this.data.setDayNo(this.data.getDayNo() + 1);
-            }
-            this.data.setCurTaskId(item.next);
-            this.save();
-            if(item.next > 0){
-                item = this.getCfgItem(item.next);
-            }else{
-                item = null;
-            }
-            this.notifyTaskPrompt(item);
+        if (item.reward > 0) {
+            ((UserPartyLogic) this.userLogic.getMod("party")).addContrib(item.reward);
         }
-
+        if (item.next == 0) {
+            this.data.setDayNo(this.data.getDayNo() + 1);
+        }
+        this.data.setCurTaskId(item.next);
+        this.save();
+        if(item.next > 0){
+            item = this.getCfgItem(item.next);
+        }else{
+            item = null;
+        }
+        this.notifyTaskPrompt(item);
     }
 
     private void notifyTaskPrompt(PartyDailyTaskItem item){
