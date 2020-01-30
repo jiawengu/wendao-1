@@ -21,6 +21,7 @@ import org.linlinjava.litemall.gameserver.service.CharaStatueService;
 import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -464,11 +465,11 @@ public class FightManager {
         round(fc);
     }
 
-    public static void goFight(Chara chara, List<String> monsterList) {
-        goFightWithCallback(chara, monsterList, null);
+    public static FightContainer goFight(Chara chara, List<String> monsterList) {
+        return goFightWithCallback(chara, monsterList, null);
     }
 
-    public static void goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
+    public static FightContainer goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
@@ -700,6 +701,7 @@ public class FightManager {
         vo_7655_0.id = 0;
         send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
+        return fc;
     }
     public static void goFightMapGuardian(String npcName, Chara chara, List<CharaStatue> defCharaStatueList) {
         FightContainer fc;///战斗空间
@@ -2986,7 +2988,9 @@ public class FightManager {
                     }
                     UserLogic logic = GameObjectChar.getGameObjectChar().logic;
                     UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-                    dailyTaskLogic.fightAfterWin(chara1.mapid, guaiwu);
+                    dailyTaskLogic.fightAfterWin(fightContainer, guaiwu);
+                    UserPartyDailyChallengeLogic dailyChallengeLogic = (UserPartyDailyChallengeLogic)logic.getMod("party_daily_challenge");
+                    dailyChallengeLogic.fightAfterWin(fightContainer, guaiwu);
                 }
             }else{
                 if (chara1.mapid == 37000 ) {//通天塔挑战失败

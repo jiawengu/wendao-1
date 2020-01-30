@@ -179,7 +179,7 @@ public class SuperBossMng extends BaseBossMng {
     @Override
     public void productionBoss (){
         if(cfg.maps != null){
-//            System.out.println("生产BOSS");
+            //System.out.println("生产BOSS");
             this.bossList = getRandomBossList();
         }
     }
