@@ -40,6 +40,7 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int x;
 /*     */   public int y;
 /*     */   public int mapid;
+            public short currentFlyFightIndex = 0; //当前飞升战斗第几阶段
 /*     */   
 /*     */   public Chara() {}
 /*     */   
@@ -557,6 +558,18 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
     public Petbeibao getLueZhenPet(){
         for(Petbeibao petbeibao:pets){
             if (petbeibao.id == petLueZhenId) {
+                return petbeibao;
+            }
+        }
+        return null;
+    }
+
+    /**
+    *根据宠物ID获取宠物
+    * */
+    public Petbeibao getPetByID(int id ){
+        for(Petbeibao petbeibao:pets){
+            if (petbeibao.id == id) {
                 return petbeibao;
             }
         }

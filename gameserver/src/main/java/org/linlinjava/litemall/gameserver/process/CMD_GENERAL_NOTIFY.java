@@ -293,8 +293,12 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new M49153_0(), vo_49153_0);
         }
 
-        if (32 == type) {
-
+        if (30020 == type) {
+            if (chara.currentFlyFightIndex >= GamePetFeiSheng.MAX_FLY){
+                GamePetFeiSheng.onChosePetFly(chara, Integer.valueOf(para1).intValue());
+            }else {
+                GamePetFeiSheng.onChosePetFly(chara, Integer.valueOf(para1).intValue());
+            }
         }
 
         int weizhi;

@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.domain.Map;
+import org.linlinjava.litemall.gameserver.data.constant.DefinedConst;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -709,6 +710,20 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
+        }
+
+        //飞升
+        if (menu_item.equals("chose_pet_feiSheng")){
+            System.out.println("选择宠物飞升");
+
+            Vo_MSG_SUBMIT_PET vo = new Vo_MSG_SUBMIT_PET();
+            vo.type =  2;// DefinedConst.SUBMIT_PET_TYPE.SUBMIT_PET_TYPE_FEISHENG.getValue();
+            GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M_MSG_SUBMIT_PET(), vo);
+        }
+
+        if (npc_id == 910){
+            System.out.println("米兰仙子");
+            GamePetFeiSheng.onPetFly(chara1, menu_item);
         }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(npc_id))) && (menu_item.equals("我是来向你挑战的"))) {
