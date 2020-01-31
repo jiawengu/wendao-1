@@ -808,6 +808,7 @@
 /* 804 */     objectObjectHashMap.put("upgrade_magic", Integer.valueOf(obj1.upgrade_magic));
 /* 805 */     objectObjectHashMap.put("upgrade_total", Integer.valueOf(obj1.upgrade_total));
 /* 806 */     objectObjectHashMap.put("silver_coin", Integer.valueOf(obj1.silver_coin));
+			  objectObjectHashMap.put("has_upgraded", Integer.valueOf(obj1.has_upgraded));
 /* 807 */     return objectObjectHashMap;
 /*     */   }
 /*     */   

@@ -187,5 +187,7 @@ public class PetShuXing {
     public int upgrade_magic = 0;
     public int upgrade_total = 0;
     public int silver_coin;
+    /**飞升*/
+    public int has_upgraded = 0;
 }
 

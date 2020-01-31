@@ -29,7 +29,8 @@ public class MSG_UPDATE_PETS extends BaseWrite{
             GameWriteTool.writeInt(writeBuf, Integer.valueOf(((Petbeibao)list.get(i)).id));
 
             GameWriteTool.writeShort(writeBuf, Integer.valueOf(((Petbeibao)list.get(i)).petShuXing.size()));
-            Entry<Object, Object> entry; for (int j = 0; j < ((Petbeibao)list.get(i)).petShuXing.size(); j++)        {
+            Entry<Object, Object> entry;
+            for (int j = 0; j < ((Petbeibao)list.get(i)).petShuXing.size(); j++)        {
                 PetShuXing petShuXing = (PetShuXing)((Petbeibao)list.get(i)).petShuXing.get(j);
                 GameWriteTool.writeByte(writeBuf, Integer.valueOf(((PetShuXing)((Petbeibao)list.get(i)).petShuXing.get(j)).no));
 
@@ -55,10 +56,17 @@ public class MSG_UPDATE_PETS extends BaseWrite{
                             it.remove();
                     }
                 }
+                System.out.println("has_upgraded="+map.get("has_upgraded"));
                 GameWriteTool.writeShort(writeBuf, Integer.valueOf(map.size()));
                 for (Entry<Object, Object> objectEntry : map.entrySet()) {
                     if (BuildFields.data.get((String)objectEntry.getKey()) != null) {
-                        BuildFields.get((String)objectEntry.getKey()).write(writeBuf, objectEntry.getValue());
+                        if (objectEntry.getKey().equals("has_upgraded")){
+                            BuildFields.get((String)objectEntry.getKey()).write(writeBuf, objectEntry.getValue());
+                            BuildFields  files =  BuildFields.get((String) objectEntry.getKey());
+                            System.out.println(files.toString());
+                        }else{
+                            BuildFields.get((String)objectEntry.getKey()).write(writeBuf, objectEntry.getValue());
+                        }
                     } else {
                         System.out.println(objectEntry.getKey());
                     }
