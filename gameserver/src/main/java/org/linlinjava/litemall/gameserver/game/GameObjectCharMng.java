@@ -124,13 +124,16 @@ public class GameObjectCharMng
         if(null!=gameObjectChar.chara) {
             synchronized (gameObjectChar) {
                 String data = gameObjectChar.characters.getData();
-                Chara chara111 = JSONUtils.parseObject(data, Chara.class);
-                if (chara111.level > gameObjectChar.chara.level) {
-                    log.error("人物等级{old}", chara111.name, chara111.level);
-                    log.error("人物等级{new}", gameObjectChar.chara.name, gameObjectChar.chara.level);
-                    log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
-                    throw new RuntimeException("角色等级回档！！！");
+                if(null!=data){
+                    Chara chara111 = JSONUtils.parseObject(data, Chara.class);
+                    if (chara111.level > gameObjectChar.chara.level) {
+                        log.error("人物等级{old}", chara111.name, chara111.level);
+                        log.error("人物等级{new}", gameObjectChar.chara.name, gameObjectChar.chara.level);
+                        log.error("人物队伍信息", gameObjectChar.gameTeam.toString());
+                        throw new RuntimeException("角色等级回档！！！");
+                    }
                 }
+
                 long beginMill = System.currentTimeMillis();
                 String charData = org.linlinjava.litemall.db.util.JSONUtils.toJSONString(gameObjectChar.chara);
                 gameObjectChar.characters.setData(charData);
