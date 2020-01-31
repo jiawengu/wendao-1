@@ -4,14 +4,13 @@ import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.gameserver.data.vo.VO_MSG_PET_UPGRADE_PRE_INFO;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
-import org.linlinjava.litemall.gameserver.data.write.M20480_0;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.data.write.M_MSG_PET_UPGRADE_PRE_INFO;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.Petbeibao;
 import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 
 import java.util.ArrayList;
@@ -59,7 +58,7 @@ public class GamePetFeiSheng {
         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
         vo_20480_0.msg = msg;
         vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
-        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new M20480_0(), vo_20480_0);
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
 
 
 
@@ -128,7 +127,7 @@ public class GamePetFeiSheng {
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
-            GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new M20480_0(), vo_20480_0);
+            GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
 
 
 
