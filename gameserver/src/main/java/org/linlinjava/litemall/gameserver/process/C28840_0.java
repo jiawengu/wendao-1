@@ -13,7 +13,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_GENERAL_NOTIFY;
 import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
@@ -230,7 +230,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /* 229 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 230 */     vo_20480_0.msg = "炼制成功";
 /* 231 */     vo_20480_0.time = 1562593376;
-/* 232 */     GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 232 */     GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 233 */     Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 234 */     vo_40964_0.type = 1;
 /* 235 */     vo_40964_0.name = str;

@@ -138,7 +138,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = msg;
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
-            GameObjectChar.send(new M20480_0(), vo_20480_0);
+            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 
 
             if (!strings[1].equals("金币")) {
@@ -368,7 +368,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 vo_20480_0 = new Vo_20480_0();
                 vo_20480_0.msg = "你获得了#R" + split[0];
                 vo_20480_0.time = (int)System.currentTimeMillis();
-                GameObjectChar.send(new M20480_0(), vo_20480_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
                 GameUtil.huodechoujiang(split, chara);
             }
         }
@@ -630,10 +630,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 }
             }
 
-            GameObjectChar.sendduiwu(new M45074_0(), arrayList, chara.id);
+            GameObjectChar.sendduiwu(new MSG_LEADER_COMBAT_GUARD(), arrayList, chara.id);
             if (GameObjectChar.getGameObjectChar().gameTeam != null && GameObjectChar.getGameObjectChar().gameTeam.duiwu != null) {
                 for(coin = 0; coin < GameObjectChar.getGameObjectChar().gameTeam.duiwu.size(); ++coin) {
-                    GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(coin)).id).sendOne(new M45074_0(), arrayList);
+                    GameObjectCharMng.getGameObjectChar(((Chara)GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(coin)).id).sendOne(new MSG_LEADER_COMBAT_GUARD(), arrayList);
                 }
             }
         }
@@ -702,7 +702,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = "你提款了钱";
             vo_20480_0.time = (int)(System.currentTimeMillis() / 1000L);
-            GameObjectChar.send(new M20480_0(), vo_20480_0);
+            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
         }
 
         if (40016 == type) {
@@ -866,7 +866,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             Vo_20480_0 vo204800 = new Vo_20480_0();
             vo204800.msg = "你领取了签到奖励。";
             vo204800.time = 1562593376;
-            GameObjectChar.send(new M20480_0(), vo204800);
+            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo204800);
             chara.isCanSgin = 2;
             ++chara.signDays;
             Vo_41051_0 vo_41051_0 = new Vo_41051_0();
@@ -1093,14 +1093,14 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameUtil.dujineng(2, pos1, shouHuShuXing.skill, true, shouHu.id, chara);
         }
 
-        if (10008 == type) {
+        if (10008 == type) {//查询组队信息
         }
 
         if (30013 == type) {
             Vo_45075_0 vo_45075_0 = new Vo_45075_0();
             vo_45075_0.teams = 0;
             vo_45075_0.members = 0;
-            GameObjectChar.send(new M45075_0(), vo_45075_0);
+            GameObjectChar.send(new MSG_MATCH_SIZE(), vo_45075_0);
         }
 
         if (26 == type) {

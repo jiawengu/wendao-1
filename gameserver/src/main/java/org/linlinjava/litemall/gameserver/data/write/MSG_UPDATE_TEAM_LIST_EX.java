@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 
 //MSG_UPDATE_TEAM_LIST_EX
 @Service
-public class M4121_0 extends BaseWrite {
-    public M4121_0() {
+public class MSG_UPDATE_TEAM_LIST_EX extends BaseWrite {
+    public MSG_UPDATE_TEAM_LIST_EX() {
     }
 
     protected void writeO(ByteBuf writeBuf, Object object) {

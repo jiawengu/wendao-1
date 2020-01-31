@@ -13,7 +13,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
@@ -50,7 +50,7 @@
 /*  50 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  51 */       vo_20480_0.msg = "你花费#R300#n个金元宝购买了#Y3,000,000#n文钱#n。";
 /*  52 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  53 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  53 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  54 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  55 */       vo_8165_0.msg = "购买成功";
 /*  56 */       vo_8165_0.active = 0;
@@ -71,7 +71,7 @@
 /*  71 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  72 */       vo_20480_0.msg = "你花费#R600#n个金元宝购买了#Y6,000,000#n文钱#n。";
 /*  73 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  74 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  74 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  75 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  76 */       vo_8165_0.msg = "购买成功";
 /*  77 */       vo_8165_0.active = 0;
@@ -92,7 +92,7 @@
 /*  92 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  93 */       vo_20480_0.msg = "你花费#R1100#n个金元宝购买了#Y10,000,000#n文钱#n。";
 /*  94 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  95 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  95 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  96 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  97 */       vo_8165_0.msg = "购买成功";
 /*  98 */       vo_8165_0.active = 0;
@@ -113,7 +113,7 @@
 /* 113 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 114 */       vo_20480_0.msg = "你花费#R3300#n个金元宝购买了#Y30,000,000#n文钱#n。";
 /* 115 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 116 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 116 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 117 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 118 */       vo_8165_0.msg = "购买成功";
 /* 119 */       vo_8165_0.active = 0;
@@ -134,7 +134,7 @@
 /* 134 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 135 */       vo_20480_0.msg = "你花费#R7200#n个金元宝购买了#Y60,000,000#n文钱#n。";
 /* 136 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 137 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 137 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 138 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 139 */       vo_8165_0.msg = "购买成功";
 /* 140 */       vo_8165_0.active = 0;
@@ -155,7 +155,7 @@
 /* 155 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 156 */       vo_20480_0.msg = "你花费#R12000#n个金元宝购买了#Y100,000,000#n文钱#n。";
 /* 157 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 158 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 158 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 159 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 160 */       vo_8165_0.msg = "购买成功";
 /* 161 */       vo_8165_0.active = 0;

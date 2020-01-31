@@ -8,7 +8,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M45074_0 extends BaseWrite
+/*    */ public class MSG_LEADER_COMBAT_GUARD extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

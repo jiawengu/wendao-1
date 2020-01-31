@@ -3148,7 +3148,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /* 1316 */
                 vo_20480_0.time = 1562593376;
                 /* 1317 */
-                GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20480_0(), vo_20480_0);
+                GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
                 /* 1318 */
                 org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
                 /* 1319 */

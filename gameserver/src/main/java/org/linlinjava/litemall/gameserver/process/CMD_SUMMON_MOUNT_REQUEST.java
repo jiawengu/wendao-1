@@ -106,7 +106,7 @@
 /* 102 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 103 */       vo_20480_0.msg = ("恭喜你召唤了一只" + strings[0]);
 /* 104 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 105 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 105 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 106 */       Vo_41045_0 vo_41045_0 = new Vo_41045_0();
 /* 107 */       vo_41045_0.flag = 3;
 /* 108 */       vo_41045_0.id = petbeibao.id;
@@ -193,7 +193,7 @@
 /* 189 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 190 */       vo_20480_0.msg = ("恭喜你召唤了一只" + strings[0]);
 /* 191 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 192 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 192 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 193 */       Vo_41045_0 vo_41045_0 = new Vo_41045_0();
 /* 194 */       vo_41045_0.flag = 3;
 /* 195 */       vo_41045_0.id = petbeibao.id;

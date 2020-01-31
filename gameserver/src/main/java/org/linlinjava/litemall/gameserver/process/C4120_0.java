@@ -39,9 +39,9 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 38 */       GameObjectCharMng.sendOne(GameObjectChar.getGameObjectChar().gameTeam.duiwu.get(i).id, new MSG_TITLE(), vo_61671_0);
 /*    */     }
 /* 40 */     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
-/* 41 */     GameObjectCharMng.sendOne(chara1.id, new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+/* 41 */     GameObjectCharMng.sendOne(chara1.id, new MSG_UPDATE_TEAM_LIST(), object1);
 /* 42 */     List<Vo_4121_0> vo_4121_0List = new ArrayList();
-/* 43 */     GameObjectCharMng.sendOne(chara1.id, new org.linlinjava.litemall.gameserver.data.write.M4121_0(), vo_4121_0List);
+/* 43 */     GameObjectCharMng.sendOne(chara1.id, new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
 /* 44 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 45 */     vo_20481_0.msg = "你被请离了队伍。";
 /* 46 */     vo_20481_0.time = 1562987118;

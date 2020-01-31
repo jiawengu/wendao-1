@@ -9,7 +9,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41045_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -90,7 +91,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  85 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  86 */     vo_20480_0.msg = ("恭喜你召唤了一只" + name);
 /*  87 */     vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  88 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M20480_0(), vo_20480_0);
+/*  88 */     GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  89 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /*  90 */     vo_20481_0.msg = ("恭喜你召唤了一只" + name);
 /*  91 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));

@@ -148,7 +148,7 @@ import java.util.List;
 /* 152 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 153 */       vo_20480_0.msg = "你组建了一支队伍。";
 /* 154 */       vo_20480_0.time = 1562593376;
-/* 155 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 155 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */     }
 /* 157 */     if ("invite_join".equals(ask_type))
 /*     */     {
@@ -182,7 +182,7 @@ import java.util.List;
 /* 186 */         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 187 */         vo_20480_0.msg = "你组建了一支队伍。";
 /* 188 */         vo_20480_0.time = 1562593376;
-/* 189 */         GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 189 */         GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */       }
 /* 191 */       else if (GameObjectChar.getGameObjectChar().gameTeam.duiwu.size() >= 5) {
 /* 192 */         return;

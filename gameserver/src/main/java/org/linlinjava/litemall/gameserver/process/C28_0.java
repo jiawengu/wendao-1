@@ -9,7 +9,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61671_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_TITLE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
@@ -79,11 +79,11 @@
 /*  75 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  76 */     vo_20480_0.msg = (chara.name + "回到了队伍。");
 /*  77 */     vo_20480_0.time = 1562593376;
-/*  78 */     GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  78 */     GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  79 */     vo_20480_0 = new Vo_20480_0();
 /*  80 */     vo_20480_0.msg = (chara.name + "你回到了#Y#<" + session1.chara.name + "#>#n的队伍。");
 /*  81 */     vo_20480_0.time = 1562593376;
-/*  82 */     GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  82 */     GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */     
 /*  84 */     GameUtil.MSG_UPDATE_TEAM_LIST(gameTeam.duiwu);
 /*  85 */     GameUtil.MSG_UPDATE_TEAM_LIST_EX(gameTeam.zhanliduiyuan);

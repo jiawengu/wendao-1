@@ -1,8 +1,7 @@
 package org.linlinjava.litemall.gameserver.util;
 
 import org.linlinjava.litemall.db.domain.StoreInfo;
-import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
-import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
+import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.PetShuXing;
@@ -12,12 +11,10 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.GameTeam;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * gm指令格式:#gm 指令 参数1 参数2 参数3
@@ -151,6 +148,18 @@ public class GmUtil {
         chara.level = level;
         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+
+
+        if(null!=GameObjectChar.getGameObjectChar().gameTeam){
+            List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+            GameUtil.MSG_UPDATE_TEAM_LIST(duiwu);
+            for(Vo_4121_0 vo_4121_0:GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan){
+                if(vo_4121_0.id==chara.id){
+                    vo_4121_0.skill = level;
+                }
+            }
+            GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
+        }
     }
 
     /**

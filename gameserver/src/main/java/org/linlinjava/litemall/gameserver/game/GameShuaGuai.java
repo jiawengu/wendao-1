@@ -1,7 +1,7 @@
 /*     */ package org.linlinjava.litemall.gameserver.game;
 /*     */ 
 /*     */ import java.util.ArrayList;
-/*     */ import java.util.HashMap;
+/*     */
 import java.util.List;
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.RenwuMonster;
@@ -11,6 +11,7 @@ import java.util.List;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_APPEAR;
 import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 import org.linlinjava.litemall.gameserver.data.write.MSG_MESSAGE_EX;
+import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ 
 /*     */ public class GameShuaGuai
@@ -51,7 +52,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  41 */             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  42 */             vo_20480_0.msg = msg;
 /*  43 */             vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  44 */             GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M20480_0(), vo_20480_0, gameSession.chara.id);
+/*  44 */             GameObjectChar.sendduiwu(new MSG_NOTIFY_MISC(), vo_20480_0, gameSession.chara.id);
 /*     */             
 /*     */ 
 /*  47 */             org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0 vo_8165_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0();
@@ -64,7 +65,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  54 */             vo_20480_0 = new Vo_20480_0();
 /*  55 */             vo_20480_0.msg = msglost;
 /*  56 */             vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  57 */             gameSession.gameMap.sendNoMeduiwu(new org.linlinjava.litemall.gameserver.data.write.M20480_0(), vo_20480_0, gameSession);
+/*  57 */             gameSession.gameMap.sendNoMeduiwu(new MSG_NOTIFY_MISC(), vo_20480_0, gameSession);
 /*     */             
 /*  59 */             org.linlinjava.litemall.gameserver.data.vo.Vo_40961_0 vo_40961_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_40961_0();
 /*  60 */             vo_40961_0.count = 1;

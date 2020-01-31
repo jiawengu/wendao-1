@@ -15,7 +15,6 @@ import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
-import org.linlinjava.litemall.gameserver.fight.FuzhuJin31Skill;
 import org.linlinjava.litemall.gameserver.game.*;
 
 import java.util.ArrayList;
@@ -535,7 +534,7 @@ import java.util.Random;
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = ("你获得了#R" + cash + "#n点" + "潜能");
             vo_20480_0.time = 1562593376;
-            GameObjectChar.send(new M20480_0(), vo_20480_0, duiyuan.id);
+            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0, duiyuan.id);
             /*  472 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
             /*  473 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
             /*      */     }
@@ -1089,6 +1088,17 @@ import java.util.Random;
 
        ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara);
        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+
+       if(null!=GameObjectChar.getGameObjectChar().gameTeam){
+             List<Chara> duiwu = GameObjectChar.getGameObjectChar().gameTeam.duiwu;
+             GameUtil.MSG_UPDATE_TEAM_LIST(duiwu);
+             for(Vo_4121_0 vo_4121_0:GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan){
+                 if(vo_4121_0.id==chara.id){
+                     vo_4121_0.skill = chara.level;
+                 }
+             }
+             GameUtil.MSG_UPDATE_TEAM_LIST_EX(GameObjectChar.getGameObjectChar().gameTeam.zhanliduiyuan);
+         }
      }
    }
     /*      */
@@ -1606,7 +1616,7 @@ import java.util.Random;
             /* 1414 */       vo_4121_0List.add(vo_4121_0);
             /*      */     }
         /* 1416 */     for (org.linlinjava.litemall.gameserver.data.vo.Vo_4121_0 vo41210 : charaList) {
-            /* 1417 */       GameObjectCharMng.getGameObjectChar(vo41210.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4121_0(), vo_4121_0List);
+            /* 1417 */       GameObjectCharMng.getGameObjectChar(vo41210.id).sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
             /*      */     }
         /*      */   }
     /*      */
@@ -1647,8 +1657,8 @@ import java.util.Random;
                 /*      */       }
             /*      */     }
         /* 1457 */     for (Chara chara : charaList) {
-            /* 1458 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M45074_0(), list);
-            /* 1459 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), vo_4119_0List);
+            /* 1458 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_LEADER_COMBAT_GUARD(), list);
+            /* 1459 */       GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE_TEAM_LIST(), vo_4119_0List);
             /*      */     }
         /*      */   }
     /*      */
@@ -4418,7 +4428,7 @@ import java.util.Random;
                             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                             vo_20480_0.msg = ("你获得了#R" + Integer.valueOf(strings[0]).intValue() + "#n点" + "潜能");
                             vo_20480_0.time = 1562593376;
-                            GameObjectChar.send(new M20480_0(), vo_20480_0, chara.id);
+                            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0, chara.id);
                             ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara);
                             GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                         }
