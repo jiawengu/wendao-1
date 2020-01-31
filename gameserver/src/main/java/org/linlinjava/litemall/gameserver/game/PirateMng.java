@@ -40,6 +40,7 @@ public class PirateMng extends BaseBossMng {
     public PirateCfg cfg;
     public List<PirateNpc> pirateList = new ArrayList<PirateNpc>();
     public Map<Integer, PirateNpc> pirateMap = new HashMap<Integer, PirateNpc>();
+    private long startTime = -1;
 
     @Override
     public void productionBoss() {
@@ -168,8 +169,7 @@ public class PirateMng extends BaseBossMng {
             public void run() {
                 try {
                     productionBoss();
-                    Thread.sleep(cfg.duration * 60 * 60 * 1000);
-                    resetBoss();
+                    startTime = System.currentTimeMillis() + cfg.duration * 60 * 60 * 1000;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -178,6 +178,24 @@ public class PirateMng extends BaseBossMng {
             @Override
             public Date nextExecutionTime(TriggerContext triggerContext) {
                 return new CronTrigger(cfg.startTime).nextExecutionTime(triggerContext);
+            }
+        });
+        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if(startTime != -1 && startTime <= System.currentTimeMillis()){
+                        resetBoss();
+                        startTime = -1;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Trigger() {
+            @Override
+            public Date nextExecutionTime(TriggerContext triggerContext) {
+                return new CronTrigger("* * * * * ?").nextExecutionTime(triggerContext);
             }
         });
     }
