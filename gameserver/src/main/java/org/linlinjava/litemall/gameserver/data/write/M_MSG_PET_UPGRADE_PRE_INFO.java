@@ -5,10 +5,11 @@ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 import org.linlinjava.litemall.gameserver.data.vo.VO_MSG_PET_UPGRADE_PRE_INFO;
 import org.linlinjava.litemall.gameserver.domain.BuildFields;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Component
 public class M_MSG_PET_UPGRADE_PRE_INFO extends BaseWrite {
 
     @Override
@@ -22,14 +23,14 @@ public class M_MSG_PET_UPGRADE_PRE_INFO extends BaseWrite {
         map.put("pet_phy_shape", vo.pet_phy_shape);
         map.put("pet_speed_shape", vo.pet_speed_shape);
 
-        GameWriteTool.writeShort(writeBuf, Integer.valueOf(map.size()));
-        for (Map.Entry<Object, Object> objectEntry : map.entrySet()) {
-            if (BuildFields.data.get((String)objectEntry.getKey()) != null) {
-                BuildFields.get((String)objectEntry.getKey()).write(writeBuf, objectEntry.getValue());
-            } else {
-                System.out.println(objectEntry.getKey());
-            }
-        }
+        GameWriteTool.writeShort(writeBuf, 0);
+//        for (Map.Entry<Object, Object> objectEntry : map.entrySet()) {
+//            if (BuildFields.data.get((String)objectEntry.getKey()) != null) {
+//                BuildFields.get((String)objectEntry.getKey()).write(writeBuf, objectEntry.getValue());
+//            } else {
+//                System.out.println(objectEntry.getKey());
+//            }
+//        }
     }
 
     @Override

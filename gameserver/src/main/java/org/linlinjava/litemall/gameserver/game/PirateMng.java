@@ -164,39 +164,39 @@ public class PirateMng extends BaseBossMng {
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
-        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    productionBoss();
-                    startTime = System.currentTimeMillis() + cfg.duration * 60 * 60 * 1000;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Trigger() {
-            @Override
-            public Date nextExecutionTime(TriggerContext triggerContext) {
-                return new CronTrigger(cfg.startTime).nextExecutionTime(triggerContext);
-            }
-        });
-        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if(startTime != -1 && startTime <= System.currentTimeMillis()){
-                        resetBoss();
-                        startTime = -1;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Trigger() {
-            @Override
-            public Date nextExecutionTime(TriggerContext triggerContext) {
-                return new CronTrigger("* * * * * ?").nextExecutionTime(triggerContext);
-            }
-        });
+//        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    productionBoss();
+//                    startTime = System.currentTimeMillis() + cfg.duration * 60 * 60 * 1000;
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Trigger() {
+//            @Override
+//            public Date nextExecutionTime(TriggerContext triggerContext) {
+//                return new CronTrigger(cfg.startTime).nextExecutionTime(triggerContext);
+//            }
+//        });
+//        scheduledTaskRegistrar.addTriggerTask(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    if(startTime != -1 && startTime <= System.currentTimeMillis()){
+//                        resetBoss();
+//                        startTime = -1;
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Trigger() {
+//            @Override
+//            public Date nextExecutionTime(TriggerContext triggerContext) {
+//                return new CronTrigger("* * * * * ?").nextExecutionTime(triggerContext);
+//            }
+//        });
     }
 }

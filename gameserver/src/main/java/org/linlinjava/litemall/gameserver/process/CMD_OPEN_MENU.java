@@ -191,7 +191,7 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         }
         //飞升
         if (GamePetFeiSheng.zhanDouNpcName.equals(npc.getName())) {
-            if (chara.currentFlyFightIndex >= GamePetFeiSheng.MAX_FLY) {
+            if ( GamePetFeiSheng.isTongGuoKaoYan(chara)) {
                 content =
                         ("飞升宠物所需材料：2阶骑宠灵魂3个以重塑其魂，驯兽诀1本以定其魂，萦香丸20颗以滋养其血肉，聚灵丹20颗以调养精气\n[飞升]\n" + "[离开]".replace("\\", ""));
             } else {

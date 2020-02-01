@@ -22,4 +22,20 @@ public class DefinedConst {
             this.value = value;
         }
     }
+    //精怪类型
+    public enum  MOUNT_TYPE
+    {
+        MOUNT_TYPE_NORMAL,
+        MOUNT_TYPE_JINGGUAI,           // 坐骑-精怪
+        MOUNT_TYPE_YULING,           // 坐骑-御灵
+    }
+
+    public  enum  PET_RANK{
+        PET_RANK_NORMAL,
+        PET_RANK_WILD               , // 野生
+        PET_RANK_BABY               , // 宝宝
+        PET_RANK_ELITE              , // 变异
+        PET_RANK_EPIC               , // 神兽
+        PET_RANK_GUARD              , // 守护
+    }
 }
