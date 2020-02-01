@@ -97,7 +97,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  96 */             chara.backpack.remove(goods);
 /*  97 */             GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /*     */           }
-/*  99 */           GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+                GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */         }
 /*     */       }
 /*     */     }

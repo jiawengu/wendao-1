@@ -85,8 +85,8 @@
 /*     */         }
 /*  86 */         GameUtil.addwupin(goods, chara);
 /*     */         
-/*     */ 
-/*  89 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+/*     */
+            GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */       }
 /*     */       
 /*  92 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();

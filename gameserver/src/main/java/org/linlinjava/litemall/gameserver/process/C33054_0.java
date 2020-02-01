@@ -11,7 +11,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M49179_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_STALL_MINE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
@@ -41,7 +41,7 @@
 /* 41 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
 /* 42 */     List<SaleGood> saleGoodList = GameData.that.saleGoodService.findByOwnerUuid(chara.uuid);
 /* 43 */     Vo_49179_0 vo_49179_0 = GameUtil.a49179(saleGoodList, chara);
-/* 44 */     GameObjectChar.send(new M49179_0(), vo_49179_0);
+/* 44 */     GameObjectChar.send(new MSG_STALL_MINE(), vo_49179_0);
 /*    */   }
 /*    */   
 /*    */   public int cmd()

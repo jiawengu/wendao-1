@@ -9,7 +9,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M61663
+/*    */ public class MSG_REQUEST_SERVER_STATUS
 /*    */   extends BaseWrite
 /*    */ {
 /*    */   @Value("${netty.ip}")

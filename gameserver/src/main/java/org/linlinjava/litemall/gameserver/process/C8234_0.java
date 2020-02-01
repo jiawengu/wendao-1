@@ -42,7 +42,7 @@
 /* 42 */         goods1.pos = from_pos;
 /* 43 */         listbeibao.add(goods1);
 /* 44 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
-/* 45 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+/* 45 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /*    */       }
 /*    */     }
 /*    */     

@@ -96,7 +96,7 @@
 /*     */       
 /*  93 */       vo_12269_0.id = petbeibao.id;
 /*  94 */       vo_12269_0.owner_id = chara.id;
-/*  95 */       GameObjectChar.send(new M12269_0(), vo_12269_0);
+/*  95 */       GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 /*  96 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  97 */       vo_40964_0.type = 2;
 /*  98 */       vo_40964_0.name = strings[0];
@@ -182,7 +182,7 @@
 /*     */       
 /* 179 */       vo_12269_0.id = petbeibao.id;
 /* 180 */       vo_12269_0.owner_id = chara.id;
-/* 181 */       GameObjectChar.send(new M12269_0(), vo_12269_0);
+/* 181 */       GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 /* 182 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 183 */       vo_40964_0.type = 2;
 /* 184 */       vo_40964_0.name = strings[0];

@@ -76,7 +76,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*  75 */       goods1.goodsInfo.silver_coin = 6000;
 /*  76 */       goods1.goodsLanSe.parry = PackUtils.demonStoneValue(index);
 /*  77 */       GameUtil.addwupin(goods1, chara);
-/*  78 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+                GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */     }
 /*     */     
 /*     */ 
@@ -98,7 +98,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*  97 */       goods1.goodsInfo.silver_coin = 6000;
 /*  98 */       goods1.goodsLanSe.wiz = PackUtils.demonStoneValue(index);
 /*  99 */       GameUtil.addwupin(goods1, chara);
-/* 100 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+        GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */     }
 /*     */     
 /*     */ 
@@ -121,7 +121,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /* 120 */       goods1.goodsInfo.silver_coin = 6000;
 /* 121 */       goods1.goodsLanSe.accurate = PackUtils.demonStoneValue(index);
 /* 122 */       GameUtil.addwupin(goods1, chara);
-/* 123 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+        GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */     }
 /*     */     
 /* 126 */     if (index / 10 == 20) {
@@ -142,7 +142,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /* 141 */       goods1.goodsInfo.silver_coin = 6000;
 /* 142 */       goods1.goodsLanSe.dex = PackUtils.demonStoneValue(index);
 /* 143 */       GameUtil.addwupin(goods1, chara);
-/* 144 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+        GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */     }
 /*     */     
 /* 147 */     if (index / 10 == 18) {
@@ -163,7 +163,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /* 162 */       goods1.goodsInfo.silver_coin = 6000;
 /* 163 */       goods1.goodsLanSe.mana = PackUtils.demonStoneValue(index);
 /* 164 */       GameUtil.addwupin(goods1, chara);
-/* 165 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+        GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */     }
 /*     */   }
 /*     */   
@@ -219,10 +219,9 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */     }
 /* 219 */     for (int j = 0; j < list.size(); j++) {
 /* 220 */       chara.backpack.remove(list.get(j));
-/* 221 */       GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /*     */     }
-/* 223 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
-/*     */     
+    GameUtil.notifyAllBagGoodsInfo(chara);
+/*     */
 /* 225 */     Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 226 */     vo_8165_0.msg = "炼制成功";
 /* 227 */     vo_8165_0.active = 0;

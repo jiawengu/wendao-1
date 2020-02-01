@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.domain.Map;
-import org.linlinjava.litemall.gameserver.data.constant.DefinedConst;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -2824,7 +2823,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                         /* 1199 */
                         vo_12269_0.owner_id = 96780;
                         /* 1200 */
-                        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12269_0(), vo_12269_0);
+                        GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
                         /*      */
                     }
                     /*      */
@@ -3190,7 +3189,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 /* 1330 */
                 vo_40965_0.guideId = 19;
                 /* 1331 */
-                GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40965_0(), vo_40965_0);
+                GameObjectChar.send(new MSG_PLAY_INSTRUCTION(), vo_40965_0);
                 /*      */
             }
             /*      */

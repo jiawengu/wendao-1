@@ -8,7 +8,7 @@
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class M62209_0 extends BaseWrite
+/*    */ public class MSG_APPELLATION_LIST extends BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

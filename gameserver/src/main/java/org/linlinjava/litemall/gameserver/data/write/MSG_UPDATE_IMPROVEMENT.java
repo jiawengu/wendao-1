@@ -32,10 +32,9 @@
 /*    */       
 /*    */ 
 /*    */ 
+/*    */
 /*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
+/*    */
 /* 35 */       GameWriteTool.writeShort(writeBuf, Integer.valueOf(map.size()));
 /* 36 */       for (Entry<Object, Object> entry : map.entrySet()) {
 /* 37 */         if (BuildFields.data.get((String)entry.getKey()) != null) {

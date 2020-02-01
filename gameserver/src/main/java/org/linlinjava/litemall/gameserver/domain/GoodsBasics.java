@@ -2,7 +2,12 @@
 /*   */ 
 /*   */ public class GoodsBasics {
 /* 4 */   public int groupNo = 1;
-/* 5 */   public int groupType = 2;
+    /**
+     * local FIELDS_BASIC      = 1 -- 物品基础属性值
+     * local FIELDS_VALUE      = 2 -- 物品加成属性值
+     * local FIELDS_SCALE      = 3 -- 物品加成百分比
+     */
+    /* 5 */   public int groupType = 2;
 /*   */   public int mana;
 /*   */   public int accurate;
 /*   */   public int def;

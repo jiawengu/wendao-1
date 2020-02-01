@@ -13,7 +13,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45143_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_45555_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_L_WAIT_IN_LINE;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M45555_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_L_START_LOGIN;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameData;
 /*    */ import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
@@ -88,7 +88,7 @@ import org.linlinjava.litemall.db.domain.Accounts;
         /* 46 */
         ByteBuf write = new MSG_L_WAIT_IN_LINE().write(vo_45143_0);
         /* 47 */
-        ByteBuf write1 = new M45555_0().write(vo_45555_0);
+        ByteBuf write1 = new MSG_L_START_LOGIN().write(vo_45555_0);
         /* 48 */
         ctx.writeAndFlush(write);
         /* 49 */

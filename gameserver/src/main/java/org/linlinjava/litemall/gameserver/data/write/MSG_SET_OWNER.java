@@ -5,7 +5,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_12269_0;
 /*    */ 
 /*    */ @org.springframework.stereotype.Service
-/*    */ public class M12269_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
+/*    */ public class MSG_SET_OWNER extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*    */ {
 /*    */   protected void writeO(ByteBuf writeBuf, Object object)
 /*    */   {

@@ -672,7 +672,7 @@ import java.util.Random;
             /*  606 */       vo_62209_0.titled_left_time = 0;
             /*  607 */       list.add(vo_62209_0);
             /*      */     }
-        /*  609 */     GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M62209_0(), list);
+        /*  609 */     GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPELLATION_LIST(), list);
         /*      */   }
     /*      */
     /*      */   public static List zhandouisyoufabao(Chara chara)
@@ -2003,7 +2003,7 @@ import java.util.Random;
                 /* 1790 */         ((Goods)chara.backpack.get(i)).goodsGaiZaoGongMingChengGong = new GoodsGaiZaoGongMingChengGong();
                 /*      */       }
             /*      */     }
-        /* 1793 */     GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+            GameUtil.notifyAllBagGoodsInfo(chara);
         /* 1794 */     for (int i = 0; i < chara.backpack.size(); i++) {
             /* 1795 */       Goods good = (Goods)chara.backpack.get(i);
             /* 1796 */       if (good.goodsFenSe != null)
@@ -5043,6 +5043,18 @@ import java.util.Random;
             vo_4163_0.id = lueZhenPet.id;
             vo_4163_0.pet_status = 2;
             gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
+        }
+    }
+
+
+    public static void notifyAllBagGoodsInfo(Chara chara){
+        final int listSize = chara.backpack.size();
+//        System.out.println("backpackSIze:"+listSize);
+        int perSize = 100;
+        for (int beginIndex = 0;beginIndex<listSize;beginIndex+=perSize){
+            int endIndex = Math.min(beginIndex+perSize, listSize);
+            GameObjectChar.send(new MSG_INVENTORY(),  chara.backpack.subList(beginIndex, endIndex));
+//            System.out.println("beginIndex:"+beginIndex+",endIndex"+endIndex);
         }
     }
 

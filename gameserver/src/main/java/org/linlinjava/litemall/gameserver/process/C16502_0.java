@@ -39,7 +39,7 @@
 /* 39 */         ((Goods)chara.cangku.get(i)).pos = GameUtil.beibaoweizhi(chara);
 /* 40 */         GameUtil.addwupin((Goods)chara.cangku.get(i), chara);
 /* 41 */         chara.cangku.remove(chara.cangku.get(i));
-/* 42 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+            GameUtil.notifyAllBagGoodsInfo(chara);
 /* 43 */         Vo_61677_0 vo_61677_0 = new Vo_61677_0();
 /* 44 */         vo_61677_0.pos = from_pos;
 /* 45 */         GameObjectChar.send(new M61677_01(), vo_61677_0);

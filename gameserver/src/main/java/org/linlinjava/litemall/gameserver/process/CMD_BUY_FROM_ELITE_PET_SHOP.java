@@ -11,7 +11,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41045_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_SET_OWNER;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */
@@ -81,7 +82,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */     
 /*  76 */     vo_12269_0.id = petbeibao.id;
 /*  77 */     vo_12269_0.owner_id = chara.id;
-/*  78 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12269_0(), vo_12269_0);
+/*  78 */     GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 /*  79 */     Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  80 */     vo_40964_0.type = 2;
 /*  81 */     vo_40964_0.name = name;

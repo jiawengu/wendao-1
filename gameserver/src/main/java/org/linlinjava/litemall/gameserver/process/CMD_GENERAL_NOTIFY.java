@@ -692,7 +692,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameObjectChar.send(new MSG_UPDATE(), vo655270);
             list1 = GameData.that.baseSaleGoodService.findByOwnerUuid(chara.uuid);
             vo_49179_0 = GameUtil.a49179(list1, chara);
-            GameObjectChar.send(new M49179_0(), vo_49179_0);
+            GameObjectChar.send(new MSG_STALL_MINE(), vo_49179_0);
             vo_40964_9 = new Vo_40964_0();
             vo_40964_9.type = 4;
             vo_40964_9.name = "金币";
@@ -735,7 +735,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
                 Vo_12269_0 vo_12269_0 = new Vo_12269_0();
                 vo_12269_0.id = petbeibao.id;
                 vo_12269_0.owner_id = chara.id;
-                GameObjectChar.send(new M12269_0(), vo_12269_0);
+                GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
                 vo_40964_0 = new Vo_40964_0();
                 vo_40964_0.type = 2;
                 vo_40964_0.name = "立正";
@@ -757,7 +757,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
 
             list1 = GameData.that.baseSaleGoodService.findByOwnerUuid(chara.uuid);
             vo_49179_0 = GameUtil.a49179(list1, chara);
-            GameObjectChar.send(new M49179_0(), vo_49179_0);
+            GameObjectChar.send(new MSG_STALL_MINE(), vo_49179_0);
         }
 
         if (40018 == type) {
@@ -836,7 +836,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         if (40015 == type) {
             list1 = GameData.that.saleGoodService.findByOwnerUuid(chara.uuid);
             Vo_49179_0 vo491790 = GameUtil.a49179(list1, chara);
-            GameObjectChar.send(new M49179_0(), vo491790);
+            GameObjectChar.send(new MSG_STALL_MINE(), vo491790);
         }
 
         if (40010 == type) {

@@ -3,7 +3,7 @@
 /*    */ import io.netty.buffer.ByteBuf;
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M61663;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_REQUEST_SERVER_STATUS;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameCore;
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 /*    */ import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
-/* 16 */     GameObjectChar.send(new M61663(), GameCore.that.getGameLineAll());
+/* 16 */     GameObjectChar.send(new MSG_REQUEST_SERVER_STATUS(), GameCore.that.getGameLineAll());
 /*    */   }
 /*    */   
 /*    */   public int cmd() {
