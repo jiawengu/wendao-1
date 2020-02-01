@@ -50,6 +50,6 @@ public class M_MSG_PET_UPGRADE_SUCC extends BaseWrite {
 
     @Override
     public int cmd() {
-        return 0;
+        return 0xB0FD;
     }
 }
