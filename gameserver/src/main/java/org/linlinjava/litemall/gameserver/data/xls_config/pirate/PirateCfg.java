@@ -28,18 +28,18 @@ public class PirateCfg extends BaseCfg {
 
     @Override
     public void startupLoad() {
-//        PirateCfg cfg = loadJson("PirateCfg", PirateCfg.class).get(0);
-//        this.startTime = cfg.startTime;
-//        this.duration = cfg.duration;
+        PirateCfg cfg = loadJson("PirateCfg", PirateCfg.class).get(0);
+        this.startTime = cfg.startTime;
+        this.duration = cfg.duration;
     }
 
     @Override
     public void afterStartup() {
-//        this.mapList = loadJson("PirateMap", SuperBossMap.class);
-//        this.pirateList = loadJson("PirateItem", PirateItem.class);
-//        this.pirateMap = new HashMap<>();
-//        for(PirateItem item: this.pirateList){
-//            this.pirateMap.put(item.name, item);
-//        }
+        this.mapList = loadJson("PirateMap", SuperBossMap.class);
+        this.pirateList = loadJson("PirateItem", PirateItem.class);
+        this.pirateMap = new HashMap<>();
+        for(PirateItem item: this.pirateList){
+            this.pirateMap.put(item.name, item);
+        }
     }
 }
