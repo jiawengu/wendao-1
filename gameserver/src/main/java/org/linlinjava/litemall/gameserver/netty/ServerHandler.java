@@ -60,12 +60,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        Attribute<GameObjectChar> attr = ctx.channel().attr(akey);
-        GameObjectChar session = null;
-        if ((attr != null) && (attr.get() != null)) {
-            session = attr.get();
-            GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(session);
-        }
         ByteBuf buff = (ByteBuf) msg;
         GameReadTool.readInt(buff);
         GameReadTool.readShort(buff);
@@ -79,7 +73,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             logicEvent.setLogicEventType(LogicEventType.LOGIC_PLAYER_CMD_REQUEST);
             logicEvent.setContext(ctx);
             logicEvent.setIntParam(cmd);
-            logicEvent.setIntParam2(session.chara.id);
             logicEvent.setByteBuf(buff);
         }
         finally
