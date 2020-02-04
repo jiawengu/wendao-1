@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.core.util;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,6 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateTimeUtil {
 
+    /**默认的日期格式*/
+    public static final String DEFAULT_TIME_FORMAT = "yyyy年MM月dd日 HH:mm:ss";
+
     /**
      * 格式 yyyy年MM月dd日 HH:mm:ss
      *
@@ -15,7 +19,7 @@ public class DateTimeUtil {
      * @return
      */
     public static String getDateTimeDisplayString(LocalDateTime dateTime) {
-        return getDateTimeFormatterString(dateTime, "yyyy年MM月dd日 HH:mm:ss");
+        return getDateTimeFormatterString(dateTime, DEFAULT_TIME_FORMAT);
     }
 
     public static String getDateTimeFormatterString(LocalDateTime time, String format){
@@ -23,4 +27,14 @@ public class DateTimeUtil {
         String strDate2 = dtf2.format(time);
         return strDate2;
     }
+
+    public static LocalDateTime getFormatDate(String dateStr, String format){
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern(format);
+        return LocalDateTime.parse(dateStr, dtf2);
+    }
+
+    public static LocalDateTime getDefaultFormatDate(String dateStr){
+        return getFormatDate(dateStr, DEFAULT_TIME_FORMAT);
+    }
+
 }

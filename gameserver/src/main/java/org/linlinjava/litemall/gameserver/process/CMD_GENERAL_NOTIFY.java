@@ -1160,6 +1160,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         }
 
         if (type == 40008) {
+            //打开福利获取福利界面的数据
             GameUtil.a49159(chara);
         }
 

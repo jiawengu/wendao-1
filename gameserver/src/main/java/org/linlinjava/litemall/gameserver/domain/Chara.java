@@ -507,6 +507,10 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      * 宠物仓库
      */
     public List<Petbeibao> chongwucangku = new LinkedList();
+    /**拥有的积分*/
+    public int integral = 10000;
+    /**累计的积分*/
+    public int totalIntegral = 10000;
 
     public void onTTTDayBreak(){
         this.ttt_layer = 0;
