@@ -31,7 +31,6 @@ public class PartyMgr {
     public void init(){
         PartyMgr.that = this;
         this.map = new HashMap<>();
-        Party a7913 = GameData.that.basePartyService.findById(7913);
         List<Party> list = GameData.that.basePartyService.getAll();
         list.forEach(item->{
             this.map.put(item.getId(), new GameParty().init(item, null));

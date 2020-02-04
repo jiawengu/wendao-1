@@ -26,10 +26,7 @@ import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.fight.FightObject;
 import org.linlinjava.litemall.gameserver.fight.FightRequest;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
-import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
@@ -294,7 +291,7 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         }
 
         if (30020 == type) {
-            if (chara.currentFlyFightIndex >= GamePetFeiSheng.MAX_FLY){
+            if ( GamePetFeiSheng.isTongGuoKaoYan(chara)){
                 GamePetFeiSheng.onChosePetFly(chara, Integer.valueOf(para1).intValue());
             }else {
                 GamePetFeiSheng.onChosePetFly(chara, Integer.valueOf(para1).intValue());

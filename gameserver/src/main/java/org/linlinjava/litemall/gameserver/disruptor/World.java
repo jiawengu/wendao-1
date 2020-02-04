@@ -1,13 +1,11 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
+package org.linlinjava.litemall.gameserver.disruptor;
 
-package org.linlinjava.litemall.gameserver.job;
-
-import java.util.*;
-
+import com.google.common.collect.Maps;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.Attribute;
 import org.linlinjava.litemall.db.domain.Notice;
+import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_16383_0;
@@ -21,50 +19,208 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.fight.FightContainer;
 import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
-import org.linlinjava.litemall.gameserver.process.GameUtil;
-import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
+import org.linlinjava.litemall.gameserver.netty.NettyServer;
+import org.linlinjava.litemall.gameserver.netty.ServerHandler;
+import org.linlinjava.litemall.gameserver.process.*;
 import org.linlinjava.litemall.gameserver.service.DBService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-@Component
-public class SaveCharaTimes {
-    private long gonggaotim = System.currentTimeMillis();
-    private static final Logger log = LoggerFactory.getLogger(SaveCharaTimes.class);
+import java.util.*;
+
+
+
+@Service
+public class World {
+    private static final Logger logger = LoggerFactory.getLogger(World.class);
+    @Autowired
+    private GameCore gameCore;
+    @Value("${netty.port}")
+    private int port;
+    @Value("${netty.url}")
+    private String url;
     @Autowired
     private DBService dbService;
-    public SaveCharaTimes() {
+    @Autowired
+    private NettyServer server;
+    @Autowired
+    private java.util.List<GameHandler> gameHandlers;
+    /**
+     * 玩家消息处理器
+     */
+    private HashMap<Integer, GameHandler> gameHandlerHashMap;
+    /**
+     * 逻辑处理器
+     */
+    private Map<LogicEventType, LogicHandler> logicHandlers;
+    private TriggerSystem triggerSystem = new TriggerSystem();
+    private long gonggaotim = System.currentTimeMillis();
+
+    public void initWhenThreadStart() {
+        triggerSystem.addTimer(new Timer(1000, Integer.MAX_VALUE, this::onSecondTick) {});
+        triggerSystem.addTimer(new Timer(2000, Integer.MAX_VALUE, this::on2SecondTick) {});
+        triggerSystem.addTimer(new Timer(10000, Integer.MAX_VALUE, this::on10SecondTick) {});
+
+        registerLogicHandler();
+
+        registerCmdHandler();
+
+        java.net.InetSocketAddress address = new java.net.InetSocketAddress(this.url, this.port);
+        logger.debug("run .... . ... " + this.url);
+        this.server.start(address);
+
+        this.gameCore.init(this.server);
     }
 
-    @Scheduled(
-            fixedDelay = 5000L
-    )
-    public void resetCompileTimes() {
-        List<GameObjectChar> all = GameObjectCharMng.getGameObjectCharList();
-        Iterator var2 = all.iterator();
-
-        while(var2.hasNext()) {
-            GameObjectChar gameSession = (GameObjectChar)var2.next();
-            dbService.save(gameSession);
+    private void registerCmdHandler(){
+        gameHandlerHashMap = Maps.newHashMap();
+        for (GameHandler gameHandler : gameHandlers) {
+            gameHandlerHashMap.put(gameHandler.cmd(), gameHandler);
         }
     }
 
+    private void registerLogicHandler(){
+        EnumMap<LogicEventType, LogicHandler> logicHandlers = new EnumMap<LogicEventType, LogicHandler>(LogicEventType.class);
+        {
+            logicHandlers.put(LogicEventType.LOGIC_PLAYER_DISCONNECT, this::ON_LOGIC_PLAYER_DISCONNECT);
+            logicHandlers.put(LogicEventType.LOGIC_PLAYER_CMD_REQUEST, this::ON_LOGIC_PLAYER_CMD_REQUEST);
+        }
+        this.logicHandlers = Collections.unmodifiableMap(logicHandlers);
+    }
 
-//    @Scheduled(
-//            fixedDelay = 10000L
-//    )
-//    public void onlines() {
-//        log.error("online  : " + GameObjectCharMng.getAll().size());
-//    }
+    private void ON_LOGIC_PLAYER_DISCONNECT(LogicEvent logicEvent){
+        int charaId = logicEvent.getIntParam();
+        GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(charaId);
+        GameObjectCharMng.downline(gameObjectChar);
+    }
+    private void ON_LOGIC_PLAYER_CMD_REQUEST(LogicEvent logicEvent){
+        int cmd = logicEvent.getIntParam();
+        ByteBuf buff = logicEvent.getByteBuf();
+        ChannelHandlerContext context = logicEvent.getContext();
 
-    @Scheduled(
-            fixedDelay = 2000L
-    )
-    public void autofight() {
+        Attribute<GameObjectChar> attr = context.channel().attr(ServerHandler.akey);
+        GameObjectChar session = null;
+        if ((attr != null) && (attr.get() != null)) {
+            session = attr.get();
+            GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(session);
+        }
+
+        GameHandler gameHandler = gameHandlerHashMap.getOrDefault(cmd, null);
+        if (gameHandler != null) {
+            try {
+                long beginMill = System.currentTimeMillis();
+                if(! (gameHandler instanceof CMD_ECHO || gameHandler instanceof CMD_MULTI_MOVE_TO || gameHandler instanceof CMD_HEART_BEAT)){//todo 打印消息
+                    logger.info("recive msg!=>"+gameHandler);
+                }
+                gameHandler.process(context, buff);
+                long cost = System.currentTimeMillis()-beginMill;
+                if(cost>30){
+                    logger.error(gameHandler+",cost==>"+cost);
+                }
+            } catch (Exception e) {
+                logger.error(String.format("Fail to execute cmd: %d, buff: %s", cmd, buff), e);
+            }
+        } else {
+            logger.debug(String.format("Cannot find a match cmd: %d, buff: %s", cmd, buff));
+        }
+    }
+
+    public void tick() {
+        triggerSystem.tickTrigger();
+    }
+
+    /**
+     * 每秒执行
+     */
+    private final void onSecondTick(Timer timer){
+        try {
+            GameData.that.superBossMng.productionBoss();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+    }
+    /**
+     * 每2秒执行
+     */
+    private final void on2SecondTick(Timer timer){
+        try {
+            autofight();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+        try {
+            autofightshuaguai();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+        try {
+            autofightromve();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+    }
+    private final void on5SecondTick(Timer timer){
+        try {
+            autoCheckPartyMgrSave();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+        try {
+            GameObjectCharMng.getGameObjectCharList().forEach(item->{
+                try {
+                    if(item.logic!=null){
+                        item.logic.cacheSave();
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }catch (Exception e){
+            logger.error("", e);
+        }
+        try {
+            List<GameObjectChar> all = GameObjectCharMng.getGameObjectCharList();
+            Iterator var2 = all.iterator();
+
+            while(var2.hasNext()) {
+                GameObjectChar gameSession = (GameObjectChar)var2.next();
+                dbService.save(gameSession);
+            }
+        }catch (Exception e){
+            logger.error("", e);
+        }
+    }
+    public void autoCheckPartyMgrSave(){
+        if(GameCore.that != null && GameCore.that.partyMgr != null){
+            GameCore.that.partyMgr.checkDirty();
+        }
+    }
+    /**
+     * 每10秒执行
+     */
+    private final void on10SecondTick(Timer timer){
+        try {
+            autofightshidao();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+        try {
+            autofightgonggao();
+        }catch (Exception e){
+            logger.error("", e);
+        }
+    }
+
+    public void onLogicEvent(LogicEvent event) {
+        LogicHandler logicHandler = logicHandlers.get(event.getLogicEventType());
+        logicHandler.handler(event);
+    }
+
+    private void autofight() {
         List<FightContainer> listFight = FightManager.listFight;
         long time = System.currentTimeMillis();
         Iterator var4 = listFight.iterator();
@@ -81,10 +237,8 @@ public class SaveCharaTimes {
         }
     }
 
-    @Scheduled(
-            fixedRate = 2000L
-    )
-    public void autofightshuaguai() {
+
+    private void autofightshuaguai() {
         long time = System.currentTimeMillis();
         if (GameLine.gameShuaGuai.shuaXing.size() < 8 && GameLine.gameShuaGuai.shuaXingTime + 180000L < time && GameLine.gameShuaGuai.shuaXingzhuangtai == 0) {
             GameShuaGuai.sendYaoYan(GameLine.gameShuaGuai);
@@ -108,11 +262,77 @@ public class SaveCharaTimes {
         }
 
     }
+    public static List<GameObjectChar> insertionSort(List<GameObjectChar> sessionList) {
+        for(int i = 0; i < sessionList.size() - 1; ++i) {
+            for(int j = i + 1; j > 0 && ((GameObjectChar)sessionList.get(j - 1)).chara.shidaodaguaijifen < ((GameObjectChar)sessionList.get(j)).chara.shidaodaguaijifen; --j) {
+                GameObjectChar temp = (GameObjectChar)sessionList.get(j);
+                sessionList.set(j, sessionList.get(j - 1));
+                sessionList.set(j - 1, temp);
+            }
+        }
 
-    @Scheduled(
-            fixedRate = 10000L
-    )
-    public void autofightshidao() {
+        return sessionList;
+    }
+
+    public void autofightgonggao() {
+        long time = System.currentTimeMillis();
+        List<Notice> all = GameData.that.baseNoticeService.findAll();
+
+        for(int i = 0; i < all.size(); ++i) {
+            if (this.gonggaotim + (long)(((Notice)all.get(i)).getTime() * '\uea60') < time) {
+                Vo_16383_0 vo_16383_0 = new Vo_16383_0();
+                vo_16383_0.channel = 19;
+                vo_16383_0.id = 0;
+                vo_16383_0.name = "";
+                vo_16383_0.msg = ((Notice)all.get(i)).getMessage();
+                long times = System.currentTimeMillis() / 1000L;
+                vo_16383_0.time = (int)times;
+                vo_16383_0.privilege = 0;
+                vo_16383_0.server_name = "涅槃重生22";
+                vo_16383_0.show_extra = 2;
+                vo_16383_0.compress = 0;
+                vo_16383_0.orgLength = 65535;
+                vo_16383_0.cardCount = 0;
+                vo_16383_0.voiceTime = 0;
+                vo_16383_0.token = "";
+                vo_16383_0.checksum = 0;
+                vo_16383_0.iid_str = "";
+                vo_16383_0.has_break_lv_limit = 0;
+                vo_16383_0.skill = 1;
+                vo_16383_0.type = 1;
+                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_0);
+                this.gonggaotim = System.currentTimeMillis();
+            }
+        }
+
+    }
+    public void autofightromve() {
+        List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+        long time = System.currentTimeMillis();
+
+        List<GameObjectChar> list = new ArrayList<>();
+
+        for(GameObjectChar obj : sessionList){
+            list.add(obj);
+
+        }
+        list.forEach(obj->{
+            try {
+                GameObjectChar gameObjectChar = obj;
+                if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
+                    GameObjectCharMng.downline(gameObjectChar);
+                }
+
+                if (gameObjectChar.gameMap!=null && (obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
+                    GameUtilRenWu.shidaohuicheng(obj.chara);
+                }
+            } catch (Exception var6) {
+                logger.error("", var6);
+            }
+        });
+
+    }
+    private void autofightshidao() {
         String[] shidaolevel = new String[]{"试道场(60-79)", "试道场(80-89)", "试道场(90-99)", "试道场(100-109)", "试道场(110-119)", "试道场(120-129)"};
         long time = System.currentTimeMillis();
         Date date = new Date();
@@ -377,114 +597,5 @@ public class SaveCharaTimes {
 
     }
 
-    @Scheduled(
-            fixedRate = 10000L
-    )
-    public void autofightgonggao() {
-        long time = System.currentTimeMillis();
-        List<Notice> all = GameData.that.baseNoticeService.findAll();
-
-        for(int i = 0; i < all.size(); ++i) {
-            if (this.gonggaotim + (long)(((Notice)all.get(i)).getTime() * '\uea60') < time) {
-                Vo_16383_0 vo_16383_0 = new Vo_16383_0();
-                vo_16383_0.channel = 19;
-                vo_16383_0.id = 0;
-                vo_16383_0.name = "";
-                vo_16383_0.msg = ((Notice)all.get(i)).getMessage();
-                long times = System.currentTimeMillis() / 1000L;
-                vo_16383_0.time = (int)times;
-                vo_16383_0.privilege = 0;
-                vo_16383_0.server_name = "涅槃重生22";
-                vo_16383_0.show_extra = 2;
-                vo_16383_0.compress = 0;
-                vo_16383_0.orgLength = 65535;
-                vo_16383_0.cardCount = 0;
-                vo_16383_0.voiceTime = 0;
-                vo_16383_0.token = "";
-                vo_16383_0.checksum = 0;
-                vo_16383_0.iid_str = "";
-                vo_16383_0.has_break_lv_limit = 0;
-                vo_16383_0.skill = 1;
-                vo_16383_0.type = 1;
-                GameObjectCharMng.sendAll(new MSG_MESSAGE_EX(), vo_16383_0);
-                this.gonggaotim = System.currentTimeMillis();
-            }
-        }
-
-    }
-
-    public static List<GameObjectChar> insertionSort(List<GameObjectChar> sessionList) {
-        for(int i = 0; i < sessionList.size() - 1; ++i) {
-            for(int j = i + 1; j > 0 && ((GameObjectChar)sessionList.get(j - 1)).chara.shidaodaguaijifen < ((GameObjectChar)sessionList.get(j)).chara.shidaodaguaijifen; --j) {
-                GameObjectChar temp = (GameObjectChar)sessionList.get(j);
-                sessionList.set(j, sessionList.get(j - 1));
-                sessionList.set(j - 1, temp);
-            }
-        }
-
-        return sessionList;
-    }
-
-    @Scheduled(
-            fixedRate = 2000L
-    )
-    public void autofightromve() {
-        List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
-        long time = System.currentTimeMillis();
-
-        List<GameObjectChar> list = new ArrayList<>();
-
-        for(GameObjectChar obj : sessionList){
-            list.add(obj);
-
-        }
-        list.forEach(obj->{
-            try {
-                GameObjectChar gameObjectChar = obj;
-                if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {
-                    GameObjectCharMng.downline(gameObjectChar);
-                }
-
-                if (gameObjectChar.gameMap!=null && (obj.gameMap.id == 38004 || obj.gameMap.isDugeno()) && obj.gameTeam == null) {
-                    GameUtilRenWu.shidaohuicheng(obj.chara);
-                }
-            } catch (Exception var6) {
-                log.error("", var6);
-            }
-        });
-
-    }
-
-    @Scheduled(
-            fixedRate =  50000L
-    )
-    public void autoCheckPartyMgrSave(){
-        if(GameCore.that != null && GameCore.that.partyMgr != null){
-            GameCore.that.partyMgr.checkDirty();
-        }
-    }
-
-
-    @Scheduled(
-            fixedRate =  1000L
-    )
-    public void autoProductionBoss(){
-        GameData.that.superBossMng.productionBoss();
-    }
-    
-    @Scheduled(
-            fixedRate =  5000L
-    )
-    public void autoCheckUserLogicSave(){
-        GameObjectCharMng.getGameObjectCharList().forEach(item->{
-            try {
-                if(item.logic!=null){
-                    item.logic.cacheSave();
-                }
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
 }

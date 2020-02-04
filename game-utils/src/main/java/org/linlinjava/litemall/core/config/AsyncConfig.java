@@ -19,26 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 @EnableScheduling
 @Slf4j
-public class AsyncConfig implements SchedulingConfigurer, AsyncConfigurer {
-    /**
-     * 定时任务使用的线程池
-     * @return
-     */
-    @Bean(destroyMethod = "shutdown", name = "taskScheduler")
-    public ThreadPoolTaskScheduler taskScheduler(){
-        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-        scheduler.setPoolSize(3);
-        scheduler.setThreadNamePrefix("scheduler-");
-        scheduler.setAwaitTerminationSeconds(600);
-        scheduler.setWaitForTasksToCompleteOnShutdown(true);
-        return scheduler;
-    }
-
-    @Override
-    public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-        ThreadPoolTaskScheduler taskScheduler = taskScheduler();
-        taskRegistrar.setTaskScheduler(taskScheduler);
-    }
+public class AsyncConfig implements AsyncConfigurer {
 
     /**
      * 异步任务执行线程池

@@ -40,7 +40,7 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int x;
 /*     */   public int y;
 /*     */   public int mapid;
-            public short currentFlyFightIndex = 0; //当前飞升战斗第几阶段
+            public int flyPetID = 0;
 /*     */   
 /*     */   public Chara() {}
 /*     */   

@@ -99,7 +99,6 @@ public class PetShuXing {
     public int pet_speed_shape;
     public int pet_phy_shape;
     public int pet_mag_shape;
-    public int rank;
     public int pet_upgraded;
     public int party_stage_party_name;
     public int left_time_to_delete;
@@ -201,5 +200,11 @@ public class PetShuXing {
     public int silver_coin;
     /**飞升*/
     public int has_upgraded = 0;
+    public short currentFlyFightIndex = 0; //当前飞升战斗第几阶段
+    public int mount_type;
+    /**
+     * 相性点
+     */
+    public int rank;
 }
 

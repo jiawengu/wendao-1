@@ -1,6 +1,10 @@
 /*    */ package org.linlinjava.litemall.gameserver;
 /*    */ 
-/*    */ import org.linlinjava.litemall.gameserver.game.GameCore;
+/*    */ import org.linlinjava.litemall.gameserver.disruptor.EventConsumer;
+import org.linlinjava.litemall.gameserver.disruptor.GlobalQueue;
+import org.linlinjava.litemall.gameserver.disruptor.LogicEvent;
+import org.linlinjava.litemall.gameserver.disruptor.World;
+import org.linlinjava.litemall.gameserver.game.GameCore;
 /*    */ import org.linlinjava.litemall.gameserver.netty.NettyServer;
 /*    */ import org.slf4j.Logger;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +16,10 @@
 /*    */ @org.springframework.core.annotation.Order(1)
 /*    */ public class ApplicationNetty implements org.springframework.boot.ApplicationRunner
 /*    */ {
-/*    */   @Autowired
-/*    */   private GameCore gameCore;
-/*    */   @Value("${netty.port}")
-/*    */   private int port;
-/*    */   @Value("${netty.url}")
-/*    */   private String url;
-/*    */   @Autowired
-/*    */   private NettyServer server;
-/*    */   
+
+    @Autowired
+/*    */   private World world;
+private GlobalQueue globalQueue;
 /*    */   public static void main(String[] args)
 /*    */   {
 /* 26 */     System.out.println("run .... . ... :");
@@ -39,12 +38,14 @@
 /*    */   
 /*    */   public void run(ApplicationArguments args)
 /*    */   {
-/* 42 */     java.net.InetSocketAddress address = new java.net.InetSocketAddress(this.url, this.port);
-/* 43 */     log.debug("run .... . ... " + this.url);
-/* 44 */     this.server.start(address);
-/* 45 */     this.gameCore.init(this.server);
+    this.globalQueue = new GlobalQueue(new EventConsumer<LogicEvent>(world));
+/* 42 */
 /*    */   }
-/*    */ }
+
+    public GlobalQueue getGlobalQueue() {
+        return globalQueue;
+    }
+    /*    */ }
 
 
 /* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\ApplicationNetty.class

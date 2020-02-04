@@ -11,11 +11,11 @@ import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.gameserver.disruptor.World;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.*;
-import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
-import org.linlinjava.litemall.gameserver.process.GamePetFeiSheng;
+import org.linlinjava.litemall.gameserver.game.GamePetFeiSheng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.CharaStatueService;
@@ -3162,7 +3162,7 @@ public class FightManager {
 
                                     var26 = GameObjectCharMng.getGameObjectChar(fightObject.id).chara;
                                     var26.shidaodaguaijifen += 25;
-                                    gameSessions = SaveCharaTimes.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
+                                    gameSessions = World.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
                                     mingname = "";
                                     mingci = 0;
 
@@ -3193,7 +3193,7 @@ public class FightManager {
                                     var26 = GameObjectCharMng.getGameObjectChar(fightObject.id).chara;
                                     var26.shidaodaguaijifen -= 25;
                                     --GameObjectCharMng.getGameObjectChar(fightObject.id).chara.shidaocishu;
-                                    gameSessions = SaveCharaTimes.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
+                                    gameSessions = World.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
                                     mingname = "";
                                     mingci = 0;
 
@@ -3285,7 +3285,7 @@ public class FightManager {
 
                 // 飞升挑战失败
                 if (null != guaiwu && GamePetFeiSheng.isPetFeiSheng(((FightObject)guaiwu.get(0)).str)){
-                    GamePetFeiSheng.onFightFail();
+                    GamePetFeiSheng.onFightFail(chara1);
                     return;
                 }
             }
