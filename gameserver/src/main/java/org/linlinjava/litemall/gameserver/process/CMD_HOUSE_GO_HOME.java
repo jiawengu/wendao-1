@@ -24,7 +24,8 @@ public class CMD_HOUSE_GO_HOME implements org.linlinjava.litemall.gameserver.Gam
     public void process(ChannelHandlerContext paramChannelHandlerContext, ByteBuf paramByteBuf) {
         Chara chara = GameObjectChar.getGameObjectChar().chara;
         String houseName = chara.house.getHouseName();
-        org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(houseName);
+        String mapName = houseName + "-房屋";
+        org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(mapName);
         chara.y = map.getY().intValue();
         chara.x = map.getX().intValue();
         GameZone gameZone = GameLine.createGameZone(15, map.getMapId());
