@@ -731,7 +731,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
                     GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
                 }else{
-                    String content = "请选择你要购买的居所类型" + "[小舍（1000万文钱）\\/xiaoshe]" + "[雅筑（5000万文钱\\/yazhu]" + "[豪宅（5000万文钱）\\/haozhai]" + "[离开\\/离开]";
+                    String content = "请选择你要购买的居所类型" + "[小舍（1000万文钱）\\/xiaoshe]" + "[雅筑（5000万文钱)\\/yazhu]" + "[豪宅（10000万文钱）\\/haozhai]" + "[离开\\/离开]";
                     MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
                     GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
                 }
