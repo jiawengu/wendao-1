@@ -63,6 +63,7 @@ public class World {
     public void initWhenThreadStart() {
         triggerSystem.addTimer(new Timer(1000, Integer.MAX_VALUE, this::onSecondTick) {});
         triggerSystem.addTimer(new Timer(2000, Integer.MAX_VALUE, this::on2SecondTick) {});
+        triggerSystem.addTimer(new Timer(5000, Integer.MAX_VALUE, this::on5SecondTick) {});
         triggerSystem.addTimer(new Timer(10000, Integer.MAX_VALUE, this::on10SecondTick) {});
 
         registerLogicHandler();
