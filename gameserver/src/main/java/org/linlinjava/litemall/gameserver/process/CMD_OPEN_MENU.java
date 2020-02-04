@@ -2,6 +2,7 @@
 package org.linlinjava.litemall.gameserver.process;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.commons.lang3.StringUtils;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcDialogueFrame;
 import org.linlinjava.litemall.db.domain.Renwu;
@@ -21,6 +22,7 @@ import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
+
 import java.util.List;
 import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 
@@ -183,7 +185,6 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
         String content = "找我有什么事吗？[离开\\/离开]";
         if (npcDialogueFrameList.size() != 0) {
             content = ((NpcDialogueFrame) npcDialogueFrameList.get(0)).getUncontent();
-
         }
         if(MapGuardianService.isProtector(npc.getName())){//地图守护神
             MapGuardianService.openMenu(chara, npc);
@@ -267,6 +268,18 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
 
 
 
+        if (id == NpcIds.HAO_WEN_JIA_NPC_ID && StringUtils.isNotBlank(chara.house.getHouseName())){
+            String[] strings = content.split("]");
+            strings[1] += "][我要进入居所/enter_house";
+            content = "";
+            for (String s : strings) {
+                content += s + "]" ;
+            }
+        }
+
+        if(id == NpcIds.GUAN_JIA_NPC_ID){
+
+        }
 
         MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(npc, content);
 

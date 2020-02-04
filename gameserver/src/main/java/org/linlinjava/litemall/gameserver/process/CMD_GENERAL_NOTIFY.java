@@ -5,11 +5,16 @@
 
 package org.linlinjava.litemall.gameserver.process;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import org.apache.commons.lang3.StringUtils;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.util.JSONUtils;
+import org.linlinjava.litemall.db.util.RedisUtils;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
 import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
@@ -18,6 +23,7 @@ import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils;
 import org.linlinjava.litemall.gameserver.data.game.NoviceGiftBagUtils;
 import org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils;
+import org.linlinjava.litemall.gameserver.data.game.RankUtils;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
@@ -30,10 +36,12 @@ import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.game.GameShangGuYaoWang;
+import org.linlinjava.litemall.gameserver.job.RankJob;
 import org.linlinjava.litemall.gameserver.service.BaxianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -668,14 +676,32 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
         }
 
         if (10002 == type) {
-            Vo_61677_0 vo_61677_0 = new Vo_61677_0();
-            vo_61677_0.list = chara.cangku;
-            GameObjectChar.send(new M61677_0(), vo_61677_0);
 
-            Vo_61677_1 vo_61677_1 = new Vo_61677_1();
-            vo_61677_1.store_type = "chongwu";
-            vo_61677_1.list = chara.chongwucangku;
-            GameObjectChar.send(new M61677_1(), vo_61677_1);
+            //居所仓库
+            if(StringUtils.equals(para1, "4")){
+                int storeLevel = chara.house.getStoreLevel();
+                int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+                Vo_61677_0 vo_61677_0 = new Vo_61677_0();
+                vo_61677_0.count = storeSpace;
+                vo_61677_0.store_type = "home_store";
+                List<Goods> houseHomeStore = chara.house.getHomeStore();
+                if(houseHomeStore == null){
+                    houseHomeStore = Lists.newLinkedList();
+                    chara.house.setHomeStore(houseHomeStore);
+                }
+                vo_61677_0.list = houseHomeStore;
+
+                GameObjectChar.send(new M61677_0(), vo_61677_0);
+            }else {
+                Vo_61677_0 vo_61677_0 = new Vo_61677_0();
+                vo_61677_0.list = chara.cangku;
+                GameObjectChar.send(new M61677_0(), vo_61677_0);
+
+                Vo_61677_1 vo_61677_1 = new Vo_61677_1();
+                vo_61677_1.store_type = "chongwu";
+                vo_61677_1.list = chara.chongwucangku;
+                GameObjectChar.send(new M61677_1(), vo_61677_1);
+            }
         }
 
         Vo_49179_0 vo_49179_0;
@@ -1257,6 +1283,10 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             GameUtil.enterDugeno(chara, para1);
         }
 
+        if (type == 1000){
+
+        }
+
 
         UserLogic logic = GameObjectChar.getGameObjectChar().logic;
         //帮派升级
@@ -1273,6 +1303,34 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             party.dirty = true;
             GameObjectChar.send(new M_MSG_PARTY_INFO(), party);
             GameUtil.sendTips("帮派升级成功!");
+        }
+
+        // 获取排行信息
+        if(type == 3){
+            processRank(para1, para2);
+        }
+
+        RedisUtils redisUtils = GameData.that.redisUtils;
+
+        // 个人排行信息
+        if(type == 30017){
+            if(1 == 1){
+                return;
+            }
+            String uuid = chara.uuid;
+            String[] rankTypeArray = RankUtils.rankTypeArray;
+            for (String rankType : rankTypeArray){
+                String rankString = redisUtils.get("rank_type" + rankType);
+                List<Rank> rankList = JSON.parseArray(rankString, Rank.class);
+                for (Rank rank : rankList) {
+                    if(StringUtils.equals(rank.getUuid(), uuid)){
+                        int rankNo = rank.getSortIdx();
+                        int id = rank.getId();
+                        int value = rank.getValue();
+
+                    }
+                }
+            }
         }
 
     }
@@ -1304,6 +1362,47 @@ public class CMD_GENERAL_NOTIFY implements GameHandler {
             baxian_left_time_vo.left_time = baxian.getTimesLeft();
             GameObjectChar.send(m_msg_baxian_left_times, baxian_left_time_vo);
         }
+    }
+
+    // 出来排行信息
+    private void processRank(String rankType, String cookie){
+        int type = 0;
+        int minLevel = 0;
+        int maxLevel = 0;
+        int requestType = 1;
+        if(rankType.contains(":")){
+            String[] strings = rankType.split(":");
+            type = Integer.parseInt(strings[0]);
+            String[] levelStrings = strings[1].split("-");
+            minLevel = Integer.parseInt(levelStrings[0]);
+            maxLevel = Integer.parseInt(levelStrings[1]);
+            requestType = 2;
+        }else {
+            type = Integer.parseInt(rankType);
+        }
+        List<Rank> rankList = getRankList(rankType);
+        GameObjectChar.send(new M61653_0(type, requestType, minLevel, maxLevel, Integer.parseInt(cookie), rankList.size()), rankList);
+
+    }
+
+    private List<Rank> getRankList(String rankType){
+        RedisUtils redisUtils = GameData.that.redisUtils;
+        String rankString = redisUtils.get("rank_type" + rankType);
+        List<Rank> rankList = JSON.parseArray(rankString, Rank.class);
+        if(rankList == null){
+            RankJob rankJob = GameData.that.rankJob;
+            try {
+                rankJob.generateRank();
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        }
+        rankString = redisUtils.get("rank_type:" + rankType);
+        rankList = JSON.parseArray(rankString, Rank.class);
+        if (rankList.size() > 100){
+            rankList = rankList.subList(0, 100);
+        }
+        return rankList;
     }
 
     public int cmd() {

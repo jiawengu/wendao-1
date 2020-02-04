@@ -12,6 +12,8 @@ public class GameZone extends GameMap {
     // 副本逻辑对象
     public GameDugeon gameDugeon = null;
 
+    public boolean isHouseZone;
+
     public GameZone() {
         super();
         super.map_type = 1;
@@ -33,6 +35,9 @@ public class GameZone extends GameMap {
             GameUtilRenWu.renwukuangkuang(cfg.task_type, "", "", gameObjectChar.chara);
         }
 
+        if(isHouseZone){
+            gameObjectChar.chara.line = 1;
+        }
         super.leave(gameObjectChar);
         if(!super.sessionList.isEmpty())
         {

@@ -21,6 +21,16 @@ public class NpcIds {
     public static int MAP_GUARDIAN_NPC_ID_BEGIN = 11000;
     public static int  MAP_GUARDIAN_NPC_ID_END = 11999;
 
+    /**
+     * 郝文佳
+     * @param npcId
+     * @return
+     */
+    public static int  HAO_WEN_JIA_NPC_ID = 990;
+
+    public static int  GUAN_JIA_NPC_ID = 1102;
+
+
 
 
     public static boolean isZhengDaoDianNpc(int npcId){

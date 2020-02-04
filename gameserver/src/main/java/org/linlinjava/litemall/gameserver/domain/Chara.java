@@ -5,7 +5,8 @@
 /*     */ import java.util.LinkedList;
 /*     */ import java.util.List;
 /*     */ import java.util.Map;
-/*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
+/*     */ import com.google.common.collect.Lists;
+import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0;
 import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 
@@ -29,6 +30,7 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */
 /*     */ 
 /*  29 */   public ZbAttribute zbAttribute = new ZbAttribute();
+            public House house = new House();
 /*  30 */   public List<Petbeibao> pets = new LinkedList();
 /*  31 */   public List<ShouHu> listshouhu = new LinkedList();
 /*  32 */   public List<JiNeng> jiNengList = new LinkedList();
@@ -186,7 +188,16 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */ 
 /*     */ 
 /*     */   public int level;
-/*     */   
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    /*     */
 /*     */ 
 /*     */ 
 /*     */   public String name;
@@ -224,7 +235,16 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public String current_task;
 /*     */   
 /*     */   public int phy_power;
-/*     */   
+
+    public int getPhy_power() {
+        return phy_power;
+    }
+
+    public void setPhy_power(int phy_power) {
+        this.phy_power = phy_power;
+    }
+
+    /*     */
 /*     */   public int life;
 /*     */   
 /*     */   public int speed;
@@ -420,7 +440,16 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      * 道行点
      */
     /*     */   public int owner_name;
-/*     */   
+
+    public int getOwner_name() {
+        return owner_name;
+    }
+
+    public void setOwner_name(int owner_name) {
+        this.owner_name = owner_name;
+    }
+
+    /*     */
 /* 405 */   public Map<String, String> chenghao = new HashMap();
 /*     */   
 /*     */ 
@@ -487,6 +516,30 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      * 英雄会-留言
      */
     public String yxh_Notice;
+
+    public int getMag_power() {
+        return mag_power;
+    }
+
+    public void setMag_power(int mag_power) {
+        this.mag_power = mag_power;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getDef() {
+        return def;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
 
     /**
      * 上次跨天的时间戳

@@ -7,13 +7,15 @@
 /*     */ import java.util.Map;
 /*     */ import java.util.Map.Entry;
 /*     */ import java.util.Set;
-/*     */ import org.linlinjava.litemall.gameserver.data.GameWriteTool;
+/*     */ import org.apache.commons.lang3.StringUtils;
+import org.linlinjava.litemall.gameserver.data.GameWriteTool;
 /*     */ import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*     */ import org.linlinjava.litemall.gameserver.domain.BuildFields;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsGaiZaoGongMing;
-/*     */ 
+
+/*     */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class M61677_0 extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*     */ {
@@ -272,7 +274,20 @@
 /* 272 */         GameWriteTool.writeShort(writeBuf, Integer.valueOf(0));
 /*     */       }
 /*     */     }
-/*     */   }
+
+                if(StringUtils.equals(object1.store_type, "home_store")){
+                    for (int i = 501; i < 501 + object1.count; i++) {
+                        if (weizhi(list, i)) {
+                            GameWriteTool.writeByte(writeBuf, Integer.valueOf(object1.isGoon));
+                            GameWriteTool.writeShort(writeBuf, Integer.valueOf(i));
+                            GameWriteTool.writeShort(writeBuf, Integer.valueOf(0));
+                        }
+                    }
+                }
+}
+
+/*     *
+}/   }
 /*     */   
 /*     */   public int cmd()
 /*     */   {

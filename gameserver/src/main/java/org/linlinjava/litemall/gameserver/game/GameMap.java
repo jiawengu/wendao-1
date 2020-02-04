@@ -158,6 +158,40 @@ public class GameMap {
         MapGuardianService.onEnterMap(this.id, gameObjectChar);
     }
 
+    public void joinHouse(GameObjectChar gameObjectChar){
+        gameObjectChar.gameMap.leave(gameObjectChar);//离开地图
+        sessionList.add(gameObjectChar); //加入到当前地图
+        Chara chara = gameObjectChar.chara;
+        List<Npc> npcList = GameData.that.baseNpcService.findByMapId(this.id);
+        gameObjectChar.gameMap = this;
+        chara.mapid = this.id;
+        chara.mapName = this.name;
+        chara.line = 15;
+        Vo_45157_0 vo_45157_0 = new Vo_45157_0();
+        vo_45157_0.id = chara.id;
+        vo_45157_0.mapId = chara.mapid;
+        gameObjectChar.sendOne(new MSG_CLEAR_ALL_CHAR(), vo_45157_0);
+
+
+        Vo_65505_0 vo_65505_1 = GameUtil.a65505(chara);
+        gameObjectChar.sendOne(new MSG_ENTER_ROOM(), vo_65505_1);
+
+        Iterator var6 = npcList.iterator();
+
+        while(var6.hasNext()) {
+            Npc npc = (Npc)var6.next();
+            if(!isNpcAppear(npc)){
+                continue;
+            }
+            gameObjectChar.sendOne(new MSG_APPEAR_NPC(), npc);
+        }
+
+        Vo_65529_0 vo_65529_0 = GameUtil.MSG_APPEAR(chara);
+        send(new MSG_APPEAR(), vo_65529_0, (GameObjectChar otherGameObjectChar)->isCanSee(gameObjectChar.chara, otherGameObjectChar.chara));
+
+
+    }
+
     private boolean isCanSee(Chara chara1, Chara chara2){
         if(isZhengDaoDianMap()){
             return chara1.menpai == chara2.menpai;
@@ -377,4 +411,6 @@ public class GameMap {
     public boolean isDugeno(){
         return this.map_type > 1;
     }
+
+
 }

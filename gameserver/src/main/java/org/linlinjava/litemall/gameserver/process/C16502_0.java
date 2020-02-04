@@ -12,7 +12,11 @@
 /*    */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*    */
 /*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-/*    */ 
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
+
+import java.util.List;
+
+/*    */
 /*    */ @org.springframework.stereotype.Service
 /*    */ public class C16502_0 implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
@@ -26,22 +30,27 @@
 /*    */     
 /* 27 */     int amount = GameReadTool.readShort(buff);
 /* 28 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
-/* 29 */     for (int i = 0; i < chara.cangku.size(); i++) {
-/* 30 */       if (((Goods)chara.cangku.get(i)).pos == from_pos)
+    List<Goods> store = chara.cangku;
+    if (from_pos > 500 && from_pos < 500 + 50 + 1){
+        store = chara.house.getHomeStore();
+    }
+/* 29 */     for (int i = 0; i < store.size(); i++) {
+/* 30 */       if ((store.get(i)).pos == from_pos)
 /*    */       {
 /* 32 */         Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 33 */         vo_40964_0.type = 1;
-/* 34 */         vo_40964_0.name = ((Goods)chara.cangku.get(i)).goodsInfo.str;
+/* 34 */         vo_40964_0.name = store.get(i).goodsInfo.str;
 /* 35 */         vo_40964_0.param = "156482";
 /* 36 */         vo_40964_0.rightNow = 2;
 /* 37 */         GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40964_0(), vo_40964_0);
 /*    */         
-/* 39 */         ((Goods)chara.cangku.get(i)).pos = GameUtil.beibaoweizhi(chara);
-/* 40 */         GameUtil.addwupin((Goods)chara.cangku.get(i), chara);
-/* 41 */         chara.cangku.remove(chara.cangku.get(i));
+/* 39 */         store.get(i).pos = GameUtil.beibaoweizhi(chara);
+/* 40 */         GameUtil.addwupin(store.get(i), chara);
+/* 41 */         store.remove(store.get(i));
 /* 42 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
 /* 43 */         Vo_61677_0 vo_61677_0 = new Vo_61677_0();
 /* 44 */         vo_61677_0.pos = from_pos;
+            vo_61677_0.store_type = "home_store";
 /* 45 */         GameObjectChar.send(new M61677_01(), vo_61677_0);
 /*    */       }
 /*    */     }

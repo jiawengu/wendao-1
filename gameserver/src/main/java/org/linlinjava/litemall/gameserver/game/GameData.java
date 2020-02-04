@@ -12,9 +12,11 @@ import org.linlinjava.litemall.db.service.UserPartyDailyTaskService;
 import org.linlinjava.litemall.db.service.CharacterService;
 import org.linlinjava.litemall.db.service.SaleGoodService;
 import org.linlinjava.litemall.db.service.base.*;
+import org.linlinjava.litemall.db.util.RedisUtils;
 import org.linlinjava.litemall.gameserver.data.xls_config.outdoorboss.OutdoorBossCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.pirate.PirateCfg;
 import org.linlinjava.litemall.gameserver.data.xls_config.superboss.SuperBossCfg;
+import org.linlinjava.litemall.gameserver.job.RankJob;
 import org.linlinjava.litemall.gameserver.service.BaseUserPartyShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -108,6 +110,10 @@ public class GameData {
     public UserPartyDailyTaskService userPartyDailyTaskService;
     @Autowired
     public BaseUserPartyShopService baseUserPartyShopService;
+    @Autowired
+    public RedisUtils redisUtils;
+    @Autowired
+    public RankJob rankJob;
 
 
     @Autowired

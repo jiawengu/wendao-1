@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.fight.FightManager;
 import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyLogic;
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1171,6 +1172,105 @@ import java.util.Random;
             /*  985 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
             /*      */     }
         /*      */   }
+
+    public static void homeStoreAddWuPin(Goods goods, Chara chara)
+        /*      */   {
+        /*  912 */     boolean has = true;
+        /*  913 */     int munber = 10;
+        /*  914 */     if ("凝香幻彩#炫影霜星#风寂云清#枯月流魂#冰落残阳#雷极弧光".contains(goods.goodsInfo.str)) {
+            /*  915 */       munber = 999;
+            /*      */     }
+        /*  917 */     for (int i = 0; i < chara.house.getHomeStore().size(); i++) {
+            /*  918 */       Goods goods1 = (Goods)chara.house.getHomeStore().get(i);
+            /*  919 */       java.util.Map<Object, Object> objectMapGoodxin = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods.goodsInfo);
+            /*  920 */       java.util.Map<Object, Object> objectMapGoodxin1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
+            /*      */
+            /*  922 */       objectMapGoodxin.remove("auto_fight");
+            /*  923 */       objectMapGoodxin.remove("owner_id");
+            /*  924 */       java.util.Map<Object, Object> objectMapGoodjold = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsInfo(goods1.goodsInfo);
+            /*  925 */       java.util.Map<Object, Object> objectMapGoodjold1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
+            /*  926 */       objectMapGoodjold.remove("auto_fight");
+            /*  927 */       objectMapGoodjold.remove("owner_id");
+            /*  928 */       if ((objectMapGoodjold.toString().equals(objectMapGoodxin.toString())) && (objectMapGoodxin1.toString().equals(objectMapGoodjold1.toString())) && (goods1.goodsInfo.degree_32 == 1))
+                /*      */       {
+                /*  930 */         if (goods1.goodsInfo.owner_id < munber) {
+                    /*  931 */           int owner = goods1.goodsInfo.owner_id;
+                    /*  932 */           goods1.goodsInfo.owner_id += goods.goodsInfo.owner_id;
+                    /*  933 */           if (goods1.goodsInfo.owner_id >= munber) {
+                        /*  934 */             goods1.goodsInfo.owner_id = munber;
+                        /*  935 */             goods.goodsInfo.owner_id = (goods.goodsInfo.owner_id - munber + owner);
+                        /*      */           } else {
+                        /*  937 */             org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0 vo_61677_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0();
+                        /*  938 */             vo_61677_0.list = chara.house.getHomeStore();
+                                                int storeLevel = chara.house.getStoreLevel();
+                                                int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+                                                vo_61677_0.count = storeSpace;
+                                                vo_61677_0.store_type = "home_store";
+                        /*  939 */             GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
+                        /*  940 */             has = false;
+                        /*      */           }
+                    /*      */         }
+                /*      */       }
+            /*      */     }
+        /*  945 */     if (has) {
+            /*  946 */       List list = new ArrayList();
+            /*  947 */       if (goods.goodsInfo.owner_id > munber) {
+                /*  948 */         int len = goods.goodsInfo.owner_id / munber;
+                /*  949 */         int last = goods.goodsInfo.owner_id % munber;
+                /*  950 */         for (int i = 0; i < len; i++) {
+                    /*  951 */           java.util.Map<Object, Object> objectMapGoodxin = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.Goods(goods);
+                    /*  952 */           Goods goodsxin = (Goods)org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(objectMapGoodxin), Goods.class);
+                    /*  953 */           goodsxin.pos = homestoreweizhi(chara);
+                    /*  954 */           goodsxin.goodsInfo.owner_id = munber;
+                    /*  955 */           chara.house.getHomeStore().add(goodsxin);
+                    /*  956 */           list = new ArrayList();
+                    /*  957 */           list.add(goodsxin);
+                    /*  958 */           org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0 vo_61677_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0();
+                    /*  959 */           vo_61677_0.list = chara.house.getHomeStore();
+                    int storeLevel = chara.house.getStoreLevel();
+                    int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+                    vo_61677_0.count = storeSpace;
+                    vo_61677_0.store_type = "home_store";
+                    /*  960 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
+                    /*      */         }
+                /*  962 */         if (last != 0) {
+                    /*  963 */           java.util.Map<Object, Object> objectMapGoodxin = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.Goods(goods);
+                    /*  964 */           Goods goodsxin = (Goods)org.linlinjava.litemall.db.util.JSONUtils.parseObject(org.linlinjava.litemall.db.util.JSONUtils.toJSONString(objectMapGoodxin), Goods.class);
+                    /*  965 */           goodsxin.pos = homestoreweizhi(chara);
+                    /*  966 */           goodsxin.goodsInfo.owner_id = last;
+                    /*  967 */           chara.house.getHomeStore().add(goodsxin);
+                    /*  968 */           list = new ArrayList();
+                    /*  969 */           list.add(goodsxin);
+                    /*  970 */           org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0 vo_61677_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0();
+                    /*  971 */           vo_61677_0.list = chara.house.getHomeStore();
+                    int storeLevel = chara.house.getStoreLevel();
+                    int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+                    vo_61677_0.count = storeSpace;
+                    vo_61677_0.store_type = "home_store";
+                    /*  972 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
+                    /*      */         }
+                /*      */       } else {
+                /*  975 */         goods.pos = homestoreweizhi(chara);
+                /*  976 */         chara.house.getHomeStore().add(goods);
+                /*  977 */         list = new ArrayList();
+                /*  978 */         list.add(goods);
+                /*  979 */         org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0 vo_61677_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0();
+                /*  980 */         vo_61677_0.list = chara.house.getHomeStore();
+                int storeLevel = chara.house.getStoreLevel();
+                int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+                vo_61677_0.count = storeSpace;
+                vo_61677_0.store_type = "home_store";
+                /*  981 */         GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
+                /*      */       }
+            /*  983 */       org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0 vo_61677_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0();
+            /*  984 */       vo_61677_0.list = chara.house.getHomeStore();
+            int storeLevel = chara.house.getStoreLevel();
+            int storeSpace = HomeUtils.getStoreSpaceByStoreLevel(storeLevel);
+            vo_61677_0.count = storeSpace;
+            vo_61677_0.store_type = "home_store";
+            /*  985 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61677_0(), vo_61677_0);
+            /*      */     }
+        /*      */   }
     /*      */
     /*      */   public static void addwupin(Goods goods, Chara chara) {
         /*  990 */     boolean has = true;
@@ -1855,6 +1955,22 @@ import java.util.Random;
             /* 1652 */       size += 50;
             /*      */     }
         /* 1654 */     int count = 201;
+        /* 1655 */     for (int i = 0; i < size; i++) {
+            /* 1656 */       if (map.get(Integer.valueOf(count)) == null) {
+                /* 1657 */         return count;
+                /*      */       }
+            /* 1659 */       count++;
+            /*      */     }
+        /* 1661 */     return 0;
+        /*      */   }
+
+    public static int homestoreweizhi(Chara chara) {
+        /* 1641 */     java.util.HashMap<Object, Object> map = new java.util.HashMap();
+        /* 1642 */     for (int i = 0; i < chara.house.getHomeStore().size(); i++) {
+            /* 1643 */       map.put(Integer.valueOf(((Goods)chara.house.getHomeStore().get(i)).pos), Integer.valueOf(((Goods)chara.house.getHomeStore().get(i)).pos));
+            /*      */     }
+        /*      */      int size = HomeUtils.getStoreSpaceByStoreLevel(chara.house.getStoreLevel());
+        /* 1654 */     int count = 501;
         /* 1655 */     for (int i = 0; i < size; i++) {
             /* 1656 */       if (map.get(Integer.valueOf(count)) == null) {
                 /* 1657 */         return count;
@@ -4887,6 +5003,22 @@ import java.util.Random;
     // 进入副本
     public static void enterDugeno(Chara chara, String name) {
         DugenoCfg cfgMgr = (DugenoCfg)XLSConfigMgr.getCfg("dugeno");
+        DugenoItem cfg = cfgMgr.getByName(name);
+        if(cfg == null){
+            cfg = cfgMgr.getByMapName(name);
+        }
+        org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(cfg.map_name);
+        chara.y = map.getY().intValue();
+        chara.x = map.getX().intValue();
+        GameZone gameZone = GameLine.createGameZone(chara.line, map.getMapId());
+        gameZone.initGameDugeon(cfg.name);
+        gameZone.join(GameObjectCharMng.getGameObjectChar(chara.id));
+        gameZone.gameDugeon.enter(chara);
+    }
+
+    // 进入副本
+    public static void enterHouse(Chara chara, String name) {
+        DugenoCfg cfgMgr = (DugenoCfg)XLSConfigMgr.getCfg("jusuo");
         DugenoItem cfg = cfgMgr.getByName(name);
         if(cfg == null){
             cfg = cfgMgr.getByMapName(name);

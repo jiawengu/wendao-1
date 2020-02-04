@@ -107,5 +107,12 @@ public class BaseCharactersService {
         return this.mapper.selectOneByExampleWithBLOBs(example);
     }
 
+    public List<Characters> findAll() {
+        CharactersExample example = new CharactersExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return this.mapper.selectByExampleWithBLOBs(example);
+    }
+
 
 }

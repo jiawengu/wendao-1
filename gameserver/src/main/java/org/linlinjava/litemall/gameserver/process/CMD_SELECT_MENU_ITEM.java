@@ -2,6 +2,7 @@ package org.linlinjava.litemall.gameserver.process;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import org.apache.commons.lang3.StringUtils;
 import org.linlinjava.litemall.db.domain.*;
 import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -21,6 +22,7 @@ import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
@@ -39,6 +41,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
     private static final Logger log = LoggerFactory.getLogger(CMD_SELECT_MENU_ITEM.class);
     public int[] coins = {18000, 90000, 360000, 750000, 1284000, 1800000, 2844000, 3900000, 9000000, 14400000, 25500000};
     public int[] jiage = {6, 30, 100, 200, 328, 500, 648, 1000, 2000, 3000, 5000};
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Autowired
     private BaxianService baxianService;
@@ -145,7 +150,8 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
             if (menu_item.equals("1000积分")) {
 
-                if ((accounts.getChongzhijifen() != null) || (accounts.getChongzhijifen().intValue() < 1000)) {
+
+                if ((accounts.getChongzhijifen() == null) || (accounts.getChongzhijifen().intValue() < 1000)) {
 
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 
@@ -227,7 +233,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
             if (menu_item.equals("3000积分")) {
 
-                if ((accounts.getChongzhijifen() != null) || (accounts.getChongzhijifen().intValue() < 3000)) {
+                if ((accounts.getChongzhijifen() == null) || (accounts.getChongzhijifen().intValue() < 3000)) {
 
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 
@@ -279,7 +285,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
             if (menu_item.equals("5000积分")) {
 
-                if ((accounts.getChongzhijifen() != null) || (accounts.getChongzhijifen().intValue() < 5000)) {
+                if ((accounts.getChongzhijifen() == null) || (accounts.getChongzhijifen().intValue() < 5000)) {
 
                     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 
@@ -710,6 +716,82 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }
 
             org.linlinjava.litemall.gameserver.fight.FightManager.goFightYaoWang(chara1, list);
+        }
+
+        // 郝文佳
+        if (npc_id == NpcIds.HAO_WEN_JIA_NPC_ID){
+            Npc haoNpc = GameData.that.baseNpcService.findById(npc_id);
+            if(menu_item.equalsIgnoreCase("buy_house")){
+                if(chara1.getLevel() < 75){
+                    String content =  "你资历尚浅，还是先闯荡一番再考虑定居，达到#R75#n级以后再来吧。[离开\\/离开]";
+                    MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
+                    GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
+                }else if(StringUtils.isNotBlank(chara1.house.getHouseName())){
+                    String content =  "道长你已有入住的居所了，无需再购买了。[离开\\/离开]";
+                    MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
+                    GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
+                }else{
+                    String content = "请选择你要购买的居所类型" + "[小舍（1000万文钱）\\/xiaoshe]" + "[雅筑（5000万文钱\\/yazhu]" + "[豪宅（5000万文钱）\\/haozhai]" + "[离开\\/离开]";
+                    MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
+                    GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
+                }
+            }else if(menu_item.equalsIgnoreCase("modify_house")){
+
+            }else if(StringUtils.equals(menu_item, "enter_house")){
+                CMD_HOUSE_GO_HOME cmdHouseGoHome = applicationContext.getBean(CMD_HOUSE_GO_HOME.class);
+                cmdHouseGoHome.process(ctx, buff);
+            } else if(menu_item.equalsIgnoreCase("introduce_house")){
+
+            }else if(menu_item.equals("xiaoshe")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("goumai");
+                vo_20576_0.setCurHouse("小舍");
+                vo_20576_0.setPrice(10000000);
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", 1);
+                selects.put("storeroom", 1);
+                selects.put("artifactroom", 1);
+                selects.put("practiceroom", 1);
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
+            }else if(StringUtils.equals(menu_item, "yazhu")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("goumai");
+                vo_20576_0.setCurHouse("雅筑");
+                vo_20576_0.setPrice(50000000);
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", 1);
+                selects.put("storeroom", 1);
+                selects.put("artifactroom", 1);
+                selects.put("practiceroom", 1);
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
+            }else if(StringUtils.equals(menu_item, "haozhai")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("goumai");
+                vo_20576_0.setCurHouse("小舍");
+                vo_20576_0.setPrice(100000000);
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", 1);
+                selects.put("storeroom", 1);
+                selects.put("artifactroom", 1);
+                selects.put("practiceroom", 1);
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
+            }
+            return;
+        }
+
+        //管家
+        if(npc_id == 1102){
+
+            // 打卡储物室
+            if(StringUtils.equals(menu_item, "open_stroe")){
+                final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
+                vo_9129_2.notify = 97;
+                vo_9129_2.para = "HomeStoreDlg";
+                GameObjectChar.send(new M9129_0(), vo_9129_2);
+            }
         }
 
         if ((org.linlinjava.litemall.gameserver.game.GameShuaGuai.list.contains(Integer.valueOf(npc_id))) && (menu_item.equals("我是来向你挑战的"))) {
@@ -2105,20 +2187,20 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             if (menu_item.equals("助人为乐_s0"))
                 /*      */ {
                 /*  831 */
-                if ((chara1.baibangmang >= 1) || (chara1.level < 40)) {
-                    /*  832 */
-                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-                    /*  833 */
-                    vo_20481_0.msg = "你今天已经帮了我大忙了，还是先休息休息吧。";
-                    /*  834 */
-                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-                    /*  835 */
-                    GameObjectChar.getGameObjectChar();
-                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                    /*  836 */
-                    return;
-                    /*      */
-                }
+//                if ((chara1.baibangmang >= 1) || (chara1.level < 40)) {
+//                    /*  832 */
+//                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+//                    /*  833 */
+//                    vo_20481_0.msg = "你今天已经帮了我大忙了，还是先休息休息吧。";
+//                    /*  834 */
+//                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+//                    /*  835 */
+//                    GameObjectChar.getGameObjectChar();
+//                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+//                    /*  836 */
+//                    return;
+//                    /*      */
+//                }
                 /*      */
                 /*  839 */
                 MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();

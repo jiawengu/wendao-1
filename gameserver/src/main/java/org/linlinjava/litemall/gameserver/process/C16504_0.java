@@ -4,7 +4,8 @@
 /*    */ import io.netty.channel.ChannelHandlerContext;
 /*    */ import java.util.ArrayList;
 /*    */ import java.util.List;
-/*    */ import org.linlinjava.litemall.gameserver.GameHandler;
+/*    */ import org.apache.commons.lang3.StringUtils;
+import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_61677_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M61677_0;
@@ -40,7 +41,11 @@
 /* 40 */         goods1.goodsLanSe = null;
 /* 41 */         goods1.pos = from_pos;
 /* 42 */         listbeibao.add(goods1);
-/* 43 */         GameUtil.cangkuaddwupin((Goods)chara.backpack.get(i), chara);
+                 if(StringUtils.equals(container, "home_store")){
+                     GameUtil.homeStoreAddWuPin((Goods)chara.backpack.get(i), chara);
+                 }else{
+                     GameUtil.cangkuaddwupin((Goods)chara.backpack.get(i), chara);
+                 }
 /* 44 */         chara.backpack.remove(chara.backpack.get(i));
 /* 45 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /* 46 */         Vo_61677_0 vo_61677_0 = new Vo_61677_0();

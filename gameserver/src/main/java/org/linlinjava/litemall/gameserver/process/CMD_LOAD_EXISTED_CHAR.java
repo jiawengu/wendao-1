@@ -3,17 +3,16 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.channel.ChannelHandlerContext;
 import org.linlinjava.litemall.db.domain.Characters;
+import org.linlinjava.litemall.db.domain.Map;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.data.xls_config.PartyDailyTaskItem;
 import org.linlinjava.litemall.gameserver.domain.*;
-import org.linlinjava.litemall.gameserver.game.GameCore;
-import org.linlinjava.litemall.gameserver.game.GameData;
-import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.game.*;
 import org.linlinjava.litemall.gameserver.service.DayBreakService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -43,6 +42,18 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         }
 
         Chara chara = session.chara;
+
+        //当前线和地图为居所时
+        if(chara.line == 15){
+            chara.line = 1;
+        }
+        if(HomeUtils.isHouseMap(chara.mapid)){
+            chara.mapid = 5000;
+
+            Map map = GameData.that.baseMapService.findOneByMapId(chara.mapid);
+            chara.x = map.getX();
+            chara.y = map.getY();
+        }
 
 
         DayBreakService.checkDayBreak(chara);
