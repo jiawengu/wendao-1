@@ -3,11 +3,13 @@ package org.linlinjava.litemall.gameserver.disruptor;
 import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.util.Attribute;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.game.GameCore;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.linlinjava.litemall.gameserver.netty.NettyServer;
+import org.linlinjava.litemall.gameserver.netty.ServerHandler;
 import org.linlinjava.litemall.gameserver.process.CMD_ECHO;
 import org.linlinjava.litemall.gameserver.process.CMD_HEART_BEAT;
 import org.linlinjava.litemall.gameserver.process.CMD_MULTI_MOVE_TO;
@@ -84,9 +86,15 @@ public class World {
     }
     private void ON_LOGIC_PLAYER_CMD_REQUEST(LogicEvent logicEvent){
         int cmd = logicEvent.getIntParam();
-        int charaId = logicEvent.getIntParam2();
         ByteBuf buff = logicEvent.getByteBuf();
         ChannelHandlerContext context = logicEvent.getContext();
+
+        Attribute<GameObjectChar> attr = context.channel().attr(ServerHandler.akey);
+        GameObjectChar session = null;
+        if ((attr != null) && (attr.get() != null)) {
+            session = attr.get();
+            GameObjectChar.GAMEOBJECTCHAR_THREAD_LOCAL.set(session);
+        }
 
         GameHandler gameHandler = gameHandlerHashMap.getOrDefault(cmd, null);
         if (gameHandler != null) {
@@ -126,7 +134,8 @@ public class World {
     }
 
     public void onLogicEvent(LogicEvent event) {
-
+        LogicHandler logicHandler = logicHandlers.get(event.getLogicEventType());
+        logicHandler.handler(event);
     }
 
 
