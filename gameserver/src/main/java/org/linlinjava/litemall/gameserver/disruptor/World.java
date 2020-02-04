@@ -44,9 +44,12 @@ public class World {
      * 逻辑处理器
      */
     private Map<LogicEventType, LogicHandler> logicHandlers;
-
+    private TriggerSystem triggerSystem = new TriggerSystem();
 
     public void initWhenThreadStart() {
+        triggerSystem.addTimer(new Timer(1000, Integer.MAX_VALUE, this::onSecondTick) {});
+        triggerSystem.addTimer(new Timer(2000, Integer.MAX_VALUE, this::on2SecondTick) {});
+
         registerLogicHandler();
 
         registerCmdHandler();
@@ -106,10 +109,25 @@ public class World {
     }
 
     public void tick() {
+        triggerSystem.tickTrigger();
+    }
+
+    /**
+     * 每秒执行
+     */
+    private final void onSecondTick(Timer timer){
+
+    }
+    /**
+     * 每2秒执行
+     */
+    private final void on2SecondTick(Timer timer){
 
     }
 
     public void onLogicEvent(LogicEvent event) {
 
     }
+
+
 }
