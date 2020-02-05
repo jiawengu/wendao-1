@@ -42,6 +42,7 @@ public class GmUtil {
             result.put("qinmidu", this::qinmidu_handler);
             result.put("coin", this::coin_handler);
             result.put("exitbattle", this::exitbattle_handler);
+            result.put("fabao", this::fabao_handler);
         }
         handlers = Collections.unmodifiableMap(result);
     }
@@ -82,10 +83,16 @@ public class GmUtil {
 
 //        int coin = Integer.parseInt(cmds[1]);
 //        chara.gold_coin += coin;
-        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
-        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+//        ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
+//        GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
+//
+//        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
 
-        GameObjectChar.send(new MSG_UPDATE_PETS(), chara.pets);
+
+
+    }
+    public void fabao_handler(Chara chara, String[] cmds){
+        GameUtil.shuafabao(chara, cmds[1]);
     }
 
     /**

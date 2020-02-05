@@ -24,677 +24,1215 @@ import java.util.Random;
 /*      */ @org.springframework.stereotype.Service
 /*      */ public class GameUtil
         /*      */ {
-            private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天璇星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
+    private static final String[] TTT_XINGJUN = new String[]{"天玑星君", "天璇星君", "天枢星君", "摇光星君", "开阳星君", "天权星君", "玉衡星君"};
     public static final String[] TONG_TIAN_TA_PET = new String[]{"疆良", "玄武", "朱雀", "东山神灵"};
     public static final String[] ZHANG_MEN = new String[]{"金系掌门", "木系掌门", "水系掌门", "火系掌门", "土系掌门"};
-    /*      */   public static void addshouhu(Chara chara)
-    /*      */   {
-        /*   30 */     for (int i = 0; i < chara.listshouhu.size(); i++)
-            /*      */     {
-            /*   32 */       org.linlinjava.litemall.gameserver.domain.ShouHu shouHu = (org.linlinjava.litemall.gameserver.domain.ShouHu)chara.listshouhu.get(i);
-            /*   33 */       org.linlinjava.litemall.gameserver.domain.ShouHuShuXing shouHuShuXing = (org.linlinjava.litemall.gameserver.domain.ShouHuShuXing)((org.linlinjava.litemall.gameserver.domain.ShouHu)chara.listshouhu.get(i)).listShouHuShuXing.get(0);
-            /*   34 */       java.util.Hashtable<String, int[]> stringHashtable = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.helpPet(shouHuShuXing.penetrate, shouHuShuXing.metal, chara.level);
-            /*   35 */       int[] attributes = (int[])stringHashtable.get("attribute");
-            /*   36 */       int[] polars = (int[])stringHashtable.get("polars");
-            /*   37 */       org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0 vo_45128_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0();
-            /*   38 */       shouHuShuXing.life = attributes[0];
-            /*   39 */       shouHuShuXing.mag_power = attributes[1];
-            /*   40 */       shouHuShuXing.phy_power = attributes[2];
-            /*   41 */       shouHuShuXing.speed = attributes[3];
-            /*   42 */       shouHuShuXing.wood = polars[0];
-            /*   43 */       shouHuShuXing.water = polars[1];
-            /*   44 */       shouHuShuXing.fire = polars[2];
-            /*   45 */       shouHuShuXing.earth = polars[3];
-            /*   46 */       shouHuShuXing.resist_metal = polars[4];
-            /*   47 */       shouHuShuXing.skill = chara.level;
-            /*   48 */       shouHuShuXing.shape = 0;
+
+    /*      */
+    public static void addshouhu(Chara chara)
+    /*      */ {
+        /*   30 */
+        for (int i = 0; i < chara.listshouhu.size(); i++)
+            /*      */ {
+            /*   32 */
+            org.linlinjava.litemall.gameserver.domain.ShouHu shouHu = (org.linlinjava.litemall.gameserver.domain.ShouHu) chara.listshouhu.get(i);
+            /*   33 */
+            org.linlinjava.litemall.gameserver.domain.ShouHuShuXing shouHuShuXing = (org.linlinjava.litemall.gameserver.domain.ShouHuShuXing) ((org.linlinjava.litemall.gameserver.domain.ShouHu) chara.listshouhu.get(i)).listShouHuShuXing.get(0);
+            /*   34 */
+            java.util.Hashtable<String, int[]> stringHashtable = org.linlinjava.litemall.gameserver.data.game.PetAttributesUtils.helpPet(shouHuShuXing.penetrate, shouHuShuXing.metal, chara.level);
+            /*   35 */
+            int[] attributes = (int[]) stringHashtable.get("attribute");
+            /*   36 */
+            int[] polars = (int[]) stringHashtable.get("polars");
+            /*   37 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0 vo_45128_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45128_0();
+            /*   38 */
+            shouHuShuXing.life = attributes[0];
+            /*   39 */
+            shouHuShuXing.mag_power = attributes[1];
+            /*   40 */
+            shouHuShuXing.phy_power = attributes[2];
+            /*   41 */
+            shouHuShuXing.speed = attributes[3];
+            /*   42 */
+            shouHuShuXing.wood = polars[0];
+            /*   43 */
+            shouHuShuXing.water = polars[1];
+            /*   44 */
+            shouHuShuXing.fire = polars[2];
+            /*   45 */
+            shouHuShuXing.earth = polars[3];
+            /*   46 */
+            shouHuShuXing.resist_metal = polars[4];
+            /*   47 */
+            shouHuShuXing.skill = chara.level;
+            /*   48 */
+            shouHuShuXing.shape = 0;
             /*      */
-            /*   50 */       int[] ints = org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils.calculationHelpAttributes(chara.level, attributes[0], attributes[1], attributes[2], attributes[3], polars[0], polars[1], polars[2], polars[3], polars[4], shouHuShuXing.metal);
-            /*   51 */       shouHuShuXing.max_life = ints[0];
-            /*   52 */       shouHuShuXing.def = ints[0];
-            /*   53 */       shouHuShuXing.accurate = ints[2];
-            /*   54 */       shouHuShuXing.mana = ints[3];
-            /*   55 */       shouHuShuXing.parry = ints[4];
-            /*   56 */       shouHuShuXing.wiz = ints[5];
-            /*   57 */       shouHuShuXing.salary = 0;
-            /*   58 */       List list = new ArrayList();
-            /*   59 */       list.add(shouHu);
-            /*   60 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12016_0(), list);
-            /*   61 */       dujineng(2, shouHuShuXing.metal, shouHuShuXing.skill, true, shouHu.id, chara);
-            /*      */     }
-        /*      */   }
+            /*   50 */
+            int[] ints = org.linlinjava.litemall.gameserver.data.game.BasicAttributesUtils.calculationHelpAttributes(chara.level, attributes[0], attributes[1], attributes[2], attributes[3], polars[0], polars[1], polars[2], polars[3], polars[4], shouHuShuXing.metal);
+            /*   51 */
+            shouHuShuXing.max_life = ints[0];
+            /*   52 */
+            shouHuShuXing.def = ints[0];
+            /*   53 */
+            shouHuShuXing.accurate = ints[2];
+            /*   54 */
+            shouHuShuXing.mana = ints[3];
+            /*   55 */
+            shouHuShuXing.parry = ints[4];
+            /*   56 */
+            shouHuShuXing.wiz = ints[5];
+            /*   57 */
+            shouHuShuXing.salary = 0;
+            /*   58 */
+            List list = new ArrayList();
+            /*   59 */
+            list.add(shouHu);
+            /*   60 */
+            GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12016_0(), list);
+            /*   61 */
+            dujineng(2, shouHuShuXing.metal, shouHuShuXing.skill, true, shouHu.id, chara);
+            /*      */
+        }
+        /*      */
+    }
+
     /*      */
     /*      */
     /*      */
-    /*      */   public static void addfabaojingyan(Chara chara1, int jingyan)
-    /*      */   {
-        /*   69 */     Boolean has = fabaojingyan(chara1, jingyan);
-        /*   70 */     if (has.booleanValue()) {
-            /*   71 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-            /*   72 */       vo_20481_0.msg = ("你的法宝获得了#R" + jingyan + "#n经验");
-            /*   73 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-            /*   74 */       GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-            /*      */     }
-        /*      */   }
+    /*      */
+    public static void addfabaojingyan(Chara chara1, int jingyan)
+    /*      */ {
+        /*   69 */
+        Boolean has = fabaojingyan(chara1, jingyan);
+        /*   70 */
+        if (has.booleanValue()) {
+            /*   71 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*   72 */
+            vo_20481_0.msg = ("你的法宝获得了#R" + jingyan + "#n经验");
+            /*   73 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*   74 */
+            GameObjectCharMng.sendOne(chara1.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*      */
+        }
+        /*      */
+    }
+
     /*      */
     /*      */
-    /*      */   public static Boolean fabaojingyan(Chara chara1, int jingyan)
-    /*      */   {
-        /*   81 */     Boolean has = Boolean.valueOf(false);
-        /*   82 */     for (int i = 0; i < chara1.backpack.size(); i++) {
-            /*   83 */       if (((Goods)chara1.backpack.get(i)).pos == 9) {
-                /*   84 */         if (((Goods)chara1.backpack.get(i)).goodsInfo.skill >= 24) {
-                    /*   85 */           return has;
-                    /*      */         }
-                /*   87 */         ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara1);
-                /*   88 */         GameObjectCharMng.sendOne(chara1.id, new MSG_UPDATE(), listVo_65527_0);
-                /*   89 */         ((Goods)chara1.backpack.get(i)).goodsInfo.pot += jingyan;
-                /*   90 */         List<Goods> list = new ArrayList();
-                /*   91 */         list.add(chara1.backpack.get(i));
-                /*   92 */         GameObjectCharMng.sendOne(chara1.id, new MSG_INVENTORY(), list);
-                /*   93 */         if (((Goods)chara1.backpack.get(i)).goodsInfo.pot >= ((Goods)chara1.backpack.get(i)).goodsInfo.resist_poison) {
-                    /*   94 */           ((Goods)chara1.backpack.get(i)).goodsInfo.skill += 1;
-                    /*   95 */           ((Goods)chara1.backpack.get(i)).goodsInfo.pot = 0;
-                    /*   96 */           jingyan -= ((Goods)chara1.backpack.get(i)).goodsInfo.resist_poison;
-                    /*   97 */           ((Goods)chara1.backpack.get(i)).goodsInfo.resist_poison = GameData.that.baseExperienceTreasureService.findOneByAttrib(Integer.valueOf(((Goods)chara1.backpack.get(i)).goodsInfo.skill)).getMaxLevel().intValue();
+    /*      */
+    public static Boolean fabaojingyan(Chara chara1, int jingyan)
+    /*      */ {
+        /*   81 */
+        Boolean has = Boolean.valueOf(false);
+        /*   82 */
+        for (int i = 0; i < chara1.backpack.size(); i++) {
+            /*   83 */
+            if (((Goods) chara1.backpack.get(i)).pos == 9) {
+                /*   84 */
+                if (((Goods) chara1.backpack.get(i)).goodsInfo.skill >= 24) {
+                    /*   85 */
+                    return has;
                     /*      */
-                    /*   99 */           fabaojingyan(chara1, jingyan);
-                    /*      */         }
-                /*  101 */         has = Boolean.valueOf(true);
-                /*  102 */         break;
-                /*      */       }
-            /*      */     }
-        /*  105 */     return has;
-        /*      */   }
-    /*      */
-    /*      */   public static Goods beibaowupin(Chara chara, int pos)
-    /*      */   {
-        /*  110 */     for (int i = 0; i < chara.backpack.size(); i++) {
-            /*  111 */       if (((Goods)chara.backpack.get(i)).pos == pos) {
-                /*  112 */         return (Goods)chara.backpack.get(i);
-                /*      */       }
-            /*      */     }
-        /*  115 */     return null;
-        /*      */   }
-    /*      */
-    /*      */   public static boolean belongCalendar()
-    /*      */   {
-        /*  120 */     java.util.Date nowTime = null;
-        /*  121 */     java.util.Date beginTime = null;
-        /*  122 */     java.util.Date endTime = null;
-        /*  123 */     java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("mm");
-        /*      */     try {
-            /*  125 */       nowTime = df.parse(df.format(new java.util.Date()));
-            /*  126 */       beginTime = df.parse("29");
-            /*  127 */       endTime = df.parse("40");
-            /*      */     } catch (java.text.ParseException e) {
-            /*  129 */       e.printStackTrace();
-            /*      */     }
-        /*      */
-        /*  132 */     java.util.Calendar date = java.util.Calendar.getInstance();
-        /*  133 */     date.setTime(nowTime);
-        /*      */
-        /*  135 */     java.util.Calendar begin = java.util.Calendar.getInstance();
-        /*  136 */     begin.setTime(beginTime);
-        /*      */
-        /*  138 */     java.util.Calendar end = java.util.Calendar.getInstance();
-        /*  139 */     end.setTime(endTime);
-        /*      */
-        /*  141 */     if ((date.after(begin)) && (date.before(end))) {
-            /*  142 */       return true;
-            /*      */     }
-        /*  144 */     return false;
-        /*      */   }
-    /*      */
-    /*      */
-    /*      */
-    /*      */   public static void nextshaxing(Chara chara1, Chara duiyuan, int level, String replace)
-    /*      */   {
-        /*  151 */     Random random = new Random();
-        /*      */
-        /*  153 */     if (replace.equals("天星")) {
-            /*  154 */       int cash = 1231 * level;
-            /*  155 */       duiyuan.cash += cash;
-            /*  156 */       int i = Math.abs(duiyuan.level - level) / 5;
-            /*  157 */       if (i == 0) {
-                /*  158 */         i = 1;
-                /*      */       }
-            /*  160 */       int jingyan = 2597 * level / i;
-            /*  161 */       int i1 = random.nextInt(100);
-            /*  162 */       jingyan = (int)(jingyan * (1000 - i1) * 0.001D);
-            /*  163 */       if (jingyan < 1) {
-                /*  164 */         jingyan = 1;
-                /*      */       }
-            /*  166 */       jingyan = shuangbei(chara1, jingyan);
-            /*  167 */       if (duiyuan.level - level > 29) {
-                /*  168 */         jingyan = 1;
-                /*      */       }
-            /*  170 */       huodejingyan(duiyuan, jingyan);
-            /*  171 */       ListVo_65527_0 localListVo_65527_01 = MSG_UPDATE(duiyuan);
-            /*      */     }
-        /*  173 */     if (replace.equals("地星")) {
-            /*  174 */       int i = Math.abs(duiyuan.level - level) / 5;
-            /*  175 */       if (i == 0) {
-                /*  176 */         i = 1;
-                /*      */       }
-            /*  178 */       int jingyan = 1298 * level / i;
-            /*  179 */       int i1 = random.nextInt(100);
-            /*  180 */       jingyan = (int)(jingyan * (1000 - i1) * 0.001D);
-            /*  181 */       if (jingyan < 1) {
-                /*  182 */         jingyan = 1;
-                /*      */       }
-            /*  184 */       jingyan = shuangbei(chara1, jingyan);
-            /*  185 */       if (duiyuan.level - level > 29) {
-                /*  186 */         jingyan = 1;
-                /*      */       }
-            /*  188 */       huodejingyan(duiyuan, jingyan);
-            /*  189 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+                }
+                /*   87 */
+                ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara1);
+                /*   88 */
+                GameObjectCharMng.sendOne(chara1.id, new MSG_UPDATE(), listVo_65527_0);
+                /*   89 */
+                ((Goods) chara1.backpack.get(i)).goodsInfo.pot += jingyan;
+                /*   90 */
+                List<Goods> list = new ArrayList();
+                /*   91 */
+                list.add(chara1.backpack.get(i));
+                /*   92 */
+                GameObjectCharMng.sendOne(chara1.id, new MSG_INVENTORY(), list);
+                /*   93 */
+                if (((Goods) chara1.backpack.get(i)).goodsInfo.pot >= ((Goods) chara1.backpack.get(i)).goodsInfo.resist_poison) {
+                    /*   94 */
+                    ((Goods) chara1.backpack.get(i)).goodsInfo.skill += 1;
+                    /*   95 */
+                    ((Goods) chara1.backpack.get(i)).goodsInfo.pot = 0;
+                    /*   96 */
+                    jingyan -= ((Goods) chara1.backpack.get(i)).goodsInfo.resist_poison;
+                    /*   97 */
+                    ((Goods) chara1.backpack.get(i)).goodsInfo.resist_poison = GameData.that.baseExperienceTreasureService.findOneByAttrib(Integer.valueOf(((Goods) chara1.backpack.get(i)).goodsInfo.skill)).getMaxLevel().intValue();
+                    /*      */
+                    /*   99 */
+                    fabaojingyan(chara1, jingyan);
+                    /*      */
+                }
+                /*  101 */
+                has = Boolean.valueOf(true);
+                /*  102 */
+                break;
+                /*      */
+            }
             /*      */
-            /*  191 */       int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
-            /*  192 */       int owner_name = 3272 * level / i / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
-            /*  193 */       adddaohang(duiyuan, owner_name);
-            /*  194 */       for (int j = 0; j < duiyuan.pets.size(); j++) {
-                /*  195 */         if (((Petbeibao)duiyuan.pets.get(j)).id == duiyuan.chongwuchanzhanId) {
-                    /*  196 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(j)).petShuXing.get(0);
-                    /*  197 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                    /*  198 */           int martial = 33 * level / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                    /*  199 */           petShuXing.martial += martial;
-                    /*  200 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-                    /*  201 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
-                    /*  202 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-                    /*  203 */           GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                    /*      */         }
-                /*  205 */         listVo_65527_0 = MSG_UPDATE(duiyuan);
-                /*  206 */         GameObjectCharMng.sendOne(duiyuan.id, new MSG_UPDATE(), listVo_65527_0);
-                /*      */       }
-            /*      */     }
-        /*      */   }
+        }
+        /*  105 */
+        return has;
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static Goods beibaowupin(Chara chara, int pos)
+    /*      */ {
+        /*  110 */
+        for (int i = 0; i < chara.backpack.size(); i++) {
+            /*  111 */
+            if (((Goods) chara.backpack.get(i)).pos == pos) {
+                /*  112 */
+                return (Goods) chara.backpack.get(i);
+                /*      */
+            }
+            /*      */
+        }
+        /*  115 */
+        return null;
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static boolean belongCalendar()
+    /*      */ {
+        /*  120 */
+        java.util.Date nowTime = null;
+        /*  121 */
+        java.util.Date beginTime = null;
+        /*  122 */
+        java.util.Date endTime = null;
+        /*  123 */
+        java.text.SimpleDateFormat df = new java.text.SimpleDateFormat("mm");
+        /*      */
+        try {
+            /*  125 */
+            nowTime = df.parse(df.format(new java.util.Date()));
+            /*  126 */
+            beginTime = df.parse("29");
+            /*  127 */
+            endTime = df.parse("40");
+            /*      */
+        } catch (java.text.ParseException e) {
+            /*  129 */
+            e.printStackTrace();
+            /*      */
+        }
+        /*      */
+        /*  132 */
+        java.util.Calendar date = java.util.Calendar.getInstance();
+        /*  133 */
+        date.setTime(nowTime);
+        /*      */
+        /*  135 */
+        java.util.Calendar begin = java.util.Calendar.getInstance();
+        /*  136 */
+        begin.setTime(beginTime);
+        /*      */
+        /*  138 */
+        java.util.Calendar end = java.util.Calendar.getInstance();
+        /*  139 */
+        end.setTime(endTime);
+        /*      */
+        /*  141 */
+        if ((date.after(begin)) && (date.before(end))) {
+            /*  142 */
+            return true;
+            /*      */
+        }
+        /*  144 */
+        return false;
+        /*      */
+    }
+
     /*      */
     /*      */
     /*      */
     /*      */
-    /*      */   public static void shuayeguai(Chara chara1, Chara duiyuan, int level)
-    /*      */   {
-        /*  216 */     Random random = new Random();
+    public static void nextshaxing(Chara chara1, Chara duiyuan, int level, String replace)
+    /*      */ {
+        /*  151 */
+        Random random = new Random();
         /*      */
-        /*  218 */     int i = Math.abs(duiyuan.level - level) / 5;
-        /*  219 */     if (i == 0) {
-            /*  220 */       i = 1;
-            /*      */     }
-        /*  222 */     int jingyan = 20 * level / i;
-        /*  223 */     int i1 = random.nextInt(100);
-        /*  224 */     jingyan = (int)(jingyan * (1000 - i1) * 0.001D);
-        /*  225 */     if (jingyan < 1) {
-            /*  226 */       jingyan = 1;
-            /*      */     }
+        /*  153 */
+        if (replace.equals("天星")) {
+            /*  154 */
+            int cash = 1231 * level;
+            /*  155 */
+            duiyuan.cash += cash;
+            /*  156 */
+            int i = Math.abs(duiyuan.level - level) / 5;
+            /*  157 */
+            if (i == 0) {
+                /*  158 */
+                i = 1;
+                /*      */
+            }
+            /*  160 */
+            int jingyan = 2597 * level / i;
+            /*  161 */
+            int i1 = random.nextInt(100);
+            /*  162 */
+            jingyan = (int) (jingyan * (1000 - i1) * 0.001D);
+            /*  163 */
+            if (jingyan < 1) {
+                /*  164 */
+                jingyan = 1;
+                /*      */
+            }
+            /*  166 */
+            jingyan = shuangbei(chara1, jingyan);
+            /*  167 */
+            if (duiyuan.level - level > 29) {
+                /*  168 */
+                jingyan = 1;
+                /*      */
+            }
+            /*  170 */
+            huodejingyan(duiyuan, jingyan);
+            /*  171 */
+            ListVo_65527_0 localListVo_65527_01 = MSG_UPDATE(duiyuan);
+            /*      */
+        }
+        /*  173 */
+        if (replace.equals("地星")) {
+            /*  174 */
+            int i = Math.abs(duiyuan.level - level) / 5;
+            /*  175 */
+            if (i == 0) {
+                /*  176 */
+                i = 1;
+                /*      */
+            }
+            /*  178 */
+            int jingyan = 1298 * level / i;
+            /*  179 */
+            int i1 = random.nextInt(100);
+            /*  180 */
+            jingyan = (int) (jingyan * (1000 - i1) * 0.001D);
+            /*  181 */
+            if (jingyan < 1) {
+                /*  182 */
+                jingyan = 1;
+                /*      */
+            }
+            /*  184 */
+            jingyan = shuangbei(chara1, jingyan);
+            /*  185 */
+            if (duiyuan.level - level > 29) {
+                /*  186 */
+                jingyan = 1;
+                /*      */
+            }
+            /*  188 */
+            huodejingyan(duiyuan, jingyan);
+            /*  189 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*      */
+            /*  191 */
+            int base_dh = (int) (0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+            /*  192 */
+            int owner_name = 3272 * level / i / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
+            /*  193 */
+            adddaohang(duiyuan, owner_name);
+            /*  194 */
+            for (int j = 0; j < duiyuan.pets.size(); j++) {
+                /*  195 */
+                if (((Petbeibao) duiyuan.pets.get(j)).id == duiyuan.chongwuchanzhanId) {
+                    /*  196 */
+                    PetShuXing petShuXing = (PetShuXing) ((Petbeibao) duiyuan.pets.get(j)).petShuXing.get(0);
+                    /*  197 */
+                    int base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
+                    /*  198 */
+                    int martial = 33 * level / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
+                    /*  199 */
+                    petShuXing.martial += martial;
+                    /*  200 */
+                    org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                    /*  201 */
+                    vo_20481_0.msg = ("宠物获得武学#R" + martial);
+                    /*  202 */
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                    /*  203 */
+                    GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    /*      */
+                }
+                /*  205 */
+                listVo_65527_0 = MSG_UPDATE(duiyuan);
+                /*  206 */
+                GameObjectCharMng.sendOne(duiyuan.id, new MSG_UPDATE(), listVo_65527_0);
+                /*      */
+            }
+            /*      */
+        }
         /*      */
-        /*  229 */     jingyan = shuangbei(chara1, jingyan);
-        /*      */
-        /*  231 */     huodejingyan(duiyuan, jingyan);
-        /*  232 */     ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-        /*  233 */     GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-        /*  234 */     i = random.nextInt(1000);
-        /*  235 */     if ((i < 5) && (level >= 60)) {
-            /*  236 */       weijianding(duiyuan);
-            /*      */     }
-        /*      */   }
+    }
+
     /*      */
     /*      */
     /*      */
     /*      */
-    /*      */   public static void shidaojingyan(Chara chara1, Chara duiyuan, int id)
-    /*      */   {
-        /*  245 */     Random random = new Random();
-        /*      */
-        /*      */
-        /*  248 */     GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(id));
-        /*  249 */     duiyuan.shidaodaguaijifen += 2;
-        /*      */
-        /*      */
-        /*  252 */     int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
-        /*  253 */     int owner_name = 3272 * duiyuan.level / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
-        /*  254 */     adddaohang(duiyuan, owner_name);
-        /*      */
-        /*      */
-        /*  257 */     int jingyan = duiyuan.level * 1281;
-        /*  258 */     if (jingyan < 1) {
-            /*  259 */       jingyan = 1;
-            /*      */     }
-        /*  261 */     jingyan = shuangbei(chara1, jingyan);
-        /*  262 */     huodejingyan(duiyuan, jingyan);
-        /*      */
-        /*  264 */     for (int i = 0; i < duiyuan.pets.size(); i++) {
-            /*  265 */       if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
-                /*  266 */         PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                /*  267 */         int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                /*  268 */         int martial = 33 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                /*  269 */         petShuXing.martial += martial;
-                /*  270 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-                /*  271 */         vo_20481_0.msg = ("宠物获得武学#R" + martial);
-                /*  272 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-                /*  273 */         GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                /*      */       }
-            /*  275 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-            /*  276 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-            /*      */     }
-        /*      */   }
     /*      */
-    /*      */   public static void nextxuanshang(Chara chara1, Chara duiyuan)
-    /*      */   {
-        /*  282 */     Random random = new Random();
+    public static void shuayeguai(Chara chara1, Chara duiyuan, int level)
+    /*      */ {
+        /*  216 */
+        Random random = new Random();
         /*      */
-        /*  284 */     duiyuan.xuanshangcishu += 1;
+        /*  218 */
+        int i = Math.abs(duiyuan.level - level) / 5;
+        /*  219 */
+        if (i == 0) {
+            /*  220 */
+            i = 1;
+            /*      */
+        }
+        /*  222 */
+        int jingyan = 20 * level / i;
+        /*  223 */
+        int i1 = random.nextInt(100);
+        /*  224 */
+        jingyan = (int) (jingyan * (1000 - i1) * 0.001D);
+        /*  225 */
+        if (jingyan < 1) {
+            /*  226 */
+            jingyan = 1;
+            /*      */
+        }
         /*      */
-        /*  286 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcxuanshang.get(0)).id), chara1.id);
+        /*  229 */
+        jingyan = shuangbei(chara1, jingyan);
         /*      */
+        /*  231 */
+        huodejingyan(duiyuan, jingyan);
+        /*  232 */
+        ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+        /*  233 */
+        GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+        /*  234 */
+        i = random.nextInt(1000);
+        /*  235 */
+        if ((i < 5) && (level >= 60)) {
+            /*  236 */
+            weijianding(duiyuan);
+            /*      */
+        }
         /*      */
-        /*  289 */     int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
-        /*  290 */     int owner_name = 878 * duiyuan.level / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
-        /*  291 */     adddaohang(duiyuan, owner_name);
-        /*  292 */     int cash = 18936 * duiyuan.level;
-        /*  293 */     duiyuan.cash += cash;
-        /*  294 */     for (int i = 0; i < duiyuan.pets.size(); i++) {
-            /*  295 */       if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
-                /*  296 */         PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                /*  297 */         int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                /*  298 */         int martial = 29 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
-                /*  299 */         petShuXing.martial += martial;
-                /*  300 */         org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-                /*  301 */         vo_20481_0.msg = ("宠物获得武学#R" + martial);
-                /*  302 */         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-                /*  303 */         GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                /*      */       }
-            /*  305 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-            /*  306 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-            /*      */     }
-        /*  308 */     GameUtilRenWu.renwukuangkuang("悬赏祍务", "", "", duiyuan);
-        /*      */
-        /*      */
-        /*  311 */     chara1.npcXuanShangName = "领取奖励";
-        /*  312 */     chara1.npcxuanshang = new ArrayList();
-        /*      */   }
+    }
+
     /*      */
     /*      */
-    /*      */   public static boolean duiwudengji(Chara chara, GameObjectChar session)
-    /*      */   {
-        /*  318 */     boolean hasyes = true;
-        /*  319 */     for (int i = 0; i < session.gameTeam.duiwu.size() - 1; i++) {
-            /*  320 */       if (Math.abs(((Chara)session.gameTeam.duiwu.get(i)).level - ((Chara)session.gameTeam.duiwu.get(i + 1)).level) > 10) {
-                /*  321 */         hasyes = false;
-                /*      */       }
-            /*      */     }
-        /*  324 */     return hasyes;
-        /*      */   }
     /*      */
-    /*      */   public static int duiwudengjicmp(Chara chara, GameObjectChar session, int nMinLv, int MaxLv) {
-        /*  329 */     for (int i = 0; i < session.gameTeam.duiwu.size(); i++) {
-            int lv = ((Chara)session.gameTeam.duiwu.get(i)).level;
-            /*  330 */       if (lv < nMinLv) {
+    /*      */
+    /*      */
+    public static void shidaojingyan(Chara chara1, Chara duiyuan, int id)
+    /*      */ {
+        /*  245 */
+        Random random = new Random();
+        /*      */
+        /*      */
+        /*  248 */
+        GameObjectChar.getGameObjectChar().gameMap.send(new MSG_DISAPPEAR_Chara(), Integer.valueOf(id));
+        /*  249 */
+        duiyuan.shidaodaguaijifen += 2;
+        /*      */
+        /*      */
+        /*  252 */
+        int base_dh = (int) (0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+        /*  253 */
+        int owner_name = 3272 * duiyuan.level / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
+        /*  254 */
+        adddaohang(duiyuan, owner_name);
+        /*      */
+        /*      */
+        /*  257 */
+        int jingyan = duiyuan.level * 1281;
+        /*  258 */
+        if (jingyan < 1) {
+            /*  259 */
+            jingyan = 1;
+            /*      */
+        }
+        /*  261 */
+        jingyan = shuangbei(chara1, jingyan);
+        /*  262 */
+        huodejingyan(duiyuan, jingyan);
+        /*      */
+        /*  264 */
+        for (int i = 0; i < duiyuan.pets.size(); i++) {
+            /*  265 */
+            if (((Petbeibao) duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
+                /*  266 */
+                PetShuXing petShuXing = (PetShuXing) ((Petbeibao) duiyuan.pets.get(i)).petShuXing.get(0);
+                /*  267 */
+                int base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
+                /*  268 */
+                int martial = 33 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
+                /*  269 */
+                petShuXing.martial += martial;
+                /*  270 */
+                org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                /*  271 */
+                vo_20481_0.msg = ("宠物获得武学#R" + martial);
+                /*  272 */
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                /*  273 */
+                GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                /*      */
+            }
+            /*  275 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  276 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+            /*      */
+        }
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static void nextxuanshang(Chara chara1, Chara duiyuan)
+    /*      */ {
+        /*  282 */
+        Random random = new Random();
+        /*      */
+        /*  284 */
+        duiyuan.xuanshangcishu += 1;
+        /*      */
+        /*  286 */
+        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcxuanshang.get(0)).id), chara1.id);
+        /*      */
+        /*      */
+        /*  289 */
+        int base_dh = (int) (0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+        /*  290 */
+        int owner_name = 878 * duiyuan.level / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1);
+        /*  291 */
+        adddaohang(duiyuan, owner_name);
+        /*  292 */
+        int cash = 18936 * duiyuan.level;
+        /*  293 */
+        duiyuan.cash += cash;
+        /*  294 */
+        for (int i = 0; i < duiyuan.pets.size(); i++) {
+            /*  295 */
+            if (((Petbeibao) duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
+                /*  296 */
+                PetShuXing petShuXing = (PetShuXing) ((Petbeibao) duiyuan.pets.get(i)).petShuXing.get(0);
+                /*  297 */
+                int base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
+                /*  298 */
+                int martial = 29 * petShuXing.skill / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1);
+                /*  299 */
+                petShuXing.martial += martial;
+                /*  300 */
+                org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                /*  301 */
+                vo_20481_0.msg = ("宠物获得武学#R" + martial);
+                /*  302 */
+                vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                /*  303 */
+                GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                /*      */
+            }
+            /*  305 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  306 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+            /*      */
+        }
+        /*  308 */
+        GameUtilRenWu.renwukuangkuang("悬赏祍务", "", "", duiyuan);
+        /*      */
+        /*      */
+        /*  311 */
+        chara1.npcXuanShangName = "领取奖励";
+        /*  312 */
+        chara1.npcxuanshang = new ArrayList();
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    /*      */
+    public static boolean duiwudengji(Chara chara, GameObjectChar session)
+    /*      */ {
+        /*  318 */
+        boolean hasyes = true;
+        /*  319 */
+        for (int i = 0; i < session.gameTeam.duiwu.size() - 1; i++) {
+            /*  320 */
+            if (Math.abs(((Chara) session.gameTeam.duiwu.get(i)).level - ((Chara) session.gameTeam.duiwu.get(i + 1)).level) > 10) {
+                /*  321 */
+                hasyes = false;
+                /*      */
+            }
+            /*      */
+        }
+        /*  324 */
+        return hasyes;
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static int duiwudengjicmp(Chara chara, GameObjectChar session, int nMinLv, int MaxLv) {
+        /*  329 */
+        for (int i = 0; i < session.gameTeam.duiwu.size(); i++) {
+            int lv = ((Chara) session.gameTeam.duiwu.get(i)).level;
+            /*  330 */
+            if (lv < nMinLv) {
                 return 1;
             } else if (lv > MaxLv) {
                 return 2;
             }
-            /*      */     }
-        /*  334 */     return 0;
-        /*      */   }
+            /*      */
+        }
+        /*  334 */
+        return 0;
+        /*      */
+    }
+
     /*      */
-   public static void subdaohang(Chara chara, int daohangdian)
-   {
-     chara.owner_name -= daohangdian;
-     chara.friend -= chara.owner_name / 1440;
+    public static void subdaohang(Chara chara, int daohangdian) {
+        chara.owner_name -= daohangdian;
+        chara.friend -= chara.owner_name / 1440;
 //     chara.owner_name %= 1440;
 
-     org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-     vo_20481_0.msg = ("减少道行#R" + daohangdian);
-     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-     GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-   }
+        org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+        vo_20481_0.msg = ("减少道行#R" + daohangdian);
+        vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+    }
 
-    /*      */   public static void adddaohang(Chara chara, int daohangdian)
-    /*      */   {
-        /*  339 */     chara.owner_name += daohangdian;
-        /*  340 */     chara.friend += chara.owner_name / 1440;
-        /*  341 */     chara.owner_name %= 1440;
-        /*      */
-        /*  343 */     org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-        /*  344 */     vo_20481_0.msg = ("获得道行#R" + daohangdian);
-        /*  345 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-        /*  346 */     GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-        /*      */   }
     /*      */
-    /*      */   public static int shuangbei(Chara chara1, int jingyan) {
-        /*  350 */     if ((chara1.charashuangbei == 1) && (chara1.enable_double_points > 0)) {
-            /*  351 */       jingyan *= 2;
-            /*  352 */       chara1.enable_double_points -= 4;
-            /*      */     }
-        /*  354 */     if (chara1.enable_double_points <= 0) {
-            /*  355 */       chara1.enable_double_points = 0;
-            /*      */     }
-        /*  357 */     return jingyan;
-        /*      */   }
-    /*      */
-    /*      */
-    /*      */
-    /*      */   public static void nextxiuxing(Chara chara1, Chara duiyuan)
-    /*      */   {
-        /*  364 */     Random random = new Random();
+    public static void adddaohang(Chara chara, int daohangdian)
+    /*      */ {
+        /*  339 */
+        chara.owner_name += daohangdian;
+        /*  340 */
+        chara.friend += chara.owner_name / 1440;
+        /*  341 */
+        chara.owner_name %= 1440;
         /*      */
-        /*  366 */     duiyuan.xiuxingcishu += 1;
-        /*  367 */     int chubao = chara1.xiuxingcishu - 1;
-        /*  368 */     if (duiyuan.xiuxingcishu <= 40) {
-            /*  369 */       int use_money_type = (int)(duiyuan.level / 10 * 6815 * (1.0D + 0.2D * chubao));
-            /*  370 */       duiyuan.use_money_type += use_money_type;
-            /*  371 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-            /*  372 */       vo_20481_0.msg = ("获得代金券#R" + use_money_type);
-            /*  373 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-            /*  374 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-            /*  375 */       int jingyan = (int)(1281 * duiyuan.level * (1.0D + 0.05D * chubao));
-            /*      */
-            /*  377 */       jingyan = shuangbei(chara1, jingyan);
-            /*  378 */       huodejingyan(duiyuan, jingyan);
-            /*  379 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-            /*  380 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-            /*  381 */       if ((duiyuan.xiuxingcishu == 20) || (duiyuan.xiuxingcishu == 40)) {
-                /*  382 */         weijianding(duiyuan);
-                /*      */       }
-            /*      */     }
+        /*  343 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+        /*  344 */
+        vo_20481_0.msg = ("获得道行#R" + daohangdian);
+        /*  345 */
+        vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+        /*  346 */
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
         /*      */
-        /*      */
-        /*  387 */     String[] npces = { "雷神", "花神", "炎神", "山神", "龙神" };
-        /*  388 */     int i = random.nextInt(npces.length);
-        /*  389 */     chara1.xiuxingNpcname = npces[i];
-        /*  390 */     int cishu = chubao + 1;
-        /*  391 */     String task_prompt = "";
-        /*  392 */     String show_name = "";
-        /*  393 */     task_prompt = "拜访#P" + npces[i] + "| M=【修行】请仙人赐教#P";
-        /*  394 */     show_name = "【修炼】修行(" + cishu + "/40)";
-        /*      */
-        /*  396 */     if (chara1.xiuxingcishu > 40) {
-            /*  397 */       task_prompt = "";
-            /*  398 */       show_name = "";
-            /*      */     }
-        /*      */
-        /*  401 */     GameUtilRenWu.renwukuangkuang("修炼", task_prompt, show_name, chara1);
-        /*      */
-        /*  403 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
-        /*  404 */     vo_45063_0.task_name = task_prompt;
-        /*  405 */     vo_45063_0.check_point = 147761859;
-        /*  406 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
-        /*      */   }
-/*      */   public static void nextzhengzhu(Chara chara1, Chara duiyuan)
-/*      */   {
-    /*  366 */     duiyuan.xiuxingcishu += 1;
-    /*  367 */     int chubao = chara1.xiuxingcishu - 1;
-    /*  368 */     if (duiyuan.xiuxingcishu <= 40) {
-        /*  369 */       int use_money_type = (int)(duiyuan.level / 10 * 6815 * (1.0D + 0.2D * chubao));
-        /*  370 */       duiyuan.use_money_type += use_money_type;
-        /*  371 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-        /*  372 */       vo_20481_0.msg = ("获得代金券#R" + use_money_type);
-        /*  373 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-        /*  374 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-        /*  375 */       int jingyan = (int)(1281 * duiyuan.level * (1.0D + 0.05D * chubao));
-        /*      */
-        /*  377 */       jingyan = shuangbei(chara1, jingyan);
-        /*  378 */       huodejingyan(duiyuan, jingyan);
-        /*  379 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-        /*  380 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-        /*  381 */       if ((duiyuan.xiuxingcishu == 20) || (duiyuan.xiuxingcishu == 40)) {
-            /*  382 */         weijianding(duiyuan);
-            /*      */       }
-        /*      */ }
+    }
 
-                   int i = (duiyuan.xiuxingcishu + 9) % 10;
-    /*  387 */     String[] npces = {"金光阵主", "风吼阵主", "落魄阵主", "化血阵主", "红水阵主", "寒冰阵主", "烈焰阵主", "地烈阵主", "天阙阵主", "红砂阵主"};
-    /*  390 */
-                   chara1.xiuxingNpcname = npces[i];
-    /*  391 */     String task_prompt = "";
-    /*  392 */     String show_name = "";
-    /*  393 */     task_prompt = "讨教#P" + npces[i] + "| M=【十绝阵】请仙人赐教#P";
-    /*  394 */     show_name = "【十绝阵】讨教(" + (i + 1) + "/10)";
     /*      */
-    /*  396 */     if (i == 0 || chara1.xiuxingcishu > 40) {
-        /*  397 */       task_prompt = "";
-        /*  398 */       show_name = "";
-                         chara1.xiuxingNpcname = "";
+    /*      */
+    public static int shuangbei(Chara chara1, int jingyan) {
+        /*  350 */
+        if ((chara1.charashuangbei == 1) && (chara1.enable_double_points > 0)) {
+            /*  351 */
+            jingyan *= 2;
+            /*  352 */
+            chara1.enable_double_points -= 4;
+            /*      */
+        }
+        /*  354 */
+        if (chara1.enable_double_points <= 0) {
+            /*  355 */
+            chara1.enable_double_points = 0;
+            /*      */
+        }
+        /*  357 */
+        return jingyan;
+        /*      */
+    }
 
-    /*  458 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-    /*  459 */           vo_20481_0.msg = ("请重新找玉泉老人接取十绝阵任务！");
-    /*  460 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-    /*  461 */           GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-        /*      */     }
     /*      */
-    /*  401 */     GameUtilRenWu.renwukuangkuang("十绝阵", task_prompt, show_name, chara1);
     /*      */
-    /*  403 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
-    /*  404 */     vo_45063_0.task_name = task_prompt;
-    /*  405 */     vo_45063_0.check_point = 147761859;
-    /*  406 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
-    /*      */   }
+    /*      */
+    /*      */
+    public static void nextxiuxing(Chara chara1, Chara duiyuan)
+    /*      */ {
+        /*  364 */
+        Random random = new Random();
+        /*      */
+        /*  366 */
+        duiyuan.xiuxingcishu += 1;
+        /*  367 */
+        int chubao = chara1.xiuxingcishu - 1;
+        /*  368 */
+        if (duiyuan.xiuxingcishu <= 40) {
+            /*  369 */
+            int use_money_type = (int) (duiyuan.level / 10 * 6815 * (1.0D + 0.2D * chubao));
+            /*  370 */
+            duiyuan.use_money_type += use_money_type;
+            /*  371 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*  372 */
+            vo_20481_0.msg = ("获得代金券#R" + use_money_type);
+            /*  373 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*  374 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*  375 */
+            int jingyan = (int) (1281 * duiyuan.level * (1.0D + 0.05D * chubao));
+            /*      */
+            /*  377 */
+            jingyan = shuangbei(chara1, jingyan);
+            /*  378 */
+            huodejingyan(duiyuan, jingyan);
+            /*  379 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  380 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+            /*  381 */
+            if ((duiyuan.xiuxingcishu == 20) || (duiyuan.xiuxingcishu == 40)) {
+                /*  382 */
+                weijianding(duiyuan);
+                /*      */
+            }
+            /*      */
+        }
+        /*      */
+        /*      */
+        /*  387 */
+        String[] npces = {"雷神", "花神", "炎神", "山神", "龙神"};
+        /*  388 */
+        int i = random.nextInt(npces.length);
+        /*  389 */
+        chara1.xiuxingNpcname = npces[i];
+        /*  390 */
+        int cishu = chubao + 1;
+        /*  391 */
+        String task_prompt = "";
+        /*  392 */
+        String show_name = "";
+        /*  393 */
+        task_prompt = "拜访#P" + npces[i] + "| M=【修行】请仙人赐教#P";
+        /*  394 */
+        show_name = "【修炼】修行(" + cishu + "/40)";
+        /*      */
+        /*  396 */
+        if (chara1.xiuxingcishu > 40) {
+            /*  397 */
+            task_prompt = "";
+            /*  398 */
+            show_name = "";
+            /*      */
+        }
+        /*      */
+        /*  401 */
+        GameUtilRenWu.renwukuangkuang("修炼", task_prompt, show_name, chara1);
+        /*      */
+        /*  403 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+        /*  404 */
+        vo_45063_0.task_name = task_prompt;
+        /*  405 */
+        vo_45063_0.check_point = 147761859;
+        /*  406 */
+        GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+        /*      */
+    }
 
-    /*      */   public static void nextshuadao(Chara chara1, Chara duiyuan)
-    /*      */   {
-        /*  414 */     Random random = new Random();
-        /*  415 */     int chubao = (chara1.shuadao - 1) % 10;
+    /*      */
+    public static void nextzhengzhu(Chara chara1, Chara duiyuan)
+    /*      */ {
+        /*  366 */
+        duiyuan.xiuxingcishu += 1;
+        /*  367 */
+        int chubao = chara1.xiuxingcishu - 1;
+        /*  368 */
+        if (duiyuan.xiuxingcishu <= 40) {
+            /*  369 */
+            int use_money_type = (int) (duiyuan.level / 10 * 6815 * (1.0D + 0.2D * chubao));
+            /*  370 */
+            duiyuan.use_money_type += use_money_type;
+            /*  371 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*  372 */
+            vo_20481_0.msg = ("获得代金券#R" + use_money_type);
+            /*  373 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*  374 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*  375 */
+            int jingyan = (int) (1281 * duiyuan.level * (1.0D + 0.05D * chubao));
+            /*      */
+            /*  377 */
+            jingyan = shuangbei(chara1, jingyan);
+            /*  378 */
+            huodejingyan(duiyuan, jingyan);
+            /*  379 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  380 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+            /*  381 */
+            if ((duiyuan.xiuxingcishu == 20) || (duiyuan.xiuxingcishu == 40)) {
+                /*  382 */
+                weijianding(duiyuan);
+                /*      */
+            }
+            /*      */
+        }
+
+        int i = (duiyuan.xiuxingcishu + 9) % 10;
+        /*  387 */
+        String[] npces = {"金光阵主", "风吼阵主", "落魄阵主", "化血阵主", "红水阵主", "寒冰阵主", "烈焰阵主", "地烈阵主", "天阙阵主", "红砂阵主"};
+        /*  390 */
+        chara1.xiuxingNpcname = npces[i];
+        /*  391 */
+        String task_prompt = "";
+        /*  392 */
+        String show_name = "";
+        /*  393 */
+        task_prompt = "讨教#P" + npces[i] + "| M=【十绝阵】请仙人赐教#P";
+        /*  394 */
+        show_name = "【十绝阵】讨教(" + (i + 1) + "/10)";
         /*      */
-        /*  417 */     duiyuan.shuadao += 1;
-        /*  418 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).id), chara1.id);
+        /*  396 */
+        if (i == 0 || chara1.xiuxingcishu > 40) {
+            /*  397 */
+            task_prompt = "";
+            /*  398 */
+            show_name = "";
+            chara1.xiuxingNpcname = "";
+
+            /*  458 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*  459 */
+            vo_20481_0.msg = ("请重新找玉泉老人接取十绝阵任务！");
+            /*  460 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*  461 */
+            GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*      */
+        }
+        /*      */
+        /*  401 */
+        GameUtilRenWu.renwukuangkuang("十绝阵", task_prompt, show_name, chara1);
+        /*      */
+        /*  403 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+        /*  404 */
+        vo_45063_0.task_name = task_prompt;
+        /*  405 */
+        vo_45063_0.check_point = 147761859;
+        /*  406 */
+        GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+        /*      */
+    }
+
+    /*      */
+    public static void nextshuadao(Chara chara1, Chara duiyuan)
+    /*      */ {
+        /*  414 */
+        Random random = new Random();
+        /*  415 */
+        int chubao = (chara1.shuadao - 1) % 10;
+        /*      */
+        /*  417 */
+        duiyuan.shuadao += 1;
+        /*  418 */
+        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).id), chara1.id);
         /*      */
         /*      */
-        /*  421 */     if (duiyuan.shuadao <= 400) {
-            /*  422 */       double beishu = 1.0D;
-            /*  423 */       if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).leixing == 3) {
-                /*  424 */         beishu = 1.5D;
-                /*      */       }
-            /*  426 */       if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).leixing == 4) {
-                /*  427 */         beishu = 3.0D;
-                /*      */       }
-            /*  429 */       int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+        /*  421 */
+        if (duiyuan.shuadao <= 400) {
+            /*  422 */
+            double beishu = 1.0D;
+            /*  423 */
+            if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).leixing == 3) {
+                /*  424 */
+                beishu = 1.5D;
+                /*      */
+            }
+            /*  426 */
+            if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).leixing == 4) {
+                /*  427 */
+                beishu = 3.0D;
+                /*      */
+            }
+            /*  429 */
+            int base_dh = (int) (0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
             /*      */
-            /*  431 */       int owner_name = (int)(39 * duiyuan.level * (1.0D + 0.2D * chubao) / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1) * beishu) * 15;
-            /*  432 */       if ((duiyuan.ziqihongmeng == 1) && (duiyuan.extra_skill > 0)) {
-                /*  433 */         owner_name = (int)(owner_name * 1.5D);
-                /*  434 */         chara1.extra_skill -= 4;
-                /*  435 */         if (chara1.extra_skill <= 0) {
-                    /*  436 */           chara1.extra_skill = 0;
-                    /*      */         }
-                /*      */       }
-            /*  439 */       adddaohang(duiyuan, owner_name);
+            /*  431 */
+            int owner_name = (int) (39 * duiyuan.level * (1.0D + 0.2D * chubao) / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1) * beishu) * 15;
+            /*  432 */
+            if ((duiyuan.ziqihongmeng == 1) && (duiyuan.extra_skill > 0)) {
+                /*  433 */
+                owner_name = (int) (owner_name * 1.5D);
+                /*  434 */
+                chara1.extra_skill -= 4;
+                /*  435 */
+                if (chara1.extra_skill <= 0) {
+                    /*  436 */
+                    chara1.extra_skill = 0;
+                    /*      */
+                }
+                /*      */
+            }
+            /*  439 */
+            adddaohang(duiyuan, owner_name);
             /*      */
             /*      */
-            /*  442 */       addfabaojingyan(duiyuan, (int)(beishu * chara1.level * 3.0D));
+            /*  442 */
+            addfabaojingyan(duiyuan, (int) (beishu * chara1.level * 3.0D));
             /*      */
             /*      */
-            /*  445 */       for (int i = 0; i < duiyuan.pets.size(); i++) {
-                /*  446 */         if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
-                    /*  447 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                    /*  448 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill) + 1;
-                    /*  449 */           int martial = (int)(22 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1) * beishu);
-                    /*  450 */           if ((duiyuan.chongfengsan == 1) && (duiyuan.shuadaochongfeng_san > 0)) {
-                        /*  451 */             martial = (int)(martial * 1.5D);
-                        /*  452 */             chara1.shuadaochongfeng_san -= 4;
-                        /*  453 */             if (chara1.shuadaochongfeng_san <= 0) {
-                            /*  454 */               chara1.shuadaochongfeng_san = 0;
-                            /*      */             }
-                        /*      */           }
-                    /*  457 */           petShuXing.martial += martial;
-                    /*  458 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-                    /*  459 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
-                    /*  460 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-                    /*  461 */           GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                    /*      */         }
-                /*      */       }
-            /*  464 */       int use_money_type = (int)(159 * duiyuan.level * (1.0D + 0.2D * chubao) * beishu);
-            /*  465 */       duiyuan.use_money_type += use_money_type;
-            /*  466 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-            /*  467 */       vo_20481_0.msg = ("获得代金券#R" + use_money_type);
-            /*  468 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-            /*  469 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-            /*  470 */       int cash = (int)((int)(673 * duiyuan.level * (1.0D + 0.2D * chubao)) * beishu);
-            /*  471 */       duiyuan.cash += cash;
+            /*  445 */
+            for (int i = 0; i < duiyuan.pets.size(); i++) {
+                /*  446 */
+                if (((Petbeibao) duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
+                    /*  447 */
+                    PetShuXing petShuXing = (PetShuXing) ((Petbeibao) duiyuan.pets.get(i)).petShuXing.get(0);
+                    /*  448 */
+                    int base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill) + 1;
+                    /*  449 */
+                    int martial = (int) (22 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1) * beishu);
+                    /*  450 */
+                    if ((duiyuan.chongfengsan == 1) && (duiyuan.shuadaochongfeng_san > 0)) {
+                        /*  451 */
+                        martial = (int) (martial * 1.5D);
+                        /*  452 */
+                        chara1.shuadaochongfeng_san -= 4;
+                        /*  453 */
+                        if (chara1.shuadaochongfeng_san <= 0) {
+                            /*  454 */
+                            chara1.shuadaochongfeng_san = 0;
+                            /*      */
+                        }
+                        /*      */
+                    }
+                    /*  457 */
+                    petShuXing.martial += martial;
+                    /*  458 */
+                    org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                    /*  459 */
+                    vo_20481_0.msg = ("宠物获得武学#R" + martial);
+                    /*  460 */
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                    /*  461 */
+                    GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    /*      */
+                }
+                /*      */
+            }
+            /*  464 */
+            int use_money_type = (int) (159 * duiyuan.level * (1.0D + 0.2D * chubao) * beishu);
+            /*  465 */
+            duiyuan.use_money_type += use_money_type;
+            /*  466 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*  467 */
+            vo_20481_0.msg = ("获得代金券#R" + use_money_type);
+            /*  468 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*  469 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*  470 */
+            int cash = (int) ((int) (673 * duiyuan.level * (1.0D + 0.2D * chubao)) * beishu);
+            /*  471 */
+            duiyuan.cash += cash;
             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
             vo_20480_0.msg = ("你获得了#R" + cash + "#n点" + "潜能");
             vo_20480_0.time = 1562593376;
             GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0, duiyuan.id);
-            /*  472 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-            /*  473 */       GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
-            /*      */     }
-        /*      */
-        /*      */
-        /*  477 */     int cishu = chubao + 1;
-        /*  478 */     String task_prompt = "";
-        /*  479 */     String show_name = "";
-        /*  480 */     if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).leixing == 2) {
-            /*  481 */       task_prompt = "找#P通灵道人|M=【降妖】降拿妖怪#P领取降妖任务";
-            /*  482 */       show_name = "降妖(" + cishu + "/10)";
-            /*      */     }
-        /*      */
-        /*  485 */     if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).leixing == 3) {
-            /*  486 */       task_prompt = "找#P陆压真人|M=【伏魔】我这就去#P领取任务";
-            /*  487 */       show_name = "伏魔(" + cishu + "/10)";
-            /*      */     }
-        /*      */
-        /*      */
-        /*  491 */     if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcshuadao.get(0)).leixing == 4) {
-            /*  492 */       task_prompt = "找#P清微真人|M=【伏魔】我这就去#P领取任务";
-            /*  493 */       show_name = "飞仙渡劫(" + cishu + "/10)";
-            /*      */     }
-        /*      */
-        /*      */
-        /*  497 */     GameUtilRenWu.renwukuangkuang("降妖", task_prompt, show_name, chara1);
-        /*      */
-        /*  499 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
-        /*  500 */     vo_45063_0.task_name = task_prompt;
-        /*  501 */     vo_45063_0.check_point = 147761859;
-        /*  502 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
-        /*      */   }
-    /*      */
-    /*      */
-    /*      */
-    /*      */   public static void chubaorenwu(Chara chara1, Chara duiyuan)
-    /*      */   {
-        /*  509 */     Random random = new Random();
-        /*  510 */     int chubao = (chara1.chubao - 1) % 10;
-        /*      */
-        /*  512 */     duiyuan.chubao += 1;
-        /*  513 */     List<org.linlinjava.litemall.db.domain.RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(1));
-        /*      */
-        /*  515 */     int k = random.nextInt(all.size());
-        /*  516 */     org.linlinjava.litemall.db.domain.RenwuMonster renwuMonster = (org.linlinjava.litemall.db.domain.RenwuMonster)all.get(k);
-        /*  517 */     String name = renwuMonster.getName() + getRandomJianHan();
-        /*  518 */     org.linlinjava.litemall.db.domain.Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara1.current_task);
-        /*  519 */     org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
-        /*      */
-        /*  521 */     GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcchubao.get(0)).id), chara1.id);
-        /*      */
-        /*      */
-        /*  524 */     if (duiyuan.chubao < 21) {
-            /*  525 */       int base_dh = (int)(0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+            /*  472 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  473 */
+            GameObjectCharMng.getGameObjectChar(duiyuan.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
             /*      */
-            /*  527 */       int owner_name = (int)(39 * duiyuan.level * (1.0D + 0.2D * chubao) / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1));
-            /*  528 */       adddaohang(duiyuan, owner_name);
+        }
+        /*      */
+        /*      */
+        /*  477 */
+        int cishu = chubao + 1;
+        /*  478 */
+        String task_prompt = "";
+        /*  479 */
+        String show_name = "";
+        /*  480 */
+        if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).leixing == 2) {
+            /*  481 */
+            task_prompt = "找#P通灵道人|M=【降妖】降拿妖怪#P领取降妖任务";
+            /*  482 */
+            show_name = "降妖(" + cishu + "/10)";
             /*      */
-            /*  530 */       for (int i = 0; i < duiyuan.pets.size(); i++) {
-                /*  531 */         if (((Petbeibao)duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
-                    /*  532 */           PetShuXing petShuXing = (PetShuXing)((Petbeibao)duiyuan.pets.get(i)).petShuXing.get(0);
-                    /*  533 */           int base_pet_dh = (int)(0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
-                    /*  534 */           int martial = (int)(13 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1));
-                    /*  535 */           petShuXing.martial += martial;
-                    /*  536 */           org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-                    /*  537 */           vo_20481_0.msg = ("宠物获得武学#R" + martial);
-                    /*  538 */           vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-                    /*  539 */           GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                    /*      */         }
-                /*      */       }
-            /*  542 */       int use_money_type = (int)(159 * duiyuan.level * (1.0D + 0.2D * chubao));
-            /*  543 */       duiyuan.use_money_type += use_money_type;
-            /*  544 */       org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
-            /*  545 */       vo_20481_0.msg = ("获得代金券#R" + use_money_type);
-            /*  546 */       vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
-            /*  547 */       GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-            /*  548 */       int cash = (int)(471 * duiyuan.level * (1.0D + 0.2D * chubao));
-            /*  549 */       duiyuan.cash += cash;
-            /*  550 */       int jingyan = (int)(546 * duiyuan.level * (1.0D + 0.2D * chubao));
+        }
+        /*      */
+        /*  485 */
+        if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).leixing == 3) {
+            /*  486 */
+            task_prompt = "找#P陆压真人|M=【伏魔】我这就去#P领取任务";
+            /*  487 */
+            show_name = "伏魔(" + cishu + "/10)";
             /*      */
-            /*  552 */       jingyan = shuangbei(chara1, jingyan);
-            /*  553 */       huodejingyan(duiyuan, jingyan);
-            /*  554 */       ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
-            /*  555 */       GameObjectCharMng.sendOne(duiyuan.id, new MSG_UPDATE(), listVo_65527_0);
-            /*      */     }
-        /*  557 */     chara1.npcchubao = new ArrayList();
+        }
         /*      */
-        /*  559 */     org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 vo_65529_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0();
-        /*  560 */     vo_65529_0.mapid = map.getMapId().intValue();
-        /*  561 */     vo_65529_0.id = getCard(chara1);
-        /*  562 */     vo_65529_0.x = renwuMonster.getX().intValue();
-        /*  563 */     vo_65529_0.y = renwuMonster.getY().intValue();
-        /*  564 */     vo_65529_0.icon = renwuMonster.getIcon().intValue();
-        /*  565 */     vo_65529_0.type = 2;
-        /*  566 */     vo_65529_0.org_icon = renwuMonster.getIcon().intValue();
-        /*  567 */     vo_65529_0.portrait = renwuMonster.getIcon().intValue();
-        /*  568 */     vo_65529_0.name = name;
-        /*  569 */     vo_65529_0.level = chara1.level;
-        /*  570 */     chara1.npcchubao.add(vo_65529_0);
-        /*  571 */     if (chara1.chubao == 21) {
-            /*  572 */       String task_prompt = "";
-            /*  573 */       String show_name = "";
+        /*      */
+        /*  491 */
+        if (((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcshuadao.get(0)).leixing == 4) {
+            /*  492 */
+            task_prompt = "找#P清微真人|M=【伏魔】我这就去#P领取任务";
+            /*  493 */
+            show_name = "飞仙渡劫(" + cishu + "/10)";
             /*      */
-            /*  575 */       GameUtilRenWu.renwukuangkuang("为民除暴", task_prompt, show_name, chara1);
-            /*  576 */       return;
-            /*      */     }
+        }
         /*      */
-        /*  579 */     if (chara1.mapid == ((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0)chara1.npcchubao.get(0)).mapid) {
-            /*  580 */       GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcchubao.get(0), chara1.id);
-            /*      */     }
         /*      */
-        /*  583 */     String task_prompt = "捉拿#P" + name + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")|M=就是来抓你的|$0#P";
-        /*  584 */     int cishu = chubao + 1;
-        /*  585 */     String show_name = "为民除暴(" + cishu + "/10)";
+        /*  497 */
+        GameUtilRenWu.renwukuangkuang("降妖", task_prompt, show_name, chara1);
         /*      */
-        /*  587 */     GameUtilRenWu.renwukuangkuang("为民除暴", task_prompt, show_name, chara1);
-        /*  588 */     org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
-        /*  589 */     vo_45063_0.task_name = task_prompt;
-        /*  590 */     vo_45063_0.check_point = 147761859;
-        /*  591 */     GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
-        /*      */   }
+        /*  499 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+        /*  500 */
+        vo_45063_0.task_name = task_prompt;
+        /*  501 */
+        vo_45063_0.check_point = 147761859;
+        /*  502 */
+        GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+        /*      */
+    }
+
     /*      */
-    /*      */   public static void chenghaoxiaoxi(Chara chara)
-    /*      */   {
-        /*  596 */     List<org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0> list = new java.util.LinkedList();
-        /*  597 */     org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0 vo_62209_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0();
-        /*  598 */     vo_62209_0.stringformat = "无显示";
-        /*  599 */     vo_62209_0.title = "";
-        /*  600 */     vo_62209_0.titled_left_time = 0;
-        /*  601 */     list.add(vo_62209_0);
-        /*  602 */     for (java.util.Map.Entry<String, String> entry : chara.chenghao.entrySet()) {
-            /*  603 */       vo_62209_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0();
-            /*  604 */       vo_62209_0.stringformat = ((String)entry.getKey());
-            /*  605 */       vo_62209_0.title = ((String)entry.getValue());
-            /*  606 */       vo_62209_0.titled_left_time = 0;
-            /*  607 */       list.add(vo_62209_0);
-            /*      */     }
-        /*  609 */     GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPELLATION_LIST(), list);
-        /*      */   }
     /*      */
-    /*      */   public static List zhandouisyoufabao(Chara chara)
-    /*      */   {
-        /*  614 */     List fabao = new java.util.LinkedList();
-        /*  615 */     for (int i = 0; i < chara.backpack.size(); i++) {
-            /*  616 */       if (((Goods)chara.backpack.get(i)).pos == 9) {
-                /*  617 */         fabao.add(((Goods)chara.backpack.get(i)).goodsInfo.str);
-                /*  618 */         fabao.add(Integer.valueOf(((Goods)chara.backpack.get(i)).goodsInfo.skill));
-                /*  619 */         fabao.add(Integer.valueOf(((Goods)chara.backpack.get(i)).goodsInfo.shape));
-                /*      */       }
-            /*      */     }
-        /*  622 */     return fabao;
-        /*      */   }
     /*      */
-    /*      */   public static void shuafabao(Chara chara)
-    /*      */   {
-        /*  627 */     String[] fb = { "番天印", "定海珠", "混元金斗", "阴阳镜", "九龙神火罩", "卸甲金葫" };
-        /*  628 */     Random random = new Random();
-        /*  629 */     int i = random.nextInt(5);
-        /*  630 */     String fabao = fb[random.nextInt(fb.length)];
-        /*  631 */     org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(fabao);
+    /*      */
+    public static void chubaorenwu(Chara chara1, Chara duiyuan)
+    /*      */ {
+        /*  509 */
+        Random random = new Random();
+        /*  510 */
+        int chubao = (chara1.chubao - 1) % 10;
+        /*      */
+        /*  512 */
+        duiyuan.chubao += 1;
+        /*  513 */
+        List<org.linlinjava.litemall.db.domain.RenwuMonster> all = GameData.that.baseRenwuMonsterService.findByType(Integer.valueOf(1));
+        /*      */
+        /*  515 */
+        int k = random.nextInt(all.size());
+        /*  516 */
+        org.linlinjava.litemall.db.domain.RenwuMonster renwuMonster = (org.linlinjava.litemall.db.domain.RenwuMonster) all.get(k);
+        /*  517 */
+        String name = renwuMonster.getName() + getRandomJianHan();
+        /*  518 */
+        org.linlinjava.litemall.db.domain.Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara1.current_task);
+        /*  519 */
+        org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(renwuMonster.getMapName());
+        /*      */
+        /*  521 */
+        GameObjectChar.sendduiwu(new MSG_DISAPPEAR_Chara(), Integer.valueOf(((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcchubao.get(0)).id), chara1.id);
+        /*      */
+        /*      */
+        /*  524 */
+        if (duiyuan.chubao < 21) {
+            /*  525 */
+            int base_dh = (int) (0.29D * duiyuan.level * duiyuan.level * duiyuan.level);
+            /*      */
+            /*  527 */
+            int owner_name = (int) (39 * duiyuan.level * (1.0D + 0.2D * chubao) / (duiyuan.friend > base_dh ? duiyuan.friend / base_dh : 1));
+            /*  528 */
+            adddaohang(duiyuan, owner_name);
+            /*      */
+            /*  530 */
+            for (int i = 0; i < duiyuan.pets.size(); i++) {
+                /*  531 */
+                if (((Petbeibao) duiyuan.pets.get(i)).id == duiyuan.chongwuchanzhanId) {
+                    /*  532 */
+                    PetShuXing petShuXing = (PetShuXing) ((Petbeibao) duiyuan.pets.get(i)).petShuXing.get(0);
+                    /*  533 */
+                    int base_pet_dh = (int) (0.29D * petShuXing.skill * petShuXing.skill * petShuXing.skill);
+                    /*  534 */
+                    int martial = (int) (13 * petShuXing.skill * (1.0D + 0.2D * chubao) / (petShuXing.martial > base_pet_dh ? petShuXing.martial / base_pet_dh : 1));
+                    /*  535 */
+                    petShuXing.martial += martial;
+                    /*  536 */
+                    org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                    /*  537 */
+                    vo_20481_0.msg = ("宠物获得武学#R" + martial);
+                    /*  538 */
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                    /*  539 */
+                    GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    /*      */
+                }
+                /*      */
+            }
+            /*  542 */
+            int use_money_type = (int) (159 * duiyuan.level * (1.0D + 0.2D * chubao));
+            /*  543 */
+            duiyuan.use_money_type += use_money_type;
+            /*  544 */
+            org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+            /*  545 */
+            vo_20481_0.msg = ("获得代金券#R" + use_money_type);
+            /*  546 */
+            vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+            /*  547 */
+            GameObjectCharMng.sendOne(duiyuan.id, new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+            /*  548 */
+            int cash = (int) (471 * duiyuan.level * (1.0D + 0.2D * chubao));
+            /*  549 */
+            duiyuan.cash += cash;
+            /*  550 */
+            int jingyan = (int) (546 * duiyuan.level * (1.0D + 0.2D * chubao));
+            /*      */
+            /*  552 */
+            jingyan = shuangbei(chara1, jingyan);
+            /*  553 */
+            huodejingyan(duiyuan, jingyan);
+            /*  554 */
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(duiyuan);
+            /*  555 */
+            GameObjectCharMng.sendOne(duiyuan.id, new MSG_UPDATE(), listVo_65527_0);
+            /*      */
+        }
+        /*  557 */
+        chara1.npcchubao = new ArrayList();
+        /*      */
+        /*  559 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0 vo_65529_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0();
+        /*  560 */
+        vo_65529_0.mapid = map.getMapId().intValue();
+        /*  561 */
+        vo_65529_0.id = getCard(chara1);
+        /*  562 */
+        vo_65529_0.x = renwuMonster.getX().intValue();
+        /*  563 */
+        vo_65529_0.y = renwuMonster.getY().intValue();
+        /*  564 */
+        vo_65529_0.icon = renwuMonster.getIcon().intValue();
+        /*  565 */
+        vo_65529_0.type = 2;
+        /*  566 */
+        vo_65529_0.org_icon = renwuMonster.getIcon().intValue();
+        /*  567 */
+        vo_65529_0.portrait = renwuMonster.getIcon().intValue();
+        /*  568 */
+        vo_65529_0.name = name;
+        /*  569 */
+        vo_65529_0.level = chara1.level;
+        /*  570 */
+        chara1.npcchubao.add(vo_65529_0);
+        /*  571 */
+        if (chara1.chubao == 21) {
+            /*  572 */
+            String task_prompt = "";
+            /*  573 */
+            String show_name = "";
+            /*      */
+            /*  575 */
+            GameUtilRenWu.renwukuangkuang("为民除暴", task_prompt, show_name, chara1);
+            /*  576 */
+            return;
+            /*      */
+        }
+        /*      */
+        /*  579 */
+        if (chara1.mapid == ((org.linlinjava.litemall.gameserver.data.vo.Vo_65529_0) chara1.npcchubao.get(0)).mapid) {
+            /*  580 */
+            GameObjectChar.sendduiwu(new MSG_APPEAR(), chara1.npcchubao.get(0), chara1.id);
+            /*      */
+        }
+        /*      */
+        /*  583 */
+        String task_prompt = "捉拿#P" + name + "|" + renwuMonster.getMapName() + "(" + renwuMonster.getX() + "," + renwuMonster.getY() + ")|M=就是来抓你的|$0#P";
+        /*  584 */
+        int cishu = chubao + 1;
+        /*  585 */
+        String show_name = "为民除暴(" + cishu + "/10)";
+        /*      */
+        /*  587 */
+        GameUtilRenWu.renwukuangkuang("为民除暴", task_prompt, show_name, chara1);
+        /*  588 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0 vo_45063_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45063_0();
+        /*  589 */
+        vo_45063_0.task_name = task_prompt;
+        /*  590 */
+        vo_45063_0.check_point = 147761859;
+        /*  591 */
+        GameObjectChar.sendduiwu(new org.linlinjava.litemall.gameserver.data.write.M45063_0(), vo_45063_0, chara1.id);
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static void chenghaoxiaoxi(Chara chara)
+    /*      */ {
+        /*  596 */
+        List<org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0> list = new java.util.LinkedList();
+        /*  597 */
+        org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0 vo_62209_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0();
+        /*  598 */
+        vo_62209_0.stringformat = "无显示";
+        /*  599 */
+        vo_62209_0.title = "";
+        /*  600 */
+        vo_62209_0.titled_left_time = 0;
+        /*  601 */
+        list.add(vo_62209_0);
+        /*  602 */
+        for (java.util.Map.Entry<String, String> entry : chara.chenghao.entrySet()) {
+            /*  603 */
+            vo_62209_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_62209_0();
+            /*  604 */
+            vo_62209_0.stringformat = ((String) entry.getKey());
+            /*  605 */
+            vo_62209_0.title = ((String) entry.getValue());
+            /*  606 */
+            vo_62209_0.titled_left_time = 0;
+            /*  607 */
+            list.add(vo_62209_0);
+            /*      */
+        }
+        /*  609 */
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_APPELLATION_LIST(), list);
+        /*      */
+    }
+
+    /*      */
+    /*      */
+    public static List zhandouisyoufabao(Chara chara)
+    /*      */ {
+        /*  614 */
+        List fabao = new java.util.LinkedList();
+        /*  615 */
+        for (int i = 0; i < chara.backpack.size(); i++) {
+            /*  616 */
+            if (((Goods) chara.backpack.get(i)).pos == 9) {
+                /*  617 */
+                fabao.add(((Goods) chara.backpack.get(i)).goodsInfo.str);
+                /*  618 */
+                fabao.add(Integer.valueOf(((Goods) chara.backpack.get(i)).goodsInfo.skill));
+                /*  619 */
+                fabao.add(Integer.valueOf(((Goods) chara.backpack.get(i)).goodsInfo.shape));
+                /*      */
+            }
+            /*      */
+        }
+        /*  622 */
+        return fabao;
+        /*      */
+    }
+
+    /*      */
+    public static void shuafabao(Chara chara, String fabao){
+        String[] fb = { "番天印", "定海珠", "混元金斗", "阴阳镜", "九龙神火罩", "卸甲金葫" };
+        int i = 0;
+        for(int j=0;j<fb.length;++j){
+            if(fb[j].equals(fabao)){
+                i = j;
+                break;
+            }
+        }
+        org.linlinjava.litemall.db.domain.StoreInfo info = GameData.that.baseStoreInfoService.findOneByName(fabao);
         /*  632 */     List<Goods> list = new ArrayList();
         /*  633 */     Goods goods = new Goods();
         /*  634 */     goods.pos = beibaoweizhi(chara);
@@ -737,6 +1275,14 @@ import java.util.Random;
         /*  671 */     vo_20481_0.msg = ("获得#R" + fabao);
         /*  672 */     vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
         /*  673 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+    }
+    /*      */   public static void shuafabao(Chara chara)
+    /*      */   {
+        /*  627 */     String[] fb = { "番天印", "定海珠", "混元金斗", "阴阳镜", "九龙神火罩", "卸甲金葫" };
+        /*  628 */     Random random = new Random();
+        /*  629 */     int i = random.nextInt(5);
+        /*  630 */     String fabao = fb[random.nextInt(fb.length)];
+        /*  631 */     shuafabao(chara, fabao);
         /*      */   }
     /*      */
     /*      */   public static void weijianding(Chara chara)

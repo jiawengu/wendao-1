@@ -1266,9 +1266,9 @@
 /* 1266 */     FIELDS.put("resist_forgotten", new BuildFields(58, 1));
 /* 1267 */     FIELDS.put("resist_confusion", new BuildFields(59, 1));
 /* 1268 */     FIELDS.put("longevity", new BuildFields(60, 1));
-/* 1269 */     FIELDS.put("martial", new BuildFields(62, 1));
-/* 1270 */     FIELDS.put("intimacy", new BuildFields(63, 1));
-/* 1271 */     FIELDS.put("shape", new BuildFields(64, 1));
+/* 1269 */     FIELDS.put("martial", new BuildFields(61, 1));
+/* 1270 */     FIELDS.put("intimacy", new BuildFields(62, 1));
+/* 1271 */     FIELDS.put("shape", new BuildFields(63, 1));
 /* 1272 */     FIELDS.put("resist_point", new BuildFields(64, 1));
 /* 1273 */     FIELDS.put("loyalty", new BuildFields(65, 1));
 /* 1274 */     FIELDS.put("double_hit", new BuildFields(66, 1));
