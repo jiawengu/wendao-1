@@ -800,10 +800,10 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
 
             // 打卡储物室
             if(StringUtils.equals(menu_item, "open_stroe")){
-                final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
+                Vo_9129_0 vo_9129_2 = new Vo_9129_0();
                 vo_9129_2.notify = 97;
                 vo_9129_2.para = "HomeStoreDlg";
-                GameObjectChar.send(new M9129_0(), vo_9129_2);
+                GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_2);
             }
         }
 
@@ -2200,20 +2200,20 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             if (menu_item.equals("助人为乐_s0"))
                 /*      */ {
                 /*  831 */
-//                if ((chara1.baibangmang >= 1) || (chara1.level < 40)) {
-//                    /*  832 */
-//                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
-//                    /*  833 */
-//                    vo_20481_0.msg = "你今天已经帮了我大忙了，还是先休息休息吧。";
-//                    /*  834 */
-//                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
-//                    /*  835 */
-//                    GameObjectChar.getGameObjectChar();
-//                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-//                    /*  836 */
-//                    return;
-//                    /*      */
-//                }
+                if ((chara1.baibangmang >= 1) || (chara1.level < 40)) {
+                    /*  832 */
+                    Vo_20481_0 vo_20481_0 = new Vo_20481_0();
+                    /*  833 */
+                    vo_20481_0.msg = "你今天已经帮了我大忙了，还是先休息休息吧。";
+                    /*  834 */
+                    vo_20481_0.time = ((int) (System.currentTimeMillis() / 1000L));
+                    /*  835 */
+                    GameObjectChar.getGameObjectChar();
+                    GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+                    /*  836 */
+                    return;
+                    /*      */
+                }
                 /*      */
                 /*  839 */
                 MSG_MENU_LIST_VO menu_list_vo = new MSG_MENU_LIST_VO();
