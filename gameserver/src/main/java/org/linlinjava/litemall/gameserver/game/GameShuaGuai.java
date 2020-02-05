@@ -2,6 +2,7 @@
 /*     */ 
 /*     */ import java.util.ArrayList;
 /*     */
+import java.util.Collection;
 import java.util.List;
 /*     */ import java.util.Random;
 /*     */ import org.linlinjava.litemall.db.domain.RenwuMonster;
@@ -27,7 +28,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  22 */     for (int i = 0; i < dengdaishuaXing.size(); i++) {
 /*  23 */       GameObjectCharMng.sendAllmap(new MSG_APPEAR(), dengdaishuaXing.get(i), ((Vo_65529_0)dengdaishuaXing.get(i)).mapid);
 /*  24 */       //List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
-                List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+                Collection<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharMap();
 
 /*  25 */       //for (int j = 0; j < sessionList.size(); j++) {
                 for(GameObjectChar obj : sessionList){

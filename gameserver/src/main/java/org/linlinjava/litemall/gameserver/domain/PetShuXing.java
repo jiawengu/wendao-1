@@ -60,6 +60,9 @@ public class PetShuXing {
      */
     public int wiz;
     public int shape;
+    /**
+     * 经验
+     */
     public int pot;
     public int loyalty;
     /**
