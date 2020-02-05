@@ -1259,7 +1259,7 @@ import java.util.Random;
         /*  655 */     goods.goodsInfo.damage_sel_rate = 400976;
         /*  656 */     goods.goodsInfo.diandqk_frozen_round = 3;
         /*      */
-        /*  658 */     goods.goodsInfo.skill = 24;
+        /*  658 */     goods.goodsInfo.skill = 1;
         /*  659 */     goods.goodsInfo.amount = 9;
         /*  660 */     goods.goodsInfo.resist_poison = 1830;
         /*  661 */     goods.goodsInfo.shuadao_ziqihongmeng = (i + 1);
@@ -5524,7 +5524,7 @@ import java.util.Random;
     }
 
     public static void notifyNpcDisappear(Npc npc){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharMap()){
             if(gameObjectChar.chara==null){
                 continue;
             }
@@ -5534,7 +5534,7 @@ import java.util.Random;
         }
     }
     public static void notifyNpcAppear(Npc npc){
-        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharList()){
+        for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharMap()){
             if(!gameObjectChar.isOnline()){
                 continue;
             }

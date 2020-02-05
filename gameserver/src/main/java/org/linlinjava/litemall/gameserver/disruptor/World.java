@@ -171,7 +171,7 @@ public class World {
             logger.error("", e);
         }
         try {
-            GameObjectCharMng.getGameObjectCharList().forEach(item->{
+            GameObjectCharMng.getGameObjectCharMap().forEach(item->{
                 try {
                     if(item.logic!=null){
                         item.logic.cacheSave();
@@ -184,7 +184,7 @@ public class World {
             logger.error("", e);
         }
         try {
-            List<GameObjectChar> all = GameObjectCharMng.getGameObjectCharList();
+            Collection<GameObjectChar> all = GameObjectCharMng.getGameObjectCharMap();
             Iterator var2 = all.iterator();
 
             while(var2.hasNext()) {
@@ -308,16 +308,10 @@ public class World {
 
     }
     public void autofightromve() {
-        List<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharList();
+        Collection<GameObjectChar> sessionList = GameObjectCharMng.getGameObjectCharMap();
         long time = System.currentTimeMillis();
 
-        List<GameObjectChar> list = new ArrayList<>();
-
-        for(GameObjectChar obj : sessionList){
-            list.add(obj);
-
-        }
-        list.forEach(obj->{
+        sessionList.forEach(obj->{
             try {
                 GameObjectChar gameObjectChar = obj;
                 if (gameObjectChar.heartEcho != 0L && gameObjectChar.heartEcho + 180000L < time) {

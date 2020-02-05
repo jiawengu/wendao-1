@@ -2,48 +2,45 @@ package org.linlinjava.litemall.gameserver.game;
 
 import io.netty.buffer.ByteBuf;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.linlinjava.litemall.db.domain.Characters;
 import org.linlinjava.litemall.db.util.JSONUtils;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
 
 
 public class GameObjectCharMng
 {
     private static final Logger log = LoggerFactory.getLogger(GameObjectCharMng.class);
-    private static final List<GameObjectChar> gameObjectCharList = new java.util.concurrent.CopyOnWriteArrayList();
+    /**
+     * key:charaId
+     */
+    private static final Int2ObjectMap<GameObjectChar> gameObjectCharMap = new Int2ObjectOpenHashMap<>();
 
     public static void add(GameObjectChar gameObjectChar) {
         log.info(gameObjectChar.chara.name+"put GameObjectMng cache!");
-        if (gameObjectCharList.contains(gameObjectChar)) {
-            for (GameObjectChar gameSession : gameObjectCharList) {
-                if (gameObjectChar.chara.id == gameSession.chara.id) {
-                    gameSession.closeChannel();
-                    gameObjectChar.gameTeam = gameSession.gameTeam;
-                    gameObjectCharList.remove(gameSession);
-                    throw new RuntimeException("不应该走到这里");
-                }
-            }
+        int charaId = gameObjectChar.chara.id;
+        if (gameObjectCharMap.containsKey(charaId)) {
+            GameObjectChar oldSession = gameObjectCharMap.get(charaId);
+            oldSession.closeChannel();
+            gameObjectChar.gameTeam = oldSession.gameTeam;
+            gameObjectCharMap.remove(charaId);
+            log.error("不应该走到这里");
         }
-        gameObjectCharList.add(gameObjectChar);
+        gameObjectCharMap.put(charaId, gameObjectChar);
     }
 
     public static void relogin(GameObjectChar newSession, int charaId){
-        int count = 0;
-        for (Iterator<GameObjectChar> iter = gameObjectCharList.iterator();iter.hasNext();) {
-            GameObjectChar gameSession = iter.next();
-            if (charaId == gameSession.chara.id) {
-                downline(gameSession);
-                count++;
-            }
-        }
-        assert count==1;
+        GameObjectChar oldSession = gameObjectCharMap.get(charaId);
+        downline(oldSession);
+
         newSession.init(GameData.that.characterService.findById(charaId));
         log.info(newSession.chara.name+"relogin!");
     }
@@ -58,20 +55,20 @@ public class GameObjectCharMng
     }
 
     public static void sendAll(BaseWrite baseWrite, Object obj) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar session = gameObjectCharList.get(i);
+        for (int i = 0; i < gameObjectCharMap.size(); i++) {
+            GameObjectChar session = gameObjectCharMap.get(i);
             ByteBuf write = baseWrite.write(obj);
             session.send0(write);
         }
     }
 
-    public static List<GameObjectChar> getGameObjectCharList() {
-        return gameObjectCharList;
+    public static Collection<GameObjectChar> getGameObjectCharMap() {
+        return gameObjectCharMap.values();
     }
 
     public static void sendAllmap(BaseWrite baseWrite, Object obj, int mapid) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharList.get(i);
+        for (int i = 0; i < gameObjectCharMap.size(); i++) {
+            GameObjectChar gameObjectChar = gameObjectCharMap.get(i);
             if (gameObjectChar.isOnline() && gameObjectChar.gameMap.id == mapid ) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
@@ -80,8 +77,8 @@ public class GameObjectCharMng
     }
 
     public static void sendAllmapname(BaseWrite baseWrite, Object obj, String mapname) {
-        for (int i = 0; i < gameObjectCharList.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharList.get(i);
+        for (int i = 0; i < gameObjectCharMap.size(); i++) {
+            GameObjectChar gameObjectChar = gameObjectCharMap.get(i);
             if (gameObjectChar.isOnline() && gameObjectChar.gameMap.name.equals(mapname)) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
@@ -90,25 +87,20 @@ public class GameObjectCharMng
     }
 
     public static final boolean isCharaCached(int charaId) {
-        for (GameObjectChar gameObjectChar : gameObjectCharList) {
-            if (charaId==gameObjectChar.chara.id) {
-                return true;
-            }
-        }
-        return false;
+        return gameObjectCharMap.containsKey(charaId);
     }
-    public static final GameObjectChar getGameObjectChar(int id) {
-        for (GameObjectChar gameObjectChar : gameObjectCharList) {
-            if (gameObjectChar.chara.id == id) {
-                return gameObjectChar;
-            }
+    public static final GameObjectChar getGameObjectChar(int charaId) {
+        GameObjectChar gameObjectChar = gameObjectCharMap.get(charaId);
+        if(null!=gameObjectChar){
+            return gameObjectChar;
         }
-        Characters characters = GameData.that.baseCharactersService.findById(id);
+
+        Characters characters = GameData.that.baseCharactersService.findById(charaId);
         if (characters == null) {
             return null;
         }
-        GameObjectChar gameObjectChar = new GameObjectChar(characters);
-        gameObjectCharList.add(gameObjectChar);
+        gameObjectChar = new GameObjectChar(characters);
+        gameObjectCharMap.put(charaId, gameObjectChar);
         return gameObjectChar;
     }
 
@@ -117,7 +109,7 @@ public class GameObjectCharMng
         gameObjectChar.offline();
         save(gameObjectChar);
 
-        gameObjectCharList.remove(gameObjectChar);
+        gameObjectCharMap.remove(gameObjectChar.chara.id);
     }
 
     public static void save(GameObjectChar gameObjectChar) {

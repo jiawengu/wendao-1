@@ -33,6 +33,9 @@ public class GoodsInfo {
     public int nick;
     public int power;
     public int wrestlescore;
+    /**
+     * 等级
+     */
     public int skill;
     public int store_exp;
     public int metal;
