@@ -28,7 +28,7 @@ public class CMD_HOUSE_GO_HOME implements org.linlinjava.litemall.gameserver.Gam
         org.linlinjava.litemall.db.domain.Map map = GameData.that.baseMapService.findOneByName(mapName);
         chara.y = map.getY().intValue();
         chara.x = map.getX().intValue();
-        GameZone gameZone = GameLine.createGameZone(15, map.getMapId());
+        GameZone gameZone = GameLine.createGameZone(chara.line, map.getMapId());
         gameZone.isHouseZone = true;
         //通知换线
         GameObjectChar.send(new M8405(), GameObjectChar.getGameObjectChar().chara.name);

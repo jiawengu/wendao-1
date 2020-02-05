@@ -13,6 +13,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.domain.GameParty;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class GameObjectChar {
         this.logic.init(chara.id, this.logic, this);
         //GameObjectCharMng.add(this);
         // herder todo 不允许在副本地图登录
-        String mapSS[]  = {"黑风洞", "兰若寺", "烈火涧"};
+        String mapSS[]  = {"黑风洞", "兰若寺", "烈火涧", "小舍", "雅筑", "豪宅"};
         for(String s: mapSS){
             Pattern pattern = Pattern.compile(s + "(.*?)");
             Matcher matcher = pattern.matcher(chara.mapName);
@@ -106,6 +107,9 @@ public class GameObjectChar {
             }
         }
 
+        if(chara.line == 15){
+            chara.line = 1;
+        }
         GameMap gameMap = GameLine.getGameMap(chara.line, chara.mapName);
         System.out.println("login init PartyId:" + chara.partyId);
         if(chara.partyId > 0){
@@ -259,12 +263,13 @@ public class GameObjectChar {
                 log.error("", e);
             }
 
-            if(this.gameMap.isDugeno()){
+            if(this.gameMap.isDugeno() || HomeUtils.isHouseMap(gameMap.id)){
                 Map map = GameData.that.baseMapService.findOneByName("天墉城");
                 this.chara.mapid = map.getMapId();
                 this.chara.y = map.getY().intValue();
                 this.chara.x = map.getX().intValue();
             }
+
         }
 
         this.chara.updatetime = System.currentTimeMillis();

@@ -166,7 +166,6 @@ public class GameMap {
         gameObjectChar.gameMap = this;
         chara.mapid = this.id;
         chara.mapName = this.name;
-        chara.line = 15;
         Vo_45157_0 vo_45157_0 = new Vo_45157_0();
         vo_45157_0.id = chara.id;
         vo_45157_0.mapId = chara.mapid;
@@ -411,6 +410,7 @@ public class GameMap {
     public boolean isDugeno(){
         return this.map_type > 1;
     }
+
 
 
 }

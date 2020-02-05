@@ -2,6 +2,7 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.linlinjava.litemall.db.domain.Accounts;
 import org.linlinjava.litemall.gameserver.GameHandler;
@@ -13,6 +14,7 @@ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.util.HomeUtils;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class C20577_0 implements GameHandler{
 
@@ -25,17 +27,26 @@ public class C20577_0 implements GameHandler{
         int lianqsLevel = GameReadTool.readByte(paramByteBuf);
         int xiuliansLevel = GameReadTool.readByte(paramByteBuf);
         Chara chara = GameObjectChar.getGameObjectChar().chara;
-        int coin = calcCoinByHouseName(houseName);
+        log.info("action={}, houseName = {}, storeLevel = {}", action, houseName, storeLevel);
         if(StringUtils.equals(action, "upgrade") && StringUtils.isNotBlank(chara.house.getHouseName())){
-            return;
+            if(storeLevel < chara.house.getStoreLevel()){
+                return;
+            }
+            int coin = calcCoinByHouseName(houseName, "upgrade");
+            chara.balance -= coin;
+            House house = chara.house;
+            house.setHouseName(houseName);
+            house.setHouseType(HomeUtils.getTypeByName(houseName));
+            house.setBedroomLevel(bedroomLevel);
+            house.setStoreLevel(storeLevel);
+            house.setLianqsLevel(lianqsLevel);
+            house.setXiuliansLevel(xiuliansLevel);
         }
 
         if(StringUtils.equals(action, "modify") && StringUtils.isNotBlank(chara.house.getHouseName())){
-            return;
-        }
-
-        if(StringUtils.equals(action, "goumai") && StringUtils.isBlank(chara.house.getHouseName())){
-            chara.balance -= coin;
+            if(storeLevel < chara.house.getStoreLevel()){
+                return;
+            }
             House house = chara.house;
             house.setHouseName(houseName);
             house.setBedroomLevel(bedroomLevel);
@@ -44,6 +55,17 @@ public class C20577_0 implements GameHandler{
             house.setXiuliansLevel(xiuliansLevel);
         }
 
+        if(StringUtils.equals(action, "goumai") && StringUtils.isBlank(chara.house.getHouseName())){
+            int coin = calcCoinByHouseName(houseName, "goumai");
+            chara.balance -= coin;
+            House house = chara.house;
+            house.setHouseName(houseName);
+            house.setHouseType(HomeUtils.getTypeByName(houseName));
+            house.setBedroomLevel(bedroomLevel);
+            house.setStoreLevel(storeLevel);
+            house.setLianqsLevel(lianqsLevel);
+            house.setXiuliansLevel(xiuliansLevel);
+        }
     }
 
     @Override
@@ -51,13 +73,21 @@ public class C20577_0 implements GameHandler{
         return 20577;
     }
 
-    private int calcCoinByHouseName(String houseName){
+    private int calcCoinByHouseName(String houseName, String action){
         if(StringUtils.equals(houseName, "小舍")){
             return 10000000;
         }else if(StringUtils.equals(houseName, "雅筑")){
-            return 50000000;
+            if(StringUtils.equals(action, "goumai")){
+                return 50000000;
+            }else{
+                return 44000000;
+            }
         }else {
-            return 100000000;
+            if(StringUtils.equals(action, "goumai")){
+                return 100000000;
+            }else{
+                return 99000000;
+            }
         }
     }
 

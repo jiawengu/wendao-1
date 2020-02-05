@@ -52,11 +52,6 @@ import org.springframework.context.ApplicationContext;
 /* 41 */       this.gameLineList.add(gameLine);
 /* 42 */       gameLine.init();
 /*    */     }
-            GameLine houseGameLine = applicationContext.getBean("glllbawsdfawelllll", GameLine.class);
-            houseGameLine.lineNum = 15;
-            houseGameLine.lineName = "居所专线";
-            houseGameLine.init();
-            gameLineList.add(houseGameLine);
 
 /*    */     
 /* 45 */     BuildFields.init();

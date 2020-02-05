@@ -17,6 +17,7 @@ import org.linlinjava.litemall.gameserver.service.*;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
+import org.linlinjava.litemall.gameserver.util.HomeUtils;
 import org.linlinjava.litemall.gameserver.util.MsgUtil;
 import org.linlinjava.litemall.gameserver.util.NpcIds;
 import org.slf4j.Logger;
@@ -749,7 +750,9 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                     GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
                 }
             }else if(menu_item.equalsIgnoreCase("modify_house")){
-
+                String content = "请问你是要对当前居所做什么改建呢" + "[升级空间\\/upgrade]" + "[改造空间\\/modify]" + "[离开\\/离开]";
+                MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
+                GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
             }else if(StringUtils.equals(menu_item, "enter_house")){
                 CMD_HOUSE_GO_HOME cmdHouseGoHome = applicationContext.getBean(CMD_HOUSE_GO_HOME.class);
                 cmdHouseGoHome.process(ctx, buff);
@@ -782,7 +785,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             }else if(StringUtils.equals(menu_item, "haozhai")){
                 Vo_20576_0 vo_20576_0 = new Vo_20576_0();
                 vo_20576_0.setAction("goumai");
-                vo_20576_0.setCurHouse("小舍");
+                vo_20576_0.setCurHouse("豪宅");
                 vo_20576_0.setPrice(100000000);
                 java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
                 selects.put("bedroom", 1);
@@ -791,12 +794,64 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 selects.put("practiceroom", 1);
                 vo_20576_0.setSelects(selects);
                 GameObjectChar.send(new M20576_0(), vo_20576_0);
+            } else if(StringUtils.equals(menu_item, "upgrade")){
+//                chara1.balance += 800000000;
+                String dialog = "你目前的居住类型为：#y" + HomeUtils.getNameByType(chara1.house.getHouseType()) + "#n，请选择你要升级到的居所类型。";
+                String menu = "";
+                if(chara1.house.getHouseType() == 1){
+                    menu = "[雅筑(4.4千万文钱)/upgrade_yazhu][豪宅(9.9千万文钱)/upgrade_haozhai]";
+                }else if(chara1.house.getHouseType() == 2){
+                    menu = "[豪宅(9.9千万文钱)/upgrade_haozhai]";
+                }else{
+                    dialog = "你目前的居住类型为：#y" + HomeUtils.getNameByType(chara1.house.getHouseType()) + "#n，不能再升级了。";
+                }
+                String quit = "[离开/离开]";
+                String content = dialog + menu + quit;
+                MSG_MENU_LIST_VO menu_list_vo = GameUtil.MSG_MENU_LIST(haoNpc, content);
+                GameObjectChar.send(new MSG_MENU_LIST(), menu_list_vo);
+            } else if(StringUtils.equals(menu_item, "modify")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("modify");
+                vo_20576_0.setCurHouse(chara1.house.getHouseName());
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", chara1.house.getBedroomLevel());
+                selects.put("storeroom", chara1.house.getStoreLevel());
+                selects.put("artifactroom", chara1.house.getLianqsLevel());
+                selects.put("practiceroom", chara1.house.getXiuliansLevel());
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
+            } else if(StringUtils.equals(menu_item, "upgrade_yazhu")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("upgrade");
+                vo_20576_0.setCurHouse("雅筑");
+                vo_20576_0.setLastHouse(chara1.house.getHouseName());
+                vo_20576_0.setPrice(44000000);
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", chara1.house.getBedroomLevel());
+                selects.put("storeroom", chara1.house.getStoreLevel());
+                selects.put("artifactroom", chara1.house.getLianqsLevel());
+                selects.put("practiceroom", chara1.house.getXiuliansLevel());
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
+            } else if(StringUtils.equals(menu_item, "upgrade_haozhai")){
+                Vo_20576_0 vo_20576_0 = new Vo_20576_0();
+                vo_20576_0.setAction("upgrade");
+                vo_20576_0.setCurHouse("豪宅");
+                vo_20576_0.setLastHouse(chara1.house.getHouseName());
+                vo_20576_0.setPrice(99000000);
+                java.util.Map<String, Integer> selects = Maps.newLinkedHashMap();
+                selects.put("bedroom", chara1.house.getBedroomLevel());
+                selects.put("storeroom", chara1.house.getStoreLevel());
+                selects.put("artifactroom", chara1.house.getLianqsLevel());
+                selects.put("practiceroom", chara1.house.getXiuliansLevel());
+                vo_20576_0.setSelects(selects);
+                GameObjectChar.send(new M20576_0(), vo_20576_0);
             }
             return;
         }
 
         //管家
-        if(npc_id == 1102){
+        if(npc_id == 1102 || npc_id == 1002 || npc_id == 1098){
 
             // 打卡储物室
             if(StringUtils.equals(menu_item, "open_stroe")){

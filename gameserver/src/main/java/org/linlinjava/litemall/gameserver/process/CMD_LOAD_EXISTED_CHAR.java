@@ -44,16 +44,17 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         Chara chara = session.chara;
 
         //当前线和地图为居所时
-        if(chara.line == 15){
-            chara.line = 1;
-        }
-        if(HomeUtils.isHouseMap(chara.mapid)){
-            chara.mapid = 5000;
-
-            Map map = GameData.that.baseMapService.findOneByMapId(chara.mapid);
-            chara.x = map.getX();
-            chara.y = map.getY();
-        }
+//        if(chara.line == 15){
+//            chara.line = 1;
+//        }
+//        if(HomeUtils.isHouseMap(chara.mapid)){
+//            chara.mapid = 5000;
+//
+//
+//            Map map = GameData.that.baseMapService.findOneByMapId(chara.mapid);
+//            chara.x = map.getX();
+//            chara.y = map.getY();
+//        }
 
 
         DayBreakService.checkDayBreak(chara);
@@ -205,7 +206,14 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameUtil.notifyAllBagGoodsInfo(chara);
 
 
-        session.gameMap.join(session);
+        if(HomeUtils.isHouseMap(chara.mapid)){
+            Map map = GameData.that.baseMapService.findOneByMapId(5000);
+            chara.x = map.getX();
+            chara.y = map.getY();
+            GameLine.getGameMap(1, 5000).join(session);
+        }else{
+            session.gameMap.join(session);
+        }
 
 
         GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
