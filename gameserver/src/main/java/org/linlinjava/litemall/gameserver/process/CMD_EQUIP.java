@@ -28,7 +28,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
  * CMD_EQUIP
  */
 /*     */ @Service
-/*     */ public class C4136_0 implements GameHandler
+/*     */ public class CMD_EQUIP implements GameHandler
 /*     */ {
 /*     */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*     */   {

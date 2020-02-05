@@ -61,7 +61,9 @@ public class GoodsInfo {
     public int pet_upgraded;
 
     public int couple;
-
+    /**
+     * 亲密度
+     */
     public int shape;
 
     public int pot;
