@@ -138,7 +138,7 @@ public class World {
      */
     private final void onSecondTick(Timer timer){
         try {
-            GameData.that.superBossMng.productionBoss();
+
         }catch (Exception e){
             logger.error("", e);
         }
