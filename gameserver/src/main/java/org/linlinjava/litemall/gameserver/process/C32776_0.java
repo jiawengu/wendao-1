@@ -74,7 +74,7 @@ public class C32776_0 implements GameHandler
                         final Vo_9129_0 vo_9129_0 = new Vo_9129_0();
                         vo_9129_0.notify = 10000;
                         vo_9129_0.para = "20691134";
-                        GameObjectChar.send(new M9129_0(), vo_9129_0);
+                        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
                         final Vo_20481_0 vo_20481_0 = new Vo_20481_0();
                         vo_20481_0.msg = "你成功合成了1个#R" + zhuangbeiInfo.getStr() + "#n。";
                         vo_20481_0.time = 1562987118;
@@ -89,7 +89,7 @@ public class C32776_0 implements GameHandler
                     final int coin = ConsumeMoneyUtils.appraisalMoney(attrib);
                     if(chara.balance<coin) {return;}
                     chara.balance -= coin;
-                    final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     if (goods.goodsInfo.attrib >= 100) {
                         infoList = (List<ZhuangbeiInfo>)GameData.that.baseZhuangbeiInfoService.findByAttrib(Integer.valueOf(70));
@@ -147,7 +147,7 @@ public class C32776_0 implements GameHandler
                 final int coin2 = ConsumeMoneyUtils.appraisalMoney(zhuangbeiInfo2.getAttrib());
                 if(chara.balance<coin2 * owner_id) {return;}
                 chara.balance -= coin2 * owner_id;
-                final ListVo_65527_0 listVo_65527_2 = GameUtil.a65527(chara);
+                final ListVo_65527_0 listVo_65527_2 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_2);
             }
             else {
@@ -176,13 +176,13 @@ public class C32776_0 implements GameHandler
                 final int coin3 = ConsumeMoneyUtils.appraisalMoney(zhuangbeiInfo2.getAttrib());
                 if(chara.balance<coin3) {return;}
                 chara.balance -= coin3;
-                final ListVo_65527_0 listVo_65527_3 = GameUtil.a65527(chara);
+                final ListVo_65527_0 listVo_65527_3 = GameUtil.MSG_UPDATE(chara);
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_3);
             }
             final Vo_9129_0 vo_9129_2 = new Vo_9129_0();
             vo_9129_2.notify = 10000;
             vo_9129_2.para = "20643387";
-            GameObjectChar.send(new M9129_0(), vo_9129_2);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_2);
         }
         if (24 == type) {
             for (int i = 0; i < chara.backpack.size(); ++i) {
@@ -238,7 +238,7 @@ public class C32776_0 implements GameHandler
                     final int coin = ConsumeMoneyUtils.remakeMoney(goods3.goodsInfo.attrib);
                     if(chara.balance<coin) {return;}
                     chara.balance -= coin;
-                    final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     GameUtil.removemunber(chara, "装备共鸣石", pos5);
                 }
@@ -275,7 +275,7 @@ public class C32776_0 implements GameHandler
                     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
                     final List<Goods> list = new ArrayList<Goods>();
                     list.add(goods4);
-                    final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_INVENTORY(), list);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     final Vo_41191_0 vo_41191_3 = new Vo_41191_0();
@@ -364,7 +364,7 @@ public class C32776_0 implements GameHandler
                     final int coin5 = ConsumeMoneyUtils.remakeMoney(goods4.goodsInfo.attrib);
                     if(chara.balance<coin5) {return;}
                     chara.balance -= coin5;
-                    final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_4 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
                     if (iswuqi == 1) {
                         GameUtil.removemunber(chara, "超级灵石", pos7);
@@ -451,7 +451,7 @@ public class C32776_0 implements GameHandler
                             final Vo_9129_0 vo_9129_3 = new Vo_9129_0();
                             vo_9129_3.notify = 50;
                             vo_9129_3.para = "39563320";
-                            GameObjectChar.send(new M9129_0(), vo_9129_3);
+                            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_3);
                         }
                     }
                     else {
@@ -467,7 +467,7 @@ public class C32776_0 implements GameHandler
                     final int coin6 = ConsumeMoneyUtils.yellowMoney(goods4.goodsInfo.attrib);
                     if(chara.balance<coin6) {return;}
                     chara.balance -= coin6;
-                    final ListVo_65527_0 listVo_65527_5 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_5 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_5);
                     GameUtil.removemunber(chara, "黄水晶", pos3);
                 }
@@ -534,7 +534,7 @@ public class C32776_0 implements GameHandler
                         final int coin7 = ConsumeMoneyUtils.pinkMoney(goods.goodsInfo.attrib);
                         if(chara.balance<coin7) {return;}
                         chara.balance -= coin7;
-                        final ListVo_65527_0 listVo_65527_6 = GameUtil.a65527(chara);
+                        final ListVo_65527_0 listVo_65527_6 = GameUtil.MSG_UPDATE(chara);
                         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_6);
                         final Vo_41191_0 vo_41191_7 = new Vo_41191_0();
                         vo_41191_7.flag = 1;
@@ -543,7 +543,7 @@ public class C32776_0 implements GameHandler
                         final Vo_9129_0 vo_9129_4 = new Vo_9129_0();
                         vo_9129_4.notify = 50;
                         vo_9129_4.para = "39563320";
-                        GameObjectChar.send(new M9129_0(), vo_9129_4);
+                        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_4);
                     }
                     GameUtil.removemunber(chara, "超级粉水晶", 1);
                 }
@@ -638,11 +638,11 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_5 = new Vo_9129_0();
             vo_9129_5.notify = 51;
             vo_9129_5.para = "33927504";
-            GameObjectChar.send(new M9129_0(), vo_9129_5);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_5);
             final int coin5 = ConsumeMoneyUtils.appendEqMoney(leve);
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
-            final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
+            final ListVo_65527_0 listVo_65527_4 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
         }
         if (11 == type) {
@@ -733,11 +733,11 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_5 = new Vo_9129_0();
             vo_9129_5.notify = 51;
             vo_9129_5.para = "33927504";
-            GameObjectChar.send(new M9129_0(), vo_9129_5);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_5);
             final int coin5 = ConsumeMoneyUtils.appendEqMoney(leve);
             if(chara.balance<coin5) {return;}
             chara.balance -= coin5;
-            final ListVo_65527_0 listVo_65527_4 = GameUtil.a65527(chara);
+            final ListVo_65527_0 listVo_65527_4 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_4);
         }
         if (9 == type) {
@@ -817,7 +817,7 @@ public class C32776_0 implements GameHandler
                 final Vo_9129_0 vo_9129_0 = new Vo_9129_0();
                 vo_9129_0.notify = 51;
                 vo_9129_0.para = "33927504";
-                GameObjectChar.send(new M9129_0(), vo_9129_0);
+                GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
             }
             else {
                 final Vo_20481_0 vo_20481_2 = new Vo_20481_0();
@@ -832,7 +832,7 @@ public class C32776_0 implements GameHandler
             final int coin = ConsumeMoneyUtils.appendEqMoney(leve);
             if(chara.balance<coin) {return;}
             chara.balance -= coin;
-            final ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+            final ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
         }
         if (4 == type) {
@@ -840,7 +840,7 @@ public class C32776_0 implements GameHandler
             final int coin8 = ConsumeMoneyUtils.createMoney(zhuangbeiInfo3.getAttrib());
             if(chara.balance<coin8) {return;}
             chara.balance -= coin8;
-            final ListVo_65527_0 listVo_65527_7 = GameUtil.a65527(chara);
+            final ListVo_65527_0 listVo_65527_7 = GameUtil.MSG_UPDATE(chara);
             GameObjectChar.send(new MSG_UPDATE(), listVo_65527_7);
             final String[] split3 = para.split("\\|");
             final int pos9 = Integer.parseInt(split3[0]);
@@ -941,7 +941,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_6 = new Vo_9129_0();
             vo_9129_6.notify = 49;
             vo_9129_6.para = "32271173";
-            GameObjectChar.send(new M9129_0(), vo_9129_6);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_6);
         }
         if (type == 2) {
             for (int i = 0; i < chara.backpack.size(); ++i) {
@@ -950,7 +950,7 @@ public class C32776_0 implements GameHandler
                     final int coin9 = ConsumeMoneyUtils.removeMoney(chara.backpack.get(i).goodsInfo.attrib);
                     if(chara.balance<coin9) {return;}
                     chara.balance -= coin9;
-                    final ListVo_65527_0 listVo_65527_8 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_8 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_8);
                     final Random random = new Random();
                     final Goods goods4 = chara.backpack.get(i);
@@ -1180,7 +1180,7 @@ public class C32776_0 implements GameHandler
                     }
                     final int coin10 = ConsumeMoneyUtils.appraisalMoney(goods.goodsInfo.attrib);
                     chara.balance -= coin10;
-                    final ListVo_65527_0 listVo_65527_9 = GameUtil.a65527(chara);
+                    final ListVo_65527_0 listVo_65527_9 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_9);
                 }
             }
@@ -1191,7 +1191,7 @@ public class C32776_0 implements GameHandler
             final Vo_9129_0 vo_9129_7 = new Vo_9129_0();
             vo_9129_7.notify = 20022;
             vo_9129_7.para = "11516529|1";
-            GameObjectChar.send(new M9129_0(), vo_9129_7);
+            GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_7);
         }
     }
 

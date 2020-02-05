@@ -5,8 +5,8 @@
 /*    */ import org.linlinjava.litemall.gameserver.GameHandler;
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_13143_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M13143_0;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_L_AGENT_RESULT;
+/*    */
 /*    */ import org.slf4j.Logger;
 /*    */ import org.slf4j.LoggerFactory;
 /*    */ import org.springframework.beans.factory.annotation.Value;
@@ -62,7 +62,7 @@
 /* 62 */     vo_13143_0.serverName = "一战功成";
 /* 63 */     vo_13143_0.serverStatus = 3;
 /* 64 */     vo_13143_0.msg = "允许该账号登录";
-/* 67 */     ByteBuf write = new M13143_0().write(vo_13143_0);
+/* 67 */     ByteBuf write = new MSG_L_AGENT_RESULT().write(vo_13143_0);
 /* 68 */     ctx.writeAndFlush(write);
 /*    */   }
 /*    */   

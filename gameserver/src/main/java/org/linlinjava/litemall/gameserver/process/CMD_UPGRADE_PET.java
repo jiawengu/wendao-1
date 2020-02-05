@@ -16,7 +16,7 @@ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M45670_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M53607_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_PET_ECLOSION_RESULT;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -60,7 +60,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
         /*     */
         /*     */
         /*  47 */
-        if (type.equals("pet_open_eclosion")) {
+        if (type.equals("pet_open_eclosion")) {//开启羽化
             /*  48 */
             for (int i = 0; i < chara.pets.size(); i++) {
                 /*  49 */
@@ -114,7 +114,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
                     /*  81 */
                     GameUtil.removemunber(chara, "羽化丹", 1);
                     /*  82 */
-                    GameObjectChar.send(new M53607_0(), null);
+                    GameObjectChar.send(new MSG_PET_ECLOSION_RESULT(), null);
                     /*     */
                 }
                 /*     */
@@ -123,7 +123,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
         }
         /*     */
         /*  87 */
-        if (type.equals("pet_eclosion")) {
+        if (type.equals("pet_eclosion")) {//羽化
             /*  88 */
             for (int i = 0; i < chara.pets.size(); i++) {
                 /*  89 */
@@ -221,8 +221,8 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 
 
                     GameObjectChar.send(new MSG_UPDATE_PETS(), list);
-                    GameObjectChar.send(new M53607_0(), null);
-                    ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+                    GameObjectChar.send(new MSG_PET_ECLOSION_RESULT(), 1);
+                    ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
                     if (split.length == 1 && split[0] == "") {
                         return;
@@ -233,7 +233,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
             }
         }
 
-        if (type.equals("pet_enchant")) {
+        if (type.equals("pet_enchant")) {//吃点化丹
             for (int i = 0; i < chara.pets.size(); i++) {
                 Petbeibao petbeibao = (Petbeibao) chara.pets.get(i);
                 if (petbeibao.no == no) {
@@ -305,7 +305,7 @@ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
         }
 
 
-        if (type.equals("pet_open_enchant")) {
+        if (type.equals("pet_open_enchant")) {//开启点化
             for (int i = 0; i < chara.pets.size(); i++) {
                 Petbeibao petbeibao = (Petbeibao) chara.pets.get(i);
                 if (petbeibao.no == no) {

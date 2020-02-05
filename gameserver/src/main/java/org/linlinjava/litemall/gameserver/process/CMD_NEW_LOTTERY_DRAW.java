@@ -43,7 +43,7 @@
 /*     */     
 /*  44 */     if (1 == type) {
 /*  45 */       chara.shadow_self -= 1;
-/*  46 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  46 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  47 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*     */ 
@@ -55,7 +55,7 @@
 /*  55 */     if (3 == type) {
 /*  56 */       for (int i = 0; i < 10; i++) {
 /*  57 */         chara.shadow_self -= 1;
-/*  58 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  58 */         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  59 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */         
 /*     */ 
@@ -67,7 +67,7 @@
 /*  67 */     if (2 == type)
 /*     */     {
 /*  69 */       chara.shadow_self -= 10;
-/*  70 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  70 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  71 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*     */ 
@@ -78,7 +78,7 @@
 /*  78 */     if (4 == type) {
 /*  79 */       for (int i = 0; i < 10; i++) {
 /*  80 */         chara.shadow_self -= 10;
-/*  81 */         ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  81 */         ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  82 */         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */         
 /*     */ 

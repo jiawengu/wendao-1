@@ -13,9 +13,9 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_12269_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.*;
+/*     */
+/*     */
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
 /*     */
@@ -79,14 +79,14 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                         /*     */           }
                     /*     */
                     /*  79 */           chara.balance -= coin;
-                    /*  80 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                    /*  80 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                     /*  81 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                     /*     */
                     /*  83 */           GameUtil.removemunber(chara, (Goods)chara.backpack.get(i), 1);
                     /*  84 */           Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                     /*  85 */           vo_20480_0.msg = "摆摊成功";
                     /*  86 */           vo_20480_0.time = ((int)System.currentTimeMillis() / 1000);
-                    /*  87 */           GameObjectChar.send(new M20480_0(), vo_20480_0);
+                    /*  87 */           GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
                     /*  88 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
                     /*  89 */           vo_8165_0.msg = ("花费了摊位费" + coin + "#n文钱#n");
                     /*  90 */           vo_8165_0.active = 0;
@@ -115,7 +115,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                 /*     */       }
             if(chara.balance<coin) {return;}
             chara.balance -= coin;
-            /* 115 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+            /* 115 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
             /* 116 */       for (int i = 0; i < chara.pets.size(); i++) {
                 /* 117 */         if (((Petbeibao)chara.pets.get(i)).id == inventoryPos) {
                     /* 118 */           Petbeibao pet = (Petbeibao)chara.pets.get(i);
@@ -127,13 +127,13 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
                     /* 124 */           Vo_12269_0 vo_12269_0 = new Vo_12269_0();
                     /* 125 */           vo_12269_0.id = pet.id;
                     /* 126 */           vo_12269_0.owner_id = 0;
-                    /* 127 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12269_0(), vo_12269_0);
+                    /* 127 */           GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
                     /*     */
                     /* 129 */           str = saleClassifyGood.getCompose();
                     /* 130 */           Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                     /* 131 */           vo_20480_0.msg = "摆摊成功";
                     /* 132 */           vo_20480_0.time = ((int)System.currentTimeMillis() / 1000);
-                    /* 133 */           GameObjectChar.send(new M20480_0(), vo_20480_0);
+                    /* 133 */           GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
                     /* 134 */           Vo_8165_0 vo_8165_0 = new Vo_8165_0();
                     /* 135 */           vo_8165_0.msg = ("花费了摊位费" + coin + "#n文钱#n");
                     /* 136 */           vo_8165_0.active = 0;
@@ -160,7 +160,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
         /* 157 */     List<SaleGood> saleGoodList = GameData.that.saleGoodService.findByOwnerUuid(chara.uuid);
         /*     */
         /* 159 */     org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0 vo_49179_0 = GameUtil.a49179(saleGoodList, chara);
-        /* 160 */     GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49179_0(), vo_49179_0);
+        /* 160 */     GameObjectChar.send(new MSG_STALL_MINE(), vo_49179_0);
         /*     */   }
     /*     */
     /*     */   public int cmd()

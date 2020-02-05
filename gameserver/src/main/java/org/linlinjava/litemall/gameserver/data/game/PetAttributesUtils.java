@@ -38,6 +38,18 @@ public class PetAttributesUtils {
         return attributes;
     }
 
+    /**
+     * 宠物羽化
+     * @param quality
+     * @param use_attrib
+     * @param currentStep
+     * @param currentReiki
+     * @param pill
+     * @param equipmentMoney
+     * @param UnidentifiedMoney
+     * @param appends
+     * @return
+     */
     public static int[] emergencePet(int quality, int use_attrib, int currentStep, int currentReiki, int pill, int equipmentMoney, int UnidentifiedMoney, int[] appends) {
         int[] reikis = new int[]{24000, 25756, 27575, 29395, 31056, 32655, 34203, 35719, 37200, 38653, 40083, 41490, 42879, 44251, 45606, 46947, 48275, 49591, 50895, 52188, 53471, 54744, 56008, 57272, 58536, 59800};
         int maxReiki = 0;
@@ -120,6 +132,17 @@ public class PetAttributesUtils {
         return result;
     }
 
+    /**
+     * 点化宠物
+     * @param quality
+     * @param use_attrib
+     * @param currentReiki
+     * @param pill
+     * @param equipmentMoney
+     * @param UnidentifiedMoney
+     * @param appends
+     * @return
+     */
     public static int[] dotPet(int quality, int use_attrib, int currentReiki, int pill, int equipmentMoney, int UnidentifiedMoney, int[] appends) {
         int[] result = new int[7];
         int maxReiki = 0;

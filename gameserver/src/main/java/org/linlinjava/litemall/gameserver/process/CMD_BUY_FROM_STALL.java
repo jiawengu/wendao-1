@@ -16,7 +16,8 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_49183;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_49183_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC_EX;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_SET_OWNER;
+import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_PETS;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -80,7 +81,7 @@ import org.slf4j.LoggerFactory;
             /*  71 */       Vo_12269_0 vo_12269_0 = new Vo_12269_0();
             /*  72 */       vo_12269_0.id = petbeibao.id;
             /*  73 */       vo_12269_0.owner_id = chara.id;
-            /*  74 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12269_0(), vo_12269_0);
+            /*  74 */       GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
             /*  75 */       Vo_40964_0 vo_40964_11 = new Vo_40964_0();
             /*  76 */       vo_40964_11.type = 2;
             /*  77 */       vo_40964_11.name = "立正";
@@ -112,7 +113,7 @@ import org.slf4j.LoggerFactory;
         /* 103 */     GameObjectChar.send(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
         /*     */
         /* 105 */     chara.balance -= price;
-        /* 106 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        /* 106 */     org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         /* 107 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
         /*     */
         /* 109 */     GameData.that.saleGoodService.deleteById(saleGood.getId().intValue());

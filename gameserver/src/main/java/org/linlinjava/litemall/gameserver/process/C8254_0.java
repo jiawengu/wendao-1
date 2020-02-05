@@ -129,7 +129,7 @@ import io.netty.buffer.ByteBuf;
                 /*  81 */
                 chara.extra_life -= -zong * fen;
                 /*  82 */
-                ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+                ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 /*  83 */
                 GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
                 /*     */
@@ -228,7 +228,7 @@ import io.netty.buffer.ByteBuf;
 
                 }
                 /* 104 */
-                ListVo_65527_0 vo_65527_0 = GameUtil.a65527(chara);
+                ListVo_65527_0 vo_65527_0 = GameUtil.MSG_UPDATE(chara);
                 /* 105 */
                 GameObjectChar.send(new MSG_UPDATE(), vo_65527_0);
                 /*     */

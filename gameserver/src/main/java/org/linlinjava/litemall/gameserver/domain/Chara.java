@@ -42,6 +42,7 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int x;
 /*     */   public int y;
 /*     */   public int mapid;
+            public int flyPetID = 0;
 /*     */   
 /*     */   public Chara() {}
 /*     */   
@@ -250,8 +251,11 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */   public int speed;
 /*     */   
 /*     */   public int mag_power;
-/*     */   
-/*     */   public int accurate;
+/*     */
+    /**
+     * 物伤
+     */
+    /*     */   public int accurate;
 /*     */   
 /*     */   public int def;
 /*     */   
@@ -298,10 +302,17 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
 /*     */ 
 /*     */   public int weapon_icon;
 /*     */   
-/*     */ 
-/*     */   public int gold_coin;
+/*     */
+    /**
+     * 银元宝
+     */
+    /*     */   public int gold_coin;
 /*     */   
-/*     */ 
+/*     */
+    /**
+     * 元宝
+     */
+
 /*     */   public int extra_life;
 /*     */   
 /*     */ 
@@ -549,6 +560,10 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
      * 宠物仓库
      */
     public List<Petbeibao> chongwucangku = new LinkedList();
+    /**拥有的积分*/
+    public int integral = 10000;
+    /**累计的积分*/
+    public int totalIntegral = 10000;
 
     public void onTTTDayBreak(){
         this.ttt_layer = 0;
@@ -600,6 +615,18 @@ import org.linlinjava.litemall.gameserver.domain.SubSystem.Baxian;
     public Petbeibao getLueZhenPet(){
         for(Petbeibao petbeibao:pets){
             if (petbeibao.id == petLueZhenId) {
+                return petbeibao;
+            }
+        }
+        return null;
+    }
+
+    /**
+    *根据宠物ID获取宠物
+    * */
+    public Petbeibao getPetByID(int id ){
+        for(Petbeibao petbeibao:pets){
+            if (petbeibao.id == id) {
                 return petbeibao;
             }
         }

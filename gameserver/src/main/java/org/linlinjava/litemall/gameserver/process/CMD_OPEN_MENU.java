@@ -190,6 +190,17 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             MapGuardianService.openMenu(chara, npc);
             return;
         }
+        //飞升
+        if (GamePetFeiSheng.zhanDouNpcName.equals(npc.getName())) {
+            if ( GamePetFeiSheng.isTongGuoKaoYan(chara)) {
+                content =
+                        ("飞升宠物所需材料：2阶骑宠灵魂3个以重塑其魂，驯兽诀1本以定其魂，萦香丸20颗以滋养其血肉，聚灵丹20颗以调养精气\n[飞升]\n" + "[离开]".replace("\\", ""));
+            } else {
+                content =
+                        ("人可修道，宠物亦可修道，不管是人还是宠物，修炼到深处，皆可得道飞升\n[宠物飞升]\n[帮派求助]\n" + "[离开]".replace("\\", ""));
+            }
+        }
+
         ShangGuYaoWangInfo info =
                 GameShangGuYaoWang.getYaoWangNpc(npc.getId(),
                         GameShangGuYaoWang.YAOWANG_STATE.YAOWANG_STATE_OPEN);

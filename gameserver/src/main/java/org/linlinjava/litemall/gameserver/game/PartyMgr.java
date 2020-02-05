@@ -6,6 +6,7 @@ import org.linlinjava.litemall.gameserver.domain.GameParty;
 import org.linlinjava.litemall.gameserver.domain.PartyRequest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -30,7 +31,6 @@ public class PartyMgr {
     public void init(){
         PartyMgr.that = this;
         this.map = new HashMap<>();
-        Party a7913 = GameData.that.basePartyService.findById(7913);
         List<Party> list = GameData.that.basePartyService.getAll();
         list.forEach(item->{
             this.map.put(item.getId(), new GameParty().init(item, null));
@@ -73,6 +73,7 @@ public class PartyMgr {
         data.setConstruction(0);
         data.setLevel(1);
         data.setCreator(c.name);
+        data.setCreateTime(new Date());
         GameData.that.basePartyService.insert(data);
 
         GameParty p = new GameParty();

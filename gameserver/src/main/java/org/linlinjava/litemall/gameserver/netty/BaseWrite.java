@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
 
-public abstract class BaseWrite {
+public abstract class BaseWrite<T> {
     Logger log = LoggerFactory.getLogger(BaseWrite.class);
 
     private int beforeWrite(ByteBuf writeBuf) {
@@ -33,7 +33,7 @@ public abstract class BaseWrite {
         return name.substring(name.lastIndexOf("."));
     }
 
-    public ByteBuf write(Object object) {
+    public ByteBuf write(T object) {
         StringBuffer cn = new StringBuffer();
         StackTraceElement[] ns = new Throwable().getStackTrace();
         cn.append(getName(ns[4].getClassName()));
@@ -43,7 +43,7 @@ public abstract class BaseWrite {
         cn.append(getName(this.getClass().getName()));
 
         if(! (this instanceof MSG_REPLY_ECHO)){
-//            System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
+            System.out.println(String.format("发送消息[%s]：%s", cn.toString(), org.linlinjava.litemall.core.util.JSONUtils.toJSONString(object)));
         }
         int writerIndex = 0;
         ByteBuf writeBuf = Unpooled.buffer();
@@ -53,7 +53,7 @@ public abstract class BaseWrite {
         return writeBuf;
     }
 
-    protected abstract void writeO(ByteBuf paramByteBuf, Object paramObject);
+    protected abstract void writeO(ByteBuf paramByteBuf, T paramObject);
 
     public abstract int cmd();
 }

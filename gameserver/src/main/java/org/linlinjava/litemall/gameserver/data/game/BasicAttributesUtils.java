@@ -123,6 +123,21 @@ public class BasicAttributesUtils {
         return attributes;
     }
 
+    /**
+     * 计算守护属性
+     * @param attrib
+     * @param constitution
+     * @param mag_power
+     * @param phy_power
+     * @param speed
+     * @param wood
+     * @param water
+     * @param fire
+     * @param earth
+     * @param resist_metal
+     * @param polar
+     * @return
+     */
     public static int[] calculationHelpAttributes(int attrib, int constitution, int mag_power, int phy_power, int speed, int wood, int water, int fire, int earth, int resist_metal, int polar) {
         int[] attributes = new int[]{100, 80, 40, 40, 48, 20};
         int accurate_phy_power = phy_power * 5 + 40;

@@ -173,13 +173,13 @@ public class GameObjectChar {
                 if (((Chara) this.gameTeam.duiwu.get(0)).id == this.chara.id) {
                     for (int i = 0; i < this.gameTeam.zhanliduiyuan.size(); i++) {
                         List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
-                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new MSG_UPDATE_TEAM_LIST(), object1);
                         List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new M4121_0(), vo_4121_0List);
+                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                         vo_20480_0.msg = "队伍解散了。";
                         vo_20480_0.time = 1562593376;
-                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new M20480_0(), vo_20480_0);
+                        GameObjectCharMng.getGameObjectChar(((Vo_4121_0) this.gameTeam.zhanliduiyuan.get(i)).id).sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
                         Vo_61671_0 vo_61671_0 = new Vo_61671_0();
                         vo_61671_0.id = ((Chara) this.gameTeam.duiwu.get(i)).id;
                         vo_61671_0.count = 0;
@@ -197,7 +197,7 @@ public class GameObjectChar {
                     vo_61593_0.ask_type = "request_team_leader";
                     send(new MSG_CLEAN_ALL_REQUEST(), vo_61593_0);
                     List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                    sendOne(new M4121_0(), vo_4121_0List);
+                    sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                     this.gameTeam = null;
                 } else {
                     Vo_61671_0 vo_61671_0 = new Vo_61671_0();
@@ -205,13 +205,13 @@ public class GameObjectChar {
                     vo_61671_0.count = 0;
                     gameMap.send(new MSG_TITLE(), vo_61671_0);
                     List<org.linlinjava.litemall.gameserver.data.vo.Vo_4119_0> object1 = new ArrayList();
-                    sendOne(new org.linlinjava.litemall.gameserver.data.write.M4119_0(), object1);
+                    sendOne(new MSG_UPDATE_TEAM_LIST(), object1);
                     List<Vo_4121_0> vo_4121_0List = new ArrayList();
-                    sendOne(new M4121_0(), vo_4121_0List);
+                    sendOne(new MSG_UPDATE_TEAM_LIST_EX(), vo_4121_0List);
                     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
                     vo_20480_0.msg = "你离开了队伍";
                     vo_20480_0.time = 1562593376;
-                    sendOne(new M20480_0(), vo_20480_0);
+                    sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
                     for (int i = 0; i < this.gameTeam.duiwu.size(); i++) {
                         org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = org.linlinjava.litemall.gameserver.process.GameUtil.MSG_UPDATE_APPEARANCE((Chara) this.gameTeam.duiwu.get(i));
                         GameObjectCharMng.getGameObjectChar(((Chara) this.gameTeam.duiwu.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_APPEARANCE(), vo_61661_0);
@@ -241,7 +241,7 @@ public class GameObjectChar {
                         vo_20480_0 = new Vo_20480_0();
                         vo_20480_0.msg = (this.chara.name + "离开了队伍");
                         vo_20480_0.time = 1562593376;
-                        GameObjectCharMng.getGameObjectChar(((Chara) duiwu.get(i)).id).sendOne(new M20480_0(), vo_20480_0);
+                        GameObjectCharMng.getGameObjectChar(((Chara) duiwu.get(i)).id).sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
 
                         org.linlinjava.litemall.gameserver.data.vo.Vo_45124_0 vo_45124_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45124_0();
                         GameObjectCharMng.getGameObjectChar(((Chara) duiwu.get(i)).id).sendOne(new org.linlinjava.litemall.gameserver.data.write.M45124_0(), vo_45124_0);

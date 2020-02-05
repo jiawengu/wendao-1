@@ -80,7 +80,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  79 */               org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0 vo_9129_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_9129_0();
 /*  80 */               vo_9129_0.notify = 12000;
 /*  81 */               vo_9129_0.para = "383174";
-/*  82 */               GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M9129_0(), vo_9129_0);
+/*  82 */               GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 /*     */             }
 /*     */           }
 /*     */           
@@ -97,7 +97,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  96 */             chara.backpack.remove(goods);
 /*  97 */             GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /*     */           }
-/*  99 */           GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+                GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */         }
 /*     */       }
 /*     */     }

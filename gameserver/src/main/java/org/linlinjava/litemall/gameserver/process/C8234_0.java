@@ -42,7 +42,7 @@
 /* 42 */         goods1.pos = from_pos;
 /* 43 */         listbeibao.add(goods1);
 /* 44 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
-/* 45 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+/* 45 */         GameObjectChar.send(new MSG_INVENTORY(), listbeibao);
 /*    */       }
 /*    */     }
 /*    */     
@@ -50,7 +50,7 @@
 /*    */ 
 /* 51 */     GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
 /*    */     
-/* 53 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 53 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 54 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */   }
 /*    */   

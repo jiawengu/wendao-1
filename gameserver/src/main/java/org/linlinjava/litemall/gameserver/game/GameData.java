@@ -128,6 +128,8 @@ public class GameData {
     public PirateMng pirateMng;
     @Autowired
     public PirateCfg pirateCfg;
+    @Autowired
+    public ChargePointMng chargePointMng;
 
     public GameData() {
     }

@@ -15,7 +15,7 @@
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {
 /* 17 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
-/* 18 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 18 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 19 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */   }
 /*    */   

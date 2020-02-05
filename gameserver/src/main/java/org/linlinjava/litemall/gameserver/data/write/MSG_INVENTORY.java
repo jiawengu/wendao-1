@@ -15,18 +15,23 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsGaiZaoGongMing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsHuangSe;
 /*     */ import org.linlinjava.litemall.gameserver.domain.GoodsLanSe;
-/*     */ 
+/*     */
+
+/**
+ * 物品的详细目录
+ */
 /*     */ @org.springframework.stereotype.Service
 /*     */ public class MSG_INVENTORY extends org.linlinjava.litemall.gameserver.netty.BaseWrite
 /*     */ {
 /*     */   protected void writeO(io.netty.buffer.ByteBuf writeBuf, Object object)
 /*     */   {
 /*  24 */     List<Goods> list = (List)object;
-/*  25 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(list.size()));
-/*  26 */     Entry<Object, Object> entry; for (int i = 0; i < list.size(); i++) {
+                int size = list.size();
+/*  25 */     GameWriteTool.writeShort(writeBuf, Integer.valueOf(size));//size
+/*  26 */     Entry<Object, Object> entry; for (int i = 0; i < size; i++) {
 /*  27 */       Goods goods = (Goods)list.get(i);
-/*  28 */       GameWriteTool.writeByte(writeBuf, Integer.valueOf(goods.pos));
-/*  29 */       GameWriteTool.writeShort(writeBuf, Integer.valueOf(10));
+/*  28 */       GameWriteTool.writeByte(writeBuf, Integer.valueOf(goods.pos));//pos
+/*  29 */       GameWriteTool.writeShort(writeBuf, Integer.valueOf(10));//groupCount
 /*  30 */       Map<Object, Object> map = new java.util.HashMap();
 /*  31 */       Entry<Object, Object> objectEntry; if (goods.goodsInfo != null) {
 /*  32 */         map = UtilObjMapshuxing.GoodsInfo(goods.goodsInfo);

@@ -59,7 +59,7 @@
 /*  60 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  61 */       vo_20480_0.msg = ("#Y#<" + peer_name + "#>#n加入你的的队伍");
 /*  62 */       vo_20480_0.time = 1562593376;
-/*  63 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  63 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */       
 /*  65 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /*  66 */       vo_61671_0.id = chara1.id;
@@ -86,7 +86,7 @@
 /*  87 */       vo_20480_0 = new Vo_20480_0();
 /*  88 */       vo_20480_0.msg = ("你加入#Y#<" + chara.name + "#>#n的队伍");
 /*  89 */       vo_20480_0.time = 1562593376;
-/*  90 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M20480_0(), vo_20480_0);
+/*  90 */       GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */       
 /*  92 */       vo_61671_0 = new Vo_61671_0();
 /*  93 */       vo_61671_0.id = chara1.id;
@@ -204,7 +204,7 @@
 /* 205 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 206 */       vo_20480_0.msg = ("你加入#Y#<" + peer_name + "#>#n的队伍");
 /* 207 */       vo_20480_0.time = 1562593376;
-/* 208 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 208 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */       
 /* 210 */       Vo_61671_0 vo_61671_0 = new Vo_61671_0();
 /* 211 */       vo_61671_0.id = chara.id;

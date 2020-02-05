@@ -28,7 +28,7 @@
 /*    */     } else {
 /* 29 */       chara.balance += money;
 /*    */     }
-/* 31 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 31 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 32 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 33 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 34 */     vo_20481_0.msg = ("#成功取出#cBA55DC" + money + "#n文钱#n。");

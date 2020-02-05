@@ -2,20 +2,13 @@ package org.linlinjava.litemall.gameserver.process;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import org.linlinjava.litemall.db.domain.Pet;
 import org.linlinjava.litemall.gameserver.GameHandler;
 import org.linlinjava.litemall.gameserver.data.GameReadTool;
-import org.linlinjava.litemall.gameserver.data.GameWriteTool;
-import org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.*;
-import org.linlinjava.litemall.gameserver.game.GameData;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
-import org.linlinjava.litemall.gameserver.netty.BaseWrite;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 /**
  * 保存宠物
@@ -52,7 +45,7 @@ public class CMD_OPERATE_PET_STORE implements GameHandler {
                 Vo_12269_0 vo_12269_0 = new Vo_12269_0();
                 vo_12269_0.id = chongwu.id;
                 vo_12269_0.owner_id = 96780;
-                GameObjectChar.send(new M12269_0(), vo_12269_0);
+                GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
             }
         }
         else if(type == 2){

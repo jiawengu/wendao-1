@@ -13,7 +13,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
@@ -39,7 +39,7 @@
 /*  39 */     if (barcode.equals("C0000001")) {
 /*  40 */       chara.balance += 3000000;
 /*  41 */       chara.extra_life -= 300;
-/*  42 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  42 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  43 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  44 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  45 */       vo_40964_0.type = 3;
@@ -50,7 +50,7 @@
 /*  50 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  51 */       vo_20480_0.msg = "你花费#R300#n个金元宝购买了#Y3,000,000#n文钱#n。";
 /*  52 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  53 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  53 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  54 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  55 */       vo_8165_0.msg = "购买成功";
 /*  56 */       vo_8165_0.active = 0;
@@ -60,7 +60,7 @@
 /*  60 */     if (barcode.equals("C0000002")) {
 /*  61 */       chara.balance += 6000000;
 /*  62 */       chara.extra_life -= 600;
-/*  63 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  63 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  64 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  65 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  66 */       vo_40964_0.type = 3;
@@ -71,7 +71,7 @@
 /*  71 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  72 */       vo_20480_0.msg = "你花费#R600#n个金元宝购买了#Y6,000,000#n文钱#n。";
 /*  73 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  74 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  74 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  75 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  76 */       vo_8165_0.msg = "购买成功";
 /*  77 */       vo_8165_0.active = 0;
@@ -81,7 +81,7 @@
 /*  81 */     if (barcode.equals("C0000003")) {
 /*  82 */       chara.balance += 10000000;
 /*  83 */       chara.extra_life -= 1100;
-/*  84 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  84 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  85 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*  86 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  87 */       vo_40964_0.type = 3;
@@ -92,7 +92,7 @@
 /*  92 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  93 */       vo_20480_0.msg = "你花费#R1100#n个金元宝购买了#Y10,000,000#n文钱#n。";
 /*  94 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/*  95 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  95 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  96 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /*  97 */       vo_8165_0.msg = "购买成功";
 /*  98 */       vo_8165_0.active = 0;
@@ -102,7 +102,7 @@
 /* 102 */     if (barcode.equals("C0000004")) {
 /* 103 */       chara.balance += 30000000;
 /* 104 */       chara.extra_life -= 3300;
-/* 105 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 105 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 106 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 107 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 108 */       vo_40964_0.type = 3;
@@ -113,7 +113,7 @@
 /* 113 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 114 */       vo_20480_0.msg = "你花费#R3300#n个金元宝购买了#Y30,000,000#n文钱#n。";
 /* 115 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 116 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 116 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 117 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 118 */       vo_8165_0.msg = "购买成功";
 /* 119 */       vo_8165_0.active = 0;
@@ -123,7 +123,7 @@
 /* 123 */     if (barcode.equals("C0000005")) {
 /* 124 */       chara.balance += 60000000;
 /* 125 */       chara.extra_life -= 7200;
-/* 126 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 126 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 127 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 128 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 129 */       vo_40964_0.type = 3;
@@ -134,7 +134,7 @@
 /* 134 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 135 */       vo_20480_0.msg = "你花费#R7200#n个金元宝购买了#Y60,000,000#n文钱#n。";
 /* 136 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 137 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 137 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 138 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 139 */       vo_8165_0.msg = "购买成功";
 /* 140 */       vo_8165_0.active = 0;
@@ -144,7 +144,7 @@
 /* 144 */     if (barcode.equals("C0000006")) {
 /* 145 */       chara.balance += 100000000;
 /* 146 */       chara.extra_life -= 7200;
-/* 147 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 147 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 148 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 149 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 150 */       vo_40964_0.type = 3;
@@ -155,7 +155,7 @@
 /* 155 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 156 */       vo_20480_0.msg = "你花费#R12000#n个金元宝购买了#Y100,000,000#n文钱#n。";
 /* 157 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 158 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 158 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 159 */       Vo_8165_0 vo_8165_0 = new Vo_8165_0();
 /* 160 */       vo_8165_0.msg = "购买成功";
 /* 161 */       vo_8165_0.active = 0;
@@ -206,7 +206,7 @@
 /*     */     }
 /*     */     
 /*     */ 
-/* 209 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 209 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 210 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */   }
 /*     */   

@@ -15,7 +15,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40964_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.M40964_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_INVENTORY;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -85,14 +85,14 @@
 /*     */         }
 /*  86 */         GameUtil.addwupin(goods, chara);
 /*     */         
-/*     */ 
-/*  89 */         GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+/*     */
+            GameUtil.notifyAllBagGoodsInfo(chara);
 /*     */       }
 /*     */       
 /*  92 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  93 */       vo_20480_0.msg = ("你购买了" + storeInfo.getName() + "#n");
 /*  94 */       vo_20480_0.time = 1562593376;
-/*  95 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  95 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*  96 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  97 */       vo_40964_0.type = 1;
 /*  98 */       vo_40964_0.name = storeInfo.getName();
@@ -104,7 +104,7 @@
 /*     */       } else {
 /* 105 */         chara.use_money_type -= storeInfo.getRebuildLevel().intValue();
 /*     */       }
-/* 107 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 107 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 108 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */     }
 /* 110 */     if (shipper == 15907) {
@@ -116,7 +116,7 @@
 /* 116 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 117 */       vo_20480_0.msg = ("你购买了" + storeInfo.getName() + "#n");
 /* 118 */       vo_20480_0.time = 1562593376;
-/* 119 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 119 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 120 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 121 */       vo_40964_0.type = 1;
 /* 122 */       vo_40964_0.name = storeInfo.getName();
@@ -129,7 +129,7 @@
 /*     */       } else {
 /* 130 */         chara.use_money_type -= storeInfo.getRebuildLevel().intValue();
 /*     */       }
-/* 132 */       ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 132 */       ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 133 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */     }
 /*     */   }

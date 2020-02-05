@@ -29,7 +29,7 @@
 /*    */     } else {
 /* 30 */       chara.gender += money;
 /*    */     }
-/* 32 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 32 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 33 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 34 */     Vo_20481_0 vo_20481_0 = new Vo_20481_0();
 /* 35 */     vo_20481_0.msg = ("#成功存入#cBA55DC" + money + "#n文钱#n。");

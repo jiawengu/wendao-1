@@ -11,11 +11,11 @@ import org.linlinjava.litemall.gameserver.data.vo.Vo_19945_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_19959_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_64989_0;
 import org.linlinjava.litemall.gameserver.data.vo.Vo_7655_0;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_HIT;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACTION;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_ACCEPT_MAGIC_HIT;
-import org.linlinjava.litemall.gameserver.data.write.MSG_C_END_ACTION;
+import org.linlinjava.litemall.gameserver.data.write.*;
 import org.linlinjava.litemall.gameserver.domain.JiNeng;
+import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
+import org.linlinjava.litemall.gameserver.process.GameUtil;
 
 /**
  * 辅助水
@@ -62,7 +62,7 @@ public class FuzhuShui131Skill extends FightRoundSkill {
 
         FuzhuShui131Skill that;
         int fangyu;
-        for(var8 = targetList.iterator(); var8.hasNext(); that.buffObject.fangyu_ext = that.buffObject.fangyu * fangyu / 100) {
+        for(var8 = targetList.iterator(); var8.hasNext(); ) {
             fightObject = (FightObject)var8.next();
             vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fightContainer.round;
@@ -78,6 +78,15 @@ public class FuzhuShui131Skill extends FightRoundSkill {
             that = new FuzhuShui131Skill(fightObject, jiNeng.skillRound, fightContainer);
             fightObject.addSkill(that);
             fangyu = (int)BattleUtils.extAdd(jiNeng.skill_level, jiNeng.skill_no);
+            that.buffObject.fangyu_ext = that.buffObject.fangyu * fangyu / 100;
+
+            if(that.buffObject.isPlayer()){
+                GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(that.buffObject.fid);
+                if(null!=gameObjectChar){
+                    gameObjectChar.sendOne(new MSG_UPDATE(), GameUtil.MSG_UPDATE(gameObjectChar.chara));
+//                    System.out.println(that.buffObject.str+":辅助水 enter!"+"accurate_ext:"+that.buffObject.accurate_ext+",fashang_ext："+that.buffObject.fashang_ext);
+                }
+            }
         }
 
         return null;
@@ -88,6 +97,13 @@ public class FuzhuShui131Skill extends FightRoundSkill {
 
     protected void doDisappear() {
         this.buffObject.fangyu_ext = 0;
+        if(this.buffObject.isPlayer()){
+            GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(this.buffObject.fid);
+            if(null!=gameObjectChar){
+                gameObjectChar.sendOne(new MSG_UPDATE(), GameUtil.MSG_UPDATE(gameObjectChar.chara));
+//                System.out.println(this.buffObject.str+":辅助金 exit");
+            }
+        }
     }
 
     public int getStateType() {

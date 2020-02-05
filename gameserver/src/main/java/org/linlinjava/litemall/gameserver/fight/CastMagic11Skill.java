@@ -55,16 +55,18 @@ public class CastMagic11Skill implements FightSkill {
             }
         }
 
-        if (attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIU_LUO)) {
-            attTimes = 2;
-            attFightObject.fightRequest = fightRequest;
-        }
 
         int hurt = 0;
         float jiabei = 1.0F;
 
         if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer,null, TianShuSkillType.NU_JI)) {
             jiabei = 2.5F;
+        }
+
+        //降魔斩
+        float hurtPer = 1F;
+        if (attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIANG_MO_ZHAN)) {
+            hurtPer = 2F;
         }
 
         Vo_19945_0 vo_19945_0 = new Vo_19945_0();
@@ -98,7 +100,7 @@ public class CastMagic11Skill implements FightSkill {
                 remove = BattleUtils.skillAttack(attFightObject.fashang + attFightObject.fashang_ext, jiNeng.skill_level, "FS", jiNeng.skill_no);
                 remove = (int)((float)remove * jiabei);
                 int thurt = BattleUtils.battle(attFightObject.fashang + attFightObject.fashang_ext, remove, fightObject.fangyu + fightObject.fangyu_ext);
-                hurt = thurt;
+                hurt = (int) (thurt * hurtPer);
             } else {
                 hurt = (int)((double)hurt * 0.9D);
             }
@@ -131,7 +133,7 @@ public class CastMagic11Skill implements FightSkill {
         }
 
         //修罗术
-        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIANG_MO_ZHAN)) {
+        if (attTimes != 2 && jiabei == 1.0F && attFightObject.isActiveTianshu(fightContainer, null, TianShuSkillType.XIU_LUO)) {
             int randomNum = RandomUtil.randomNotZeroInt(5);
             GameUtil.showImg(fightContainer, fightRequest.id, "连击");
             int xiuluoHurt = hurt;

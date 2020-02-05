@@ -10,7 +10,7 @@
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41480_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_41482_0;
 /*     */ import org.linlinjava.litemall.gameserver.data.vo.Vo_8165_0;
-/*     */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE_SKILLS;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_DIALOG_OK;
 /*     */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
@@ -44,7 +44,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  43 */             Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /*  44 */             vo_20480_0.msg = ("你获得了#R" + potentialPoint + "#n点" + name);
 /*  45 */             vo_20480_0.time = 1562593376;
-/*  46 */             GameObjectChar.send(new M20480_0(), vo_20480_0);
+/*  46 */             GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */           }
 /*  48 */           if (i == 2) {
 /*  49 */             name = "道行";
@@ -67,7 +67,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*  66 */           GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41482_0(), vo_41482_0);
 /*     */           
 /*     */ 
-/*  69 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  69 */           org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  70 */           GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */           
 /*  72 */           List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);
@@ -117,7 +117,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 116 */         Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 117 */         vo_20480_0.msg = ("你获得了#R" + potentialPoint + "#n点" + name);
 /* 118 */         vo_20480_0.time = 1562593376;
-/* 119 */         GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 119 */         GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*     */       }
 /* 121 */       if (i == 2) {
 /* 122 */         name = "道行";
@@ -140,7 +140,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /* 139 */       GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41482_0(), vo_41482_0);
 /*     */       
 /*     */ 
-/* 142 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 142 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 143 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /* 145 */       List<Vo_32747_0> vo_32747_0List = GameUtil.MSG_UPDATE_SKILLS(chara);

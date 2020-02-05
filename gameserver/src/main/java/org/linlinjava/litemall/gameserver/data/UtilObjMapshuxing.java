@@ -2,7 +2,9 @@
 /*     */ 
 /*     */ import java.util.HashMap;
 /*     */ import java.util.Map;
-/*     */ import org.linlinjava.litemall.gameserver.domain.Chara;
+/*     */ import org.linlinjava.litemall.db.domain.T_Pet_INTIMACY;
+import org.linlinjava.litemall.db.service.base.BasePetIntimacyService;
+import org.linlinjava.litemall.gameserver.domain.Chara;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Duiyuan;
 /*     */ import org.linlinjava.litemall.gameserver.domain.EquipInformation;
 /*     */ import org.linlinjava.litemall.gameserver.domain.Goods;
@@ -24,7 +26,11 @@
 /*     */ import org.linlinjava.litemall.gameserver.domain.ShouHuShuXing;
 /*     */ import org.linlinjava.litemall.gameserver.domain.ShuXingUtil;
 /*     */ import org.linlinjava.litemall.gameserver.domain.ZbAttribute;
-/*     */ 
+import org.linlinjava.litemall.gameserver.fight.FightAttribtueType;
+import org.linlinjava.litemall.gameserver.fight.FightManager;
+import org.linlinjava.litemall.gameserver.fight.FightObject;
+
+/*     */
 /*     */ public class UtilObjMapshuxing
 /*     */ {
 /*     */   public static Map<Object, Object> Chara(Object obj)
@@ -808,6 +814,21 @@
 /* 804 */     objectObjectHashMap.put("upgrade_magic", Integer.valueOf(obj1.upgrade_magic));
 /* 805 */     objectObjectHashMap.put("upgrade_total", Integer.valueOf(obj1.upgrade_total));
 /* 806 */     objectObjectHashMap.put("silver_coin", Integer.valueOf(obj1.silver_coin));
+	objectObjectHashMap.put("has_upgraded", Integer.valueOf(obj1.has_upgraded));
+
+//亲密度
+	int intimacy = obj1.intimacy;
+	T_Pet_INTIMACY t_pet_intimacy = BasePetIntimacyService.getT_Pet_INTIMACY(obj1.str, intimacy);
+	if(null!=t_pet_intimacy) {
+		float attPer = 1 + 1.0F * t_pet_intimacy.getAttackPer() / 100;
+		int old_phy = (int) objectObjectHashMap.getOrDefault("accurate", 0);
+		int old_mag = (int) objectObjectHashMap.getOrDefault("mana", 0);
+		int old_def = (int) objectObjectHashMap.getOrDefault("wiz", 0);
+		objectObjectHashMap.put("accurate", (int) (old_phy * attPer));//物伤
+		objectObjectHashMap.put("mana", (int) (old_mag * attPer));//法伤
+		int newDef = (int) (old_def * (1 + 1.0F * t_pet_intimacy.getDefencePer() / 100));
+		objectObjectHashMap.put("wiz", newDef);//防御
+	}
 /* 807 */     return objectObjectHashMap;
 /*     */   }
 /*     */   

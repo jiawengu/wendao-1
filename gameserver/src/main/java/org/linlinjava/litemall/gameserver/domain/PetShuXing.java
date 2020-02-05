@@ -99,7 +99,6 @@ public class PetShuXing {
     public int pet_speed_shape;
     public int pet_phy_shape;
     public int pet_mag_shape;
-    public int rank;
     public int pet_upgraded;
     public int party_stage_party_name;
     public int left_time_to_delete;
@@ -128,10 +127,22 @@ public class PetShuXing {
      * 携带等级
      */
     public int attrib;
+    /**
+     * 点化灵气
+     */
     public int enchant_nimbus;
+    /**
+     * 最大点化灵气
+     */
     public int max_enchant_nimbus;
     public int card_type;
+    /**
+     * 羽化灵气
+     */
     public int eclosion_nimbus;
+    /**
+     * 最大羽化灵气
+     */
     public int max_eclosion_nimbus;
     public int status_all_resist_except_add;
     public int status_yanchuan_shenjiao = 0;
@@ -187,5 +198,13 @@ public class PetShuXing {
     public int upgrade_magic = 0;
     public int upgrade_total = 0;
     public int silver_coin;
+    /**飞升*/
+    public int has_upgraded = 0;
+    public short currentFlyFightIndex = 0; //当前飞升战斗第几阶段
+    public int mount_type;
+    /**
+     * 相性点
+     */
+    public int rank;
 }
 

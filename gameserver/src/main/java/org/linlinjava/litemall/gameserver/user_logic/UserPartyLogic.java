@@ -28,14 +28,14 @@ public class UserPartyLogic extends BaseLogic {
             s.insert(data);
         }
 
-//        if(this.data.getPartyid() > 0){
-//            this.party = PartyMgr.that.get(this.data.getPartyid());
-//            if(this.party == null){
-//                this.data.setPartyid(0);
-//                this.data.setPartyname("");
-//                this.save();
-//            }
-//        }
+        if(this.data.getPartyid() > 0){
+            this.party = PartyMgr.that.get(this.data.getPartyid());
+            if(this.party == null){
+                this.data.setPartyid(0);
+                this.data.setPartyname("");
+                this.save();
+            }
+        }
     }
 
     @Override
@@ -57,6 +57,8 @@ public class UserPartyLogic extends BaseLogic {
         data.setThisweekactive(0);
         data.setLastweekactive(0);
         this.save();
+
+        this.party = PartyMgr.that.get(partyId);
     }
 
     public int addContrib(int v){

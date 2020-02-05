@@ -46,7 +46,7 @@
 /*  42 */     if (flag == 3) {
 /*  43 */       int coin = 5000000;
 /*  44 */       chara.balance -= coin;
-/*  45 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  45 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*  46 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*     */       
 /*  48 */       GameUtil.removemunber(chara, "精怪诱饵", 1);
@@ -96,7 +96,7 @@
 /*     */       
 /*  93 */       vo_12269_0.id = petbeibao.id;
 /*  94 */       vo_12269_0.owner_id = chara.id;
-/*  95 */       GameObjectChar.send(new M12269_0(), vo_12269_0);
+/*  95 */       GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 /*  96 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /*  97 */       vo_40964_0.type = 2;
 /*  98 */       vo_40964_0.name = strings[0];
@@ -106,7 +106,7 @@
 /* 102 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 103 */       vo_20480_0.msg = ("恭喜你召唤了一只" + strings[0]);
 /* 104 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 105 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 105 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 106 */       Vo_41045_0 vo_41045_0 = new Vo_41045_0();
 /* 107 */       vo_41045_0.flag = 3;
 /* 108 */       vo_41045_0.id = petbeibao.id;
@@ -124,7 +124,7 @@
 /* 120 */     if (flag == 4) {
 /* 121 */       int coin = 50000000;
 /* 122 */       chara.balance -= coin;
-/* 123 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 123 */       org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 124 */       GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /* 125 */       String[] strings = callMounts(false);
 /* 126 */       GameUtil.removemunber(chara, "精怪诱饵", 10);
@@ -182,7 +182,7 @@
 /*     */       
 /* 179 */       vo_12269_0.id = petbeibao.id;
 /* 180 */       vo_12269_0.owner_id = chara.id;
-/* 181 */       GameObjectChar.send(new M12269_0(), vo_12269_0);
+/* 181 */       GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 /* 182 */       Vo_40964_0 vo_40964_0 = new Vo_40964_0();
 /* 183 */       vo_40964_0.type = 2;
 /* 184 */       vo_40964_0.name = strings[0];
@@ -193,7 +193,7 @@
 /* 189 */       Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 190 */       vo_20480_0.msg = ("恭喜你召唤了一只" + strings[0]);
 /* 191 */       vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 192 */       GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 192 */       GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /* 193 */       Vo_41045_0 vo_41045_0 = new Vo_41045_0();
 /* 194 */       vo_41045_0.flag = 3;
 /* 195 */       vo_41045_0.id = petbeibao.id;

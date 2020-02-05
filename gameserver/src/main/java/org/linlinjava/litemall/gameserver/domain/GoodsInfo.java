@@ -3,6 +3,11 @@ package org.linlinjava.litemall.gameserver.domain;
 
 public class GoodsInfo {
     public int groupNo = 0;
+    /**
+     * local FIELDS_BASIC      = 1 -- 物品基础属性值
+     * local FIELDS_VALUE      = 2 -- 物品加成属性值
+     * local FIELDS_SCALE      = 3 -- 物品加成百分比
+     */
     public int groupType = 1;
     public int value;
     public int total_score;
@@ -56,7 +61,9 @@ public class GoodsInfo {
     public int pet_upgraded;
 
     public int couple;
-
+    /**
+     * 亲密度
+     */
     public int shape;
 
     public int pot;

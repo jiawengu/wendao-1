@@ -8,7 +8,7 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_20480_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_40995_0;
-/*    */ import org.linlinjava.litemall.gameserver.data.write.M20480_0;
+/*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_NOTIFY_MISC;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.M40995_0;
 /*    */ import org.linlinjava.litemall.gameserver.data.write.MSG_UPDATE;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
@@ -27,7 +27,7 @@
 /* 27 */     Chara chara = GameObjectChar.getGameObjectChar().chara;
 /*    */     
 /* 29 */     chara.balance -= amount;
-/* 30 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/* 30 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /* 31 */     GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 /*    */     
 /* 33 */     int prize = prize();
@@ -57,7 +57,7 @@
 /* 57 */     Vo_20480_0 vo_20480_0 = new Vo_20480_0();
 /* 58 */     vo_20480_0.msg = ("你花费了" + amount + "文钱#n进行五行竞猜。");
 /* 59 */     vo_20480_0.time = ((int)(System.currentTimeMillis() / 1000L));
-/* 60 */     GameObjectChar.send(new M20480_0(), vo_20480_0);
+/* 60 */     GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0);
 /*    */   }
 /*    */   
 /*    */ 

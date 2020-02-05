@@ -125,7 +125,7 @@ public class NormalAttackSkill implements FightSkill {
             fightResult.point = -hurt;
             fightResult.effect_no = 0;
             fightResult.damage_type = 1;
-            resultList.add(fightResult);
+            FightManager.send_LIFE_DELTA(fightContainer, fightResult);
         }
 
         //连击
@@ -156,7 +156,8 @@ public class NormalAttackSkill implements FightSkill {
                 fightResult.point = -hurt;
                 fightResult.effect_no = 0;
                 fightResult.damage_type = 1;
-                resultList.add(fightResult);
+
+                FightManager.send_LIFE_DELTA(fightContainer, fightResult);
             }
 
         }

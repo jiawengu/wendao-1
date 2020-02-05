@@ -655,19 +655,19 @@ public class FightObject {
         T_Pet_INTIMACY t_pet_intimacy = BasePetIntimacyService.getT_Pet_INTIMACY(str, intimacy);
         if(null!=t_pet_intimacy){
             //复活率
-            this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_RATE, 1.0F*t_pet_intimacy.getRevivePer()/100);
+            this.fightAttribute.addPerAttribute(FightAttribtueType.REVIVAL_RATE, 1.0F*t_pet_intimacy.getRevivePer()/100);
             //剩余复活次数
             this.fightAttribute.addAttribute(FightAttribtueType.REVIVAL_NUM, t_pet_intimacy.getReviveNum());
             //连击率
-            this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_RATE, 1.0F*t_pet_intimacy.getContiHitPer()/100);
+            this.fightAttribute.addPerAttribute(FightAttribtueType.CONTI_HIT_RATE, 1.0F*t_pet_intimacy.getContiHitPer()/100);
             //连击次数
             this.fightAttribute.addAttribute(FightAttribtueType.CONTI_HIT_NUM, t_pet_intimacy.getContiHitNum());
             //必杀率
-            this.fightAttribute.addAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F*t_pet_intimacy.getHitKillPer()/100);
+            this.fightAttribute.addPerAttribute(FightAttribtueType.HIT_KILL_RATE, 1.0F*t_pet_intimacy.getHitKillPer()/100);
             //攻击力提示百分比
-            this.fightAttribute.addAttribute(FightAttribtueType.ATTACK_RATE, 1.0F*t_pet_intimacy.getAttackPer()/100);
+            this.fightAttribute.addPerAttribute(FightAttribtueType.ATTACK_RATE, 1.0F*t_pet_intimacy.getAttackPer()/100);
             //防御力提示百分比
-            this.fightAttribute.addAttribute(FightAttribtueType.DEFENCE_RATE, 1.0F*t_pet_intimacy.getDefencePer()/100);
+            this.fightAttribute.addPerAttribute(FightAttribtueType.DEFENCE_RATE, 1.0F*t_pet_intimacy.getDefencePer()/100);
 
         }
 
@@ -1419,5 +1419,12 @@ public class FightObject {
      */
     public boolean isPet(){
         return type == 2;
+    }
+    /**
+     * 是否是人
+     * @return
+     */
+    public boolean isPlayer(){
+        return type == 1;
     }
 }

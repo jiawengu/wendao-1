@@ -101,24 +101,24 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_45277_0 vo_45277_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_45277_0();
         vo_45277_0.server_type = 0;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45277_0(), vo_45277_0);
+        GameObjectChar.send(new MSG_CS_SERVER_TYPE(), vo_45277_0);
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_41009_0 vo_41009_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_41009_0();
         vo_41009_0.server_time = ((int) (System.currentTimeMillis() / 1000L));
         vo_41009_0.time_zone = 8;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41009_0(), vo_41009_0);
+        GameObjectChar.send(new MSG_REPLY_SERVER_TIME(), vo_41009_0);
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_4099_0 vo_4099_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_4099_0();
         vo_4099_0.name = char_name;
         vo_4099_0.para = (char_name + "是第 7 次登录");
         vo_4099_0.gid = chara.uuid;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M4099_0(), vo_4099_0);
+        GameObjectChar.send(new MSG_LOGIN_DONE(), vo_4099_0);
 
 
-        org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+        org.linlinjava.litemall.gameserver.data.vo.ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
         GameObjectChar.send(new MSG_UPDATE(), listVo_65527_0);
 
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M45388_0(), null);
+        GameObjectChar.send(new MSG_NEW_LOTTERY_OPEN(), null);
 
 
         GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
@@ -128,7 +128,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         Vo_41023_0 vo_41023_0 = new Vo_41023_0();
         vo_41023_0.taskName = "拜师任务";
         vo_41023_0.status = 1;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41023_0(), vo_41023_0);
+        GameObjectChar.send(new MSG_TASK_STATUS_INFO(), vo_41023_0);
 
 
         for (int i = 0; i < chara.pets.size(); i++) {
@@ -151,16 +151,16 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameUtil.addVip(chara);
 
 
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M41017_0(), null);
+        GameObjectChar.send(new MSG_SUIJI_RICHANGE_FANBEI(), null);
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_53399_0 vo_53399_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_53399_0();
         vo_53399_0.value = "10011011111";
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M53399_0(), vo_53399_0);
+        GameObjectChar.send(new MSG_SET_PUSH_SETTINGS(), vo_53399_0);
 
         Vo_53521_0 vo_53521_0 = new Vo_53521_0();
         vo_53521_0.chushiLevel = 90;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M53521_0(), vo_53521_0);
+        GameObjectChar.send(new MSG_NOTIFY_CHUSHI_LEVEL(), vo_53521_0);
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_33055_0 vo_33055_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_33055_0();
         vo_33055_0.is_enable = 1;
@@ -170,39 +170,39 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         vo_33055_0.enable_appoint = 0;
         vo_33055_0.enable_autcion = 0;
         vo_33055_0.close_time = 1536181200;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M33055_0(), vo_33055_0);
+        GameObjectChar.send(new MSG_GOLD_STALL_CONFIG(), vo_33055_0);
 
 
         Vo_9129_0 vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 61001;
         vo_9129_0.para = "1";
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
         vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 50017;
         vo_9129_0.para = "0";
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 
 
         vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 20002;
         vo_9129_0.para = "0000FFFF060FFDFF";
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
         vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 39;
         vo_9129_0.para = "";
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
         vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 10012;
         vo_9129_0.para = "";
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 
         vo_9129_0 = new Vo_9129_0();
         vo_9129_0.notify = 20010;
         vo_9129_0.para = String.valueOf(chara.qumoxiang);
-        GameObjectChar.send(new M9129_0(), vo_9129_0);
+        GameObjectChar.send(new MSG_GENERAL_NOTIFY(), vo_9129_0);
 
 
-        GameObjectChar.send(new MSG_INVENTORY(), chara.backpack);
+        GameUtil.notifyAllBagGoodsInfo(chara);
 
 
         session.gameMap.join(session);
@@ -235,22 +235,22 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
 
         List<org.linlinjava.litemall.db.domain.SaleGood> saleGoodList = GameData.that.saleGoodService.findByOwnerUuid(chara.uuid);
         org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0 vo_49179_0 = GameUtil.a49179(saleGoodList, chara);
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M49179_0(), vo_49179_0);
+        GameObjectChar.send(new MSG_STALL_MINE(), vo_49179_0);
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_12269_0 vo_12269_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_12269_0();
         vo_12269_0.id = chara.id;
         vo_12269_0.owner_id = 96780;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M12269_0(), vo_12269_0);
+        GameObjectChar.send(new MSG_SET_OWNER(), vo_12269_0);
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_61589_0 vo_61589_0 = GameUtil.a61589();
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61589_0(), vo_61589_0);
+        GameObjectChar.send(new MSG_SET_SETTING(), vo_61589_0);
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_40965_0 vo_40965_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_40965_0();
         vo_40965_0.guideId = 3;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M40965_0(), vo_40965_0);
+        GameObjectChar.send(new MSG_PLAY_INSTRUCTION(), vo_40965_0);
 
 
         org.linlinjava.litemall.db.domain.Renwu tasks = GameData.that.baseRenwuService.findOneByCurrentTask(chara.current_task);
@@ -260,7 +260,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_53925_0 vo_53925_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_53925_0();
         vo_53925_0.isOffical = 1;
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M53925_0(), vo_53925_0);
+        GameObjectChar.send(new MSG_OFFICIAL_DIST(), vo_53925_0);
 
 
         org.linlinjava.litemall.gameserver.data.vo.Vo_61661_0 vo_61661_0 = GameUtil.MSG_UPDATE_APPEARANCE(chara);
@@ -287,7 +287,7 @@ public class CMD_LOAD_EXISTED_CHAR implements org.linlinjava.litemall.gameserver
         GameUtil.genchongfei(chara);
 
 
-        GameObjectChar.send(new org.linlinjava.litemall.gameserver.data.write.M61663(), GameCore.that.getGameLineAll());
+        GameObjectChar.send(new MSG_REQUEST_SERVER_STATUS(), GameCore.that.getGameLineAll());
 
 
         if (!chara.npcName.equals("")) {

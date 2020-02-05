@@ -39,7 +39,7 @@
 /*     */     
 /*     */ 
 /*  41 */     chara.extra_life -= packModification.getGoodsPrice().intValue();
-/*  42 */     ListVo_65527_0 listVo_65527_0 = GameUtil.a65527(chara);
+/*  42 */     ListVo_65527_0 listVo_65527_0 = GameUtil.MSG_UPDATE(chara);
 /*     */     
 /*  44 */     Goods goods = new Goods();
 /*  45 */     goods.goodsInfo.owner_id = 1;

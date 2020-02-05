@@ -231,10 +231,10 @@ public class BattleUtils {
         }
     }
 
-    public static double extAdd(int skillLeave, int skillPara) {
-        int skillIndex = getSkillIndex(skillPara);
+    public static double extAdd(int skillLevel, int skillNo) {
+        int skillIndex = getSkillIndex(skillNo);
         int[] base_pro = new int[]{10, 17, 25, 50, 40};
-        double append = (double)(skillLeave / 208) * 0.3D;
+        double append = (double)(skillLevel / 208) * 0.3D;
         return (double)base_pro[skillIndex] * (1.0D + append);
     }
 

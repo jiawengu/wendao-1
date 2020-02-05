@@ -11,16 +11,18 @@ import org.linlinjava.litemall.db.domain.T_FightObject;
 import org.linlinjava.litemall.gameserver.data.constant.TitleConst;
 import org.linlinjava.litemall.gameserver.data.vo.*;
 import org.linlinjava.litemall.gameserver.data.write.*;
+import org.linlinjava.litemall.gameserver.disruptor.World;
 import org.linlinjava.litemall.gameserver.domain.*;
 import org.linlinjava.litemall.gameserver.game.*;
-import org.linlinjava.litemall.gameserver.job.SaveCharaTimes;
 import org.linlinjava.litemall.gameserver.netty.BaseWrite;
+import org.linlinjava.litemall.gameserver.game.GamePetFeiSheng;
 import org.linlinjava.litemall.gameserver.process.GameUtil;
 import org.linlinjava.litemall.gameserver.process.GameUtilRenWu;
 import org.linlinjava.litemall.gameserver.service.CharaStatueService;
 import org.linlinjava.litemall.gameserver.service.MapGuardianService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.linlinjava.litemall.gameserver.user_logic.UserLogic;
+import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyChallengeLogic;
 import org.linlinjava.litemall.gameserver.user_logic.UserPartyDailyTaskLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -464,11 +466,11 @@ public class FightManager {
         round(fc);
     }
 
-    public static void goFight(Chara chara, List<String> monsterList) {
-        goFightWithCallback(chara, monsterList, null);
+    public static FightContainer goFight(Chara chara, List<String> monsterList) {
+        return goFightWithCallback(chara, monsterList, null);
     }
 
-    public static void goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
+    public static FightContainer goFightWithCallback(Chara chara, List<String> monsterList, Consumer<Boolean> fightCallback) {
         FightContainer fc;///战斗空间
         for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
             listFight.remove(fc);
@@ -700,6 +702,7 @@ public class FightManager {
         vo_7655_0.id = 0;
         send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
+        return fc;
     }
     public static void goFightMapGuardian(String npcName, Chara chara, List<CharaStatue> defCharaStatueList) {
         FightContainer fc;///战斗空间
@@ -911,6 +914,274 @@ public class FightManager {
         send(fc, new MSG_C_END_ACTION(), vo_7655_0);
         round(fc);
     }
+
+
+    //飞升战斗
+    public static void goFightFeiSheng(Chara chara, List<String> monsterList) {
+        FightContainer fc;///战斗空间
+        for(fc = getFightContainer(chara.id); fc != null; fc = getFightContainer(chara.id)) {
+            listFight.remove(fc);
+        }
+
+        fc = new FightContainer();
+        FightTeam ft = new FightTeam();
+        ft.type = 1;
+        GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);
+        int num = 0;
+        int i;
+        FightObject fightObject;
+        if (session.gameTeam != null) {
+            for(i = 0; i < session.gameTeam.duiwu.size(); ++i) {
+                fightObject = new FightObject((Chara)session.gameTeam.duiwu.get(i));
+                fightObject.pos = (Integer)PERSON_POS.get(num);
+                fightObject.fid = ((Chara)session.gameTeam.duiwu.get(i)).id;
+                fightObject.id = ((Chara)session.gameTeam.duiwu.get(i)).id;
+                addFabao(fc, (Chara)session.gameTeam.duiwu.get(i), fightObject);
+                if (i == 0) {
+                    fightObject.leader = 1;
+                }
+
+                ft.add(fightObject);
+                List<Petbeibao> pets = ((Chara)session.gameTeam.duiwu.get(i)).pets;
+
+                for(int j = 0; j < pets.size(); ++j) {
+                    Petbeibao petbeibao = (Petbeibao)pets.get(j);
+                    if (chara.id ==((Chara)session.gameTeam.duiwu.get(i)).id &&  (((Petbeibao)pets.get(j)).petShuXing.get(0).has_upgraded > 0)){
+                        fightObject = new FightObject(petbeibao);
+                        fightObject.pos = (Integer)PERSON_POS.get(num) + 5;
+                        fightObject.fid = petbeibao.id;
+                        fightObject.id = petbeibao.id;
+                        fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
+
+                        ft.add(fightObject);
+                        break;
+                    }
+                    else if (((Petbeibao)pets.get(j)).id == ((Chara)session.gameTeam.duiwu.get(i)).chongwuchanzhanId) {
+                        fightObject = new FightObject(petbeibao);
+                        fightObject.pos = (Integer)PERSON_POS.get(num) + 5;
+                        fightObject.fid = petbeibao.id;
+                        fightObject.id = petbeibao.id;
+                        fightObject.cid = ((Chara)session.gameTeam.duiwu.get(i)).id;
+
+                        ft.add(fightObject);
+                        break;
+                    }
+                }
+
+                ++num;
+            }
+        } else {
+            fightObject = new FightObject(chara);
+            fightObject.pos = (Integer)PERSON_POS.get(num);
+            fightObject.fid = chara.id;
+            fightObject.leader = 1;
+            fightObject.id = chara.id;
+            addFabao(fc, chara, fightObject);
+            ft.add(fightObject);//战斗加入法宝
+            List<Petbeibao> pets = chara.pets;
+
+            for(int j = 0; j < pets.size(); ++j) {//判断是哪个宠物上场
+                Petbeibao petbeibao = (Petbeibao)pets.get(j);
+                if (petbeibao.petShuXing.get(0).has_upgraded > 0) {//商场的宠物id
+                    fightObject = new FightObject(petbeibao);
+                    fightObject.pos = (Integer)PERSON_POS.get(num) + 5;
+                    fightObject.fid = petbeibao.id;
+                    fightObject.id = petbeibao.id;
+                    fightObject.cid = chara.id;
+
+                    ft.add(fightObject);
+                    break;
+                }
+            }
+
+            ++num;
+        }
+
+        for(i = 0; i < chara.listshouhu.size() && num < 5; ++i) {
+            if (((ShouHuShuXing)((ShouHu)chara.listshouhu.get(i)).listShouHuShuXing.get(0)).nil != 0) {
+                fightObject = new FightObject((ShouHu)chara.listshouhu.get(i));
+                fightObject.pos = (Integer)PERSON_POS.get(num);
+                fightObject.fid = fc.id++;
+                ft.add(fightObject);
+                ++num;
+            }
+        }
+
+        FightTeam monsterTeam = new FightTeam();
+        monsterTeam.type = 2;
+        num = 0;
+
+
+
+//        for(Iterator var20 = monsterList.iterator(); var20.hasNext(); ++num) {
+//            String monsterName = (String)var20.next();
+////            if (0 == num){
+////                fightObject = new FightObject(chara, monsterName);
+////            }else{
+//            T_FightObject t_fightObject =
+//                    GameData.that.baseFightObjectService.findOneByName(monsterName);
+//            fightObject = new FightObject(t_fightObject);
+////            }
+//            //fightObject = new FightObject(chara, monsterName);
+//            fightObject.pos = (Integer)MONSTER_POS.get(num);
+//            fightObject.fid = fc.id++;
+//            if (num == 1) {
+//                fightObject.leader = 1;
+//            }
+
+//            monsterTeam.add(fightObject);
+//        }
+
+        GameMap gameMap = GameObjectCharMng.getGameObjectChar(chara.id).gameMap;
+        for(Iterator var20 = monsterList.iterator(); var20.hasNext(); ++num) {
+            String monsterName = (String)var20.next();
+            if(gameMap.isDugeno()){
+                T_FightObject t_fightObject = GameData.that.baseFightObjectService.findOneByName(monsterName);
+                fightObject = new FightObject(t_fightObject);
+            }
+            else {
+                fightObject = new FightObject(chara, monsterName);
+            }
+            fightObject.pos = (Integer)MONSTER_POS.get(num);
+            fightObject.fid = fc.id++;
+            if (num == 1) {
+                fightObject.leader = 1;
+            }
+
+            monsterTeam.add(fightObject);
+        }
+
+        fc.teamList.add(ft);
+        fc.teamList.add(monsterTeam);
+        listFight.add(fc);
+        if (chara.autofight_select != 0) {
+            Vo_32985_0 vo_32985_0 = new Vo_32985_0();
+            vo_32985_0.user_is_multi = 0;
+            vo_32985_0.user_round = chara.autofight_select;
+            vo_32985_0.user_action = chara.autofight_skillaction;
+            vo_32985_0.user_next_action = chara.autofight_skillaction;
+            vo_32985_0.user_para = chara.autofight_skillno;
+            vo_32985_0.user_next_para = chara.autofight_skillno;
+            vo_32985_0.pet_is_multi = 0;
+            vo_32985_0.pet_round = 0;
+            vo_32985_0.pet_action = 0;
+            vo_32985_0.pet_next_action = 0;
+            vo_32985_0.pet_para = 0;
+            vo_32985_0.pet_next_para = 0;
+            GameObjectChar.send(new MSG_AUTO_FIGHT_SKIL(), vo_32985_0);
+        }
+
+        GameUtil.MSG_FRIEND_UPDATE_PARTIAL(chara);
+        GameUtil.MSG_UPDATE_IMPROVEMENT(chara);
+        Vo_3583_0 vo_3583_0 = new Vo_3583_0();
+        vo_3583_0.a = 1;
+        vo_3583_0.b = 3;
+        send(fc, new MSG_C_START_COMBAT(), vo_3583_0);
+        Vo_61671_0 vo_61671_0 = new Vo_61671_0();
+        vo_61671_0.id = chara.id;
+        vo_61671_0.count = 1;
+        vo_61671_0.list.add(1);
+        GameObjectChar.getGameObjectChar().gameMap.send(new MSG_TITLE(), vo_61671_0);
+        FightTeam friendsFightTeam = getFightTeam(fc, chara.id);
+        List<FightObject> fightObjectList1 = friendsFightTeam.fightObjectList;
+        Iterator var31 = fightObjectList1.iterator();
+
+        while(var31.hasNext()) {
+            fightObject = (FightObject)var31.next();
+            if (fightObject.type == 2) {
+                Vo_64971_0 vo_64971_0 = new Vo_64971_0();
+                vo_64971_0.count = 1;
+                vo_64971_0.id = fightObject.id;
+                vo_64971_0.haveCalled = 1;
+                GameObjectCharMng.getGameObjectChar(fightObject.cid).sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
+            }
+        }
+
+        List<Vo_65017_0> list65019 = new ArrayList();
+        List<FightObject> fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+        Iterator var37 = fightObjectList.iterator();
+
+        while(var37.hasNext()) {
+            fightObject = (FightObject)var37.next();
+            Vo_65017_0 vo_65019_0 = new Vo_65017_0();
+            vo_65019_0.id = fightObject.fid;
+            vo_65019_0.leader = fightObject.leader;
+            vo_65019_0.weapon_icon = fightObject.weapon_icon;
+            vo_65019_0.pos = fightObject.pos;
+            vo_65019_0.rank = fightObject.rank;
+            vo_65019_0.vip_type = 0;
+            vo_65019_0.str = fightObject.str;
+            vo_65019_0.type = fightObject.org_icon;
+            vo_65019_0.durability = fightObject.durability;
+            vo_65019_0.req_level = 0;
+            vo_65019_0.upgrade_level = 0;
+            vo_65019_0.upgrade_type = 0;
+            vo_65019_0.dex = fightObject.max_mofa;
+            vo_65019_0.max_mana = fightObject.max_mofa;
+            vo_65019_0.max_life = fightObject.max_shengming;
+            vo_65019_0.def = fightObject.max_shengming;
+            vo_65019_0.org_icon = fightObject.org_icon;
+            vo_65019_0.suit_icon = fightObject.suit_icon;
+            vo_65019_0.suit_light_effect = fightObject.suit_light_effect;
+            vo_65019_0.special_icon = 0;
+            list65019.add(vo_65019_0);
+        }
+
+        send(fc, new MSG_C_FRIENDS(), list65019);
+        List<Vo_65017_0> list65017 = new ArrayList();
+        fightObjectList = getFightTeamDM(fc, chara.id).fightObjectList;
+        Iterator var39 = fightObjectList.iterator();
+
+        while(var39.hasNext()) {
+            fightObject = (FightObject)var39.next();
+            Vo_65017_0 vo_65017_0 = new Vo_65017_0();
+            vo_65017_0.id = fightObject.fid;
+            vo_65017_0.leader = fightObject.leader;
+            vo_65017_0.weapon_icon = 0;
+            vo_65017_0.pos = fightObject.pos;
+            vo_65017_0.rank = 0;
+            vo_65017_0.vip_type = 0;
+            vo_65017_0.str = fightObject.str;
+            vo_65017_0.type = fightObject.org_icon;
+            vo_65017_0.durability = 2;
+            vo_65017_0.req_level = 0;
+            vo_65017_0.upgrade_level = 0;
+            vo_65017_0.upgrade_type = 0;
+            vo_65017_0.dex = fightObject.max_mofa;
+            vo_65017_0.max_mana = fightObject.max_mofa;
+            vo_65017_0.max_life = fightObject.max_shengming;
+            vo_65017_0.def = fightObject.max_shengming;
+            vo_65017_0.org_icon = fightObject.org_icon;
+            vo_65017_0.suit_icon = fightObject.suit_icon;
+            vo_65017_0.suit_light_effect = fightObject.suit_light_effect;
+            vo_65017_0.special_icon = 0;
+            list65017.add(vo_65017_0);
+        }
+
+        send(fc, new MSG_C_OPPONENTS(), list65017);
+        fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+        Vo_19959_0 vo_19959_0 = new Vo_19959_0();
+        vo_19959_0.round = fc.round;
+        vo_19959_0.aid = 0;
+        vo_19959_0.action = 0;
+        vo_19959_0.vid = 0;
+        vo_19959_0.para = 0;
+        send(fc, new MSG_C_ACTION(), vo_19959_0);
+        Iterator var42 = fightObjectList.iterator();
+
+        while(var42.hasNext()) {
+            fightObject = (FightObject)var42.next();
+            fightObject.randomTianShuSkill(fc);
+        }
+
+        Vo_7655_0 vo_7655_0 = new Vo_7655_0();
+        vo_7655_0.id = 0;
+        send(fc, new MSG_C_END_ACTION(), vo_7655_0);
+        round(fc);
+    }
+
+
+
 
     //妖王战斗
     public static void goFightYaoWang(Chara chara, List<String> monsterList) {
@@ -1973,46 +2244,22 @@ public class FightManager {
                         fightObject.fid = petbeibao.id;
                         fightObject.id = petbeibao.id;
                         fightObject.cid = gameObjectChar.chara.id;
-//                        fightObject.shengming = 9999999;
-//                        fightObject.max_shengming = 9999999;
-
-//                        victimObject.state=1;
-//                        victimObject.shengming = victimObject.max_shengming;
 
                         FightTeam friendsFightTeam = getFightTeam(fc, victimObject.fid);
-//                        friendsFightTeam.fightObjectList.remove(victimObject);
                         fc.doActionList.remove(victimObject);
 
                         friendsFightTeam.fightObjectList.add(fightObject);
-//                        fc.doActionList.add(victimObject);
-
-//                                gameObjectChar.sendOne(new MSG_UPDATE_PETS(), gameObjectChar.chara.pets);
-
-//                                Vo_64971_0 vo_64971_0 = new Vo_64971_0();
-//                                vo_64971_0.count = 1;
-//                                vo_64971_0.id = fightObject.id;
-//                                vo_64971_0.haveCalled = 1;
-//                                gameObjectChar.sendOne(new MSG_C_REFRESH_PET_LIST(), vo_64971_0);
-
 
                         notifyTeamFriendList(fc, Arrays.asList(fightObject));
-                                notifyTeamEnemyList(fc, Arrays.asList(fightObject));
+//                        notifyTeamEnemyList(fc, fightObjectList, Arrays.asList(fightObject));
 
-                    Vo_4163_0 vo_4163_0 = new Vo_4163_0();
-                    vo_4163_0.id = fightObject.id;
-                    vo_4163_0.pet_status = 1;
-                    gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
-//
-//                                notifyTeamEnemyList(fightContainer, friendsFightTeam.fightObjectList);
+                        Vo_4163_0 vo_4163_0 = new Vo_4163_0();
+                        vo_4163_0.id = fightObject.id;
+                        vo_4163_0.pet_status = 1;
+                        gameObjectChar.sendOne(new MSG_SET_CURRENT_PET(), vo_4163_0);
 
-//                                friendsFightTeam = getFightTeamDM(fightContainer, fightObject.id);
-//                                notifyTeamFriendList(fightContainer, friendsFightTeam.fightObjectList);
-//                                notifyTeamEnemyList(fightContainer, friendsFightTeam.fightObjectList);
-
-//                                fightObject.randomTianShuSkill(fightContainer);
-
-
-                        System.out.println("掠阵");
+                        fightObject.randomTianShuSkill(fc);
+                        log.info(fightObject.str+"掠阵");
                     }
                 }
             }
@@ -2839,6 +3086,13 @@ public class FightManager {
                     GameShangGuYaoWang.onReward(chara1,((FightObject)guaiwu.get(0)).str);
                     return;
                 }
+                // 飞升挑战
+                if (null != guaiwu && GamePetFeiSheng.isPetFeiSheng(((FightObject)guaiwu.get(0)).str)){
+                    GamePetFeiSheng.onFightSuccess(chara1);
+                    return;
+                }
+
+
                 //野怪
                 if(guaiwu != null && GameData.that.outdoorBossMng.isBoss(guaiwu.get(0).bossid)){
                     if(fightContainer.fightCallback != null){
@@ -2908,7 +3162,7 @@ public class FightManager {
 
                                     var26 = GameObjectCharMng.getGameObjectChar(fightObject.id).chara;
                                     var26.shidaodaguaijifen += 25;
-                                    gameSessions = SaveCharaTimes.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
+                                    gameSessions = World.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
                                     mingname = "";
                                     mingci = 0;
 
@@ -2939,7 +3193,7 @@ public class FightManager {
                                     var26 = GameObjectCharMng.getGameObjectChar(fightObject.id).chara;
                                     var26.shidaodaguaijifen -= 25;
                                     --GameObjectCharMng.getGameObjectChar(fightObject.id).chara.shidaocishu;
-                                    gameSessions = SaveCharaTimes.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
+                                    gameSessions = World.insertionSort(GameObjectCharMng.getGameObjectChar(fightObject.id).gameMap.sessionList);
                                     mingname = "";
                                     mingci = 0;
 
@@ -2964,7 +3218,7 @@ public class FightManager {
                                         vo_20481_0.msg = "你获得了50000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                                        listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
+                                        listVo_65527_0 = GameUtil.MSG_UPDATE(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 
@@ -2981,7 +3235,7 @@ public class FightManager {
                                         vo_20481_0.msg = "你获得了100000元宝。";
                                         vo_20481_0.time = (int)(System.currentTimeMillis() / 1000L);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
-                                        listVo_65527_0 = GameUtil.a65527(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
+                                        listVo_65527_0 = GameUtil.MSG_UPDATE(GameObjectCharMng.getGameObjectChar(fightObject.id).chara);
                                         GameObjectCharMng.getGameObjectChar(fightObject.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
                                     }
 
@@ -3010,7 +3264,9 @@ public class FightManager {
                     }
                     UserLogic logic = GameObjectChar.getGameObjectChar().logic;
                     UserPartyDailyTaskLogic dailyTaskLogic = (UserPartyDailyTaskLogic)logic.getMod("party_daily_task");
-                    dailyTaskLogic.fightAfterWin(chara1.mapid, guaiwu);
+                    dailyTaskLogic.fightAfterWin(fightContainer, guaiwu);
+                    UserPartyDailyChallengeLogic dailyChallengeLogic = (UserPartyDailyChallengeLogic)logic.getMod("party_daily_challenge");
+                    dailyChallengeLogic.fightAfterWin(fightContainer, guaiwu);
                 }
             }else{
                 if (chara1.mapid == 37000 ) {//通天塔挑战失败
@@ -3024,6 +3280,12 @@ public class FightManager {
                 if (null != guaiwu && GameShangGuYaoWang.isYaoWang(((FightObject)guaiwu.get(0)).str)){
                     System.out.println("妖王");
                     GameShangGuYaoWang.onChallengeFail(chara1,((FightObject)guaiwu.get(0)).str);
+                    return;
+                }
+
+                // 飞升挑战失败
+                if (null != guaiwu && GamePetFeiSheng.isPetFeiSheng(((FightObject)guaiwu.get(0)).str)){
+                    GamePetFeiSheng.onFightFail(chara1);
                     return;
                 }
             }
@@ -3272,10 +3534,12 @@ public class FightManager {
                 }
 
                 fightObjectList = getFightTeam(fc, chara.id).fightObjectList;
+                List<FightObject> fightObjectListOther = getFightTeam(fc, charaduishou.id).fightObjectList;
                 notifyTeamFriendList(fc, fightObjectList);
+                notifyTeamEnemyList(fc, fightObjectList, fightObjectListOther);
 
-                List<FightObject> fightObjectListOther = getFightTeamDM(fc, chara.id).fightObjectList;
-                notifyTeamEnemyList(fc, fightObjectListOther);
+                notifyTeamFriendList(fc, fightObjectListOther);
+                notifyTeamEnemyList(fc, fightObjectListOther, fightObjectList);
 
                 for(FightObject fb : getAllFightObject(fc)) {
                     fb.randomTianShuSkill(fc);
@@ -3489,7 +3753,7 @@ public class FightManager {
     }
 
 
-    public static void notifyTeamEnemyList(FightContainer fightContainer, List<FightObject> fightObjectList){
+    public static void notifyTeamEnemyList(FightContainer fightContainer, List<FightObject> notifyObjectList, List<FightObject> fightObjectList){
         Iterator var43 = fightObjectList.iterator();
         List<Vo_65017_0> list65017 = new ArrayList<>();
         while(var43.hasNext()) {
@@ -3518,7 +3782,7 @@ public class FightManager {
             vo_65017_0.special_icon = 0;
             list65017.add(vo_65017_0);
         }
-        send(fightContainer, new MSG_C_OPPONENTS(), list65017);
+        sendTeam(fightContainer, notifyObjectList, new MSG_C_OPPONENTS(), list65017);
     }
 
     public static void notifyTeamFriendList(FightContainer fightContainer, List<FightObject> fightObjectList){
@@ -3551,7 +3815,7 @@ public class FightManager {
             list65019.add(vo_65019_0);
         }
 
-        send(fightContainer, new MSG_C_FRIENDS(), list65019);
+        sendTeam(fightContainer, fightObjectList, new MSG_C_FRIENDS(), list65019);
     }
 
     public static FightObject getRandomObject(FightContainer fightContainer, List<FightObject> exclude) {
@@ -3619,8 +3883,8 @@ public class FightManager {
             List<FightObject> fightObjectList = getFightTeam(fc, id).fightObjectList;
             notifyTeamFriendList(fc, fightObjectList);
 
-            fightObjectList = getFightTeamDM(fc, id).fightObjectList;
-            notifyTeamEnemyList(fc, fightObjectList);
+            List<FightObject> enemyObjectList = getFightTeamDM(fc, id).fightObjectList;
+            notifyTeamEnemyList(fc, fightObjectList, enemyObjectList);
 
             Vo_19959_0 vo_19959_0 = new Vo_19959_0();
             vo_19959_0.round = fc.round;
