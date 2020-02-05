@@ -1907,6 +1907,56 @@ import java.util.Random;
         }
     }
 
+    public static org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0 a49179(List<org.linlinjava.litemall.db.domain.SaleGood> saleGoodList, Chara chara)
+    {
+        org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0 vo_49179_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49179_0();
+        vo_49179_0.dealNum = 0;
+        vo_49179_0.sellCash = String.valueOf(chara.jishou_coin);
+        vo_49179_0.stallTotalNum = 4;
+        vo_49179_0.record_count_max = 30;
+        for (int i = 0; i < saleGoodList.size(); i++)
+        {
+
+            org.linlinjava.litemall.db.domain.SaleGood saleGood = (org.linlinjava.litemall.db.domain.SaleGood)saleGoodList.get(i);
+
+
+            org.linlinjava.litemall.gameserver.data.vo.Vo_49179 vo_49179 = new org.linlinjava.litemall.gameserver.data.vo.Vo_49179();
+
+            vo_49179.name = saleGood.getName();
+            if (saleGood.getName().contains("超级黑水晶·")) {
+                String goods = saleGood.getGoods();
+                Goods goods1 = (Goods)org.linlinjava.litemall.db.util.JSONUtils.parseObject(goods, Goods.class);
+                java.util.Map<Object, Object> goodsFenSe1 = org.linlinjava.litemall.gameserver.data.UtilObjMapshuxing.GoodsLanSe(goods1.goodsLanSe);
+                int value = 0;
+                for (java.util.Map.Entry<Object, Object> entry : goodsFenSe1.entrySet()) {
+                    if ((!entry.getKey().equals("groupNo")) && (!entry.getKey().equals("groupType")) && (((Integer)entry.getValue()).intValue() != 0))
+                    {
+
+                        value = ((Integer)entry.getValue()).intValue();
+                    }
+                }
+                vo_49179.name = (saleGood.getName() + "|" + value + "|1");
+            }
+            vo_49179.id = saleGood.getGoodsId();
+            vo_49179.price = saleGood.getPrice().intValue();
+            vo_49179.pos = 2;
+            vo_49179.status = 2;
+            vo_49179.startTime = saleGood.getStartTime().intValue();
+            vo_49179.endTime = saleGood.getEndTime().intValue();
+            vo_49179.level = 0;
+            vo_49179.unidentified = 1;
+            vo_49179.amount = saleGood.getReqLevel().intValue();
+            vo_49179.req_level = 635;
+            vo_49179.extra = 125;
+            vo_49179.item_polar = 0;
+            vo_49179.cg_price_count = 4;
+            vo_49179.init_price = saleGood.getPrice().intValue();
+            vo_49179_0.vo_49179s.add(vo_49179);
+        }
+        return vo_49179_0;
+    }
+
+
 
 
     public static void a49159(Chara chara) {
