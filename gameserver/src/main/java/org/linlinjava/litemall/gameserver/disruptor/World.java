@@ -89,14 +89,21 @@ public class World {
         {
             logicHandlers.put(LogicEventType.LOGIC_PLAYER_DISCONNECT, this::ON_LOGIC_PLAYER_DISCONNECT);
             logicHandlers.put(LogicEventType.LOGIC_PLAYER_CMD_REQUEST, this::ON_LOGIC_PLAYER_CMD_REQUEST);
+            logicHandlers.put(LogicEventType.LOGIC_CLOSE_GAME, this::ON_LOGIC_CLOSE_GAME);
         }
         this.logicHandlers = Collections.unmodifiableMap(logicHandlers);
     }
 
     private void ON_LOGIC_PLAYER_DISCONNECT(LogicEvent logicEvent){
         int charaId = logicEvent.getIntParam();
+        if(!GameObjectCharMng.isCharaCached(charaId)){
+            return;
+        }
         GameObjectChar gameObjectChar = GameObjectCharMng.getGameObjectChar(charaId);
         GameObjectCharMng.downline(gameObjectChar);
+    }
+    private void ON_LOGIC_CLOSE_GAME(LogicEvent logicEvent){
+        closeServer();
     }
     private void ON_LOGIC_PLAYER_CMD_REQUEST(LogicEvent logicEvent){
         int cmd = logicEvent.getIntParam();
@@ -591,6 +598,14 @@ public class World {
         }
 
     }
+
+    public void closeServer(){
+        logger.error("==>begin close server!");
+        GameObjectCharMng.closeServer();
+        logger.error("==>close server success!");
+        System.exit(0);
+    }
+
 
 
 }

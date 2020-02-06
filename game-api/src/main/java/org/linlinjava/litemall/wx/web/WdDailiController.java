@@ -24,12 +24,11 @@ import org.linlinjava.litemall.db.domain.Notice;
 import org.linlinjava.litemall.db.service.base.BaseAccountsService;
 import org.linlinjava.litemall.db.service.base.BaseDailiService;
 import org.linlinjava.litemall.db.service.base.BaseNoticeService;
+import org.linlinjava.litemall.gameserver.ApplicationNetty;
+import org.linlinjava.litemall.gameserver.disruptor.World;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -44,6 +43,8 @@ public class WdDailiController {
     private BaseDailiService baseDailiService;
     @Autowired
     private CustomDailiMapper customDailiMapper;
+    @Autowired
+    private ApplicationNetty applicationNetty;
     public static final List<String> zimu = new CopyOnWriteArrayList();
     private static boolean charge;
 
@@ -82,7 +83,7 @@ public class WdDailiController {
 
                 data.put("name", username);
                 data.put("list", list);
-                data.put("token", "tasdjbaqwuibzxcvnbibasouwerka");
+                data.put("token", ADMIN_TOKEN);
                 data.put("isAdmin", true);
                 data.put("number", 0);
                 data.put("canGiveCount", 0);
@@ -124,7 +125,7 @@ public class WdDailiController {
     public Object message(@RequestBody String body, HttpServletRequest request) {
         String message = JacksonUtil.parseString(body, "message");
         String token = JacksonUtil.parseString(body, "token");
-        if (!token.equals("tasdjbaqwuibzxcvnbibasouwerka")) {
+        if (!token.equals(ADMIN_TOKEN)) {
             return ResponseUtil.fail();
         } else {
             int time = JacksonUtil.parseInteger(body, "time");
@@ -141,7 +142,7 @@ public class WdDailiController {
         String count = JacksonUtil.parseString(body, "count");
         String appendName = JacksonUtil.parseString(body, "appendName");
         String token = JacksonUtil.parseString(body, "token");
-        if (!token.equals("tasdjbaqwuibzxcvnbibasouwerka")) {
+        if (!token.equals(ADMIN_TOKEN)) {
             return ResponseUtil.fail();
         } else {
             HashMap<Object, Object> data = new HashMap();
@@ -161,7 +162,7 @@ public class WdDailiController {
         String token = JacksonUtil.parseString(body, "token");
         ArrayList<Map> list = new ArrayList();
         HashMap zidaihashMap;
-        if (token.equals("tasdjbaqwuibzxcvnbibasouwerka")) {
+        if (token.equals(ADMIN_TOKEN)) {
             HashMap hashMap = new HashMap();
             hashMap.put("countTotal", 1);
             hashMap.put("code", "管理员");
@@ -230,7 +231,7 @@ public class WdDailiController {
     @PostMapping({"/popen"})
     public Object popen(@RequestBody String body, HttpServletRequest request) {
         String token = JacksonUtil.parseString(body, "token");
-        if (!token.equals("tasdjbaqwuibzxcvnbibasouwerka")) {
+        if (!token.equals(ADMIN_TOKEN)) {
             return ResponseUtil.ok();
         } else {
             String popen = JacksonUtil.parseString(body, "popen");
@@ -242,6 +243,15 @@ public class WdDailiController {
 
             HashMap<Object, Object> data = new HashMap();
             data.put("popen", popen);
+            return ResponseUtil.ok();
+        }
+    }
+    @GetMapping({"/closeGame"})
+    public Object closeGame(String token) {
+        if (null==token || !token.equals(ADMIN_TOKEN)) {
+            return ResponseUtil.fail();
+        } else {
+            applicationNetty.closeGame();
             return ResponseUtil.ok();
         }
     }
