@@ -9,4 +9,8 @@ public enum LogicEventType {
      * 收到客户端的请求消息
      */
     LOGIC_PLAYER_CMD_REQUEST,
+    /**
+     * 停服
+     */
+    LOGIC_CLOSE_GAME,
 }

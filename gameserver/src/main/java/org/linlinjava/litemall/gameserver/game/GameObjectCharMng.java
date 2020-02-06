@@ -2,6 +2,7 @@ package org.linlinjava.litemall.gameserver.game;
 
 import io.netty.buffer.ByteBuf;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -55,8 +56,7 @@ public class GameObjectCharMng
     }
 
     public static void sendAll(BaseWrite baseWrite, Object obj) {
-        for (int i = 0; i < gameObjectCharMap.size(); i++) {
-            GameObjectChar session = gameObjectCharMap.get(i);
+        for (GameObjectChar session : gameObjectCharMap.values()) {
             ByteBuf write = baseWrite.write(obj);
             session.send0(write);
         }
@@ -67,8 +67,7 @@ public class GameObjectCharMng
     }
 
     public static void sendAllmap(BaseWrite baseWrite, Object obj, int mapid) {
-        for (int i = 0; i < gameObjectCharMap.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharMap.get(i);
+        for (GameObjectChar gameObjectChar: gameObjectCharMap.values()) {
             if (gameObjectChar.isOnline() && gameObjectChar.gameMap.id == mapid ) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
@@ -77,8 +76,7 @@ public class GameObjectCharMng
     }
 
     public static void sendAllmapname(BaseWrite baseWrite, Object obj, String mapname) {
-        for (int i = 0; i < gameObjectCharMap.size(); i++) {
-            GameObjectChar gameObjectChar = gameObjectCharMap.get(i);
+        for (GameObjectChar gameObjectChar : gameObjectCharMap.values()) {
             if (gameObjectChar.isOnline() && gameObjectChar.gameMap.name.equals(mapname)) {
                 ByteBuf write = baseWrite.write(obj);
                 gameObjectChar.send0(write);
@@ -135,6 +133,13 @@ public class GameObjectCharMng
 //            log.info("save char [{}] db: ==>charData size:{}, serialize cost:{}, db cost:{}", gameObjectChar.chara.name, charData.length(), seriaCost, (System.currentTimeMillis()-beginMill));
 
             }
+        }
+    }
+
+    public static void closeServer(){
+        List<GameObjectChar> list = new ArrayList<>(gameObjectCharMap.values());
+        for(GameObjectChar gameObjectChar:list){
+            downline(gameObjectChar);
         }
     }
 }

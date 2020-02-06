@@ -1,9 +1,7 @@
 /*    */ package org.linlinjava.litemall.gameserver;
 /*    */ 
-/*    */ import org.linlinjava.litemall.gameserver.disruptor.EventConsumer;
-import org.linlinjava.litemall.gameserver.disruptor.GlobalQueue;
-import org.linlinjava.litemall.gameserver.disruptor.LogicEvent;
-import org.linlinjava.litemall.gameserver.disruptor.World;
+/*    */ import com.lmax.disruptor.RingBuffer;
+import org.linlinjava.litemall.gameserver.disruptor.*;
 import org.linlinjava.litemall.gameserver.game.GameCore;
 /*    */ import org.linlinjava.litemall.gameserver.netty.NettyServer;
 /*    */ import org.slf4j.Logger;
@@ -45,7 +43,24 @@ private GlobalQueue globalQueue;
     public GlobalQueue getGlobalQueue() {
         return globalQueue;
     }
+
+    /**
+     * 停服
+     * 可由任意线程调用
+     */
+    public void closeGame(){
+        RingBuffer<LogicEvent> ringBuffer = globalQueue.getRingBuffer();
+        long sequence = ringBuffer.next();
+        try{
+            LogicEvent logicEvent = ringBuffer.get(sequence);
+            logicEvent.setLogicEventType(LogicEventType.LOGIC_CLOSE_GAME);
+        }finally{
+            ringBuffer.publish(sequence);
+        }
+    }
     /*    */ }
+
+
 
 
 /* Location:              C:\Users\Administrator\Desktop\gameserver-0.1.0.jar!\org\linlinjava\litemall\gameserver\ApplicationNetty.class
