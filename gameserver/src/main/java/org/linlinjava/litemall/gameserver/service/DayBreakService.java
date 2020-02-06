@@ -1,10 +1,15 @@
 package org.linlinjava.litemall.gameserver.service;
 
+import com.lmax.disruptor.RingBuffer;
+import org.linlinjava.litemall.gameserver.ApplicationNetty;
+import org.linlinjava.litemall.gameserver.disruptor.LogicEvent;
+import org.linlinjava.litemall.gameserver.disruptor.LogicEventType;
 import org.linlinjava.litemall.gameserver.domain.Chara;
 import org.linlinjava.litemall.gameserver.game.GameObjectChar;
 import org.linlinjava.litemall.gameserver.game.GameObjectCharMng;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +28,8 @@ public class DayBreakService {
         registerHandler(new clock0Handler());
         registerHandler(new clock5Handler());
     }
+    @Autowired
+    private ApplicationNetty applicationNetty;
 
     private static void registerHandler(Handler handler){
         assert !handlerMap.containsKey(handler.getKey());
@@ -40,6 +47,17 @@ public class DayBreakService {
      */
     @Scheduled(cron="0 0 0,5 * * ?")
     public void checkDayBreak(){
+        RingBuffer<LogicEvent> ringBuffer = applicationNetty.getGlobalQueue().getRingBuffer();
+        long sequence = ringBuffer.next();
+        try{
+            LogicEvent logicEvent = ringBuffer.get(sequence);
+            logicEvent.setLogicEventType(LogicEventType.LOGIC_DAY_BREAK);
+        }finally{
+            ringBuffer.publish(sequence);
+        }
+    }
+
+    public void ON_LOGIC_DAY_BREAK(LogicEvent logicEvent){
         for(GameObjectChar gameObjectChar:GameObjectCharMng.getGameObjectCharMap()){
             if(null!=gameObjectChar.chara){
                 checkDayBreak(gameObjectChar.chara);

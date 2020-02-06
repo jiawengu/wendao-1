@@ -23,6 +23,7 @@ import org.linlinjava.litemall.gameserver.netty.NettyServer;
 import org.linlinjava.litemall.gameserver.netty.ServerHandler;
 import org.linlinjava.litemall.gameserver.process.*;
 import org.linlinjava.litemall.gameserver.service.DBService;
+import org.linlinjava.litemall.gameserver.service.DayBreakService;
 import org.linlinjava.litemall.gameserver.service.TitleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,8 @@ public class World {
     private DBService dbService;
     @Autowired
     private NettyServer server;
+    @Autowired
+    private DayBreakService dayBreakService;
     @Autowired
     private java.util.List<GameHandler> gameHandlers;
     /**
@@ -90,6 +93,7 @@ public class World {
             logicHandlers.put(LogicEventType.LOGIC_PLAYER_DISCONNECT, this::ON_LOGIC_PLAYER_DISCONNECT);
             logicHandlers.put(LogicEventType.LOGIC_PLAYER_CMD_REQUEST, this::ON_LOGIC_PLAYER_CMD_REQUEST);
             logicHandlers.put(LogicEventType.LOGIC_CLOSE_GAME, this::ON_LOGIC_CLOSE_GAME);
+            logicHandlers.put(LogicEventType.LOGIC_DAY_BREAK, dayBreakService::ON_LOGIC_DAY_BREAK);
         }
         this.logicHandlers = Collections.unmodifiableMap(logicHandlers);
     }

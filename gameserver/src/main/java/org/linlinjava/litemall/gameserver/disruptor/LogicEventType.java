@@ -13,4 +13,8 @@ public enum LogicEventType {
      * 停服
      */
     LOGIC_CLOSE_GAME,
+    /**
+     * 跨天事件
+     */
+    LOGIC_DAY_BREAK,
 }
