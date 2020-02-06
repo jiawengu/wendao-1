@@ -9,10 +9,10 @@
 /*    */ import org.linlinjava.litemall.gameserver.data.GameReadTool;
 /*    */ import org.linlinjava.litemall.gameserver.data.vo.Vo_65505_0;
 /*    */ import org.linlinjava.litemall.gameserver.domain.Chara;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameData;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameLine;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameMap;
-/*    */ import org.linlinjava.litemall.gameserver.game.GameObjectChar;
+/*    */ import org.linlinjava.litemall.gameserver.game.*;
+/*    */
+/*    */
+/*    */
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */
@@ -31,8 +31,8 @@
 /* 27 */     int isTaskWalk = GameReadTool.readByte(buff);
 /* 28 */     GameObjectChar session = GameObjectChar.getGameObjectChar();
 /* 29 */     Chara chara = session.chara;
-/* 30 */     GameMap gameMap = GameLine.getGameMap(chara.line, room_name);
-/*    */     
+/* 30 */     GameMap gameMap =  GameLine.getGameMap(chara.line, room_name);
+/*    */
 /* 32 */     if (!chara.mapName.equals(room_name)) {
 /* 33 */       List<NpcPoint> list = GameData.that.baseNpcPointService.findByMapname(room_name);
 /* 34 */       for (NpcPoint npcPoint : list) {

@@ -17,7 +17,7 @@ import org.linlinjava.litemall.gameserver.domain.Chara;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ 
 /*    */ @Service
-/*    */ public class C4114_0 implements org.linlinjava.litemall.gameserver.GameHandler
+/*    */ public class CMD_KILL implements org.linlinjava.litemall.gameserver.GameHandler
 /*    */ {
 /*    */   public void process(ChannelHandlerContext ctx, ByteBuf buff)
 /*    */   {

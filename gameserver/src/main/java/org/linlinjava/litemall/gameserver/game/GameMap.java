@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Predicate;
 
+import org.linlinjava.litemall.db.domain.LaoFang;
 import org.linlinjava.litemall.db.domain.Npc;
 import org.linlinjava.litemall.db.domain.NpcPoint;
 import org.linlinjava.litemall.gameserver.data.vo.*;
@@ -57,8 +58,28 @@ public class GameMap {
         }
         return true;
     }
-
     public void join(GameObjectChar gameObjectChar) {
+        if (!PKMgr.isZhuaBu(gameObjectChar.chara, this.name)){
+            joinEx(gameObjectChar);
+        }else{
+            if (!gameObjectChar.chara.mapName.equals("监狱")){
+                GameMap gameMap = GameLine.getGameMap(gameObjectChar.chara.line, "监狱");
+                gameObjectChar.chara.x = 33;
+                gameObjectChar.chara.y = 7;
+                gameMap.joinEx(gameObjectChar);
+
+                org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0 vo_20481_0 = new org.linlinjava.litemall.gameserver.data.vo.Vo_20481_0();
+                vo_20481_0.msg = ("你被抓捕进了#R监狱#n");
+                vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
+                gameObjectChar.sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
+
+                LaoFang laoFang = GameData.that.baseLaoFangService.findOneByCharaID(gameObjectChar.chara.id);
+                laoFang.setItime((int) (System.currentTimeMillis()/1000));
+                GameData.that.baseLaoFangService.updateById(laoFang);
+            }
+        }
+    }
+    public void joinEx(GameObjectChar gameObjectChar) {
         gameObjectChar.gameMap.leave(gameObjectChar);
         this.sessionList.remove(gameObjectChar);
         this.sessionList.add(gameObjectChar);

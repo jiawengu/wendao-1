@@ -16,5 +16,9 @@ public enum BattleType {
      * 英雄会
      */
     HERO_PUB,
+    /**
+     * 切磋
+     */
+    HERO_PK,
     ;
 }

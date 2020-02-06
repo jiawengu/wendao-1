@@ -1548,7 +1548,27 @@ import java.util.Random;
         vo_20481_0.time = ((int)(System.currentTimeMillis() / 1000L));
         GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_NOTIFY_MISC_EX(), vo_20481_0);
     }
+        public  static  void subQianNeng(Chara chara, int qianNeng){
+            chara.cash -= qianNeng;
+            Vo_20480_0 vo_20480_0 = new Vo_20480_0();
+            vo_20480_0.msg = ("你减少了#R" + qianNeng + "#n点" + "潜能");
+            vo_20480_0.time = 1562593376;
+            GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0, chara.id);
+            ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara);
+            GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
 
+        }
+
+    public  static  void subJinQian(Chara chara, int money){
+        chara.balance += money;
+        Vo_20480_0 vo_20480_0 = new Vo_20480_0();
+        vo_20480_0.msg = ("你减少了#R" + money + "#n点" + "金币");
+        vo_20480_0.time = 1562593376;
+        GameObjectChar.send(new MSG_NOTIFY_MISC(), vo_20480_0, chara.id);
+        ListVo_65527_0 listVo_65527_0 = MSG_UPDATE(chara);
+        GameObjectCharMng.getGameObjectChar(chara.id).sendOne(new MSG_UPDATE(), listVo_65527_0);
+
+    }
     public static void subjingyan(Chara chara, int jingyan)
     {
         jingyan *= 5;

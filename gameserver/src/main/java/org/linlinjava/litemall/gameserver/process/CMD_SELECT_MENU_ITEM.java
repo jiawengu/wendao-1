@@ -727,6 +727,20 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
             GameObjectCharMng.getGameObjectChar(chara1.id).sendOne(new M_MSG_SUBMIT_PET(), vo);
         }
 
+        if (983 == npc_id){
+            System.out.println("蒙面人");
+            if (menu_item.equals("追踪对方")){
+                GameUtil.sendNotify(97,"SearchUserDlg");
+            }else if(menu_item.equals("了解PK")){
+
+            }
+        }
+
+        if (1015 == npc_id && menu_item.equals("查看在押犯人")){
+            GameUtil.sendNotify(97,"PrisonDlg");
+            PKMgr.getZuoLaoInfo(chara1);
+        }
+
         if (npc_id == 910){
             System.out.println("米兰仙子");
             GamePetFeiSheng.onPetFly(chara1, menu_item);
