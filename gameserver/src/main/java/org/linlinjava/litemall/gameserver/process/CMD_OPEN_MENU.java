@@ -189,6 +189,11 @@ import static org.linlinjava.litemall.gameserver.util.MsgUtil.*;
             MapGuardianService.openMenu(chara, npc);
             return;
         }
+
+        //牢头
+         if (1015 == npc.getId()){
+             content = "你来探监吗？\n[查看在押犯人]\n[离开]\n";
+         }
         //飞升
         if (GamePetFeiSheng.zhanDouNpcName.equals(npc.getName())) {
             if ( GamePetFeiSheng.isTongGuoKaoYan(chara)) {

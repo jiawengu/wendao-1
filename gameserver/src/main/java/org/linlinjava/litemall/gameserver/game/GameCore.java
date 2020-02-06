@@ -88,6 +88,8 @@ import org.springframework.context.ApplicationContext;
 /*    */     }
 /* 74 */     return null;
 /*    */   }
+
+            public  String getServerId(){return  this.serverId;}
 /*    */   
 /*    */   public List<GameLine> getGameLineAll() {
 /* 78 */     return this.gameLineList;

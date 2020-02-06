@@ -2959,6 +2959,27 @@ public class FightManager {
                     fightContainer.success.onSuccess(fightContainer);
                 }
 
+                if(fightContainer.isBattleType(BattleType.HERO_PK)){
+                    System.out.println("PK");
+                    boolean isNotAllDead = false;
+
+                    FightTeam fightTeam = (FightTeam)teamList.get(0);
+                    List<FightObject> fightObjectList = fightTeam.fightObjectList;
+                    Iterator var5 = fightObjectList.iterator();
+
+                    while(var5.hasNext()) {
+                        FightObject fightObject = (FightObject)var5.next();
+                        if (!fightObject.isDead()) {
+                            isNotAllDead = true;
+                        }
+                    }
+                    fightTeam = (FightTeam)teamList.get(1);
+                    fightObjectList = fightTeam.fightObjectList;
+                    Chara duiShouChara = GameObjectCharMng.getGameObjectChar(fightObjectList.get(0).fid).chara;
+                    PKMgr.onPKFight(chara1,duiShouChara,!isNotAllDead, !isNotAllDead ? teamList.get(0).fightObjectList : teamList.get(1).fightObjectList, isNotAllDead ? teamList.get(0).fightObjectList : teamList.get(1).fightObjectList);
+                    return;
+                }
+
                 //挑战掌门
                 if(fightContainer.isBattleType(BattleType.CHALLENGE_LEADER)){
                     String zhangMenName = GameUtil.getZhangMenName(fightContainer.charaStatue.menpai);
@@ -3354,7 +3375,7 @@ public class FightManager {
         if (fc == null) {
             fc = getFightContainer(charaduishou.id);
             if (fc == null) {
-                fc = new FightContainer();
+                fc = new FightContainer(BattleType.HERO_PK);
                 FightTeam ft = new FightTeam();
                 ft.type = 1;
                 GameObjectChar session = GameObjectCharMng.getGameObjectChar(chara.id);

@@ -67,6 +67,10 @@ public class GameData {
     @Autowired
     public BaseAccountsService baseAccountsService;
     @Autowired
+    public BasePKRecordService basePKRecordService;
+    @Autowired
+    public BaseLaoFangService baseLaoFangService;
+    @Autowired
     public BaseNpcPointService baseNpcPointService;
     @Autowired
     public BaseNpcDialogueService baseNpcDialogueService;

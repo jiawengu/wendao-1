@@ -213,6 +213,8 @@ public class World {
     private final void on10SecondTick(Timer timer){
         try {
             autofightshidao();
+
+            PKMgr.checkLaoFang();
         }catch (Exception e){
             logger.error("", e);
         }
