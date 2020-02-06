@@ -860,6 +860,7 @@ public class CMD_SELECT_MENU_ITEM<main> implements org.linlinjava.litemall.games
                 selects.put("practiceroom", chara1.house.getXiuliansLevel());
                 vo_20576_0.setSelects(selects);
                 GameObjectChar.send(new M20576_0(), vo_20576_0);
+
             }
             return;
         }
